@@ -11,7 +11,7 @@ IF ERRORLEVEL 1 GOTO END
 CD "%TEMP%\LightningsToolsInstall"
 CALL Clone.bat
 
-CD "%CD:~0,2%\lightningstools\trunk\MasterBuild"
+CD "%CD:~0,2%\lightningstools\src\MasterBuild"
 CALL PrepareBuildMachine.bat
 
 :END
