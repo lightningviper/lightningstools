@@ -3,7 +3,7 @@
 ***
 ## Releases
 
-### [End%20User%20Applications](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications)
+### [End User Applications](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications)
 
 #### [ADI Test Tool](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/ADI%20Test%20Tool)
 Desktop application for testing Henkie's F-16 ADI Support Board with a real ARU-42/A Attitude Director Indicator instrument.
@@ -39,7 +39,7 @@ End-user desktop application providing basic testing capabilities for the PHCC m
 End-user desktop application for testing Henkie's Digital-to-Synchro (SDI) interface card. Demonstrates the use of the `SDI` class library.
 
 #### [SimLinkup](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/SimLinkup) 
-##### [ADI Special Edition](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/SimLinkup/ADI Special Edition)
+##### [ADI Special Edition](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/SimLinkup/ADI%20Special%20Edition)
 End-user desktop application for interfacing Falcon BMS with a real ARU-42/A Attitude Director Indicator instrument. 
 
 #### [TlkTool](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/TlkTool)
