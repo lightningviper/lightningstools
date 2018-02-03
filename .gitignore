@@ -316,3 +316,10 @@ ASALocalRun/
 
 # MSBuild Binary and Structured Log
 *.binlog
+/src/MasterBuild/DXSDK_Jun10.exe
+/src/MasterBuild/InstallerProjects.vsix
+/src/MasterBuild/TortoiseGit-2.5.0.0-64bit.msi
+/src/MasterBuild/dotnetfx35setup.exe
+/src/MasterBuild/nuget.exe
+/src/MasterBuild/vs_community.exe
+/src/MasterBuild/vswhere.exe
