@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO WESTIN HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- EPU FUEL-->
+     <SignalMapping>
+      <!-- F4 EPU FUEL OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EPU_FUEL__EPU_FUEL_PERCENT</Id>
+      </Source>
+      <!-- WESTIN EPU FUEL INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>521993_EPU_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM WESTIN HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- EPU FUEL INDICATOR  -->
+    <SignalMapping>
+      <!-- WESTIN EPU FUEL INDICATOR HARDWARE SUPPORT MODULE OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>521993_EPU_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 15 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][15]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>

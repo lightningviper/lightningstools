@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Product xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" ProductCode=".NETFramework,Version=v4.6.1">
+  <!-- Defines list of files to be copied on build -->
+<PackageFiles CopyAllPackageFiles="false">
+<PackageFile Name="NDP461-KB3102436-x86-x64-AllOS-ENU.exe" HomeSite="DotNetFX461FullWebBootstrapper" PublicKey="3082010A028201010096715DED0646FA84CB9D5BB746C7B0E1B4113903ADB11573609CEBA7B66E1A3C3FFF65E334F1A6A5215E56996C58E492A10A5CC2D3DC522F0C659A20614053319C6C8F217DBAF9FE13505260953A5BB958A5746141A994E0AD264E4CA1977049275E7C67CA4F1E718446BC1D4BB6E20FC5C627C907E67A0AA51700194C7045382D81B450AAC567D1FA79BCC5CCA1729BF4253498F854DF123938122FA46BA59A7EC762D1DCCFED3D34F8B9DF3530BAEC7932A9E1A9AC554D4C7F4C56C3130B76F107F9CC47ACFB88D552A51E28FA3D2DCFCF849886716511CF85C9094486E16FE7B1FCAC4044A5A98B233F82499DD596595013591873FF430CAD2BD47F3040670203010001"/>
+<PackageFile Name="NDP461-KB3102438-Web.exe" HomeSite="DotNetFX461FullWebBootstrapper" CopyOnBuild="False" PublicKey="3082010A028201010096715DED0646FA84CB9D5BB746C7B0E1B4113903ADB11573609CEBA7B66E1A3C3FFF65E334F1A6A5215E56996C58E492A10A5CC2D3DC522F0C659A20614053319C6C8F217DBAF9FE13505260953A5BB958A5746141A994E0AD264E4CA1977049275E7C67CA4F1E718446BC1D4BB6E20FC5C627C907E67A0AA51700194C7045382D81B450AAC567D1FA79BCC5CCA1729BF4253498F854DF123938122FA46BA59A7EC762D1DCCFED3D34F8B9DF3530BAEC7932A9E1A9AC554D4C7F4C56C3130B76F107F9CC47ACFB88D552A51E28FA3D2DCFCF849886716511CF85C9094486E16FE7B1FCAC4044A5A98B233F82499DD596595013591873FF430CAD2BD47F3040670203010001"/>
+</PackageFiles>
+  <RelatedProducts>
+  <IncludesProduct Code=".NETFramework,Version=v4.6.1" />
+</RelatedProducts>
+  <InstallChecks>
+    <RegistryCheck Property="DotNet46Full_Release" Key="HKLM\Software\Microsoft\NET Framework Setup\NDP\v4\Full" Value="Release" />
+    <RegistryCheck Property="DotNet46Full_OSIntegrated" Key="HKLM\SOFTWARE\Microsoft\NET Framework Setup\OS Integration" Value="v4" />
+  </InstallChecks>
+  <!-- Defines how to invoke the setup for .NET Framework redist -->
+  <Commands Reboot="Immediate">
+    <!--Command for downlevel and future Operating Systems where netfx is not integrated within OS.-->
+    <Command PackageFile="NDP461-KB3102436-x86-x64-AllOS-ENU.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper" EstimatedInstalledBytes="437362964" EstimatedInstallSeconds="600" EstimatedTempBytes="2095870765">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNet46Full_Release" Compare="ValueGreaterThanOrEqualTo" Value="394271" />
+        <!-- If netfx is part of the OS, then bypass this command. -->
+        <BypassIf Property="DotNet46Full_OSIntegrated" Compare="ValueEqualTo" Value="1" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on less than Windows Vista -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.0.0" String="InvalidPlatformWinNT" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+    <!--Command for downlevel and future Operating Systems where netfx is not integrated within OS.-->
+    <Command PackageFile="NDP461-KB3102436-x86-x64-AllOS-ENU.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper" EstimatedInstalledBytes="437362964" EstimatedInstallSeconds="600" EstimatedTempBytes="2095870765">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNet46Full_Release" Compare="ValueGreaterThanOrEqualTo" Value="394271" />
+        <!-- If netfx is not part of the OS, then bypass this command. -->
+        <BypassIf Property="DotNet46Full_OSIntegrated" Compare="ValueNotEqualTo" Value="1" />
+        <BypassIf Property="DotNet46Full_OSIntegrated" Compare="ValueNotExists" Value="1" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on OS less than Windows 8.0 -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.2.0" String="InvalidPlatformWinNT" />
+        <!-- Skip install if OS is above Win10-->
+<BypassIf Property="VersionNT" Compare="VersionGreaterThan" Value="10.0.0" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+    <!--Command for downlevel and future Operating Systems where netfx is not integrated within OS.-->
+    <Command PackageFile="NDP461-KB3102438-Web.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper /lcid 1033" EstimatedInstalledBytes="437362964" EstimatedInstallSeconds="600" EstimatedTempBytes="468232836">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueNotEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNet46Full_Release" Compare="ValueGreaterThanOrEqualTo" Value="394271" />
+        <!-- If netfx is part of the OS, then bypass this command. -->
+        <BypassIf Property="DotNet46Full_OSIntegrated" Compare="ValueEqualTo" Value="1" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on less than Windows Vista -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.0.0" String="InvalidPlatformWinNT" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+    <!--Command for downlevel and future Operating Systems where netfx is not integrated within OS.-->
+    <Command PackageFile="NDP461-KB3102438-Web.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper /lcid 1033" EstimatedInstalledBytes="437362964" EstimatedInstallSeconds="600" EstimatedTempBytes="468232836">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueNotEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNet46Full_Release" Compare="ValueGreaterThanOrEqualTo" Value="394271" />
+        <!-- If netfx is not part of the OS, then bypass this command. -->
+        <BypassIf Property="DotNet46Full_OSIntegrated" Compare="ValueNotEqualTo" Value="1" />
+        <BypassIf Property="DotNet46Full_OSIntegrated" Compare="ValueNotExists" Value="1" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on OS less than Windows 8.0 -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.2.0" String="InvalidPlatformWinNT" />
+        <!-- Skip install if OS is above Win10-->
+        <BypassIf Property="VersionNT" Compare="VersionGreaterThan" Value="10.0.0" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+  </Commands>
+</Product>

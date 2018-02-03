@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4ResourceFileEditor", "F4ResourceFileEditor.csproj", "{25AFABB4-A3BF-40CA-AB6B-D0A71BC8A2C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4Utils.Resources", "..\F4Utils\Resources\F4Utils.Resources.csproj", "{A95B675E-E59B-4D44-B66E-8E642B2D825F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Application", "..\Common\Application\Common.Application.csproj", "{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{BDDA831D-EB3E-4ECB-9972-FAE51B74D485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Win32", "..\Common\Win32\Common.Win32.csproj", "{188090E9-8B00-457B-85EB-F48BCDD94B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Drawing", "..\Common\Drawing\Common.Drawing.csproj", "{5649A340-1475-4116-B5A1-CD21A99387F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25AFABB4-A3BF-40CA-AB6B-D0A71BC8A2C6}.Debug|x86.ActiveCfg = Debug|x86
+		{25AFABB4-A3BF-40CA-AB6B-D0A71BC8A2C6}.Debug|x86.Build.0 = Debug|x86
+		{25AFABB4-A3BF-40CA-AB6B-D0A71BC8A2C6}.Release|x86.ActiveCfg = Release|x86
+		{25AFABB4-A3BF-40CA-AB6B-D0A71BC8A2C6}.Release|x86.Build.0 = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.ActiveCfg = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.Build.0 = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.ActiveCfg = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.Build.0 = Release|x86
+		{A95B675E-E59B-4D44-B66E-8E642B2D825F}.Debug|x86.ActiveCfg = Debug|x86
+		{A95B675E-E59B-4D44-B66E-8E642B2D825F}.Debug|x86.Build.0 = Debug|x86
+		{A95B675E-E59B-4D44-B66E-8E642B2D825F}.Release|x86.ActiveCfg = Release|x86
+		{A95B675E-E59B-4D44-B66E-8E642B2D825F}.Release|x86.Build.0 = Release|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Debug|x86.ActiveCfg = Debug|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Debug|x86.Build.0 = Debug|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Release|x86.ActiveCfg = Release|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Release|x86.Build.0 = Release|x86
+		{188090E9-8B00-457B-85EB-F48BCDD94B0B}.Debug|x86.ActiveCfg = Debug|x86
+		{188090E9-8B00-457B-85EB-F48BCDD94B0B}.Debug|x86.Build.0 = Debug|x86
+		{188090E9-8B00-457B-85EB-F48BCDD94B0B}.Release|x86.ActiveCfg = Release|x86
+		{188090E9-8B00-457B-85EB-F48BCDD94B0B}.Release|x86.Build.0 = Release|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Debug|x86.ActiveCfg = Debug|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Debug|x86.Build.0 = Debug|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Release|x86.ActiveCfg = Release|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59} = {BDDA831D-EB3E-4ECB-9972-FAE51B74D485}
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7} = {BDDA831D-EB3E-4ECB-9972-FAE51B74D485}
+		{188090E9-8B00-457B-85EB-F48BCDD94B0B} = {BDDA831D-EB3E-4ECB-9972-FAE51B74D485}
+		{5649A340-1475-4116-B5A1-CD21A99387F5} = {BDDA831D-EB3E-4ECB-9972-FAE51B74D485}
+	EndGlobalSection
+EndGlobal

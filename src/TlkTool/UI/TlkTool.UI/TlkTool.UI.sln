@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlkTool.UI", "TlkTool.UI.csproj", "{342D1F48-2428-4697-9829-D44D314C7BD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\..\..\Common\Common.csproj", "{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlkTool", "..\..\TlkTool.csproj", "{34E420DF-D312-4B00-BA4D-693C2FB51E2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIUSBWrapper", "..\..\..\BIUSBWrapper\BIUSBWrapper.csproj", "{6A686BC3-E2A2-4E46-A175-B318FF0A2646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PHCC", "..\..\..\PHCC\PHCC.csproj", "{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPJoyWrapper", "..\..\..\PPJoyWrapper\PPJoyWrapper.csproj", "{78555A0E-5D2F-4328-A4F0-67B5D7E51871}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4Utils.Speech", "..\..\..\F4Utils\Speech\F4Utils.Speech.csproj", "{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeexInvoke", "..\..\..\SpeexInvoke\SpeexInvoke\SpeexInvoke.csproj", "{C19C5F53-4B71-4CAF-830E-4D9226914842}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "F4Utils", "F4Utils", "{684E7641-1BBE-4CE9-900A-52332A6A7F2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{86E809B0-49EC-413F-B532-80ED38BE63CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Application", "..\..\..\Common\Application\Common.Application.csproj", "{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Debug|x86.ActiveCfg = Debug|x86
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Debug|x86.Build.0 = Debug|x86
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Release|x86.ActiveCfg = Release|x86
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Release|x86.Build.0 = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.ActiveCfg = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.Build.0 = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.ActiveCfg = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.Build.0 = Release|x86
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Debug|x86.ActiveCfg = Debug|x86
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Debug|x86.Build.0 = Debug|x86
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Release|x86.ActiveCfg = Release|x86
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Release|x86.Build.0 = Release|x86
+		{6A686BC3-E2A2-4E46-A175-B318FF0A2646}.Debug|x86.ActiveCfg = Debug|x86
+		{6A686BC3-E2A2-4E46-A175-B318FF0A2646}.Debug|x86.Build.0 = Debug|x86
+		{6A686BC3-E2A2-4E46-A175-B318FF0A2646}.Release|x86.ActiveCfg = Release|x86
+		{6A686BC3-E2A2-4E46-A175-B318FF0A2646}.Release|x86.Build.0 = Release|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Debug|x86.ActiveCfg = Debug|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Debug|x86.Build.0 = Debug|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Release|x86.ActiveCfg = Release|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Release|x86.Build.0 = Release|x86
+		{78555A0E-5D2F-4328-A4F0-67B5D7E51871}.Debug|x86.ActiveCfg = Debug|x86
+		{78555A0E-5D2F-4328-A4F0-67B5D7E51871}.Debug|x86.Build.0 = Debug|x86
+		{78555A0E-5D2F-4328-A4F0-67B5D7E51871}.Release|x86.ActiveCfg = Release|x86
+		{78555A0E-5D2F-4328-A4F0-67B5D7E51871}.Release|x86.Build.0 = Release|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Debug|x86.ActiveCfg = Debug|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Debug|x86.Build.0 = Debug|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Release|x86.ActiveCfg = Release|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Release|x86.Build.0 = Release|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Debug|x86.ActiveCfg = Debug|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Debug|x86.Build.0 = Debug|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Release|x86.ActiveCfg = Release|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Release|x86.Build.0 = Release|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Debug|x86.ActiveCfg = Debug|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Debug|x86.Build.0 = Debug|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Release|x86.ActiveCfg = Release|x86
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59} = {86E809B0-49EC-413F-B532-80ED38BE63CA}
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA} = {684E7641-1BBE-4CE9-900A-52332A6A7F2D}
+		{0CDB21CA-A5F7-446C-837E-C7C37238F2D7} = {86E809B0-49EC-413F-B532-80ED38BE63CA}
+	EndGlobalSection
+EndGlobal

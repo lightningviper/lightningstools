@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO SIMTEK HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- RPM-->
+     <SignalMapping>
+      <!-- F4 RPM OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RPM1__RPM_PERCENT</Id>
+      </Source>
+      <!-- SIMTEK RPM INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>100207_RPM_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM SIMTEK HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- RPM INDICATOR  -->
+    <SignalMapping>
+      <!-- SIMTEK RPM INDICATOR HARDWARE SUPPORT MODULE RPM OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>100207_RPM_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 5 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][5]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>

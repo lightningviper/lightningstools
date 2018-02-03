@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B928D6CB-9199-4679-8EF6-A489F167D400}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimLinkup</RootNamespace>
+    <AssemblyName>SimLinkup</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SignManifests>false</SignManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.3.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>false</Optimize>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SimLinkup.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Costura.Fody.1.6.2\lib\dotnet\Costura.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LibUsb.Common, Version=2.2.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\LibUsb.Common.2.2.10-r112\lib\net45\LibUsb.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUsbDotNet.LibUsbDotNet, Version=2.2.9.110, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\LibUsbDotNet.2.2.10-r112\lib\net45\LibUsbDotNet.LibUsbDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DirectX.DirectInput, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Windows\assembly\GAC\Microsoft.DirectX.DirectInput\1.0.2902.0__31bf3856ad364e35\Microsoft.DirectX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\frmMappings.resx">
+      <DependentUpon>frmMappings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmSignalsViewer.resx">
+      <DependentUpon>frmSignalsViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\ModuleBasicVisualizer.resx">
+      <DependentUpon>ModuleBasicVisualizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\ModuleList.resx">
+      <DependentUpon>ModuleList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\SignalsView.resx">
+      <DependentUpon>SignalsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI900158001HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI9001584HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI9002780-02HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Astronautics\Astronautics12871HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\DirectInput\DirectInputHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin19581HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Powell\DrawBlipsCommand.cs" />
+    <Compile Include="HardwareSupport\Powell\FalconRWRSymbol.cs" />
+    <Compile Include="HardwareSupport\Powell\FalconRWRSymbolTranslator.cs" />
+    <Compile Include="HardwareSupport\Powell\PowellIP1310ALRHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Powell\PowellIP1310ALRHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Powell\Blip.cs" />
+    <Compile Include="HardwareSupport\Powell\ResetCommand.cs" />
+    <Compile Include="HardwareSupport\Powell\RWRCommand.cs" />
+    <Compile Include="HardwareSupport\Powell\Symbols.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100295HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek10058201HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101079HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101088HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek10108902HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101082HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101081HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100335015HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek10058102HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100194HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100207HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100216HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModule.cs" />
+    <Compile Include="Runtime\Runtime.cs" />
+    <Compile Include="Runtime\SimSupportModuleLoader.cs" />
+    <Compile Include="Scripting\ScriptingContext.cs" />
+    <Compile Include="Signals\MappingProfile.cs" />
+    <Compile Include="Signals\SignalMapping.cs" />
+    <Compile Include="Runtime\HardwareSupportModuleLoader.cs" />
+    <Compile Include="UI\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UI\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmOptions.resx">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\HelpAbout.resx">
+      <DependentUpon>HelpAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Content\Mapping\Nigel\AMI9001584fuelquantityindicator.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AMI900157501angleofattack.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\AMI9001584fuelquantityindicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\AnalogDevicesHardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek10033501standbyADI.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek100207rpm.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek101079standbyCompass.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek100216ftit.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek100285altimeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek100194machmeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek10058201angleofattack.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek10058102verticalvelocity.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Mapping\String\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkADI\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkADI\HenkF16ADISupportBoard.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkADI\henksdi.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkADI\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\SimSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\PHCC\SimSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\SimSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\default.profile">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Lightning\AnalogDevicesHardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Lightning\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Lightning\SimSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Lightning\Simtek100285altimeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\AnalogDevicesHardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\HenkF16ADISupportBoard.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\henksdi.config.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\SimSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek100194machmeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek100285altimeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek100294fuelquantityindicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek10033501standbyADI.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek10058102verticalvelocity.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek10058201angleofattack.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek101079standbyCompass.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek100285HardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek100294HardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100294HardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100285HardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\PHCC\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="SimLinkup.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\PHCC\PhccHardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\PHCC\phcc.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AMI900158001horizontalsituationindicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AMI900278002primaryADI.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Astronautics128710primaryADI.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AnalogDevicesHardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\GouldHS070D51341standbyCompass.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\henksdi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Lilbern3239FuelFlowIndicator.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin19581hydraulicPressureA.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin19581hydraulicPressureB.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin246102CabinPressureAltimeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\PowellIP1310ALRazimuthindicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100194machmeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100207rpm.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100216ftit.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100285altimeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100294fuelquantityindicator.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100295fuelflowindicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10033501standbyADI.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10058102verticalvelocity.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10058201angleofattack.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101082machmeter.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101084standbyADI.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101088nozzlePositionIndicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10108902fuelquantityindicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101090epuFuel.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101091oilPressure.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Westin521993epuFuel.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HenkF16ADISupportBoard.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101079standbyCompass.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Content\Mapping\Nigel\PowellIP1310ALRHardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UI\frmSignalsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmSignalsViewer.Designer.cs">
+      <DependentUpon>frmSignalsViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmOptions.Designer.cs">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\HelpAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\HelpAbout.Designer.cs">
+      <DependentUpon>HelpAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmMappings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMappings.Designer.cs">
+      <DependentUpon>frmMappings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\ModuleBasicVisualizer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\ModuleBasicVisualizer.Designer.cs">
+      <DependentUpon>ModuleBasicVisualizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\ModuleList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\ModuleList.Designer.cs">
+      <DependentUpon>ModuleList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\SignalsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\SignalsView.Designer.cs">
+      <DependentUpon>SignalsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.DirectX.9c">
+      <Visible>False</Visible>
+      <ProductName>Microsoft DirectX 9c Runtime</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Visual.C++.14.10.x86">
+      <Visible>False</Visible>
+      <ProductName>Visual C++ "14.10" Runtime Libraries %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnalogDevices\AnalogDevices.csproj">
+      <Project>{E8F9E0E2-6DCA-4C39-8E0C-2818C1D87DA9}</Project>
+      <Name>AnalogDevices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BIUSBWrapper\BIUSBWrapper.csproj">
+      <Project>{6a686bc3-e2a2-4e46-a175-b318ff0a2646}</Project>
+      <Name>BIUSBWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Application\Common.Application.csproj">
+      <Project>{0cdb21ca-a5f7-446c-837e-c7c37238f2d7}</Project>
+      <Name>Common.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Drawing\Common.Drawing.csproj">
+      <Project>{5649a340-1475-4116-b5a1-cd21a99387f5}</Project>
+      <Name>Common.Drawing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\HardwareSupport\Common.HardwareSupport.csproj">
+      <Project>{b8fcc824-2b39-4637-a447-64d60cf60811}</Project>
+      <Name>Common.HardwareSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Imaging\Common.Imaging.csproj">
+      <Project>{04157d6e-afe0-4399-94d5-306cf4aadac1}</Project>
+      <Name>Common.Imaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\InputSupport\BetaInnovations\Common.InputSupport.BetaInnovations.csproj">
+      <Project>{12474929-ec83-42d9-bd0c-167c40d51182}</Project>
+      <Name>Common.InputSupport.BetaInnovations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\InputSupport\Common.InputSupport.csproj">
+      <Project>{90b49895-9bf5-48c9-87fe-972e47cddae5}</Project>
+      <Name>Common.InputSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\InputSupport\DirectInput\Common.InputSupport.DirectInput.csproj">
+      <Project>{07a76e17-57ae-4952-a309-2a670ce3d7dd}</Project>
+      <Name>Common.InputSupport.DirectInput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\InputSupport\Phcc\Common.InputSupport.Phcc.csproj">
+      <Project>{738063da-f792-4081-a70a-4a3190dbc6d2}</Project>
+      <Name>Common.InputSupport.Phcc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\InputSupport\UI\Common.InputSupport.UI.csproj">
+      <Project>{01adfc8a-742b-4824-8501-8e0db931b94f}</Project>
+      <Name>Common.InputSupport.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\MacroProgramming\Common.MacroProgramming.csproj">
+      <Project>{320431c6-2454-4d95-8d3c-d27c8e2288e9}</Project>
+      <Name>Common.MacroProgramming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\PDF\Common.PDF.csproj">
+      <Project>{5130f409-0e66-4d02-9de9-7bfb11174c13}</Project>
+      <Name>Common.PDF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\SimSupport\Common.SimSupport.csproj">
+      <Project>{275c5e8d-a56a-45d2-8f70-93b0797c2e7b}</Project>
+      <Name>Common.SimSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\UI\Common.UI.csproj">
+      <Project>{3fc238ba-7fc2-47ae-ae45-7cf199edbe08}</Project>
+      <Name>Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Win32\Common.Win32.csproj">
+      <Project>{188090e9-8b00-457b-85eb-f48bcdd94b0b}</Project>
+      <Name>Common.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4KeyFile\F4KeyFile.csproj">
+      <Project>{eeed5595-6eb8-473d-b487-334b45d753a6}</Project>
+      <Name>F4KeyFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4SharedMem\F4SharedMem.csproj">
+      <Project>{517d1b4d-e8c7-4331-bbe7-300fd6b78441}</Project>
+      <Name>F4SharedMem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4TexSharedMem\F4TexSharedMem.csproj">
+      <Project>{e930ba7b-7474-49d7-b7cf-25106c450190}</Project>
+      <Name>F4TexSharedMem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4Utils\Campaign\F4Utils.Campaign.csproj">
+      <Project>{d386ec91-6d89-421f-87bc-4849e0232722}</Project>
+      <Name>F4Utils.Campaign</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4Utils\PlayerOp\F4Utils.PlayerOp.csproj">
+      <Project>{ea92153f-08e5-42b1-b6c5-6b22366e7cf2}</Project>
+      <Name>F4Utils.PlayerOp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4Utils\Process\F4Utils.Process.csproj">
+      <Project>{66242024-b7e5-4f66-ac1a-f0e2f1d70899}</Project>
+      <Name>F4Utils.Process</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4Utils\Resources\F4Utils.Resources.csproj">
+      <Project>{a95b675e-e59b-4d44-b66e-8e642b2d825f}</Project>
+      <Name>F4Utils.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4Utils\SimSupport\F4Utils.SimSupport.csproj">
+      <Project>{6967bfc5-944d-405c-960b-5a4900ebfd92}</Project>
+      <Name>F4Utils.SimSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F4Utils\Terrain\F4Utils.Terrain.csproj">
+      <Project>{305b6164-1c7d-4627-9774-db6bd5cf50e8}</Project>
+      <Name>F4Utils.Terrain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LightningGauges\LightningGauges\LightningGauges.csproj">
+      <Project>{e3e09957-dd05-4dec-961a-915a082c0bc4}</Project>
+      <Name>LightningGauges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lzss\LzssManaged\LzssManaged.csproj">
+      <Project>{04f20e15-844a-4d30-9ec4-e8fd61a043a9}</Project>
+      <Name>LzssManaged</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PhccDeviceManager\PhccDeviceManager.csproj">
+      <Project>{52AB07AF-C7BB-4586-BC5E-34759831CB08}</Project>
+      <Name>PhccDeviceManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PHCC\PHCC.csproj">
+      <Project>{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}</Project>
+      <Name>PHCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SDI\SDI.csproj">
+      <Project>{7326f627-65f7-4163-a579-36af2091b357}</Project>
+      <Name>SDI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets" Condition="Exists('$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets'))" />
+  </Target>
+  <Target AfterTargets="AfterBuild;NonWinFodyTarget" Name="CleanReferenceCopyLocalPaths">
+    <Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,3 @@
+﻿This file will be embedded in the Tests assembly for testing the EmbeddedResourceLoader functionality.  
+Test test will know it's loaded this particular resource when it detects this magic string:
+{CFD12EF3-D80B-4954-A28C-6EB789F3F32C}

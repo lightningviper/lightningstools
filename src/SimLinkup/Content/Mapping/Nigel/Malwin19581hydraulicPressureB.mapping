@@ -1,0 +1,50 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO MALWIN HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- HYDRAULIC PRESSURE B-->
+     <SignalMapping>
+      <!-- F4 HYDRAULIC PRESSURE B OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HYD_PRESSURE_B__PSI</Id>
+      </Source>
+      <!-- MALWIN HYDRAULIC PRESSURE B INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>19581_Hydraulic_Pressure_B_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM MALWIN HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- HYDRAULIC PRESSURE B INDICATOR  -->
+    <SignalMapping>
+      <!-- MALWIN HYDRAULIC PRESSURE B INDICATOR HARDWARE SUPPORT MODULE SIN OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19581_Hydraulic_Pressure_B_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 13 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][13]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- MALWIN HYDRAULIC PRESSURE B INDICATOR HARDWARE SUPPORT MODULE COSINE OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19581_Hydraulic_Pressure_B_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 14 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][14]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>

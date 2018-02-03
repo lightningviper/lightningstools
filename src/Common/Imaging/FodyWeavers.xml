@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Weavers>
+  <Costura>
+    <Unmanaged32Assemblies>
+      FreeImage
+      squishinterface_Win32
+    </Unmanaged32Assemblies>
+  </Costura>
+  
+</Weavers>

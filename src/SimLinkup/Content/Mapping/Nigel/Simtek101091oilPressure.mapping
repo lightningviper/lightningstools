@@ -1,0 +1,49 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO SIMTEK HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- OIL PRESSURE-->
+     <SignalMapping>
+      <!-- F4 OIL PRESSURE OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_OIL_PRESS1__OIL_PRESS_PERCENT</Id>
+      </Source>
+      <!-- SIMTEK OIL PRESSURE INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>101091_Oil_Pressure_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM SIMTEK HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- OIL PRESSURE INDICATOR  -->
+    <SignalMapping>
+      <!-- SIMTEK OIL PRESSURE INDICATOR HARDWARE SUPPORT MODULE SIN OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>101091_Oil_Pressure_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 2 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][2]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- SIMTEK OIL PRESSURE INDICATOR HARDWARE SUPPORT MODULE COSINE OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>101091_Oil_Pressure_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 1 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][1]</Id>
+      </Destination>
+      
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

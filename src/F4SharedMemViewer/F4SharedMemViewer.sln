@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4SharedMemViewer", "F4SharedMemViewer.csproj", "{B88F8409-F306-4AF4-A619-F83760111585}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B7E2F899-57FE-4EF9-A99A-37A191F66532}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "F4SharedMem", "F4SharedMem", "{E30405B2-2EE8-4DEE-9FE7-28017C238194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4SharedMem", "..\F4SharedMem\F4SharedMem.csproj", "{517D1B4D-E8C7-4331-BBE7-300FD6B78441}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "F4SharedMemViewer", "F4SharedMemViewer", "{423CB23E-9F8F-4F48-AF67-21E55CBDE3D8}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "F4SharedMemViewerSetup", "F4SharedMemViewerSetup\F4SharedMemViewerSetup.vdproj", "{B53B40A0-3C28-4614-A568-30513E46E979}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B88F8409-F306-4AF4-A619-F83760111585}.Debug|x86.ActiveCfg = Debug|x86
+		{B88F8409-F306-4AF4-A619-F83760111585}.Debug|x86.Build.0 = Debug|x86
+		{B88F8409-F306-4AF4-A619-F83760111585}.Release|x86.ActiveCfg = Release|x86
+		{B88F8409-F306-4AF4-A619-F83760111585}.Release|x86.Build.0 = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.ActiveCfg = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.Build.0 = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.ActiveCfg = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.Build.0 = Release|x86
+		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Debug|x86.ActiveCfg = Debug|x86
+		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Debug|x86.Build.0 = Debug|x86
+		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Release|x86.ActiveCfg = Release|x86
+		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Release|x86.Build.0 = Release|x86
+		{B53B40A0-3C28-4614-A568-30513E46E979}.Debug|x86.ActiveCfg = Debug
+		{B53B40A0-3C28-4614-A568-30513E46E979}.Debug|x86.Build.0 = Debug
+		{B53B40A0-3C28-4614-A568-30513E46E979}.Release|x86.ActiveCfg = Release
+		{B53B40A0-3C28-4614-A568-30513E46E979}.Release|x86.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B88F8409-F306-4AF4-A619-F83760111585} = {423CB23E-9F8F-4F48-AF67-21E55CBDE3D8}
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59} = {B7E2F899-57FE-4EF9-A99A-37A191F66532}
+		{517D1B4D-E8C7-4331-BBE7-300FD6B78441} = {E30405B2-2EE8-4DEE-9FE7-28017C238194}
+		{B53B40A0-3C28-4614-A568-30513E46E979} = {423CB23E-9F8F-4F48-AF67-21E55CBDE3D8}
+	EndGlobalSection
+EndGlobal

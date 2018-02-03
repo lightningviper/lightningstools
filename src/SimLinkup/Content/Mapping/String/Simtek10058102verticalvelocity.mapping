@@ -1,0 +1,53 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO SIMTEK HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- VERTICAL VELOCITY (DECIMAL FEET PER MINUTE) -->
+     <SignalMapping>
+      <!-- F4 VERTICAL VELOCITY (DECIMAL FEET PER MINUTE) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_VVI__VERTICAL_VELOCITY_FPM</Id>
+      </Source>
+      <!-- SIMTEK VVI (FPM) INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>10058102_Vertical_Velocity_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    <!-- VVI OFF FLAG -->
+    <SignalMapping>
+      <!-- F4 VVI OFF FLAG OUTPUT -->
+    <Source xsi:type="DigitalSignal">
+      <Id>F4_VVI__OFF_FLAG</Id>
+    </Source>
+    <!-- SIMTEK VVI OFF FLAG INPUT-->
+    <Destination xsi:type="DigitalSignal">
+      <Id>10058102_VVI_Power_Off_Flag_From_Sim</Id>
+    </Destination>
+    
+    </SignalMapping>
+    
+    
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM SIMTEK HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- VVI  -->
+    <SignalMapping>
+      <!-- SIMTEK VVI HARDWARE SUPPORT MODULE VVI OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>10058102_Vertical_Velocity_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 7 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][7]</Id>
+      </Destination>
+      
+    </SignalMapping>
+    
+  </SignalMappings>
+</MappingProfile>

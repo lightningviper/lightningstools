@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CFC7ADC1-150E-4015-8A40-85FA2DEE4AB6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MFDExtractor</RootNamespace>
+    <AssemblyName>MFDExtractor</AssemblyName>
+    <StartupObject>MFDExtractor.Program</StartupObject>
+    <ApplicationIcon>mfdextractoricon.ICO</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>Sn.key.snk</AssemblyOriginatorKeyFile>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <SignManifests>false</SignManifests>
+    <ManifestCertificateThumbprint>20948C304B322E448ECE13AACFEB7B039C846C0D</ManifestCertificateThumbprint>
+    <ManifestKeyFile>MFDExtractor_1_TemporaryKey.pfx</ManifestKeyFile>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.6.3.0</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DefineConstants>
+    </DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Costura.Fody.1.6.2\lib\dotnet\Costura.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.DirectX.DirectInput, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualC" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\InstrumentFormSettingsReader.cs" />
+    <Compile Include="Configuration\InstrumentFormSettingsWriter.cs" />
+    <Compile Include="Configuration\KeySettingsReader.cs" />
+    <Compile Include="DIHotkeyDetection.cs" />
+    <Compile Include="EventSystem\DirectInputEventHotkeyFilter.cs" />
+    <Compile Include="EventSystem\EHSIStateTracker.cs" />
+    <Compile Include="EventSystem\Handlers\AccelerometerResetEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\AirspeedIndexDecreasedByOneEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\AirspeedIndexIncreasedByOneEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\AzimuthIndicatorBrightnessDecreasedEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\AzimuthIndicatorBrightnessIncreasedEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\EHSILeftKnobDecreasedByOneEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\EHSILeftKnobIncreasedByOneEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\EHSIMenuButtonDepressedEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\EHSIRightKnobDecreasedByOneEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\EHSIRightKnobDepressedEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\EHSIRightKnobIncreasedByOneEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\EHSIRightKnobReleasedEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\InputEvents.cs" />
+    <Compile Include="EventSystem\Handlers\IInputEventHandlerEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\ISISBrightButtonDepressedEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\ISISStandardButtonDepressedEventHandler.cs" />
+    <Compile Include="EventSystem\Handlers\NightVisionModeToggledEventHandler.cs" />
+    <Compile Include="EventSystem\KeyboardWatcher.cs" />
+    <Compile Include="EventSystem\KeyEventHandler.cs" />
+    <Compile Include="EventSystem\KeyEventArgsAugmenter.cs" />
+    <Compile Include="Configuration\KeySettings.cs" />
+    <Compile Include="EventSystem\KeyInputEventHotkeyFilter.cs" />
+    <Compile Include="EventSystem\MediatorStateChangeHandler.cs" />
+    <Compile Include="Extractor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtractorState.cs" />
+    <Compile Include="FlightDataAdapters\AccelerometerFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\AirspeedIndicatorFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\AltimeterFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\AngleOfAttackIndexerFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\AngleOfAttackIndicatorFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\CabinPressureAltitudeIndicatorFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\CautionPanelFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\CMDSFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\CompassFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\FTIT1FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\FTIT2FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\FuelQTYFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\MFDFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\HYDAFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\HYDBFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\NOZ1FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\NOZ2FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\OIL2FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\DEDFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\EPUFuelFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\FlightDataAdapterSet.cs" />
+    <Compile Include="FlightDataAdapters\FuelFlowFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\ISISFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\LandingGearLightsFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\NWSFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\OIL1FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\PFLFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\AzimuthIndicatorFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\PitchTrimIndicatorFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\RollTrimIndicatorFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\RPM1FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\RPM2FlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\RWRFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\SpeedbrakeFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\StandbyADIFlightDataAdapter.cs" />
+    <Compile Include="FlightDataAdapters\VVIFlightDataAdapter.cs" />
+    <Compile Include="FlightDataRetriever.cs" />
+    <Compile Include="FlightDataUpdater.cs" />
+    <Compile Include="Instrument.cs" />
+    <Compile Include="InstrumentFactory.cs" />
+    <Compile Include="InstrumentFormDataChangedHandler.cs" />
+    <Compile Include="InstrumentFormFactory.cs" />
+    <Compile Include="InstrumentFormSettings.cs" />
+    <Compile Include="Configuration\InputControlSelectionSettingReader.cs" />
+    <Compile Include="InstrumentRenderHelper.cs" />
+    <Compile Include="InstrumentStateSnapshotCache.cs" />
+    <Compile Include="Networking\ExtractorClient.cs" />
+    <Compile Include="Networking\ExtractorServer.cs" />
+    <Compile Include="Networking\MessageType.cs" />
+    <Compile Include="Networking\Message.cs" />
+    <Compile Include="Networking\ClientSideIncomingMessageDispatcher.cs" />
+    <Compile Include="Networking\ServerSideIncomingMessageDispatcher.cs" />
+    <Compile Include="PerformanceCounterInstaller.cs" />
+    <Compile Include="PerformanceCounterInstanceFactory.cs" />
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="InstrumentType.cs" />
+    <Compile Include="RendererFactories\AltimeterRendererFactory.cs" />
+    <Compile Include="RendererFactories\FuelQualityIndicatorRendererFactory.cs" />
+    <Compile Include="RendererFactories\ISISRendererFactory.cs" />
+    <Compile Include="RendererFactories\AzimuthIndicatorRendererFactory.cs" />
+    <Compile Include="RendererFactories\VVIRendererFactory.cs" />
+    <Compile Include="RendererFactory.cs" />
+    <Compile Include="Renderer\MfdRenderer.cs" />
+    <Compile Include="SettingReader.cs" />
+    <Compile Include="SettingsWriter.cs" />
+    <Compile Include="SharedmemReaderFactory.cs" />
+    <Compile Include="UI\frmBMSOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmBMSOptions.Designer.cs">
+      <DependentUpon>frmBMSOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="UI\DraggableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmOptions.Designer.cs">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KeyConverter.cs" />
+    <Compile Include="UI\InstrumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\InstrumentForm.Designer.cs">
+      <DependentUpon>InstrumentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UI\DraggableForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DraggableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmBMSOptions.resx">
+      <DependentUpon>frmBMSOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmOptions.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InstrumentForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InstrumentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ResizeHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+    <Content Include="mfdextractoricon.ICO" />
+    <None Include="Resources\restore.PNG" />
+    <None Include="Resources\mfd4TestAlignmentImage.bmp" />
+    <None Include="Resources\mfd3TestAlignmentImage.bmp" />
+    <BaseApplicationManifest Include="Properties\app.manifest">
+      <SubType>Designer</SubType>
+    </BaseApplicationManifest>
+    <None Include="MFDExtractor_TemporaryKey.pfx" />
+    <None Include="Resources\hudTestAlignmentImage.jpg" />
+    <None Include="Resources\hudBlankImage.jpg" />
+    <None Include="Resources\rightMFDBlankImage.bmp" />
+    <None Include="Resources\leftMFDBlankImage.bmp" />
+    <None Include="Resources\rightMFDTestAlignmentImage.bmp" />
+    <None Include="Resources\leftMFDTestAlignmentImage.bmp" />
+    <None Include="Sn.key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.DirectX.9c">
+      <Visible>False</Visible>
+      <ProductName>Microsoft DirectX 9c Runtime</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Visual.C++.14.10.x86">
+      <Visible>False</Visible>
+      <ProductName>Visual C++ "14" Runtime Libraries %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Application\Common.Application.csproj">
+      <Project>{0cdb21ca-a5f7-446c-837e-c7c37238f2d7}</Project>
+      <Name>Common.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Drawing\Common.Drawing.csproj">
+      <Project>{5649a340-1475-4116-b5a1-cd21a99387f5}</Project>
+      <Name>Common.Drawing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Imaging\Common.Imaging.csproj">
+      <Project>{04157d6e-afe0-4399-94d5-306cf4aadac1}</Project>
+      <Name>Common.Imaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\InputSupport\BetaInnovations\Common.InputSupport.BetaInnovations.csproj">
+      <Project>{12474929-ec83-42d9-bd0c-167c40d51182}</Project>
+      <Name>Common.InputSupport.BetaInnovations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\InputSupport\Common.InputSupport.csproj">
+      <Project>{90b49895-9bf5-48c9-87fe-972e47cddae5}</Project>
+      <Name>Common.InputSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\InputSupport\DirectInput\Common.InputSupport.DirectInput.csproj">
+      <Project>{07a76e17-57ae-4952-a309-2a670ce3d7dd}</Project>
+      <Name>Common.InputSupport.DirectInput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\InputSupport\Phcc\Common.InputSupport.Phcc.csproj">
+      <Project>{738063da-f792-4081-a70a-4a3190dbc6d2}</Project>
+      <Name>Common.InputSupport.Phcc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\InputSupport\UI\Common.InputSupport.UI.csproj">
+      <Project>{01adfc8a-742b-4824-8501-8e0db931b94f}</Project>
+      <Name>Common.InputSupport.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\SimSupport\Common.SimSupport.csproj">
+      <Project>{275c5e8d-a56a-45d2-8f70-93b0797c2e7b}</Project>
+      <Name>Common.SimSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\UI\Common.UI.csproj">
+      <Project>{3fc238ba-7fc2-47ae-ae45-7cf199edbe08}</Project>
+      <Name>Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Win32\Common.Win32.csproj">
+      <Project>{188090e9-8b00-457b-85eb-f48bcdd94b0b}</Project>
+      <Name>Common.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4KeyFile\F4KeyFile.csproj">
+      <Project>{EEED5595-6EB8-473D-B487-334B45D753A6}</Project>
+      <Name>F4KeyFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4SharedMem\F4SharedMem.csproj">
+      <Project>{517D1B4D-E8C7-4331-BBE7-300FD6B78441}</Project>
+      <Name>F4SharedMem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4TexSharedMem\F4TexSharedMem.csproj">
+      <Project>{E930BA7B-7474-49D7-B7CF-25106C450190}</Project>
+      <Name>F4TexSharedMem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4Utils\Campaign\F4Utils.Campaign.csproj">
+      <Project>{d386ec91-6d89-421f-87bc-4849e0232722}</Project>
+      <Name>F4Utils.Campaign</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4Utils\PlayerOp\F4Utils.PlayerOp.csproj">
+      <Project>{ea92153f-08e5-42b1-b6c5-6b22366e7cf2}</Project>
+      <Name>F4Utils.PlayerOp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4Utils\Process\F4Utils.Process.csproj">
+      <Project>{66242024-b7e5-4f66-ac1a-f0e2f1d70899}</Project>
+      <Name>F4Utils.Process</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4Utils\SimSupport\F4Utils.SimSupport.csproj">
+      <Project>{6967bfc5-944d-405c-960b-5a4900ebfd92}</Project>
+      <Name>F4Utils.SimSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4Utils\Terrain\F4Utils.Terrain.csproj">
+      <Project>{305b6164-1c7d-4627-9774-db6bd5cf50e8}</Project>
+      <Name>F4Utils.Terrain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LightningGauges\LightningGauges\LightningGauges.csproj">
+      <Project>{E3E09957-DD05-4DEC-961A-915A082C0BC4}</Project>
+      <Name>LightningGauges</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets" Condition="Exists('$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.2.3.18\build\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets'))" />
+  </Target>
+  <Target AfterTargets="AfterBuild;NonWinFodyTarget" Name="CleanReferenceCopyLocalPaths">
+    <Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,57 @@
+﻿using System.Windows;
+using System.Windows.Media;
+
+namespace SoundCardRWR
+{
+    internal static class GeometryFloodFillExtension
+    {
+        public static Geometry FloodFill(this Geometry sourceGeometry, double thickness)
+        {
+            return FloodFill(sourceGeometry, thickness, PathGeometry.StandardFlatteningTolerance, ToleranceType.Absolute);
+        }
+        public static Geometry FloodFill(this Geometry sourceGeometry, double thickness, double tolerance, ToleranceType toleranceType)
+        {
+            var brush = new SolidColorBrush(Colors.Green);
+            var pen = new Pen(brush, thickness);
+            var targetDrawingGroup = new DrawingGroup();
+            var targetDrawingContext = targetDrawingGroup.Open();
+            var figures = sourceGeometry.GetFlattenedPathGeometry(tolerance, toleranceType).Figures;
+            foreach (var figure in figures)
+            {
+                var figureGeometry= new PathGeometry(new[] { figure });
+                for (var y=figureGeometry.Bounds.Top;y<=figureGeometry.Bounds.Bottom;y+=thickness)
+                {
+                    Point? startPoint = null;
+                    Point? endPoint = null;
+                    for (var x = figureGeometry.Bounds.Left; x <= figureGeometry.Bounds.Right; x+=thickness)
+                    {
+                        var hitPoint = new Point(x, y);
+                        if (figureGeometry.FillContains(hitPoint) || figureGeometry.StrokeContains(pen, hitPoint))
+                        {
+                            if (startPoint == null)
+                            {
+                                startPoint = hitPoint;
+                            }
+                            else
+                            {
+                                endPoint = hitPoint;
+                            }
+                        }
+                        else
+                        {
+                            if (startPoint != null && endPoint != null)
+                            {
+                                targetDrawingContext.DrawGeometry(brush, pen, new LineGeometry(startPoint.Value, endPoint.Value));
+                                startPoint = endPoint = null;
+                            }
+                        }
+
+                    }
+                }
+                targetDrawingContext.DrawGeometry(null, pen, figureGeometry);
+            }
+            targetDrawingContext.Close();
+            return targetDrawingGroup.GetGeometry();
+        }
+    }
+}

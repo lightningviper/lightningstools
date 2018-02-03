@@ -1,0 +1,53 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO SIMTEK HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- ANGLE OF ATTACK (DECIMAL DEGREES) -->
+     <SignalMapping>
+      <!-- F4 ANGLE OF ATTACK (DECIMAL DEGREES) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_AOA_INDICATOR__AOA_DEGREES</Id>
+      </Source>
+      <!-- SIMTEK AOA (DECIMAL DEGREES) INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>10058201_AOA_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    <!-- AOA OFF FLAG -->
+    <SignalMapping>
+      <!-- F4 AOA OFF FLAG OUTPUT -->
+    <Source xsi:type="DigitalSignal">
+      <Id>F4_AOA_INDICATOR__OFF_FLAG</Id>
+    </Source>
+    <!-- SIMTEK AOA OFF FLAG INPUT-->
+    <Destination xsi:type="DigitalSignal">
+      <Id>10058201_OFF_Flag_From_Sim</Id>
+    </Destination>
+    
+    </SignalMapping>
+    
+    
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM SIMTEK HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- MACH NUMBER (  -->
+    <SignalMapping>
+      <!-- SIMTEK AOA HARDWARE SUPPORT MODULE AOA OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>10058201_AOA_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 6 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][6]</Id>
+      </Destination>
+      
+    </SignalMapping>
+    
+  </SignalMappings>
+</MappingProfile>

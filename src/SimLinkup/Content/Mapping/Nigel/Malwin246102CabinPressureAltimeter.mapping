@@ -1,0 +1,54 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO MALWIN HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- CABIN PRESSURE ALTITUDE IN FEET -->
+    <SignalMapping>
+      <!-- F4 CABIN PRESSURE ALTIMETER ALTITUDE IN FEET MSL OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CABIN_PRESS__CABIN_PRESS_FEET_MSL</Id>
+      </Source>
+      <!-- MALWIN CABIN PRESSURE ALTIMETER ALTITUDE IN FEET MSL INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>246102_Cabin_Pressure_Altitude_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM MALWIN HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- CABIN PRESSURE ALTITUDE (SIN) -->
+    <SignalMapping>
+      <!-- MALWIN CABIN PRESSURE ALTIMETER HARDWARE SUPPORT MODULE ALTITUDE (SIN) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>246102_Cabin_Pressure_Altitude_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 11 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][11]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- CABIN PRESSURE ALTITUDE (COS) -->
+    <SignalMapping>
+      <!-- MALWIN CABIN PRESSURE ALTIMETER HARDWARE SUPPORT MODULE ALTITUDE (COS) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>246102_Cabin_Pressure_Altitude_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 12 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][12]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+
+
+  </SignalMappings>
+</MappingProfile>

@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{878CBB75-76A7-4B64-88DD-D7B6AA0D4706}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlkTool", "TlkTool.csproj", "{34E420DF-D312-4B00-BA4D-693C2FB51E2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4Utils.Speech", "..\F4Utils\Speech\F4Utils.Speech.csproj", "{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlkToolTest", "TlkToolTest\TlkToolTest.csproj", "{B3ED49B3-ADF0-4987-B20E-B930132912F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeexInvoke", "..\SpeexInvoke\SpeexInvoke\SpeexInvoke.csproj", "{C19C5F53-4B71-4CAF-830E-4D9226914842}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlkTool.UI", "UI\TlkTool.UI\TlkTool.UI.csproj", "{342D1F48-2428-4697-9829-D44D314C7BD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7E289F8C-FEDA-4945-8C7D-7F26A12FB887}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "F4Utils", "F4Utils", "{B7784E00-59F6-4165-BD04-21812B45517D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Debug|x86.ActiveCfg = Debug|x86
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Debug|x86.Build.0 = Debug|x86
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Release|x86.ActiveCfg = Release|x86
+		{34E420DF-D312-4B00-BA4D-693C2FB51E2F}.Release|x86.Build.0 = Release|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Debug|x86.ActiveCfg = Debug|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Debug|x86.Build.0 = Debug|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Release|x86.ActiveCfg = Release|x86
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}.Release|x86.Build.0 = Release|x86
+		{B3ED49B3-ADF0-4987-B20E-B930132912F4}.Debug|x86.ActiveCfg = Debug|x86
+		{B3ED49B3-ADF0-4987-B20E-B930132912F4}.Debug|x86.Build.0 = Debug|x86
+		{B3ED49B3-ADF0-4987-B20E-B930132912F4}.Release|x86.ActiveCfg = Release|x86
+		{B3ED49B3-ADF0-4987-B20E-B930132912F4}.Release|x86.Build.0 = Release|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Debug|x86.ActiveCfg = Debug|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Debug|x86.Build.0 = Debug|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Release|x86.ActiveCfg = Release|x86
+		{C19C5F53-4B71-4CAF-830E-4D9226914842}.Release|x86.Build.0 = Release|x86
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Debug|x86.ActiveCfg = Debug|x86
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Debug|x86.Build.0 = Debug|x86
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Release|x86.ActiveCfg = Release|x86
+		{342D1F48-2428-4697-9829-D44D314C7BD9}.Release|x86.Build.0 = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.ActiveCfg = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.Build.0 = Debug|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.ActiveCfg = Release|x86
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA} = {B7784E00-59F6-4165-BD04-21812B45517D}
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59} = {7E289F8C-FEDA-4945-8C7D-7F26A12FB887}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TlkTool.vsmdi
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" Name="DisplayName" Culture="Culture" LicenseAgreement="eula.rtf">
+    <!-- Defines list of files to be copied on build -->
+    <PackageFiles>
+        <PackageFile Name="eula.rtf"/>
+        <PackageFile Name="DotNetFX35\x64\dotnetfx35langpack_x64de.exe" PublicKey="3082010A0282010100A2DB0A8DCFC2C1499BCDAA3A34AD23596BDB6CBE2122B794C8EAAEBFC6D526C232118BBCDA5D2CFB36561E152BAE8F0DDD14A36E284C7F163F41AC8D40B146880DD98194AD9706D05744765CEAF1FC0EE27F74A333CB74E5EFE361A17E03B745FFD53E12D5B0CA5E0DD07BF2B7130DFC606A2885758CB7ADBC85E817B490BEF516B6625DED11DF3AEE215B8BAF8073C345E3958977609BE7AD77C1378D33142F13DB62C9AE1AA94F9867ADD420393071E08D6746E2C61CF40D5074412FE805246A216B49B092C4B239C742A56D5C184AAB8FD78E833E780A47D8A4B28423C3E2F27B66B14A74BD26414B9C6114604E30C882F3D00B707CEE554D77D2085576810203010001"/>
+        <PackageFile Name="DotNetFX35\x86\dotnetfx35langpack_x86de.exe" PublicKey="3082010A0282010100A2DB0A8DCFC2C1499BCDAA3A34AD23596BDB6CBE2122B794C8EAAEBFC6D526C232118BBCDA5D2CFB36561E152BAE8F0DDD14A36E284C7F163F41AC8D40B146880DD98194AD9706D05744765CEAF1FC0EE27F74A333CB74E5EFE361A17E03B745FFD53E12D5B0CA5E0DD07BF2B7130DFC606A2885758CB7ADBC85E817B490BEF516B6625DED11DF3AEE215B8BAF8073C345E3958977609BE7AD77C1378D33142F13DB62C9AE1AA94F9867ADD420393071E08D6746E2C61CF40D5074412FE805246A216B49B092C4B239C742A56D5C184AAB8FD78E833E780A47D8A4B28423C3E2F27B66B14A74BD26414B9C6114604E30C882F3D00B707CEE554D77D2085576810203010001"/>
+    </PackageFiles>
+
+    <InstallChecks>
+        <RegistryCheck Property="DotNet35SP" Key="HKLM\Software\Microsoft\NET Framework Setup\NDP\v3.5\1031" Value="SP"/>
+    </InstallChecks>
+
+    <!-- Defines how to invoke the setup for the .NET Framework redist -->
+    <Commands Reboot="Defer">
+        <Command PackageFile="dotNetFx35setup.exe" Arguments=" /lang:deu /quiet /norestart" EstimatedInstalledBytes="30000000" EstimatedTempBytes="30000000">
+
+            <!-- These checks determine whether the package is to be installed -->
+            <InstallConditions>
+                <!-- This indicates the .Net Framework is already installed -->
+                <BypassIf Property="DotNet35SP" Compare="ValueGreaterThanOrEqualTo" Value="1"/>
+
+                <!-- Block install if user does not have admin privileges -->
+                <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired"/>
+
+                <!-- Block install on less than Windows XP SP2 -->
+                <FailIf Property="VersionNT" Compare="VersionLessThan" Value="5.1.2" String="InvalidPlatformWinNT"/>
+
+                <!-- Block install on W2K3 with no service pack -->
+                <FailIf Property="VersionNT" Compare="VersionEqualTo" Value="5.2.0" String="InvalidPlatformWinNT"/>
+
+                <!-- Block install if the platform is IA-64 -->
+                <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture"/>
+            </InstallConditions>
+
+            <ExitCodes>
+                <ExitCode Value="0" Result="Success"/>
+                <ExitCode Value="1602" Result="Fail" String="UserCancelled"/>
+                <ExitCode Value="1603" Result="Fail" String="GeneralFailure"/>
+                <ExitCode Value="3010" Result="SuccessReboot"/>
+                <DefaultExitCode Result="Fail" FormatMessageFromSystem="true" String="GeneralFailure"/>
+            </ExitCodes>
+
+        </Command>
+    </Commands>
+
+    <!-- Defines a localizable string table for error messages-->
+    <Strings>
+        <String Name="DisplayName">.NET Framework 3.5 SP1</String>
+        <String Name="Culture">de</String>
+        <String Name="AdminRequired">Für die Installation von .NET Framework 3.5 SP1 sind Administratorrechte erforderlich. Wenden Sie sich an den Administrator.</String>
+        <String Name="InvalidPlatformWinNT">Für die Installation von .NET Framework 3.5 SP1 ist Windows XP SP2, Windows 2003 SP1, Windows Vista oder höher erforderlich. Wenden Sie sich an den Hersteller der Anwendung.</String>
+        <String Name="InvalidPlatformArchitecture">Diese Version von .NET Framework 3.5 SP1 wird auf einem IA-64-Betriebssystem nicht unterstützt. Wenden Sie sich an den Hersteller der Anwendung.</String>
+        <String Name="UserCancelled">Die Installation wurde vom Benutzer abgebrochen. .NET Framework 3.5 SP1 wurde nicht installiert.</String>
+        <String Name="GeneralFailure">Fehler bei der Installation von .NET Framework 3.5 SP1.</String>
+        <String Name="DotNetFX35SP1Exe">http://go.microsoft.com/fwlink/?linkid=118076</String>
+    </Strings>
+
+</Package>

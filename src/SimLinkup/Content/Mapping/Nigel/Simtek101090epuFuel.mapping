@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO SIMTEK HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- EPU FUEL-->
+     <SignalMapping>
+      <!-- F4 EPU FUEL OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EPU_FUEL__EPU_FUEL_PERCENT</Id>
+      </Source>
+      <!-- SIMTEK EPU FUEL INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>101090_EPU_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM SIMTEK HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- EPU FUEL INDICATOR  -->
+    <SignalMapping>
+      <!-- SIMTEK EPU FUEL INDICATOR HARDWARE SUPPORT MODULE OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>101090_EPU_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 10 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][10]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>

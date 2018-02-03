@@ -1,0 +1,367 @@
+Index: Properties/AssemblyInfo.cs
+===================================================================
+--- Properties/AssemblyInfo.cs	(revision 1047)
++++ Properties/AssemblyInfo.cs	(working copy)
+@@ -3,11 +3,11 @@
+ using System.Runtime.InteropServices;
+ using log4net.Config;
+ 
+-[assembly: AssemblyTitle("SimLinkup")]
++[assembly: AssemblyTitle("SimLinkup ADI Special Edition")]
+ [assembly: AssemblyDescription("")]
+ [assembly: AssemblyConfiguration("")]
+ [assembly: AssemblyCompany("")]
+-[assembly: AssemblyProduct("SimLinkup")]
++[assembly: AssemblyProduct("SimLinkup ADI Special Edition")]
+ [assembly: AssemblyCopyright("")]
+ [assembly: AssemblyTrademark("")]
+ [assembly: AssemblyCulture("")]
+@@ -14,8 +14,8 @@
+ [assembly: XmlConfigurator]
+ [assembly: ComVisible(false)]
+ [assembly: Guid("195c05fa-0b6d-4f4c-8c40-e329c01fea68")]
+-[assembly: AssemblyVersion("0.3.0.0")]
+-[assembly: AssemblyFileVersion("0.3.0.0")]
++[assembly: AssemblyVersion("0.1.1.0")]
++[assembly: AssemblyFileVersion("0.1.1.0")]
+ [assembly: InternalsVisibleTo("SimLinkup.UnitTests")]
+ [assembly: InternalsVisibleTo("InternalsVisible.DynamicProxyGenAssembly2")]
+ [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+\ No newline at end of file
+Index: SimLinkup.csproj
+===================================================================
+--- SimLinkup.csproj	(revision 1047)
++++ SimLinkup.csproj	(working copy)
+@@ -32,7 +32,7 @@
+     <UpdateRequired>false</UpdateRequired>
+     <MapFileExtensions>true</MapFileExtensions>
+     <ApplicationRevision>0</ApplicationRevision>
+-    <ApplicationVersion>0.3.0.%2a</ApplicationVersion>
++    <ApplicationVersion>0.1.1.%2a</ApplicationVersion>
+     <UseApplicationTrust>true</UseApplicationTrust>
+     <BootstrapperEnabled>true</BootstrapperEnabled>
+   </PropertyGroup>
+@@ -109,49 +109,9 @@
+       <DependentUpon>SignalsView.cs</DependentUpon>
+     </EmbeddedResource>
+     <Compile Include="GlobalSuppressions.cs" />
+-    <Compile Include="HardwareSupport\AMI\AMI900158001HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\AMI\AMI9001584HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\AMI\AMI9002780-02HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModuleConfig.cs" />
+-    <Compile Include="HardwareSupport\Astronautics\Astronautics12871HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\DirectInput\DirectInputHardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModule.cs" />
+     <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModule.cs" />
+     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModule.cs" />
+     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModuleConfig.cs" />
+-    <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Malwin\Malwin19581HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
+-    <Compile Include="HardwareSupport\Powell\DrawBlipsCommand.cs" />
+-    <Compile Include="HardwareSupport\Powell\FalconRWRSymbol.cs" />
+-    <Compile Include="HardwareSupport\Powell\FalconRWRSymbolTranslator.cs" />
+-    <Compile Include="HardwareSupport\Powell\PowellIP1310ALRHardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Powell\PowellIP1310ALRHardwareSupportModuleConfig.cs" />
+-    <Compile Include="HardwareSupport\Powell\Blip.cs" />
+-    <Compile Include="HardwareSupport\Powell\ResetCommand.cs" />
+-    <Compile Include="HardwareSupport\Powell\RWRCommand.cs" />
+-    <Compile Include="HardwareSupport\Powell\Symbols.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek100295HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek10058201HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek101079HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek101088HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek10108902HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek101082HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek101081HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek100335015HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek10058102HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek100194HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek100207HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek100216HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+-    <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModule.cs" />
+     <Compile Include="Runtime\Runtime.cs" />
+     <Compile Include="Runtime\SimSupportModuleLoader.cs" />
+     <Compile Include="Scripting\ScriptingContext.cs" />
+@@ -191,50 +151,6 @@
+     <None Include="app.config">
+       <SubType>Designer</SubType>
+     </None>
+-    <Content Include="Content\Mapping\Nigel\AMI9001584fuelquantityindicator.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\AMI900157501angleofattack.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\AMI9001584fuelquantityindicator.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\AnalogDevicesHardwareSupportModule.config">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek10033501standbyADI.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek100207rpm.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek101079standbyCompass.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek100216ftit.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek100285altimeter.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek100194machmeter.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek10058201angleofattack.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Simtek10058102verticalvelocity.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\HardwareSupportModule.registry">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Content\Mapping\String\HardwareSupportModule.registry">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+     <Content Include="Content\Mapping\HenkADI\HardwareSupportModule.registry">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </Content>
+@@ -247,30 +163,9 @@
+     <Content Include="Content\Mapping\HenkADI\SimSupportModule.registry">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </Content>
+-    <Content Include="Content\Mapping\Nigel\SimSupportModule.registry">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\PHCC\SimSupportModule.registry">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\SimSupportModule.registry">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+     <Content Include="Content\Mapping\default.profile">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+-    <Content Include="Content\Mapping\Lightning\AnalogDevicesHardwareSupportModule.config">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Lightning\HardwareSupportModule.registry">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Lightning\SimSupportModule.registry">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Lightning\Simtek100285altimeter.mapping">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+     <None Include="FodyWeavers.xml">
+       <SubType>Designer</SubType>
+     </None>
+@@ -277,109 +172,7 @@
+     <Content Include="SimLinkup.ico">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </Content>
+-    <Content Include="Content\Mapping\PHCC\PhccHardwareSupportModule.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\PHCC\phcc.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\AMI900158001horizontalsituationindicator.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\AMI900278002primaryADI.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Astronautics128710primaryADI.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\AnalogDevicesHardwareSupportModule.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\GouldHS070D51341standbyCompass.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\henksdi.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Lilbern3239FuelFlowIndicator.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Malwin19581hydraulicPressureA.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Malwin19581hydraulicPressureB.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Malwin246102CabinPressureAltimeter.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\PowellIP1310ALRazimuthindicator.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek100194machmeter.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek100207rpm.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek100216ftit.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek100285altimeter.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek100294fuelquantityindicator.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek100295fuelflowindicator.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek10033501standbyADI.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek10058102verticalvelocity.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek10058201angleofattack.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek101082machmeter.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek101084standbyADI.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek101088nozzlePositionIndicator.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek10108902fuelquantityindicator.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek101090epuFuel.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek101091oilPressure.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\String\Westin521993epuFuel.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\HenkF16ADISupportBoard.mapping">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\Mapping\Nigel\Simtek101079standbyCompass.mapping.disabled">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+     <None Include="packages.config" />
+-    <Content Include="Content\Mapping\Nigel\PowellIP1310ALRHardwareSupportModule.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+     <None Include="Properties\app.manifest" />
+     <None Include="Properties\Settings.settings">
+       <Generator>SettingsSingleFileGenerator</Generator>
+Index: SimLinkupSetup/SimLinkupSetup.vdproj
+===================================================================
+--- SimLinkupSetup/SimLinkupSetup.vdproj	(revision 1047)
++++ SimLinkupSetup/SimLinkupSetup.vdproj	(working copy)
+@@ -2227,7 +2227,7 @@
+ {
+ "{9EF0B969-E518-4E46-987F-47570745A589}:_C5C601F6D1A740C788BB168A0CE33E56"
+ {
+-"Name" = "8:SimLinkup"
++"Name" = "8:SimLinkup ADI Special Edition"
+ "AlwaysCreate" = "11:FALSE"
+ "Condition" = "8:"
+ "Transitive" = "11:FALSE"
+@@ -2253,24 +2253,24 @@
+ "Product"
+ {
+ "Name" = "8:Microsoft Visual Studio"
+-"ProductName" = "8:SimLinkup"
+-"ProductCode" = "8:{CE7C181F-804E-424C-8456-DB2D6AFD0C20}"
+-"PackageCode" = "8:{E1551B97-021F-43A1-9A16-4C332CDD157C}"
+-"UpgradeCode" = "8:{6381D6D0-4BF6-4E04-8EA0-9D60DF044590}"
++"ProductName" = "8:SimLinkup ADI Special Edition"
++"ProductCode" = "8:{3E63F49C-E185-46FF-A9B5-7DC527550818}"
++"PackageCode" = "8:{EE231A98-615B-4E54-AE8A-3C33E2026BE0}"
++"UpgradeCode" = "8:{D75ABE98-E5A2-4361-BA5B-DCA9444894A6}"
+ "AspNetVersion" = "8:4.0.30319.0"
+ "RestartWWWService" = "11:FALSE"
+ "RemovePreviousVersions" = "11:TRUE"
+ "DetectNewerInstalledVersion" = "11:TRUE"
+ "InstallAllUsers" = "11:TRUE"
+-"ProductVersion" = "8:0.3.0"
++"ProductVersion" = "8:0.1.1"
+ "Manufacturer" = "8:lightning"
+ "ARPHELPTELEPHONE" = "8:"
+ "ARPHELPLINK" = "8:https://github.com/lightningviper/lightningstools"
+-"Title" = "8:SimLinkup Setup"
+-"Subject" = "8:SimLinkup"
++"Title" = "8:SimLinkup ADI Special Edition Setup"
++"Subject" = "8:SimLinkup ADI Special Edition"
+ "ARPCONTACT" = "8:lightning"
+-"Keywords" = "8:SimLinkup"
+-"ARPCOMMENTS" = "8:SimLinkup"
++"Keywords" = "8:SimLinkup ADI Special Edition"
++"ARPCOMMENTS" = "8:SimLinkup ADI Special Edition"
+ "ARPURLINFOABOUT" = "8:https://github.com/lightningviper/lightningstools"
+ "ARPPRODUCTICON" = "8:_235DB5C3372642E98C079B7E7660E4F2"
+ "ARPIconIndex" = "3:0"
+@@ -2377,7 +2377,7 @@
+ {
+ "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2C2CB220511041AB9563D93DAD7D0AC2"
+ {
+-"Name" = "8:SimLinkup"
++"Name" = "8:SimLinkup ADI Special Edition"
+ "Arguments" = "8:"
+ "Description" = "8:"
+ "ShowCmd" = "3:1"
+Index: UI/UserControls/ModuleBasicVisualizer.cs
+===================================================================
+--- UI/UserControls/ModuleBasicVisualizer.cs	(revision 1013)
++++ UI/UserControls/ModuleBasicVisualizer.cs	(working copy)
+@@ -20,7 +20,7 @@
+ 
+         private void btnShowSignals_Click(object sender, EventArgs e)
+         {
+-            ShowSignals?.Invoke(this, null);
++            //ShowSignals?.Invoke(this, null);
+         }
+     }
+ }
+\ No newline at end of file
+Index: UnitTests/SimLinkup.UnitTests.csproj
+===================================================================
+--- UnitTests/SimLinkup.UnitTests.csproj	(revision 1013)
++++ UnitTests/SimLinkup.UnitTests.csproj	(working copy)
+@@ -96,7 +96,6 @@
+   </ItemGroup>
+   <ItemGroup>
+     <Compile Include="GlobalSuppressions.cs" />
+-    <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModuleTests.cs" />
+     <Compile Include="Properties\AssemblyInfo.cs" />
+   </ItemGroup>
+   <ItemGroup>

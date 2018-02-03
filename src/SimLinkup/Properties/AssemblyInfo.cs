@@ -1,0 +1,21 @@
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using log4net.Config;
+
+[assembly: AssemblyTitle("SimLinkup")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SimLinkup")]
+[assembly: AssemblyCopyright("")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: XmlConfigurator]
+[assembly: ComVisible(false)]
+[assembly: Guid("195c05fa-0b6d-4f4c-8c40-e329c01fea68")]
+[assembly: AssemblyVersion("0.3.0.0")]
+[assembly: AssemblyFileVersion("0.3.0.0")]
+[assembly: InternalsVisibleTo("SimLinkup.UnitTests")]
+[assembly: InternalsVisibleTo("InternalsVisible.DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

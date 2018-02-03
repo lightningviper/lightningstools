@@ -1,0 +1,1503 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MFDExtractor.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LMFD_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RMFD_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LMFD_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LMFD_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LMFD_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LMFD_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="LMFD_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="RMFD_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">201</Value>
+    </Setting>
+    <Setting Name="RMFD_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">201</Value>
+    </Setting>
+    <Setting Name="RMFD_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RMFD_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="RMFD_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="StartOnLaunch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LaunchWithWindows" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LMFD_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RMFD_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LMFD_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="RMFD_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="LMFD_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RMFD_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableHudOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HUD_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HUD_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">401</Value>
+    </Setting>
+    <Setting Name="HUD_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">401</Value>
+    </Setting>
+    <Setting Name="HUD_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HUD_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="HUD_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="HUD_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HUD_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="HUD_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NetworkingMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ClientUseServerIpAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ClientUseServerPortNum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">62121</Value>
+    </Setting>
+    <Setting Name="ServerUsePortNumber" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">62121</Value>
+    </Setting>
+    <Setting Name="LMFD_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RMFD_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HUD_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BmsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NetworkImageFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PNG</Value>
+    </Setting>
+    <Setting Name="CompressionType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="EnableMfd3Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnableMfd4Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MFD3_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MFD3_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="MFD3_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MFD3_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MFD3_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MFD3_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">205</Value>
+    </Setting>
+    <Setting Name="MFD3_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="MFD3_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">405</Value>
+    </Setting>
+    <Setting Name="MFD3_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MFD3_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MFD4_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MFD4_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MFD4_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="MFD4_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">205</Value>
+    </Setting>
+    <Setting Name="MFD4_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">205</Value>
+    </Setting>
+    <Setting Name="MFD4_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">205</Value>
+    </Setting>
+    <Setting Name="MFD4_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">405</Value>
+    </Setting>
+    <Setting Name="MFD4_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">405</Value>
+    </Setting>
+    <Setting Name="MFD4_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MFD4_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UpgradeNeeded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ADI_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ADI_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ADI_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ADI_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ADI_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="ADI_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableADIOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ADI_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ADI_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="ADI_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ADI_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BackupADI_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BackupADI_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="BackupADI_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="BackupADI_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="BackupADI_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="BackupADI_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="EnableBackupADIOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BackupADI_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BackupADI_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="BackupADI_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="BackupADI_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ASI_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ASI_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ASI_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ASI_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ASI_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="ASI_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableASIOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ASI_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ASI_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="ASI_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ASI_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Altimeter_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Altimeter_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Altimeter_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Altimeter_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Altimeter_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="Altimeter_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableAltimeterOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Altimeter_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Altimeter_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="Altimeter_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Altimeter_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">41</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">140</Value>
+    </Setting>
+    <Setting Name="EnableAOAIndexerOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AOAIndexer_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AOAIndexer_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">142</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableAOAIndicatorOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AOAIndicator_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AOAIndicator_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CautionPanel_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CautionPanel_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CautionPanel_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CautionPanel_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CautionPanel_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">377</Value>
+    </Setting>
+    <Setting Name="CautionPanel_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">292</Value>
+    </Setting>
+    <Setting Name="EnableCautionPanelOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CautionPanel_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CautionPanel_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="CautionPanel_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CautionPanel_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CMDS_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CMDS_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CMDS_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CMDS_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CMDS_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">445</Value>
+    </Setting>
+    <Setting Name="CMDS_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">101</Value>
+    </Setting>
+    <Setting Name="EnableCMDSOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CMDS_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CMDS_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="CMDS_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CMDS_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Compass_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Compass_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Compass_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Compass_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Compass_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">216</Value>
+    </Setting>
+    <Setting Name="Compass_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">216</Value>
+    </Setting>
+    <Setting Name="EnableCompassOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Compass_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Compass_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="Compass_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Compass_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DED_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DED_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DED_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DED_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DED_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">320</Value>
+    </Setting>
+    <Setting Name="DED_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">121</Value>
+    </Setting>
+    <Setting Name="EnableDEDOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DED_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DED_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="DED_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DED_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PFL_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PFL_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PFL_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PFL_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PFL_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">320</Value>
+    </Setting>
+    <Setting Name="PFL_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">121</Value>
+    </Setting>
+    <Setting Name="EnablePFLOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PFL_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PFL_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="PFL_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PFL_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EPUFuel_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EPUFuel_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EPUFuel_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EPUFuel_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EPUFuel_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="EPUFuel_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="EnableEPUFuelOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EPUFuel_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EPUFuel_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="EPUFuel_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EPUFuel_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FTIT1_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FTIT1_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FTIT1_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FTIT1_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FTIT1_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="FTIT1_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="EnableFTIT1Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FTIT1_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FTIT1_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="FTIT1_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FTIT1_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FTIT2_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FTIT2_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FTIT2_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FTIT2_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FTIT2_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="FTIT2_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="EnableFTIT2Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FTIT2_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FTIT2_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="FTIT2_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FTIT2_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FuelFlow_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FuelFlow_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FuelFlow_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FuelFlow_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FuelFlow_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">165</Value>
+    </Setting>
+    <Setting Name="FuelFlow_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">137</Value>
+    </Setting>
+    <Setting Name="EnableFuelFlowOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FuelFlow_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FuelFlow_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="FuelFlow_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FuelFlow_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">228</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">228</Value>
+    </Setting>
+    <Setting Name="EnableFuelQuantityOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FuelQuantity_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FuelQuantity_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HSI_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HSI_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HSI_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HSI_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HSI_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="HSI_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableHSIOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HSI_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HSI_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="HSI_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HSI_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GearLights_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GearLights_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="GearLights_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="GearLights_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="GearLights_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">179</Value>
+    </Setting>
+    <Setting Name="GearLights_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">210</Value>
+    </Setting>
+    <Setting Name="EnableGearLightsOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GearLights_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GearLights_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="GearLights_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GearLights_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">41</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">140</Value>
+    </Setting>
+    <Setting Name="EnableNWSIndexerOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NWSIndexer_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NWSIndexer_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NOZ1_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NOZ1_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NOZ1_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NOZ1_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NOZ1_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">144</Value>
+    </Setting>
+    <Setting Name="NOZ1_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">144</Value>
+    </Setting>
+    <Setting Name="EnableNOZ1Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NOZ1_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NOZ1_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="NOZ1_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NOZ1_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NOZ2_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NOZ2_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NOZ2_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NOZ2_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="NOZ2_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">144</Value>
+    </Setting>
+    <Setting Name="NOZ2_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">144</Value>
+    </Setting>
+    <Setting Name="EnableNOZ2Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NOZ2_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NOZ2_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="NOZ2_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NOZ2_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OIL1_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OIL1_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OIL1_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OIL1_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OIL1_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="OIL1_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="EnableOIL1Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OIL1_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OIL1_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="OIL1_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OIL1_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OIL2_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OIL2_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OIL2_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OIL2_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OIL2_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="OIL2_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="EnableOIL2Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OIL2_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OIL2_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="OIL2_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OIL2_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RWR_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RWR_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RWR_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RWR_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RWR_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="RWR_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableRWROutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RWR_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RWR_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="RWR_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RWR_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Speedbrake_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Speedbrake_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Speedbrake_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Speedbrake_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Speedbrake_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">61</Value>
+    </Setting>
+    <Setting Name="Speedbrake_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">87</Value>
+    </Setting>
+    <Setting Name="EnableSpeedbrakeOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Speedbrake_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Speedbrake_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="Speedbrake_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Speedbrake_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RPM1_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RPM1_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RPM1_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RPM1_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RPM1_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">192</Value>
+    </Setting>
+    <Setting Name="RPM1_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">192</Value>
+    </Setting>
+    <Setting Name="EnableRPM1Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RPM1_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RPM1_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="RPM1_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RPM1_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RPM2_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RPM2_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RPM2_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RPM2_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RPM2_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">192</Value>
+    </Setting>
+    <Setting Name="RPM2_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">192</Value>
+    </Setting>
+    <Setting Name="EnableRPM2Output" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RPM2_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RPM2_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="RPM2_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RPM2_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="VVI_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="VVI_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="VVI_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="VVI_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="VVI_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">142</Value>
+    </Setting>
+    <Setting Name="VVI_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableVVIOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="VVI_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="VVI_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="VVI_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="VVI_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HYDA_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HYDA_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HYDA_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HYDA_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HYDA_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="HYDA_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="EnableHYDAOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HYDA_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HYDA_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="HYDA_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HYDA_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HYDB_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HYDB_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HYDB_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HYDB_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HYDB_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="HYDB_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="EnableHYDBOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HYDB_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HYDB_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="HYDB_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HYDB_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CabinPress_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CabinPress_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CabinPress_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CabinPress_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CabinPress_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">216</Value>
+    </Setting>
+    <Setting Name="CabinPress_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">216</Value>
+    </Setting>
+    <Setting Name="EnableCabinPressOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CabinPress_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CabinPress_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="CabinPress_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CabinPress_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RollTrim_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RollTrim_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RollTrim_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RollTrim_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RollTrim_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="RollTrim_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="EnableRollTrimOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RollTrim_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RollTrim_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="RollTrim_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RollTrim_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PitchTrim_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PitchTrim_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PitchTrim_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PitchTrim_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PitchTrim_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="PitchTrim_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
+    <Setting Name="EnablePitchTrimOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PitchTrim_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PitchTrim_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="PitchTrim_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PitchTrim_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NVISKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AzimuthIndicator_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableAzimuthIndicatorOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AzimuthIndicator_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicatorType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IP1310ALR</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicator_ShowBezel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Altimeter_Style" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Electromechanical</Value>
+    </Setting>
+    <Setting Name="Altimeter_PressureUnits" Type="System.String" Scope="User">
+      <Value Profile="(Default)">InchesOfMercury</Value>
+    </Setting>
+    <Setting Name="VVI_Style" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Tape</Value>
+    </Setting>
+    <Setting Name="FuelQuantityIndicator_NeedleCModel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ISIS_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ISIS_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ISIS_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ISIS_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ISIS_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="ISIS_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableISISOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ISIS_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ISIS_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="ISIS_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ISIS_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ISIS_PressureUnits" Type="System.String" Scope="User">
+      <Value Profile="(Default)">InchesOfMercury</Value>
+    </Setting>
+    <Setting Name="ISIS_SpeedUnits" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FeetPerSecond</Value>
+    </Setting>
+    <Setting Name="AirspeedIndexIncreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AirspeedIndexDecreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSI_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EHSI_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EHSI_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EHSI_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EHSI_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EHSI_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">312</Value>
+    </Setting>
+    <Setting Name="EnableEHSIOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EHSI_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSI_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="EHSI_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EHSI_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EHSIMenuButtonKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSIHeadingIncreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSIHeadingDecreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSICourseIncreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSICourseDecreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSICourseKnobDepressedKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EHSIBrightness" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicatorBrightness" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AzimuthIndicatorBrightnessIncreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AzimuthIndicatorBrightnessDecreaseKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ISISBrightButtonKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ISISStandardButtonKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Accelerometer_StretchToFit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Accelerometer_OutZOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Accelerometer_OutULX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Accelerometer_OutULY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Accelerometer_OutLRX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="Accelerometer_OutLRY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">217</Value>
+    </Setting>
+    <Setting Name="EnableAccelerometerOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Accelerometer_OutputDisplay" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Accelerometer_RotateFlipType" Type="System.Drawing.RotateFlipType" Scope="User">
+      <Value Profile="(Default)">RotateNoneFlipNone</Value>
+    </Setting>
+    <Setting Name="Accelerometer_AlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Accelerometer_Monochrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AccelerometerResetKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HighlightOutputWindows" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DisableDirectInputMediator" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnableLMFDOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableRMFDOutput" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PollingDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

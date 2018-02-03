@@ -1,0 +1,50 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO MALWIN HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- HYDRAULIC PRESSURE A-->
+     <SignalMapping>
+      <!-- F4 HYDRAULIC PRESSURE A OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HYD_PRESSURE_A__PSI</Id>
+      </Source>
+      <!-- MALWIN HYDRAULIC PRESSURE A INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>19581_Hydraulic_Pressure_A_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM MALWIN HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- HYDRAULIC PRESSURE A INDICATOR  -->
+    <SignalMapping>
+      <!-- MALWIN HYDRAULIC PRESSURE A INDICATOR HARDWARE SUPPORT MODULE SIN OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19581_Hydraulic_Pressure_A_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 9 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][9]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- MALWIN HYDRAULIC PRESSURE A INDICATOR HARDWARE SUPPORT MODULE COSINE OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19581_Hydraulic_Pressure_A_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 8 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][8]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>
