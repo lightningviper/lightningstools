@@ -115,7 +115,7 @@ Minimum-viable concept demonstrator showing ability to record and playback a str
 C# class library for reading images from Falcon BMS' "textures shared memory" area.  
 
 [F4TexSharedMemTester](https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMemTester/)  
-Desktop application for displaying the contents of Falcon BMS' "Textures Shared Memory" area.   Demonstrates the use of the [F4TexSharedMem]((https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMem/) library.
+Desktop application for displaying the contents of Falcon BMS' "Textures Shared Memory" area.   Demonstrates the use of the [F4TexSharedMem](https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMem/) library.
 
 [F4Utils](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/)  
 C# class libraries which provide support for detecting Falcon operating characteristics,  interacting with the simulation programmatically, and reading from and writing to various low-level Falcon 4 file formats.  
