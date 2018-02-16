@@ -144,7 +144,7 @@ Shared C# code for Henkie.* projects.
 [Henkie.SDI](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.SDI/)  
 C# class library for interfacing with Henkie's Digital-to-Synchro (SDI) interface card.  
 
-[Henkie.SDI.TestTool](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie.SDI.TestTool/)  
+[Henkie.SDI.TestTool](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.SDI.TestTool/)  
 End-user desktop application for testing Henkie's Digital-to-Synchro (SDI) interface card. Demonstrates the use of the [Henkie.SDI](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.SDI/) class library.  
 
 [JoyMapper](https://github.com/lightningviper/lightningstools/tree/master/src/JoyMapper/)  
