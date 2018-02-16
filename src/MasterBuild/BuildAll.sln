@@ -175,6 +175,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.Altimeter", "..\Henk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.Common", "..\Henkie\Henkie.Common\Henkie.Common.csproj", "{80C69F3D-8429-4270-9021-CC3A76FE5F13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.FuelFlow", "..\Henkie\Henkie.FuelFlow\Henkie.FuelFlow.csproj", "{99B05C84-1313-4839-A565-075F3ABFBE85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -462,6 +464,10 @@ Global
 		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Debug|x86.Build.0 = Debug|x86
 		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.ActiveCfg = Release|x86
 		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.Build.0 = Release|x86
+		{99B05C84-1313-4839-A565-075F3ABFBE85}.Debug|x86.ActiveCfg = Debug|x86
+		{99B05C84-1313-4839-A565-075F3ABFBE85}.Debug|x86.Build.0 = Debug|x86
+		{99B05C84-1313-4839-A565-075F3ABFBE85}.Release|x86.ActiveCfg = Release|x86
+		{99B05C84-1313-4839-A565-075F3ABFBE85}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -535,6 +541,7 @@ Global
 		{F5DFFB93-5C6A-4179-83F3-A39CBF4BC66D} = {EE755688-38C6-4E5D-A0CE-56BE398E58BB}
 		{28F849D9-6D44-4B36-BED9-06F9D2207269} = {270B93E1-525F-4CFE-B10C-655710CE0A10}
 		{80C69F3D-8429-4270-9021-CC3A76FE5F13} = {270B93E1-525F-4CFE-B10C-655710CE0A10}
+		{99B05C84-1313-4839-A565-075F3ABFBE85} = {270B93E1-525F-4CFE-B10C-655710CE0A10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {984B51B5-9BB7-41EF-99B8-4D28491B74AB}
