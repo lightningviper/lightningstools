@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimLinkup", "SimLinkup.csproj", "{B928D6CB-9199-4679-8EF6-A489F167D400}"
 EndProject
@@ -84,6 +84,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimLinkup.UnitTests", "UnitTests\SimLinkup.UnitTests.csproj", "{F5DFFB93-5C6A-4179-83F3-A39CBF4BC66D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Phcc", "Phcc", "{0AFB2F85-74AB-45F3-837F-751EC5CFF298}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.Common", "..\Henkie\Henkie.Common\Henkie.Common.csproj", "{80C69F3D-8429-4270-9021-CC3A76FE5F13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -235,6 +237,10 @@ Global
 		{F5DFFB93-5C6A-4179-83F3-A39CBF4BC66D}.Debug|x86.Build.0 = Debug|x86
 		{F5DFFB93-5C6A-4179-83F3-A39CBF4BC66D}.Release|x86.ActiveCfg = Release|x86
 		{F5DFFB93-5C6A-4179-83F3-A39CBF4BC66D}.Release|x86.Build.0 = Release|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Debug|x86.ActiveCfg = Debug|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Debug|x86.Build.0 = Debug|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.ActiveCfg = Release|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -267,5 +273,8 @@ Global
 		{B0E0274A-9EB9-4E42-BD7C-3E11FAE36FD9} = {40459742-DCE1-42E5-B62A-7FE09B96695B}
 		{5649A340-1475-4116-B5A1-CD21A99387F5} = {771E9AD1-7F14-455A-A526-0EB0D02CD958}
 		{F5DFFB93-5C6A-4179-83F3-A39CBF4BC66D} = {40459742-DCE1-42E5-B62A-7FE09B96695B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E2CA56F-FB3C-4176-89D1-C05DC8248ACB}
 	EndGlobalSection
 EndGlobal
