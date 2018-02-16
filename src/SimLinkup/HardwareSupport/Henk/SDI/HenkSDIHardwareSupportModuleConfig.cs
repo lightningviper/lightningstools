@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Xml.Serialization;
 using Common.MacroProgramming;
-using SDI;
+using Henkie.Common;
+using Henkie.SDI;
 
 namespace SimLinkup.HardwareSupport.Henk.SDI
 {

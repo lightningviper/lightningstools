@@ -620,6 +620,10 @@
       <Project>{305b6164-1c7d-4627-9774-db6bd5cf50e8}</Project>
       <Name>F4Utils.Terrain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Henkie\Henkie.Common\Henkie.Common.csproj">
+      <Project>{80C69F3D-8429-4270-9021-CC3A76FE5F13}</Project>
+      <Name>Henkie.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LightningGauges\LightningGauges\LightningGauges.csproj">
       <Project>{e3e09957-dd05-4dec-961a-915a082c0bc4}</Project>
       <Name>LightningGauges</Name>
@@ -632,13 +636,13 @@
       <Project>{52AB07AF-C7BB-4586-BC5E-34759831CB08}</Project>
       <Name>PhccDeviceManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PHCC\PHCC.csproj">
-      <Project>{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}</Project>
-      <Name>PHCC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SDI\SDI.csproj">
+    <ProjectReference Include="..\Henkie\Henkie.SDI\Henkie.SDI.csproj">
       <Project>{7326f627-65f7-4163-a579-36af2091b357}</Project>
-      <Name>SDI</Name>
+      <Name>Henkie.SDI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PHCC\PHCC.csproj">
+      <Project>{75fa2030-c9ca-4b2d-8534-8f48eea13ca3}</Project>
+      <Name>PHCC</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

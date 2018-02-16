@@ -71,7 +71,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4Utils.Resources", "..\F4U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Compression", "..\Common\Compression\Common.Compression.csproj", "{1E857490-C70D-4EF8-9EDD-A1FDBCF98AB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDI", "..\SDI\SDI.csproj", "{7326F627-65F7-4163-A579-36AF2091B357}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.SDI", "..\Henkie\Henkie.SDI\Henkie.SDI.csproj", "{7326F627-65F7-4163-A579-36AF2091B357}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SimLinkupSetup", "SimLinkupSetup\SimLinkupSetup.vdproj", "{B0E0274A-9EB9-4E42-BD7C-3E11FAE36FD9}"
 EndProject

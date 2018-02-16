@@ -48,9 +48,6 @@ and
 
 ***
 # Projects 
-[ADITestTool](https://github.com/lightningviper/lightningstools/tree/master/src/ADITestTool/)  
-Desktop application for testing Henkie's F-16 ADI Support Board with a real ARU-42/A Attitude Director Indicator instrument.
-
 [AnalogDevices](https://github.com/lightningviper/lightningstools/tree/master/src/AnalogDevices/)  
 C# class library that provides programmatic control over the Analog Devices AD536x and AD537x digital-to-analog converter evaluation boards [providing +/-10VDC analog outputs in order to drive military-grade simulated flight instruments]
 
@@ -135,6 +132,21 @@ _Namespaces_:
     - [F4Utils.Terrain](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/Terrain/)  
     Basic support for Falcon's terrain database (THEATER.MAP, THEATER.Lx/THEATER.Ox, THEATER.TDF, TEXTURE.BIN, etc) which includes support for accessing the terrain tile and mipmap images, the terrain height information at any grid coordinate, the terrain extent themselves, the UI theater map at various resolutions, etc.    
 
+[Henkie.ADI.TestTool](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henki.ADI.TestTool/)  
+Desktop application for testing Henkie's F-16 ADI Support Board with a real ARU-42/A Attitude Director Indicator instrument.
+
+[Henkie.Altimeter](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.Altimeter/)  
+C# class library for interfacing with Henkie's Altimeter interface card.  
+
+[Henkie.Common](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henki.Common/)  
+Shared C# code for Henkie.* projects.
+
+[Henkie.SDI](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.SDI/)  
+C# class library for interfacing with Henkie's Digital-to-Synchro (SDI) interface card.  
+
+[Henkie.SDI.TestTool](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie.SDI.TestTool/)  
+End-user desktop application for testing Henkie's Digital-to-Synchro (SDI) interface card. Demonstrates the use of the [Henkie.SDI](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.SDI/) class library.  
+
 [JoyMapper](https://github.com/lightningviper/lightningstools/tree/master/src/JoyMapper/)  
 Desktop application for remapping analog and digital inputs from DirectInput devices, BetaInnovations non-Joystick-class HID devices, and PHCC devices using PPJoy virtual joystick drivers.  
    
@@ -168,12 +180,6 @@ End-user GUI application for configuring PHCC motherboard and peripherals.
 
 [PhccTestTool](https://github.com/lightningviper/lightningstools/tree/master/src/PhccTestTool/)  
 End-user desktop application providing basic testing capabilities for the PHCC motherboard and attached peripherals.  Demonstrates the use of the [PHCC](https://github.com/lightningviper/lightningstools/tree/master/src/PHCC/) class library.  
-
-[SDI](https://github.com/lightningviper/lightningstools/tree/master/src/SDI/)  
-C# class library for interfacing with Henkie's Digital-to-Synchro (SDI) interface card.  
-
-[SDITestTool](https://github.com/lightningviper/lightningstools/tree/master/src/SDITestTool/)  
-End-user desktop application for testing Henkie's Digital-to-Synchro (SDI) interface card. Demonstrates the use of the [SDI](https://github.com/lightningviper/lightningstools/tree/master/src/SDI/) class library.  
 
 [SimLinkup](https://github.com/lightningviper/lightningstools/tree/master/src/SimLinkup/)  
 End-user desktop application for controlling various simulator-related I/O hardware and physical instruments using data from simulation software, and for controlling the simulation by reading inputs from their I/O hardware.  Provides out-of-the-box support for Falcon 4, PHCC devices and popular peripherals, BetaInnovations devices, DirectInput devices, Analog Devices AD536x and AD537x evaluation boards, and a variety of simulated instrumentation.  

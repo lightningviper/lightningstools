@@ -6,9 +6,10 @@ using System.Linq;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
 using Common.MacroProgramming;
+using Henkie.Common;
 using log4net;
 using Phcc;
-using SDIDriver = SDI;
+using SDIDriver = Henkie.SDI;
 
 namespace SimLinkup.HardwareSupport.Henk.SDI
 {
@@ -151,7 +152,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             {
                 if (
                     _deviceConfig?.ConnectionType != null &&
-                    _deviceConfig.ConnectionType.Value == SDIDriver.ConnectionType.USB &&
+                    _deviceConfig.ConnectionType.Value == ConnectionType.USB &&
                     !string.IsNullOrWhiteSpace(_deviceConfig.COMPort)
                 )
                 {
@@ -159,7 +160,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
                 }
                 else if (
                     _deviceConfig?.ConnectionType != null &&
-                    _deviceConfig.ConnectionType.Value == SDIDriver.ConnectionType.PHCC &&
+                    _deviceConfig.ConnectionType.Value == ConnectionType.PHCC &&
                     !string.IsNullOrWhiteSpace(_deviceConfig.COMPort) &&
                     !string.IsNullOrWhiteSpace(_deviceConfig.Address)
                 )
@@ -180,7 +181,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             var diagnosticLEDBehavior = _deviceConfig?.UpdateRateControlConfig != null &&
                                         _deviceConfig.DiagnosticLEDMode.HasValue
                 ? _deviceConfig.DiagnosticLEDMode.Value
-                : SDIDriver.DiagnosticLEDMode.Heartbeat;
+                : DiagnosticLEDMode.Heartbeat;
             try
             {
                 _sdiDevice.ConfigureDiagnosticLEDBehavior(diagnosticLEDBehavior);
@@ -258,7 +259,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             if
             (
                 _deviceConfig?.ConnectionType == null ||
-                _deviceConfig.ConnectionType.Value != SDIDriver.ConnectionType.PHCC ||
+                _deviceConfig.ConnectionType.Value != ConnectionType.PHCC ||
                 string.IsNullOrWhiteSpace(_deviceConfig.COMPort) || string.IsNullOrWhiteSpace(_deviceConfig.Address)
             )
             {
@@ -337,9 +338,9 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
 
             try
             {
-                _sdiDevice.SetStatorBaseAngle(SDIDriver.StatorSignals.S1, (short) s1StatorBaseAngle);
-                _sdiDevice.SetStatorBaseAngle(SDIDriver.StatorSignals.S2, (short) s2StatorBaseAngle);
-                _sdiDevice.SetStatorBaseAngle(SDIDriver.StatorSignals.S3, (short) s3StatorBaseAngle);
+                _sdiDevice.SetStatorBaseAngle(StatorSignals.S1, (short) s1StatorBaseAngle);
+                _sdiDevice.SetStatorBaseAngle(StatorSignals.S2, (short) s2StatorBaseAngle);
+                _sdiDevice.SetStatorBaseAngle(StatorSignals.S3, (short) s3StatorBaseAngle);
             }
             catch (Exception e)
             {
@@ -445,7 +446,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
         {
             if (
                 _deviceConfig?.ConnectionType == null || _deviceConfig.ConnectionType.Value !=
-                SDIDriver.ConnectionType.USB &&
+                ConnectionType.USB &&
                 string.IsNullOrWhiteSpace(_deviceConfig.COMPort)
             )
             {
@@ -530,14 +531,14 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
 
         private List<DigitalSignal> CreateInputSignalsForDigitalOutputChannels()
         {
-            return AllOutputChannels.Where(x => OutputChannelMode(x) == SDIDriver.OutputChannelMode.Digital)
+            return AllOutputChannels.Where(x => OutputChannelMode(x) == Henkie.Common.OutputChannelMode.Digital)
                 .Select(x => CreateInputSignalForOutputChannelConfiguredAsDigital(ChannelNumber(x)))
                 .ToList();
         }
 
         private List<CalibratedAnalogSignal> CreateInputSignalsForPWMOutputChannels()
         {
-            return AllOutputChannels.Where(x => OutputChannelMode(x) == SDIDriver.OutputChannelMode.PWM)
+            return AllOutputChannels.Where(x => OutputChannelMode(x) == Henkie.Common.OutputChannelMode.PWM)
                 .Select(x => CreateInputSignalForOutputChannelConfiguredAsPWM(ChannelNumber(x)))
                 .ToList();
         }
@@ -634,19 +635,19 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             {
                 if (requestedPosition >= 0 && requestedPosition <= 255)
                 {
-                    _sdiDevice.MoveIndicatorFine(SDIDriver.Quadrant.One, (byte) requestedPosition);
+                    _sdiDevice.MoveIndicatorFine(Quadrant.One, (byte) requestedPosition);
                 }
                 else if (requestedPosition >= 256 && requestedPosition <= 511)
                 {
-                    _sdiDevice.MoveIndicatorFine(SDIDriver.Quadrant.Two, (byte) (requestedPosition - 256));
+                    _sdiDevice.MoveIndicatorFine(Quadrant.Two, (byte) (requestedPosition - 256));
                 }
                 else if (requestedPosition >= 512 && requestedPosition <= 767)
                 {
-                    _sdiDevice.MoveIndicatorFine(SDIDriver.Quadrant.Three, (byte) (requestedPosition - 512));
+                    _sdiDevice.MoveIndicatorFine(Quadrant.Three, (byte) (requestedPosition - 512));
                 }
                 else if (requestedPosition >= 768 && requestedPosition <= 1023)
                 {
-                    _sdiDevice.MoveIndicatorFine(SDIDriver.Quadrant.Four, (byte) (requestedPosition - 768));
+                    _sdiDevice.MoveIndicatorFine(Quadrant.Four, (byte) (requestedPosition - 768));
                 }
             }
             catch (Exception e)
@@ -743,34 +744,34 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             return 0;
         }
 
-        private SDIDriver.OutputChannelMode OutputChannelMode(SDIDriver.OutputChannels outputChannel)
+        private OutputChannelMode OutputChannelMode(SDIDriver.OutputChannels outputChannel)
         {
             switch (outputChannel)
             {
                 case SDIDriver.OutputChannels.DIG_PWM_1:
-                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_1?.Mode ?? SDIDriver.OutputChannelMode.Digital;
+                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_1?.Mode ?? Henkie.Common.OutputChannelMode.Digital;
                 case SDIDriver.OutputChannels.DIG_PWM_2:
-                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_2?.Mode ?? SDIDriver.OutputChannelMode.Digital;
+                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_2?.Mode ?? Henkie.Common.OutputChannelMode.Digital;
                 case SDIDriver.OutputChannels.DIG_PWM_3:
                     return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_3?.Mode ??
                            (DeviceFunction == "PITCH" //HORIZONTAL ILS COMMAND BAR
-                               ? SDIDriver.OutputChannelMode.PWM
-                               : SDIDriver.OutputChannelMode.Digital);
+                               ? Henkie.Common.OutputChannelMode.PWM
+                               : Henkie.Common.OutputChannelMode.Digital);
                 case SDIDriver.OutputChannels.DIG_PWM_4:
                     return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_4?.Mode ??
                            (DeviceFunction == "PITCH" //VERTICAL ILS COMMAND BAR
-                               ? SDIDriver.OutputChannelMode.PWM
-                               : SDIDriver.OutputChannelMode.Digital);
+                               ? Henkie.Common.OutputChannelMode.PWM
+                               : Henkie.Common.OutputChannelMode.Digital);
                 case SDIDriver.OutputChannels.DIG_PWM_5:
-                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_5?.Mode ?? SDIDriver.OutputChannelMode.Digital;
+                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_5?.Mode ?? Henkie.Common.OutputChannelMode.Digital;
                 case SDIDriver.OutputChannels.DIG_PWM_6:
-                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_6?.Mode ?? SDIDriver.OutputChannelMode.Digital;
+                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_6?.Mode ?? Henkie.Common.OutputChannelMode.Digital;
                 case SDIDriver.OutputChannels.DIG_PWM_7:
-                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_7?.Mode ?? SDIDriver.OutputChannelMode.Digital;
+                    return _deviceConfig?.OutputChannelsConfig?.DIG_PWM_7?.Mode ?? Henkie.Common.OutputChannelMode.Digital;
                 case SDIDriver.OutputChannels.PWM_OUT:
-                    return SDIDriver.OutputChannelMode.PWM;
+                    return Henkie.Common.OutputChannelMode.PWM;
             }
-            return SDIDriver.OutputChannelMode.Digital;
+            return Henkie.Common.OutputChannelMode.Digital;
         }
 
         private void PositionInputSignal_SignalChanged(object sender, AnalogSignalChangedEventArgs args)

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.SDI.TestTool", "Henkie.SDI.TestTool.csproj", "{AEE62688-9F5E-4447-B0F3-186E4AE0AD89}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Henkie.SDI.TestTool.Setup", "..\Henkie.SDI.TestTool.Setup\Henkie.SDI.TestTool.Setup.vdproj", "{EDC304D3-C933-45DB-BA12-95E6564766F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.SDI", "..\..\Henkie.SDI\Henkie.SDI.csproj", "{7326F627-65F7-4163-A579-36AF2091B357}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PHCC", "..\..\..\PHCC\PHCC.csproj", "{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.Common", "..\..\Henkie.Common\Henkie.Common.csproj", "{80C69F3D-8429-4270-9021-CC3A76FE5F13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEE62688-9F5E-4447-B0F3-186E4AE0AD89}.Debug|x86.ActiveCfg = Debug|x86
+		{AEE62688-9F5E-4447-B0F3-186E4AE0AD89}.Debug|x86.Build.0 = Debug|x86
+		{AEE62688-9F5E-4447-B0F3-186E4AE0AD89}.Release|x86.ActiveCfg = Release|x86
+		{AEE62688-9F5E-4447-B0F3-186E4AE0AD89}.Release|x86.Build.0 = Release|x86
+		{EDC304D3-C933-45DB-BA12-95E6564766F7}.Debug|x86.ActiveCfg = Debug
+		{EDC304D3-C933-45DB-BA12-95E6564766F7}.Debug|x86.Build.0 = Debug
+		{EDC304D3-C933-45DB-BA12-95E6564766F7}.Release|x86.ActiveCfg = Release
+		{EDC304D3-C933-45DB-BA12-95E6564766F7}.Release|x86.Build.0 = Release
+		{7326F627-65F7-4163-A579-36AF2091B357}.Debug|x86.ActiveCfg = Debug|x86
+		{7326F627-65F7-4163-A579-36AF2091B357}.Debug|x86.Build.0 = Debug|x86
+		{7326F627-65F7-4163-A579-36AF2091B357}.Release|x86.ActiveCfg = Release|x86
+		{7326F627-65F7-4163-A579-36AF2091B357}.Release|x86.Build.0 = Release|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Debug|x86.ActiveCfg = Debug|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Debug|x86.Build.0 = Debug|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Release|x86.ActiveCfg = Release|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Release|x86.Build.0 = Release|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Debug|x86.ActiveCfg = Debug|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Debug|x86.Build.0 = Debug|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.ActiveCfg = Release|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9137E889-40B2-472E-AACB-F476F1D8390A}
+	EndGlobalSection
+EndGlobal
