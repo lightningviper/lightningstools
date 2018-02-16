@@ -68,14 +68,14 @@ namespace Henkie.Altimeter
         public const short WATCHDOG_MAX_COUNTDOWN = 63; //6 bits
         #endregion
 
-        public void MoveIndicator(short position)
+        public void SetPosition(short position)
         {
 
 			var rangeNum = (byte)(position /256);
 			var positionInRange=(byte)(position %256);
             if (rangeNum >=0 && rangeNum <=15)
             {
-				SendCommand((CommandSubaddress)(CommandSubaddress.SALT_0 + rangeNum), positionInRange);
+				SendCommand(CommandSubaddress.SALT_0 + rangeNum, positionInRange);
 			}
 			else 
 			{

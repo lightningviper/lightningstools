@@ -1,0 +1,37 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- ************************************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO HENKIE F-16 ALTIMETER HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- ************************************************************************************-->
+    <!-- INDICATED ALTITUDE IN FEET -->
+    <SignalMapping>
+      <!-- F4 ALTITUDE IN FEET OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ALTIMETER__INDICATED_ALTITUDE__MSL</Id>
+      </Source>
+
+      <!-- HENKIE F-16 ALTIMETER ALTITUDE IN FEET INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>HenkieF16Altimeter_Altitude_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    <!-- ALTIMETER BAROMETER SETTING IN INCHES HG -->
+    <SignalMapping>
+      <!-- F4 ALTIMETER BAROMETER SETTING OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ALTIMETER__BAROMETRIC_PRESSURE_INCHES_HG</Id>
+      </Source>
+
+      <!-- HENKIE F-16 ALTIMETER BAROMETER SETTING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>HenkieF16Altimeter_Barometric_Pressure_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

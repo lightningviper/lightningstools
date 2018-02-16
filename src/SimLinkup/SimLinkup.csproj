@@ -124,6 +124,8 @@
     <Compile Include="HardwareSupport\DirectInput\DirectInputHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
@@ -244,16 +246,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\HenkADI\HardwareSupportModule.registry">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Mapping\HenkADI\HenkF16ADISupportBoard.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\HenkADI\henksdi.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\HenkADI\SimSupportModule.registry">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\SimSupportModule.registry">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -328,6 +331,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\PHCC\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkieAltimeter\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkieAltimeter\HenkieF16Altimeter.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkieAltimeter\HenkieF16Altimeter.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkieAltimeter\SimSupportModule.registry">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">
@@ -620,9 +636,17 @@
       <Project>{305b6164-1c7d-4627-9774-db6bd5cf50e8}</Project>
       <Name>F4Utils.Terrain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Henkie\Henkie.Altimeter\Henkie.Altimeter.csproj">
+      <Project>{28f849d9-6d44-4b36-bed9-06f9d2207269}</Project>
+      <Name>Henkie.Altimeter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Henkie\Henkie.Common\Henkie.Common.csproj">
-      <Project>{80C69F3D-8429-4270-9021-CC3A76FE5F13}</Project>
+      <Project>{80c69f3d-8429-4270-9021-cc3a76fe5f13}</Project>
       <Name>Henkie.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Henkie\Henkie.FuelFlow\Henkie.FuelFlow.csproj">
+      <Project>{99b05c84-1313-4839-a565-075f3abfbe85}</Project>
+      <Name>Henkie.FuelFlow</Name>
     </ProjectReference>
     <ProjectReference Include="..\LightningGauges\LightningGauges\LightningGauges.csproj">
       <Project>{e3e09957-dd05-4dec-961a-915a082c0bc4}</Project>

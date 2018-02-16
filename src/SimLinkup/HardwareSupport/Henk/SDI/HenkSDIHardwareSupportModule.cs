@@ -19,11 +19,11 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
         private static readonly ILog _log = LogManager.GetLogger(typeof(HenkSDIHardwareSupportModule));
         private readonly DeviceConfig _deviceConfig;
         private byte _deviceAddress;
-        private List<DigitalSignal> _inputSignalsForDigitalOutputChannels = new List<DigitalSignal>();
-        private List<CalibratedAnalogSignal> _inputSignalsForPwmOutputChannels = new List<CalibratedAnalogSignal>();
+        private List<DigitalSignal> _digitalOutputs = new List<DigitalSignal>();
+        private List<CalibratedAnalogSignal> _analogOutputs = new List<CalibratedAnalogSignal>();
 
         private bool _isDisposed;
-        private CalibratedAnalogSignal _positionInputSignal;
+        private CalibratedAnalogSignal _positionOutputSignal;
         private SDIDriver.Device _sdiDevice;
 
         private HenkSDIHardwareSupportModule(DeviceConfig deviceConfig)
@@ -32,36 +32,36 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             if (_deviceConfig != null)
             {
                 ConfigureDevice();
-                CreateInputSignals();
-                RegisterForInputEvents();
+                CreateOutputSignals();
+                RegisterForDataChangeEvents();
             }
         }
 
-        public override AnalogSignal[] AnalogInputs
+        public override AnalogSignal[] AnalogOutputs
         {
             get
             {
-                return _inputSignalsForPwmOutputChannels
-                    .Union(new[] {_positionInputSignal})
+                return _analogOutputs
+                    .Union(new[] {_positionOutputSignal})
                     .OrderBy(x => x.FriendlyName)
                     .Cast<AnalogSignal>()
                     .ToArray();
             }
         }
 
-        public override AnalogSignal[] AnalogOutputs => null;
+        public override AnalogSignal[] AnalogInputs=> null;
 
-        public override DigitalSignal[] DigitalInputs
+        public override DigitalSignal[] DigitalOutputs
         {
             get
             {
-                return _inputSignalsForDigitalOutputChannels
+                return _digitalOutputs
                     .OrderBy(x => x.FriendlyName)
                     .ToArray();
             }
         }
 
-        public override DigitalSignal[] DigitalOutputs => null;
+        public override DigitalSignal[] DigitalInputs => null;
 
         public override string FriendlyName =>
             $"Henk Synchro Drive Interface: 0x{_deviceAddress.ToString("X").PadLeft(2, '0')} {(string.IsNullOrWhiteSpace(DeviceFunction) ? string.Empty : $"(\"{DeviceFunction}\")")} on {_deviceConfig.ConnectionType?.ToString() ?? "UNKNOWN"} [ {_deviceConfig.COMPort ?? "<UNKNOWN>"} ]";
@@ -474,7 +474,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             }
         }
 
-        private DigitalSignal CreateInputSignalForOutputChannelConfiguredAsDigital(int channelNumber)
+        private DigitalSignal CreateOutputSignalForOutputChannelConfiguredAsDigital(int channelNumber)
         {
             var thisSignal = new DigitalSignal
             {
@@ -491,7 +491,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             return thisSignal;
         }
 
-        private CalibratedAnalogSignal CreateInputSignalForOutputChannelConfiguredAsPWM(int channelNumber)
+        private CalibratedAnalogSignal CreateOutputSignalForOutputChannelConfiguredAsPWM(int channelNumber)
         {
             var thisSignal = new CalibratedAnalogSignal
             {
@@ -522,32 +522,32 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             return thisSignal;
         }
 
-        private void CreateInputSignals()
+        private void CreateOutputSignals()
         {
-            _positionInputSignal = CreatePositionInputSignal();
-            _inputSignalsForDigitalOutputChannels = CreateInputSignalsForDigitalOutputChannels();
-            _inputSignalsForPwmOutputChannels = CreateInputSignalsForPWMOutputChannels();
+            _positionOutputSignal = CreatePositionOutputSignal();
+            _digitalOutputs = CreateOutputSignalsForDigitalOutputChannels();
+            _analogOutputs = CreateOutputSignalsForPWMOutputChannels();
         }
 
-        private List<DigitalSignal> CreateInputSignalsForDigitalOutputChannels()
+        private List<DigitalSignal> CreateOutputSignalsForDigitalOutputChannels()
         {
             return AllOutputChannels.Where(x => OutputChannelMode(x) == Henkie.Common.OutputChannelMode.Digital)
-                .Select(x => CreateInputSignalForOutputChannelConfiguredAsDigital(ChannelNumber(x)))
+                .Select(x => CreateOutputSignalForOutputChannelConfiguredAsDigital(ChannelNumber(x)))
                 .ToList();
         }
 
-        private List<CalibratedAnalogSignal> CreateInputSignalsForPWMOutputChannels()
+        private List<CalibratedAnalogSignal> CreateOutputSignalsForPWMOutputChannels()
         {
             return AllOutputChannels.Where(x => OutputChannelMode(x) == Henkie.Common.OutputChannelMode.PWM)
-                .Select(x => CreateInputSignalForOutputChannelConfiguredAsPWM(ChannelNumber(x)))
+                .Select(x => CreateOutputSignalForOutputChannelConfiguredAsPWM(ChannelNumber(x)))
                 .ToList();
         }
 
-        private CalibratedAnalogSignal CreatePositionInputSignal()
+        private CalibratedAnalogSignal CreatePositionOutputSignal()
         {
             var thisSignal = new CalibratedAnalogSignal
             {
-                Category = "Inputs",
+                Category = "Outputs",
                 CollectionName = "Synchro Control",
                 FriendlyName = "Synchro Position (0-1023)",
                 Id = $"HenkSDI[{"0x" + _deviceAddress.ToString("X").PadLeft(2, '0')}]__Synchro_Position",
@@ -576,14 +576,14 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             {
                 if (disposing)
                 {
-                    UnregisterForInputEvents();
+                    UnregisterForDataChangeEvents();
                     Common.Util.DisposeObject(_sdiDevice);
                 }
             }
             _isDisposed = true;
         }
 
-        private void InputSignalForDigitalOutputChannel_SignalChanged(object sender, DigitalSignalChangedEventArgs args)
+        private void OutputSignalForDigitalOutputChannel_SignalChanged(object sender, DigitalSignalChangedEventArgs args)
         {
             if (_sdiDevice == null) return;
             var signal = (DigitalSignal) sender;
@@ -599,7 +599,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             }
         }
 
-        private void InputSignalForPWMOutputChannel_SignalChanged(object sender, AnalogSignalChangedEventArgs args)
+        private void OutputSignalForPWMOutputChannel_SignalChanged(object sender, AnalogSignalChangedEventArgs args)
         {
             if (_sdiDevice == null) return;
             var signal = (AnalogSignal) sender;
@@ -774,51 +774,51 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             return Henkie.Common.OutputChannelMode.Digital;
         }
 
-        private void PositionInputSignal_SignalChanged(object sender, AnalogSignalChangedEventArgs args)
+        private void PositionOutputSignal_SignalChanged(object sender, AnalogSignalChangedEventArgs args)
         {
-            if (_positionInputSignal != null)
+            if (_positionOutputSignal != null)
             {
-                var requestedPosition = _positionInputSignal.State;
+                var requestedPosition = _positionOutputSignal.State;
                 MoveIndicatorToPositionFine((int) requestedPosition);
             }
         }
 
-        private void RegisterForInputEvents()
+        private void RegisterForDataChangeEvents()
         {
-            if (_positionInputSignal != null)
+            if (_positionOutputSignal != null)
             {
-                _positionInputSignal.SignalChanged += PositionInputSignal_SignalChanged;
+                _positionOutputSignal.SignalChanged += PositionOutputSignal_SignalChanged;
             }
-            foreach (var digitalSignal in _inputSignalsForDigitalOutputChannels)
-                digitalSignal.SignalChanged += InputSignalForDigitalOutputChannel_SignalChanged;
-            foreach (var analogSignal in _inputSignalsForPwmOutputChannels)
-                analogSignal.SignalChanged += InputSignalForPWMOutputChannel_SignalChanged;
+            foreach (var digitalSignal in _digitalOutputs)
+                digitalSignal.SignalChanged += OutputSignalForDigitalOutputChannel_SignalChanged;
+            foreach (var analogSignal in _analogOutputs)
+                analogSignal.SignalChanged += OutputSignalForPWMOutputChannel_SignalChanged;
         }
 
-        private void UnregisterForInputEvents()
+        private void UnregisterForDataChangeEvents()
         {
-            if (_positionInputSignal != null)
+            if (_positionOutputSignal != null)
             {
                 try
                 {
-                    _positionInputSignal.SignalChanged -= PositionInputSignal_SignalChanged;
+                    _positionOutputSignal.SignalChanged -= PositionOutputSignal_SignalChanged;
                 }
                 catch (RemotingException)
                 {
                 }
             }
-            foreach (var digitalSignal in _inputSignalsForDigitalOutputChannels)
+            foreach (var digitalSignal in _digitalOutputs)
                 try
                 {
-                    digitalSignal.SignalChanged -= InputSignalForDigitalOutputChannel_SignalChanged;
+                    digitalSignal.SignalChanged -= OutputSignalForDigitalOutputChannel_SignalChanged;
                 }
                 catch (RemotingException)
                 {
                 }
-            foreach (var analogSignal in _inputSignalsForPwmOutputChannels)
+            foreach (var analogSignal in _analogOutputs)
                 try
                 {
-                    analogSignal.SignalChanged -= InputSignalForPWMOutputChannel_SignalChanged;
+                    analogSignal.SignalChanged -= OutputSignalForPWMOutputChannel_SignalChanged;
                 }
                 catch (RemotingException)
                 {

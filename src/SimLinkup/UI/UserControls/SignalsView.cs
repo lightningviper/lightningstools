@@ -118,7 +118,7 @@ namespace SimLinkup.UI.UserControls
 
         private IHardwareSupportModule HardwareSupportModuleFor(TreeNode treeNode)
         {
-            return treeNode != null && ScriptingContext != null
+            return treeNode != null && ScriptingContext != null && ScriptingContext.HardwareSupportModules !=null
                 ? ScriptingContext.HardwareSupportModules
                     .FirstOrDefault(x => x.FriendlyName == treeNode.Text)
                 : null;
