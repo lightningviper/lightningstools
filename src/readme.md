@@ -132,13 +132,13 @@ _Namespaces_:
     - [F4Utils.Terrain](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/Terrain/)  
     Basic support for Falcon's terrain database (THEATER.MAP, THEATER.Lx/THEATER.Ox, THEATER.TDF, TEXTURE.BIN, etc) which includes support for accessing the terrain tile and mipmap images, the terrain height information at any grid coordinate, the terrain extent themselves, the UI theater map at various resolutions, etc.    
 
-[Henkie.ADI.TestTool](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henki.ADI.TestTool/)  
+[Henkie.ADI.TestTool](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.ADI.TestTool/)  
 Desktop application for testing Henkie's F-16 ADI Support Board with a real ARU-42/A Attitude Director Indicator instrument.
 
 [Henkie.Altimeter](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.Altimeter/)  
 C# class library for interfacing with Henkie's Altimeter interface card.  
 
-[Henkie.Common](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henki.Common/)  
+[Henkie.Common](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.Common/)  
 Shared C# code for Henkie.* projects.
 
 [Henkie.SDI](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.SDI/)  
