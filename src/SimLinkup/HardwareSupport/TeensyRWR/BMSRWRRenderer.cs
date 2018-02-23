@@ -1,9 +1,10 @@
-﻿namespace SoundCardRWR
-{
-    using F4SharedMem;
-    using LightningGauges.Renderers.F16.RWR;
-    using System.Windows.Media;
+﻿using F4SharedMem;
+using LightningGauges.Renderers.F16.RWR;
+using System.Windows.Media;
 
+
+namespace SimLinkup.HardwareSupport.TeensyRWR
+{
     internal class BMSRWRRenderer
     {
         private readonly IRWRRendererFactory _rwrRendererFactory;
@@ -31,19 +32,21 @@
         }
         private InstrumentState GetInstrumentState(FlightData flightData)
         {
-            var instrumentState =new InstrumentState();
-            instrumentState.bearing = flightData.bearing;
-            instrumentState.ChaffCount = flightData.ChaffCount;
-            instrumentState.FlareCount = flightData.FlareCount;
-            instrumentState.lethality = flightData.lethality;
-            instrumentState.missileActivity = flightData.missileActivity;
-            instrumentState.missileLaunch = flightData.missileLaunch;
-            instrumentState.newDetection = flightData.newDetection;
-            instrumentState.RwrInfo = flightData.RwrInfo;
-            instrumentState.RwrObjectCount = flightData.RwrObjectCount;
-            instrumentState.RWRsymbol = flightData.RWRsymbol;
-            instrumentState.selected = flightData.selected;
-            instrumentState.yaw = flightData.yaw;
+            var instrumentState = new InstrumentState
+            {
+                bearing = flightData.bearing,
+                ChaffCount = flightData.ChaffCount,
+                FlareCount = flightData.FlareCount,
+                lethality = flightData.lethality,
+                missileActivity = flightData.missileActivity,
+                missileLaunch = flightData.missileLaunch,
+                newDetection = flightData.newDetection,
+                RwrInfo = flightData.RwrInfo,
+                RwrObjectCount = flightData.RwrObjectCount,
+                RWRsymbol = flightData.RWRsymbol,
+                selected = flightData.selected,
+                yaw = flightData.yaw
+            };
             return instrumentState;
         }
         private void CreateRWRRenderer(FlightData flightData)

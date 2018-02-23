@@ -92,11 +92,16 @@
       <HintPath>..\..\..\Windows\assembly\GAC\Microsoft.DirectX.DirectInput\1.0.2902.0__31bf3856ad364e35\Microsoft.DirectX.DirectInput.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\frmMappings.resx">
@@ -161,6 +166,13 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\DrawingGroupExtensions.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\PathFigureExtensions.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\VectorEncoder.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\VectorPreprocessor.cs" />
     <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModule.cs" />
     <Compile Include="Runtime\Runtime.cs" />
     <Compile Include="Runtime\SimSupportModuleLoader.cs" />

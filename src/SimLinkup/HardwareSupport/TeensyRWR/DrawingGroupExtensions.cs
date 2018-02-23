@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace SoundCardRWR
+namespace SimLinkup.HardwareSupport.TeensyRWR
 {
     internal static class DrawingGroupExtensions
     {
