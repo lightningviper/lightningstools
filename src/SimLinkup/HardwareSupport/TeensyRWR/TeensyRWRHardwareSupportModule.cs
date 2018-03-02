@@ -18,7 +18,6 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
     public class TeensyRWRHardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
         private const int MAX_RWR_SYMBOLS_AS_INPUTS = 64;
-
         private const int BAUD_RATE = 9600;
         private const int DATA_BITS = 8;
         private const Parity PARITY = Parity.None;
@@ -26,8 +25,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const Handshake HANDSHAKE = Handshake.None;
         private const int WRITE_BUFFER_SIZE = 2048;
         private const int SERIAL_WRITE_TIMEOUT = 500;
+        private const int MAX_REFRESH_RATE_HZ = 60; 
 
-        private BMSRWRRenderer _renderer = new BMSRWRRenderer();
+        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer();
+        private BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
 
         //limits exceptions when we don't have the RWR plugged into the serial port
         private const int MAX_UNSUCCESSFUL_PORT_OPEN_ATTEMPTS = 5;
@@ -40,7 +41,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private ISerialPort _serialPort;
         private int _unsuccessfulConnectionAttempts = 0;
-        private string _lastDrawingCommands;
+        private DateTime _lastSynchronizedAt = DateTime.MinValue;
+        private string _lastCommandList = string.Empty;
 
         private readonly AnalogSignal[] _analogInputSignals;
         private readonly DigitalSignal[] _digitalInputSignals;
@@ -105,12 +107,17 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override void Synchronize()
         {
             base.Synchronize();
-            UpdateOutputs();
+            var timeSinceLastSynchronizedInMillis = DateTime.Now.Subtract(_lastSynchronizedAt).TotalMilliseconds;
+            if (timeSinceLastSynchronizedInMillis > 1000.00 / MAX_REFRESH_RATE_HZ)
+            {
+                UpdateOutputs();
+                _lastSynchronizedAt = DateTime.Now;
+            }
         }
         public override void Render(Graphics g, Rectangle destinationRectangle)
         {
             var instrumentState = GetInstrumentState();
-            _renderer.Render(g, destinationRectangle, instrumentState);
+            _uiRenderer.Render(g, destinationRectangle, instrumentState);
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -155,8 +162,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new TextSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Text Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = "RWR Additional Info",
                     Id = "TeensyRWR__RWR_AdditionalInfo",
                     Index = 0,
@@ -175,8 +182,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new AnalogSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Analog Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Navigation",
                     FriendlyName = "Magnetic Heading (Degrees)",
                     Id = "TeensyRWR__Magnetic_Heading_Degrees",
                     Index = 0,
@@ -198,8 +205,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new AnalogSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Analog Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Chaff/Flare",
                     FriendlyName = "Chaff Count (# remaining)",
                     Id = "TeensyRWR__Chaff_Count",
                     Index = 0,
@@ -221,8 +228,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new AnalogSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Analog Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Chaff/Flare",
                     FriendlyName = "Flare Count (# remaining)",
                     Id = "TeensyRWR__Flare_Count",
                     Index = 0,
@@ -244,8 +251,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new AnalogSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Analog Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = "RWR Symbol Count",
                     Id = "TeensyRWR__RWR_Symbol_Count",
                     Index = 0,
@@ -269,8 +276,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new AnalogSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Analog Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = $"RWR Object #{i} Symbol ID",
                     Id = $"TeensyRWR__RWR_Object_Symbol_ID[{i}]",
                     Index = i,
@@ -292,8 +299,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new AnalogSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Analog Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = $"RWR Object #{i} Bearing (degrees)",
                     Id = $"TeensyRWR__RWR_Object_Bearing_Degrees[{i}]",
                     Index = i,
@@ -317,8 +324,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new AnalogSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Analog Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = $"RWR Object #{i} Lethality",
                     Id = $"TeensyRWR__RWR_Object_Lethality[{i}]",
                     Index = i,
@@ -341,8 +348,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new DigitalSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Digital Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = $"RWR Object #{i} Missile Activity Flag",
                     Id = $"TeensyRWR__RWR_Object_Missile_Activity_Flag[{i}]",
                     Index = i,
@@ -362,8 +369,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new DigitalSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Digital Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = $"RWR Object #{i} Missile Launch Flag",
                     Id = $"TeensyRWR__RWR_Object_Missile_Launch_Flag[{i}]",
                     Index = i,
@@ -383,8 +390,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new DigitalSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Digital Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = $"RWR Object #{i} Selected Flag",
                     Id = $"TeensyRWR__RWR_Object_Selected_Flag[{i}]",
                     Index = i,
@@ -404,8 +411,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var thisSignal = new DigitalSignal
                 {
-                    Category = "Inputs",
-                    CollectionName = "Digital Inputs",
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
                     FriendlyName = $"RWR Object #{i} New Detection Flag",
                     Id = $"TeensyRWR__RWR_Object_New_Detection_Flag[{i}]",
                     Index = i,
@@ -439,7 +446,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 missileActivity = _rwrObjectMissileActivityFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1: 0)).ToArray(),
                 missileLaunch = _rwrObjectMissileLaunchFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1 : 0)).ToArray(),
                 newDetection = _rwrObjectNewDetectionFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1 : 0)).ToArray(),
-                RwrInfo = Encoding.Default.GetBytes(_rwrInfoInputSignal.State),
+                RwrInfo = Encoding.Default.GetBytes(_rwrInfoInputSignal.State ?? string.Empty),
                 RwrObjectCount = (int)_rwrSymbolCountInputSignal.State,
                 RWRsymbol = _rwrObjectSymbolIDInputSignals.OrderBy(x => x.Index).Select(x => (int)x.State).ToArray(),
                 selected = _rwrObjectSelectedFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1: 0)).ToArray(),
@@ -502,6 +509,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                         _log.Error(e.Message, e);
                     }
                 }
+                else if (_serialPort !=null && _serialPort.IsOpen)
+                {
+                    return true;
+                }
                 return false;
             }
         }
@@ -512,7 +523,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
             drawingContext.PushTransform(new ScaleTransform(1, -1));
-            _renderer.Render(drawingContext, instrumentState);
+            _drawingCommandRenderer.Render(drawingContext, instrumentState);
             drawingContext.Close();
             Rect bounds = new Rect(0, -500, 500, 500);
             const uint dacPrecisionBits = 12;
@@ -539,7 +550,6 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     {
                         _serialPort.Write(drawingCommands);
                         _serialPort.BaseStream.Flush();
-                        _lastDrawingCommands = drawingCommands;
                     }
                 }
                 catch (Exception e)
@@ -555,9 +565,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             if (connected)
             {
                 var commandList = GenerateDrawingCommands();
-                if (commandList != _lastDrawingCommands)
+                if (commandList != _lastCommandList)
                 {
                     SendDrawingCommands(commandList);
+                    _lastCommandList = commandList;
                 }
             }
         }

@@ -27,10 +27,10 @@ namespace LightningGauges.Renderers.F16.RWR
         protected const double SmallFontVOffset = (1.0/300.0)*ActualHeight;
         protected SolidColorBrush brush { get { return new SolidColorBrush(Color.FromRgb(5, 248, 7)); } }
         string s = System.IO.Packaging.PackUriHelper.UriSchemePack;
-        protected Typeface typeface { get; } = new Typeface(new FontFamily(new Uri("pack://application:,,,/"), "./#Lekton"),
-                                                 FontStyles.Normal,
-                                                 FontWeights.Normal,
-                                                 FontStretches.Normal);
+        protected Typeface typeface { get; } = new Typeface(new FontFamily(new Uri("file:///" + AppDomain.CurrentDomain.BaseDirectory + @"\"), "#Lekton"),
+			FontStyles.Normal,
+            FontWeights.Normal,
+            FontStretches.Normal);
 
         public InstrumentState InstrumentState { get; set; } = new InstrumentState();
         public virtual void Render(DrawingContext drawingContext){}

@@ -62,11 +62,11 @@ namespace SimLinkup.Runtime
         public void Stop()
         {
             _keepRunning = false;
-            var startWaitingTime = DateTime.UtcNow;
+            var startWaitingTime = DateTime.Now;
             while (IsRunning)
             {
                 Thread.Sleep(5);
-                var currentTime = DateTime.UtcNow;
+                var currentTime = DateTime.Now;
                 var elapsed = currentTime.Subtract(startWaitingTime);
                 if (elapsed.TotalSeconds > 5)
                 {
@@ -81,9 +81,8 @@ namespace SimLinkup.Runtime
             _loopDurationSignal =
                 new AnalogSignal
                 {
-                    Category = "Outputs",
-                    CollectionName = "Analog Outputs",
-                    SubcollectionName = "Performance Metrics",
+                    Category = "Metrics",
+                    CollectionName = "Performance",
                     FriendlyName = "Loop Duration (ms)",
                     Id = "SIMLINKUP__PERFORMANCE__LOOP_DURATION",
                     Index = 0,
@@ -101,9 +100,8 @@ namespace SimLinkup.Runtime
             _loopFrequencySignal =
                 new AnalogSignal
                 {
-                    Category = "Outputs",
-                    CollectionName = "Analog Outputs",
-                    SubcollectionName = "Performance Metrics",
+                    Category = "Metrics",
+                    CollectionName = "Performance",
                     FriendlyName = "Loop Frequency (Hz)",
                     Id = "SIMLINKUP__PERFORMANCE__LOOP_FREQUENCY",
                     Index = 0,

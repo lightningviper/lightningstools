@@ -128,11 +128,11 @@ namespace SimLinkup.HardwareSupport.Powell
         public override void Synchronize()
         {
             base.Synchronize();
-            var timeSinceLastSynchronizedInMillis = DateTime.UtcNow.Subtract(_lastSynchronizedAt).TotalMilliseconds;
+            var timeSinceLastSynchronizedInMillis = DateTime.Now.Subtract(_lastSynchronizedAt).TotalMilliseconds;
             if (timeSinceLastSynchronizedInMillis > 1000.00 / MAX_REFRESH_RATE_HZ)
             {
                 UpdateOutputs();
-                _lastSynchronizedAt = DateTime.UtcNow;
+                _lastSynchronizedAt = DateTime.Now;
             }
         }
 
@@ -455,6 +455,10 @@ namespace SimLinkup.HardwareSupport.Powell
                         _log.Error(e.Message, e);
                     }
                 }
+                else if (_serialPort !=null && _serialPort.IsOpen)
+                {
+                    return true;
+                }
                 return false;
             }
         }
@@ -463,7 +467,7 @@ namespace SimLinkup.HardwareSupport.Powell
         {
             var numInputSymbols = (int) Math.Truncate(_rwrSymbolCountInputSignal.State);
             var blipList = new List<Blip>();
-            var usePrimarySymbol = DateTime.UtcNow.Millisecond < 500;
+            var usePrimarySymbol = DateTime.Now.Millisecond < 500;
             for (var i = 0; i < numInputSymbols; i++)
             {
                 var falconRwrSymbol = new FalconRWRSymbol

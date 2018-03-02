@@ -18,6 +18,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 var figurePoints = figure.GetPoints();
                 vectors.Add((figurePoints.First(), false));
                 vectors.AddRange(figurePoints.Skip(1).Take(figurePoints.Count() - 1).Select((point) => (point, true)));
+                vectors.Add((figurePoints.First(), true));
             }
             vectors = VectorPreprocessor.PreprocessVectors(vectors, preprocessorOptions ?? new PreprocessorOptions()).ToList();
             var fullScaleValue = (Math.Pow(2,DacPrecisionBits)-1);
