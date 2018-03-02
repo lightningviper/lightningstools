@@ -1115,7 +1115,7 @@
       <Source xsi:type="AnalogSignal">
         <Id>F4_RWR__BEARING_DEGREES[22]</Id>
       </Source>
-      <!-- TeensyRWR OBJECT BEARING INPUT-->
+      <!-- TeensyRWR OBJECT 22 BEARING INPUT-->
       <Destination xsi:type="AnalogSignal">
         <Id>TeensyRWR__RWR_Object_Bearing_Degrees[22]</Id>
       </Destination>
@@ -1123,7 +1123,7 @@
     </SignalMapping>
 
     <SignalMapping>
-      <!-- F4 RWR OBJECT BEARING OUTPUT-->
+      <!-- F4 RWR OBJECT 23 BEARING OUTPUT-->
       <Source xsi:type="AnalogSignal">
         <Id>F4_RWR__BEARING_DEGREES[23]</Id>
       </Source>
@@ -1885,7 +1885,7 @@
       <Source xsi:type="AnalogSignal">
         <Id>F4_RWR__LETHALITY[22]</Id>
       </Source>
-      <!-- TeensyRWR OBJECT LETHALITY INPUT-->
+      <!-- TeensyRWR OBJECT 22 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
         <Id>TeensyRWR__RWR_Object_Lethality[22]</Id>
       </Destination>
@@ -1893,7 +1893,7 @@
     </SignalMapping>
 
     <SignalMapping>
-      <!-- F4 RWR OBJECT LETHALITY OUTPUT-->
+      <!-- F4 RWR OBJECT 23 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
         <Id>F4_RWR__LETHALITY[23]</Id>
       </Source>
@@ -2219,7 +2219,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 50 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[50]</Id>
+        <Id>F4_RWR__LETHALITY[50]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 50 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2231,7 +2231,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 51 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[51]</Id>
+        <Id>F4_RWR__LETHALITY[51]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 51 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2243,7 +2243,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 52 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[52]</Id>
+        <Id>F4_RWR__LETHALITY[52]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 52 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2255,7 +2255,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 53 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[53]</Id>
+        <Id>F4_RWR__LETHALITY[53]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 53 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2267,7 +2267,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 54 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[54]</Id>
+        <Id>F4_RWR__LETHALITY[54]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 54 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2279,7 +2279,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 55 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[55]</Id>
+        <Id>F4_RWR__LETHALITY[55]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 55 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2291,7 +2291,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 56 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[56]</Id>
+        <Id>F4_RWR__LETHALITY[56]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 56 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2303,7 +2303,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 57 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[57]</Id>
+        <Id>F4_RWR__LETHALITY[57]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 57 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2315,7 +2315,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 58 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[58]</Id>
+        <Id>F4_RWR__LETHALITY[58]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 58 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2327,7 +2327,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 59 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[59]</Id>
+        <Id>F4_RWR__LETHALITY[59]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 59 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2339,7 +2339,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 60 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[60]</Id>
+        <Id>F4_RWR__LETHALITY[60]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 60 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2351,7 +2351,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 61 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[61]</Id>
+        <Id>F4_RWR__LETHALITY[61]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 61 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2363,7 +2363,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 62 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[62]</Id>
+        <Id>F4_RWR__LETHALITY[62]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 62 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2375,7 +2375,7 @@
     <SignalMapping>
       <!-- F4 RWR OBJECT 63 LETHALITY OUTPUT-->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_RWR__LETHALITY_DEGREES[63]</Id>
+        <Id>F4_RWR__LETHALITY[63]</Id>
       </Source>
       <!-- TeensyRWR OBJECT 63 LETHALITY INPUT-->
       <Destination xsi:type="AnalogSignal">
@@ -2656,7 +2656,7 @@
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[22]</Id>
       </Source>
-      <!-- TeensyRWR MISSILE ACTIVITY FLAG INPUT-->
+      <!-- TeensyRWR OBJECT 22 MISSILE ACTIVITY FLAG INPUT-->
       <Destination xsi:type="DigitalSignal">
         <Id>TeensyRWR__RWR_Object_Missile_Activity_Flag[22]</Id>
       </Destination>
@@ -2664,7 +2664,7 @@
     </SignalMapping>
 
     <SignalMapping>
-      <!-- F4 RWR MISSILE ACTIVITY FLAG OUTPUT-->
+      <!-- F4 RWR OBJECT 23 MISSILE ACTIVITY FLAG OUTPUT-->
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[23]</Id>
       </Source>
@@ -3426,7 +3426,7 @@
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__MISSILE_LAUNCH_FLAG[22]</Id>
       </Source>
-      <!-- TeensyRWR MISSILE LAUNCH FLAG INPUT-->
+      <!-- TeensyRWR OBJECT 22 MISSILE LAUNCH FLAG INPUT-->
       <Destination xsi:type="DigitalSignal">
         <Id>TeensyRWR__RWR_Object_Missile_Launch_Flag[22]</Id>
       </Destination>
@@ -3434,7 +3434,7 @@
     </SignalMapping>
 
     <SignalMapping>
-      <!-- F4 RWR MISSILE LAUNCH FLAG OUTPUT-->
+      <!-- F4 RWR OBJECT 23 MISSILE LAUNCH FLAG OUTPUT-->
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__MISSILE_LAUNCH_FLAG[23]</Id>
       </Source>
@@ -4196,7 +4196,7 @@
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__SELECTED_FLAG[22]</Id>
       </Source>
-      <!-- TeensyRWR SELECTED FLAG INPUT-->
+      <!-- TeensyRWR OBJECT 22 SELECTED FLAG INPUT-->
       <Destination xsi:type="DigitalSignal">
         <Id>TeensyRWR__RWR_Object_Selected_Flag[22]</Id>
       </Destination>
@@ -4204,7 +4204,7 @@
     </SignalMapping>
 
     <SignalMapping>
-      <!-- F4 RWR SELECTED FLAG OUTPUT-->
+      <!-- F4 RWR OBJECT 23 SELECTED FLAG OUTPUT-->
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__SELECTED_FLAG[23]</Id>
       </Source>
@@ -4966,7 +4966,7 @@
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__NEWDETECTION_FLAG[22]</Id>
       </Source>
-      <!-- TeensyRWR NEW DETECTION FLAG INPUT-->
+      <!-- TeensyRWR OBJECT 22 NEW DETECTION FLAG INPUT-->
       <Destination xsi:type="DigitalSignal">
         <Id>TeensyRWR__RWR_Object_New_Detection_Flag[22]</Id>
       </Destination>
@@ -4974,7 +4974,7 @@
     </SignalMapping>
 
     <SignalMapping>
-      <!-- F4 RWR NEW DETECTION FLAG OUTPUT-->
+      <!-- F4 RWR OBJECT 23 NEW DETECTION FLAG OUTPUT-->
       <Source xsi:type="DigitalSignal">
         <Id>F4_RWR__NEWDETECTION_FLAG[23]</Id>
       </Source>
