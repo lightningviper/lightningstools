@@ -1228,7 +1228,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.RWR__SYMBOL_ID:
-                    SetOutput((AnalogSignal) output, _lastFlightData.RWRsymbol?.Length > ((Signal) output).Index ? _lastFlightData.RWRsymbol[((Signal) output).Index ?? 0] : 0);
+                    SetOutput((AnalogSignal) output, _lastFlightData.RWRsymbol?.Length > ((Signal) output).Index ? _lastFlightData.RWRsymbol[((Signal) output).Index ?? 0] : -1);
                     break;
 
                 case F4SimOutputs.RWR__BEARING_DEGREES:
@@ -1237,23 +1237,23 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.RWR__MISSILE_ACTIVITY_FLAG:
-                    ((DigitalSignal) output).State = _lastFlightData.missileActivity?.Length > ((Signal) output).Index && _lastFlightData.missileActivity?[((Signal) output).Index ?? 0] == 1;
+                    ((DigitalSignal) output).State = _lastFlightData.missileActivity?.Length > ((Signal) output).Index && _lastFlightData.missileActivity?[((Signal) output).Index ?? 0] !=0;
                     break;
 
                 case F4SimOutputs.RWR__MISSILE_LAUNCH_FLAG:
-                    ((DigitalSignal) output).State = _lastFlightData.missileLaunch?.Length > ((Signal) output).Index && _lastFlightData.missileLaunch?[((Signal) output).Index ?? 0] == 1;
+                    ((DigitalSignal) output).State = _lastFlightData.missileLaunch?.Length > ((Signal) output).Index && _lastFlightData.missileLaunch?[((Signal) output).Index ?? 0] !=0;
                     break;
 
                 case F4SimOutputs.RWR__SELECTED_FLAG:
-                    ((DigitalSignal) output).State = _lastFlightData.selected?.Length > ((Signal) output).Index && _lastFlightData.selected?[((Signal) output).Index ?? 0] == 1;
+                    ((DigitalSignal) output).State = _lastFlightData.selected?.Length > ((Signal) output).Index && _lastFlightData.selected?[((Signal) output).Index ?? 0] !=0;
                     break;
 
                 case F4SimOutputs.RWR__LETHALITY:
-                    SetOutput((AnalogSignal) output, _lastFlightData.lethality?.Length > ((Signal) output).Index ? (float) _lastFlightData.lethality?[((Signal) output).Index ?? 0] : 0);
+                    SetOutput((AnalogSignal) output, _lastFlightData.lethality?.Length > ((Signal) output).Index ? (float) _lastFlightData.lethality?[((Signal) output).Index ?? 0] : -1);
                     break;
 
                 case F4SimOutputs.RWR__NEWDETECTION_FLAG:
-                    ((DigitalSignal) output).State = _lastFlightData.newDetection?.Length > ((Signal) output).Index && _lastFlightData.newDetection?[((Signal) output).Index ?? 0] == 1;
+                    ((DigitalSignal) output).State = _lastFlightData.newDetection?.Length > ((Signal) output).Index && _lastFlightData.newDetection?[((Signal) output).Index ?? 0] !=0;
                     break;
 
                 case F4SimOutputs.RWR__ADDITIONAL_INFO:
@@ -1788,7 +1788,7 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("RWR", "Object Count", F4SimOutputs.RWR__OBJECT_COUNT, typeof(int)));
             for (var i = 0; i < 64; i++)
             {
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Symbol ID", F4SimOutputs.RWR__SYMBOL_ID, i, typeof(int), 0, 255));
+                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Symbol ID", F4SimOutputs.RWR__SYMBOL_ID, i, typeof(int), Int32.MinValue, Int32.MaxValue));
                 AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Bearing (Degrees)", F4SimOutputs.RWR__BEARING_DEGREES, i, typeof(float), 0, 360, true));
                 AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Missile Activity Flag", F4SimOutputs.RWR__MISSILE_ACTIVITY_FLAG, i, typeof(bool)));
                 AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Missile Launch Flag", F4SimOutputs.RWR__MISSILE_LAUNCH_FLAG, i, typeof(bool)));

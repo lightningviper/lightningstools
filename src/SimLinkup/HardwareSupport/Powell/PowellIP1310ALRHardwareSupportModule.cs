@@ -68,7 +68,7 @@ namespace SimLinkup.HardwareSupport.Powell
         private AnalogSignal _rwrSymbolCountInputSignal;
 
         private ISerialPort _serialPort;
-        private int _unsuccessfulConnectionAttempts = 3;
+        private int _unsuccessfulConnectionAttempts = 0;
 
         private PowellIP1310ALRHardwareSupportModule(string comPort, string deviceID = DEFAULT_DEVICE_ID,
             uint delayBetweenCharactersMillis = 0, uint delayBetweenCommandsMillis = 0)
@@ -251,8 +251,8 @@ namespace SimLinkup.HardwareSupport.Powell
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
                     State = 0,
-                    MinValue = 0,
-                    MaxValue = 64
+                    MinValue = Int32.MinValue,
+                    MaxValue = Int32.MaxValue
                 };
                 _rwrObjectSymbolIDInputSignals[i] = thisSignal;
                 analogSignalsToReturn.Add(thisSignal);
@@ -447,15 +447,15 @@ namespace SimLinkup.HardwareSupport.Powell
                         GC.SuppressFinalize(_serialPort.BaseStream);
                         _serialPort.DiscardOutBuffer();
                         _unsuccessfulConnectionAttempts = 0;
+                        return true;
                     }
                     catch (Exception e)
                     {
                         _unsuccessfulConnectionAttempts++;
                         _log.Error(e.Message, e);
-                        return false;
                     }
                 }
-                return true;
+                return false;
             }
         }
 

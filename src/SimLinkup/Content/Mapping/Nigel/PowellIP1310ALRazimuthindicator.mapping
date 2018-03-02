@@ -5,8 +5,6 @@
     <!-- *********************************************************************-->
     <!-- MAPPINGS FROM F4 SIM VALUES TO POWELL IP-1310/ALR HARDWARE SUPPORT MODULE INPUTS -->
     <!-- *********************************************************************-->
-    
-    IP1310ALR__Magnetic_Heading_Degrees
 
     <!-- MAGNETIC HEADING (DEGREES) INPUT-->
     <SignalMapping>

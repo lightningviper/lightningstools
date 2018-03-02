@@ -1,5 +1,6 @@
 ﻿using F4SharedMem;
 using LightningGauges.Renderers.F16.RWR;
+using System.Drawing;
 using System.Windows.Media;
 
 
@@ -8,91 +9,83 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
     internal class BMSRWRRenderer
     {
         private readonly IRWRRendererFactory _rwrRendererFactory;
-        private Reader _sharedmemReader = new Reader();
         private IRWRRenderer _rwrRenderer;
-        private string rwrType = string.Empty;
-
+        private string _lastRwrType = string.Empty;
         public BMSRWRRenderer(IRWRRendererFactory rwrRendererFactory=null)
         {
             _rwrRendererFactory = rwrRendererFactory ?? new RWRRendererFactory();
         }
-        public void Render(DrawingContext drawingContext)
+        public void Render(DrawingContext drawingContext, InstrumentState instrumentState)
         {
-            if (!_sharedmemReader.IsFalconRunning) { return; }
-            var flightData = _sharedmemReader.GetCurrentData();
-            if (_rwrRenderer == null)
-            {
-                CreateRWRRenderer(flightData);
-            }
+            CreateRWRRenderer(instrumentState.RwrInfo);
             if (_rwrRenderer != null)
             {
-                _rwrRenderer.InstrumentState = GetInstrumentState(flightData);
+                _rwrRenderer.InstrumentState = instrumentState;
                 _rwrRenderer.Render(drawingContext);
             }
         }
-        private InstrumentState GetInstrumentState(FlightData flightData)
+        public void Render(Graphics destinationGraphics, Rectangle destinationRectangle, InstrumentState instrumentState)
         {
-            var instrumentState = new InstrumentState
+            CreateRWRRenderer(instrumentState.RwrInfo);
+            if (_rwrRenderer != null)
             {
-                bearing = flightData.bearing,
-                ChaffCount = flightData.ChaffCount,
-                FlareCount = flightData.FlareCount,
-                lethality = flightData.lethality,
-                missileActivity = flightData.missileActivity,
-                missileLaunch = flightData.missileLaunch,
-                newDetection = flightData.newDetection,
-                RwrInfo = flightData.RwrInfo,
-                RwrObjectCount = flightData.RwrObjectCount,
-                RWRsymbol = flightData.RWRsymbol,
-                selected = flightData.selected,
-                yaw = flightData.yaw
-            };
-            return instrumentState;
+                _rwrRenderer.InstrumentState = instrumentState;
+                _rwrRenderer.Render(destinationGraphics, destinationRectangle);
+            }
         }
-        private void CreateRWRRenderer(FlightData flightData)
+        private void CreateRWRRenderer(byte[] rwrInfoArray)
+        {
+            var rwrType = GetRWRType(rwrInfoArray);
+            if (_rwrRenderer == null || rwrType != _lastRwrType)
+            {
+
+                if ((rwrType == "0" || rwrType == "1"))
+                {
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR56);
+                }
+                else if (rwrType == "2")
+                {
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR69);
+                }
+                else if (rwrType == "3")
+                {
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR93);
+                }
+                else if (rwrType == "4")
+                {
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.SPS1000);
+                }
+                else if (rwrType == "5")
+                {
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR67);
+                }
+                else if (rwrType == "6")
+                {
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.CARAPACE);
+                }
+                else
+                {
+                    _rwrRenderer = null;
+                }
+                _lastRwrType = rwrType;
+            }
+        }
+        private string GetRWRType(byte[] rwrInfoArray)
         {
             string[] rwrInfo = null;
             var rwrInfoBuffer = string.Empty;
 
-            for (var i = 0; i < flightData.RwrInfo.Length; i++)
+            for (var i = 0; i < rwrInfoArray.Length; i++)
             {
-                rwrInfoBuffer += (char)flightData.RwrInfo[i];
+                rwrInfoBuffer += (char)rwrInfoArray[i];
             }
             rwrInfo = rwrInfoBuffer.Split('<');
-
+            string rwrType = string.Empty;
             if (RwrInfoContains(rwrInfo, "type") && RwrInfoGetKeyContent(rwrInfo, "type") != rwrType)
             {
                 rwrType = RwrInfoGetKeyContent(rwrInfo, "type");
             }
-
-            if ((rwrType == "0" || rwrType == "1"))
-            {
-                _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR56);
-            }
-            else if (rwrType == "2")
-            {
-                _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR69);
-            }
-            else if (rwrType == "3")
-            {
-                _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR93);
-            }
-            else if (rwrType == "4")
-            {
-                _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.SPS1000);
-            }
-            else if (rwrType == "5")
-            {
-                _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR67);
-            }
-            else if (rwrType == "6")
-            {
-                _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.CARAPACE);
-            }
-            else
-            {
-                _rwrRenderer = null;
-            }
+            return rwrType;
         }
         private bool RwrInfoContains(string[] rwrInfo, string key)
         {

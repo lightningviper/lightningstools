@@ -131,6 +131,8 @@
     <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowIndicatorHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowIndicatorHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
@@ -358,6 +360,32 @@
     <Content Include="Content\Mapping\HenkieAltimeter\SimSupportModule.registry">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\HenkieFuelFlowIndicator\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkieFuelFlowIndicator\HenkieF16FuelFlowIndicator.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkieFuelFlowIndicator\HenkieF16FlowIndicator.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkieFuelFlowIndicator\SimSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyRWR\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Mapping\TeensyRWR\SimSupportModule.registry">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>

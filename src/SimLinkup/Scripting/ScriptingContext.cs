@@ -20,7 +20,6 @@ namespace SimLinkup.Scripting
                 return toReturn;
             }
         }
-
         public SignalList<AnalogSignal> AnalogSignals
         {
             get
@@ -30,8 +29,25 @@ namespace SimLinkup.Scripting
                 return toReturn;
             }
         }
+        public SignalList<DigitalSignal> DigitalSignals
+        {
+            get
+            {
+                var toReturn = new SignalList<DigitalSignal>();
+                toReturn.AddRange(Values.OfType<DigitalSignal>());
+                return toReturn;
+            }
+        }
+        public SignalList<TextSignal> TextSignals
+        {
+            get
+            {
+                var toReturn = new SignalList<TextSignal>();
+                toReturn.AddRange(Values.OfType<TextSignal>());
+                return toReturn;
+            }
+        }
 
-        public DigitalSignal[] DigitalSignals => Values.OfType<DigitalSignal>().ToArray();
 
         public IHardwareSupportModule[] HardwareSupportModules
         {
@@ -50,16 +66,6 @@ namespace SimLinkup.Scripting
             {
                 _ssms = value;
                 AddSimAndHardwareInsAndOuts();
-            }
-        }
-
-        public SignalList<TextSignal> TextSignals
-        {
-            get
-            {
-                var toReturn = new SignalList<TextSignal>();
-                toReturn.AddRange(Values.OfType<TextSignal>());
-                return toReturn;
             }
         }
 
@@ -89,6 +95,16 @@ namespace SimLinkup.Scripting
                 {
                     foreach (var digitalOutput in hsm.DigitalOutputs)
                         this[digitalOutput.Id] = digitalOutput;
+                }
+                if (hsm.TextInputs != null && hsm.TextInputs.Length > 0)
+                {
+                    foreach (var textInput in hsm.TextInputs)
+                        this[textInput.Id] = textInput;
+                }
+                if (hsm.TextOutputs != null && hsm.TextOutputs.Length > 0)
+                {
+                    foreach (var textOutput in hsm.TextOutputs)
+                        this[textOutput.Id] = textOutput;
                 }
             }
         }

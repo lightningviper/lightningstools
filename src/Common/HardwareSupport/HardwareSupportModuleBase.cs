@@ -6,15 +6,17 @@ namespace Common.HardwareSupport
 {
     public abstract class HardwareSupportModuleBase : IHardwareSupportModule
     {
-        public abstract AnalogSignal[] AnalogInputs { get; }
-        public abstract AnalogSignal[] AnalogOutputs { get; }
-
-        public abstract DigitalSignal[] DigitalInputs { get; }
-        public abstract DigitalSignal[] DigitalOutputs { get; }
+        public virtual AnalogSignal[] AnalogInputs { get { return null; } }
+        public virtual AnalogSignal[] AnalogOutputs { get { return null; } }
+        public virtual TextSignal[] TextInputs { get { return null; } }
+        public virtual DigitalSignal[] DigitalInputs { get { return null; } }
+        public virtual DigitalSignal[] DigitalOutputs { get { return null; } }
+        public virtual TextSignal[] TextOutputs { get { return null; } }
         public abstract string FriendlyName { get; }
 
         public virtual void Render(Graphics g, Rectangle destinationRectangle)
         {
+            Thread.Sleep(0);
         }
 
         public virtual void Synchronize()

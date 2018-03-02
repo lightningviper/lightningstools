@@ -68,7 +68,7 @@ namespace Henkie.FuelFlow
         public const short WATCHDOG_MAX_COUNTDOWN = 63; //6 bits
         #endregion
 
-        public void MoveIndicator(short position)
+        public void SetPosition(short position)
         {
 
 			var rangeNum = (byte)(position /256);
