@@ -540,6 +540,14 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
             if (_fuelFlowInputSignal != null)
             {
                 var fuelFlowFromSim= _fuelFlowInputSignal.State;
+                if (fuelFlowFromSim >80000.0)
+                {
+                    fuelFlowFromSim = 80000;
+                }
+                else if (fuelFlowFromSim <0)
+                {
+                    fuelFlowFromSim = 0;
+                }
                 var positionOutput = CalibratedPosition(fuelFlowFromSim);
                 _positionOutputSignal.State=positionOutput;
             }

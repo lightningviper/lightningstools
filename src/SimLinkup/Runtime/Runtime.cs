@@ -93,7 +93,7 @@ namespace SimLinkup.Runtime
                     IsAngle = false,
                     IsPercentage = false,
                     MinValue = 0,
-                    MaxValue = 250
+                    MaxValue = 1000
                 };
             ScriptingContext[_loopDurationSignal.Id] = _loopDurationSignal;
 
@@ -113,7 +113,7 @@ namespace SimLinkup.Runtime
                     IsAngle = false,
                     IsPercentage = false,
                     MinValue = 0,
-                    MaxValue = 300
+                    MaxValue = 1000
                 };
             ScriptingContext[_loopFrequencySignal.Id] = _loopFrequencySignal;
         }
@@ -131,7 +131,7 @@ namespace SimLinkup.Runtime
             var loopDuration = endTime.Subtract(startTime).TotalMilliseconds;
             if (loopDuration <= 0) loopDuration = 1;
             _loopDurationSignal.State = loopDuration;
-            _loopFrequencySignal.State = 1000 / loopDuration;
+            _loopFrequencySignal.State = 1000.0 / loopDuration;
         }
 
 
