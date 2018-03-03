@@ -1,8 +1,8 @@
 @ECHO OFF
 SET MASTERBUILDDIR=%~dp0
 
-REM Download and Install TortoiseGit
-CALL %MASTERBUILDDIR%InstallTortoiseGit.bat
+REM Download and Install Git for Windows
+CALL %MASTERBUILDDIR%InstallGitForWindows.bat
 
 REM Clone Git repository
 CALL %MASTERBUILDDIR%Clone.bat
