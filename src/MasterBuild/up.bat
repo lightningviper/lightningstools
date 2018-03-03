@@ -9,6 +9,12 @@ IF ERRORLEVEL 1 GOTO END
 CD "%TEMP%\LightningsToolsInstall"
 CALL InstallTortoiseGit.bat
 
+IF NOT EXIST "%TEMP%\LightningsToolsInstall\Clone.bat" powershell Invoke-WebRequest -OutFile "%TEMP%\LightningsToolsInstall\Clone.bat" "https://raw.githubusercontent.com/lightningviper/lightningstools/master/src/MasterBuild/Clone.bat"
+IF ERRORLEVEL 1 GOTO END
+
+CD "%TEMP%\LightningsToolsInstall"
+CALL Clone.bat
+
 CD "%CD:~0,2%\lightningstools\src\MasterBuild"
 CALL PrepareBuildMachine.bat
 
