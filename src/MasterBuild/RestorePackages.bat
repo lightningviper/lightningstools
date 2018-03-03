@@ -1,7 +1,8 @@
 @ECHO OFF
 :start
 SET MASTERBUILDDIR=%~dp0
-IF NOT EXIST "%MASTERBUILDDIR%nuget.exe" powershell Invoke-WebRequest -OutFile "%MASTERBUILDDIR%nuget.exe" "https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe"
+IF NOT EXIST "%MASTERBUILDDIR%nuget.exe" bitsadmin /transfer Nuget /priority HIGH https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe "%MASTERBUILDDIR%nuget.exe" 
+
   
 IF ERRORLEVEL 1 GOTO END
 SET EnableNuGetPackageRestore=true
