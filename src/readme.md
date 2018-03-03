@@ -3,7 +3,7 @@
 ##### Installing Prerequisites and Checking out the Code
 To clone the `lightningstools` repository and install all required prerequisites in a single command, run the following command from an **administrative** command prompt:
 ```
-@cd "%userprofile%\Downloads" & powershell Invoke-WebRequest -OutFile "up.bat" "https://raw.githubusercontent.com/lightningviper/lightningstools/master/src/MasterBuild/up.bat" & up.bat
+cd "%userprofile%\Downloads" & powershell Invoke-WebRequest -OutFile "up.bat" "https://raw.githubusercontent.com/lightningviper/lightningstools/master/src/MasterBuild/up.bat" & up.bat
 ```
 
 The above command will clone the repository to a local folder, `\lightningstools`, located in the root of the current drive where the above command was run from (typically, this folder will be located at `c:\lightningstools`).  
