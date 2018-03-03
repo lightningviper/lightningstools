@@ -1,7 +1,7 @@
 //pin assignments
 const int X_PIN=A21;
 const int Y_PIN=A22;
-const int Z_PIN=24;
+const int Z_PIN=39;
 const int BUILTIN_LED_PIN=13;
 
 //DAC precision & scale
