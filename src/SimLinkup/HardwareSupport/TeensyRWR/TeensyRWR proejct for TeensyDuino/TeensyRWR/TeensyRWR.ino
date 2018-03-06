@@ -20,7 +20,7 @@ const unsigned int RECEIVE_BUFFER_SIZE = 20*1024;
 const unsigned int SERIAL_WRITE_DELAY_MILLIS=1;
 const unsigned int BEAM_TURNON_SETTLING_TIME_MICROSECONDS=15;
 const unsigned int BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS=15;
-const unsigned int BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS=500000;
+const unsigned int BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS=50;
 
 //firmware version
 const unsigned int FIRMWARE_MAJOR_VERSION =0;
@@ -274,7 +274,7 @@ void beamTo(Point point)
   debugLog("beamTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
   analogWrite(X_PIN, point.X);
   analogWrite(Y_PIN, point.Y);
-  delayMicroseconds(BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS);
+  yieldMicroseconds(BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS);
   _beamLocation=point;
   emitArduinoSerialPlotterInfo();
   debugLog("beamTo(point) exited");
@@ -287,7 +287,7 @@ void beamOff()
   {
     digitalWrite(Z_PIN, HIGH);
     _beamOn=false;
-    delayMicroseconds(BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS);
+    yieldMicroseconds(BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS);
   }
   debugLog("beamOff() exited");
 }
@@ -299,7 +299,7 @@ void beamOn()
   {
     digitalWrite(Z_PIN, LOW);
     _beamOn=true;
-    delayMicroseconds(BEAM_TURNON_SETTLING_TIME_MICROSECONDS);
+    yieldMicroseconds(BEAM_TURNON_SETTLING_TIME_MICROSECONDS);
   }
   debugLog("beamOn() exited");
 }
@@ -337,7 +337,21 @@ void identify()
 void serialPrint(String message) 
 {
   Serial.print(message);
-  delay(SERIAL_WRITE_DELAY_MILLIS);
+  yieldMilliseconds(SERIAL_WRITE_DELAY_MILLIS);
+}
+void yieldMilliseconds(int delay) {
+  unsigned long startMillis=millis();
+  while (startMillis + delay < millis())
+  {
+    yield(); 
+  }
+}
+void yieldMicroseconds(int delay) {
+  unsigned long startMicros=micros();
+  while (startMicros + delay < micros())
+  {
+    yield(); 
+  }
 }
 void serialPrintln(String message) {
    serialPrint(message + '\r' + '\n');
