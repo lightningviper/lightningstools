@@ -1,6 +1,3 @@
-#include <Scheduler.h>
-#include <Scheduler/Semaphore.h>
-
 //pin assignments
 const int X_PIN=A21;
 const int Y_PIN=A22;
@@ -11,16 +8,18 @@ const int BUILTIN_LED_PIN=13;
 const unsigned int DAC_PRECISION_BITS=12;
 const unsigned int MAX_DAC_VALUE= 0xFFF;
 const unsigned int CENTER_DAC_VALUE=0x800;
+const unsigned int DIAGONAL_RESOLUTION=280;
 
 //communications settings
-const unsigned int BAUD_RATE=9600;
+const unsigned int BAUD_RATE=128000;
 const unsigned int RECEIVE_BUFFER_SIZE = 20*1024;
 
 //timings
-const unsigned int SERIAL_WRITE_DELAY_MILLIS=50;
-const unsigned int BEAM_TURNON_SETTLING_TIME_MICROSECONDS=15;
-const unsigned int BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS=15;
-const unsigned int BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS=50;
+const unsigned int SERIAL_READ_TIMEOUT_MILLIS=200;
+const unsigned int SERIAL_WRITE_DELAY_MILLIS=10;
+const unsigned int BEAM_TURNON_SETTLING_TIME_MICROSECONDS=0;
+const unsigned int BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS=0;
+const unsigned int BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS=0;
 
 //firmware version
 const unsigned int FIRMWARE_MAJOR_VERSION =0;
@@ -33,9 +32,15 @@ const String FIRMWARE_IDENTIFICATION="Teensy RWR v" + String(FIRMWARE_MAJOR_VERS
 
 typedef struct 
 {
-  unsigned int X=CENTER_DAC_VALUE;
-  unsigned int Y=CENTER_DAC_VALUE;
+  float X=0;
+  float Y=0;
 } Point;
+typedef enum {
+  TRACE=0,
+  INFO,
+  WARNING,
+  ERROR
+} DebugLevel;
 
 const Point CENTER;
 
@@ -45,39 +50,45 @@ bool _beamOn;
 String _inputString="";
 String _drawCommands="";
 bool _ledOn=false;
-bool _emitArduinoSerialPlotterInfo=false;
 bool _echoBackEnabled=false;
 bool _debugLoggingEnabled=false;
+DebugLevel _debugLevel=INFO;
+
 bool _beamAutoCenteringEnabled=false;
 
 void setup() 
 {
+  Serial.setTimeout(SERIAL_READ_TIMEOUT_MILLIS);
   Serial.begin(BAUD_RATE); 
   debugLog("setup() entered");
   _inputString.reserve(RECEIVE_BUFFER_SIZE );
+  _drawCommands.reserve(RECEIVE_BUFFER_SIZE );
   analogWriteResolution(DAC_PRECISION_BITS); 
   pinMode(Z_PIN, OUTPUT);
   pinMode(BUILTIN_LED_PIN, OUTPUT);
   beamOff();
   beamTo(CENTER);
-  Scheduler.startLoop(drawLoop);
-  Scheduler.startLoop(serialLoop);
   debugLog("setup() exited");
 }
 
 void loop() 
 {
-  yield();
+  debugLog("loop() entered", TRACE);
+  processSerialData();
+  draw();
+  debugLog("loop() exited", TRACE);
 }
-void serialLoop() 
+void processSerialData() 
 {
-  debugLog("serialLoop() entered");
-  while(Serial.available() > 0) 
+  debugLog("serialEvent() entered", TRACE);
+  unsigned long bytesRead=0;
+  while(Serial.dtr() && Serial.available() > 0 && bytesRead <256) 
   {
     int inChar=Serial.read();
+    bytesRead++;
     if (inChar != -1) 
     {
-      toggleLED();
+      debugLog("serial character entered: ", TRACE);
       if (_echoBackEnabled) 
       {
         serialPrint((char)inChar);
@@ -108,12 +119,6 @@ void serialLoop()
           break;
         }
   
-        case 'p': case 'P': //toggle emitting of Arduino serial plotter data 
-        {
-          toggleEmitArduinoSerialPlotterInfo();
-          break;
-        }
-  
         case 'r': case 'R': //reboot the device and restart the program 
         {
           CPU_RESTART;
@@ -128,10 +133,12 @@ void serialLoop()
         case '.':
         case '0' ... '9':
           _inputString+=(char)inChar;
+          debugLog("appending char to _inputString:" + String((char)inChar), TRACE);
           break;
   
         case 'z': case 'Z': //end of command-list, render
         {
+          toggleLED();
           _drawCommands=_inputString;
           _inputString="";
           _inputString.reserve(RECEIVE_BUFFER_SIZE);
@@ -139,9 +146,8 @@ void serialLoop()
         }
       }
     }
-    yield();
   }
-  debugLog("serialLoop() exited");
+  debugLog("serialEvent() exited", TRACE);
 }
 
 void toggleBeamAutoCenteringEnabled() 
@@ -158,12 +164,6 @@ void toggleDebugLoggingEnabled()
   debugLog("toggleDebugLoggingEnabled() exited");
 }
 
-void toggleEmitArduinoSerialPlotterInfo() {
-  debugLog("toggleEmitArduinoSerialPlotterInfo() entered");
-  _emitArduinoSerialPlotterInfo = !_emitArduinoSerialPlotterInfo;
-  debugLog("toggleEmitArduinoSerialPlotterInfo() exited");
-}
-
 void toggleEchobackEnabled() {
   debugLog("toggleEchobackEnabled() entered");
   _echoBackEnabled=!_echoBackEnabled;
@@ -178,55 +178,65 @@ void toggleLED()
   debugLog("toggleLED() exited");
 }
 
-void drawLoop() 
+void draw() 
 {
-  debugLog("drawLoop() entered");
+  debugLog("draw() entered", TRACE);
   Point point;  
   unsigned int index;
+  unsigned int numCommandsProcessed=0;
   for (unsigned int i=0;i<_drawCommands.length();i++)
   {
     index=i;
+    debugLog("draw() processing command char at index " + String(index), TRACE);
     char curChar=_drawCommands.charAt(i);
     switch (curChar)
     {
       case 'm': case 'M': //move to point
-        index++;
         point = readPoint(_drawCommands, index);
         moveTo(point);
+        numCommandsProcessed++;
         break;
 
       case 'l': case 'L': //draw line to point
-        index++;
         point = readPoint(_drawCommands, index);
         lineTo(point);
+        numCommandsProcessed++;
         break;
     }
-    yield();
+    i=index;
+    processSerialData();
   }
   beamOff();
   if (_beamAutoCenteringEnabled) 
   {
     autoCenterBeam();
   }
-  yield();
-  debugLog("drawLoop() exited");
+  debugLog("# commands processed: " + String(numCommandsProcessed), TRACE);
+  debugLog("draw() exited", TRACE);
 }
 
 Point readPoint(String string, unsigned int &index) 
 {
-  debugLog("readPoint(string, unsigned int &index) entered");
+  debugLog("readPoint(string, unsigned int &index) entered", TRACE);
   Point point;
-  point.X = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
-  point.Y = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
+  point.X = readNormalizedFloat(string, index);
+  point.Y = readNormalizedFloat(string, index);
   
-  debugLog("readPoint(string, unsigned int &index) exited");
+  debugLog("readPoint(string, unsigned int &index) exited", TRACE);
   return point;
 }
 
-unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) 
+float readNormalizedFloat(String string, unsigned int &index) 
 {
-  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) entered");
+  debugLog("readNormalizedFloat(string, unsigned int &index) entered", TRACE);
   String toParse="";
+  float parsed = 0;
+
+  if (index>= string.length()-1)
+  {
+    debugLog("readNormalizedFloat(string, unsigned int &index) exited", TRACE);
+    return parsed;
+  }
   for (unsigned int i = index;i<string.length();i++) 
   {
     index++;
@@ -241,21 +251,28 @@ unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned
     }
   }
 
-  unsigned int parsed = defaultValue;
   if (toParse.length() > 0) 
   {
-    int asInt = toParse.toInt();;
-    parsed = asInt >=0 ? (unsigned int) asInt : 0;
-    parsed = parsed <= maxValue ? parsed : maxValue;
+    debugLog("parsing float from string: " + toParse);
+    parsed = toParse.toFloat();
+    if (parsed  < -1.0) 
+    {
+      parsed  = -1.0;
+    }
+    else if (parsed  > 1.0) 
+    {
+      parsed  = 1.0;
+    }
   }
-  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) exited with return value:" + String(parsed));
+  debugLog("parsed value: " + String(parsed,4));
+  debugLog("readNormalizedFloat(string, unsigned int &index) exited", TRACE);
   return parsed;
 }
 
 
 void moveTo(Point point) 
 {
-  debugLog("moveTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
+  debugLog("moveTo(point) entered - Point.X=" + String(point.X,4) + "; Point.Y=" + String(point.Y,4));
   beamOff();
   beamTo(point);
   debugLog("moveTo(point) exited");
@@ -263,7 +280,7 @@ void moveTo(Point point)
 
 void lineTo(Point point)
 {
-  debugLog("lineTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
+  debugLog("lineTo(point) entered - Point.X=" + String(point.X,4) + "; Point.Y=" + String(point.Y,4));
   beamOn();
   beamTo(point);
   debugLog("lineTo(point) exited");
@@ -271,13 +288,58 @@ void lineTo(Point point)
 
 void beamTo(Point point) 
 {
-  debugLog("beamTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
-  analogWrite(X_PIN, point.X);
-  analogWrite(Y_PIN, point.Y);
-  yieldMicroseconds(BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS);
-  _beamLocation=point;
-  emitArduinoSerialPlotterInfo();
+  debugLog("beamTo(point) entered - Point.X=" + String(point.X,4) + "; Point.Y=" + String(point.Y,4));
+  if (_beamOn)
+  {
+    float dx = point.X - _beamLocation.X;
+    float dy = point.Y - _beamLocation.Y;
+    float distance = sqrt((dx*dx) + (dy*dy));
+    long numSteps = (long)(distance * (DIAGONAL_RESOLUTION/2.0));
+    debugLog("numSteps=" + String(numSteps));
+    for (long i=0;i<numSteps;i++) 
+    {
+      Point nextPoint;
+      nextPoint.X = _beamLocation.X + (((float)dx / (float)numSteps));
+      nextPoint.Y = _beamLocation.Y +(((float)dy / (float)numSteps));
+      debugLog("next Point X=" + String(nextPoint.X) + "; Y=" + String(nextPoint.Y));
+      writePointToDACs(nextPoint);
+      processSerialData();
+    }
+  }
+  writePointToDACs(point);
   debugLog("beamTo(point) exited");
+}
+
+void writePointToDACs(Point point) 
+{
+    debugLog("writePointToDACs(point) entered - Point.X=" + String(point.X,4) + "; Point.Y=" + String(point.Y,4), TRACE);
+    if (point.X < -1.0) 
+    {
+      point.X = -1.0;
+    }
+    else if (point.X > 1.0) 
+    {
+      point.X = 1.0;
+    }
+    if (point.Y < -1.0) 
+    {
+      point.Y = -1.0;
+    }
+    else if (point.Y > 1.0) 
+    {
+      point.Y = 1.0;
+    }
+    if (_beamLocation.X != point.X || _beamLocation.Y != point.Y) 
+    {
+      unsigned int xVal = (unsigned int)((point.X * (MAX_DAC_VALUE /2.0))+(MAX_DAC_VALUE /2.0));
+      unsigned int yVal = (unsigned int)((point.Y * (MAX_DAC_VALUE /2.0))+(MAX_DAC_VALUE /2.0));
+      debugLog("writing to DACs: xVal=" + String(xVal) + "; yVal=" + String(yVal));
+      analogWrite(X_PIN, xVal);
+      analogWrite(Y_PIN, yVal);
+      delayMicroseconds(BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS);
+      _beamLocation=point;
+    }
+    debugLog("writePointToDACs(point) exited", TRACE);
 }
 
 void beamOff()
@@ -287,7 +349,7 @@ void beamOff()
   {
     digitalWrite(Z_PIN, HIGH);
     _beamOn=false;
-    yieldMicroseconds(BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS);
+    delayMicroseconds(BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS);
   }
   debugLog("beamOff() exited");
 }
@@ -299,7 +361,7 @@ void beamOn()
   {
     digitalWrite(Z_PIN, LOW);
     _beamOn=true;
-    yieldMicroseconds(BEAM_TURNON_SETTLING_TIME_MICROSECONDS);
+    delayMicroseconds(BEAM_TURNON_SETTLING_TIME_MICROSECONDS);
   }
   debugLog("beamOn() exited");
 }
@@ -314,20 +376,6 @@ void autoCenterBeam()
   debugLog("autoCenterBeam() exited");
 }
 
-void emitArduinoSerialPlotterInfo() 
-{
-  debugLog("emitArduinoSerialPlotterInfo() entered");
-  if (_emitArduinoSerialPlotterInfo) 
-  {
-    serialPrint(_beamLocation.X);
-    serialPrint('\t');
-    serialPrint(_beamLocation.Y);
-    serialPrint('\t');
-    serialPrintln(_beamOn ? 0 : 1);    
-  }
-  debugLog("emitArduinoSerialPlotterInfo() exited");
-}
-
 void identify() 
 {
   debugLog("identify() entered");
@@ -336,29 +384,24 @@ void identify()
 }
 void serialPrint(String message) 
 {
-  Serial.print(message);
-  delay(SERIAL_WRITE_DELAY_MILLIS);
+  if (Serial.dtr()) 
+  {
+    Serial.print(message);
+    delay(SERIAL_WRITE_DELAY_MILLIS);
+  }
 }
-void serialPrintln(String message) {
+void serialPrintln(String message) 
+{
    serialPrint(message + '\r' + '\n');
 }
-void yieldMilliseconds(int delay) {
-  unsigned long startMillis=millis();
-  while (startMillis + delay < millis())
-  {
-    yield(); 
-  }
-}
-void yieldMicroseconds(int delay) {
-  unsigned long startMicros=micros();
-  while (startMicros + delay < micros())
-  {
-    yield(); 
-  }
-}
+
 void debugLog(String message) 
 {
-  if(_debugLoggingEnabled) 
+  debugLog(message,TRACE);
+}
+void debugLog(String message, DebugLevel level) 
+{
+  if(_debugLoggingEnabled && level >= _debugLevel) 
   {
     serialPrintln(String(micros()) + ":" + message);
   }

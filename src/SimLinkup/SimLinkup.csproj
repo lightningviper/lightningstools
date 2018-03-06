@@ -174,7 +174,6 @@
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\VectorEncoder.cs" />
-    <Compile Include="HardwareSupport\TeensyRWR\VectorPreprocessor.cs" />
     <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModule.cs" />
     <Compile Include="Runtime\Runtime.cs" />
     <Compile Include="Runtime\SimSupportModuleLoader.cs" />
