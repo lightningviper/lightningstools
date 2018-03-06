@@ -1,3 +1,6 @@
+#include <Scheduler.h>
+#include <Scheduler/Semaphore.h>
+
 //pin assignments
 const int X_PIN=A21;
 const int Y_PIN=A22;
@@ -14,10 +17,10 @@ const unsigned int BAUD_RATE=9600;
 const unsigned int RECEIVE_BUFFER_SIZE = 20*1024;
 
 //timings
-const unsigned int SERIAL_WRITE_DELAY_MILLIS=2;
-const unsigned int BEAM_TURNON_SETTLING_TIME_MICROSECONDS=1;
-const unsigned int BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS=1;
-const unsigned int BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS=4;
+const unsigned int SERIAL_WRITE_DELAY_MILLIS=1;
+const unsigned int BEAM_TURNON_SETTLING_TIME_MICROSECONDS=15;
+const unsigned int BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS=15;
+const unsigned int BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS=500000;
 
 //firmware version
 const unsigned int FIRMWARE_MAJOR_VERSION =0;
@@ -36,11 +39,6 @@ typedef struct
 
 const Point CENTER;
 
-enum LEDMode 
-{
-  ToggleOnReceivedCharacter=0,
-  Blink=1,
-};
 
 Point _beamLocation;
 bool _beamOn;
@@ -48,114 +46,102 @@ String _inputString="";
 String _drawCommands="";
 bool _ledOn=false;
 bool _emitArduinoSerialPlotterInfo=false;
-LEDMode _ledMode=ToggleOnReceivedCharacter;
 bool _echoBackEnabled=false;
 bool _debugLoggingEnabled=false;
-bool _beamAutoCenteringEnabled=true;
+bool _beamAutoCenteringEnabled=false;
 
 void setup() 
 {
   Serial.begin(BAUD_RATE); 
   debugLog("setup() entered");
+  _inputString.reserve(RECEIVE_BUFFER_SIZE );
   analogWriteResolution(DAC_PRECISION_BITS); 
   pinMode(Z_PIN, OUTPUT);
   pinMode(BUILTIN_LED_PIN, OUTPUT);
   beamOff();
   beamTo(CENTER);
-  _inputString.reserve(RECEIVE_BUFFER_SIZE );
+  Scheduler.startLoop(drawLoop);
+  Scheduler.startLoop(serialLoop);
   debugLog("setup() exited");
 }
 
 void loop() 
 {
-  debugLog("loop() entered");
-  if (_ledMode == Blink && millis()%1000 > 500) 
-  {
-    toggleLED();
-  }
-  processSerialData();
-  draw(_drawCommands);
-  beamOff();
-  autoCenterBeam();
-  debugLog("loop() exited");
+  yield();
 }
-void processSerialData() 
+void serialLoop() 
 {
-  debugLog("processSerialData() entered");
-  while(Serial.available()) 
+  debugLog("serialLoop() entered");
+  while(Serial.available() > 0) 
   {
-    char inChar=(char)Serial.read();
+    int inChar=Serial.read();
     if (inChar != -1) 
     {
-      if (_ledMode==ToggleOnReceivedCharacter) 
+      toggleLED();
+      if (_echoBackEnabled) 
       {
-        toggleLED();
+        serialPrint((char)inChar);
       }
-      if (_echoBackEnabled && Serial.dtr()) 
+      switch ((char)inChar) 
       {
-        Serial.print(inChar);
-        pushSerialData();
+        case 'c':case 'C': //toggle beam auto-centering enable/disable 
+        {
+          toggleBeamAutoCenteringEnabled();
+          break;
+        }
+  
+        case 'd':case 'D': //toggle debug logging enable/disable
+        {
+          toggleDebugLoggingEnabled();
+          break;
+        }
+  
+        case 'e':case 'E': //toggle echo-back enable/disable
+        {
+          toggleEchobackEnabled();
+          break;
+        }
+  
+        case 'i': case 'I': //identify firmware
+        {
+          identify();
+          break;
+        }
+  
+        case 'p': case 'P': //toggle emitting of Arduino serial plotter data 
+        {
+          toggleEmitArduinoSerialPlotterInfo();
+          break;
+        }
+  
+        case 'r': case 'R': //reboot the device and restart the program 
+        {
+          CPU_RESTART;
+          break;
+        }
+  
+        case 'm': case 'M':
+        case 'l': case 'L':
+        case ',':
+        case ' ':
+        case '-':
+        case '.':
+        case '0' ... '9':
+          _inputString+=(char)inChar;
+          break;
+  
+        case 'z': case 'Z': //end of command-list, render
+        {
+          _drawCommands=_inputString;
+          _inputString="";
+          _inputString.reserve(RECEIVE_BUFFER_SIZE);
+          break;
+        }
       }
     }
-    switch (inChar) 
-    {
-      case 'c':case 'C': //toggle beam auto-centering enable/disable 
-      {
-        toggleBeamAutoCenteringEnabled();
-        break;
-      }
-
-      case 'd':case 'D': //toggle debug logging enable/disable
-      {
-        toggleDebugLoggingEnabled();
-        break;
-      }
-
-      case 'e':case 'E': //toggle echo-back enable/disable
-      {
-        toggleEchobackEnabled();
-        break;
-      }
-
-      case 'i': case 'I': //identify firmware
-      {
-        identify();
-        break;
-      }
-
-      case 'p': case 'P': //toggle emitting of Arduino serial plotter data 
-      {
-        toggleEmitArduinoSerialPlotterInfo();
-        break;
-      }
-
-      case 'r': case 'R': //reboot the device and restart the program 
-      {
-        CPU_RESTART;
-        break;
-      }
-
-      case 'm': case 'M':
-      case 'l': case 'L':
-      case ',':
-      case ' ':
-      case '-':
-      case '.':
-      case '0' ... '9':
-        _inputString+=inChar;
-        break;
-
-      case 'z': case 'Z': //end of command-list, render
-      {
-        _drawCommands=_inputString;
-        _inputString="";
-        break;
-      }
-
-    }
-
+    yield();
   }
-  debugLog("processSerialData() exited");
+  debugLog("serialLoop() exited");
 }
 
 void toggleBeamAutoCenteringEnabled() 
@@ -192,31 +178,38 @@ void toggleLED()
   debugLog("toggleLED() exited");
 }
 
-void draw(String commands) 
+void drawLoop() 
 {
-  debugLog("draw(string) entered");
+  debugLog("drawLoop() entered");
   Point point;  
   unsigned int index;
-  for (unsigned int i=0;i<commands.length();i++)
+  for (unsigned int i=0;i<_drawCommands.length();i++)
   {
     index=i;
-    char curChar=commands.charAt(i);
+    char curChar=_drawCommands.charAt(i);
     switch (curChar)
     {
       case 'm': case 'M': //move to point
         index++;
-        point = readPoint(commands, index);
+        point = readPoint(_drawCommands, index);
         moveTo(point);
         break;
 
       case 'l': case 'L': //draw line to point
         index++;
-        point = readPoint(commands, index);
+        point = readPoint(_drawCommands, index);
         lineTo(point);
         break;
     }
+    yield();
   }
-  debugLog("draw(string) exited");
+  beamOff();
+  if (_beamAutoCenteringEnabled) 
+  {
+    autoCenterBeam();
+  }
+  yield();
+  debugLog("drawLoop() exited");
 }
 
 Point readPoint(String string, unsigned int &index) 
@@ -321,24 +314,16 @@ void autoCenterBeam()
   debugLog("autoCenterBeam() exited");
 }
 
-void pushSerialData() 
-{
-  Serial.send_now();
-  Serial.flush();
-  delay(SERIAL_WRITE_DELAY_MILLIS);
-}
-
 void emitArduinoSerialPlotterInfo() 
 {
   debugLog("emitArduinoSerialPlotterInfo() entered");
-  if (_emitArduinoSerialPlotterInfo && Serial.dtr()) 
+  if (_emitArduinoSerialPlotterInfo) 
   {
-    Serial.print(_beamLocation.X);
-    Serial.print('\t');
-    Serial.print(_beamLocation.Y);
-    Serial.print('\t');
-    Serial.println(_beamOn ? 0 : 1);    
-    pushSerialData();
+    serialPrint(_beamLocation.X);
+    serialPrint('\t');
+    serialPrint(_beamLocation.Y);
+    serialPrint('\t');
+    serialPrintln(_beamOn ? 0 : 1);    
   }
   debugLog("emitArduinoSerialPlotterInfo() exited");
 }
@@ -346,19 +331,22 @@ void emitArduinoSerialPlotterInfo()
 void identify() 
 {
   debugLog("identify() entered");
-  Serial.print(FIRMWARE_IDENTIFICATION);
-  pushSerialData();
+  serialPrintln(FIRMWARE_IDENTIFICATION);
   debugLog("identify() entered");
 }
-
+void serialPrint(String message) 
+{
+  Serial.print(message);
+  delay(SERIAL_WRITE_DELAY_MILLIS);
+}
+void serialPrintln(String message) {
+   serialPrint(message + '\r' + '\n');
+}
 void debugLog(String message) 
 {
-  if(_debugLoggingEnabled && Serial.dtr()) 
+  if(_debugLoggingEnabled) 
   {
-    Serial.print(micros());
-    Serial.print(":");
-    Serial.println(message);
-    pushSerialData();
+    serialPrintln(String(micros()) + ":" + message);
   }
 }
 
