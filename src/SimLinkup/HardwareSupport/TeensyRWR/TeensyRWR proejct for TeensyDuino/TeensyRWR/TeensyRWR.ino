@@ -17,7 +17,7 @@ const unsigned int BAUD_RATE=9600;
 const unsigned int RECEIVE_BUFFER_SIZE = 20*1024;
 
 //timings
-const unsigned int SERIAL_WRITE_DELAY_MILLIS=1;
+const unsigned int SERIAL_WRITE_DELAY_MILLIS=50;
 const unsigned int BEAM_TURNON_SETTLING_TIME_MICROSECONDS=15;
 const unsigned int BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS=15;
 const unsigned int BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS=50;
@@ -337,7 +337,10 @@ void identify()
 void serialPrint(String message) 
 {
   Serial.print(message);
-  yieldMilliseconds(SERIAL_WRITE_DELAY_MILLIS);
+  delay(SERIAL_WRITE_DELAY_MILLIS);
+}
+void serialPrintln(String message) {
+   serialPrint(message + '\r' + '\n');
 }
 void yieldMilliseconds(int delay) {
   unsigned long startMillis=millis();
@@ -352,9 +355,6 @@ void yieldMicroseconds(int delay) {
   {
     yield(); 
   }
-}
-void serialPrintln(String message) {
-   serialPrint(message + '\r' + '\n');
 }
 void debugLog(String message) 
 {
