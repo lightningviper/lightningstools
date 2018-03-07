@@ -23,7 +23,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const Parity PARITY = Parity.None;
         private const StopBits STOP_BITS = StopBits.One;
         private const Handshake HANDSHAKE = Handshake.None;
-        private const int WRITE_BUFFER_SIZE = 20*1024;
+        private const int WRITE_BUFFER_SIZE = 64*1024;
         private const int SERIAL_WRITE_TIMEOUT = 200;
 
         private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer();
@@ -536,8 +536,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 {
                     if (_serialPort != null && _serialPort.IsOpen)
                     {
-                        _serialPort.Write(drawingCommands);
+                        _serialPort.WriteLine(drawingCommands);
                         _serialPort.BaseStream.Flush();
+
                     }
                 }
                 catch (Exception e)

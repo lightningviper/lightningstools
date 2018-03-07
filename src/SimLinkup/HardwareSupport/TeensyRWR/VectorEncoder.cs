@@ -30,11 +30,11 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     var thisVectorString = string.Format("{0}{1:0.####},{2:0.####}", vector.BeamOn ? "L" : "M", x, y);
                     if (thisVectorString != lastVectorString)
                     {
-                        writer.WriteLine(thisVectorString);
+                        writer.Write(thisVectorString);
                     }
                     lastVectorString = thisVectorString;
                 }
-                writer.WriteLine("Z");
+                writer.Write("Z");
             }
            
         }
