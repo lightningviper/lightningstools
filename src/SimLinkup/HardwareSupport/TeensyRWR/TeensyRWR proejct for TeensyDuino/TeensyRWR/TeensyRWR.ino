@@ -11,7 +11,7 @@ const unsigned int CENTER_DAC_VALUE = 0x800;
 const unsigned int MAX_STEPS_LONGEST_DIAGONAL = 195;
 
 //communications settings
-const unsigned int BAUD_RATE = 12 * 1000 * 1000;
+const unsigned int BAUD_RATE = 115200;
 const unsigned int RECEIVE_BUFFER_SIZE = 20 * 1024;
 
 //timings
@@ -31,8 +31,8 @@ const String FIRMWARE_IDENTIFICATION = "Teensy RWR v" + String(FIRMWARE_MAJOR_VE
 #define CPU_RESTART (*CPU_RESTART_ADDR = CPU_RESTART_VAL);
 
 typedef struct {
-  double X = 0;
-  double Y = 0;
+  unsigned short X = 0;
+  unsigned short Y = 0;
 }
 Point;
 
@@ -80,67 +80,65 @@ void loop() {
 void processSerialData() {
   debugLog("serialEvent() entered", TRACE);
   unsigned int bytesRead = 0;
-  
+
   while (Serial.available() > 0 && bytesRead < 256) {
     int inChar = Serial.read();
     bytesRead++;
     if (inChar != -1) {
       debugLog("serial character entered: ", TRACE);
-      
+
       if (_echoBackEnabled) {
         serialPrint((char) inChar);
       }
-      
+
       switch ((char) inChar) {
         case 'c':
-        case 'C': //toggle beam auto-centering enable/disable 
+        case 'C': //toggle beam auto-centering enable/disable
           {
             toggleBeamAutoCenteringEnabled();
             break;
           }
-  
+
         case 'd':
         case 'D': //toggle debug logging enable/disable
           {
             toggleDebugLoggingEnabled();
             break;
           }
-  
+
         case 'e':
         case 'E': //toggle echo-back enable/disable
           {
             toggleEchobackEnabled();
             break;
           }
-  
+
         case 'i':
         case 'I': //identify firmware
           {
             identify();
             break;
           }
-  
+
         case 'r':
-        case 'R': //reboot the device and restart the program 
+        case 'R': //reboot the device and restart the program
           {
             CPU_RESTART;
             break;
           }
-  
+
         case 'm':
         case 'M':
         case 'l':
         case 'L':
         case ',':
         case ' ':
-        case '-':
-        case '.':
         case '0'...
-        '9':
+            '9':
           _inputString += (char) inChar;
           debugLog("appending char to _inputString:" + String((char) inChar), TRACE);
           break;
-  
+
         case 'z':
         case 'Z': //end of command-list, render
           {
@@ -185,46 +183,46 @@ void draw() {
   debugLog("draw() entered", TRACE);
   Point point;
   unsigned int numCommandsProcessed = 0;
-  
+
   debugLog("draw commands:", TRACE);
   debugLog("-------------------------------------------", TRACE);
   debugLog(_drawCommands, TRACE);
   debugLog("-------------------------------------------", TRACE);
 
-  unsigned int index=0;
+  unsigned int index = 0;
   for (unsigned int i = 0; i < _drawCommands.length(); i++) {
     char curChar = _drawCommands.charAt(i);
     debugLog("draw() processing command char at index " + String(i) + "(" + String(curChar) + ")", TRACE);
 
     switch (curChar) {
-      
+
       case 'm':
       case 'M': //move to point
-        index=i;
+        index = i;
         point = readPoint(_drawCommands, index);
-        i=--index;
+        i = --index;
         moveTo(point);
         numCommandsProcessed++;
         break;
-  
+
       case 'l':
       case 'L': //draw line to point
-        index=i;
+        index = i;
         point = readPoint(_drawCommands, index);
         lineTo(point);
         numCommandsProcessed++;
-        i=--index;
+        i = --index;
         break;
     }
     processSerialData();
   }
-  
+
   beamOff();
-  
+
   if (_beamAutoCenteringEnabled) {
     autoCenterBeam();
   }
-  
+
   debugLog("# commands processed: " + String(numCommandsProcessed), TRACE);
   debugLog("draw() exited", TRACE);
 }
@@ -232,48 +230,42 @@ void draw() {
 Point readPoint(String string, unsigned int & index) {
   debugLog("readPoint(string, unsigned int &index) entered", TRACE);
   Point point;
-  point.X = readNormalizedDouble(string, index);
-  point.Y = readNormalizedDouble(string, index);
+  point.X = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
+  point.Y = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
 
   debugLog("readPoint(string, unsigned int &index) exited", TRACE);
   return point;
 }
 
-double readNormalizedDouble(String string, unsigned int & index) {
-  debugLog("readNormalizedDouble(string, unsigned int &index) entered", TRACE);
+unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue)
+{
+  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) entered");
   String toParse = "";
-  double parsed = 0;
-
-  if (index > string.length() - 1) {
-    debugLog("readNormalizedDouble(string, unsigned int &index) exited", TRACE);
-    return parsed;
-  }
-  
-  for (unsigned int i = index; i < string.length(); i++) {
-    index=i;
+  for (unsigned int i = index; i < string.length(); i++)
+  {
+    index++;
     char thisChar = string.charAt(i);
-    if (thisChar == '0' || thisChar == '1' || thisChar == '2' || thisChar == '3' || thisChar == '4' || thisChar == '5' || thisChar == '6' || thisChar == '7' || thisChar == '8' || thisChar == '9' || thisChar == '-' || thisChar == '.') {
+    if (thisChar == '0' || thisChar == '1' || thisChar == '2' || thisChar == '3' || thisChar == '4' || thisChar == '5' || thisChar == '6' || thisChar == '7' || thisChar == '8' || thisChar == '9' || thisChar == '-' || thisChar == '.')
+    {
       toParse += thisChar;
-    } else if (toParse.length() > 0) {
+    }
+    else if (toParse.length() > 0)
+    {
       break;
     }
   }
-    
-  if (toParse.length() > 0) {
-    debugLog("parsing double from string: " + toParse);
-    parsed = toParse.toFloat();
-    if (parsed < -1.0) {
-      parsed = -1.0;
-    } else if (parsed > 1.0) {
-      parsed = 1.0;
-    }
+
+  unsigned int parsed = defaultValue;
+  if (toParse.length() > 0)
+  {
+    int asInt = toParse.toInt();;
+    parsed = asInt >= 0 ? (unsigned int) asInt : 0;
+    parsed = parsed <= maxValue ? parsed : maxValue;
   }
-  
-  debugLog("parsed value: " + String(parsed, 4));
-  debugLog("readNormalizedDouble(string, unsigned int &index) exited", TRACE);
-  
+  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) exited with return value:" + String(parsed));
   return parsed;
 }
+
 
 void moveTo(Point point) {
   debugLog("moveTo(point) entered - Point.X=" + String(point.X, 4) + "; Point.Y=" + String(point.Y, 4));
@@ -292,13 +284,13 @@ void lineTo(Point point) {
 void beamTo(Point point) {
   debugLog("beamTo(point) entered - Point.X=" + String(point.X, 4) + "; Point.Y=" + String(point.Y, 4));
   if (_beamOn) {
-    const double maxDistance = sqrt(8);
+    const double maxDistance = sqrt((unsigned long)2 * (unsigned long)MAX_DAC_VALUE * (unsigned long)MAX_DAC_VALUE);
     double dx = point.X - _beamLocation.X;
     double dy = point.Y - _beamLocation.Y;
     double distance = abs(sqrt((dx * dx) + (dy * dy)));
     unsigned int numSteps = (unsigned int)((distance / maxDistance) * MAX_STEPS_LONGEST_DIAGONAL);
     debugLog("numSteps=" + String(numSteps));
-    
+
     for (unsigned int i = 0; i < numSteps; i++) {
       Point nextPoint;
       nextPoint.X = _beamLocation.X + (((double) dx / (double) numSteps));
@@ -314,29 +306,17 @@ void beamTo(Point point) {
 
 void writePointToDACs(Point point) {
   debugLog("writePointToDACs(point) entered - Point.X=" + String(point.X, 4) + "; Point.Y=" + String(point.Y, 4), TRACE);
-  
-  if (point.X < -1.0) {
-    point.X = -1.0;
-  } else if (point.X > 1.0) {
-    point.X = 1.0;
-  }
-  if (point.Y < -1.0) {
-    point.Y = -1.0;
-  } else if (point.Y > 1.0) {
-    point.Y = 1.0;
-  }
-
-  unsigned int xVal = (unsigned int)((point.X * (MAX_DAC_VALUE / 2.0)) + (MAX_DAC_VALUE / 2.0));
-  unsigned int yVal = (unsigned int)((point.Y * (MAX_DAC_VALUE / 2.0)) + (MAX_DAC_VALUE / 2.0));
 
   if (_beamLocation.X != point.X || _beamLocation.Y != point.Y) {
-    debugLog("Writing to DACs: xVal=" + String(xVal) + "; yVal=" + String(yVal) + "");
-    analogWrite(X_PIN, xVal);
-    analogWrite(Y_PIN, yVal);
-    delayMicroseconds(BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS);
+    debugLog("Writing to DACs: point.X=" + String(point.X) + "; point.Y=" + String(point.Y) + "");
+    analogWrite(X_PIN, point.X);
+    analogWrite(Y_PIN, point.Y);
+    if (BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS > 0) {
+      delayMicroseconds(BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS);
+    }
     _beamLocation = point;
   } else {
-    debugLog("Skipped writing to DACs: xVal=" + String(xVal) + "; yVal=" + String(yVal) + "; beam is already at that location");
+    debugLog("Skipped writing to DACs: point.X=" + String(point.X) + "; point.Y=" + String(point.Y) + "; beam is already at that location");
   }
 
   debugLog("writePointToDACs(point) exited", TRACE);
@@ -347,7 +327,9 @@ void beamOff() {
   if (_beamOn) {
     digitalWrite(Z_PIN, HIGH);
     _beamOn = false;
-    delayMicroseconds(BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS);
+    if (BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS > 0) {
+      delayMicroseconds(BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS);
+    }
   }
   debugLog("beamOff() exited");
 }
@@ -357,7 +339,9 @@ void beamOn() {
   if (!_beamOn) {
     digitalWrite(Z_PIN, LOW);
     _beamOn = true;
-    delayMicroseconds(BEAM_TURNON_SETTLING_TIME_MICROSECONDS);
+    if (BEAM_TURNON_SETTLING_TIME_MICROSECONDS) {
+      delayMicroseconds(BEAM_TURNON_SETTLING_TIME_MICROSECONDS);
+    }
   }
   debugLog("beamOn() exited");
 }

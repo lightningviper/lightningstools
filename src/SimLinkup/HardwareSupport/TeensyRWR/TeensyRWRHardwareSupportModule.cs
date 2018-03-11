@@ -18,7 +18,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
     public class TeensyRWRHardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
         private const int MAX_RWR_SYMBOLS_AS_INPUTS = 64;
-        private const int BAUD_RATE = 128000;
+        private const int BAUD_RATE = 115200;
         private const int DATA_BITS = 8;
         private const Parity PARITY = Parity.None;
         private const StopBits STOP_BITS = StopBits.One;

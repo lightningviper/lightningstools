@@ -25,9 +25,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 var lastVectorString = String.Empty;
                 foreach (var vector in vectors)
                 {
-                    var x = (((vector.Point.X - bounds.Left) / bounds.Width) * 2.0) - 1.0;
-                    var y = (((vector.Point.Y - bounds.Top) / bounds.Height) * 2.0) - 1.0;
-                    var thisVectorString = string.Format("{0}{1:0.####},{2:0.####}", vector.BeamOn ? "L" : "M", x, y);
+                    var x = (ushort)(((vector.Point.X - bounds.Left) / bounds.Width) * 4095);
+                    var y = (ushort)(((vector.Point.Y - bounds.Top) / bounds.Height) * 4095);
+                    var thisVectorString = string.Format("{0}{1},{2}", vector.BeamOn ? "L" : "M", x, y);
                     if (thisVectorString != lastVectorString)
                     {
                         writer.Write(thisVectorString);
