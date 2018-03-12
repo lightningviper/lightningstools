@@ -1,3 +1,4 @@
+
 //pin assignments
 const int X_PIN = A21;
 const int Y_PIN = A22;
@@ -13,6 +14,7 @@ const unsigned int MAX_STEPS_LONGEST_DIAGONAL = 195;
 //communications settings
 const unsigned int BAUD_RATE = 115200;
 const unsigned int RECEIVE_BUFFER_SIZE = 20 * 1024;
+const unsigned int MAX_POINTS_PER_FRAME=5*1024;
 
 //timings
 const unsigned int SERIAL_READ_TIMEOUT_MILLIS = 200;
@@ -33,6 +35,7 @@ const String FIRMWARE_IDENTIFICATION = "Teensy RWR v" + String(FIRMWARE_MAJOR_VE
 typedef struct {
   unsigned short X = 0;
   unsigned short Y = 0;
+  bool BeamOn=false;
 }
 Point;
 
@@ -43,32 +46,35 @@ typedef enum {
   ERROR
 }
 DebugLevel;
+const DebugLevel _debugLevel = INFO;
 
 const Point CENTER;
-
-const DebugLevel _debugLevel = TRACE;
 
 Point _beamLocation;
 bool _beamOn;
 String _inputString = "";
-String _drawCommands = "";
+String _drawCommandBuffer = "";
+Point _drawPoints[MAX_POINTS_PER_FRAME];
+unsigned long _numDrawPoints =0;
+
 bool _ledOn = false;
 bool _echoBackEnabled = false;
 bool _debugLoggingEnabled = false;
 bool _beamAutoCenteringEnabled = false;
+bool _pointInterpolationEnabled=false;
 
 void setup() {
   Serial.setTimeout(SERIAL_READ_TIMEOUT_MILLIS);
   Serial.begin(BAUD_RATE);
-  debugLog("setup() entered");
+  debugLog("setup() entered", TRACE);
   _inputString.reserve(RECEIVE_BUFFER_SIZE);
-  _drawCommands.reserve(RECEIVE_BUFFER_SIZE);
+  _drawCommandBuffer.reserve(RECEIVE_BUFFER_SIZE);
   analogWriteResolution(DAC_PRECISION_BITS);
   pinMode(Z_PIN, OUTPUT);
   pinMode(BUILTIN_LED_PIN, OUTPUT);
   beamOff();
   beamTo(CENTER);
-  debugLog("setup() exited");
+  debugLog("setup() exited", TRACE);
 }
 
 void loop() {
@@ -119,6 +125,12 @@ void processSerialData() {
             identify();
             break;
           }
+        case 'p':
+        case 'P': //toggle point interpolation enable/disable
+          {
+            togglePointInterpolationEnabled();
+            break;
+          }
 
         case 'r':
         case 'R': //reboot the device and restart the program
@@ -143,9 +155,10 @@ void processSerialData() {
         case 'Z': //end of command-list, render
           {
             toggleLED();
-            _drawCommands = _inputString;
+            _drawCommandBuffer = _inputString;
             _inputString = "";
             _inputString.reserve(RECEIVE_BUFFER_SIZE);
+            parseDrawCommands();
             break;
           }
       }
@@ -153,93 +166,124 @@ void processSerialData() {
   }
   debugLog("serialEvent() exited", TRACE);
 }
+void togglePointInterpolationEnabled() {
+  debugLog("togglePointInterpolationEnabled() entered", TRACE);
+  _pointInterpolationEnabled = !_pointInterpolationEnabled;
+  debugLog("togglePointInterpolationEnabled() exited", TRACE);
+}
 
 void toggleBeamAutoCenteringEnabled() {
-  debugLog("toggleBeamAutoCenteringEnabled() entered");
+  debugLog("toggleBeamAutoCenteringEnabled() entered", TRACE);
   _beamAutoCenteringEnabled = !_beamAutoCenteringEnabled;
-  debugLog("toggleBeamAutoCenteringEnabled() exited");
+  debugLog("toggleBeamAutoCenteringEnabled() exited", TRACE);
 }
 
 void toggleDebugLoggingEnabled() {
-  debugLog("toggleDebugLoggingEnabled() entered");
+  debugLog("toggleDebugLoggingEnabled() entered", TRACE);
   _debugLoggingEnabled = !_debugLoggingEnabled;
-  debugLog("toggleDebugLoggingEnabled() exited");
+  debugLog("toggleDebugLoggingEnabled() exited", TRACE);
 }
 
 void toggleEchobackEnabled() {
-  debugLog("toggleEchobackEnabled() entered");
+  debugLog("toggleEchobackEnabled() entered", TRACE);
   _echoBackEnabled = !_echoBackEnabled;
-  debugLog("toggleEchobackEnabled() exited");
+  debugLog("toggleEchobackEnabled() exited", TRACE);
 }
 
 void toggleLED() {
-  debugLog("toggleLED() entered");
+  debugLog("toggleLED() entered", TRACE);
   _ledOn = !_ledOn;
   digitalWrite(BUILTIN_LED_PIN, _ledOn ? HIGH : LOW);
-  debugLog("toggleLED() exited");
+  debugLog("toggleLED() exited", TRACE);
 }
 
-void draw() {
-  debugLog("draw() entered", TRACE);
+void parseDrawCommands() {
+  debugLog("parseDrawCommands() entered", TRACE);
   Point point;
+  Point drawPoints[MAX_POINTS_PER_FRAME];
   unsigned int numCommandsProcessed = 0;
 
   debugLog("draw commands:", TRACE);
   debugLog("-------------------------------------------", TRACE);
-  debugLog(_drawCommands, TRACE);
+  debugLog(_drawCommandBuffer, TRACE);
   debugLog("-------------------------------------------", TRACE);
-
+  unsigned long startTimeMicros = micros();
   unsigned int index = 0;
-  for (unsigned int i = 0; i < _drawCommands.length(); i++) {
-    char curChar = _drawCommands.charAt(i);
+  for (unsigned int i = 0; i < _drawCommandBuffer.length(); i++) {
+    char curChar = _drawCommandBuffer.charAt(i);
     debugLog("draw() processing command char at index " + String(i) + "(" + String(curChar) + ")", TRACE);
 
     switch (curChar) {
 
       case 'm':
       case 'M': //move to point
-        index = i+1;
-        point = readPoint(_drawCommands, index);
+        index = i + 1;
+        point = readPoint(_drawCommandBuffer, index);
+        point.BeamOn=false;
         i = --index;
-        moveTo(point);
+        drawPoints[numCommandsProcessed]=point;
         numCommandsProcessed++;
         break;
 
       case 'l':
       case 'L': //draw line to point
-        index = i+1;
-        point = readPoint(_drawCommands, index);
-        lineTo(point);
+        index = i + 1;
+        point = readPoint(_drawCommandBuffer, index);
+        point.BeamOn=true;
+        drawPoints[numCommandsProcessed]=point;
         numCommandsProcessed++;
         i = --index;
         break;
     }
     processSerialData();
   }
+  memcpy (_drawPoints, drawPoints, numCommandsProcessed * sizeof(Point));
+  _numDrawPoints = numCommandsProcessed;
+  
 
+  unsigned long elapsedTime=micros()-startTimeMicros;
+  debugLog("Time taken for parsing: " + String(elapsedTime) + " microseconds", INFO);
+  debugLog("# commands parsed: " + String(numCommandsProcessed), INFO);
+  debugLog("parseDrawCommands() exited", TRACE);
+}
+
+void draw() {
+  debugLog("draw() entered", TRACE);
+  unsigned long startTimeMicros=micros();
+  for (unsigned long i=0;i<_numDrawPoints;i++)
+  {
+    Point point = _drawPoints[i];
+    if (point.BeamOn) {
+      lineTo(point);
+    }
+    else {
+      moveTo(point);
+    }
+  }
   beamOff();
 
   if (_beamAutoCenteringEnabled) {
     autoCenterBeam();
   }
-
-  debugLog("# commands processed: " + String(numCommandsProcessed), TRACE);
+  unsigned long elapsedTime=micros()-startTimeMicros;
+  debugLog("Time taken for drawing: " + String(elapsedTime) + " microseconds", INFO);
+  debugLog("# draw points (before interpolation): " + String(_numDrawPoints), INFO);
   debugLog("draw() exited", TRACE);
-}
 
+}
 Point readPoint(String string, unsigned int & index) {
   debugLog("readPoint(string, unsigned int &index) entered", TRACE);
   Point point;
   point.X = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
   point.Y = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
-  debugLog("read point: Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
+  debugLog("read point: Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y), TRACE);
   debugLog("readPoint(string, unsigned int &index) exited", TRACE);
   return point;
 }
 
 unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue)
 {
-  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) entered");
+  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) entered", TRACE);
   String toParse = "";
   for (unsigned int i = index; i < string.length(); i++)
   {
@@ -262,53 +306,63 @@ unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned
     parsed = asInt >= 0 ? (unsigned int) asInt : 0;
     parsed = parsed <= maxValue ? parsed : maxValue;
   }
-  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) exited with return value:" + String(parsed));
+  debugLog("readClampedUnsignedInt(string, unsigned int &index, unsigned int maxValue, unsigned int defaultValue) exited with return value:" + String(parsed), TRACE);
   return parsed;
 }
 
 
 void moveTo(Point point) {
-  debugLog("moveTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
+  debugLog("moveTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y), TRACE);
   beamOff();
   beamTo(point);
-  debugLog("moveTo(point) exited");
+  debugLog("moveTo(point) exited", TRACE);
 }
 
 void lineTo(Point point) {
-  debugLog("lineTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
+  debugLog("lineTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y), TRACE);
   beamOn();
-  beamTo(point);
-  debugLog("lineTo(point) exited");
+  if (_pointInterpolationEnabled) {
+    beamToWithInterpolation(point);
+  }
+  else {
+    beamTo(point);
+  }
+  debugLog("lineTo(point) exited", TRACE);
 }
 
 void beamTo(Point point) {
-  debugLog("beamTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
+  debugLog("beamTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y), TRACE);
+  writePointToDACs(point);
+  debugLog("beamTo(point) exited", TRACE);
+}
+void beamToWithInterpolation(Point point) {
+  debugLog("beamToWithInterpolation(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y), TRACE);
   if (_beamOn) {
     const double maxDistance = sqrt((unsigned long)2 * (unsigned long)MAX_DAC_VALUE * (unsigned long)MAX_DAC_VALUE);
     double dx = point.X - _beamLocation.X;
     double dy = point.Y - _beamLocation.Y;
     double distance = abs(sqrt((dx * dx) + (dy * dy)));
     unsigned int numSteps = (unsigned int)((distance / maxDistance) * MAX_STEPS_LONGEST_DIAGONAL);
-    debugLog("numSteps=" + String(numSteps));
+    debugLog("numSteps=" + String(numSteps), TRACE);
 
     for (unsigned int i = 0; i < numSteps; i++) {
       Point nextPoint;
       nextPoint.X = _beamLocation.X + (((double) dx / (double) numSteps));
       nextPoint.Y = _beamLocation.Y + (((double) dy / (double) numSteps));
-      debugLog("next Point X=" + String(nextPoint.X) + "; Y=" + String(nextPoint.Y));
+      debugLog("next Point X=" + String(nextPoint.X) + "; Y=" + String(nextPoint.Y), TRACE);
       writePointToDACs(nextPoint);
       processSerialData();
     }
   }
   writePointToDACs(point);
-  debugLog("beamTo(point) exited");
+  debugLog("beamToWithInterpolation(point) exited", TRACE);
 }
 
 void writePointToDACs(Point point) {
   debugLog("writePointToDACs(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y), TRACE);
 
   if (_beamLocation.X != point.X || _beamLocation.Y != point.Y) {
-    debugLog("Writing to DACs: point.X=" + String(point.X) + "; point.Y=" + String(point.Y) + "");
+    debugLog("Writing to DACs: point.X=" + String(point.X) + "; point.Y=" + String(point.Y), TRACE);
     analogWrite(X_PIN, point.X);
     analogWrite(Y_PIN, point.Y);
     if (BEAM_MOVEMENT_SETTLING_TIME_MICROSECONDS > 0) {
@@ -316,14 +370,14 @@ void writePointToDACs(Point point) {
     }
     _beamLocation = point;
   } else {
-    debugLog("Skipped writing to DACs: point.X=" + String(point.X) + "; point.Y=" + String(point.Y) + "; beam is already at that location");
+    debugLog("Skipped writing to DACs: point.X=" + String(point.X) + "; point.Y=" + String(point.Y) + "; beam is already at that location", TRACE);
   }
 
   debugLog("writePointToDACs(point) exited", TRACE);
 }
 
 void beamOff() {
-  debugLog("beamOff() entered");
+  debugLog("beamOff() entered", TRACE);
   if (_beamOn) {
     digitalWrite(Z_PIN, HIGH);
     _beamOn = false;
@@ -331,11 +385,11 @@ void beamOff() {
       delayMicroseconds(BEAM_TURNOFF_SETTLING_TIME_MICROSECONDS);
     }
   }
-  debugLog("beamOff() exited");
+  debugLog("beamOff() exited", TRACE);
 }
 
 void beamOn() {
-  debugLog("beamOn() entered");
+  debugLog("beamOn() entered", TRACE);
   if (!_beamOn) {
     digitalWrite(Z_PIN, LOW);
     _beamOn = true;
@@ -343,21 +397,21 @@ void beamOn() {
       delayMicroseconds(BEAM_TURNON_SETTLING_TIME_MICROSECONDS);
     }
   }
-  debugLog("beamOn() exited");
+  debugLog("beamOn() exited", TRACE);
 }
 
 void autoCenterBeam() {
-  debugLog("autoCenterBeam() entered");
+  debugLog("autoCenterBeam() entered", TRACE);
   if (_beamAutoCenteringEnabled) {
     beamTo(CENTER);
   }
-  debugLog("autoCenterBeam() exited");
+  debugLog("autoCenterBeam() exited", TRACE);
 }
 
 void identify() {
-  debugLog("identify() entered");
+  debugLog("identify() entered", TRACE);
   serialPrintln(FIRMWARE_IDENTIFICATION);
-  debugLog("identify() entered");
+  debugLog("identify() entered", TRACE);
 }
 
 void serialPrint(String message) {
