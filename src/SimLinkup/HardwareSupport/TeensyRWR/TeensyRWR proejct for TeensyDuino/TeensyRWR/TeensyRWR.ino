@@ -198,7 +198,7 @@ void draw() {
 
       case 'm':
       case 'M': //move to point
-        index = i;
+        index = i+1;
         point = readPoint(_drawCommands, index);
         i = --index;
         moveTo(point);
@@ -207,7 +207,7 @@ void draw() {
 
       case 'l':
       case 'L': //draw line to point
-        index = i;
+        index = i+1;
         point = readPoint(_drawCommands, index);
         lineTo(point);
         numCommandsProcessed++;
@@ -232,7 +232,7 @@ Point readPoint(String string, unsigned int & index) {
   Point point;
   point.X = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
   point.Y = readClampedUnsignedInt(string, index, MAX_DAC_VALUE, CENTER_DAC_VALUE);
-
+  debugLog("read point: Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
   debugLog("readPoint(string, unsigned int &index) exited", TRACE);
   return point;
 }
@@ -243,7 +243,6 @@ unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned
   String toParse = "";
   for (unsigned int i = index; i < string.length(); i++)
   {
-    index++;
     char thisChar = string.charAt(i);
     if (thisChar == '0' || thisChar == '1' || thisChar == '2' || thisChar == '3' || thisChar == '4' || thisChar == '5' || thisChar == '6' || thisChar == '7' || thisChar == '8' || thisChar == '9' || thisChar == '-' || thisChar == '.')
     {
@@ -253,6 +252,7 @@ unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned
     {
       break;
     }
+    index++;
   }
 
   unsigned int parsed = defaultValue;
@@ -268,21 +268,21 @@ unsigned int readClampedUnsignedInt(String string, unsigned int &index, unsigned
 
 
 void moveTo(Point point) {
-  debugLog("moveTo(point) entered - Point.X=" + String(point.X, 4) + "; Point.Y=" + String(point.Y, 4));
+  debugLog("moveTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
   beamOff();
   beamTo(point);
   debugLog("moveTo(point) exited");
 }
 
 void lineTo(Point point) {
-  debugLog("lineTo(point) entered - Point.X=" + String(point.X, 4) + "; Point.Y=" + String(point.Y, 4));
+  debugLog("lineTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
   beamOn();
   beamTo(point);
   debugLog("lineTo(point) exited");
 }
 
 void beamTo(Point point) {
-  debugLog("beamTo(point) entered - Point.X=" + String(point.X, 4) + "; Point.Y=" + String(point.Y, 4));
+  debugLog("beamTo(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y));
   if (_beamOn) {
     const double maxDistance = sqrt((unsigned long)2 * (unsigned long)MAX_DAC_VALUE * (unsigned long)MAX_DAC_VALUE);
     double dx = point.X - _beamLocation.X;
@@ -295,7 +295,7 @@ void beamTo(Point point) {
       Point nextPoint;
       nextPoint.X = _beamLocation.X + (((double) dx / (double) numSteps));
       nextPoint.Y = _beamLocation.Y + (((double) dy / (double) numSteps));
-      debugLog("next Point X=" + String(nextPoint.X, 4) + "; Y=" + String(nextPoint.Y, 4));
+      debugLog("next Point X=" + String(nextPoint.X) + "; Y=" + String(nextPoint.Y));
       writePointToDACs(nextPoint);
       processSerialData();
     }
@@ -305,7 +305,7 @@ void beamTo(Point point) {
 }
 
 void writePointToDACs(Point point) {
-  debugLog("writePointToDACs(point) entered - Point.X=" + String(point.X, 4) + "; Point.Y=" + String(point.Y, 4), TRACE);
+  debugLog("writePointToDACs(point) entered - Point.X=" + String(point.X) + "; Point.Y=" + String(point.Y), TRACE);
 
   if (_beamLocation.X != point.X || _beamLocation.Y != point.Y) {
     debugLog("Writing to DACs: point.X=" + String(point.X) + "; point.Y=" + String(point.Y) + "");
