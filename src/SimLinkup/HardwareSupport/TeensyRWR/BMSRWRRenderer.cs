@@ -9,8 +9,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
     internal class BMSRWRRenderer
     {
         private readonly IRWRRendererFactory _rwrRendererFactory;
-        private IRWRRenderer _rwrRenderer;
+        private RWRRenderer _rwrRenderer;
         private string _lastRwrType = string.Empty;
+        internal int ActualWidth { get; set; }
+        internal int ActualHeight{ get; set; }
         public BMSRWRRenderer(IRWRRendererFactory rwrRendererFactory=null)
         {
             _rwrRendererFactory = rwrRendererFactory ?? new RWRRendererFactory();
@@ -68,6 +70,11 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     _rwrRenderer = null;
                 }
                 _lastRwrType = rwrType;
+            }
+            if (_rwrRenderer !=null && ActualWidth !=0 && ActualHeight !=0)
+            {
+                (_rwrRenderer as RWRRenderer).ActualWidth = ActualWidth;
+                (_rwrRenderer as RWRRenderer).ActualHeight = ActualHeight;
             }
         }
         private string GetRWRType(byte[] rwrInfoArray)

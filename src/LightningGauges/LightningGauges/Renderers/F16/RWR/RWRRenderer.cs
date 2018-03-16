@@ -17,14 +17,14 @@ namespace LightningGauges.Renderers.F16.RWR
     {
         protected string[] rwrInfo;
         protected const float DTR = 0.01745329F;
-        protected const double ActualWidth = 500;
-        protected const double ActualHeight = 500;
+        public double ActualWidth { get; set; } = 300;
+        public double ActualHeight { get; set; } = 300;
         protected double offsetX = 0;
         protected double offsetY = 0;
-        protected const double BigFontSize = (30.0/300.0)*ActualHeight;
-        protected const double SmallFontSize = (20.0/300.0)*ActualHeight;
-        protected const double BigFontVOffset = (2.0/300.0)*ActualHeight;
-        protected const double SmallFontVOffset = (1.0/300.0)*ActualHeight;
+        protected double BigFontSize { get { return (30.0 / 300.0) * ActualHeight; } }
+        protected double SmallFontSize { get { return(20.0 / 300.0) * ActualHeight; } }
+        protected double BigFontVOffset { get { return(2.0 /300.0)*ActualHeight;}}
+        protected double SmallFontVOffset { get { return(1.0 /300.0)*ActualHeight;}}
         protected SolidColorBrush brush { get { return new SolidColorBrush(Color.FromRgb(5, 248, 7)); } }
         string s = System.IO.Packaging.PackUriHelper.UriSchemePack;
         protected Typeface typeface { get; } = new Typeface(new FontFamily(new Uri("file:///" + AppDomain.CurrentDomain.BaseDirectory + @"\"), "#Lekton"),

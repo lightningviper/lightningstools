@@ -11,32 +11,44 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
     {
         internal static void Serialize(DrawingGroup drawingGroup, Rect bounds, Stream stream)
         {
-            var figures = drawingGroup.GetGeometry().GetFlattenedPathGeometry().Figures;
+            var basicGeometry = drawingGroup.GetGeometry();
+            var figures = basicGeometry.GetFlattenedPathGeometry(0.01, ToleranceType.Absolute).Figures;
             var vectors = new List<(Point Point, bool BeamOn)>();
             foreach (var figure in figures)
             {
                 var figurePoints = figure.GetPoints();
-                vectors.Add((figurePoints.First(), false));
-                vectors.AddRange(figurePoints.Skip(1).Take(figurePoints.Count() - 1).Select((point) => (point, true)));
-                vectors.Add((figurePoints.First(), true));
-            }
-            using (var writer = new StreamWriter(stream, encoding: System.Text.Encoding.Default, bufferSize:2048, leaveOpen:true))
-            {
-                var lastVectorString = String.Empty;
-                foreach (var vector in vectors)
+                vectors.Add((figure.StartPoint, false));
+                vectors.AddRange(figurePoints.Select((point) => (point, true)));
+                if (figure.IsClosed)
                 {
-                    var x = (ushort)(((vector.Point.X - bounds.Left) / bounds.Width) * 4095);
-                    var y = (ushort)(((vector.Point.Y - bounds.Top) / bounds.Height) * 4095);
-                    var thisVectorString = string.Format("{0}{1},{2}", vector.BeamOn ? "L" : "M", x, y);
-                    if (thisVectorString != lastVectorString)
-                    {
-                        writer.Write(thisVectorString);
-                    }
-                    lastVectorString = thisVectorString;
+                    vectors.Add((figure.StartPoint, true));
                 }
-                writer.Write("Z");
             }
-           
+            //vectors = VectorPreprocessor.PreprocessVectors(vectors, new PreprocessorOptions { EqualizeBrightness = true }).ToList();
+            ushort vectorCount = 0;
+            stream.Write(BitConverter.GetBytes(vectorCount), 0, sizeof(ushort));
+            (Point Point, bool BeamOn) prevVector = (Point:new Point(0,0), BeamOn:false);
+            foreach (var curVector in vectors)
+            {
+                var x = (ushort)(((curVector.Point.X - bounds.Left) / bounds.Width) * 4095);
+                var y = (ushort)(((curVector.Point.Y - bounds.Top) / bounds.Height) * 4095);
+                var z = curVector.BeamOn ? 1 : 0;
+                var xyzCombined = (uint)(((uint)(x & 0xFFF)) << 12 | ((uint)(y & 0xFFE)) | ((uint)(z & 0x1)));
+                if (!(curVector.Point.X == prevVector.Point.X && curVector.Point.Y == prevVector.Point.Y && curVector.BeamOn == prevVector.BeamOn))
+                {
+                    stream.WriteByte((byte)((xyzCombined & 0xFF0000) >> 16));
+                    stream.WriteByte((byte)((xyzCombined & 0xFF00) >> 8));
+                    stream.WriteByte((byte)(xyzCombined & 0xFF));
+                    vectorCount++;
+                }
+                prevVector = curVector;
+            }
+            var position = stream.Position;
+            stream.Seek(0, SeekOrigin.Begin);
+            stream.Write(BitConverter.GetBytes(vectorCount).Reverse().ToArray(), 0, sizeof(ushort));
+            stream.Seek(position, SeekOrigin.Begin);
         }
+        private static uint SwapUInt32(uint v) { return (uint)(((SwapUInt16((ushort)v) & 0xffff) << 0x10) | (SwapUInt16((ushort)(v >> 0x10)) & 0xffff)); }
+        public static ushort SwapUInt16(ushort v) { return (ushort)(((v & 0xff) << 8) | ((v >> 8) & 0xff));}
     }
 }
