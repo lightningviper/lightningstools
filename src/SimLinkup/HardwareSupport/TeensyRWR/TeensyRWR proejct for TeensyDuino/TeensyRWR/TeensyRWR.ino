@@ -12,10 +12,10 @@ const uint16_t MAX_DAC_VALUE = 0xFFF;
 
 //communication settings
 const unsigned int BAUD_RATE = 115200;
-const size_t RECEIVE_BUFFER_SIZE=64 * 1024;
+const size_t RECEIVE_BUFFER_SIZE=15 * 1024;
 
 //drawing settings
-const size_t DRAW_POINTS_BUFFER_SIZE = 20 * 1024 * 3;
+const size_t DRAW_POINTS_BUFFER_SIZE = 15 * 1024 * 3;
 const unsigned int INTERPOLATION_STEPS = 50;
 const float MIN_DISTANCE = 0.001f;
 
@@ -51,7 +51,7 @@ float _previousCommandControlPointX = 0;
 float _previousCommandControlPointY = 0;
 
 float _viewBoxLeft = 0;
-float _viewBoxTop = -300;
+float _viewBoxTop = 0;
 float _viewBoxWidth = 300;
 float _viewBoxHeight = 300;
 
@@ -66,6 +66,8 @@ volatile bool _drawReady = false;
 
 PacketSerial_<COBS, 0, RECEIVE_BUFFER_SIZE> _packetSerial;
 
+String _drawSquare="M0,0 300,0 300,300 0,300 0,0";
+uint8_t _drawSquareBytes[100];
 
 void setup() {
   pinMode(Z_PIN, OUTPUT);
@@ -76,6 +78,8 @@ void setup() {
   _packetSerial.setStream(&Serial);
   _packetSerial.setPacketHandler(&processFrame);
   _drawTimer.begin(draw, 16000);
+  _drawSquare.getBytes(_drawSquareBytes, 100);
+  processFrame(_drawSquareBytes, 100);
 }
 
 void loop() {

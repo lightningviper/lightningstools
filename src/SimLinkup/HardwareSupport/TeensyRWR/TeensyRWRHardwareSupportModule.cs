@@ -517,12 +517,38 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var instrumentState = GetInstrumentState();
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
-            drawingContext.PushTransform(new ScaleTransform(1, -1));
+            drawingContext.PushTransform(new ScaleTransform(1, 1));
             _drawingCommandRenderer.Render(drawingContext, instrumentState);
             drawingContext.Close();
-            return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
+            return ShortenFloats(PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString());
         }
-
+        private String ShortenFloats(String pathMarkupLanguageString)
+        {
+            StringBuilder numString = new StringBuilder(100);
+            StringBuilder outString = new StringBuilder(pathMarkupLanguageString.Length);
+            for (var i = 0; i < pathMarkupLanguageString.Length; i++)
+            {
+                var thisChar = pathMarkupLanguageString[i];
+                if (char.IsDigit(thisChar) || thisChar == '-' || thisChar == '.')
+                {
+                    numString.Append(thisChar);
+                }
+                if (i == pathMarkupLanguageString.Length - 1 || !(char.IsDigit(thisChar) || thisChar == '-' || thisChar == '.'))
+                {
+                    if (numString.Length > 0)
+                    {
+                        double num = double.Parse(numString.ToString());
+                        double rounded = Math.Round(num, 0);
+                        outString.Append(((int)rounded).ToString());
+                        numString.Clear();
+                    }
+                    if (!(char.IsDigit(thisChar) || thisChar == '-' || thisChar == '.')){
+                        outString.Append(thisChar);
+                    }
+                }
+            }
+            return outString.ToString();
+        }
         private byte[] PacketMarker = new[] { (byte)'\0' };
         private void SendDrawingCommands(String drawingCommands)
         {
@@ -532,7 +558,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 {
                     if (_serialPort != null && _serialPort.IsOpen && drawingCommands !=null)
                     {
-                        var cobsEncodedPacket = PacketEncoding.COBS.Encode(Encoding.ASCII.GetBytes(drawingCommands + "\r\n"));
+                        var cobsEncodedPacket = PacketEncoding.COBS.Encode(Encoding.ASCII.GetBytes(drawingCommands + "     "));
                         if (cobsEncodedPacket != null)
                         {
                             _serialPort.Write(cobsEncodedPacket, 0, cobsEncodedPacket.Length);
