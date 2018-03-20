@@ -23,10 +23,11 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const Parity PARITY = Parity.None;
         private const StopBits STOP_BITS = StopBits.One;
         private const Handshake HANDSHAKE = Handshake.None;
-        private const int WRITE_BUFFER_SIZE = 64*1024;
+        private const int WRITE_BUFFER_SIZE = 32*1024;
         private const int SERIAL_WRITE_TIMEOUT = 1000;
+        private const int MAX_UPDATE_FREQUENCY_HZ = 5;
 
-        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer() { ActualWidth = 4096, ActualHeight = 4096 };
+        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer() { ActualWidth = 300, ActualHeight = 300 };
         private BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
 
         //limits exceptions when we don't have the RWR plugged into the serial port
@@ -40,8 +41,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private ISerialPort _serialPort;
         private int _unsuccessfulConnectionAttempts = 0;
-        private DateTime _lastSynchronizedAt = DateTime.MinValue;
-        private byte[] _lastCommandList=null;
+        private DateTime _lastCommandListSentTime = DateTime.MinValue;
+        private String _lastCommandList=null;
 
         private readonly AnalogSignal[] _analogInputSignals;
         private readonly DigitalSignal[] _digitalInputSignals;
@@ -511,7 +512,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             }
         }
 
-        private byte[] GenerateDrawingCommands()
+        private string GenerateDrawingCommands()
         {
             var instrumentState = GetInstrumentState();
             var drawingGroup = new DrawingGroup();
@@ -519,19 +520,11 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             drawingContext.PushTransform(new ScaleTransform(1, -1));
             _drawingCommandRenderer.Render(drawingContext, instrumentState);
             drawingContext.Close();
-            Rect bounds = new Rect(0, 0, _drawingCommandRenderer.ActualWidth, _drawingCommandRenderer.ActualHeight);
-            using (var stream = new MemoryStream())
-            { 
-                VectorEncoder.Serialize(drawingGroup, bounds, stream);
-                var length = (int)stream.Length;
-                stream.Seek(0, SeekOrigin.Begin);
-                var toReturn = new byte[length];
-                stream.Read(toReturn, 0, length);
-                return toReturn;
-            }
+            return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
         }
+
         private byte[] PacketMarker = new[] { (byte)'\0' };
-        private void SendDrawingCommands(byte[] drawingCommands)
+        private void SendDrawingCommands(String drawingCommands)
         {
             lock (_serialPortLock)
             {
@@ -539,13 +532,12 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 {
                     if (_serialPort != null && _serialPort.IsOpen && drawingCommands !=null)
                     {
-                        var cobsEncodedPacket = PacketEncoding.COBS.Encode(drawingCommands);
+                        var cobsEncodedPacket = PacketEncoding.COBS.Encode(Encoding.ASCII.GetBytes(drawingCommands + "\r\n"));
                         if (cobsEncodedPacket != null)
                         {
-                            _serialPort.Write(cobsEncodedPacket, 0, cobsEncodedPacket.Count());
+                            _serialPort.Write(cobsEncodedPacket, 0, cobsEncodedPacket.Length);
                             _serialPort.Write(PacketMarker, 0, 1);
                             _serialPort.BaseStream.Flush();
-                            System.Threading.Thread.Sleep(30);
                         }
 
                     }
@@ -559,14 +551,19 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private void UpdateOutputs()
         {
+            if (DateTime.Now.Subtract(_lastCommandListSentTime).TotalMilliseconds < (1000/MAX_UPDATE_FREQUENCY_HZ))
+            {
+                return;
+            }
             var connected = EnsureSerialPortConnected();
-            if (connected || true)
+            if (connected)
             {
                 var commandList = GenerateDrawingCommands();
                 if (_lastCommandList == null || commandList != _lastCommandList)
                 {
                     SendDrawingCommands(commandList);
                     _lastCommandList = commandList;
+                    _lastCommandListSentTime = DateTime.Now;
                 }
             }
         }
