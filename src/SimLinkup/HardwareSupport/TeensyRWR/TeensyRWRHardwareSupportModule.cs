@@ -5,7 +5,6 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Media;
 using Common.HardwareSupport;
 using Common.IO.Ports;
@@ -23,11 +22,11 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const Parity PARITY = Parity.None;
         private const StopBits STOP_BITS = StopBits.One;
         private const Handshake HANDSHAKE = Handshake.None;
-        private const int WRITE_BUFFER_SIZE = 32*1024;
-        private const int SERIAL_WRITE_TIMEOUT = 1000;
-        private const int MAX_UPDATE_FREQUENCY_HZ = 5;
+        private const int WRITE_BUFFER_SIZE = 64*1024;
+        private const int SERIAL_WRITE_TIMEOUT = 500;
+        private const int MAX_UPDATE_FREQUENCY_HZ = 20;
 
-        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer() { ActualWidth = 300, ActualHeight = 300 };
+        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer() { ActualWidth = 4095, ActualHeight = 4095 };
         private BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
 
         //limits exceptions when we don't have the RWR plugged into the serial port
@@ -35,7 +34,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private static readonly ILog _log = LogManager.GetLogger(typeof(TeensyRWRHardwareSupportModule));
 
-        private readonly string _comPort;
+        private readonly TeensyRWRHardwareSupportModuleConfig _config;
         private readonly object _serialPortLock = new object();
         private bool _isDisposed;
 
@@ -61,9 +60,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private AnalogSignal _chaffCountInputSignal;
         private AnalogSignal _flareCountInputSignal;
 
-        private TeensyRWRHardwareSupportModule(string comPort)
+        private TeensyRWRHardwareSupportModule(TeensyRWRHardwareSupportModuleConfig config)
         {
-            _comPort = comPort;
+            _config = config;
             CreateInputSignals(out _analogInputSignals, out _digitalInputSignals, out _textInputSignals);
         }
 
@@ -74,7 +73,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override TextSignal[] TextInputs => _textInputSignals;
         public override TextSignal[] TextOutputs => null;
 
-        public override string FriendlyName => $"Teensy RWR module for IP-1310/ALR Azimuth Indicator (RWR) on {_comPort}";
+        public override string FriendlyName => $"Teensy RWR module for IP-1310/ALR Azimuth Indicator (RWR) on {_config.COMPort}";
 
         public void Dispose()
         {
@@ -94,7 +93,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 var hsmConfigFilePath = Path.Combine(Util.CurrentMappingProfileDirectory, "TeensyRWRHardwareSupportModule.config");
                 var hsmConfig = TeensyRWRHardwareSupportModuleConfig.Load(hsmConfigFilePath);
-                IHardwareSupportModule thisHsm = new TeensyRWRHardwareSupportModule(hsmConfig.COMPort);
+                IHardwareSupportModule thisHsm = new TeensyRWRHardwareSupportModule(hsmConfig);
                 toReturn.Add(thisHsm);
             }
             catch (Exception e)
@@ -118,7 +117,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
             _log.ErrorFormat(
-                $"A serial port error occurred communicating on COM port {_comPort}.\r\nError Type: {e.EventType}\r\nError Description:{e}");
+                $"A serial port error occurred communicating on COM port {_config.COMPort}.\r\nError Type: {e.EventType}\r\nError Description:{e}");
         }
 
         private void CloseSerialPortConnection()
@@ -131,7 +130,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     {
                         if (_serialPort.IsOpen)
                         {
-                            _log.DebugFormat($"Closing serial port {_comPort}");
+                            _log.DebugFormat($"Closing serial port {_config.COMPort}");
                             _serialPort.DiscardOutBuffer();
                             _serialPort.Close();
                         }
@@ -165,7 +164,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -185,7 +184,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -208,7 +207,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -231,7 +230,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -254,7 +253,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -279,7 +278,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -302,7 +301,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -327,7 +326,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -351,7 +350,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -372,7 +371,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -393,7 +392,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -414,7 +413,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     PublisherObject = this,
                     Source = this,
                     SourceFriendlyName = FriendlyName,
-                    SourceAddress = _comPort,
+                    SourceAddress = _config.COMPort,
                     SubSource = null,
                     SubSourceFriendlyName = null,
                     SubSourceAddress = null,
@@ -473,7 +472,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 {
                     try
                     {
-                        _serialPort = new SerialPort(_comPort, BAUD_RATE, PARITY, DATA_BITS, STOP_BITS);
+                        _serialPort = new SerialPort(_config.COMPort, BAUD_RATE, PARITY, DATA_BITS, STOP_BITS);
                     }
                     catch (Exception e)
                     {
@@ -491,7 +490,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                         _serialPort.ErrorReceived += _serialPort_ErrorReceived;
                         _serialPort.WriteBufferSize = WRITE_BUFFER_SIZE;
                         _log.DebugFormat(
-                            $"Opening serial port {_comPort}: Handshake:{HANDSHAKE}, WriteTimeout:{SERIAL_WRITE_TIMEOUT}, WriteBufferSize:{WRITE_BUFFER_SIZE}");
+                            $"Opening serial port {_config.COMPort}: Handshake:{HANDSHAKE}, WriteTimeout:{SERIAL_WRITE_TIMEOUT}, WriteBufferSize:{WRITE_BUFFER_SIZE}");
                         _serialPort.Open();
                         GC.SuppressFinalize(_serialPort.BaseStream);
                         _serialPort.DiscardOutBuffer();
@@ -517,7 +516,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var instrumentState = GetInstrumentState();
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
-            drawingContext.PushTransform(new ScaleTransform(1, 1));
+            drawingContext.PushTransform(new RotateTransform(_config.RotationDegrees, 2047, 2047));
             _drawingCommandRenderer.Render(drawingContext, instrumentState);
             drawingContext.Close();
             return ShortenFloats(PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString());
@@ -538,8 +537,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     if (numString.Length > 0)
                     {
                         double num = double.Parse(numString.ToString());
-                        double rounded = Math.Round(num, 0);
-                        outString.Append(((int)rounded).ToString());
+                        double rounded = Math.Round(num, 0, MidpointRounding.AwayFromZero);
+                        outString.Append(rounded.ToString());
                         numString.Clear();
                     }
                     if (!(char.IsDigit(thisChar) || thisChar == '-' || thisChar == '.')){
@@ -558,14 +557,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 {
                     if (_serialPort != null && _serialPort.IsOpen && drawingCommands !=null)
                     {
-                        var cobsEncodedPacket = PacketEncoding.COBS.Encode(Encoding.ASCII.GetBytes(drawingCommands + "     "));
-                        if (cobsEncodedPacket != null)
-                        {
-                            _serialPort.Write(cobsEncodedPacket, 0, cobsEncodedPacket.Length);
-                            _serialPort.Write(PacketMarker, 0, 1);
-                            _serialPort.BaseStream.Flush();
-                        }
-
+                        var bytesToWrite = Encoding.ASCII.GetBytes(drawingCommands + "   ");
+                        _serialPort.Write(bytesToWrite, 0, bytesToWrite.Length);
+                        _serialPort.Write(PacketMarker, 0, 1);
+                        _serialPort.BaseStream.Flush();
                     }
                 }
                 catch (Exception e)

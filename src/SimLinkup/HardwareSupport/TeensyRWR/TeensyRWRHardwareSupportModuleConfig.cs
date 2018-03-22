@@ -6,7 +6,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
     public class TeensyRWRHardwareSupportModuleConfig
     {
         public string COMPort { get; set; }
-
+        public float RotationDegrees { get; set; }
         public static TeensyRWRHardwareSupportModuleConfig Load(string filePath)
         {
             return Common.Serialization.Util
