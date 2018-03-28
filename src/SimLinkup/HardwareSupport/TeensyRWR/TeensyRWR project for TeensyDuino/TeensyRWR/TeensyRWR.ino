@@ -2,7 +2,7 @@
 
 const int X_PIN = A21;
 const int Y_PIN = A22;
-const int Z_PIN = A14;
+const int Z_PIN = A20;
 const int BUILTIN_LED_PIN = 13;
 
 //DAC precision & scale
