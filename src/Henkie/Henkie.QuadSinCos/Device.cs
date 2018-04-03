@@ -65,7 +65,7 @@ namespace Henkie.QuadSinCos
         public const short WATCHDOG_MAX_COUNTDOWN = 63; //6 bits
         #endregion
 
-        public void SetPitchAngleDegrees(float pitchAngleDegrees)
+        public void SetPitchAngleDegrees(double pitchAngleDegrees)
         {
             if (!IsNumeric(pitchAngleDegrees))
             {
@@ -89,7 +89,7 @@ namespace Henkie.QuadSinCos
 
         }
 
-        public void SetRollAngleDegrees(float rollAngleDegrees)
+        public void SetRollAngleDegrees(double rollAngleDegrees)
         {
             if (!IsNumeric(rollAngleDegrees))
             {
@@ -117,7 +117,7 @@ namespace Henkie.QuadSinCos
             SendCommand(CommandSubaddress.SADI_OFF_FLAG, (byte)(newValue ? 1 : 0));
         }
 
-        public void SetAngleImmediate(float angleDegrees, byte deviceNum)
+        public void SetAngleImmediate(double angleDegrees, byte deviceNum)
         {
             if (!IsNumeric(angleDegrees))
             {
@@ -128,27 +128,27 @@ namespace Henkie.QuadSinCos
                 throw new ArgumentOutOfRangeException(nameof(deviceNum), string.Format(CultureInfo.InvariantCulture, "Must be >= 0 and <= 3"));
             }
 
-            var sine = (float)Math.Sin(angleDegrees * (Math.PI / 180.0f));
-            var cosine = (float)Math.Cos(angleDegrees * (Math.PI / 180.0f));
+            var sine = Math.Sin(angleDegrees * (Math.PI / 180.0f));
+            var cosine = Math.Cos(angleDegrees * (Math.PI / 180.0f));
             SetSineDeferred(sine);
-            SetCosineDeffered(cosine);
+            SetCosineDeferred(cosine);
             LoadDeferredSineAndCosine(deviceNum);
         }
 
-        public void SetPullToCageRollAngle(float angleDegrees)
+        public void SetPullToCageRollAngle(double angleDegrees)
         {
             if (!IsNumeric(angleDegrees))
             {
                 throw new ArgumentOutOfRangeException(nameof(angleDegrees), string.Format(CultureInfo.InvariantCulture, "Must be numeric"));
             }
 
-            var sine = (float)Math.Sin(angleDegrees * (Math.PI / 180.0f));
-            var cosine = (float)Math.Cos(angleDegrees * (Math.PI / 180.0f));
+            var sine = Math.Sin(angleDegrees * (Math.PI / 180.0f));
+            var cosine = Math.Cos(angleDegrees * (Math.PI / 180.0f));
             SetPullToCageRollAngleSine(sine);
             SetPullToCageRollAngleCosine(cosine);
         }
 
-        public void SetPullToCageRollAngleSine(float sine)
+        public void SetPullToCageRollAngleSine(double sine)
         {
             if (IsValidSineOrCosineValue(sine))
             {
@@ -167,7 +167,7 @@ namespace Henkie.QuadSinCos
             }
         }
 
-        public void SetPullToCageRollAngleCosine(float cosine)
+        public void SetPullToCageRollAngleCosine(double cosine)
         {
             if (IsValidSineOrCosineValue(cosine))
             {
@@ -186,20 +186,20 @@ namespace Henkie.QuadSinCos
             }
         }
 
-        public void SetPullToCagePitchAngle(float angleDegrees)
+        public void SetPullToCagePitchAngle(double angleDegrees)
         {
             if (!IsNumeric(angleDegrees))
             {
                 throw new ArgumentOutOfRangeException(nameof(angleDegrees), string.Format(CultureInfo.InvariantCulture, "Must be numeric"));
             }
 
-            var sine = (float)Math.Sin(angleDegrees * (Math.PI / 180.0f));
-            var cosine = (float)Math.Cos(angleDegrees * (Math.PI / 180.0f));
+            var sine = Math.Sin(angleDegrees * (Math.PI / 180.0f));
+            var cosine = Math.Cos(angleDegrees * (Math.PI / 180.0f));
             SetPullToCagePitchAngleSine(sine);
             SetPullToCagePitchAngleCosine(cosine);
         }
 
-        public void SetPullToCagePitchAngleSine(float sine)
+        public void SetPullToCagePitchAngleSine(double sine)
         {
             if (IsValidSineOrCosineValue(sine))
             {
@@ -218,7 +218,7 @@ namespace Henkie.QuadSinCos
             }
         }
 
-        public void SetPullToCagePitchAngleCosine(float cosine)
+        public void SetPullToCagePitchAngleCosine(double cosine)
         {
             if (IsValidSineOrCosineValue(cosine))
             {
@@ -238,7 +238,7 @@ namespace Henkie.QuadSinCos
         }
 
 
-        public void SetSineDeferred(float sine)
+        public void SetSineDeferred(double sine)
         {
             if (IsValidSineOrCosineValue(sine))
             {
@@ -257,7 +257,7 @@ namespace Henkie.QuadSinCos
             }
         }
 
-        public void SetCosineDeffered(float cosine)
+        public void SetCosineDeferred(double cosine)
         {
             if (IsValidSineOrCosineValue(cosine))
             {
@@ -295,7 +295,7 @@ namespace Henkie.QuadSinCos
         }
 
 
-        public short CalculatePositionForAngle(float angle)
+        public short CalculatePositionForAngle(double angle)
         {
             if (!IsNumeric(angle))
             {
@@ -310,12 +310,12 @@ namespace Henkie.QuadSinCos
             return (short)((angle / 360) * 1023);
         }
 
-        private bool IsNumeric(float value)
+        private bool IsNumeric(double value)
         {
-            return !float.IsNaN(value) && !float.IsInfinity(value);
+            return !double.IsNaN(value) && !double.IsInfinity(value);
         }
 
-        private bool IsValidSineOrCosineValue(float value)
+        private bool IsValidSineOrCosineValue(double value)
         {
             return IsNumeric(value) && value >= -1 && value <= 1;
         }
@@ -360,7 +360,7 @@ namespace Henkie.QuadSinCos
             _commandDispatcher.SendCommand((byte)subaddress, data);
         }
 
-        public byte[] SendQuery(CommandSubaddress subaddress, byte? data = null, int bytesToRead = 0)
+       public byte[] SendQuery(CommandSubaddress subaddress, byte? data = null, int bytesToRead = 0)
         {
             return _commandDispatcher.SendQuery((byte)subaddress, data, bytesToRead);
         }
