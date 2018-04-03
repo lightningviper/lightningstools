@@ -7,7 +7,7 @@ IF NOT EXIST "%MASTERBUILDDIR%nuget.exe" bitsadmin /transfer Nuget /priority HIG
 IF ERRORLEVEL 1 GOTO END
 SET EnableNuGetPackageRestore=true
 
-CALL GetVsWhere.bat
+CALL %MASTERBUILDDIR%GetVsWhere.bat
 for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (
   set InstallDir=%%i
 )
