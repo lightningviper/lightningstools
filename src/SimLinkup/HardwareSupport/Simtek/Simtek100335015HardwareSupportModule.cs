@@ -106,13 +106,13 @@ namespace SimLinkup.HardwareSupport.Simtek
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "OFF Flag",
+                FriendlyName = "OFF Flag (0=Visible; 1=Hidden)",
                 Id = "10033501_OFF_Flag_From_Sim",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = false
+                State = true
             };
             return thisSignal;
         }
@@ -123,7 +123,7 @@ namespace SimLinkup.HardwareSupport.Simtek
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "OFF Flag",
+                FriendlyName = "OFF Flag (0=Visible; 1=Hidden)",
                 Id = "10033501_OFF_Flag_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -349,7 +349,7 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         private void UpdateOFFFlagOutputValue()
         {
-            _offFlagOutputSignal.State = _offFlagInputSignal.State;
+            _offFlagOutputSignal.State = !_offFlagInputSignal.State;
         }
 
         private void UpdatePitchOutputValues()

@@ -61,11 +61,11 @@
     <!-- SHOW COMMAND BARS  -->
     <SignalMapping>
       <!-- F4 SHOW COMMAND BARS OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__ILS_SHOW_COMMAND_BARS</Id>
       </Source>
       <!-- ASTRONAUTICS ADI SHOW COMMAND BARS INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>12871_Show_Command_Bars_From_Sim</Id>
       </Destination>
       
@@ -74,11 +74,11 @@
     <!-- AUX FLAG  -->
     <SignalMapping>
       <!-- F4 AUX FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__AUX_FLAG</Id>
       </Source>
       <!-- ASTRONAUTICS ADI AUX FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>12871_AUX_Flag_From_Sim</Id>
       </Destination>
       
@@ -87,11 +87,11 @@
     <!-- GS FLAG  -->
     <SignalMapping>
       <!-- F4 GS FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__GS_FLAG</Id>
       </Source>
       <!-- ASTRONAUTICS ADI GS FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>12871_GS_Flag_From_Sim</Id>
       </Destination>
       
@@ -100,11 +100,11 @@
     <!-- LOC FLAG  -->
     <SignalMapping>
       <!-- F4 LOC FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__LOC_FLAG</Id>
       </Source>
       <!-- ASTRONAUTICS ADI LOC FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>12871_LOC_Flag_From_Sim</Id>
       </Destination>
       
@@ -113,11 +113,11 @@
     <!-- OFF FLAG  -->
     <SignalMapping>
       <!-- F4 OFF FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__OFF_FLAG</Id>
       </Source>
       <!-- ASTRONAUTICS ADI OFF FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>12871_OFF_Flag_From_Sim</Id>
       </Destination>
       

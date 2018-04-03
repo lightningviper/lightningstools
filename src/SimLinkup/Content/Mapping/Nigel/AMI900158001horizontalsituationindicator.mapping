@@ -8,11 +8,11 @@
     <!-- OFF FLAG -->
     <SignalMapping>
       <!-- F4 OFF FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_HSI__OFF_FLAG</Id>
       </Source>
       <!-- AMI 9001580-01 OFF FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>900158001_Off_Flag_From_Sim</Id>
       </Destination>
       
@@ -21,11 +21,11 @@
     <!-- DEVIATION FLAG -->
     <SignalMapping>
       <!-- F4 DEVIATION FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_HSI__COURSE_DEVIATION_INVALID_FLAG</Id>
       </Source>
       <!-- AMI 9001580-01 DEVIATION FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>900158001_Deviation_Flag_From_Sim</Id>
       </Destination>
       
@@ -34,11 +34,11 @@
     <!-- DME SHUTTER  -->
     <SignalMapping>
       <!-- F4 DME SHUTTER OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_HSI__DISTANCE_INVALID_FLAG</Id>
       </Source>
       <!-- AMI 9001580-01 DME SHUTTER INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>900158001_DME_Shutter_Flag_From_Sim</Id>
       </Destination>
       
@@ -47,11 +47,11 @@
     <!-- TO FLAG  -->
     <SignalMapping>
       <!-- F4 TO FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_HSI__TO_FLAG</Id>
       </Source>
       <!-- AMI 9001580-01 TO FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>900158001_TO_Flag_From_Sim</Id>
       </Destination>
       
@@ -60,11 +60,11 @@
     <!-- FROM FLAG  -->
     <SignalMapping>
       <!-- F4 FROM FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_HSI__FROM_FLAG</Id>
       </Source>
       <!-- AMI 9001580-01 FROM FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>900158001_FROM_Flag_From_Sim</Id>
       </Destination>
       

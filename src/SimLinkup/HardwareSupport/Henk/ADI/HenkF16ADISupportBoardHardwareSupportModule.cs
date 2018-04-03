@@ -166,7 +166,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "AUX Flag Visible",
+                FriendlyName = "AUX Flag Visible (0=Hidden, 1=Visible)",
                 Id = "HenkF16ADISupportBoard_AUX_Flag_From_Sim",
                 Index = 0,
                 Source = this,
@@ -183,7 +183,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "AUX Flag Hidden",
+                FriendlyName = "AUX Flag Hidden (0=Visible, 1=Hidden)",
                 Id = "HenkF16ADISupportBoard_AUX_Flag_To_SDI",
                 Index = 0,
                 Source = this,
@@ -201,7 +201,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "Command Bars Visible",
+                FriendlyName = "Command Bars Visible (0=Hidden; 1=Visible)",
                 Id = "HenkF16ADISupportBoard_Command_Bars_Visible_Flag_From_Sim",
                 Index = 0,
                 Source = this,
@@ -253,7 +253,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "GS Flag Visible",
+                FriendlyName = "GS Flag Visible (0=Hidden; 1=Visible)",
                 Id = "HenkF16ADISupportBoard_GS_Flag_From_Sim",
                 Index = 0,
                 Source = this,
@@ -270,7 +270,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "GS Flag Hidden",
+                FriendlyName = "GS Flag Hidden (0=Visible; 1=Hidden)",
                 Id = "HenkF16ADISupportBoard_GS_Flag_To_SDI",
                 Index = 0,
                 Source = this,
@@ -365,7 +365,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "LOC Flag Visible",
+                FriendlyName = "LOC Flag Visible (0=Hidden; 1=Visible)",
                 Id = "HenkF16ADISupportBoard_LOC_Flag_From_Sim",
                 Index = 0,
                 Source = this,
@@ -382,7 +382,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "LOC Flag Hidden",
+                FriendlyName = "LOC Flag Hidden (0=Visible; 1=Hidden)",
                 Id = "HenkF16ADISupportBoard_LOC_Flag_To_SDI",
                 Index = 0,
                 Source = this,
@@ -400,7 +400,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "OFF Flag Visible",
+                FriendlyName = "OFF Flag Visible (0=Hidden; 1=Visible)",
                 Id = "HenkF16ADISupportBoard_OFF_Flag_From_Sim",
                 Index = 0,
                 Source = this,

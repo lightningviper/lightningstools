@@ -178,7 +178,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
         {
             if (_sdiDevice == null) return;
 
-            var diagnosticLEDBehavior = _deviceConfig?.UpdateRateControlConfig != null &&
+            var diagnosticLEDBehavior = _deviceConfig?.DiagnosticLEDMode != null &&
                                         _deviceConfig.DiagnosticLEDMode.HasValue
                 ? _deviceConfig.DiagnosticLEDMode.Value
                 : DiagnosticLEDMode.Heartbeat;

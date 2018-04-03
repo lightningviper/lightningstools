@@ -163,7 +163,8 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
         {
             if (_fuelFlowDeviceInterface == null) return;
 
-            var diagnosticLEDBehavior =_deviceConfig.DiagnosticLEDMode.HasValue
+            var diagnosticLEDBehavior = _deviceConfig?.DiagnosticLEDMode !=null && 
+                _deviceConfig.DiagnosticLEDMode.HasValue
                 ? _deviceConfig.DiagnosticLEDMode.Value
                 : DiagnosticLEDMode.Heartbeat;
             try

@@ -8,11 +8,11 @@
     <!-- OFF FLAG -->
     <SignalMapping>
       <!-- F4 STANDBY ADI OFF FLAG OUTPUT-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_STBY_ADI__OFF_FLAG</Id>
       </Source>
       <!-- SIMTEK STANDBY ADI OFF FLAG INPUT-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>101084_OFF_Flag_From_Sim</Id>
       </Destination>
       

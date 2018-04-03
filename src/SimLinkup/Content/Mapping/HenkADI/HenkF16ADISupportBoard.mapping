@@ -60,11 +60,11 @@
     <!-- AUX FLAG SIGNAL FROM SIM -->
     <SignalMapping>
       <!-- F4 AUX FLAG OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__AUX_FLAG</Id>
       </Source>
       <!-- HENK ADI AUX FLAG INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_AUX_Flag_From_Sim</Id>
       </Destination>
       
@@ -73,11 +73,11 @@
     <!-- GS FLAG SIGNAL FROM SIM -->
     <SignalMapping>
       <!-- F4 GS FLAG OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__GS_FLAG</Id>
       </Source>
       <!-- HENK ADI GS FLAG INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_GS_Flag_From_Sim</Id>
       </Destination>
       
@@ -86,11 +86,11 @@
     <!-- LOC FLAG SIGNAL FROM SIM -->
     <SignalMapping>
       <!-- F4 LOC FLAG OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__LOC_FLAG</Id>
       </Source>
       <!-- HENK ADI LOC FLAG INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_LOC_Flag_From_Sim</Id>
       </Destination>
       
@@ -99,11 +99,11 @@
     <!-- OFF FLAG SIGNAL FROM SIM -->
     <SignalMapping>
       <!-- F4 OFF FLAG OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__OFF_FLAG</Id>
       </Source>
       <!-- HENK ADI OFF FLAG INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_OFF_Flag_From_Sim</Id>
       </Destination>
       
@@ -113,11 +113,11 @@
     <!-- "COMMAND BARS VISIBLE" SIGNAL FROM SIM -->
     <SignalMapping>
       <!-- F4 SHOW COMMAND BARS OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>F4_ADI__ILS_SHOW_COMMAND_BARS</Id>
       </Source>
       <!-- HENK ADI SHOW COMMAND BARS INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_Command_Bars_Visible_Flag_From_Sim</Id>
       </Destination>
       
@@ -160,11 +160,11 @@
     <!-- PITCH AND ROLL SERVO ENABLE SIGNAL FROM HENK ADI HARDWARE SUPPORT MODULE TO HENK SYNCHRO DRIVE INTERFACE BOARD  -->
     <SignalMapping>
       <!-- HENK ADI PRIMARY ADI HARDWARE SUPPORT MODULE PITCH AND ROLL SERVO ENABLE OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_ENABLE_PITCH_AND_ROLL_To_SDI</Id>
       </Source>
       <!-- HENK SDI HARDWARE SUPPORT MODULE - PITCH SDI BOARD - DIG_PWM_1 INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkSDI[0x30]__DIG_PWM_1</Id>
       </Destination>
       
@@ -173,11 +173,11 @@
     <!-- GLIDE SLOPE INDICATORS POWER ON/OFF SIGNAL FROM HENK ADI HARDWARE SUPPORT MODULE TO HENK SYNCHRO DRIVE INTERFACE BOARD  -->
     <SignalMapping>
       <!-- HENK ADI PRIMARY ADI HARDWARE SUPPORT MODULE GLIDE SLOPE BARS POWER ON/OFF OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_GS_POWER_To_SDI</Id>
       </Source>
       <!-- HENK SDI HARDWARE SUPPORT MODULE - PITCH SDI BOARD - DIG_PWM_2 INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkSDI[0x30]__DIG_PWM_2</Id>
       </Destination>
       
@@ -230,11 +230,11 @@
     <!-- GS FLAG SIGNAL FROM HENK ADI HARDWARE SUPPORT MODULE TO HENK SYNCHRO DRIVE INTERFACE BOARD  -->
     <SignalMapping>
       <!-- HENK ADI PRIMARY ADI HARDWARE SUPPORT MODULE GS FLAG OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_GS_Flag_To_SDI</Id>
       </Source>
       <!-- HENK SDI HARDWARE SUPPORT MODULE - ROLL SDI BOARD - DIG_PWM_1 INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkSDI[0x32]__DIG_PWM_1</Id>
       </Destination>
       
@@ -243,11 +243,11 @@
     <!-- RT AND FLAGS POWER ON/OFF SIGNAL FROM HENK ADI HARDWARE SUPPORT MODULE TO HENK SYNCHRO DRIVE INTERFACE BOARD  -->
     <SignalMapping>
       <!-- HENK ADI PRIMARY ADI HARDWARE SUPPORT MODULE RT AND FLAGS POWER ON/OFF OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_RT_AND_FLAGS_POWER_To_SDI</Id>
       </Source>
       <!-- HENK SDI HARDWARE SUPPORT MODULE - ROLL SDI BOARD - DIG_PWM_2 INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkSDI[0x32]__DIG_PWM_2</Id>
       </Destination>
       
@@ -256,11 +256,11 @@
     <!-- LOC FLAG SIGNAL FROM HENK ADI HARDWARE SUPPORT MODULE TO HENK SYNCHRO DRIVE INTERFACE BOARD  -->
     <SignalMapping>
       <!-- HENK ADI PRIMARY ADI HARDWARE SUPPORT MODULE LOC FLAG OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_LOC_Flag_To_SDI</Id>
       </Source>
       <!-- HENK SDI HARDWARE SUPPORT MODULE - ROLL SDI BOARD - DIG_PWM_3 INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkSDI[0x32]__DIG_PWM_3</Id>
       </Destination>
       
@@ -269,11 +269,11 @@
     <!-- AUX FLAG SIGNAL FROM HENK ADI HARDWARE SUPPORT MODULE TO HENK SYNCHRO DRIVE INTERFACE BOARD  -->
     <SignalMapping>
       <!-- HENK ADI PRIMARY ADI HARDWARE SUPPORT MODULE AUX FLAG OUTPUT SIGNAL-->
-      <Source xsi:type="AnalogSignal">
+      <Source xsi:type="DigitalSignal">
         <Id>HenkF16ADISupportBoard_AUX_Flag_To_SDI</Id>
       </Source>
       <!-- HENK SDI HARDWARE SUPPORT MODULE - ROLL SDI BOARD - DIG_PWM_4 INPUT SIGNAL-->
-      <Destination xsi:type="AnalogSignal">
+      <Destination xsi:type="DigitalSignal">
         <Id>HenkSDI[0x32]__DIG_PWM_4</Id>
       </Destination>
       

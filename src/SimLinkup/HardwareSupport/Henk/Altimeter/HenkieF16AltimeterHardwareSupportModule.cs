@@ -169,7 +169,8 @@ namespace SimLinkup.HardwareSupport.Henk.Altimeter
         {
             if (_altimeterDeviceInterface == null) return;
 
-            var diagnosticLEDBehavior =_deviceConfig.DiagnosticLEDMode.HasValue
+            var diagnosticLEDBehavior = _deviceConfig?.DiagnosticLEDMode !=null && 
+                _deviceConfig.DiagnosticLEDMode.HasValue
                 ? _deviceConfig.DiagnosticLEDMode.Value
                 : DiagnosticLEDMode.Heartbeat;
             try

@@ -153,13 +153,13 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "AUX Flag",
+                FriendlyName = "AUX Flag Visible (0=Hidden; 1=Visible)",
                 Id = "12871_AUX_Flag_From_Sim",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = false
+                State = true
             };
             return thisSignal;
         }
@@ -170,7 +170,7 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "AUX Flag",
+                FriendlyName = "AUX Flag Hidden (0=Visible; 1=Hidden)",
                 Id = "12871_AUX_Flag_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -187,13 +187,13 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "GS Flag",
+                FriendlyName = "GS Flag Visible (0=Hidden; 1=Visible)",
                 Id = "12871_GS_Flag_From_Sim",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = false
+                State = true
             };
             return thisSignal;
         }
@@ -204,7 +204,7 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "GS Flag",
+                FriendlyName = "GS Flag Hidden (0=Visible; 1=Hidden)",
                 Id = "12871_GS_Flag_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -339,13 +339,13 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "LOC Flag",
+                FriendlyName = "LOC Flag Visible (0=Hidden; 1=Visible)",
                 Id = "12871_LOC_Flag_From_Sim",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = false
+                State = true
             };
             return thisSignal;
         }
@@ -356,7 +356,7 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "LOC Flag",
+                FriendlyName = "LOC Flag Hidden (0=Visible; 1=Hidden)",
                 Id = "12871_LOC_Flag_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -373,13 +373,13 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "OFF Flag",
+                FriendlyName = "OFF Flag Visible (0=Hidden; 1=Visible)",
                 Id = "12871_OFF_Flag_From_Sim",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = false
+                State = true
             };
             return thisSignal;
         }
@@ -390,7 +390,7 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "OFF Flag",
+                FriendlyName = "OFF Flag Hidden (0=Visible; 1=Hidden)",
                 Id = "12871_OFF_Flag_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -590,7 +590,7 @@ namespace SimLinkup.HardwareSupport.Astronautics
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "Command Bars Visible Flag",
+                FriendlyName = "Command Bars Visible Flag (0=Hidden; 1=Visible)",
                 Id = "12871_Show_Command_Bars_From_Sim",
                 Index = 0,
                 Source = this,
@@ -867,12 +867,12 @@ namespace SimLinkup.HardwareSupport.Astronautics
 
         private void UpdateAUXFlagOutputValue()
         {
-            _auxFlagOutputSignal.State = _auxFlagInputSignal.State;
+            _auxFlagOutputSignal.State = !_auxFlagInputSignal.State;
         }
 
         private void UpdateGSFlagOutputValue()
         {
-            _gsFlagOutputSignal.State = _gsFlagInputSignal.State;
+            _gsFlagOutputSignal.State = !_gsFlagInputSignal.State;
         }
 
         private void UpdateHorizontalCommandBarOutputValues()
@@ -918,12 +918,12 @@ namespace SimLinkup.HardwareSupport.Astronautics
 
         private void UpdateLOCFlagOutputValue()
         {
-            _locFlagOutputSignal.State = _locFlagInputSignal.State;
+            _locFlagOutputSignal.State = !_locFlagInputSignal.State;
         }
 
         private void UpdateOFFFlagOutputValue()
         {
-            _offFlagOutputSignal.State = _offFlagInputSignal.State;
+            _offFlagOutputSignal.State = !_offFlagInputSignal.State;
         }
 
         private void UpdatePitchOutputValues()
