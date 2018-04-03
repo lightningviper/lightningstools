@@ -144,6 +144,9 @@ C# class library for interfacing with Henkie's Fuel Flow Indicator interface car
 [Henkie.Common](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.Common/)  
 Shared C# code for Henkie.* projects.
 
+[Henkie.QuadSinCos](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.QuadSinCos/)  
+C# class library for interfacing with Henkie's Standby ADI / Quad SIN/COS interface card.
+
 [Henkie.SDI](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.SDI/)  
 C# class library for interfacing with Henkie's Digital-to-Synchro (SDI) interface card.  
 
