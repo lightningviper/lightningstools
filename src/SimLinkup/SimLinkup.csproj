@@ -396,6 +396,12 @@
     <Content Include="Content\Mapping\HenkieStandbyADI\HenkieStandbyADIMapping.mapping">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\Kukki\HenkieF16FlowIndicator.mapping.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\HenkieF16FuelFlowIndicator.config.disabled">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
