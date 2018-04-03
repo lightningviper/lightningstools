@@ -68,7 +68,7 @@
       </Source>
       <!-- HENKIE QUAD SIN/COS BOARD PITCH (SIN) OUTPUT -->
       <Destination xsi:type="AnalogSignal">
-        <Id>HenkQuadSinCos[0x53]__DEVICE0_SIN</Id>
+        <Id>HenkQuadSinCos[0x53]__DEVICE_0_SIN</Id>
       </Destination>
     </SignalMapping>
 
@@ -80,7 +80,7 @@
       </Source>
       <!-- HENKIE QUAD SIN/COS BOARD PITCH (SIN) OUTPUT -->
       <Destination xsi:type="AnalogSignal">
-        <Id>HenkQuadSinCos[0x53]__DEVICE0_COS</Id>
+        <Id>HenkQuadSinCos[0x53]__DEVICE_0_COS</Id>
       </Destination>
     </SignalMapping>
 
@@ -92,7 +92,7 @@
       </Source>
       <!-- HENKIE QUAD SIN/COS BOARD ROLL (SIN) OUTPUT -->
       <Destination xsi:type="AnalogSignal">
-        <Id>HenkQuadSinCos[0x53]__DEVICE1_SIN</Id>
+        <Id>HenkQuadSinCos[0x53]__DEVICE_1_SIN</Id>
       </Destination>
     </SignalMapping>
 
@@ -104,11 +104,8 @@
       </Source>
       <!-- HENKIE QUAD SIN/COS BOARD ROLL (COS) OUTPUT -->
       <Destination xsi:type="AnalogSignal">
-        <Id>HenkQuadSinCos[0x53]__DEVICE1_COS</Id>
+        <Id>HenkQuadSinCos[0x53]__DEVICE_1_COS</Id>
       </Destination>
     </SignalMapping>
-
-
-
   </SignalMappings>
 </MappingProfile>

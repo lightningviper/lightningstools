@@ -108,7 +108,7 @@ namespace SimLinkup.HardwareSupport.Simtek
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "OFF Flag (0=Hidden; 1=Visible)",
+                FriendlyName = "OFF Flag Visible (0=Hidden; 1=Visible)",
                 Id = "101084_OFF_Flag_From_Sim",
                 Index = 0,
                 Source = this,
@@ -125,7 +125,7 @@ namespace SimLinkup.HardwareSupport.Simtek
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "OFF Flag (0=Visible; 1=Hidden)",
+                FriendlyName = "OFF Flag Hidden (0=Visible; 1=Hidden)",
                 Id = "101084_OFF_Flag_To_Instrument",
                 Index = 0,
                 Source = this,

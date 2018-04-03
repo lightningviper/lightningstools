@@ -113,7 +113,7 @@ namespace SimLinkup.HardwareSupport.Henk.QuadSinCos
             try
             {
                 _sinCosInterfaceBoard.SetSineDeferred(_device0SinOutputSignal.State / 10.0 );
-                _sinCosInterfaceBoard.SetCosineDeferred(_device0SinOutputSignal.State / 10.0);
+                _sinCosInterfaceBoard.SetCosineDeferred(_device0CosOutputSignal.State / 10.0);
                 _sinCosInterfaceBoard.LoadDeferredSineAndCosine(0);
             }
             catch (Exception e)
@@ -124,7 +124,7 @@ namespace SimLinkup.HardwareSupport.Henk.QuadSinCos
             try
             {
                 _sinCosInterfaceBoard.SetSineDeferred(_device1SinOutputSignal.State / 10.0);
-                _sinCosInterfaceBoard.SetCosineDeferred(_device1SinOutputSignal.State / 10.0);
+                _sinCosInterfaceBoard.SetCosineDeferred(_device1CosOutputSignal.State / 10.0);
                 _sinCosInterfaceBoard.LoadDeferredSineAndCosine(1);
             }
             catch (Exception e)
@@ -135,7 +135,7 @@ namespace SimLinkup.HardwareSupport.Henk.QuadSinCos
             try
             {
                 _sinCosInterfaceBoard.SetSineDeferred(_device2SinOutputSignal.State / 10.0);
-                _sinCosInterfaceBoard.SetCosineDeferred(_device2SinOutputSignal.State / 10.0);
+                _sinCosInterfaceBoard.SetCosineDeferred(_device2CosOutputSignal.State / 10.0);
                 _sinCosInterfaceBoard.LoadDeferredSineAndCosine(2);
             }
             catch (Exception e)
@@ -146,7 +146,7 @@ namespace SimLinkup.HardwareSupport.Henk.QuadSinCos
             try
             {
                 _sinCosInterfaceBoard.SetSineDeferred(_device3SinOutputSignal.State / 10.0);
-                _sinCosInterfaceBoard.SetCosineDeferred(_device3SinOutputSignal.State / 10.0);
+                _sinCosInterfaceBoard.SetCosineDeferred(_device3CosOutputSignal.State / 10.0);
                 _sinCosInterfaceBoard.LoadDeferredSineAndCosine(3);
             }
             catch (Exception e)
@@ -344,19 +344,24 @@ namespace SimLinkup.HardwareSupport.Henk.QuadSinCos
             return thisSignal;
         }
 
-        private AnalogSignal CreateSinCosOutputSignal(byte deviceNum, string qualifier)
+        private AnalogSignal CreateSinCosOutputSignal(byte deviceNum, string sinCosType)
         {
+            var canonicalFunction = deviceNum == 0 ? "(notionally: PITCH)" : deviceNum == 1 ? "(notionally: ROLL)" : string.Empty;
             var thisSignal = new AnalogSignal
             {
                 Category = "Outputs",
-                CollectionName = "SIN/COS Voltage Signals",
-                FriendlyName = string.Format("Device {0} {1} (-10VDC to +10VDC)", deviceNum + 1, qualifier),
-                Id = "HenkQuadSinCos[" + "0x" + _deviceAddress.ToString("X").PadLeft(2, '0')+"]__DEVICE_" + deviceNum + "_" + qualifier,
+                CollectionName = "Analog Outputs",
+                FriendlyName = string.Format("Device {0} {1} {2} (-10VDC to +10VDC)", deviceNum, canonicalFunction, sinCosType),
+                Id = "HenkQuadSinCos[" + "0x" + _deviceAddress.ToString("X").PadLeft(2, '0') + "]__DEVICE_" + deviceNum + "_" + sinCosType,
                 Index = deviceNum,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = 0,
+                State = sinCosType.Equals("COS", StringComparison.InvariantCultureIgnoreCase) ? 10 : 0,
+                IsVoltage = true,
+                IsCosine = sinCosType.Equals("COS", StringComparison.InvariantCultureIgnoreCase),
+                IsSine = sinCosType.Equals("SIN", StringComparison.InvariantCultureIgnoreCase),
+                Precision = 4,
                 MinValue = -10.0,
                 MaxValue = +10.0
             };

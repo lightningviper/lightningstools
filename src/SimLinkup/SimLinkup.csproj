@@ -393,7 +393,9 @@
     <Content Include="Content\Mapping\HenkieStandbyADI\SimSupportModule.registry">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\Mapping\HenkieStandbyADI\HenkieStandbyADIMapping.mapping" />
+    <Content Include="Content\Mapping\HenkieStandbyADI\HenkieStandbyADIMapping.mapping">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
