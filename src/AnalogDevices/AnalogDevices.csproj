@@ -175,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AD5371SPI.hex">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="sn.snk" />
