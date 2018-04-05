@@ -1,10 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Common.InputSupport.DirectInput;
 using log4net;
-using Microsoft.DirectX;
-using Microsoft.DirectX.DirectInput;
 using PPJoy;
-
+using SlimDX.DirectInput;
 namespace JoyMapper
 {
     /// <summary>
@@ -54,8 +53,12 @@ namespace JoyMapper
             //number of virtual joysticks that PPJoy itself can support,
             //regardless of Windows limitations
 
-            //get a list of devices currently registered with DirectInput
-            var detectedJoysticks = Manager.GetDevices(DeviceClass.GameControl, EnumDevicesFlags.AllDevices);
+            IList<DeviceInstance> detectedJoysticks = null;
+            using (var directInput = new DirectInput())
+            {
+                //get a list of devices currently registered with DirectInput
+                detectedJoysticks = directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AllDevices);
+            }
 
             //for each detected device, determine if the device is a Physical (non-Virtual) device.
             //NOTE: even PPJoy non-virtual devices are considered physical devices.
@@ -89,18 +92,7 @@ namespace JoyMapper
                         }
                     }
                 }
-                catch (DirectXException e)
-                {
-                    _log.Debug(e.Message, e);
-                }
-                catch (AccessViolationException e)
-                {
-                    _log.Debug(e.Message, e);
-                }
-                catch (OutOfMemoryException e)
-                {
-                    _log.Debug(e.Message, e);
-                }
+                catch { }
             }
             return maxDevices;
         }

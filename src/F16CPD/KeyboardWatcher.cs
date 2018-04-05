@@ -1,14 +1,8 @@
-﻿using Common.Collections;
-using Common.Win32;
-using F16CPD.Mfd.Controls;
+﻿using Common.Win32;
 using log4net;
-using Microsoft.DirectX.DirectInput;
+using SlimDX.DirectInput;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace F16CPD
@@ -41,75 +35,86 @@ namespace F16CPD
         }
         private void KeyboardWatcherThreadWork()
         {
-            AutoResetEvent resetEvent;
-            Device device = null;
-            try
+            Keyboard keyboard = null;
+            using (var directInput = new DirectInput())
             {
-                resetEvent = new AutoResetEvent(false);
-                device = new Device(SystemGuid.Keyboard);
-                device.SetCooperativeLevel(null, CooperativeLevelFlags.Background | CooperativeLevelFlags.NonExclusive);
-                device.SetEventNotification(resetEvent);
-                device.Properties.BufferSize = 255;
-                device.Acquire();
-                var lastKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
-                var currentKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
-                while (true)
+                try
                 {
-                    resetEvent.WaitOne();
-                    try
+                    keyboard = new Keyboard(directInput);
+                    keyboard.SetCooperativeLevel(Application.OpenForms[0], CooperativeLevel.Background | CooperativeLevel.Nonexclusive);
+                    keyboard.Properties.BufferSize = 255;
+                    keyboard.Acquire();
+                    var lastKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
+                    var currentKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
+                    while (true)
                     {
-                        var curState = device.GetCurrentKeyboardState();
-                        var possibleKeys = Enum.GetValues(typeof(Key));
-
-                        var i = 0;
-                        foreach (Key thisKey in possibleKeys)
+                        try
                         {
-                            currentKeyboardState[i] = curState[thisKey];
-                            i++;
-                        }
+                            var curState = keyboard.GetCurrentState();
+                            var possibleKeys = Enum.GetValues(typeof(Key));
 
-                        i = 0;
-                        foreach (Key thisKey in possibleKeys)
-                        {
-                            var isPressedNow = currentKeyboardState[i];
-                            var wasPressedBefore = lastKeyboardState[i];
-                            if (isPressedNow && !wasPressedBefore)
+                            var i = 0;
+                            foreach (Key thisKey in possibleKeys)
                             {
-                                var winFormsKey =
-                                    (Keys)NativeMethods.MapVirtualKey((uint)thisKey, NativeMethods.MAPVK_VSC_TO_VK_EX);
-                                AddExtendedKeyInfo(winFormsKey);
-                                var eventArgs = new KeyEventArgs(winFormsKey);
-                                _keyDownEventHandler.HandleKeyDownEvent(this, eventArgs);
+                                currentKeyboardState[i] = curState.IsPressed(thisKey);
+                                i++;
                             }
-                            i++;
+
+                            i = 0;
+                            foreach (Key thisKey in possibleKeys)
+                            {
+                                var isPressedNow = currentKeyboardState[i];
+                                var wasPressedBefore = lastKeyboardState[i];
+                                if (isPressedNow && !wasPressedBefore)
+                                {
+                                    var winFormsKey =
+                                        (Keys)NativeMethods.MapVirtualKey((uint)thisKey, NativeMethods.MAPVK_VSC_TO_VK_EX);
+                                    AddExtendedKeyInfo(winFormsKey);
+                                    var eventArgs = new KeyEventArgs(winFormsKey);
+                                    _keyDownEventHandler.HandleKeyDownEvent(this, eventArgs);
+                                }
+                                i++;
+                            }
+                            Array.Copy(currentKeyboardState, lastKeyboardState, currentKeyboardState.Length);
                         }
-                        Array.Copy(currentKeyboardState, lastKeyboardState, currentKeyboardState.Length);
-                    }
-                    catch (Exception e)
-                    {
-                        _log.Debug(e.Message, e);
+                        catch (Exception e)
+                        {
+                            _log.Debug(e.Message, e);
+                        }
+                        Thread.Sleep(50);
+
                     }
                 }
-            }
-            catch (ThreadInterruptedException)
-            {
-            }
-            catch (ThreadAbortException)
-            {
-                Thread.ResetAbort();
-            }
-            catch (Exception e)
-            {
-                _log.Error(e.Message, e);
-            }
-            finally
-            {
-                if (device != null)
+                catch (ThreadInterruptedException)
                 {
-                    device.Unacquire();
                 }
-                Common.Util.DisposeObject(device);
-                device = null;
+                catch (ThreadAbortException)
+                {
+                    Thread.ResetAbort();
+                }
+                catch (Exception e)
+                {
+                    _log.Error(e.Message, e);
+                }
+                finally
+                {
+                    if (keyboard != null)
+                    {
+                        try
+                        {
+                            keyboard.Unacquire();
+                        }
+                        catch { }
+
+                        try
+                        {
+                            Common.Util.DisposeObject(keyboard);
+                        }
+                        catch { }
+
+                        keyboard = null;
+                    }
+                }
             }
         }
         private Keys AddExtendedKeyInfo(Keys keys)

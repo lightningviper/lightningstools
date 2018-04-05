@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using Microsoft.DirectX.DirectInput;
+using SlimDX.DirectInput;
 
 namespace Common.InputSupport.DirectInput
 {
@@ -93,25 +93,25 @@ namespace Common.InputSupport.DirectInput
                 case Keys.D9:
                     return Key.D9;
                 case Keys.NumPad0:
-                    return Key.NumPad0;
+                    return Key.NumberPad0;
                 case Keys.NumPad1:
-                    return Key.NumPad1;
+                    return Key.NumberPad1;
                 case Keys.NumPad2:
-                    return Key.NumPad2;
+                    return Key.NumberPad2;
                 case Keys.NumPad3:
-                    return Key.NumPad3;
+                    return Key.NumberPad3;
                 case Keys.NumPad4:
-                    return Key.NumPad4;
+                    return Key.NumberPad4;
                 case Keys.NumPad5:
-                    return Key.NumPad5;
+                    return Key.NumberPad5;
                 case Keys.NumPad6:
-                    return Key.NumPad6;
+                    return Key.NumberPad6;
                 case Keys.NumPad7:
-                    return Key.NumPad7;
+                    return Key.NumberPad7;
                 case Keys.NumPad8:
-                    return Key.NumPad8;
+                    return Key.NumberPad8;
                 case Keys.NumPad9:
-                    return Key.NumPad9;
+                    return Key.NumberPad9;
                 case Keys.F1:
                     return Key.F1;
                 case Keys.F2:
@@ -165,27 +165,27 @@ namespace Common.InputSupport.DirectInput
                 case Keys.Insert:
                     return Key.Insert;
                 case Keys.Multiply:
-                    return Key.Multiply;
+                    return Key.NumberPadStar;
                 case Keys.Add:
-                    return Key.Add;
+                    return Key.NumberPadPlus;
                 case Keys.Divide:
-                    return Key.Divide;
+                    return Key.NumberPadSlash;
                 case Keys.Subtract:
-                    return Key.Subtract;
+                    return Key.NumberPadMinus;
                 case Keys.Separator:
-                    return Key.Comma;
+                    return Key.NumberPadComma;
                 case Keys.Decimal:
-                    return Key.Period;
+                    return Key.NumberPadPeriod;
                 case Keys.OemPeriod:
                     return Key.Period;
                 case Keys.Oemcomma:
                     return Key.Comma;
                 case Keys.Oemplus:
-                    return Key.Add;
+                    return Key.NumberPadPlus;
                 case Keys.OemMinus:
-                    return Key.Subtract;
+                    return Key.NumberPadMinus;
                 case Keys.OemSemicolon:
-                    return Key.SemiColon;
+                    return Key.Semicolon;
                 case Keys.OemQuotes:
                     return Key.Apostrophe;
                 case Keys.OemOpenBrackets:

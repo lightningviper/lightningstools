@@ -448,45 +448,45 @@ namespace JoyMapper
                 switch (control.ControlType)
                 {
                     case ControlType.Button:
-                        byte buttonState;
+                        bool buttonState;
 
-                        if (state.HasValue)
+                        if (state !=null)
                         {
                             //get the state of just this button from the larger state-bag
-                            buttonState = state.Value.GetButtons()[control.ControlNum];
+                            buttonState = state.GetButtons()[control.ControlNum];
                         }
                         else
                         {
                             return null; //no state was found, so we can't return a value
                         }
-                        return (buttonState & 0x80) != 0 ? 1 : 0;
+                        return buttonState ? 1 : 0;
                     case ControlType.Axis:
                         //TODO: finish documenting this method
                         int? toReturn;
 
-                        if (!state.HasValue) return null;
+                        if (state == null) return null;
                         switch (control.AxisType)
                         {
                             case AxisType.X:
-                                toReturn = state.Value.X;
+                                toReturn = state.X;
                                 break;
                             case AxisType.Y:
-                                toReturn = state.Value.Y;
+                                toReturn = state.Y;
                                 break;
                             case AxisType.Z:
-                                toReturn = state.Value.Z;
+                                toReturn = state.Z;
                                 break;
                             case AxisType.XR:
-                                toReturn = state.Value.Rx;
+                                toReturn = state.RotationX;
                                 break;
                             case AxisType.YR:
-                                toReturn = state.Value.Ry;
+                                toReturn = state.RotationY;
                                 break;
                             case AxisType.ZR:
-                                toReturn = state.Value.Rz;
+                                toReturn = state.RotationZ;
                                 break;
                             case AxisType.Slider:
-                                toReturn = state.Value.GetSlider()[control.ControlNum];
+                                toReturn = state.GetSliders()[control.ControlNum];
                                 break;
                             default:
                                 throw new ArgumentException(@"Unsupported control type", nameof(control));
@@ -506,9 +506,9 @@ namespace JoyMapper
                 if (control.ControlType != ControlType.Pov)
                     throw new ArgumentException(@"Unsupported control type", nameof(control));
                 int degrees;
-                if (state.HasValue)
+                if (state !=null)
                 {
-                    degrees = state.Value.GetPointOfView()[control.ControlNum];
+                    degrees = state.GetPointOfViewControllers()[control.ControlNum];
                 }
                 else
                 {

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using log4net;
-using Microsoft.DirectX;
-using Microsoft.DirectX.DirectInput;
-
+using SlimDX.DirectInput;
 namespace Common.InputSupport.DirectInput
 {
     public sealed class DIDeviceMonitor : DeviceMonitor, IDisposable
@@ -37,7 +35,6 @@ namespace Common.InputSupport.DirectInput
         /// </summary>
         private readonly int _axisRangeMin;
 
-        private readonly AutoResetEvent _diEvent = new AutoResetEvent(false);
         private readonly object _stateLock = new object();
         private Thread _eventMonitorThread;
 
@@ -45,18 +42,20 @@ namespace Common.InputSupport.DirectInput
         ///     The previous JoystickState structure from the DirectInput Device
         ///     being monitored by this object instance
         /// </summary>
-        private JoystickState? _prevState;
+        private JoystickState _prevState;
 
         /// <summary>
         ///     The last-polled JoystickState structure from the DirectInput Device
         ///     being monitored by this object instance
         /// </summary>
-        private JoystickState? _state;
+        private JoystickState _state;
 
         /// <summary>
         ///     The DirectInput Device object being monitored by this object instance
         /// </summary>
-        private Device _underlyingDxDevice;
+        private Joystick _underlyingDxDevice;
+        private SlimDX.DirectInput.DirectInput _directInput = new SlimDX.DirectInput.DirectInput();
+        private Control _parentForm;
 
         /// <summary>
         ///     Hidden default constructor -- forces callers to use one of the static
@@ -91,6 +90,7 @@ namespace Common.InputSupport.DirectInput
         private DIDeviceMonitor(DIPhysicalDeviceInfo device, Control parentForm, int axisRangeMin, int axisRangeMax)
         {
             DeviceInfo = device;
+            _parentForm = parentForm;
             _axisRangeMin = axisRangeMin;
             _axisRangeMax = axisRangeMax;
             Prepare();
@@ -103,7 +103,7 @@ namespace Common.InputSupport.DirectInput
         ///     Returns a DirectInput JoystickState structure representing the most-recently-polled joystick state of the device
         ///     being monitored by this object
         /// </summary>
-        public JoystickState? CurrentState
+        public JoystickState CurrentState
         {
             get
             {
@@ -120,7 +120,7 @@ namespace Common.InputSupport.DirectInput
         ///     Returns a DirectInput JoystickState structure representing the previous joystick state of the device being
         ///     monitored by this object
         /// </summary>
-        public JoystickState? PreviousState
+        public JoystickState PreviousState
         {
             get
             {
@@ -156,7 +156,7 @@ namespace Common.InputSupport.DirectInput
                 }
                 if (_underlyingDxDevice != null)
                 {
-                    return _underlyingDxDevice.Properties.VendorIdentityProductId;
+                    return (int)((long)(_underlyingDxDevice.Properties.VendorId << 16) | (long)_underlyingDxDevice.Properties.ProductId);
                 }
                 return null;
             }
@@ -193,7 +193,7 @@ namespace Common.InputSupport.DirectInput
                     while (!_isDisposed)
                     {
                         try {
-                            _diEvent.WaitOne(50);
+                            Thread.Sleep(50);
                             GetNewJoyState();
                         }
                         catch (TimeoutException)
@@ -207,10 +207,7 @@ namespace Common.InputSupport.DirectInput
                 {
                     Thread.ResetAbort();
                 }
-                catch (ThreadInterruptedException)
-                {
-                    //_log.Debug(e2.Message, e2);
-                }
+                catch (ThreadInterruptedException) {}
             }
         }
 
@@ -300,7 +297,7 @@ namespace Common.InputSupport.DirectInput
         ///     and returns a nullable JoystickState structure representing
         ///     the current joystick state discovered during polling
         /// </returns>
-        public JoystickState? Poll()
+        public JoystickState Poll()
         {
             try
             {
@@ -314,7 +311,7 @@ namespace Common.InputSupport.DirectInput
                     lock (_stateLock)
                     {
                         _prevState = _state;
-                        _state = _underlyingDxDevice.CurrentJoystickState;
+                        _state = _underlyingDxDevice.GetCurrentState();
                     }
                 }
                 else
@@ -322,24 +319,8 @@ namespace Common.InputSupport.DirectInput
                     Prepared = false;
                 }
             }
-            catch (DirectXException e)
-            {
-                Log.Debug(e.Message, e);
-                Prepared = false;
-            }
-            catch (OutOfMemoryException e)
-            {
-                Log.Debug(e.Message, e);
-                Prepared = false;
-            }
-            catch (NullReferenceException e)
-            {
-                Log.Debug(e.Message, e);
-                Prepared = false;
-            }
-            catch (AccessViolationException e)
-            {
-                Log.Debug(e.Message, e);
+            catch
+            { 
                 Prepared = false;
             }
             return _state;
@@ -367,83 +348,28 @@ namespace Common.InputSupport.DirectInput
                 {
                     Common.Util.DisposeObject(_underlyingDxDevice);
                     Preparing = true;
-                    try
+                    _underlyingDxDevice = new Joystick(_directInput,DeviceInfo.Guid);
+                    if (_underlyingDxDevice != null)
                     {
-                        if (!Manager.GetDeviceAttached(DeviceInfo.Guid))
-                        {
-                            Preparing = false;
-                            Prepared = false;
-                            return;
-                        }
-                    }
-                    catch (OutOfMemoryException e)
-                    {
-                        Log.Debug(e.Message, e);
-                        Preparing = false;
-                        Prepared = false;
-                        return;
-                    }
-                    catch (DirectXException e)
-                    {
-                        Log.Debug(e.Message, e);
-                        Preparing = false;
-                        Prepared = false;
-                        return;
-                    }
-                    catch (AccessViolationException e)
-                    {
-                        Log.Debug(e.Message, e);
-                        Preparing = false;
-                        Prepared = false;
-                        return;
-                    }
-                    _underlyingDxDevice = Util.GetDIDevice(DeviceInfo.Guid);
-                    if (_underlyingDxDevice == null)
-                    {
-                        Preparing = false;
-                        return;
-                    }
+                        _underlyingDxDevice.SetCooperativeLevel(_parentForm, 
+                            CooperativeLevel.Nonexclusive | CooperativeLevel.Background);
 
-                    _underlyingDxDevice.SetCooperativeLevel(null,
-                        CooperativeLevelFlags.NonExclusive |
-                        CooperativeLevelFlags.Background);
+                        //Set joystick axis ranges.
+                        _underlyingDxDevice.Properties.SetRange(_axisRangeMin, _axisRangeMax);
+                        _underlyingDxDevice.Properties.AxisMode = DeviceAxisMode.Absolute;
+                        _underlyingDxDevice.Acquire();
+                        _eventMonitorThread = new Thread(DIEventMonitorThreadWork);
+                        _eventMonitorThread.SetApartmentState(ApartmentState.STA);
+                        _eventMonitorThread.Name = "DIMonitorThread:" + _underlyingDxDevice.Information.InstanceGuid;
+                        _eventMonitorThread.Priority = ThreadPriority.Normal;
+                        _eventMonitorThread.IsBackground = true;
+                        _eventMonitorThread.Start();
 
-                    _underlyingDxDevice.SetDataFormat(DeviceDataFormat.Joystick);
-
-                    //Set joystick axis ranges.
-                    foreach (DeviceObjectInstance doi in _underlyingDxDevice.Objects)
-                        if ((doi.ObjectId & (int) DeviceObjectTypeFlags.Axis) != 0)
-                        {
-                            _underlyingDxDevice.Properties.SetRange(
-                                ParameterHow.ById,
-                                doi.ObjectId,
-                                new InputRange(_axisRangeMin, _axisRangeMax));
-                        }
-                    _underlyingDxDevice.Properties.AxisModeAbsolute = true;
-                    _underlyingDxDevice.SetEventNotification(_diEvent);
-                    _underlyingDxDevice.Acquire();
-                    _eventMonitorThread = new Thread(DIEventMonitorThreadWork);
-                    _eventMonitorThread.SetApartmentState(ApartmentState.STA);
-                    _eventMonitorThread.Name = "DIMonitorThread:" + _underlyingDxDevice.DeviceInformation.InstanceGuid;
-                    _eventMonitorThread.Priority = ThreadPriority.Normal;
-                    _eventMonitorThread.IsBackground = true;
-                    _eventMonitorThread.Start();
-
-                    Prepared = true;
+                        Prepared = true;
+                    }
                 }
-                catch (OutOfMemoryException e)
+                catch (Exception e)
                 {
-                    Log.Debug(e.Message, e);
-                    Prepared = false;
-                }
-                catch (DirectXException e)
-                {
-                    Log.Debug(e.Message, e);
-                    Prepared = false;
-                }
-                catch (AccessViolationException e2)
-                {
-                    Log.Debug(e2.Message, e2);
                     Prepared = false;
                 }
                 finally
@@ -478,53 +404,28 @@ namespace Common.InputSupport.DirectInput
                             _monitors.Remove(DeviceInfo.Guid);
                         }
                     }
-                    catch (Exception e)
-                    {
-                        Log.Debug(e.Message, e);
-                    }
+                    catch { }
                     if (_underlyingDxDevice != null)
                     {
                         try
                         {
                             _underlyingDxDevice.Unacquire();
                         }
-                        catch (OutOfMemoryException e)
-                        {
-                            Log.Debug(e.Message, e);
-                        }
-                        catch (DirectXException e)
-                        {
-                            Log.Debug(e.Message, e);
-                        }
-                        catch (NullReferenceException e2)
-                        {
-                            Log.Debug(e2.Message, e2);
-                        }
-                        catch (AccessViolationException e3)
-                        {
-                            Log.Debug(e3.Message, e3);
-                        }
+                        catch { }
 
                         try
                         {
-                            _underlyingDxDevice.Dispose();
+                            Common.Util.DisposeObject(_underlyingDxDevice);
                         }
-                        catch (OutOfMemoryException e)
+                        catch { }
+                    }
+                    if (_directInput !=null)
+                    {
+                        try
                         {
-                            Log.Debug(e.Message, e);
+                            Common.Util.DisposeObject(_directInput);
                         }
-                        catch (DirectXException e)
-                        {
-                            Log.Debug(e.Message, e);
-                        }
-                        catch (NullReferenceException ed)
-                        {
-                            Log.Debug(ed.Message, ed);
-                        }
-                        catch (AccessViolationException e)
-                        {
-                            Log.Debug(e.Message, e);
-                        }
+                        catch { }
                     }
                 }
             }
@@ -541,28 +442,13 @@ namespace Common.InputSupport.DirectInput
                 {
                     if (_underlyingDxDevice != null)
                     {
-                        _state = _underlyingDxDevice.CurrentJoystickState;
+                        _state = _underlyingDxDevice.GetCurrentState();
                         StateChanged?.Invoke(this, new DIStateChangedEventArgs(_prevState, _state));
                     }
                 }
-                catch (OutOfMemoryException e)
+                catch (Exception e)
                 {
-                    Log.Debug(e.Message, e);
-                    Prepared = false;
-                }
-                catch (DirectXException e)
-                {
-                    Log.Debug(e.Message, e);
-                    Prepared = false;
-                }
-                catch (NullReferenceException e2)
-                {
-                    Log.Debug(e2.Message, e2);
-                    Prepared = false;
-                }
-                catch (AccessViolationException e3)
-                {
-                    Log.Debug(e3.Message, e3);
+                    Dispose();
                     Prepared = false;
                 }
             }

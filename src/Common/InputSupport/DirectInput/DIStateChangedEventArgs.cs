@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.DirectX.DirectInput;
+using SlimDX.DirectInput;
 
 namespace Common.InputSupport.DirectInput
 {
@@ -9,14 +9,14 @@ namespace Common.InputSupport.DirectInput
         {
         }
 
-        public DIStateChangedEventArgs(JoystickState? newState, JoystickState? previousState)
+        public DIStateChangedEventArgs(JoystickState newState, JoystickState previousState)
         {
             NewState = newState;
             PreviousState = previousState;
         }
 
-        public JoystickState? NewState { get; }
+        public JoystickState NewState { get; }
 
-        public JoystickState? PreviousState { get; }
+        public JoystickState PreviousState { get; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F16CPD", "F16CPD.csproj", "{00B0AF4E-9949-40D9-92DB-C5C4DE871834}"
 EndProject
@@ -88,7 +88,6 @@ Global
 		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Release|x86.ActiveCfg = Release|x86
 		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Release|x86.Build.0 = Release|x86
 		{ACD4DF1C-8994-417C-9F40-D2BAEE0DD7A2}.Debug|x86.ActiveCfg = Debug
-		{ACD4DF1C-8994-417C-9F40-D2BAEE0DD7A2}.Debug|x86.Build.0 = Debug
 		{ACD4DF1C-8994-417C-9F40-D2BAEE0DD7A2}.Release|x86.ActiveCfg = Release
 		{ACD4DF1C-8994-417C-9F40-D2BAEE0DD7A2}.Release|x86.Build.0 = Release
 		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}.Debug|x86.ActiveCfg = Debug|x86
@@ -221,5 +220,8 @@ Global
 		{D386EC91-6D89-421F-87BC-4849E0232722} = {87B9C1D4-61AB-457C-8388-E6DA96325539}
 		{A95B675E-E59B-4D44-B66E-8E642B2D825F} = {87B9C1D4-61AB-457C-8388-E6DA96325539}
 		{5649A340-1475-4116-B5A1-CD21A99387F5} = {B75892D5-8A05-4C57-82D7-C2886157DF41}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2193C7D-F12E-4C5A-BC76-45D3DAB34D0A}
 	EndGlobalSection
 EndGlobal

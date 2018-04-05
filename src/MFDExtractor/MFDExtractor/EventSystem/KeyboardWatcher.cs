@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Forms;
 using Common.Win32;
-using Microsoft.DirectX.DirectInput;
+using SlimDX.DirectInput;
 using log4net;
 using MFDExtractor.EventSystem.Handlers;
 
@@ -50,78 +50,72 @@ namespace MFDExtractor.EventSystem
         private void KeyboardWatcherThreadWork()
         { 
 			_keepRunning = true;
-			Device device = null;
-			try
+			Keyboard keyboard = null;
+            using (var directInput = new DirectInput())
             {
-                var eventWaitHandle = new AutoResetEvent(false);
-                Control mainForm = null;// Application.OpenForms[0];
-                device = new Device(SystemGuid.Keyboard);
-                device.SetCooperativeLevel(mainForm, CooperativeLevelFlags.Background | CooperativeLevelFlags.NonExclusive);
-                device.SetEventNotification(eventWaitHandle);
-                device.Properties.BufferSize = 255;
-                device.Acquire();
-                var lastKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
-                var currentKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
-                while (_keepRunning)
+                try
                 {
-                    try
-                    {
-                        eventWaitHandle.WaitOne(1000);
-                    }
-                    catch (TimeoutException)
-                    {
-                        continue;
-                    }
+                    Control mainForm = null;// Application.OpenForms[0];
 
-                    try
+                    keyboard = new Keyboard(directInput);
+                    keyboard.SetCooperativeLevel(mainForm, CooperativeLevel.Background | CooperativeLevel.Nonexclusive);
+                    keyboard.Properties.BufferSize = 255;
+                    keyboard.Acquire();
+                    var lastKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
+                    var currentKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
+                    while (_keepRunning)
                     {
-                        var curState = device.GetCurrentKeyboardState();
-                        var possibleKeys = Enum.GetValues(typeof(Key));
-
-                        var i = 0;
-                        foreach (Key thisKey in possibleKeys)
+                        try
                         {
-                            currentKeyboardState[i] = curState[thisKey];
-                            i++;
-                        }
+                            var curState = keyboard.GetCurrentState();
+                            var possibleKeys = Enum.GetValues(typeof(Key));
 
-                        i = 0;
-                        foreach (Key thisKey in possibleKeys)
-                        {
-                            var isPressedNow = currentKeyboardState[i];
-                            var wasPressedBefore = lastKeyboardState[i];
-                            var winFormsKey = (Keys)NativeMethods.MapVirtualKey((uint)thisKey, NativeMethods.MAPVK_VSC_TO_VK_EX);
-                            if (isPressedNow && !wasPressedBefore)
+                            var i = 0;
+                            foreach (Key thisKey in possibleKeys)
                             {
-                                _keyEventHandler.ProcessKeyDownEvent(new KeyEventArgs(winFormsKey));
+                                currentKeyboardState[i] = curState.IsPressed(thisKey);
+                                i++;
                             }
-                            else if (wasPressedBefore && !isPressedNow)
+
+                            i = 0;
+                            foreach (Key thisKey in possibleKeys)
                             {
-                                _keyEventHandler.ProcessKeyUpEvent(new KeyEventArgs(winFormsKey));
+                                var isPressedNow = currentKeyboardState[i];
+                                var wasPressedBefore = lastKeyboardState[i];
+                                var winFormsKey = (Keys)NativeMethods.MapVirtualKey((uint)thisKey, NativeMethods.MAPVK_VSC_TO_VK_EX);
+                                if (isPressedNow && !wasPressedBefore)
+                                {
+                                    _keyEventHandler.ProcessKeyDownEvent(new KeyEventArgs(winFormsKey));
+                                }
+                                else if (wasPressedBefore && !isPressedNow)
+                                {
+                                    _keyEventHandler.ProcessKeyUpEvent(new KeyEventArgs(winFormsKey));
+                                }
+                                i++;
                             }
-                            i++;
+                            Array.Copy(currentKeyboardState, lastKeyboardState, currentKeyboardState.Length);
                         }
-                        Array.Copy(currentKeyboardState, lastKeyboardState, currentKeyboardState.Length);
-                    }
-                    catch (Exception e)
-                    {
-                        _log.Error(e.Message, e);
+                        catch (Exception e)
+                        {
+                            _log.Error(e.Message, e);
+                        }
+                        Thread.Sleep(1000);
                     }
                 }
-            }
-			catch (Exception e)
-			{
-				_log.Error(e.Message, e);
-			}
-			finally
-			{
-				if (device != null)
-				{
-					device.Unacquire();
-				}
-				Common.Util.DisposeObject(device);
-                Common.Util.DisposeObject(_thread);
-                _thread = null;
+                catch (Exception e)
+                {
+                    _log.Error(e.Message, e);
+                }
+                finally
+                {
+                    if (keyboard != null)
+                    {
+                        keyboard.Unacquire();
+                    }
+                    Common.Util.DisposeObject(keyboard);
+                    Common.Util.DisposeObject(_thread);
+                    _thread = null;
+                }
             }
         }
 

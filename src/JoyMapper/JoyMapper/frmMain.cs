@@ -16,7 +16,7 @@ using Common.Strings;
 using Common.UI;
 using JoyMapper.Properties;
 using log4net;
-using Microsoft.DirectX.DirectInput;
+using SlimDX.DirectInput;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Win32;
 using PPJoy;
@@ -675,54 +675,60 @@ namespace JoyMapper
             _outputMap = new OutputMap();
 
             //get a list of joysticks that DirectInput can currently detect
-            var detectedJoysticks = Manager.GetDevices(DeviceClass.GameControl, EnumDevicesFlags.AllDevices);
-
-            //for each detected joystick, determine if it's physical or a virtual PPJoy stick,
-            //and if it's physical, then it should appear in the new output map.
-            foreach (DeviceInstance instance in detectedJoysticks)
+            IList<DeviceInstance> detectedJoysticks=null;
+            using (var directInput = new DirectInput())
             {
-                var deviceInfo = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName);
-                //Get the DIDeviceMonitor object from the monitor pool that represents the input
-                //device being evaluated.   If no monitor exists in the pool yet for that device,
-                //one will be created and added to the pool.  This avoids having multiple objects
-                //taking control of a device at the same time -- all communication with
-                //the device itself will occur via the monitor object, not via DirectInput directly.
-                var dev = DIDeviceMonitor.GetInstance(deviceInfo, this,
-                    VirtualJoystick.MinAnalogDataSourceVal,
-                    VirtualJoystick.MaxAnalogDataSourceVal);
-
-                //get the vendor ID and product ID from the current device
-                var productId = dev.VendorIdentityProductId;
-
-                //check with PPJoy to determine if this device is actually a virtual joystick --
-                //PPJoy will check the vendor identity and product ID to determine this
-                if (!productId.HasValue) continue;
-                var isVirtual = false;
-                try
+                detectedJoysticks = directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AllDevices);
+            }
+            if (detectedJoysticks != null)
+            {
+                //for each detected joystick, determine if it's physical or a virtual PPJoy stick,
+                //and if it's physical, then it should appear in the new output map.
+                foreach (DeviceInstance instance in detectedJoysticks)
                 {
-                    isVirtual = new DeviceManager().IsVirtualDevice(productId.Value);
-                }
-                catch (DeviceNotFoundException e)
-                {
-                    _log.Debug(e.Message, e);
-                }
-                if (isVirtual)
-                {
-                    dev.Dispose();
-                }
-                else
-                {
-                    //if it's not a PPJoy virtual device, then we can add it to the map.
+                    var deviceInfo = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName);
+                    //Get the DIDeviceMonitor object from the monitor pool that represents the input
+                    //device being evaluated.   If no monitor exists in the pool yet for that device,
+                    //one will be created and added to the pool.  This avoids having multiple objects
+                    //taking control of a device at the same time -- all communication with
+                    //the device itself will occur via the monitor object, not via DirectInput directly.
+                    var dev = DIDeviceMonitor.GetInstance(deviceInfo, this,
+                        VirtualJoystick.MinAnalogDataSourceVal,
+                        VirtualJoystick.MaxAnalogDataSourceVal);
 
-                    //create a PhysicalDeviceInfo object to represent the current device, allowing
-                    //us to get a list of its controls
-                    var thisDev = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName);
+                    //get the vendor ID and product ID from the current device
+                    var productId = dev.VendorIdentityProductId;
 
-                    //add all the device's controls to the map, mapping them to nothing (null).
-                    //This will ensure that they appear in the control tree on the form, without
-                    //having any explicit mappings defined at this point in time.
-                    foreach (var pci in thisDev.Controls)
-                        _outputMap.SetMapping(pci, null);
+                    //check with PPJoy to determine if this device is actually a virtual joystick --
+                    //PPJoy will check the vendor identity and product ID to determine this
+                    if (!productId.HasValue) continue;
+                    var isVirtual = false;
+                    try
+                    {
+                        isVirtual = new DeviceManager().IsVirtualDevice(productId.Value);
+                    }
+                    catch (DeviceNotFoundException e)
+                    {
+                        _log.Debug(e.Message, e);
+                    }
+                    if (isVirtual)
+                    {
+                        dev.Dispose();
+                    }
+                    else
+                    {
+                        //if it's not a PPJoy virtual device, then we can add it to the map.
+
+                        //create a PhysicalDeviceInfo object to represent the current device, allowing
+                        //us to get a list of its controls
+                        var thisDev = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName);
+
+                        //add all the device's controls to the map, mapping them to nothing (null).
+                        //This will ensure that they appear in the control tree on the form, without
+                        //having any explicit mappings defined at this point in time.
+                        foreach (var pci in thisDev.Controls)
+                            _outputMap.SetMapping(pci, null);
+                    }
                 }
             }
 
@@ -2692,71 +2698,78 @@ namespace JoyMapper
             var detectedInputControls = new List<PhysicalControlInfo>();
 
             //detect all known DirectInput joysticks on this system
-            var detectedJoysticks = Manager.GetDevices(DeviceClass.GameControl, EnumDevicesFlags.AllDevices);
-            //check each known joystick device to see if it's a virtual joystick or a 
-            //physical joystick.  If it's physical, enumerate its controls.
-            foreach (DeviceInstance instance in detectedJoysticks)
+            IList<DeviceInstance> detectedJoysticks = null;
+            using (var directInput = new DirectInput())
             {
-                var device = Common.InputSupport.DirectInput.Util.GetDIDevice(instance.InstanceGuid);
+                detectedJoysticks = directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AllDevices);
+            }
+            if (detectedJoysticks != null)
+            {
+                //check each known joystick device to see if it's a virtual joystick or a 
+                //physical joystick.  If it's physical, enumerate its controls.
+                foreach (DeviceInstance instance in detectedJoysticks)
+                {
+                    var device = Common.InputSupport.DirectInput.Util.GetDIDevice(instance.InstanceGuid);
 
-                //get the vendor ID and product ID of the current device
-                int? productId = device.Properties.VendorIdentityProductId;
-
-                //use the vendor ID/product ID to determine if the device is virtual or physical
-                var isVirtual = false;
-                try
-                {
-                    isVirtual = new DeviceManager().IsVirtualDevice(productId.Value);
-                }
-                catch (DeviceNotFoundException e)
-                {
-                    _log.Debug(e.Message, e);
-                }
-                if (!isVirtual)
-                {
-                    //create a PhysicalDeviceInfo object to represent the current device
-                    var thisDev = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName);
-                    //if the device is physical, then create a monitor for it if it's not already created
-                    DIDeviceMonitor.GetInstance(thisDev, this,
-                        VirtualJoystick.MinAnalogDataSourceVal,
-                        VirtualJoystick.MaxAnalogDataSourceVal);
-                    //obtain a list of the device's controls
-                    foreach (var pci in thisDev.Controls)
+                    //get the vendor ID and product ID of the current device
+                    var vendorId = device.Properties.VendorId;
+                    var productId = device.Properties.ProductId;
+                    var vendorIdentityProductId = (int)((((long)vendorId << 16)) | ((long)productId));
+                    //use the vendor ID/product ID to determine if the device is virtual or physical
+                    var isVirtual = false;
+                    try
                     {
-                        //add the current control to the master list of controls
-                        detectedInputControls.Add(pci);
-                        if (!_outputMap.ContainsMappingFrom(pci))
+                        isVirtual = new DeviceManager().IsVirtualDevice(vendorIdentityProductId);
+                    }
+                    catch (DeviceNotFoundException e)
+                    {
+                        _log.Debug(e.Message, e);
+                    }
+                    if (!isVirtual)
+                    {
+                        //create a PhysicalDeviceInfo object to represent the current device
+                        var thisDev = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName);
+                        //if the device is physical, then create a monitor for it if it's not already created
+                        DIDeviceMonitor.GetInstance(thisDev, this,
+                            VirtualJoystick.MinAnalogDataSourceVal,
+                            VirtualJoystick.MaxAnalogDataSourceVal);
+                        //obtain a list of the device's controls
+                        foreach (var pci in thisDev.Controls)
                         {
-                            //the output map does not contain a mapping from the current control, then add
-                            //the control to the output map but don't associate it with any particular output.
-                            //This, in and of itself, represents a change to the output map, as we've added an unknown control
-                            //to the map.
-                            changesDetected = true;
-                            _outputMap.SetMapping(pci, null);
-                            _outputMap.EnableMapping(pci);
-                        }
-                        else
-                        {
-                            if (oldMap.ContainsMappingFrom(pci))
+                            //add the current control to the master list of controls
+                            detectedInputControls.Add(pci);
+                            if (!_outputMap.ContainsMappingFrom(pci))
                             {
-                                if (oldMap.IsMappingEnabled(pci))
-                                {
-                                    _outputMap.EnableMapping(pci);
-                                }
-                                else
-                                {
-                                    _outputMap.DisableMapping(pci);
-                                }
+                                //the output map does not contain a mapping from the current control, then add
+                                //the control to the output map but don't associate it with any particular output.
+                                //This, in and of itself, represents a change to the output map, as we've added an unknown control
+                                //to the map.
+                                changesDetected = true;
+                                _outputMap.SetMapping(pci, null);
+                                _outputMap.EnableMapping(pci);
                             }
-                        } //end if
-                    } //end foreach
-                }
-                else
-                {
-                    device.Dispose();
-                } //end if
-            } //end foreach
-
+                            else
+                            {
+                                if (oldMap.ContainsMappingFrom(pci))
+                                {
+                                    if (oldMap.IsMappingEnabled(pci))
+                                    {
+                                        _outputMap.EnableMapping(pci);
+                                    }
+                                    else
+                                    {
+                                        _outputMap.DisableMapping(pci);
+                                    }
+                                }
+                            } //end if
+                        } //end foreach
+                    }
+                    else
+                    {
+                        device.Dispose();
+                    } //end if
+                } //end foreach
+            }
 
             //detect all BetaInnovations HID input devices on this system
             var manager = BIDeviceManager.GetInstance();

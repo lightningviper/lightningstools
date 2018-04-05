@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using log4net;
-using Microsoft.DirectX.DirectInput;
+using SlimDX.DirectInput;
 
 namespace Common.InputSupport.DirectInput
 {
@@ -162,18 +162,18 @@ namespace Common.InputSupport.DirectInput
                 //the state in terms of that button
                 if (control.ControlType == ControlType.Button)
                 {
-                    byte buttonState;
+                    bool buttonState;
 
-                    if (state.HasValue)
+                    if (state !=null)
                     {
                         //get the state of just this button from the larger state-bag
-                        buttonState = state.Value.GetButtons()[control.ControlNum];
+                        buttonState = state.GetButtons()[control.ControlNum];
                     }
                     else
                     {
                         return null; //no state was found, so we can't return a value
                     }
-                    return (buttonState & 0x80) != 0 ? 1 : 0;
+                    return buttonState ? 1 : 0;
                 }
                 //else if the supplied input control object refers to an Axis, then read
                 //the state in terms of that axis
@@ -181,30 +181,30 @@ namespace Common.InputSupport.DirectInput
                 {
                     int? toReturn = null;
 
-                    if (state.HasValue)
+                    if (state !=null)
                     {
                         switch (control.AxisType)
                         {
                             case AxisType.X:
-                                toReturn = state.Value.X;
+                                toReturn = state.X;
                                 break;
                             case AxisType.Y:
-                                toReturn = state.Value.Y;
+                                toReturn = state.Y;
                                 break;
                             case AxisType.Z:
-                                toReturn = state.Value.Z;
+                                toReturn = state.Z;
                                 break;
                             case AxisType.XR:
-                                toReturn = state.Value.Rx;
+                                toReturn = state.RotationX;
                                 break;
                             case AxisType.YR:
-                                toReturn = state.Value.Ry;
+                                toReturn = state.RotationY;
                                 break;
                             case AxisType.ZR:
-                                toReturn = state.Value.Rz;
+                                toReturn = state.RotationZ;
                                 break;
                             case AxisType.Slider:
-                                toReturn = state.Value.GetSlider()[control.ControlNum];
+                                toReturn = state.GetSliders()[control.ControlNum];
                                 break;
                             default:
                                 throw new ArgumentException("Unsupported control type", nameof(control));
@@ -213,8 +213,10 @@ namespace Common.InputSupport.DirectInput
                     return toReturn;
                 }
                 if (control.ControlType != ControlType.Pov)
+                {
                     throw new ArgumentException("Unsupported control type", nameof(control));
-                return state?.GetPointOfView()[control.ControlNum];
+                }
+                return state?.GetPointOfViewControllers()[control.ControlNum];
             }
             throw new ArgumentException("Unsupported control type", nameof(control));
         }
@@ -223,21 +225,27 @@ namespace Common.InputSupport.DirectInput
         {
             _diDeviceMonitors.Clear();
             //get a list of joysticks that DirectInput can currently detect
-            var detectedJoysticks = Manager.GetDevices(DeviceClass.GameControl, EnumDevicesFlags.AllDevices);
-            var curDevice = 0;
-            foreach (DeviceInstance instance in detectedJoysticks)
+            using (var input = new SlimDX.DirectInput.DirectInput())
             {
-                var deviceInfo = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName)
-                    {DeviceNum = curDevice};
-                //Get the DIDeviceMonitor object from the monitor pool that represents the input
-                //device being evaluated.   If no monitor exists in the pool yet for that device,
-                //one will be created and added to the pool.  This avoids having multiple objects
-                //taking control of a device at the same time -- all communication with
-                //the device itself will occur via the monitor object, not via DirectInput directly.
-                var dev = DIDeviceMonitor.GetInstance(deviceInfo, _parentForm, 0, 1024);
-                _diDeviceMonitors.Add(dev.DeviceInfo.Guid, dev);
-                dev.StateChanged += _diDeviceMonitorStateChanged;
-                curDevice++;
+                var detectedJoysticks = input.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AllDevices);
+                var curDevice = 0;
+                foreach (DeviceInstance instance in detectedJoysticks)
+                {
+                    var deviceInfo = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName)
+                    { DeviceNum = curDevice };
+                    //Get the DIDeviceMonitor object from the monitor pool that represents the input
+                    //device being evaluated.   If no monitor exists in the pool yet for that device,
+                    //one will be created and added to the pool.  This avoids having multiple objects
+                    //taking control of a device at the same time -- all communication with
+                    //the device itself will occur via the monitor object, not via DirectInput directly.
+                    var dev = DIDeviceMonitor.GetInstance(deviceInfo, _parentForm, 0, 1024);
+                    if (dev != null)
+                    { 
+                        _diDeviceMonitors.Add(dev.DeviceInfo.Guid, dev);
+                        dev.StateChanged += _diDeviceMonitorStateChanged;
+                    }
+                    curDevice++;
+                }
             }
         }
 
@@ -246,7 +254,9 @@ namespace Common.InputSupport.DirectInput
             var source = (DIDeviceMonitor) sender;
             var device = source.DeviceInfo;
             foreach (var physicalControl in device.Controls)
+            {
                 ProcessStateChange(physicalControl);
+            }
         }
 
         /// <summary>
@@ -265,18 +275,12 @@ namespace Common.InputSupport.DirectInput
                         {
                             pstick.StateChanged -= _diDeviceMonitorStateChanged;
                         }
-                        catch (Exception e)
-                        {
-                            Log.Debug(e.Message, e);
-                        }
+                        catch { }
                         try
                         {
                             pstick.Dispose();
                         }
-                        catch (Exception e)
-                        {
-                            Log.Debug(e.Message, e);
-                        }
+                        catch { }
                     }
                 }
             }
@@ -310,14 +314,13 @@ namespace Common.InputSupport.DirectInput
                 }
             }
             foreach (var diDevice in _diDeviceMonitors.Values)
+            {
                 try
                 {
                     diDevice.Poll();
                 }
-                catch (ApplicationException e)
-                {
-                    Log.Debug(e.Message, e);
-                }
+                catch { }
+            }
             _raiseEvents = oldSendEventsVal;
             _isInitialized = true;
         }

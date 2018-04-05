@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using log4net;
-using Microsoft.DirectX;
-using Microsoft.DirectX.DirectInput;
-
+using SlimDX.DirectInput;
 namespace Common.InputSupport.DirectInput
 {
     /// <summary>
@@ -64,117 +63,103 @@ namespace Common.InputSupport.DirectInput
             {
                 return;
             }
-            try
+
+            var controls = new List<PhysicalControlInfo>();
+            using (var directInput = new SlimDX.DirectInput.DirectInput())
             {
-                if (!Manager.GetDeviceAttached(new Guid(Key.ToString())))
+                Joystick joystick = null;
+                try
+                {
+                    joystick = new Joystick(directInput, new Guid(Key.ToString()));
+                    if (joystick == null)
+                    {
+                        return;
+                    }
+                }
+                catch (Exception e)
                 {
                     return;
                 }
-            }
-            catch (OutOfMemoryException e)
-            {
-                _log.Debug(e.Message, e);
-                return;
-            }
-            catch (NullReferenceException e)
-            {
-                _log.Debug(e.Message, e);
-            }
-            catch (DirectXException e)
-            {
-                _log.Debug(e.Message, e);
-                return;
-            }
-            catch (AccessViolationException e2)
-            {
-                _log.Debug(e2.Message, e2);
-                return;
-            }
-            var controls = new List<PhysicalControlInfo>();
-            var joystick = Util.GetDIDevice(new Guid(Key.ToString()));
-            if (joystick == null)
-            {
-                return;
-            }
 
-            var dol = joystick.GetObjects(DeviceObjectTypeFlags.Axis);
-            var lastSlider = -1;
-            var lastAxis = -1;
-            foreach (DeviceObjectInstance doi in dol)
-                if (doi.ObjectType == ObjectTypeGuid.Slider)
+                var dol = joystick.GetObjects(ObjectDeviceType.Axis);
+                var lastSlider = -1;
+                var lastAxis = -1;
+                foreach (DeviceObjectInstance doi in dol)
+                    if (doi.ObjectTypeGuid == ObjectGuid.Slider)
+                    {
+                        lastSlider++;
+                        PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastSlider,
+                            "Slider " + (lastSlider + 1));
+                        controls.Add(control);
+                    }
+                    else if ((doi.ObjectType & ObjectDeviceType.Axis) != 0)
+                    {
+                        if (!(doi.ObjectTypeGuid == ObjectGuid.XAxis ||
+                              doi.ObjectTypeGuid == ObjectGuid.YAxis ||
+                              doi.ObjectTypeGuid == ObjectGuid.ZAxis ||
+                              doi.ObjectTypeGuid == ObjectGuid.RotationalXAxis ||
+                              doi.ObjectTypeGuid == ObjectGuid.RotationalYAxis ||
+                              doi.ObjectTypeGuid == ObjectGuid.RotationalZAxis))
+                        {
+                            continue;
+                        }
+                        lastAxis++;
+                        var axisName = "Unknown";
+                        if (doi.ObjectTypeGuid == ObjectGuid.XAxis)
+                        {
+                            axisName = "X Axis";
+                        }
+                        else if (doi.ObjectTypeGuid == ObjectGuid.YAxis)
+                        {
+                            axisName = "Y Axis";
+                        }
+                        else if (doi.ObjectTypeGuid == ObjectGuid.ZAxis)
+                        {
+                            axisName = "Z Axis";
+                        }
+                        else if (doi.ObjectTypeGuid == ObjectGuid.RotationalXAxis)
+                        {
+                            axisName = "X Rotation Axis";
+                        }
+                        else if (doi.ObjectTypeGuid == ObjectGuid.RotationalYAxis)
+                        {
+                            axisName = "Y Rotation Axis";
+                        }
+                        else if (doi.ObjectTypeGuid == ObjectGuid.RotationalZAxis)
+                        {
+                            axisName = "Z Rotation Axis";
+                        }
+
+                        PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastAxis, axisName);
+                        controls.Add(control);
+                    }
+                var lastButton = -1;
+                dol = joystick.GetObjects(ObjectDeviceType.Button);
+                foreach (DeviceObjectInstance doi in dol)
                 {
-                    lastSlider++;
-                    PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastSlider,
-                        "Slider " + (lastSlider + 1));
+                    lastButton++;
+                    PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastButton,
+                        "Button " + (lastButton + 1));
                     controls.Add(control);
                 }
-                else if ((doi.ObjectId & (int) DeviceObjectTypeFlags.Axis) != 0)
-                {
-                    if (!(doi.ObjectType == ObjectTypeGuid.XAxis ||
-                          doi.ObjectType == ObjectTypeGuid.YAxis ||
-                          doi.ObjectType == ObjectTypeGuid.ZAxis ||
-                          doi.ObjectType == ObjectTypeGuid.RxAxis ||
-                          doi.ObjectType == ObjectTypeGuid.RyAxis ||
-                          doi.ObjectType == ObjectTypeGuid.RzAxis))
-                    {
-                        continue;
-                    }
-                    lastAxis++;
-                    var axisName = "Unknown";
-                    if (doi.ObjectType == ObjectTypeGuid.XAxis)
-                    {
-                        axisName = "X Axis";
-                    }
-                    else if (doi.ObjectType == ObjectTypeGuid.YAxis)
-                    {
-                        axisName = "Y Axis";
-                    }
-                    else if (doi.ObjectType == ObjectTypeGuid.ZAxis)
-                    {
-                        axisName = "Z Axis";
-                    }
-                    else if (doi.ObjectType == ObjectTypeGuid.RxAxis)
-                    {
-                        axisName = "X Rotation Axis";
-                    }
-                    else if (doi.ObjectType == ObjectTypeGuid.RyAxis)
-                    {
-                        axisName = "Y Rotation Axis";
-                    }
-                    else if (doi.ObjectType == ObjectTypeGuid.RzAxis)
-                    {
-                        axisName = "Z Rotation Axis";
-                    }
 
-                    PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastAxis, axisName);
+                var lastPov = -1;
+                dol = joystick.GetObjects(ObjectDeviceType.PointOfViewController);
+                foreach (DeviceObjectInstance doi in dol)
+                {
+                    lastPov++;
+                    PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastPov, "Hat " + (lastPov + 1));
                     controls.Add(control);
                 }
-            var lastButton = -1;
-            dol = joystick.GetObjects(DeviceObjectTypeFlags.Button);
-            foreach (DeviceObjectInstance doi in dol)
-            {
-                lastButton++;
-                PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastButton,
-                    "Button " + (lastButton + 1));
-                controls.Add(control);
+                _controls = new PhysicalControlInfo[controls.Count];
+                var thisControlIndex = 0;
+                foreach (var control in controls)
+                {
+                    _controls[thisControlIndex] = control;
+                    thisControlIndex++;
+                }
+                ControlsLoaded = true;
             }
-
-            var lastPov = -1;
-            dol = joystick.GetObjects(DeviceObjectTypeFlags.Pov);
-            foreach (DeviceObjectInstance doi in dol)
-            {
-                lastPov++;
-                PhysicalControlInfo control = new DIPhysicalControlInfo(this, doi, lastPov, "Hat " + (lastPov + 1));
-                controls.Add(control);
-            }
-            _controls = new PhysicalControlInfo[controls.Count];
-            var thisControlIndex = 0;
-            foreach (var control in controls)
-            {
-                _controls[thisControlIndex] = control;
-                thisControlIndex++;
-            }
-            ControlsLoaded = true;
         }
     }
 }

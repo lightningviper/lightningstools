@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.DirectX.DirectInput;
+using SlimDX.DirectInput;
 
 namespace Common.InputSupport.DirectInput
 {
@@ -7,15 +7,15 @@ namespace Common.InputSupport.DirectInput
     public class DIPhysicalControlInfo : PhysicalControlInfo
     {
         /// <summary>
-        ///     The DirectInput Object ID of this physical control
+        ///     The DirectInput Object Device Type of this physical control
         /// </summary>
-        private readonly int _doiObjectId;
+        private readonly ObjectDeviceType _objectType;
 
         /// <summary>
         ///     The DirectInput Object Type GUID of this physical control -- indicates its type
         ///     from a DirectInput standpoint
         /// </summary>
-        private readonly Guid _doiObjectTypeGuid;
+        private readonly Guid _doiObjectGuid;
 
         public DIPhysicalControlInfo()
         {
@@ -42,8 +42,8 @@ namespace Common.InputSupport.DirectInput
             int controlNum)
             : base(parent, controlNum, ControlType.Unknown, AxisType.Unknown)
         {
-            _doiObjectId = deviceObjectInstance.ObjectId;
-            _doiObjectTypeGuid = deviceObjectInstance.ObjectType;
+            _objectType = deviceObjectInstance.ObjectType;
+            _doiObjectGuid = deviceObjectInstance.ObjectTypeGuid;
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace Common.InputSupport.DirectInput
             int controlNum, string alias)
             : base(parent, controlNum, ControlType.Unknown, AxisType.Unknown, alias)
         {
-            _doiObjectId = deviceObjectInstance.ObjectId;
-            _doiObjectTypeGuid = deviceObjectInstance.ObjectType;
+            _objectType = deviceObjectInstance.ObjectType;
+            _doiObjectGuid = deviceObjectInstance.ObjectTypeGuid;
         }
 
         /// <summary>
@@ -87,19 +87,19 @@ namespace Common.InputSupport.DirectInput
                 switch (ControlType)
                 {
                     case ControlType.Axis:
-                        _axisType = _doiObjectTypeGuid == ObjectTypeGuid.XAxis
+                        _axisType = _doiObjectGuid == ObjectGuid.XAxis
                             ? AxisType.X
-                            : (_doiObjectTypeGuid == ObjectTypeGuid.YAxis
+                            : (_doiObjectGuid == ObjectGuid.YAxis
                                 ? AxisType.Y
-                                : (_doiObjectTypeGuid == ObjectTypeGuid.ZAxis
+                                : (_doiObjectGuid == ObjectGuid.ZAxis
                                     ? AxisType.Z
-                                    : (_doiObjectTypeGuid == ObjectTypeGuid.RxAxis
+                                    : (_doiObjectGuid == ObjectGuid.RotationalXAxis
                                         ? AxisType.XR
-                                        : (_doiObjectTypeGuid == ObjectTypeGuid.RyAxis
+                                        : (_doiObjectGuid == ObjectGuid.RotationalYAxis
                                             ? AxisType.YR
-                                            : (_doiObjectTypeGuid == ObjectTypeGuid.RzAxis
+                                            : (_doiObjectGuid == ObjectGuid.RotationalZAxis
                                                 ? AxisType.ZR
-                                                : (_doiObjectTypeGuid == ObjectTypeGuid.Slider
+                                                : (_doiObjectGuid == ObjectGuid.Slider
                                                     ? AxisType.Slider
                                                     : AxisType.Unknown))))));
                         break;
@@ -128,11 +128,11 @@ namespace Common.InputSupport.DirectInput
             get
             {
                 if (_controlType != ControlType.Unknown) return _controlType;
-                _controlType = _doiObjectTypeGuid == ObjectTypeGuid.Button
+                _controlType = _doiObjectGuid == ObjectGuid.Button
                     ? ControlType.Button
-                    : (_doiObjectTypeGuid == ObjectTypeGuid.PointOfView
+                    : (_doiObjectGuid == ObjectGuid.PovController
                         ? ControlType.Pov
-                        : ((_doiObjectId & (int) DeviceObjectTypeFlags.Axis) != 0
+                        : ((_objectType & ObjectDeviceType.Axis) != 0
                             ? ControlType.Axis
                             : ControlType.Unknown));
                 return _controlType;
