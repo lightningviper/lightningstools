@@ -27,7 +27,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2CF1E0064A4536045C7A3426EB6CA346"
+        "MsmKey" = "8:_637DB8987D7FE684314101D6F4919703"
+        "OwnerKey" = "8:_14625A13807D411EBBAE01453F165369"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B0FB1D5EBA68E3753D66346073BD2D3C"
         "OwnerKey" = "8:_14625A13807D411EBBAE01453F165369"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -40,7 +46,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2CF1E0064A4536045C7A3426EB6CA346"
+        "OwnerKey" = "8:_B0FB1D5EBA68E3753D66346073BD2D3C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_637DB8987D7FE684314101D6F4919703"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -158,14 +170,45 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2CF1E0064A4536045C7A3426EB6CA346"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_637DB8987D7FE684314101D6F4919703"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Costura, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_637DB8987D7FE684314101D6F4919703"
+                    {
+                    "Name" = "8:Costura.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Costura.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_394D3818F6E24D8DAD592B80303B51CE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B0FB1D5EBA68E3753D66346073BD2D3C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:F4TexSharedMem, Version=1.4.0.0, Culture=neutral, PublicKeyToken=13cc4724751b44e4, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_2CF1E0064A4536045C7A3426EB6CA346"
+                    "_B0FB1D5EBA68E3753D66346073BD2D3C"
                     {
                     "Name" = "8:F4TexSharedMem.dll"
                     "Attributes" = "3:512"
@@ -185,7 +228,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -781,7 +824,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_14625A13807D411EBBAE01453F165369"
             {
-            "SourcePath" = "8:..\\obj\\x86\\Release\\F4TexSharedMemTester.exe"
+            "SourcePath" = "8:..\\obj\\x86\\Debug\\F4TexSharedMemTester.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_394D3818F6E24D8DAD592B80303B51CE"
