@@ -23,6 +23,3 @@ REM Install Visual Studio Installer Projects Add-In for Visual Studio
 CALL %MASTERBUILDDIR%InstallVisualStudio2017InstallerProjectAddIn.bat
 CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 
-REM Restore NuGet Packages
-CALL %MASTERBUILDDIR%RestorePackages.bat
-

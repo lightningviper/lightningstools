@@ -15,13 +15,9 @@ for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -latest -product
   set InstanceId=%%i
 )
 
-FOR /R "%MASTERBUILDDIR%".. %%S IN (*.sln) DO (
-	Pushd "%%~dpS"
-	ECHO Restoring packages for solution: %%S
-	"%MASTERBUILDDIR%nuget.exe" restore "%%S" -NoCache -NonInteractive -MsbuildPath "%InstallDir%\MSBuild\15.0\Bin"
-	IF ERRORLEVEL 1 GOTO END
-	Popd
-)
-:END
+SET SOLUTION=%1
+IF "%SOLUTION%"=="" SET SOLUTION=%MASTERBUILDDIR%BuildAll.sln
+
+"%MASTERBUILDDIR%nuget.exe" restore "%SOLUTION%" -NoCache -NonInteractive -MsbuildPath "%InstallDir%\MSBuild\15.0\Bin"
 
 

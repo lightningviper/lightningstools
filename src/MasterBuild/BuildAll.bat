@@ -1,7 +1,6 @@
 @ECHO OFF
 :start
 SET MASTERBUILDDIR=%~dp0
-CALL %MASTERBUILDDIR%RestorePackages.bat
 CALL %MASTERBUILDDIR%GetVsWhere.bat
 
 for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (
@@ -17,9 +16,12 @@ DEL "%MASTERBUILDDIR%EnableCommandLineInstallerBuilds.reg" >NUL 2>NUL
 
 FOR /R "%MASTERBUILDDIR%".. %%S IN (*.sln) DO (
 	SET LAST_BUILT_SOLUTION="%%S"
-	"%InstallDir%\Common7\IDE\devenv.com"  /Rebuild "Release" "%%S"
+	SET SOLUTION=%%S
+	CALL %MASTERBUILDDIR%RestorePackages.bat %SOLUTION%
 	IF ERRORLEVEL 1 GOTO END
-	"%InstallDir%\Common7\IDE\devenv.com"  /Rebuild "Debug" "%%S"
+	"%InstallDir%\Common7\IDE\devenv.com"  /Build "Release" "%%S"
+	IF ERRORLEVEL 1 GOTO END
+	"%InstallDir%\Common7\IDE\devenv.com"  /Build "Debug" "%%S"
 	IF ERRORLEVEL 1 GOTO END
 )
 :END
