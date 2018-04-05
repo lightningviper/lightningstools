@@ -80,6 +80,7 @@ namespace MFDExtractor
                 return;
             }
 
+            Common.Win32.NativeMethods.SetProcessDpiAwareness(Common.Win32.NativeMethods.PROCESS_DPI_AWARENESS.Process_System_DPI_Aware);
             // Add the event handler for handling UI thread exceptions to the event.
             Application.ThreadException += UIThreadException;
 
