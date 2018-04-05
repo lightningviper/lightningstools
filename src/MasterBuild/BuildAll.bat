@@ -16,8 +16,7 @@ DEL "%MASTERBUILDDIR%EnableCommandLineInstallerBuilds.reg" >NUL 2>NUL
 
 FOR /R "%MASTERBUILDDIR%".. %%S IN (*.sln) DO (
 	SET LAST_BUILT_SOLUTION="%%S"
-	SET SOLUTION=%%S
-	CALL %MASTERBUILDDIR%RestorePackages.bat %SOLUTION%
+	CALL %MASTERBUILDDIR%RestorePackages.bat "%%S"
 	IF ERRORLEVEL 1 GOTO END
 	"%InstallDir%\Common7\IDE\devenv.com"  /Build "Release" "%%S"
 	IF ERRORLEVEL 1 GOTO END
