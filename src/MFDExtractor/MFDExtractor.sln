@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MFDExtractorSetup", "MFDExtractorSetup\MFDExtractorSetup.vdproj", "{217B357C-70EF-4B17-B450-99500707CF64}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFDExtractor", "MFDExtractor\MFDExtractor.csproj", "{CFC7ADC1-150E-4015-8A40-85FA2DEE4AB6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MFDExtractorSetup", "MFDExtractorSetup\MFDExtractorSetup.vdproj", "{217B357C-70EF-4B17-B450-99500707CF64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4SharedMem", "..\F4SharedMem\F4SharedMem.csproj", "{517D1B4D-E8C7-4331-BBE7-300FD6B78441}"
 EndProject
