@@ -300,12 +300,6 @@
     <Content Include="Content\Mapping\Kukki\HardwareSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\Kukki\HenkF16ADISupportBoard.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Kukki\henksdi.config.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Mapping\Kukki\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -313,12 +307,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Kukki\Simtek100285altimeter.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Kukki\Simtek100294fuelquantityindicator.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Kukki\Simtek10033501standbyADI.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Kukki\Simtek10058102verticalvelocity.mapping">
@@ -331,9 +319,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Kukki\Simtek100285HardwareSupportModule.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Kukki\Simtek100294HardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Simtek100294HardwareSupportModule.config">
@@ -394,10 +379,37 @@
     <Content Include="Content\Mapping\HenkieStandbyADI\HenkieStandbyADIMapping.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\Kukki\HenkieF16FlowIndicator.mapping.disabled">
+    <Content Include="Content\Mapping\Kukki\HardwareSupportModule-old .disabled">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\Kukki\HenkieF16FuelFlowIndicator.config.disabled">
+    <Content Include="Content\Mapping\Kukki\HenkF16ADISupportBoard.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\HenkieF16FlowIndicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\HenkieF16FuelFlowIndicator.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\henksdi.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek100294fuelquantityindicator.mapping.disabled">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek100294HardwareSupportModule.config.disabled">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek10033501standbyADI.mapping.disabled">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek101084standbyADI.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek10108902fuelquantityindicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Kukki\Simtek10108902HardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
