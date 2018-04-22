@@ -63,7 +63,7 @@ namespace Henkie.FuelFlow
         #region Protocol
 
         #region Public constants
-        public const short STATOR_ANGLE_MAX_OFFSET = 4095; //12 bits of precision allowed
+        public const short STATOR_ANGLE_MAX_OFFSET = 8191; //13 bits of precision allowed
         public const short MAX_POSITION = 4095; //12 bits of precision allowed
         public const short WATCHDOG_MAX_COUNTDOWN = 63; //6 bits
         #endregion
@@ -86,7 +86,7 @@ namespace Henkie.FuelFlow
         public void SetStatorBaseAngle(StatorSignals statorSignal, short offset)
         {
             const ushort LSB_BITMASK = 0xFF; //bits 0-7
-            const ushort MSB_BITMASK = 0xF00; //bits 8-11
+            const ushort MSB_BITMASK = 0x1F00; //bits 8-12
 
             if (offset <0 || offset > STATOR_ANGLE_MAX_OFFSET)
             {
@@ -144,7 +144,7 @@ namespace Henkie.FuelFlow
 		public void SetStatorHighAccuracyAngleDeferred(StatorSignals statorSignal, short offset)
         {
             const ushort LSB_BITMASK = 0xFF; //bits 0-7
-            const ushort MSB_BITMASK = 0xF00; //bits 8-11
+            const ushort MSB_BITMASK = 0x1F00; //bits 8-12
 
             if (offset <0 || offset > STATOR_ANGLE_MAX_OFFSET)
             {
