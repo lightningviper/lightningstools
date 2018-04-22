@@ -1,0 +1,106 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO SIMTEK HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- OFF FLAG -->
+    <SignalMapping>
+      <!-- F4 STANDBY ADI OFF FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_STBY_ADI__OFF_FLAG</Id>
+      </Source>
+      <!-- SIMTEK STANDBY ADI OFF FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>10033501_OFF_Flag_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    <!-- PITCH DEGREES -->
+    <SignalMapping>
+      <!-- F4 STANDBY ADI PITCH DEGREES OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_STBY_ADI__PITCH_DEGREES</Id>
+      </Source>
+      <!-- SIMTEK STANDBY ADI PITCH DEGREES INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>10033501_Pitch_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- ROLL DEGREES -->
+    <SignalMapping>
+      <!-- F4 STANDBY ADI ROLL DEGREES OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_STBY_ADI__ROLL_DEGREES</Id>
+      </Source>
+      <!-- SIMTEK STANDBY ADI ROLL DEGREES INPUT -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>10033501_Roll_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM SIMTEK HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- ROLL (SIN ) -->
+    <SignalMapping>
+      <!-- SIMTEK STANDBY ADI HARDWARE SUPPORT MODULE ROLL (SIN) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Roll_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 0 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][0]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- ROLL (COS) -->
+    <SignalMapping>
+      <!-- SIMTEK STANDBY ADI HARDWARE SUPPORT MODULE ROLL (COS) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Roll_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 1 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][1]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    <!-- PITCH (SIN) -->
+    <SignalMapping>
+      <!-- SIMTEK STANDBY ADI HARDWARE SUPPORT MODULE PITCH (SIN) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Pitch_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 2 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][2]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- PITCH (COS) -->
+    <SignalMapping>
+      <!-- SIMTEK STANDBY ADI HARDWARE SUPPORT MODULE PITCH (COS) OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Pitch_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 3 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][3]</Id>
+      </Destination>
+      
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

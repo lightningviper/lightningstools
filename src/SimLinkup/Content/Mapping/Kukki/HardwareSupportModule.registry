@@ -6,13 +6,13 @@
     <Module>SimLinkup.HardwareSupport.Simtek.Simtek100285HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Simtek.Simtek100294HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Simtek.Simtek101079HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
-    <Module>SimLinkup.HardwareSupport.Simtek.Simtek100335015HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+    <Module>SimLinkup.HardwareSupport.Simtek.Simtek101084HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek100335015HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
     <Module>SimLinkup.HardwareSupport.Simtek.Simtek10058102HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Simtek.Simtek10058201HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
-<!--
-    <Module>SimLinkup.HardwareSupport.Henk.FuelFlow.HenkieF16FuelFlowIndicatorHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Henk.ADI.HenkF16ADISupportBoardHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Henk.SDI.HenkSDIHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
--->
+    <Module>SimLinkup.HardwareSupport.Simtek.Simtek10108902HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+	<Module>SimLinkup.HardwareSupport.Henk.FuelFlow.HenkieF16FuelFlowIndicatorHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
   </HardwareSupportModules>
 </HardwareSupportModuleRegistry>
