@@ -1,5 +1,5 @@
 ﻿namespace BMSVoiceGen.TextToSpeechProviders.AmazonPolly
-{
+{ 
     internal enum Volume
     {
         Default,

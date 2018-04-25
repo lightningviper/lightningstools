@@ -1,0 +1,8 @@
+﻿---
+api-key: 'YOUR_API_KEY'
+rate-of-speech: 1.0
+sample-rate-hz: 8000
+volume-gain-db: 10.0
+voice-ids: ['en-US-Wavenet-A','en-US-Wavenet-B','en-AU-Standard-B','en-GB-Standard-B','en-US-Wavenet-C','en-US-Standard-B','en-US-Wavenet-E','en-US-Wavenet-D','en-US-Standard-D','en-GB-Standard-D','en-GB-Standard-D','en-GB-Standard-B','en-US-Wavenet-E','en-GB-Standard-B','en-AU-Standard-D']
+language-code: 'en-us'
+...

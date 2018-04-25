@@ -4,9 +4,6 @@ namespace BMSVoiceGen.TextToSpeechProviders.AmazonPolly
 {
     internal class Settings
     {
-        private const int DEFAULT_SAMPLE_RATE = 8000;
-        private const int DEFAULT_MAX_ERROR_RETRIES = -1;
-
         [YamlMember(Alias = "aws-access-key-id")]
         public string AwsAccessKeyId { get; set; }
 
@@ -17,7 +14,7 @@ namespace BMSVoiceGen.TextToSpeechProviders.AmazonPolly
         public string AwsRegion { get; set; }
 
         [YamlMember(Alias = "max-error-retries")]
-        public int MaxErrorRetries { get; set; } = DEFAULT_MAX_ERROR_RETRIES;
+        public int MaxErrorRetries { get; set; } = -1;
 
         [YamlMember(Alias = "throttle-retries")]
         public bool ThrottleRetries { get; set; } = false;
@@ -49,8 +46,8 @@ namespace BMSVoiceGen.TextToSpeechProviders.AmazonPolly
         [YamlMember(Alias = "breath-duration")]
         public Duration BreathDuration { get; set; } = Duration.Default;
 
-        [YamlMember(Alias = "sample-rate")]
-        public uint SampleRate { get; set; } = DEFAULT_SAMPLE_RATE;
+        [YamlMember(Alias = "sample-rate-hz")]
+        public uint SampleRateHz { get; set; } = 8000;
 
         [YamlIgnore]
         private static string[] DefaultVoiceIdSet

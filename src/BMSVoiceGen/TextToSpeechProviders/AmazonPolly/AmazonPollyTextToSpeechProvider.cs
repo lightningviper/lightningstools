@@ -32,7 +32,7 @@ namespace BMSVoiceGen.TextToSpeechProviders.AmazonPolly
             var request = new SynthesizeSpeechRequest()
             {
                 OutputFormat = OutputFormat.Pcm,
-                SampleRate = Settings.SampleRate.ToString(),
+                SampleRate = Settings.SampleRateHz.ToString(),
                 Text = GetSSMLForSpeakerText(speakerText),
                 TextType = TextType.Ssml,
                 VoiceId = Settings.VoiceIds[voice]

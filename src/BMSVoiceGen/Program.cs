@@ -3,6 +3,7 @@ using BMSVoiceGen.TextToSpeechProviders;
 using log4net;
 using log4net.Config;
 using System.IO;
+using System.Reflection;
 
 namespace BMSVoiceGen
 {
@@ -16,17 +17,10 @@ namespace BMSVoiceGen
         public static void Main(string[] args)
         {
             XmlConfigurator.Configure();
-            var appSettings = _settingsReader.Read(args[0]);
+            var appSettings = _settingsReader.Read(Path.Combine(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "conf"), "app-settings.yml"));
             var textToSpeechProviderType = appSettings.TextToSpeechProviderType;
-            var textToSpeechProvider = _textToSpeechProviderFactory.CreateTextToSpeechProvider(textToSpeechProviderType, args[1]);
+            var textToSpeechProvider = _textToSpeechProviderFactory.CreateTextToSpeechProvider(textToSpeechProviderType);
             _textToSpeechBatchConverter.GenerateWAVs(appSettings.FragFile, appSettings.CsvFile, appSettings.OutputFolder, textToSpeechProvider, -1);
-        }
-        private static void ValidateArguments(string[] args)
-        {
-            if (args == null || args.Length !=2 || !File.Exists(args[0]) || !File.Exists(args[1]))
-            {
-                Log.Error("invalid command line arguments.");
-            }
         }
     }
 }

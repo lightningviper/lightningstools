@@ -6,7 +6,7 @@ max-error-retries: 5
 throttle-retries: true
 use-nagle-algorithm: true
 rate-of-speech: medium
-sample-rate: 8000
+sample-rate-hz: 8000
 speech-volume: x_loud
 use-dynamic-range-compression: true
 use-auto-breathing: false
