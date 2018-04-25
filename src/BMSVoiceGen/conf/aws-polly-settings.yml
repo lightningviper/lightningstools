@@ -1,0 +1,17 @@
+﻿---
+aws-region: 'us-west-2'
+aws-access-key-id: 'YOUR_AWS_ACCESS_KEY_ID'
+aws-secret-access-key: 'YOUR_AWS_SECRET_ACCESS_KEY'
+max-error-retries: 5
+throttle-retries: true
+use-nagle-algorithm: true
+rate-of-speech: medium
+sample-rate: 8000
+speech-volume: x_loud
+use-dynamic-range-compression: true
+use-auto-breathing: false
+breath-duration: default
+breath-frequency: default
+breath-volume: default
+voice-ids: ['Matthew','Joey','Russell','Brian','Joanna','Geraint','Nicole','Matthew','Joey','Russell','Brian','Geraint','Amy','Brian','Russell']
+...

@@ -1,0 +1,5 @@
+﻿---
+bms-folder: "C:\\Falcon BMS 4.34"
+output-folder: "C:\\TextToSpeech_GeneratedWavs"
+tts-provider: AmazonPolly
+...
