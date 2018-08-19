@@ -368,7 +368,7 @@ namespace Common.InputSupport.DirectInput
                         Prepared = true;
                     }
                 }
-                catch (Exception e)
+                catch 
                 {
                     Prepared = false;
                 }
@@ -446,7 +446,7 @@ namespace Common.InputSupport.DirectInput
                         StateChanged?.Invoke(this, new DIStateChangedEventArgs(_prevState, _state));
                     }
                 }
-                catch (Exception e)
+                catch 
                 {
                     Dispose();
                     Prepared = false;

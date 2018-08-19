@@ -76,7 +76,7 @@ namespace Common.InputSupport.DirectInput
                         return;
                     }
                 }
-                catch (Exception e)
+                catch 
                 {
                     return;
                 }
