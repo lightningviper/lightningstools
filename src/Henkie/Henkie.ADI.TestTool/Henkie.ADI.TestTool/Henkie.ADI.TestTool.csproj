@@ -14,9 +14,6 @@
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sn.key.snk</AssemblyOriginatorKeyFile>
-    <SignManifests>false</SignManifests>
-    <ManifestCertificateThumbprint>9BC2E51DA6445D0A89E35B514B0CF8D5A39D1FB4</ManifestCertificateThumbprint>
-    <ManifestKeyFile>ADITestTool_TemporaryKey.pfx</ManifestKeyFile>
     <ApplicationIcon>aditesttoolicon.ICO</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
