@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -15,7 +16,6 @@ namespace F4Utils.Speech
     public class TlkFile
     {
         private const int TLK_HEADER_SIZE = 12;
-        private const int WAV_HEADER_SIZE = 44;
         private static readonly byte[] TLK_HEADER_FIELD1 = new byte[] {0x68, 0x0a, 0x00, 0x00};
         private static readonly byte[] TLK_HEADER_FIELD2 = new byte[] {0xb4, 0x19, 0x00, 0x00};
         private static readonly byte[] TLK_HEADER_FIELD3 = new byte[] {0x00, 0x00, 0x00, 0x00};
@@ -623,9 +623,16 @@ namespace F4Utils.Speech
             if (compressedBuffer.Length - compressedBufferOffset < wavFileBuffer.Length)
                 Array.Resize(ref compressedBuffer, wavFileBuffer.Length + compressedBufferOffset); //allocate buffers
             int compressedSize;
-            pcmSize = wavFileBuffer.Length - WAV_HEADER_SIZE;
-            compressedSize = codec.Encode(wavFileBuffer, wavFileBufferOffset + WAV_HEADER_SIZE, pcmSize,
-                                          compressedBuffer, compressedBufferOffset); //compress WAV file
+            int dataChunkSizeFieldPosition;
+            using (var stream = new MemoryStream(wavFileBuffer, wavFileBufferOffset, wavFileBufferLength))
+            using (var reader = new BinaryReader(stream))
+            {
+                dataChunkSizeFieldPosition = stream.ScanUntilFound(Encoding.ASCII.GetBytes("data"));
+                pcmSize = reader.ReadInt32();
+            }
+            
+            compressedSize = codec.Encode(wavFileBuffer, dataChunkSizeFieldPosition, pcmSize,
+                                          compressedBuffer, compressedBufferOffset); //compress PCM data
             return compressedSize;
         }
     }

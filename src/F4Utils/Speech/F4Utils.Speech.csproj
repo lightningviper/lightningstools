@@ -95,6 +95,10 @@
     <None Include="sn.key.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{aba9cc75-b778-4e46-a6f6-afec27f2eb59}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SpeexInvoke\SpeexInvoke\SpeexInvoke.csproj">
       <Project>{C19C5F53-4B71-4CAF-830E-4D9226914842}</Project>
       <Name>SpeexInvoke</Name>
