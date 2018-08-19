@@ -2709,12 +2709,14 @@ namespace JoyMapper
                 //physical joystick.  If it's physical, enumerate its controls.
                 foreach (DeviceInstance instance in detectedJoysticks)
                 {
-                    var device = Common.InputSupport.DirectInput.Util.GetDIDevice(instance.InstanceGuid);
+                    var deviceInfo = new DIPhysicalDeviceInfo(instance.InstanceGuid, instance.InstanceName);
+                    var device = DIDeviceMonitor.GetInstance(deviceInfo, this,
+                        VirtualJoystick.MinAnalogDataSourceVal,
+                        VirtualJoystick.MaxAnalogDataSourceVal);
+
 
                     //get the vendor ID and product ID of the current device
-                    var vendorId = device.Properties.VendorId;
-                    var productId = device.Properties.ProductId;
-                    var vendorIdentityProductId = (int)((((long)vendorId << 16)) | ((long)productId));
+                    var vendorIdentityProductId = device.VendorIdentityProductId.HasValue ? device.VendorIdentityProductId.Value: 0;
                     //use the vendor ID/product ID to determine if the device is virtual or physical
                     var isVirtual = false;
                     try
