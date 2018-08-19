@@ -1,13 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{878CBB75-76A7-4B64-88DD-D7B6AA0D4706}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlkTool", "TlkTool.csproj", "{34E420DF-D312-4B00-BA4D-693C2FB51E2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4Utils.Speech", "..\F4Utils\Speech\F4Utils.Speech.csproj", "{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59} = {ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlkToolTest", "TlkToolTest\TlkToolTest.csproj", "{B3ED49B3-ADF0-4987-B20E-B930132912F4}"
 EndProject
@@ -58,6 +61,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA} = {B7784E00-59F6-4165-BD04-21812B45517D}
 		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59} = {7E289F8C-FEDA-4945-8C7D-7F26A12FB887}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {048A1ED5-BC50-4D89-9305-8F1A5067A797}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TlkTool.vsmdi

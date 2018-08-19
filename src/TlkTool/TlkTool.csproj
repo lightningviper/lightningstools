@@ -80,8 +80,12 @@
     <Compile Include="StringLogicalComparer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{aba9cc75-b778-4e46-a6f6-afec27f2eb59}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\F4Utils\Speech\F4Utils.Speech.csproj">
-      <Project>{0CC7A7C4-BD53-4AAC-8AEB-8654672272AA}</Project>
+      <Project>{0cc7a7c4-bd53-4aac-8aeb-8654672272aa}</Project>
       <Name>F4Utils.Speech</Name>
     </ProjectReference>
   </ItemGroup>
