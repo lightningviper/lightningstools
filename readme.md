@@ -123,7 +123,6 @@ _Namespaces_:
     - [Common.MacroProgramming](https://github.com/lightningviper/lightningstools/tree/master/src/Common/MacroProgramming/)  
     - [Common.Math](https://github.com/lightningviper/lightningstools/tree/master/src/Common/Math/)  
     - [Common.Networking](https://github.com/lightningviper/lightningstools/tree/master/src/Common/Networking/)  
-    - [Common.PDF](https://github.com/lightningviper/lightningstools/tree/master/src/Common/PDF/)  
     - [Common.Reflection](https://github.com/lightningviper/lightningstools/tree/master/src/Common/Reflection/)  
     - [Common.Serialization](https://github.com/lightningviper/lightningstools/tree/master/src/Common/Serialization/)  
     - [Common.SimSupport](https://github.com/lightningviper/lightningstools/tree/master/src/Common/SimSupport/)  
