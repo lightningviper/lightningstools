@@ -68,8 +68,9 @@
     <LangVersion>7</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
+      <HintPath>$(SolutionDir)\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Costura, Version=3.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Costura.Fody.3.1.0\lib\net46\Costura.dll</HintPath>
@@ -81,8 +82,9 @@
       <HintPath>$(SolutionDir)\packages\LibUsbDotNet.2.2.10-r112\lib\net45\LibUsbDotNet.LibUsbDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Resourcer, Version=1.7.0.0, Culture=neutral, PublicKeyToken=409b3227471b0f0d, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Resourcer.Fody.1.7.0\lib\net452\Resourcer.dll</HintPath>
+    <Reference Include="Resourcer, Version=1.7.1.0, Culture=neutral, PublicKeyToken=409b3227471b0f0d">
+      <HintPath>$(SolutionDir)\packages\Resourcer.Fody.1.7.1\lib\net452\Resourcer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

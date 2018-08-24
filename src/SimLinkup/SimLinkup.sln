@@ -59,8 +59,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4Utils.PlayerOp", "..\F4Ut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.InputSupport.UI", "..\Common\InputSupport\UI\Common.InputSupport.UI.csproj", "{01ADFC8A-742B-4824-8501-8E0DB931B94F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.PDF", "..\Common\PDF\Common.PDF.csproj", "{5130F409-0E66-4D02-9DE9-7BFB11174C13}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4TexSharedMem", "..\F4TexSharedMem\F4TexSharedMem.csproj", "{E930BA7B-7474-49D7-B7CF-25106C450190}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4Utils.Terrain", "..\F4Utils\Terrain\F4Utils.Terrain.csproj", "{305B6164-1C7D-4627-9774-DB6BD5CF50E8}"
