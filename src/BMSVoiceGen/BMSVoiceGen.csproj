@@ -139,7 +139,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="$(SolutionDir)\packages\AWSSDK.Polly.3.3.4.4\analyzers\dotnet\cs\AWSSDK.Polly.CodeAnalysis.dll" />
+    <Analyzer Include="$(SolutionDir)\packages\AWSSDK.Polly.3.3.7.3\analyzers\dotnet\cs\AWSSDK.Polly.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\F4Utils\Speech\F4Utils.Speech.csproj">
