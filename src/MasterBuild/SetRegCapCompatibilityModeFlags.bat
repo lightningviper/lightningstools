@@ -3,7 +3,7 @@
 SET MASTERBUILDDIR=%~dp0
 CALL %MASTERBUILDDIR%GetVsWhere.bat
 
-for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (
+for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (
   set InstallDir=%%i
 )
 
