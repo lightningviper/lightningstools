@@ -224,9 +224,13 @@ namespace JoyMapper
             for (var i = 0; i < numImages; i++)
             {
                 Image img = imglstImages.Images[i]; //get a reference to the current Image from the control
-                var greyedOut = Common.Imaging.Util.ConvertImageToGreyscale((Bitmap) img);
-                //convert this image to greyscale
-                imglstImages.Images.Add(greyedOut); //add the greyscale version back into the control
+                using (var bmp = new Bitmap(img))
+                {
+                    //convert this image to greyscale
+                    var greyedOut = Common.Imaging.Util.ConvertImageToGreyscale(bmp);
+
+                    imglstImages.Images.Add(greyedOut); //add the greyscale version back into the control
+                }
             }
         }
 
