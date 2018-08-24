@@ -5,19 +5,38 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdf2Img", "Pdf2Img\Pdf2Img.csproj", "{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{04249AD7-EF1D-495F-BB99-ABF60423A483}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Drawing", "..\Common\Drawing\Common.Drawing.csproj", "{5649A340-1475-4116-B5A1-CD21A99387F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Debug|x86.ActiveCfg = Debug|x86
+		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Debug|x86.Build.0 = Debug|x86
 		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Release|x86.ActiveCfg = Release|x86
+		{2D16B3B2-66CA-4BD8-A1EB-5C2AB288F334}.Release|x86.Build.0 = Release|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Debug|x86.ActiveCfg = Debug|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Debug|x86.Build.0 = Debug|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Release|Any CPU.ActiveCfg = Release|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Release|x86.ActiveCfg = Release|x86
+		{5649A340-1475-4116-B5A1-CD21A99387F5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5649A340-1475-4116-B5A1-CD21A99387F5} = {04249AD7-EF1D-495F-BB99-ABF60423A483}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB5D5EE3-05C9-418C-8E86-FB1913B267F3}

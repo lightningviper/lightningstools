@@ -19,7 +19,10 @@ namespace Pdf2Img
         private readonly Lazy<byte[]> _ghostscriptNativeDll;
         private readonly IGhostscriptNativeDllRetriever _ghostscriptNativeDllRetriever;
         private readonly GhostscriptRasterizer _ghostscriptRasterizer;
+        public PdfRasterizerProxy() : this(null, null)
+        {
 
+        }
         internal PdfRasterizerProxy(IGhostscriptNativeDllRetriever ghostscriptNativeDllRetriever = null,
             GhostscriptRasterizer ghostscriptRasterizer = null)
         {
