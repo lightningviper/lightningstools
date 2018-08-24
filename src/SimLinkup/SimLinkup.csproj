@@ -637,10 +637,6 @@
       <Project>{320431c6-2454-4d95-8d3c-d27c8e2288e9}</Project>
       <Name>Common.MacroProgramming</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common\PDF\Common.PDF.csproj">
-      <Project>{5130f409-0e66-4d02-9de9-7bfb11174c13}</Project>
-      <Name>Common.PDF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common\SimSupport\Common.SimSupport.csproj">
       <Project>{275c5e8d-a56a-45d2-8f70-93b0797c2e7b}</Project>
       <Name>Common.SimSupport</Name>

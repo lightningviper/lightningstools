@@ -9,7 +9,6 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using Common.Imaging;
-using Common.PDF;
 using F16CPD.FlightInstruments;
 using F16CPD.FlightInstruments.Pfd;
 using F16CPD.Mfd;
@@ -451,9 +450,12 @@ namespace F16CPD
         {
             if (_currentChecklistFile != null)
             {
-                var numPages = PdfRenderEngine.NumPagesInPdf(_currentChecklistFile.FullName);
-                _currentChecklistPagesTotal = numPages;
-                _currentChecklistPageNum = 1;
+                using (var rasterizer = new Pdf2Img.PdfRasterizerProxy())
+                {
+                    rasterizer.Open(_currentChecklistFile.FullName);
+                    _currentChecklistPagesTotal = rasterizer.PageCount;
+                    _currentChecklistPageNum = 1;
+                }
             }
             else
             {
@@ -481,9 +483,12 @@ namespace F16CPD
         {
             if (_currentChartFile != null)
             {
-                var numPages = PdfRenderEngine.NumPagesInPdf(_currentChartFile.FullName);
-                _currentChartPagesTotal = numPages;
-                _currentChartPageNum = 1;
+                using (var rasterizer = new Pdf2Img.PdfRasterizerProxy())
+                {
+                    rasterizer.Open(_currentChartFile.FullName);
+                    _currentChartPagesTotal = rasterizer.PageCount;
+                    _currentChartPageNum = 1;
+                }
             }
             else
             {
@@ -883,9 +888,11 @@ namespace F16CPD
                     _lastRenderedChecklistPageNum != _currentChecklistPageNum)
                 {
                     Common.Util.DisposeObject(_lastRenderedChecklistPdfPage);
-                    _lastRenderedChecklistPdfPage = PdfRenderEngine.GeneratePageBitmap(_currentChecklistFile.FullName,
-                        _currentChecklistPageNum,
-                        new Size(150, 150));
+                    using (var rasterizer = new Pdf2Img.PdfRasterizerProxy())
+                    {
+                        rasterizer.Open(_currentChecklistFile.FullName);
+                        _lastRenderedChecklistPdfPage = new Bitmap(rasterizer.GetPage(150, 150, _currentChecklistPageNum));
+                    }
                     _lastRenderedChecklistPageNum = _currentChecklistPageNum;
                     _lastRenderedChecklistFile = _currentChecklistFile;
                 }
@@ -959,9 +966,12 @@ namespace F16CPD
                     _lastRenderedChartPageNum != _currentChartPageNum)
                 {
                     Common.Util.DisposeObject(_lastRenderedChartPdfPage);
-                    _lastRenderedChartPdfPage = PdfRenderEngine.GeneratePageBitmap(_currentChartFile.FullName,
-                        _currentChartPageNum,
-                        new Size(150, 150));
+                    using (var rasterizer = new Pdf2Img.PdfRasterizerProxy())
+                    {
+                        rasterizer.Open(_currentChartFile.FullName);
+                        _lastRenderedChartPdfPage = new Bitmap(rasterizer.GetPage(150, 150, _currentChartPageNum));
+                    }
+
                     _lastRenderedChartPageNum = _currentChartPageNum;
                     _lastRenderedChartFile = _currentChartFile;
                 }
