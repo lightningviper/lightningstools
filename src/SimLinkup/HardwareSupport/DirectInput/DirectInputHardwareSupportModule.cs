@@ -70,7 +70,7 @@ namespace SimLinkup.HardwareSupport.DirectInput
             var toReturn = new List<IHardwareSupportModule>();
             try
             {
-                var mediator = new Mediator(Application.OpenForms[0])
+                var mediator = new Mediator(Application.OpenForms.Count == 0 ? null : Application.OpenForms[0])
                 {
                     RaiseEvents = true
                 };

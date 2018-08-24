@@ -55,7 +55,7 @@ namespace MFDExtractor.EventSystem
             {
                 try
                 {
-                    Control mainForm = null;// Application.OpenForms[0];
+                    Control mainForm = Application.OpenForms.Count == 0 ? null : Application.OpenForms[0];
 
                     keyboard = new Keyboard(directInput);
                     keyboard.SetCooperativeLevel(mainForm, CooperativeLevel.Background | CooperativeLevel.Nonexclusive);

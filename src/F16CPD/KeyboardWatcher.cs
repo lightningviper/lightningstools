@@ -41,7 +41,7 @@ namespace F16CPD
                 try
                 {
                     keyboard = new Keyboard(directInput);
-                    keyboard.SetCooperativeLevel(Application.OpenForms[0], CooperativeLevel.Background | CooperativeLevel.Nonexclusive);
+                    keyboard.SetCooperativeLevel(Application.OpenForms.Count ==0 ? null : Application.OpenForms[0], CooperativeLevel.Background | CooperativeLevel.Nonexclusive);
                     keyboard.Properties.BufferSize = 255;
                     keyboard.Acquire();
                     var lastKeyboardState = new bool[Enum.GetValues(typeof(Key)).Length];
