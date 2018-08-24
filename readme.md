@@ -229,7 +229,7 @@ C# class library for interfacing with the PIC Home Cockpit Controller I/O hardwa
 C# class library for interacting with the PPJoy virtual joystick drivers from Deon Van Der Westhuysen.  
 
 [PDF2Img](https://github.com/lightningviper/lightningstools/tree/master/src/PDF2Img/)  
-C# class library for converting PDFs to images.  Uses embedded GhostScript library to perform the conversions.  Intended to replace the functionality in [Common.PDF](https://github.com/lightningviper/lightningstools/tree/master/src/Common/PDF/).  
+C# class library for converting PDFs to images.  Uses embedded GhostScript library to perform the conversions.   
 
 [PhccDeviceManager](https://github.com/lightningviper/lightningstools/tree/master/src/PhccDeviceManager/)  
 End-user GUI application for configuring PHCC motherboard and peripherals.  
