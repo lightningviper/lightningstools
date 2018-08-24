@@ -16,7 +16,6 @@
     <SignManifests>false</SignManifests>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
@@ -582,11 +581,6 @@
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.DirectX.9c">
-      <Visible>False</Visible>
-      <ProductName>Microsoft DirectX 9c Runtime</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>

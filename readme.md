@@ -64,10 +64,7 @@ The above command will clone the repository to a local folder, `\lightningstools
 The following prerequisites will be installed:  
 - Visual Studio 2017 Community Edition  
 - Visual Studio Installer Project add-in  
-- DirectX SDK (June 2010)  
-- .NET Framework 3.5 SP1 (required for Managed DirectX)  
 - .NET Framework 4.6.1 (required by all projects)  
-- C++ runtimes.  
 - Command-line Build tools  
   
 The above command will also restore all required NuGet packages for all projects and solutions in the repository.
