@@ -116,7 +116,7 @@ namespace Common.UI.Screen
                 formToOpen.Cursor = Cursors.Default;
             }
             formToOpen.Size = size;
-            formToOpen.Owner = Application.OpenForms[0];
+            formToOpen.Owner = Application.OpenForms.Count == 0 ? null : Application.OpenForms[0];
             if (hideFromTaskBar)
             {
                 formToOpen.ShowInTaskbar = false;
