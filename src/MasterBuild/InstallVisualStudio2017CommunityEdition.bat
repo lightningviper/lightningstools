@@ -5,7 +5,7 @@ IF NOT EXIST "%MASTERBUILDDIR%vs_community.exe" bitsadmin /transfer VisualStudio
 
 IF ERRORLEVEL 1 GOTO END
 ECHO Installing Visual Studio 2017 Community Edition...
-"%MASTERBUILDDIR%vs_community.exe" --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended --includeOptional --passive --wait --norestart
+"%MASTERBUILDDIR%vs_community.exe" --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NativeDesktop --passive --wait --norestart
 
 :END
 
