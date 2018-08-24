@@ -51,6 +51,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>7</LangVersion>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -68,6 +69,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>7</LangVersion>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DemoBits.cs" />
