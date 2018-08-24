@@ -179,6 +179,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.FuelFlow", "..\Henki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.QuadSinCos", "..\Henkie\Henkie.QuadSinCos\Henkie.QuadSinCos.csproj", "{B8254151-27D0-4471-A3B5-DF84BDD24B77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMSVoiceGen", "..\BMSVoiceGen\BMSVoiceGen.csproj", "{CD004B3C-72AF-4FEE-9519-44CA80D5375E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -462,6 +464,10 @@ Global
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77}.Debug|x86.Build.0 = Debug|x86
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77}.Release|x86.ActiveCfg = Release|x86
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77}.Release|x86.Build.0 = Release|x86
+		{CD004B3C-72AF-4FEE-9519-44CA80D5375E}.Debug|x86.ActiveCfg = Debug|x86
+		{CD004B3C-72AF-4FEE-9519-44CA80D5375E}.Debug|x86.Build.0 = Debug|x86
+		{CD004B3C-72AF-4FEE-9519-44CA80D5375E}.Release|x86.ActiveCfg = Release|x86
+		{CD004B3C-72AF-4FEE-9519-44CA80D5375E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
