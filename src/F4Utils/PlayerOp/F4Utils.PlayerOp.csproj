@@ -59,8 +59,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Costura, Version=3.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Costura.Fody.3.1.0\lib\net46\Costura.dll</HintPath>
+    <Reference Include="Costura, Version=3.1.6.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Costura.Fody.3.1.6\lib\net46\Costura.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -69,11 +69,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\packages\Fody.3.1.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.3.1.4\build\Fody.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\Costura.Fody.3.1.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Costura.Fody.3.1.0\build\Costura.Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\Fody.3.2.17\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.3.2.17\build\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\Costura.Fody.3.1.6\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Costura.Fody.3.1.6\build\Costura.Fody.props'))" />
   </Target>
-  <Import Project="$(SolutionDir)\packages\Fody.3.1.4\build\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.3.1.4\build\Fody.targets')" />
-  <Import Project="$(SolutionDir)\packages\Costura.Fody.3.1.0\build\Costura.Fody.targets" Condition="Exists('$(SolutionDir)\packages\Costura.Fody.3.1.0\build\Costura.Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\Fody.3.2.17\build\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.3.2.17\build\Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\Costura.Fody.3.1.6\build\Costura.Fody.props" Condition="Exists('$(SolutionDir)\packages\Costura.Fody.3.1.6\build\Costura.Fody.props')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
