@@ -70,6 +70,9 @@
     <Prefer32Bit>true</Prefer32Bit>
     <LangVersion>7</LangVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
       <HintPath>$(SolutionDir)\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
