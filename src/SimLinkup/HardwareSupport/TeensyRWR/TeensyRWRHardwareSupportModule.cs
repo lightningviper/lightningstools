@@ -22,11 +22,13 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const Parity PARITY = Parity.None;
         private const StopBits STOP_BITS = StopBits.One;
         private const Handshake HANDSHAKE = Handshake.None;
-        private const int WRITE_BUFFER_SIZE = 64*1024;
+        private const int WRITE_BUFFER_SIZE = 8*1024;
         private const int SERIAL_WRITE_TIMEOUT = 500;
         private const int MAX_UPDATE_FREQUENCY_HZ = 20;
-
-        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer() { ActualWidth = 4095, ActualHeight = 4095 };
+        private const int VIEWBOX_WIDTH = 4095;
+        private const int VIEWBOX_HEIGHT = 4095;
+        private const bool USE_VECTOR_FONT = true;
+        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer() { ActualWidth = VIEWBOX_WIDTH, ActualHeight = VIEWBOX_HEIGHT };
         private BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
 
         //limits exceptions when we don't have the RWR plugged into the serial port
@@ -111,7 +113,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override void Render(Graphics g, Rectangle destinationRectangle)
         {
             var instrumentState = GetInstrumentState();
-            _uiRenderer.Render(g, destinationRectangle, instrumentState);
+            _uiRenderer.Render(g, destinationRectangle, instrumentState, USE_VECTOR_FONT);
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -516,8 +518,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var instrumentState = GetInstrumentState();
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
-            drawingContext.PushTransform(new RotateTransform(_config.RotationDegrees, 2047, 2047));
-            _drawingCommandRenderer.Render(drawingContext, instrumentState);
+            drawingContext.PushTransform(new RotateTransform(_config.RotationDegrees, VIEWBOX_WIDTH /2.0, VIEWBOX_HEIGHT/2.0));
+            _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
             drawingContext.Close();
             return ShortenFloats(PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString());
         }

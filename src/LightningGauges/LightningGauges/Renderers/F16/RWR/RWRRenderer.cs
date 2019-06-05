@@ -21,8 +21,10 @@ namespace LightningGauges.Renderers.F16.RWR
         public double ActualHeight { get; set; } = 300;
         protected double offsetX = 0;
         protected double offsetY = 0;
-        protected double BigFontSize { get { return (30.0 / 300.0) * ActualHeight; } }
-        protected double SmallFontSize { get { return(20.0 / 300.0) * ActualHeight; } }
+        protected double BigFontSize { get { return 0.00375 * ActualHeight; } }
+        protected double SmallFontSize { get { return 0.0025 * ActualHeight; } }
+        protected double BigFontVectorScale { get { return 0.00375 * ActualHeight; } }
+        protected double SmallFontVectorScale { get { return 0.0025 * ActualHeight; } }
         protected double BigFontVOffset { get { return(2.0 /300.0)*ActualHeight;}}
         protected double SmallFontVOffset { get { return(1.0 /300.0)*ActualHeight;}}
         protected SolidColorBrush brush { get { return new SolidColorBrush(Color.FromRgb(5, 248, 7)); } }
@@ -31,7 +33,7 @@ namespace LightningGauges.Renderers.F16.RWR
 			FontStyles.Normal,
             FontWeights.Normal,
             FontStretches.Normal);
-
+        public bool UseVectorFont { get; set; }
         public InstrumentState InstrumentState { get; set; } = new InstrumentState();
         public virtual void Render(DrawingContext drawingContext){}
         public override void Render(Common.Drawing.Graphics destinationGraphics, Common.Drawing.Rectangle destinationRectangle)
@@ -131,8 +133,12 @@ namespace LightningGauges.Renderers.F16.RWR
 
             drawingContext.DrawArc(pen, null, new Rect(ConvertXPos(x - radius + offsetX), ConvertYPos(y + radius + offsetY), ConvertLen(radius) * 2d, ConvertLen(radius) * 2d), start, stop);
         }
-
         protected double TextHeight(bool big)
+        {
+            return UseVectorFont ? TextHeightVectorFont(big) : TextHeightTrueTypeFont(big);
+        }
+
+        protected double TextHeightTrueTypeFont(bool big)
         {
             double fontSize;
 
@@ -148,7 +154,20 @@ namespace LightningGauges.Renderers.F16.RWR
             return (fontSize * 0.85) / (ActualHeight / 2.0);
         }
 
+        protected double TextHeightVectorFont(bool big)
+        
+        {
+            double height = (VectorStrokeFont.MaxCharacterHeight(big ? BigFontVectorScale : SmallFontVectorScale));
+            if (ActualHeight > 0)
+                return height/ (ActualHeight / 2);
+            else return 0;
+        }
+
         protected double TextWidth(string text, bool big)
+        {
+            return UseVectorFont ? TextWidthVectorFont(text, big) : TextWidthTrueTypeFont(text, big);
+        }
+        protected double TextWidthTrueTypeFont(string text, bool big)
         {
             double fontSize;
 
@@ -171,8 +190,21 @@ namespace LightningGauges.Renderers.F16.RWR
 
             return width / (ActualWidth / 2.0);
         }
-
-        protected void DrawTextCenteredVertival(DrawingContext drawingContext, string text, double x, double y, bool big)
+        protected double TextWidthVectorFont(string text, bool big)
+        {
+            double width=VectorStrokeFont.GetStringWidth(text, big ? BigFontVectorScale : SmallFontVectorScale);
+            if (ActualWidth > 0)
+                return width / (ActualWidth / 2.0);
+            else return 0;
+        }
+        protected void DrawTextCenteredVertical(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            if (UseVectorFont)
+                DrawTextCenteredVerticalVectorFont(drawingContext, text, x, y, big);
+            else
+                DrawTextCenteredVerticalTrueTypeFont(drawingContext, text, x, y, big);
+        }
+        protected void DrawTextCenteredVerticalTrueTypeFont(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
             double fontSize, vOffset;
 
@@ -207,8 +239,38 @@ namespace LightningGauges.Renderers.F16.RWR
                 fontSize, brush),
                 new Point(x - (width / 2.0), y - (height / 2.0) + vOffset));
         }
+        protected void DrawTextCenteredVerticalVectorFont(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            Pen pen = new Pen();
+            pen.Thickness = 2;
+            pen.Brush = brush;
 
+            double vOffset;
+
+            x = ConvertXPos(x + offsetX);
+            y = ConvertYPos(y + offsetY);
+
+            if (big)
+            {
+                vOffset = BigFontVOffset;
+            }
+            else
+            {
+                vOffset = SmallFontVOffset;
+            }
+
+            double width = VectorStrokeFont.GetStringWidth(text, (big ? BigFontVectorScale : SmallFontVectorScale));
+            double height =VectorStrokeFont.GetStringHeight(text, (big ? BigFontVectorScale : SmallFontVectorScale));
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - (width / 2.0), y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+        }
         protected void DrawTextCenter(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            if (UseVectorFont)
+                DrawTextCenteredVerticalVectorFont(drawingContext, text, x, y, big);
+            else
+                DrawTextCenteredVerticalTrueTypeFont(drawingContext, text, x, y, big);
+        }
+        protected void DrawTextCenterTrueTypeFont(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
             double fontSize, vOffset;
 
@@ -218,12 +280,12 @@ namespace LightningGauges.Renderers.F16.RWR
             if (big)
             {
                 fontSize = BigFontSize;
-                vOffset = BigFontVOffset*2;
+                vOffset = BigFontVOffset * 2;
             }
             else
             {
                 fontSize = SmallFontSize;
-                vOffset = SmallFontVOffset *2;
+                vOffset = SmallFontVOffset * 2;
             }
 
             FormattedText ft = new FormattedText(text,
@@ -243,8 +305,38 @@ namespace LightningGauges.Renderers.F16.RWR
                 fontSize, brush),
                 new Point(x - (width / 2.0), y - (fontSize * 0.5) + vOffset));
         }
+       protected void DrawTextCenterVectorFont(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            Pen pen = new Pen();
+            pen.Thickness = 2;
+            pen.Brush = brush;
 
+            double vOffset;
+
+            x = ConvertXPos(x + offsetX);
+            y = ConvertYPos(y + offsetY);
+
+            if (big)
+            {
+                vOffset = BigFontVOffset*2;
+            }
+            else
+            {
+                vOffset = SmallFontVOffset *2;
+            }
+
+            double width = VectorStrokeFont.GetStringWidth(text, big ? BigFontVectorScale : SmallFontVectorScale);
+            double height = VectorStrokeFont.GetStringHeight(text, big ? BigFontVectorScale : SmallFontVectorScale);
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - (width / 2.0), y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+        }
         protected void DrawTextLeft(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            if (UseVectorFont)
+                DrawTextLeftVectorFont(drawingContext, text, x, y, big);
+            else
+                DrawTextLeftTrueTypeFont(drawingContext, text, x, y, big);
+        }
+        protected void DrawTextLeftTrueTypeFont(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
             double fontSize, vOffset;
 
@@ -254,12 +346,12 @@ namespace LightningGauges.Renderers.F16.RWR
             if (big)
             {
                 fontSize = BigFontSize;
-                vOffset = BigFontVOffset *2;
+                vOffset = BigFontVOffset * 2;
             }
             else
             {
                 fontSize = SmallFontSize;
-                vOffset = SmallFontVOffset *2;
+                vOffset = SmallFontVOffset * 2;
             }
 
             FormattedText ft = new FormattedText(text,
@@ -279,8 +371,38 @@ namespace LightningGauges.Renderers.F16.RWR
                 fontSize, brush),
                 new Point(x, y - (fontSize * 0.5) + vOffset));
         }
+        protected void DrawTextLeftVectorFont(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            Pen pen = new Pen();
+            pen.Thickness = 2;
+            pen.Brush = brush;
 
+            double vOffset;
+
+            x = ConvertXPos(x + offsetX);
+            y = ConvertYPos(y + offsetY);
+
+            if (big)
+            {
+                vOffset = BigFontVOffset *2;
+            }
+            else
+            {
+                vOffset = SmallFontVOffset *2;
+            }
+
+            double width = VectorStrokeFont.GetStringWidth(text, big ? BigFontVectorScale : SmallFontVectorScale);
+            double height = VectorStrokeFont.GetStringHeight(text, big ? BigFontVectorScale : SmallFontVectorScale);
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x, y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+        }
         protected void DrawTextRight(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            if (UseVectorFont)
+                DrawTextRightVectorFont(drawingContext, text, x, y, big);
+            else
+                DrawTextRightTrueTypeFont(drawingContext, text, x, y, big);
+        }
+        protected void DrawTextRightTrueTypeFont(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
             double fontSize, vOffset;
 
@@ -290,12 +412,12 @@ namespace LightningGauges.Renderers.F16.RWR
             if (big)
             {
                 fontSize = BigFontSize;
-                vOffset = BigFontVOffset *2;
+                vOffset = BigFontVOffset * 2;
             }
             else
             {
                 fontSize = SmallFontSize;
-                vOffset = SmallFontVOffset *2;
+                vOffset = SmallFontVOffset * 2;
             }
 
             FormattedText ft = new FormattedText(text,
@@ -316,6 +438,30 @@ namespace LightningGauges.Renderers.F16.RWR
                 new Point(x - width, y - (fontSize * 0.5) + vOffset));
         }
 
+        protected void DrawTextRightVectorFont(DrawingContext drawingContext, string text, double x, double y, bool big)
+        {
+            Pen pen = new Pen();
+            pen.Thickness = 2;
+            pen.Brush = brush;
 
+            double vOffset;
+
+            x = ConvertXPos(x + offsetX);
+            y = ConvertYPos(y + offsetY);
+
+            if (big)
+            {
+                vOffset = BigFontVOffset *2;
+            }
+            else
+            {
+                vOffset = SmallFontVOffset *2;
+            }
+
+            double width = VectorStrokeFont.GetStringWidth(text, big ? BigFontVectorScale : SmallFontVectorScale);
+            double height = VectorStrokeFont.GetStringHeight(text, big ? BigFontVectorScale : SmallFontVectorScale);
+
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - width, y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+        }
     }
 }

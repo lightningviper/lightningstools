@@ -8,7 +8,7 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
     public class RWRScopeALR93Renderer : RWRRenderer
     {
         private enum RWRSymbol { Hat, Diamond, Lethal, MissileActivity, MissileLaunch };
-        
+
         private const int BASELINE_CYCLE_TIME_ALR93 = 500;
         private const int CYCLE_TIME_PER_CONTACT_ALR93 = 50;
         private int flipFactor = 1;
@@ -109,63 +109,63 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
             }
 
             if (RwrInfoContains("nnlbl"))
-		    {
-                DrawTextCenteredVertival(drawingContext, "NN", 0, -TextHeight(false) * 2, false);
-		    }
+            {
+                DrawTextCenteredVertical(drawingContext, "NN", 0, -TextHeight(false) * 2, false);
+            }
             else if (RwrInfoContains("onlbl"))
-		    {
-                DrawTextCenteredVertival(drawingContext, "ON", 0, -TextHeight(false) * 2, false);
-		    }
+            {
+                DrawTextCenteredVertical(drawingContext, "ON", 0, -TextHeight(false) * 2, false);
+            }
 
             if (RwrInfoContains("albl"))
             {
-                DrawTextCenteredVertival(drawingContext, "A", -TextWidth("M", false), 1 - TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "A", -TextWidth("M", false), 1 - TextHeight(false), false);
             }
 
             if (RwrInfoContains("slbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "S", -TextWidth("M", false), 1 - TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "S", -TextWidth("M", false), 1 - TextHeight(false), false);
             }
 
             if (RwrInfoContains("clbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "C", -TextWidth("M", false), 1 - TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "C", -TextWidth("M", false), 1 - TextHeight(false), false);
             }
 
             if (RwrInfoContains("dlbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "D", -TextWidth("M", false), 1 - TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "D", -TextWidth("M", false), 1 - TextHeight(false), false);
             }
 
             if (RwrInfoContains("mlbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "M", -TextWidth("M", false), 1 - TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "M", -TextWidth("M", false), 1 - TextHeight(false), false);
             }
 
             if (RwrInfoContains("elbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "E", TextWidth("M", false), 1 - TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "E", TextWidth("M", false), 1 - TextHeight(false), false);
             }
 
             if (RwrInfoContains("mltlbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "MLT", 0, -1 + TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "MLT", 0, -1 + TextHeight(false), false);
             }
 
             if (RwrInfoContains("fcrlbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "FCR", 0, -1 + TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "FCR", 0, -1 + TextHeight(false), false);
             }
 
             if (RwrInfoContains("tfrlbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "TFR", 0, -1 + TextHeight(false), false);
+                DrawTextCenteredVertical(drawingContext, "TFR", 0, -1 + TextHeight(false), false);
             }
 
             if (RwrInfoContains("falbl"))
             {
-                DrawTextCenteredVertival(drawingContext, "F", -0.99 + TextWidth("M", false), 0 - (TextHeight(false) / 2), false);
-                DrawTextCenteredVertival(drawingContext, "A", -0.99 + TextWidth("M", false), 0 + (TextHeight(false) / 2), false);
+                DrawTextCenteredVertical(drawingContext, "F", -0.99 + TextWidth("M", false), 0 - (TextHeight(false) / 2), false);
+                DrawTextCenteredVertical(drawingContext, "A", -0.99 + TextWidth("M", false), 0 + (TextHeight(false) / 2), false);
             }
 
         }
@@ -174,7 +174,7 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
         {
             for (int i = 0; i < rwrInfo.Length; i++)
             {
-                if(rwrInfo[i].StartsWith(key + ">")) return true;
+                if (rwrInfo[i].StartsWith(key + ">")) return true;
             }
 
             return false;
@@ -290,78 +290,78 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
             double scale = big ? 1.5 : 1;
 
             double[,] basicAir = {
-		        {0.090F,-0.030F},
-		        {0.000F,0.060F},
-		        {0.000F,0.010F},
-		        {0.090F,-0.030F},
-		        {-0.090F,-0.030F},
-		        {0.000F,0.010F},
-		        {0.000F,0.060F},
-		        {-0.090F,-0.030F}};
+                {0.090F,-0.030F},
+                {0.000F,0.060F},
+                {0.000F,0.010F},
+                {0.090F,-0.030F},
+                {-0.090F,-0.030F},
+                {0.000F,0.010F},
+                {0.000F,0.060F},
+                {-0.090F,-0.030F}};
 
-	        double[,] advAir =  {
-		        {0.000F,0.090F},
-		        {0.090F,-0.010F},
-		        {0.090F,-0.010F},
-		        {0.030F,0.010F},
-		        {0.030F,0.010F},
-		        {0.000F,-0.060F},
-		        {0.000F,-0.060F},
-		        {-0.030F,0.010F},
-		        {-0.030F,0.010F},
-		        {-0.090F,-0.010F},
-		        {-0.090F,-0.010F},
-		        {0.000F,0.090F}};
+            double[,] advAir =  {
+                {0.000F,0.090F},
+                {0.090F,-0.010F},
+                {0.090F,-0.010F},
+                {0.030F,0.010F},
+                {0.030F,0.010F},
+                {0.000F,-0.060F},
+                {0.000F,-0.060F},
+                {-0.030F,0.010F},
+                {-0.030F,0.010F},
+                {-0.090F,-0.010F},
+                {-0.090F,-0.010F},
+                {0.000F,0.090F}};
 
-	        double[,] theBoat = {
-		        {-0.060F,-0.040F},
-		        {-0.080F,0.000F},
-		        {-0.080F,0.000F},
-		        {-0.030F,0.000F},
-		        {-0.030F,0.000F},
-		        {-0.030F,0.040F},
-		        {-0.030F,0.040F},
-		        {0.030F,0.040F},
-		        {0.030F,0.040F},
-		        {0.030F,0.000F},
-		        {0.030F,0.000F},
-		        {0.060F,0.000F},
-		        {0.060F,0.000F},
-		        {0.060F,-0.040F},
-		        {0.060F,-0.040F},
-		        {-0.060F,-0.040F}};
+            double[,] theBoat = {
+                {-0.060F,-0.040F},
+                {-0.080F,0.000F},
+                {-0.080F,0.000F},
+                {-0.030F,0.000F},
+                {-0.030F,0.000F},
+                {-0.030F,0.040F},
+                {-0.030F,0.040F},
+                {0.030F,0.040F},
+                {0.030F,0.040F},
+                {0.030F,0.000F},
+                {0.030F,0.000F},
+                {0.060F,0.000F},
+                {0.060F,0.000F},
+                {0.060F,-0.040F},
+                {0.060F,-0.040F},
+                {-0.060F,-0.040F}};
 
-	        double[,] theSearch = {
-		        {0.000F,-0.050F},
-		        {0.000F,0.038F},
-		        {-0.024F,-0.050F},
-		        {0.024F,-0.050F},
-		        {0.014F,0.054F},
-		        {-0.016F,0.020F},
-		        {0.014F,0.054F},
-		        {0.024F,0.090F},
-		        {-0.054F,0.010F},
-		        {-0.016F,0.020F}};
+            double[,] theSearch = {
+                {0.000F,-0.050F},
+                {0.000F,0.038F},
+                {-0.024F,-0.050F},
+                {0.024F,-0.050F},
+                {0.014F,0.054F},
+                {-0.016F,0.020F},
+                {0.014F,0.054F},
+                {0.024F,0.090F},
+                {-0.054F,0.010F},
+                {-0.016F,0.020F}};
 
-	        double[,] theSam = {
-		        {-0.056F,0.060F},
-		        {-0.096F,-0.074F},
-		        {-0.056F,0.060F},
-		        {-0.078F,0.028F},
-		        {-0.056F,0.060F},
-		        {-0.054F,0.020F}};
+            double[,] theSam = {
+                {-0.056F,0.060F},
+                {-0.096F,-0.074F},
+                {-0.056F,0.060F},
+                {-0.078F,0.028F},
+                {-0.056F,0.060F},
+                {-0.054F,0.020F}};
 
-	        double[,] theAAA = {
-		        {-0.098F,0.038F},
-		        {-0.098F,-0.100F},
-		        {-0.098F,0.038F},
-		        {0.098F,0.038F},
-		        {0.098F,-0.100F},
-		        {0.098F,0.038F},
-		        {-0.098F,0.038F},
-		        {0.098F,0.098F},
-		        {0.098F,-0.100F},
-		        {-0.098F,-0.100F}};
+            double[,] theAAA = {
+                {-0.098F,0.038F},
+                {-0.098F,-0.100F},
+                {-0.098F,0.038F},
+                {0.098F,0.038F},
+                {0.098F,-0.100F},
+                {0.098F,0.038F},
+                {-0.098F,0.038F},
+                {0.098F,0.098F},
+                {0.098F,-0.100F},
+                {-0.098F,-0.100F}};
 
             if (symbol >= 0)
             {
@@ -379,74 +379,74 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                      */
                     case ThreatSymbols.RWRSYM_ACTIVE_MISSILE:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        DrawTextCenteredVertival(drawingContext, "AM", x, y, big);
+                        DrawTextCenteredVertical(drawingContext, "AM", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_HAWK:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        DrawTextCenteredVertival(drawingContext, " MQ", x, y, big);
+                        DrawTextCenteredVertical(drawingContext, " MQ", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_PATRIOT:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " PT", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " PT", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "P", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "P", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_SA2:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " 2T", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " 2T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "2", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "2", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_SA3:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " 3T", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " 3T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "3", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "3", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_SA4:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " 4T", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " 4T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "4", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "4", x, y, big);
                         break;
                     /*
                     case ThreatSymbols.RWRSYM_SA5:
@@ -454,56 +454,56 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                      */
                     case ThreatSymbols.RWRSYM_SA6:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " 6T", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " 6T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "6", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "6", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_SA8:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " 8T", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " 8T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "8", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "8", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_SA9:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " 9T", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " 9T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "9", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "9", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_SA10:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        DrawTextCenteredVertival(drawingContext, " 10", x, y, big);
+                        DrawTextCenteredVertical(drawingContext, " 10", x, y, big);
                         break;
                     /*
                     case ThreatSymbols.RWRSYM_SA13:
@@ -511,7 +511,7 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                      */
                     case ThreatSymbols.RWRSYM_AAA:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theAAA.Length / 2; )
+                        for (int i = 1; i < theAAA.Length / 2;)
                         {
                             DrawLine(drawingContext, theAAA[i, 0] * scale, theAAA[i, 1] * scale, theAAA[i - 1, 0] * scale, theAAA[i - 1, 1] * scale);
                             i++;
@@ -524,25 +524,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3T", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4T", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                             }
                         }
@@ -551,32 +551,32 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                             }
                         }
                         break;
                     case ThreatSymbols.RWRSYM_SEARCH:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSearch.Length / 2; )
+                        for (int i = 1; i < theSearch.Length / 2;)
                         {
                             DrawLine(drawingContext, theSearch[i, 0] * scale, theSearch[i, 1] * scale, theSearch[i - 1, 0] * scale, theSearch[i - 1, 1] * scale);
                             i++;
@@ -587,87 +587,87 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         switch (band)
                         {
                             case 'E':
-                                DrawTextCenteredVertival(drawingContext, "1", x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, "1", x + 0.07, y + 0.02f, big);
                                 break;
                             case 'F':
-                                DrawTextCenteredVertival(drawingContext, "1", x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, "1", x + 0.07, y + 0.02f, big);
                                 break;
                             case 'G':
-                                DrawTextCenteredVertival(drawingContext, "2", x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, "2", x + 0.07, y + 0.02f, big);
                                 break;
                             case 'H':
-                                DrawTextCenteredVertival(drawingContext, "2", x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, "2", x + 0.07, y + 0.02f, big);
                                 break;
                             case 'I':
-                                DrawTextCenteredVertival(drawingContext, "3", x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, "3", x + 0.07, y + 0.02f, big);
                                 break;
                             case 'J':
-                                DrawTextCenteredVertival(drawingContext, "4", x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, "4", x + 0.07, y + 0.02f, big);
                                 break;
                             default:
-                                DrawTextCenteredVertival(drawingContext, "1", x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, "1", x + 0.07, y + 0.02f, big);
                                 break;
                         }
                         break;
                     case ThreatSymbols.RWRSYM_NAVAL:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " FT", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " FT", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "F", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "F", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_CHAPARAL:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " CT", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " CT", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "C", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "C", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_SA15:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(locked == '1')
-                            DrawTextCenteredVertival(drawingContext, " 5T", x, y, big);
+                        if (locked == '1')
+                            DrawTextCenteredVertical(drawingContext, " 5T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "5", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "5", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_NIKE:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " NT", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " NT", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "N", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "N", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_A1:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theAAA.Length / 2; )
+                        for (int i = 1; i < theAAA.Length / 2;)
                         {
                             DrawLine(drawingContext, theAAA[i, 0] * scale, theAAA[i, 1] * scale, theAAA[i - 1, 0] * scale, theAAA[i - 1, 1] * scale);
                             i++;
@@ -680,25 +680,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3T", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4T", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                             }
                         }
@@ -707,32 +707,32 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                             }
                         }
                         break;
                     case ThreatSymbols.RWRSYM_A2:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theAAA.Length / 2; )
+                        for (int i = 1; i < theAAA.Length / 2;)
                         {
                             DrawLine(drawingContext, theAAA[i, 0] * scale, theAAA[i, 1] * scale, theAAA[i - 1, 0] * scale, theAAA[i - 1, 1] * scale);
                             i++;
@@ -745,25 +745,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3T", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4T", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                             }
                         }
@@ -772,32 +772,32 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                             }
                         }
                         break;
                     case ThreatSymbols.RWRSYM_A3:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theAAA.Length / 2; )
+                        for (int i = 1; i < theAAA.Length / 2;)
                         {
                             DrawLine(drawingContext, theAAA[i, 0] * scale, theAAA[i, 1] * scale, theAAA[i - 1, 0] * scale, theAAA[i - 1, 1] * scale);
                             i++;
@@ -810,25 +810,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3T", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4T", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04f, big);
                                     break;
                             }
                         }
@@ -837,25 +837,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04f, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "3", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "3", x, y - 0.04f, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "4", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "4", x, y - 0.04f, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04f, big);
+                                    DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04f, big);
                                     break;
                             }
                         }
@@ -870,25 +870,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         switch (band)
                         {
                             case 'E':
-                                DrawTextCenteredVertival(drawingContext, "11", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "11", x, y, big);
                                 break;
                             case 'F':
-                                DrawTextCenteredVertival(drawingContext, "11", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "11", x, y, big);
                                 break;
                             case 'G':
-                                DrawTextCenteredVertival(drawingContext, "12", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "12", x, y, big);
                                 break;
                             case 'H':
-                                DrawTextCenteredVertival(drawingContext, "12", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "12", x, y, big);
                                 break;
                             case 'I':
-                                DrawTextCenteredVertival(drawingContext, "13", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "13", x, y, big);
                                 break;
                             case 'J':
-                                DrawTextCenteredVertival(drawingContext, "14", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "14", x, y, big);
                                 break;
                             default:
-                                DrawTextCenteredVertival(drawingContext, "1", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "1", x, y, big);
                                 break;
                         }
                         break;
@@ -896,25 +896,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         switch (band)
                         {
                             case 'E':
-                                DrawTextCenteredVertival(drawingContext, "11", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "11", x, y, big);
                                 break;
                             case 'F':
-                                DrawTextCenteredVertival(drawingContext, "11", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "11", x, y, big);
                                 break;
                             case 'G':
-                                DrawTextCenteredVertival(drawingContext, "12", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "12", x, y, big);
                                 break;
                             case 'H':
-                                DrawTextCenteredVertival(drawingContext, "12", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "12", x, y, big);
                                 break;
                             case 'I':
-                                DrawTextCenteredVertival(drawingContext, "13", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "13", x, y, big);
                                 break;
                             case 'J':
-                                DrawTextCenteredVertival(drawingContext, "14", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "14", x, y, big);
                                 break;
                             default:
-                                DrawTextCenteredVertival(drawingContext, "1", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "1", x, y, big);
                                 break;
                         }
                         break;
@@ -922,48 +922,48 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         switch (band)
                         {
                             case 'E':
-                                DrawTextCenteredVertival(drawingContext, "11", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "11", x, y, big);
                                 break;
                             case 'F':
-                                DrawTextCenteredVertival(drawingContext, "11", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "11", x, y, big);
                                 break;
                             case 'G':
-                                DrawTextCenteredVertival(drawingContext, "12", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "12", x, y, big);
                                 break;
                             case 'H':
-                                DrawTextCenteredVertival(drawingContext, "12", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "12", x, y, big);
                                 break;
                             case 'I':
-                                DrawTextCenteredVertival(drawingContext, "13", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "13", x, y, big);
                                 break;
                             case 'J':
-                                DrawTextCenteredVertival(drawingContext, "14", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "14", x, y, big);
                                 break;
                             default:
-                                DrawTextCenteredVertival(drawingContext, "1", x, y, big);
+                                DrawTextCenteredVertical(drawingContext, "1", x, y, big);
                                 break;
                         }
                         break;
                     case ThreatSymbols.RWRSYM_KSAM:
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " CT", x, y, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, " CT", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "C", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, "C", x, y, big);
                         break;
                     case ThreatSymbols.RWRSYM_V4:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "4T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "4T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "4", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "4", x, y - 0.04, big);
                         break;
                     /*
                     case ThreatSymbols.RWRSYM_V5:
@@ -977,17 +977,17 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                      */
                     case ThreatSymbols.RWRSYM_V16:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "6T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "6T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "6", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "6", x, y - 0.04, big);
                         break;
                     case ThreatSymbols.RWRSYM_V18:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "8T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "8T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "8", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "8", x, y - 0.04, big);
                         break;
                     /*
                     case ThreatSymbols.RWRSYM_V19:
@@ -997,45 +997,45 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                      */
                     case ThreatSymbols.RWRSYM_V21:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "1T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "1T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "1", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "1", x, y - 0.04, big);
                         break;
                     case ThreatSymbols.RWRSYM_V22:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "2T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "2T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "2", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "2", x, y - 0.04, big);
                         break;
                     case ThreatSymbols.RWRSYM_V23:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "3T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "3T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "3", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "3", x, y - 0.04, big);
                         break;
                     case ThreatSymbols.RWRSYM_V25:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "5T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "5T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "5", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "5", x, y - 0.04, big);
                         break;
                     case ThreatSymbols.RWRSYM_V27:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "7T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "7T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "7", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "7", x, y - 0.04, big);
                         break;
                     case ThreatSymbols.RWRSYM_V29:
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
-                        if(tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, "9T", x, y - 0.04, big);
+                        if (tracking == '1')
+                            DrawTextCenteredVertical(drawingContext, "9T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, "9", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, "9", x, y - 0.04, big);
                         break;
                     /*
                     case ThreatSymbols.RWRSYM_V30:
@@ -1082,9 +1082,9 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             {
                                 DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
                                 if (tracking == '1')
-                                    DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString() + "T", x, y - 0.04, big);
+                                    DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant() + "T", x, y - 0.04, big);
                                 else
-                                    DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y - 0.04, big);
+                                    DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y - 0.04, big);
                             }
                             else if (customSymbol == '2')
                             {
@@ -1097,9 +1097,9 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                                 }
                                 ZeroDisplayOrigin();
                                 if (tracking == '1')
-                                    DrawTextCenteredVertival(drawingContext, " " + ((char)symbol).ToString() + "T", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, " " + ((char)symbol).ToString() + "T", x, y, big);
                                 else
-                                    DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y, big);
                             }
                             else if (customSymbol == '3')
                             {
@@ -1112,9 +1112,9 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                                 }
                                 ZeroDisplayOrigin();
                                 if (tracking == '1')
-                                    DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString() + "T", x, y - 0.04, big);
+                                    DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant() + "T", x, y - 0.04, big);
                                 else
-                                    DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y - 0.04, big);
+                                    DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y - 0.04, big);
                             }
                             else if (customSymbol == '4')
                             {
@@ -1126,14 +1126,14 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                                     i++;
                                 }
                                 ZeroDisplayOrigin();
-                                DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x + 0.07, y + 0.02f, big);
+                                DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x + 0.07, y + 0.02f, big);
                             }
                             else
                             {
                                 if (tracking == '1')
-                                    DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString() + "T", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant() + "T", x, y, big);
                                 else
-                                    DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y, big);
                             }
                         }
                         else if (type == 'C')
@@ -1141,25 +1141,25 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             switch (band)
                             {
                                 case 'E':
-                                    DrawTextCenteredVertival(drawingContext, "CW1", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, "CW1", x, y, big);
                                     break;
                                 case 'F':
-                                    DrawTextCenteredVertival(drawingContext, "CW1", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, "CW1", x, y, big);
                                     break;
                                 case 'G':
-                                    DrawTextCenteredVertival(drawingContext, "CW2", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, "CW2", x, y, big);
                                     break;
                                 case 'H':
-                                    DrawTextCenteredVertival(drawingContext, "CW2", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, "CW2", x, y, big);
                                     break;
                                 case 'I':
-                                    DrawTextCenteredVertival(drawingContext, "CW3", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, "CW3", x, y, big);
                                     break;
                                 case 'J':
-                                    DrawTextCenteredVertival(drawingContext, "CW4", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, "CW4", x, y, big);
                                     break;
                                 default:
-                                    DrawTextCenteredVertival(drawingContext, "CW", x, y, big);
+                                    DrawTextCenteredVertical(drawingContext, "CW", x, y, big);
                                     break;
                             }
                         }
@@ -1192,7 +1192,7 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                                     break;
                             }
 
-                            DrawTextCenteredVertival(drawingContext, buffer, x, y, big);
+                            DrawTextCenteredVertical(drawingContext, buffer, x, y, big);
                         }
                         break;
                 }
@@ -1207,14 +1207,14 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                     {
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
                         if (tracking == '1' && symbol < 110)
-                            DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString() + "T", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString() + "T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString(), x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString(), x, y - 0.04, big);
                     }
                     else if (customSymbol == '2')
                     {
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
@@ -1222,14 +1222,14 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         }
                         ZeroDisplayOrigin();
                         if (tracking == '1' && symbol < 110)
-                            DrawTextCenteredVertival(drawingContext, " " + (symbol - 100).ToString() + "T", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, " " + (symbol - 100).ToString() + "T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString(), x, y, big);
+                            DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString(), x, y, big);
                     }
                     else if (customSymbol == '3')
                     {
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theAAA.Length / 2; )
+                        for (int i = 1; i < theAAA.Length / 2;)
                         {
                             DrawLine(drawingContext, theAAA[i, 0] * scale, theAAA[i, 1] * scale, theAAA[i - 1, 0] * scale, theAAA[i - 1, 1] * scale);
                             i++;
@@ -1237,28 +1237,28 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         }
                         ZeroDisplayOrigin();
                         if (tracking == '1' && symbol < 110)
-                            DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString() + "T", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString() + "T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString(), x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString(), x, y - 0.04, big);
                     }
                     else if (customSymbol == '4')
                     {
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSearch.Length / 2; )
+                        for (int i = 1; i < theSearch.Length / 2;)
                         {
                             DrawLine(drawingContext, theSearch[i, 0] * scale, theSearch[i, 1] * scale, theSearch[i - 1, 0] * scale, theSearch[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString(), x + 0.07, y + 0.02f, big);
+                        DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString(), x + 0.07, y + 0.02f, big);
                     }
                     else
                     {
                         if (tracking == '1' && symbol < 110)
-                            DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString() + "T", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString() + "T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, (symbol - 100).ToString(), x, y, big);
+                            DrawTextCenteredVertical(drawingContext, (symbol - 100).ToString(), x, y, big);
                     }
                 }
                 else if (symbol >= 48)
@@ -1267,14 +1267,14 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                     {
                         DrawSymbol(drawingContext, RWRSymbol.Hat, x, y, big);
                         if (tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString() + "T", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant() + "T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y - 0.04, big);
                     }
                     else if (customSymbol == '2')
                     {
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSam.Length / 2; )
+                        for (int i = 1; i < theSam.Length / 2;)
                         {
                             DrawLine(drawingContext, theSam[i, 0] * scale, theSam[i, 1] * scale, theSam[i - 1, 0] * scale, theSam[i - 1, 1] * scale);
                             i++;
@@ -1282,14 +1282,14 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         }
                         ZeroDisplayOrigin();
                         if (tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, " " + ((char)symbol).ToString() + "T", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, " " + ((char)symbol).ToString() + "T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y, big);
+                            DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y, big);
                     }
                     else if (customSymbol == '3')
                     {
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theAAA.Length / 2; )
+                        for (int i = 1; i < theAAA.Length / 2;)
                         {
                             DrawLine(drawingContext, theAAA[i, 0] * scale, theAAA[i, 1] * scale, theAAA[i - 1, 0] * scale, theAAA[i - 1, 1] * scale);
                             i++;
@@ -1297,28 +1297,28 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                         }
                         ZeroDisplayOrigin();
                         if (tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString() + "T", x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant() + "T", x, y - 0.04, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y - 0.04, big);
+                            DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y - 0.04, big);
                     }
                     else if (customSymbol == '4')
                     {
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < theSearch.Length / 2; )
+                        for (int i = 1; i < theSearch.Length / 2;)
                         {
                             DrawLine(drawingContext, theSearch[i, 0] * scale, theSearch[i, 1] * scale, theSearch[i - 1, 0] * scale, theSearch[i - 1, 1] * scale);
                             i++;
                             i++;
                         }
                         ZeroDisplayOrigin();
-                        DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x + 0.07, y + 0.02f, big);
+                        DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x + 0.07, y + 0.02f, big);
                     }
                     else
                     {
                         if (tracking == '1')
-                            DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString() + "T", x, y, big);
+                            DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant() + "T", x, y, big);
                         else
-                            DrawTextCenteredVertival(drawingContext, ((char)symbol).ToString(), x, y, big);
+                            DrawTextCenteredVertical(drawingContext, ((char)symbol).ToString().ToUpperInvariant(), x, y, big);
                     }
                 }
                 else
@@ -1350,7 +1350,7 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                             break;
                     }
 
-                    DrawTextCenteredVertival(drawingContext, buffer, x, y, big);
+                    DrawTextCenteredVertical(drawingContext, buffer, x, y, big);
                 }
             }
         }
@@ -1382,12 +1382,12 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                 case RWRSymbol.Hat:
                     {
                         double[,] lines = {
-		                {0.000F,0.082F},
-		                {-0.084F,0.050F},
-		                {0.000F,0.082F},
-		                {0.084F,0.050F}};
+                        {0.000F,0.082F},
+                        {-0.084F,0.050F},
+                        {0.000F,0.082F},
+                        {0.084F,0.050F}};
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < lines.Length / 2; )
+                        for (int i = 1; i < lines.Length / 2;)
                         {
                             DrawLine(drawingContext, lines[i, 0] * scale, lines[i, 1] * scale, lines[i - 1, 0] * scale, lines[i - 1, 1] * scale);
                             i++;
@@ -1401,24 +1401,24 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                     {
                         scale = 1.3;
                         double[,] lines = {
-		                {-0.100F,-0.050F},
-				        {-0.100F,0.050F},
-				        {-0.050F,0.100F},
-				        {0.050F,0.100F},
-				        {0.050F,-0.100F},
-				        {-0.050F,-0.100F},
-				        {0.100F,0.050F},
-				        {0.100F,-0.050F},
-				        {-0.100F,0.050F},
-				        {-0.050F,0.100F},
-				        {0.050F,0.100F},
-				        {0.100F,0.050F},
-				        {-0.100F,-0.050F},
-				        {-0.050F,-0.100F},
-				        {0.100F,-0.050F},
-				        {0.050F,-0.100F}};
+                        {-0.100F,-0.050F},
+                        {-0.100F,0.050F},
+                        {-0.050F,0.100F},
+                        {0.050F,0.100F},
+                        {0.050F,-0.100F},
+                        {-0.050F,-0.100F},
+                        {0.100F,0.050F},
+                        {0.100F,-0.050F},
+                        {-0.100F,0.050F},
+                        {-0.050F,0.100F},
+                        {0.050F,0.100F},
+                        {0.100F,0.050F},
+                        {-0.100F,-0.050F},
+                        {-0.050F,-0.100F},
+                        {0.100F,-0.050F},
+                        {0.050F,-0.100F}};
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < lines.Length / 2; )
+                        for (int i = 1; i < lines.Length / 2;)
                         {
                             DrawLine(drawingContext, lines[i, 0] * scale, lines[i, 1] * scale, lines[i - 1, 0] * scale, lines[i - 1, 1] * scale);
                             i++;
@@ -1431,24 +1431,24 @@ namespace LightningGauges.Renderers.F16.RWR.ALR93
                     {
                         scale = 1.3;
                         double[,] lines = {
-		                {-0.100F,-0.050F},
-				        {-0.100F,0.050F},
-				        {-0.050F,0.100F},
-				        {0.050F,0.100F},
-				        {0.050F,-0.100F},
-				        {-0.050F,-0.100F},
-				        {0.100F,0.050F},
-				        {0.100F,-0.050F},
-				        {-0.100F,0.050F},
-				        {-0.050F,0.100F},
-				        {0.050F,0.100F},
-				        {0.100F,0.050F},
-				        {-0.100F,-0.050F},
-				        {-0.050F,-0.100F},
-				        {0.100F,-0.050F},
-				        {0.050F,-0.100F}};
+                        {-0.100F,-0.050F},
+                        {-0.100F,0.050F},
+                        {-0.050F,0.100F},
+                        {0.050F,0.100F},
+                        {0.050F,-0.100F},
+                        {-0.050F,-0.100F},
+                        {0.100F,0.050F},
+                        {0.100F,-0.050F},
+                        {-0.100F,0.050F},
+                        {-0.050F,0.100F},
+                        {0.050F,0.100F},
+                        {0.100F,0.050F},
+                        {-0.100F,-0.050F},
+                        {-0.050F,-0.100F},
+                        {0.100F,-0.050F},
+                        {0.050F,-0.100F}};
                         SetDisplayOrigin(x, y);
-                        for (int i = 1; i < lines.Length / 2; )
+                        for (int i = 1; i < lines.Length / 2;)
                         {
                             DrawLine(drawingContext, lines[i, 0] * scale, lines[i, 1] * scale, lines[i - 1, 0] * scale, lines[i - 1, 1] * scale);
                             i++;

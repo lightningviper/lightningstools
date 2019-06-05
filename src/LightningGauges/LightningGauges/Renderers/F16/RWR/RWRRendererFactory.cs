@@ -10,29 +10,38 @@ namespace LightningGauges.Renderers.F16.RWR
 {
     public interface IRWRRendererFactory
     {
-        RWRRenderer CreateRenderer(RWRType rwrType);
+        RWRRenderer CreateRenderer(RWRType rwrType, bool useVectorFont=false);
     }
     public class RWRRendererFactory:IRWRRendererFactory
     {
-        public RWRRenderer CreateRenderer(RWRType rwrType)
+        public RWRRenderer CreateRenderer(RWRType rwrType, bool useVectorFont=false)
         {
+            RWRRenderer toReturn=null;
             switch (rwrType)
             {
                 case RWRType.ALR56:
-                    return new RWRScopeALR56Renderer();
+                    toReturn= new RWRScopeALR56Renderer();
+                    break;
                 case RWRType.ALR69:
-                    return new RWRScopeALR69Renderer();
+                    toReturn= new RWRScopeALR69Renderer();
+                    break;
                 case RWRType.ALR93:
-                    return new RWRScopeALR93Renderer();
+                    toReturn= new RWRScopeALR93Renderer();
+                    break;
                 case RWRType.SPS1000:
-                    return new RWRScopeSPS1000Renderer();
+                    toReturn= new RWRScopeSPS1000Renderer();
+                    break;
                 case RWRType.ALR67:
-                    return new RWRScopeALR67Renderer();
+                    toReturn= new RWRScopeALR67Renderer();
+                    break;
                 case RWRType.CARAPACE:
-                    return new RWRScopeCARAPACERenderer();
+                    toReturn= new RWRScopeCARAPACERenderer();
+                    break;
                 default:
                     throw new ArgumentException();
             }
+            toReturn.UseVectorFont = useVectorFont;
+            return toReturn;
            
         }
 

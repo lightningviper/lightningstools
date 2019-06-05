@@ -23,11 +23,11 @@ volatile uint32_t _drawPointsBuffer1[DRAW_POINTS_BUFFER_SIZE];
 volatile uint32_t _drawPointsBuffer2[DRAW_POINTS_BUFFER_SIZE];
 volatile uint32_t *_pDrawPointsBackBuffer=_drawPointsBuffer1;
 volatile uint32_t *_pDrawPointsFrontBuffer=_drawPointsBuffer2;
-volatile size_t _drawPointsBackBufferLength = 0;
-volatile size_t _drawPointsFrontBufferLength = 0;
+volatile size_t _drawPointsBackBufferPosition = 0;
+volatile size_t _drawPointsFrontBufferPosition = 0;
 
 uint8_t _receiveBuffer[RECEIVE_BUFFER_SIZE];
-size_t _receiveBufferLength = 0;
+size_t _receiveBufferPosition = 0;
 
 IntervalTimer _drawTimer;
 
@@ -51,10 +51,9 @@ bool _invertY = true;
 //draw-point interpolation state
 int16_t _previousDrawPointXDAC = 0;
 int16_t _previousDrawPointYDAC = 0;
-bool _prevBeamOn = false;
 uint16_t _currentBeamLocationXDAC = 0;
 uint16_t _currentBeamLocationYDAC = 0;
-bool _beamOn = false;
+bool _beamOn = true;
 bool _ledOn = false;
 
 //firmware version
@@ -73,6 +72,7 @@ void setup()
   pinMode(BUILTIN_LED_PIN, OUTPUT);
   analogWriteResolution(DAC_PRECISION_BITS);
   LEDOn();
+  beamOff();
   _drawTimer.priority(0);
   _drawTimer.begin(draw, 1 * 1000 * 1000 / REFRESH_RATE_HZ);
 }
@@ -82,7 +82,7 @@ void loop()
   int result = readIncomingSerialData();
   if (result == 0)
   {
-    processFrame(_receiveBuffer, _receiveBufferLength);
+    processFrame(_receiveBuffer, _receiveBufferPosition);
     discardReceiveBuffer();
   }
 }
@@ -94,7 +94,7 @@ int readIncomingSerialData()
     int bytesAvailable = Serial.available();
     for (int i=0;i<bytesAvailable;i++)
     {
-      if (_receiveBufferLength +1 >= RECEIVE_BUFFER_SIZE)
+      if (_receiveBufferPosition +1 >= RECEIVE_BUFFER_SIZE)
       {
         return -1;
       }
@@ -103,7 +103,7 @@ int readIncomingSerialData()
       {
         return thisByte;
       }
-      _receiveBuffer[_receiveBufferLength++] = thisByte;
+      _receiveBuffer[_receiveBufferPosition++] = thisByte;
     }
   }
   return -1;
@@ -124,29 +124,29 @@ void swap()
      volatile uint32_t* pTemp=_pDrawPointsFrontBuffer;
     _pDrawPointsFrontBuffer = _pDrawPointsBackBuffer;
     _pDrawPointsBackBuffer=pTemp;
-    _drawPointsFrontBufferLength = _drawPointsBackBufferLength;
+    _drawPointsFrontBufferPosition = _drawPointsBackBufferPosition;
     discardBackBuffer();
    }
 }
 void discardBackBuffer()
 {
-  _drawPointsBackBufferLength = 0;
+  _drawPointsBackBufferPosition = 0;
 }
 
 void discardReceiveBuffer()
 {
-  _receiveBufferLength = 0;
+  _receiveBufferPosition = 0;
 }
 
 void draw()
 {
    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
-      if (_drawPointsFrontBufferLength < 1)
+      if (_drawPointsFrontBufferPosition < 1)
       {
         return;
       }
-      for (size_t i = 0; i < _drawPointsFrontBufferLength; i++)
+      for (size_t i = 0; i < _drawPointsFrontBufferPosition; i++)
       {
         uint32_t xyzCombined = _pDrawPointsFrontBuffer[i];
     
@@ -155,6 +155,10 @@ void draw()
         bool beamOnFlag = (xyzCombined & (uint32_t)0x1000000) == (uint32_t)0x1000000;
         beamOnFlag ? beamOn() : beamOff();
         beamTo(xDAC, yDAC);
+        if (!_beamOn) {
+          delayMicroseconds(70);
+        }
+
       }
       beamOff();
       beamTo(0, MAX_DAC_VALUE);
@@ -187,13 +191,13 @@ void echo(char charToEcho)
   Serial.write(charToEcho);
 }
 
-void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_t bufferLength)
+void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_t BufferPosition)
 {
   float args[7] = {0, 0, 0, 0, 0, 0, 0};
   switch (pathChar)
   {
     case 'M': //move to, absolute
-      readFloats(buffer, offset, bufferLength, 2, args);
+      readFloats(buffer, offset, BufferPosition, 2, args);
       moveTo(args[0], args[1]);
       _previousCommand = 'L'; //subsequent coordinates will be treated as implicit absolute LineTo commands
       _previousCommandControlPointX = _currentX;
@@ -201,61 +205,61 @@ void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_
       break;
 
     case 'm': //move to, relative
-      readFloats(buffer, offset, bufferLength, 2, args);
+      readFloats(buffer, offset, BufferPosition, 2, args);
       moveTo(args[0] + _currentX, args[1] + _currentY);
       _previousCommand = 'l'; //subsequent coordinates will be treated as implicit relative lineTo commands
       break;
 
     case 'L': //line to, absolute
-      readFloats(buffer, offset, bufferLength, 2, args);
+      readFloats(buffer, offset, BufferPosition, 2, args);
       lineTo(args[0], args[1]);
       _previousCommand = 'L';
       break;
 
     case 'l': //line to, relative
-      readFloats(buffer, offset, bufferLength, 2, args);
+      readFloats(buffer, offset, BufferPosition, 2, args);
       lineTo(args[0] + _currentX, args[1] + _currentY);
       _previousCommand = 'l';
       break;
 
     case 'H': //horizontal line to, absolute
-      readFloats(buffer, offset, bufferLength, 1, args);
+      readFloats(buffer, offset, BufferPosition, 1, args);
       horizontalLineTo(args[0]);
       _previousCommand = 'H';
       break;
 
     case 'h': //horizontal line to, relative
-      readFloats(buffer, offset, bufferLength, 1, args);
+      readFloats(buffer, offset, BufferPosition, 1, args);
       horizontalLineTo(args[0] + _currentX);
       _previousCommand = 'h';
       break;
 
     case 'V': //vertical line to, absolute
-      readFloats(buffer, offset, bufferLength, 1, args);
+      readFloats(buffer, offset, BufferPosition, 1, args);
       verticalLineTo(args[0]);
       _previousCommand = 'V';
       break;
 
     case 'v': //vertical line to, relative
-      readFloats(buffer, offset, bufferLength, 1, args);
+      readFloats(buffer, offset, BufferPosition, 1, args);
       verticalLineTo(args[0] + _currentY);
       _previousCommand = 'v';
       break;
 
     case 'C': //cubic bezier curve to, absolute
-      readFloats(buffer, offset, bufferLength, 6, args);
+      readFloats(buffer, offset, BufferPosition, 6, args);
       cubicBezierCurveTo(args[0], args[1], args[2], args[3], args[4], args[5]);
       _previousCommand = 'C';
       break;
 
     case 'c': //cubic bezier curve to, relative
-      readFloats(buffer, offset, bufferLength, 6, args);
+      readFloats(buffer, offset, BufferPosition, 6, args);
       cubicBezierCurveTo(args[0] + _currentX, args[1] + _currentY, args[2] + _currentX, args[3] + _currentY, args[4] + _currentX, args[5] + _currentY);
       _previousCommand = 'c';
       break;
 
     case 'S': //smooth cubic bezier curve to, absolute
-      readFloats(buffer, offset, bufferLength, 4, args);
+      readFloats(buffer, offset, BufferPosition, 4, args);
       if (_previousCommand == 'S' || _previousCommand == 's' || _previousCommand == 'C' || _previousCommand == 'c')
       {
         cubicBezierCurveTo(_currentX - (_previousCommandControlPointX - _currentX), _currentY - (_previousCommandControlPointY - _currentY), args[0], args[1], args[2], args[3]);
@@ -268,7 +272,7 @@ void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_
       break;
 
     case 's': //smooth cubic bezier curve to, relative
-      readFloats(buffer, offset, bufferLength, 4, args);
+      readFloats(buffer, offset, BufferPosition, 4, args);
       if (_previousCommand == 'S' || _previousCommand == 's' || _previousCommand == 'C' || _previousCommand == 'c')
       {
         cubicBezierCurveTo(_currentX - (_previousCommandControlPointX - _currentX), _currentY - (_previousCommandControlPointY - _currentY), args[0] + _currentX, args[1] + _currentY, args[2] + _currentX, args[3] + _currentY);
@@ -281,19 +285,19 @@ void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_
       break;
 
     case 'Q': //quadratic bezier curve to, absolute
-      readFloats(buffer, offset, bufferLength, 4, args);
+      readFloats(buffer, offset, BufferPosition, 4, args);
       quadraticBezierCurveTo(args[0], args[1], args[2], args[3]);
       _previousCommand = 'Q';
       break;
 
     case 'q': //quadratic bezier curve to, relative
-      readFloats(buffer, offset, bufferLength, 4, args);
+      readFloats(buffer, offset, BufferPosition, 4, args);
       quadraticBezierCurveTo(args[0] + _currentX, args[1] + _currentY, args[2] + _currentX, args[3] + _currentY);
       _previousCommand = 'q';
       break;
 
     case 'T': //smooth quadratic bezier curve to, absolute
-      readFloats(buffer, offset, bufferLength, 2, args);
+      readFloats(buffer, offset, BufferPosition, 2, args);
       if (_previousCommand == 'Q' || _previousCommand == 'q' || _previousCommand == 'T' || _previousCommand == 't')
       {
         quadraticBezierCurveTo(_currentX - (_previousCommandControlPointX - _currentX), _currentY - (_previousCommandControlPointY - _currentY), args[0], args[1]);
@@ -306,7 +310,7 @@ void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_
       break;
 
     case 't': //smooth quadratic bezier curve to, relative
-      readFloats(buffer, offset, bufferLength, 2, args);
+      readFloats(buffer, offset, BufferPosition, 2, args);
       if (_previousCommand == 'Q' || _previousCommand == 'q' || _previousCommand == 'T' || _previousCommand == 't')
       {
         quadraticBezierCurveTo(_currentX - (_previousCommandControlPointX - _currentX), _currentY - (_previousCommandControlPointY - _currentY), args[0] + _currentX, args[1] + _currentY);
@@ -319,13 +323,13 @@ void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_
       break;
 
     case 'A': //elliptical arc, absolute
-      readFloats(buffer, offset, bufferLength, 7, args);
+      readFloats(buffer, offset, BufferPosition, 7, args);
       ellipticalArc(args[0], args[1], args[2], args[3] > 0.5, args[4] > 0.5, args[5], args[6]);
       _previousCommand = 'A';
       break;
 
     case 'a': //elliptical arc, relative
-      readFloats(buffer, offset, bufferLength, 7, args);
+      readFloats(buffer, offset, BufferPosition, 7, args);
       ellipticalArc(args[0], args[1], args[2], args[3] > 0.5, args[4] > 0.5, args[5] + _currentX, args[6] + _currentY);
       _previousCommand = 'a';
       break;
@@ -340,16 +344,16 @@ void processPathChar(char pathChar, const uint8_t* buffer, size_t &offset, size_
       _previousCommand = 'z';
       break;
   }
-  if (nextCharIsNumeric(buffer, offset, bufferLength))
+  if (nextCharIsNumeric(buffer, offset, BufferPosition))
   {
-    processPathChar(_previousCommand, buffer, offset, bufferLength);
+    processPathChar(_previousCommand, buffer, offset, BufferPosition);
   }
 }
 
-bool nextCharIsNumeric(const uint8_t* buffer, size_t &offset, size_t bufferLength)
+bool nextCharIsNumeric(const uint8_t* buffer, size_t &offset, size_t BufferPosition)
 {
-  skipSeparators(buffer, offset, bufferLength);
-  if (offset > bufferLength - 1)
+  skipSeparators(buffer, offset, BufferPosition);
+  if (offset > BufferPosition - 1)
   {
     return false;
   }
@@ -364,19 +368,19 @@ bool nextCharIsNumeric(const uint8_t* buffer, size_t &offset, size_t bufferLengt
   return false;
 }
 
-void readFloats(const uint8_t* buffer, size_t &offset, size_t bufferLength, uint8_t howMany, float * floats)
+void readFloats(const uint8_t* buffer, size_t &offset, size_t BufferPosition, uint8_t howMany, float * floats)
 {
   for (size_t i = 0; i < howMany; i++)
   {
-    skipSeparators(buffer, offset, bufferLength);
-    floats[i] = parseFloat(buffer, offset, bufferLength);
+    skipSeparators(buffer, offset, BufferPosition);
+    floats[i] = parseFloat(buffer, offset, BufferPosition);
   }
 }
 
-float parseFloat(const uint8_t* buffer, size_t &offset, size_t bufferLength)
+float parseFloat(const uint8_t* buffer, size_t &offset, size_t BufferPosition)
 {
   String toParse = "";
-  while (offset <= bufferLength - 1)
+  while (offset <= BufferPosition - 1)
   {
     char thisChar = (char)buffer[offset];
     switch (thisChar)
@@ -394,9 +398,9 @@ float parseFloat(const uint8_t* buffer, size_t &offset, size_t bufferLength)
   return toParse.toFloat();
 }
 
-void skipSeparators(const uint8_t* buffer, size_t &offset, size_t bufferLength)
+void skipSeparators(const uint8_t* buffer, size_t &offset, size_t BufferPosition)
 {
-  while (offset <= bufferLength - 1)
+  while (offset <= BufferPosition - 1)
   {
     switch ((char)buffer[offset])
     {
@@ -548,7 +552,7 @@ void beamTo(uint16_t x, uint16_t y)
 
 void insertInterpolatedDrawPoints(float x, float y, bool beamOn)
 {
-  if (_drawPointsBackBufferLength + 1 > DRAW_POINTS_BUFFER_SIZE)
+  if (_drawPointsBackBufferPosition + 1 > DRAW_POINTS_BUFFER_SIZE)
   {
     return;
   }
@@ -596,7 +600,7 @@ void insertInterpolatedDrawPoints(float x, float y, bool beamOn)
   }
   for (int32_t i=1;i<=numSteps;i++)
   {
-    if (_drawPointsBackBufferLength + 1 > DRAW_POINTS_BUFFER_SIZE)
+    if (_drawPointsBackBufferPosition + 1 > DRAW_POINTS_BUFFER_SIZE)
     {
       return;
     }
@@ -608,9 +612,9 @@ void insertInterpolatedDrawPoints(float x, float y, bool beamOn)
     uint32_t xyzCombined = xBits | yBits | zBit;
 
 
-    if (_drawPointsBackBufferLength == 0 || (_drawPointsBackBufferLength > 0 && ((abs(_previousDrawPointXDAC - xDAC) >= 1) || (abs(_previousDrawPointYDAC - yDAC) >= 1))))
+    if (_drawPointsBackBufferPosition == 0 || (_drawPointsBackBufferPosition > 0 && ((abs(_previousDrawPointXDAC - xDAC) >= 1) || (abs(_previousDrawPointYDAC - yDAC) >= 1))))
     {
-      _pDrawPointsBackBuffer[_drawPointsBackBufferLength++] = xyzCombined;
+      _pDrawPointsBackBuffer[_drawPointsBackBufferPosition++] = xyzCombined;
       _previousDrawPointXDAC = xDAC;
       _previousDrawPointYDAC = yDAC;
     }
@@ -621,9 +625,9 @@ void insertInterpolatedDrawPoints(float x, float y, bool beamOn)
       uint32_t xBits = ((finalXDAC & (uint32_t)0xFFF) << 12);
       uint32_t yBits = (finalYDAC & (uint32_t)0xFFF);
       uint32_t xyzCombined = xBits | yBits | zBit;
-      _pDrawPointsBackBuffer[_drawPointsBackBufferLength++] = xyzCombined;
+      _pDrawPointsBackBuffer[_drawPointsBackBufferPosition++] = xyzCombined;
       _previousDrawPointXDAC = finalXDAC;
-      _previousDrawPointYDAC = finalXDAC;
+      _previousDrawPointYDAC = finalYDAC;
   }
 }
 

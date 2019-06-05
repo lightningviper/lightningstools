@@ -1,5 +1,4 @@
-﻿using F4SharedMem;
-using LightningGauges.Renderers.F16.RWR;
+﻿using LightningGauges.Renderers.F16.RWR;
 using System.Drawing;
 using System.Windows.Media;
 
@@ -17,25 +16,25 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         {
             _rwrRendererFactory = rwrRendererFactory ?? new RWRRendererFactory();
         }
-        public void Render(DrawingContext drawingContext, InstrumentState instrumentState)
+        public void Render(DrawingContext drawingContext, InstrumentState instrumentState, bool useVectorFont=false)
         {
-            CreateRWRRenderer(instrumentState.RwrInfo);
+            CreateRWRRenderer(instrumentState.RwrInfo, useVectorFont);
             if (_rwrRenderer != null)
             {
                 _rwrRenderer.InstrumentState = instrumentState;
                 _rwrRenderer.Render(drawingContext);
             }
         }
-        public void Render(Graphics destinationGraphics, Rectangle destinationRectangle, InstrumentState instrumentState)
+        public void Render(Graphics destinationGraphics, Rectangle destinationRectangle, InstrumentState instrumentState, bool useVectorFont=false)
         {
-            CreateRWRRenderer(instrumentState.RwrInfo);
+            CreateRWRRenderer(instrumentState.RwrInfo, useVectorFont);
             if (_rwrRenderer != null)
             {
                 _rwrRenderer.InstrumentState = instrumentState;
                 _rwrRenderer.Render(destinationGraphics, destinationRectangle);
             }
         }
-        private void CreateRWRRenderer(byte[] rwrInfoArray)
+        private void CreateRWRRenderer(byte[] rwrInfoArray, bool useVectorFont=false)
         {
             var rwrType = GetRWRType(rwrInfoArray);
             if (_rwrRenderer == null || rwrType != _lastRwrType)
@@ -43,27 +42,27 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
                 if ((rwrType == "0" || rwrType == "1"))
                 {
-                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR56);
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR56, useVectorFont);
                 }
                 else if (rwrType == "2")
                 {
-                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR69);
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR69, useVectorFont);
                 }
                 else if (rwrType == "3")
                 {
-                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR93);
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR93, useVectorFont);
                 }
                 else if (rwrType == "4")
                 {
-                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.SPS1000);
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.SPS1000, useVectorFont);
                 }
                 else if (rwrType == "5")
                 {
-                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR67);
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.ALR67, useVectorFont);
                 }
                 else if (rwrType == "6")
                 {
-                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.CARAPACE);
+                    _rwrRenderer = _rwrRendererFactory.CreateRenderer(RWRType.CARAPACE, useVectorFont);
                 }
                 else
                 {

@@ -274,6 +274,7 @@
     <Compile Include="Renderers\F16\PitchTrimIndicator.cs" />
     <Compile Include="Renderers\F16\RollTrimIndicator.cs" />
     <Compile Include="Renderers\F16\RWR\InstrumentState.cs" />
+    <Compile Include="Renderers\F16\RWR\VectorStrokeFont.cs" />
     <Compile Include="Renderers\F16\SpeedbrakeIndicator.cs" />
     <Compile Include="Renderers\F16\StandbyADI.cs" />
     <Compile Include="Renderers\F16\Tachometer.cs" />
