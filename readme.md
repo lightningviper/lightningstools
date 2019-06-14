@@ -20,6 +20,9 @@ Desktop application for viewing Falcon .key files.  Demonstrates the use of the 
 #### [Falcon 4 Shared Memory Mirror](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Mirror)
 Desktop client-server application that mirrors the contents of Falcon's shared memory areas to one or more remote networked PCs.
 
+#### [Falcon 4 Shared Memory Recorder](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Recorder)
+Desktop application that enables recording and playback of Falcon shared memory data.
+
 #### [Falcon 4 Shared Memory Viewer](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Viewer)
 Desktop application that displays the contents of Falcon's shared memory areas.
 
