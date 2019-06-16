@@ -93,6 +93,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.FuelFlow", "..\Henki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.QuadSinCos", "..\Henkie\Henkie.QuadSinCos\Henkie.QuadSinCos.csproj", "{B8254151-27D0-4471-A3B5-DF84BDD24B77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.HSI", "..\Henkie\Henkie.HSI\Henkie.HSI.csproj", "{B1BC2014-526E-4EE0-B77A-95988DF30B39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -255,6 +257,10 @@ Global
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77}.Debug|x86.Build.0 = Debug|x86
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77}.Release|x86.ActiveCfg = Release|x86
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77}.Release|x86.Build.0 = Release|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Debug|x86.ActiveCfg = Debug|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Debug|x86.Build.0 = Debug|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Release|x86.ActiveCfg = Release|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -291,6 +297,7 @@ Global
 		{28F849D9-6D44-4B36-BED9-06F9D2207269} = {69F6B7FC-1460-45FF-B698-061B24DC1590}
 		{99B05C84-1313-4839-A565-075F3ABFBE85} = {69F6B7FC-1460-45FF-B698-061B24DC1590}
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77} = {69F6B7FC-1460-45FF-B698-061B24DC1590}
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39} = {69F6B7FC-1460-45FF-B698-061B24DC1590}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2CA56F-FB3C-4176-89D1-C05DC8248ACB}
