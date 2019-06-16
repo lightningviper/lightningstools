@@ -105,7 +105,7 @@ namespace Henkie.HSI
                 throw new ArgumentOutOfRangeException(nameof(rangeOnesDigitValue),  "Must be >=0 and <=9");
             }
         }
-        public void SetRangeTendDigitIndication(byte rangeTensDigitValue)
+        public void SetRangeTensDigitIndication(byte rangeTensDigitValue)
         {
             if (rangeTensDigitValue >= 0 && rangeTensDigitValue <= 9)
             {
