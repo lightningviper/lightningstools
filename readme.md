@@ -68,7 +68,8 @@ The following prerequisites will be installed:
 - Visual Studio 2017 Community Edition  
 - Visual Studio Installer Project add-in  
 - .NET Framework 4.6.1 (required by all projects)  
-- Command-line Build tools  
+- Command-line Build tools
+- Windows 10 SDK version 10.0.10586.0 
   
 The above command will also restore all required NuGet packages for all projects and solutions in the repository.
   

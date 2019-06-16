@@ -18,3 +18,5 @@ CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 CALL %MASTERBUILDDIR%InstallVisualStudio2017InstallerProjectAddIn.bat
 CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 
+REM Install Windows 10 SDK
+CALL %MASTERBUILDDIR%InstallWindowsSDK.bat
