@@ -190,11 +190,14 @@ Desktop application for testing Henkie's F-16 ADI Support Board with a real ARU-
 [Henkie.Altimeter](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.Altimeter/)  
 C# class library for interfacing with Henkie's Altimeter interface card.  
 
+[Henkie.Common](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.Common/)  
+Shared C# code for Henkie.* projects.
+
 [Henkie.FuelFlow](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.FuelFlow/)  
 C# class library for interfacing with Henkie's Fuel Flow Indicator interface card.  
 
-[Henkie.Common](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.Common/)  
-Shared C# code for Henkie.* projects.
+[Henkie.HSI](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.HSI/)  
+C# class library for interfacing with Henkie's HSI Board #1 interface card.  
 
 [Henkie.QuadSinCos](https://github.com/lightningviper/lightningstools/tree/master/src/Henkie/Henkie.QuadSinCos/)  
 C# class library for interfacing with Henkie's Standby ADI / Quad SIN/COS interface card.

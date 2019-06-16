@@ -25,6 +25,23 @@ namespace Henkie.Common
         /// <summary>
         ///   S3
         /// </summary>
-        S3 = 0x04
+        S3 = 0x04,
+
+        /// <summary>
+        ///   X
+        /// </summary>
+        X = 0x01,
+        /// <summary>
+        ///   Y
+        /// </summary>
+        Y = 0x02,
+        /// <summary>
+        ///   Z
+        /// </summary>
+        Z = 0x04
+
+
+
+
     }
 }

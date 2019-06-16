@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PHCC", "..\..\PHCC\PHCC.csproj", "{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.Common", "..\Henkie.Common\Henkie.Common.csproj", "{80C69F3D-8429-4270-9021-CC3A76FE5F13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.HSI", "Henkie.HSI.csproj", "{B1BC2014-526E-4EE0-B77A-95988DF30B39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Debug|x86.ActiveCfg = Debug|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Debug|x86.Build.0 = Debug|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Release|x86.ActiveCfg = Release|x86
+		{75FA2030-C9CA-4B2D-8534-8F48EEA13CA3}.Release|x86.Build.0 = Release|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Debug|x86.ActiveCfg = Debug|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Debug|x86.Build.0 = Debug|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.ActiveCfg = Release|x86
+		{80C69F3D-8429-4270-9021-CC3A76FE5F13}.Release|x86.Build.0 = Release|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Debug|x86.ActiveCfg = Debug|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Debug|x86.Build.0 = Debug|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Release|x86.ActiveCfg = Release|x86
+		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = 38D76740-E470-4812-8E4A-3ABC00F5415B
+	EndGlobalSection
+EndGlobal
