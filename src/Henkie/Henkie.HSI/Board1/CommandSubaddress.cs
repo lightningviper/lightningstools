@@ -161,9 +161,9 @@ namespace Henkie.HSI.Board1
         /// </summary>
         RANGE_3DIGIT_768TO999 = 35,
         /// <summary>
-        ///   Set RANGE update mode (0="jump scroll", 1="smooth scroll")
+        ///   Set RANGE digits scroll mode (0="jump scroll", 1="smooth scroll")
         /// </summary>
-        RANGE_UPDATE_MODE = 36,
+        RANGE_DIGITS_SCROLL_MODE = 36,
 
 
 

@@ -171,11 +171,11 @@ namespace Henkie.HSI.Board1
                     break;
                 case StatorSignals.S2:
                     SendCommand(CommandSubaddress.BEARING_S2_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.BEARING_S2_OFFSET_LSB, msb);
+                    SendCommand(CommandSubaddress.BEARING_S2_OFFSET_MSB, msb);
                     break;
                 case StatorSignals.S3:
                     SendCommand(CommandSubaddress.BEARING_S3_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.BEARING_S3_OFFSET_LSB, msb);
+                    SendCommand(CommandSubaddress.BEARING_S3_OFFSET_MSB, msb);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statorSignal));
@@ -200,11 +200,11 @@ namespace Henkie.HSI.Board1
                     break;
                 case StatorSignals.S2:
                     SendCommand(CommandSubaddress.HEADING_S2_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.HEADING_S2_OFFSET_LSB, msb);
+                    SendCommand(CommandSubaddress.HEADING_S2_OFFSET_MSB, msb);
                     break;
                 case StatorSignals.S3:
                     SendCommand(CommandSubaddress.HEADING_S3_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.HEADING_S3_OFFSET_LSB, msb);
+                    SendCommand(CommandSubaddress.HEADING_S3_OFFSET_MSB, msb);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statorSignal));
@@ -264,6 +264,10 @@ namespace Henkie.HSI.Board1
             {
                 throw new ArgumentOutOfRangeException(nameof(indicatedRangeMiles), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= 999"));
             }
+        }
+        public void SetRangeIndicationScrollMode(RangeDigitsScrollMode rangeDigitsScrollMode)
+        {
+            SendCommand(CommandSubaddress.RANGE_DIGITS_SCROLL_MODE, (byte)rangeDigitsScrollMode);
         }
 
         public void SetBearingStatorSignalCoarseSetpointDeferred(StatorSignals statorSignal, byte coarseSetpoint)
