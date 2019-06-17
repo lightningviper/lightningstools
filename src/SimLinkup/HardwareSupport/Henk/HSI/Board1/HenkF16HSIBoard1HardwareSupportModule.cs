@@ -680,7 +680,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Magnetic Heading (output to instrument)",
+                FriendlyName = "Magnetic Heading",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Magnetic_Heading_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -701,7 +701,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Bearing to Beacon (output to instrument)",
+                FriendlyName = "Bearing to Beacon",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Bearing_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -722,7 +722,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Range x100 (output to instrument)",
+                FriendlyName = "Range x100",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Range_x100_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -743,7 +743,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Range x10 (output to instrument)",
+                FriendlyName = "Range x10",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Range_x10_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -764,7 +764,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Range x1 (output to instrument)",
+                FriendlyName = "Range x1",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Range_x1_To_Instrument",
                 Index = 0,
                 Source = this,
@@ -785,7 +785,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
-                FriendlyName = "Range Invalid Flag (output to instrument)",
+                FriendlyName = "Range Invalid Flag",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Range_Invalid_Flag_To_Instrument",
                 Index = 0,
                 Source = this,
