@@ -169,6 +169,12 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             ConfigureDiagnosticLEDBehavior();
             ConfigureOutputChannels();
             ConfigureCalibration();
+            ConfigureRangeDigitsScrollMode();
+        }
+        private void ConfigureRangeDigitsScrollMode()
+        {
+            if (_hsiBoard1DeviceInterface == null) return;
+            _hsiBoard1DeviceInterface.SetRangeDigitsScrollMode(_hsiBoard1DeviceConfig.RangeDigitsScrollMode ?? RangeDigitsScrollMode.Jump);
         }
 
         private void ConfigureStatorOffsets()

@@ -265,7 +265,7 @@ namespace Henkie.HSI.Board1
                 throw new ArgumentOutOfRangeException(nameof(indicatedRangeMiles), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= 999"));
             }
         }
-        public void SetRangeIndicationScrollMode(RangeDigitsScrollMode rangeDigitsScrollMode)
+        public void SetRangeDigitsScrollMode(RangeDigitsScrollMode rangeDigitsScrollMode)
         {
             SendCommand(CommandSubaddress.RANGE_DIGITS_SCROLL_MODE, (byte)rangeDigitsScrollMode);
         }

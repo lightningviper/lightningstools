@@ -35,6 +35,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
         public DiagnosticLEDMode? DiagnosticLEDMode { get; set; }
         public OutputChannelsConfig OutputChannelsConfig { get; set; }
         public StatorOffsetsConfig StatorOffsetsConfig { get; set; }
+        public RangeDigitsScrollMode? RangeDigitsScrollMode { get; set; }
 
         [XmlArray("HeadingCalibrationData")]
         [XmlArrayItem(nameof(CalibrationPoint))]
