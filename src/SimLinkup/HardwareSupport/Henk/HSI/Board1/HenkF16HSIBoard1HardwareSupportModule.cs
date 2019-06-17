@@ -149,7 +149,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
 
                 Category = "Outputs",
-                CollectionName = "Digital Output Channels",
+                CollectionName = "Digital Outputs",
                 FriendlyName = $"DIG_OUT_{channelNumber} (0=OFF, 1=ON)",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__DIG_OUT_{channelNumber}",
                 Index = channelNumber,

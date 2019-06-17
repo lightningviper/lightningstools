@@ -305,7 +305,7 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
             var thisSignal = new DigitalSignal
             {
                 Category = "Outputs",
-                CollectionName = "Digital Output Channels",
+                CollectionName = "Digital Outputs",
                 FriendlyName = $"DIG_OUT_{channelNumber} (0=OFF, 1=ON)",
                 Id = $"HenkieF16FuelFlow[{"0x" + _deviceAddress.ToString("X").PadLeft(2, '0')}]__DIG_OUT_{channelNumber}",
                 Index = channelNumber,
