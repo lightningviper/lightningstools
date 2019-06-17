@@ -46,7 +46,7 @@ namespace SimLinkup.HardwareSupport.Gould
 
         ~GouldHS070D51341HardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

@@ -86,7 +86,7 @@ namespace SimLinkup.HardwareSupport.Henk.QuadSinCos
 
         ~HenkieQuadSinCosBoardHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
         public override void Synchronize()
         {

@@ -62,7 +62,7 @@ namespace SimLinkup.HardwareSupport.DirectInput
 
         ~DirectInputHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

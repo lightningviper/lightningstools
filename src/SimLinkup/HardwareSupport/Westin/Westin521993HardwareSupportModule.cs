@@ -45,7 +45,7 @@ namespace SimLinkup.HardwareSupport.Westin
 
         ~Westin521993HardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

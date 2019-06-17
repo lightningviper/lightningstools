@@ -87,7 +87,7 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
 
         ~HenkieF16FuelFlowIndicatorHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()
@@ -527,7 +527,7 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
             var upperPoint =
                 _calibrationData
                     .OrderBy(x => x.Input)
-                    .FirstOrDefault(x => x != lowerPoint && x.Input >= lowerPoint.Input) ?? new CalibrationPoint(80000, 80000);
+                    .FirstOrDefault(x => x != lowerPoint && x.Input >= lowerPoint.Input) ?? new CalibrationPoint(80000, 4095);
             var inputRange = Math.Abs(upperPoint.Input - lowerPoint.Input);
             var outputRange = Math.Abs(upperPoint.Output - lowerPoint.Output);
             var inputPct = inputRange != 0

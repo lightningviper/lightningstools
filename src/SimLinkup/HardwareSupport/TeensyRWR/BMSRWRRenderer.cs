@@ -76,7 +76,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 (_rwrRenderer as RWRRenderer).ActualHeight = ActualHeight;
             }
         }
-        private string GetRWRType(byte[] rwrInfoArray)
+        private static string GetRWRType(byte[] rwrInfoArray)
         {
             string[] rwrInfo = null;
             var rwrInfoBuffer = string.Empty;
@@ -93,7 +93,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             }
             return rwrType;
         }
-        private bool RwrInfoContains(string[] rwrInfo, string key)
+        private static bool RwrInfoContains(string[] rwrInfo, string key)
         {
             for (int i = 0; i < rwrInfo.Length; i++)
             {
@@ -102,7 +102,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             return false;
         }
 
-        private string RwrInfoGetKeyContent(string[] rwrInfo, string key)
+        private static string RwrInfoGetKeyContent(string[] rwrInfo, string key)
         {
             for (int i = 0; i < rwrInfo.Length; i++)
             {

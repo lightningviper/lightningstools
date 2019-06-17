@@ -98,7 +98,7 @@ namespace SimLinkup.HardwareSupport.Powell
 
         ~PowellIP1310ALRHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

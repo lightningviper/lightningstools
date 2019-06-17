@@ -53,7 +53,7 @@ namespace SimLinkup.HardwareSupport.AMI
 
         ~AMI9001584HardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

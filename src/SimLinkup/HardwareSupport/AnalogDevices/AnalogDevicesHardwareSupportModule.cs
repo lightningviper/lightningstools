@@ -43,7 +43,7 @@ namespace SimLinkup.HardwareSupport.AnalogDevices
 
         ~AnalogDevicesHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static AnalogDevicesHardwareSupportModule Create(a.IDenseDacEvalBoard device, int deviceIndex = 0,

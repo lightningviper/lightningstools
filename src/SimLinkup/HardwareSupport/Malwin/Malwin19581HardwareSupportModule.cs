@@ -55,7 +55,7 @@ namespace SimLinkup.HardwareSupport.Malwin
 
         ~Malwin19581HardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

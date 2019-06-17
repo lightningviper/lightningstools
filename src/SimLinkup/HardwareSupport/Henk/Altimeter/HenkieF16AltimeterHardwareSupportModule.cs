@@ -93,7 +93,7 @@ namespace SimLinkup.HardwareSupport.Henk.Altimeter
 
         ~HenkieF16AltimeterHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

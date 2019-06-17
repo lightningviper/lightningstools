@@ -67,7 +67,7 @@ namespace SimLinkup.HardwareSupport.Phcc
 
         ~PhccHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

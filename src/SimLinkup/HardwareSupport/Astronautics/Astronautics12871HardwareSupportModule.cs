@@ -98,7 +98,7 @@ namespace SimLinkup.HardwareSupport.Astronautics
 
         ~Astronautics12871HardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

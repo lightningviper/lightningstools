@@ -50,8 +50,15 @@ namespace SimLinkup.Runtime
             var ssmRegistry =
                 SimSupportModuleRegistry.Load(Path.Combine(Util.CurrentMappingProfileDirectory,
                     "SimSupportModule.registry"));
-            var modules = ssmRegistry.GetInstances();
-            return modules?.ToArray();
+            if (ssmRegistry == null)
+            {
+                return Array.Empty<SimSupportModule>();
+            }
+            else
+            {
+                var modules = ssmRegistry.GetInstances();
+                return modules?.ToArray();
+            }
         }
 
         public void Start()

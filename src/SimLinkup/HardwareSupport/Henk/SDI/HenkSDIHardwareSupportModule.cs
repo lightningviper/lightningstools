@@ -92,7 +92,7 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
 
         ~HenkSDIHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

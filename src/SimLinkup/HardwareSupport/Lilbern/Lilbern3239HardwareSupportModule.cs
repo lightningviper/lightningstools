@@ -44,7 +44,7 @@ namespace SimLinkup.HardwareSupport.Lilbern
 
         ~Lilbern3239HardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

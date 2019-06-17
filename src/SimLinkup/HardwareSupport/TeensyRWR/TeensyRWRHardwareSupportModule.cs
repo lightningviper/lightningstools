@@ -85,7 +85,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         ~TeensyRWRHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()
@@ -465,6 +465,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             }
             _isDisposed = true;
         }
+        
 
         private bool EnsureSerialPortConnected()
         {
@@ -523,7 +524,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             drawingContext.Close();
             return ShortenFloats(PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString());
         }
-        private String ShortenFloats(String pathMarkupLanguageString)
+        private static String ShortenFloats(String pathMarkupLanguageString)
         {
             StringBuilder numString = new StringBuilder(100);
             StringBuilder outString = new StringBuilder(pathMarkupLanguageString.Length);

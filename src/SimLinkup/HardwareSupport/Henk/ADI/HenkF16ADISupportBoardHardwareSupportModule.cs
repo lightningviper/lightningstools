@@ -107,7 +107,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
 
         ~HenkF16ADISupportBoardHardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()

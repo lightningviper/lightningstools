@@ -44,7 +44,7 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         ~Simtek100207HardwareSupportModule()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public static IHardwareSupportModule[] GetInstances()
