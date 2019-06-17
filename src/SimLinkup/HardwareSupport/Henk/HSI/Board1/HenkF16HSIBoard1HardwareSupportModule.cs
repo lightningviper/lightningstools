@@ -451,7 +451,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Analog Inputs",
-                FriendlyName = "Magnetic Heading (from sim)",
+                FriendlyName = "Magnetic Heading",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Magnetic_Heading_From_Sim",
                 Index = 0,
                 Source = this,
@@ -493,7 +493,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Analog Inputs",
-                FriendlyName = "Bearing to Beacon (from sim)",
+                FriendlyName = "Bearing to Beacon",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Bearing_From_Sim",
                 Index = 0,
                 Source = this,
@@ -533,7 +533,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Analog Inputs",
-                FriendlyName = "Course Deviation (from sim)",
+                FriendlyName = "Course Deviation",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Course_Deviation_From_Sim",
                 Index = 0,
                 Source = this,
@@ -553,7 +553,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Analog Inputs",
-                FriendlyName = "Course Deviation Limit (from sim)",
+                FriendlyName = "Course Deviation Limit",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Course_Deviation_Limit_From_Sim",
                 Index = 0,
                 Source = this,
@@ -572,7 +572,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "Deviation Flag (from sim)",
+                FriendlyName = "Deviation Flag",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Deviation_Flag_From_Sim",
                 Index = 0,
                 Source = this,
@@ -609,7 +609,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "Range Invalid Flag (from sim)",
+                FriendlyName = "Range Invalid Flag",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Range_Invalid_Flag_From_Sim",
                 Index = 0,
                 Source = this,
@@ -643,7 +643,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Digital Inputs",
-                FriendlyName = "FROM Flag (from sim)",
+                FriendlyName = "FROM Flag",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__FROM_Flag_From_Sim",
                 Index = 0,
                 Source = this,
