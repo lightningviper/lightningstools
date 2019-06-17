@@ -589,7 +589,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             {
                 Category = "Inputs",
                 CollectionName = "Analog Inputs",
-                FriendlyName = "Range (from sim)",
+                FriendlyName = "Range",
                 Id = $"Henk_F16_HS1_Board1[{"0x" + _hsiBoard1DeviceAddress.ToString("X").PadLeft(2, '0')}]__Range_From_Sim",
                 Index = 0,
                 Source = this,
