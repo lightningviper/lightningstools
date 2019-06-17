@@ -75,11 +75,11 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Device.cs" />
-    <Compile Include="CommandSubaddress.cs" />
+    <Compile Include="Board1\Device.cs" />
+    <Compile Include="Board1\CommandSubaddress.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OutputChannels.cs" />
+    <Compile Include="Board1\OutputChannels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

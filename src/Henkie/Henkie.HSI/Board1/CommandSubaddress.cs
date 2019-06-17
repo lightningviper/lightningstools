@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Henkie.HSI
+namespace Henkie.HSI.Board1
 {
     /// <summary>
     ///   Enumeration of subaddresses of the commands that can be sent to the device
@@ -54,10 +54,11 @@ namespace Henkie.HSI
         ///   Set RANGE miles indicator "hundreds" digit (0-9)
         /// </summary>
         RANGE_HUNDREDS_DIGIT_0TO9 = 10,
+
         /// <summary>
         ///  Set RANGE invalid indicator (bar), 0=bar visible, 1=bar hidden
         /// </summary>
-        RANGE_VALID = 11,
+        RANGE_INVALID = 11,
 
         /// <summary>
         ///   Set value of user-defined digital output 1; 0=logic zero (false), 1=logic one (true)

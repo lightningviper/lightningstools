@@ -51,6 +51,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>7</LangVersion>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -72,6 +73,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>sn.key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=3.1.6.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
@@ -150,6 +157,8 @@
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowIndicatorHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowIndicatorHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\HSI\Board1\HenkF16HSIBoard1HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\HSI\Board1\HenkF16HSIBoard1HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\QuadSinCos\HenkieQuadSinCosBoardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\QuadSinCos\HenkieQuadSinCosBoardHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModule.cs" />
@@ -431,6 +440,19 @@
     <Content Include="Content\Mapping\Kukki\Simtek10108902HardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\HenkHSI\HenkF16HSIBoard1.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkHSI\HardwareSupportModule.registry">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkHSI\HenkF16HSIBoard1HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\HenkHSI\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -596,6 +618,7 @@
       <DependentUpon>SignalsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <None Include="sn.key.snk" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -716,6 +739,10 @@
     <ProjectReference Include="..\Henkie\Henkie.FuelFlow\Henkie.FuelFlow.csproj">
       <Project>{99b05c84-1313-4839-a565-075f3abfbe85}</Project>
       <Name>Henkie.FuelFlow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Henkie\Henkie.HSI\Henkie.HSI.csproj">
+      <Project>{b1bc2014-526e-4ee0-b77a-95988df30b39}</Project>
+      <Name>Henkie.HSI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Henkie\Henkie.QuadSinCos\Henkie.QuadSinCos.csproj">
       <Project>{b8254151-27d0-4471-a3b5-df84bdd24b77}</Project>

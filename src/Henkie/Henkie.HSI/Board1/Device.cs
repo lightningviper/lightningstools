@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Henkie.HSI
+namespace Henkie.HSI.Board1
 {
     /// <summary>
     ///   The <see cref = "Device" /> class provides methods for
@@ -94,6 +94,7 @@ namespace Henkie.HSI
                 throw new ArgumentOutOfRangeException(nameof(headingIndicationPosition), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= {0}", MAX_POSITION));
             }
         }
+
         public void SetRangeOnesDigitIndication(byte rangeOnesDigitValue)
         {
             if (rangeOnesDigitValue >= 0 && rangeOnesDigitValue <= 9)
@@ -105,6 +106,7 @@ namespace Henkie.HSI
                 throw new ArgumentOutOfRangeException(nameof(rangeOnesDigitValue),  "Must be >=0 and <=9");
             }
         }
+
         public void SetRangeTensDigitIndication(byte rangeTensDigitValue)
         {
             if (rangeTensDigitValue >= 0 && rangeTensDigitValue <= 9)
@@ -116,6 +118,7 @@ namespace Henkie.HSI
                 throw new ArgumentOutOfRangeException(nameof(rangeTensDigitValue), "Must be >=0 and <=9");
             }
         }
+
         public void SetRangeHundredsDigitIndication(byte rangeHundredsDigitValue)
         {
             if (rangeHundredsDigitValue >= 0 && rangeHundredsDigitValue <= 9)
@@ -126,6 +129,11 @@ namespace Henkie.HSI
             {
                 throw new ArgumentOutOfRangeException(nameof(rangeHundredsDigitValue), "Must be >=0 and <=9");
             }
+        }
+
+        public void SetRangeInvalidIndicatorVisible(bool visible)
+        {
+            SendCommand(CommandSubaddress.RANGE_INVALID, visible ? (byte)0 : (byte)1);
         }
 
         public void SetDigitalOutputChannelValue(OutputChannels outputChannel, bool value)

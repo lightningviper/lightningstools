@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Henkie.HSI
+namespace Henkie.HSI.Board1
 {
     /// <summary>
     ///   Output channels

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO HENK F-16 HSI HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- OFF FLAG -->
+    <SignalMapping>
+      <!-- F4 OFF FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_HSI__OFF_FLAG</Id>
+      </Source>
+      <!-- HENK HSI OFF FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>Henk_F16_HS1_Board1__Off_Flag_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- DEVIATION FLAG -->
+    <SignalMapping>
+      <!-- F4 DEVIATION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_HSI__COURSE_DEVIATION_INVALID_FLAG</Id>
+      </Source>
+      <!-- HENK HSI DEVIATION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>Henk_F16_HS1_Board1__Deviation_Flag_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- RANGE INVALID FLAG -->
+    <SignalMapping>
+      <!-- F4 RANGE INVALID FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_HSI__DISTANCE_INVALID_FLAG</Id>
+      </Source>
+      <!-- HENK HSI RANGE INVALID FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>Henk_F16_HS1_Board1__Range_Invalid_Flag_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- TO FLAG  -->
+    <SignalMapping>
+      <!-- F4 TO FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_HSI__TO_FLAG</Id>
+      </Source>
+      <!-- HENK HSI TO FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>Henk_F16_HS1_Board1__TO_Flag_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- FROM FLAG  -->
+    <SignalMapping>
+      <!-- F4 FROM FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_HSI__FROM_FLAG</Id>
+      </Source>
+      <!-- HENK HSI FROM FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>Henk_F16_HS1_Board1__FROM_Flag_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- MAGNETIC HEADING  -->
+    <SignalMapping>
+      <!-- F4 MAGNETIC HEADING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_COMPASS__MAGNETIC_HEADING_DEGREES</Id>
+      </Source>
+      <!-- HENK HSI MAGNETIC HEADING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Henk_F16_HS1_Board1__Magnetic_Heading_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- DESIRED HEADING  -->
+    <SignalMapping>
+      <!-- F4 DESIRED HEADING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HSI__DESIRED_HEADING_DEGREES</Id>
+      </Source>
+      <!-- HENK HSI DESIRED HEADING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Henk_F16_HS1_Board1__Desired_Heading_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- COURSE  -->
+    <SignalMapping>
+      <!-- F4 COURSE OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HSI__DESIRED_COURSE_DEGREES</Id>
+      </Source>
+      <!-- HENK HSI COURSE INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Henk_F16_HS1_Board1__Course_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- BEARING  -->
+    <SignalMapping>
+      <!-- F4 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HSI__BEARING_TO_BEACON_DEGREES</Id>
+      </Source>
+      <!-- HENK HSI BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Henk_F16_HS1_Board1__Bearing_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- RANGE  -->
+    <SignalMapping>
+      <!-- F4 RANGE OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HSI__DISTANCE_TO_BEACON_NAUTICAL_MILES</Id>
+      </Source>
+      <!-- HENK HSI RANGE INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Henk_F16_HS1_Board1__Range_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- COURSE DEVIATION  -->
+    <SignalMapping>
+      <!-- F4 COURSE DEVIATION OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HSI__COURSE_DEVIATION_DEGREES</Id>
+      </Source>
+      <!-- HENK HSI COURSE DEVIATION INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Henk_F16_HS1_Board1__Course_Deviation_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+
+    <!-- COURSE DEVIATION LIMIT -->
+    <SignalMapping>
+      <!-- F4 COURSE DEVIATION LIMIT OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HSI__COURSE_DEVIATION_LIMIT_DEGREES</Id>
+      </Source>
+      <!-- HENK HSI COURSE DEVIATION LIMIT INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Henk_F16_HS1_Board1__Course_Deviation_Limit_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+    
+  </SignalMappings>
+</MappingProfile>
