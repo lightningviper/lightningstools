@@ -530,6 +530,12 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
         }
 
+        private IEnumerable<DrawPoint> CalibrateDrawPoints(IEnumerable<DrawPoint> uncalibratedDrawPoints)
+        {
+            return uncalibratedDrawPoints.Select(drawPoint =>
+                CalibrationHelper.CalibrateDrawPoint(drawPoint, _config.XAxisCalibrationData,
+                    _config.YAxisCalibrationData));
+        }
         private void SendDrawingCommands(string svgPathString)
         {
             lock (_serialPortLock)
@@ -538,8 +544,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 {
                     if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
                     var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(dacPrecisionBits:DAC_PRECISION, bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS);
-                    var drawPoints = svgPathToDrawPointsConverter.ConvertToDrawPoints(svgPathString);
-                    var drawPointsAsBytes = drawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
+                    var uncalibratedDrawPoints = svgPathToDrawPointsConverter.ConvertToDrawPoints(svgPathString).ToList();
+                    var calibratedDrawPoints = CalibrateDrawPoints(uncalibratedDrawPoints).ToList();
+                    var drawPointsAsBytes = calibratedDrawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
                     var cobsEncodedPacket = COBS.Encode(drawPointsAsBytes);
                     _serialPort.Write(cobsEncodedPacket, offset: 0, count: cobsEncodedPacket.Length);
                     _serialPort.Write(new byte[]{0},0,1);
