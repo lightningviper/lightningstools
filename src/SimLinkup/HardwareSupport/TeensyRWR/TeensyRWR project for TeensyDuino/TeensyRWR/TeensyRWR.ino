@@ -16,7 +16,6 @@ const unsigned int SERIAL_READ_TIMEOUT_MILLIS = 0;
 const size_t RECEIVE_BUFFER_SIZE=42 * 1024;
 
 //beam timings
-const unsigned int REFRESH_RATE_HZ = 60;
 const uint16_t BEAM_MOVEMENT_WHILE_BEAM_OFF_DELAY_MICROSECONDS = 50;
 const uint16_t BEAM_MOVEMENT_MAX_DISTANCE_DELAY_MICROSECONDS = 50;
 const uint16_t BEAM_DELAY_BETWEEN_DRAW_POINTS_MICROSECONDS=8;
@@ -27,10 +26,6 @@ const uint16_t BLANKING_SIGNAL_RISE_TIME_MICROSECONDS=15;
 const size_t DRAW_POINTS_BUFFER_SIZE = 10 * 1024;
 uint32_t _drawPointsBuffer[DRAW_POINTS_BUFFER_SIZE];
 size_t _drawPointsBufferLength = 0;
-
-
-//draw timer setup 
-IntervalTimer _drawTimer;
 
 //beam location and state
 uint16_t _currentBeamLocationXDAC = 0;
@@ -51,9 +46,6 @@ void setup()
   beamOff();
   packetSerial.begin(BAUD_RATE);
   packetSerial.setPacketHandler(&onPacketReceived);
-//  _drawTimer.priority(255);
-//  _drawTimer.begin(draw, 1 * 1000 * 1000 / REFRESH_RATE_HZ);
-
 }
 
 void loop()
