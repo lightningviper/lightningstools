@@ -16,9 +16,14 @@ const size_t RECEIVE_BUFFER_SIZE = 32 * 1024;
 
 //drawing settings
 const size_t DRAW_POINTS_BUFFER_SIZE = 15 * 1024;
-const unsigned int INTERPOLATION_STEPS = 25;
+const unsigned int BEZIER_CURVE_INTERPOLATION_STEPS = 25;
 const unsigned int REFRESH_RATE_HZ = 60;
 
+//beam timings
+const uint16_t BEAM_MOVEMENT_WHILE_BEAM_OFF_DELAY_MICROSECONDS = 50;
+const uint16_t BEAM_DELAY_BETWEEN_DRAW_POINTS_MICROSECONDS=5;
+const uint16_t BLANKING_SIGNAL_SETTLING_TIME_MICROSECONDS=15;
+const uint16_t BLANKING_SIGNAL_RISE_TIME_MICROSECONDS=15;
 volatile uint32_t _drawPointsBuffer1[DRAW_POINTS_BUFFER_SIZE];
 volatile uint32_t _drawPointsBuffer2[DRAW_POINTS_BUFFER_SIZE];
 volatile uint32_t *_pDrawPointsBackBuffer=_drawPointsBuffer1;
@@ -40,13 +45,10 @@ char _previousCommand = 'z';
 float _previousCommandControlPointX = 0;
 float _previousCommandControlPointY = 0;
 
-//viewBox and inversion settings
-float _viewBoxLeft = 0.00;
-float _viewBoxTop = 0.00;
-float _viewBoxWidth = MAX_DAC_VALUE;
-float _viewBoxHeight = MAX_DAC_VALUE;
+//inversion settings
 bool _invertX = false;
 bool _invertY = true;
+bool _invertZ = true;
 
 //draw-point interpolation state
 int16_t _previousDrawPointXDAC = 0;
@@ -73,7 +75,7 @@ void setup()
   analogWriteResolution(DAC_PRECISION_BITS);
   LEDOn();
   beamOff();
-  _drawTimer.priority(0);
+  _drawTimer.priority(255);
   _drawTimer.begin(draw, 1 * 1000 * 1000 / REFRESH_RATE_HZ);
 }
 
@@ -152,13 +154,19 @@ void draw()
     
         uint16_t xDAC = ((xyzCombined & (uint32_t)0xFFF000) >> 12);
         uint16_t yDAC = (xyzCombined & (uint32_t)0xFFF);
+        
         bool beamOnFlag = (xyzCombined & (uint32_t)0x1000000) == (uint32_t)0x1000000;
-        beamOnFlag ? beamOn() : beamOff();
-        beamTo(xDAC, yDAC);
-        if (!_beamOn) {
-          delayMicroseconds(70);
+        if (beamOnFlag) //we should draw a line to this point WITH THE BEAM TURNED ON
+        {
+          beamOn();
+          beamTo(xDAC, yDAC);
         }
-
+        else //we should move to this point WITH THE BEAM OFF
+        {
+          beamOff();
+          beamTo(xDAC, yDAC);
+        }
+        delayMicroseconds(BEAM_DELAY_BETWEEN_DRAW_POINTS_MICROSECONDS);
       }
       beamOff();
       beamTo(0, MAX_DAC_VALUE);
@@ -472,11 +480,11 @@ void cubicBezierCurveTo(float x1, float y1, float x2, float y2, float x, float y
 {
   float startX = _currentX;
   float startY = _currentY;
-  for (unsigned int i = 0; i < INTERPOLATION_STEPS; i++)
+  for (unsigned int i = 0; i < BEZIER_CURVE_INTERPOLATION_STEPS; i++)
   {
     float nextPointX = 0;
     float nextPointY = 0;
-    pointOnCubicBezierCurve(startX, startY, x1, y1, x2, y2, x, y, (float)i / (float)(INTERPOLATION_STEPS - 1), &nextPointX, &nextPointY);
+    pointOnCubicBezierCurve(startX, startY, x1, y1, x2, y2, x, y, (float)i / (float)(BEZIER_CURVE_INTERPOLATION_STEPS - 1), &nextPointX, &nextPointY);
     lineTo(nextPointX, nextPointY);
   }
   lineTo(x, y);
@@ -488,11 +496,11 @@ void quadraticBezierCurveTo(float x1, float y1, float x, float y)
 {
   float startX = _currentX;
   float startY = _currentY;
-  for (unsigned int i = 0; i < INTERPOLATION_STEPS; i++)
+  for (unsigned int i = 0; i < BEZIER_CURVE_INTERPOLATION_STEPS; i++)
   {
     float nextPointX = 0;
     float nextPointY = 0;
-    pointOnQuadraticBezierCurve(startX, startY, x1, y1, x, y, (float)i / (float)(INTERPOLATION_STEPS - 1), &nextPointX, &nextPointY);
+    pointOnQuadraticBezierCurve(startX, startY, x1, y1, x, y, (float)i / (float)(BEZIER_CURVE_INTERPOLATION_STEPS - 1), &nextPointX, &nextPointY);
     lineTo(nextPointX, nextPointY);
   }
   lineTo(x, y);
@@ -504,11 +512,11 @@ void ellipticalArc(float rx, float ry, float xAxisRotation, bool largeArcFlag, b
 {
   float startX = _currentX;
   float startY = _currentY;
-  for (unsigned int i = 0; i < INTERPOLATION_STEPS; i++)
+  for (unsigned int i = 0; i < BEZIER_CURVE_INTERPOLATION_STEPS; i++)
   {
     float nextPointX = 0;
     float nextPointY = 0;
-    pointOnEllipticalArc(startX, startY, rx, ry, xAxisRotation, largeArcFlag, sweepDirectionFlag, x, y, (float)i / (float)(INTERPOLATION_STEPS - 1), &nextPointX, &nextPointY);
+    pointOnEllipticalArc(startX, startY, rx, ry, xAxisRotation, largeArcFlag, sweepDirectionFlag, x, y, (float)i / (float)(BEZIER_CURVE_INTERPOLATION_STEPS - 1), &nextPointX, &nextPointY);
     lineTo(nextPointX, nextPointY);
   }
   lineTo(x, y);
@@ -547,7 +555,11 @@ void updateLED()
 
 void beamTo(uint16_t x, uint16_t y)
 {
+  //float maxDistance = distance(0,0, MAX_DAC_VALUE, MAX_DAC_VALUE);
+  //float dist = distance(x, y, _currentBeamLocationXDAC, _currentBeamLocationYDAC);
   writePointToDACs(x, y);
+  //delayMicroseconds((uint16_t) BEAM_MOVEMENT_MAX_DISTANCE_DELAY_MICROSECONDS * (dist / maxDistance) ); //wait for beam to get there
+  if (!_beamOn) delayMicroseconds(BEAM_MOVEMENT_WHILE_BEAM_OFF_DELAY_MICROSECONDS);
 }
 
 void insertInterpolatedDrawPoints(float x, float y, bool beamOn)
@@ -557,15 +569,8 @@ void insertInterpolatedDrawPoints(float x, float y, bool beamOn)
     return;
   }
 
-  float pctX = (x - _viewBoxLeft) / _viewBoxWidth;
-  float pctY = (y - _viewBoxTop) / _viewBoxHeight;
-
-  if (pctX < 0.0 || pctX > 1.0 || pctY < 0.0 || pctY > 1.0)
-  {
-    beamOn = false;
-  }
-  int16_t finalXDAC = roundf((_invertX ? MAX_DAC_VALUE - (pctX * MAX_DAC_VALUE) : pctX * MAX_DAC_VALUE));
-  int16_t finalYDAC = roundf((_invertY ? MAX_DAC_VALUE - (pctY * MAX_DAC_VALUE) : pctY * MAX_DAC_VALUE));
+  int16_t finalXDAC = roundf(_invertX ? MAX_DAC_VALUE - x : x);
+  int16_t finalYDAC = roundf(_invertY ? MAX_DAC_VALUE - y : y);
   if (finalXDAC < 0)
   {
     finalXDAC = 0;
@@ -591,13 +596,13 @@ void insertInterpolatedDrawPoints(float x, float y, bool beamOn)
   float yDistance = finalYDAC - startYDAC;
   float euclideanDistance = fabs(sqrtf((xDistance * xDistance) + (yDistance * yDistance)));
   int32_t numSteps= beamOn? ceilf(euclideanDistance) : 1;
-  float dx = xDistance / numSteps;
-  float dy = yDistance / numSteps; 
 
   if (numSteps ==0) 
   {
     return;
   }
+  float dx = xDistance / numSteps;
+  float dy = yDistance / numSteps; 
   for (int32_t i=1;i<=numSteps;i++)
   {
     if (_drawPointsBackBufferPosition + 1 > DRAW_POINTS_BUFFER_SIZE)
@@ -649,7 +654,8 @@ void beamOff()
   {
     return;
   }
-  digitalWrite(Z_PIN, HIGH);
+  digitalWrite(Z_PIN, _invertZ ? HIGH : LOW);
+  delayMicroseconds(BLANKING_SIGNAL_SETTLING_TIME_MICROSECONDS);
   _beamOn = false;
 }
 
@@ -659,7 +665,8 @@ void beamOn()
   {
     return;
   }
-  digitalWrite(Z_PIN, LOW);
+  digitalWrite(Z_PIN, _invertZ ? LOW : HIGH);
+  delayMicroseconds(BLANKING_SIGNAL_RISE_TIME_MICROSECONDS);
   _beamOn = true;
 }
 
