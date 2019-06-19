@@ -30,6 +30,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const int MAX_UPDATE_FREQUENCY_HZ = 20;
         private const int VIEWBOX_WIDTH = 4095;
         private const int VIEWBOX_HEIGHT = 4095;
+		private const int DAC_PRECISION=12;
+		private const int BEZIER_CURVE_INTERPOLATION_STEPS=100;
         private const bool USE_VECTOR_FONT = true;
         private readonly BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer { ActualWidth = VIEWBOX_WIDTH, ActualHeight = VIEWBOX_HEIGHT };
         private readonly BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
@@ -535,7 +537,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 try
                 {
                     if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
-                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter();
+                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(dacPrecisionBits:DAC_PRECISION, bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS);
                     var drawPoints = svgPathToDrawPointsConverter.ConvertToDrawPoints(svgPathString);
                     var drawPointsAsBytes = drawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
                     var cobsEncodedPacket = COBS.Encode(drawPointsAsBytes);

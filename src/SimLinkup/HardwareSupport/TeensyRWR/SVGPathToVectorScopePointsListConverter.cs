@@ -11,10 +11,6 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         //degree of detail for Bezier curve interpolation
         private readonly long _bezierCurveInterpolationSteps;
 
-        //inversion settings
-        private readonly bool _invertX;
-        private readonly bool _invertY;
-
         //SVG parser state
         private double _currentX;
         private double _currentY;
@@ -26,14 +22,12 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private readonly IList<DrawPoint> _drawPoints=new List<DrawPoint>();
 
-        public SVGPathToVectorScopePointsListConverter(byte dacPrecisionBits = 12, bool invertX = false, bool invertY = true, 
-            long bezierCurveInterpolationSteps = 25)
+        public SVGPathToVectorScopePointsListConverter(byte dacPrecisionBits = 12, long bezierCurveInterpolationSteps = 25)
         {
             _dacPrecisionBits = dacPrecisionBits;
-            _invertX = invertX;
-            _invertY = invertY;
             _bezierCurveInterpolationSteps = bezierCurveInterpolationSteps;
         }
+
 
         public IEnumerable<DrawPoint> ConvertToDrawPoints(string svgPathString)
         {
@@ -41,8 +35,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             {
                 return Enumerable.Empty<DrawPoint>();
             }
+
             var chars = svgPathString.ToCharArray();
             _drawPoints.Clear();
+
             long offset = 0;
             while (offset < chars.Length - 1)
             {
@@ -294,14 +290,14 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         {
             _figureStartX = x;
             _figureStartY = y;
-            DrawPointInterpolationHelper.InsertInterpolatedDrawPoints(_drawPoints, x, y, beamOn: false, dacPrecisionBits:_dacPrecisionBits, invertX:_invertX, invertY:_invertY);
+            DrawPointInterpolationHelper.InsertInterpolatedDrawPoints(_drawPoints, x, y, beamOn: false, dacPrecisionBits:_dacPrecisionBits);
             _currentX = x;
             _currentY = y;
         }
 
         private void LineTo(double x, double y)
         {
-            DrawPointInterpolationHelper.InsertInterpolatedDrawPoints(_drawPoints, x, y, beamOn:true, dacPrecisionBits: _dacPrecisionBits, invertX: _invertX, invertY: _invertY);
+            DrawPointInterpolationHelper.InsertInterpolatedDrawPoints(_drawPoints, x, y, beamOn:true, dacPrecisionBits: _dacPrecisionBits);
             _currentX = x;
             _currentY = y;
         }

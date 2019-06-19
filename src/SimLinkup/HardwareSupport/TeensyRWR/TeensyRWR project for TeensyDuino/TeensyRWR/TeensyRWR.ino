@@ -18,7 +18,7 @@ const size_t RECEIVE_BUFFER_SIZE=42 * 1024;
 //beam timings
 const uint16_t BEAM_MOVEMENT_WHILE_BEAM_OFF_DELAY_MICROSECONDS = 50;
 const uint16_t BEAM_MOVEMENT_MAX_DISTANCE_DELAY_MICROSECONDS = 50;
-const uint16_t BEAM_DELAY_BETWEEN_DRAW_POINTS_MICROSECONDS=8;
+const uint16_t BEAM_DELAY_BETWEEN_DRAW_POINTS_MICROSECONDS=10;
 const uint16_t BLANKING_SIGNAL_SETTLING_TIME_MICROSECONDS=15;
 const uint16_t BLANKING_SIGNAL_RISE_TIME_MICROSECONDS=15;
 
@@ -71,10 +71,10 @@ void draw()
       {
         uint32_t xyzCombined = _drawPointsBuffer[i];
     
-        bool beamOnFlag = ((xyzCombined & (uint32_t)0x1000000) == (uint32_t)0x1000000); //bit 24
-        uint16_t xDAC = ((xyzCombined & (uint32_t)0xFFF000) >> 12); //bits 12-23 [12 bits]
-        uint16_t yDAC = (xyzCombined & (uint32_t)0xFFF); //bits 0-11 [12 bits]
-
+        bool beamOnFlag = ((((uint32_t)xyzCombined) & ((uint32_t)0x1000000)) == (uint32_t)0x1000000); //bit 24
+        uint16_t xDAC = ((((uint32_t)xyzCombined) & ((uint32_t)0xFFF000)) >> 12); //bits 12-23 [12 bits]
+        uint16_t yDAC = (((uint32_t)MAX_DAC_VALUE)-(((uint32_t)xyzCombined) & ((uint32_t)0xFFF))); //bits 0-11 [12 bits]
+        
         if (beamOnFlag) //we should DRAW A LINE to this point WITH THE BEAM TURNED ON
         {
           beamOn();

@@ -200,6 +200,7 @@
     <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPoint.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPointInterpolationHelper.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\GridCalibrationPattern.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\SVGPathToVectorScopePointsListConverter.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawingGroupExtensions.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />

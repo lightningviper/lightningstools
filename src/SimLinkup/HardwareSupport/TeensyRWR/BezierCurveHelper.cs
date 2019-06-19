@@ -95,7 +95,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                                    Math.Pow(ry, 2.0) * Math.Pow(transformedPointY, 2.0);
             var cRadicand = cSquareNumerator / cSquareRootDenom;
 
-            cRadicand = cRadicand < 0 ? 0 : cRadicand;
+            cRadicand = cRadicand < 0  || double.IsNaN(cRadicand) ? 0 : cRadicand;
             var cCoef = (largeArcFlag != sweepFlag ? 1 : -1) * Math.Sqrt(cRadicand);
             var transformedCenterX = cCoef * (rx * transformedPointY / ry);
             var transformedCenterY = cCoef * (-(ry * transformedPointY) / rx);
