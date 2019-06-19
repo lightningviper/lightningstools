@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -9,7 +10,9 @@ using System.Windows.Media;
 using Common.HardwareSupport;
 using Common.IO.Ports;
 using Common.MacroProgramming;
+using LightningGauges.Renderers.F16.RWR;
 using log4net;
+using SimLinkup.PacketEncoding;
 using SerialPort = Common.IO.Ports.SerialPort;
 
 namespace SimLinkup.HardwareSupport.TeensyRWR
@@ -28,8 +31,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const int VIEWBOX_WIDTH = 4095;
         private const int VIEWBOX_HEIGHT = 4095;
         private const bool USE_VECTOR_FONT = true;
-        private BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer() { ActualWidth = VIEWBOX_WIDTH, ActualHeight = VIEWBOX_HEIGHT };
-        private BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
+        private readonly BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer { ActualWidth = VIEWBOX_WIDTH, ActualHeight = VIEWBOX_HEIGHT };
+        private readonly BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
 
         //limits exceptions when we don't have the RWR plugged into the serial port
         private const int MAX_UNSUCCESSFUL_PORT_OPEN_ATTEMPTS = 5;
@@ -41,9 +44,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private bool _isDisposed;
 
         private ISerialPort _serialPort;
-        private int _unsuccessfulConnectionAttempts = 0;
+        private int _unsuccessfulConnectionAttempts;
         private DateTime _lastCommandListSentTime = DateTime.MinValue;
-        private String _lastCommandList=null;
+        private String _lastCommandList;
 
         private readonly AnalogSignal[] _analogInputSignals;
         private readonly DigitalSignal[] _digitalInputSignals;
@@ -430,10 +433,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             textSignals = textSignalsToReturn.ToArray();
         }
 
-        private LightningGauges.Renderers.F16.RWR.InstrumentState GetInstrumentState()
+        private InstrumentState GetInstrumentState()
         {
             const float RADIANS_PER_DEGREE = 0.01745329252F;
-            var instrumentState = new LightningGauges.Renderers.F16.RWR.InstrumentState
+            var instrumentState = new InstrumentState
             {
                 bearing = _rwrObjectBearingInputSignals.OrderBy(x => x.Index).Select(x => (float)(x.State * RADIANS_PER_DEGREE)).ToArray(),
                 ChaffCount = (float)_chaffCountInputSignal.State,
@@ -522,49 +525,23 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             drawingContext.PushTransform(new RotateTransform(_config.RotationDegrees, VIEWBOX_WIDTH /2.0, VIEWBOX_HEIGHT/2.0));
             _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
             drawingContext.Close();
-            return ShortenFloats(PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString());
+            return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
         }
-        private static String ShortenFloats(String pathMarkupLanguageString)
-        {
-            StringBuilder numString = new StringBuilder(100);
-            StringBuilder outString = new StringBuilder(pathMarkupLanguageString.Length);
-            for (var i = 0; i < pathMarkupLanguageString.Length; i++)
-            {
-                var thisChar = pathMarkupLanguageString[i];
-                if (char.IsDigit(thisChar) || thisChar == '-' || thisChar == '.')
-                {
-                    numString.Append(thisChar);
-                }
-                if (i == pathMarkupLanguageString.Length - 1 || !(char.IsDigit(thisChar) || thisChar == '-' || thisChar == '.'))
-                {
-                    if (numString.Length > 0)
-                    {
-                        double num = double.Parse(numString.ToString());
-                        double rounded = Math.Round(num, 0, MidpointRounding.AwayFromZero);
-                        outString.Append(rounded.ToString());
-                        numString.Clear();
-                    }
-                    if (!(char.IsDigit(thisChar) || thisChar == '-' || thisChar == '.')){
-                        outString.Append(thisChar);
-                    }
-                }
-            }
-            return outString.ToString();
-        }
-        private byte[] PacketMarker = new[] { (byte)'\0' };
-        private void SendDrawingCommands(String drawingCommands)
+
+        private void SendDrawingCommands(string svgPathString)
         {
             lock (_serialPortLock)
             {
                 try
                 {
-                    if (_serialPort != null && _serialPort.IsOpen && drawingCommands !=null)
-                    {
-                        var bytesToWrite = Encoding.ASCII.GetBytes(drawingCommands + "   ");
-                        _serialPort.Write(bytesToWrite, 0, bytesToWrite.Length);
-                        _serialPort.Write(PacketMarker, 0, 1);
-                        _serialPort.BaseStream.Flush();
-                    }
+                    if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
+                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter();
+                    var drawPoints = svgPathToDrawPointsConverter.ConvertToDrawPoints(svgPathString);
+                    var drawPointsAsBytes = drawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
+                    var cobsEncodedPacket = COBS.Encode(drawPointsAsBytes);
+                    _serialPort.Write(cobsEncodedPacket, offset: 0, count: cobsEncodedPacket.Length);
+                    _serialPort.Write(new byte[]{0},0,1);
+                    _serialPort.BaseStream.Flush();
                 }
                 catch (Exception e)
                 {
@@ -580,16 +557,12 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 return;
             }
             var connected = EnsureSerialPortConnected();
-            if (connected)
-            {
-                var commandList = GenerateDrawingCommands();
-                if (_lastCommandList == null || commandList != _lastCommandList)
-                {
-                    SendDrawingCommands(commandList);
-                    _lastCommandList = commandList;
-                    _lastCommandListSentTime = DateTime.Now;
-                }
-            }
+            if (!connected) return;
+            var commandList = GenerateDrawingCommands();
+            if (_lastCommandList != null && commandList == _lastCommandList) return;
+            SendDrawingCommands(commandList);
+            _lastCommandList = commandList;
+            _lastCommandListSentTime = DateTime.Now;
         }
     }
 }

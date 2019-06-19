@@ -196,7 +196,11 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\DrawPoint.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\DrawPointInterpolationHelper.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\SVGPathToVectorScopePointsListConverter.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawingGroupExtensions.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModuleConfig.cs" />
