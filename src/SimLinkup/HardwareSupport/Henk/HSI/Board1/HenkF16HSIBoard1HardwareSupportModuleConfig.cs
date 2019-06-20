@@ -35,7 +35,6 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
         public DiagnosticLEDMode? DiagnosticLEDMode { get; set; }
         public OutputChannelsConfig OutputChannelsConfig { get; set; }
         public StatorOffsetsConfig StatorOffsetsConfig { get; set; }
-        public RangeDigitsScrollMode? RangeDigitsScrollMode { get; set; }
 
         [XmlArray("HeadingCalibrationData")]
         [XmlArrayItem(nameof(CalibrationPoint))]
@@ -68,12 +67,12 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
         public ushort? BearingS1Offset { get; set; }
         public ushort? BearingS2Offset { get; set; }
         public ushort? BearingS3Offset { get; set; }
-        public byte? RangeOnesDigitXOffset { get; set; }
-        public byte? RangeOnesDigitYOffset { get; set; }
-        public byte? RangeTensDigitXOffset { get; set; }
-        public byte? RangeTensDigitYOffset { get; set; }
-        public byte? RangeHundredsDigitXOffset { get; set; }
-        public byte? RangeHundredsDigitYOffset { get; set; }
+        public ushort? RangeOnesDigitXOffset { get; set; }
+        public ushort? RangeOnesDigitYOffset { get; set; }
+        public ushort? RangeTensDigitXOffset { get; set; }
+        public ushort? RangeTensDigitYOffset { get; set; }
+        public ushort? RangeHundredsDigitXOffset { get; set; }
+        public ushort? RangeHundredsDigitYOffset { get; set; }
     }
 
     [Serializable]

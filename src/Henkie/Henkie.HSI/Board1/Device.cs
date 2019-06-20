@@ -95,39 +95,45 @@ namespace Henkie.HSI.Board1
             }
         }
 
-        public void SetRangeOnesDigitIndication(byte rangeOnesDigitValue)
+        public void SetRangeOnesDigitIndication(short rangeOnesDigitIndicationPosition)
         {
-            if (rangeOnesDigitValue >= 0 && rangeOnesDigitValue <= 9)
+            var rangeNum = (byte)(rangeOnesDigitIndicationPosition / 256);
+            var positionInRange = (byte)(rangeOnesDigitIndicationPosition % 256);
+            if (rangeNum >= 0 && rangeNum <= 3)
             {
-                SendCommand(CommandSubaddress.RANGE_ONES_DIGIT_0TO9, rangeOnesDigitValue);
+                SendCommand(CommandSubaddress.RANGE_ONES_DIGIT_0TO90 + rangeNum, positionInRange);
             }
             else
             {
-                throw new ArgumentOutOfRangeException(nameof(rangeOnesDigitValue),  "Must be >=0 and <=9");
+                throw new ArgumentOutOfRangeException(nameof(rangeOnesDigitIndicationPosition), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= {0}", MAX_POSITION));
             }
         }
 
-        public void SetRangeTensDigitIndication(byte rangeTensDigitValue)
+        public void SetRangeTensDigitIndication(short rangeTensDigitIndicationPosition)
         {
-            if (rangeTensDigitValue >= 0 && rangeTensDigitValue <= 9)
+            var rangeNum = (byte)(rangeTensDigitIndicationPosition / 256);
+            var positionInRange = (byte)(rangeTensDigitIndicationPosition % 256);
+            if (rangeNum >= 0 && rangeNum <= 3)
             {
-                SendCommand(CommandSubaddress.RANGE_TENS_DIGIT_0TO9, rangeTensDigitValue);
+                SendCommand(CommandSubaddress.RANGE_TENS_DIGIT_0TO90 + rangeNum, positionInRange);
             }
             else
             {
-                throw new ArgumentOutOfRangeException(nameof(rangeTensDigitValue), "Must be >=0 and <=9");
+                throw new ArgumentOutOfRangeException(nameof(rangeTensDigitIndicationPosition), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= {0}", MAX_POSITION));
             }
         }
 
-        public void SetRangeHundredsDigitIndication(byte rangeHundredsDigitValue)
+        public void SetRangeHundredsDigitIndication(short rangeHundredsDigitIndicationPosition)
         {
-            if (rangeHundredsDigitValue >= 0 && rangeHundredsDigitValue <= 9)
+            var rangeNum = (byte)(rangeHundredsDigitIndicationPosition / 256);
+            var positionInRange = (byte)(rangeHundredsDigitIndicationPosition % 256);
+            if (rangeNum >= 0 && rangeNum <= 3)
             {
-                SendCommand(CommandSubaddress.RANGE_HUNDREDS_DIGIT_0TO9, rangeHundredsDigitValue);
+                SendCommand(CommandSubaddress.RANGE_HUNDREDS_DIGIT_0TO90 + rangeNum, positionInRange);
             }
             else
             {
-                throw new ArgumentOutOfRangeException(nameof(rangeHundredsDigitValue), "Must be >=0 and <=9");
+                throw new ArgumentOutOfRangeException(nameof(rangeHundredsDigitIndicationPosition), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= {0}", MAX_POSITION));
             }
         }
 
@@ -152,7 +158,7 @@ namespace Henkie.HSI.Board1
 
         }
 
-        public void SetBearingStatorOffset(StatorSignals statorSignal, short offset)
+        public void SetStatorOffsetCoilMask(short offset)
         {
             const ushort LSB_BITMASK = 0xFF; //bits 0-7
             const ushort MSB_BITMASK = 0x300; //bits 8-9
@@ -163,112 +169,55 @@ namespace Henkie.HSI.Board1
             }
             var lsb = (byte)(offset & LSB_BITMASK);
             var msb = (byte)((offset & MSB_BITMASK) >>8);
-            switch (statorSignal)
-            {
-                case StatorSignals.S1:
-                    SendCommand(CommandSubaddress.BEARING_S1_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.BEARING_S1_OFFSET_MSB, msb);
-                    break;
-                case StatorSignals.S2:
-                    SendCommand(CommandSubaddress.BEARING_S2_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.BEARING_S2_OFFSET_MSB, msb);
-                    break;
-                case StatorSignals.S3:
-                    SendCommand(CommandSubaddress.BEARING_S3_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.BEARING_S3_OFFSET_MSB, msb);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(statorSignal));
-            }
+            SendCommand(CommandSubaddress.SET_STATOR_COIL_OFFSET_LSB, lsb);
+            SendCommand(CommandSubaddress.SET_STATOR_COIL_OFFSET_MSB, msb);
         }
-        public void SetHeadingStatorOffset(StatorSignals statorSignal, short offset)
-        {
-            const ushort LSB_BITMASK = 0xFF; //bits 0-7
-            const ushort MSB_BITMASK = 0x300; //bits 8-9
 
-            if (offset < 0 || offset > STATOR_ANGLE_MAX_OFFSET)
-            {
-                throw new ArgumentOutOfRangeException(nameof(offset), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= {0}", STATOR_ANGLE_MAX_OFFSET));
-            }
-            var lsb = (byte)(offset & LSB_BITMASK);
-            var msb = (byte)((offset & MSB_BITMASK) >> 8);
+        public void LoadBearingOffsetStatorCoilMask(StatorSignals statorSignal)
+        {
+            byte val;
             switch (statorSignal)
             {
                 case StatorSignals.S1:
-                    SendCommand(CommandSubaddress.HEADING_S1_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.HEADING_S1_OFFSET_MSB, msb);
+                    val = 0x01;
                     break;
                 case StatorSignals.S2:
-                    SendCommand(CommandSubaddress.HEADING_S2_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.HEADING_S2_OFFSET_MSB, msb);
+                    val = 0x02;
                     break;
                 case StatorSignals.S3:
-                    SendCommand(CommandSubaddress.HEADING_S3_OFFSET_LSB, lsb);
-                    SendCommand(CommandSubaddress.HEADING_S3_OFFSET_MSB, msb);
+                    val = 0x04;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statorSignal));
             }
+            SendCommand(CommandSubaddress.LOAD_BEARING_OFFSET_STATOR_COIL_MASK, val);
         }
-        public void SetRangeOnesDigitStatorOffset(StatorSignals statorSignal, byte offset)
+
+        public void LoadHeadingOffsetStatorCoilMask(StatorSignals statorSignal)
         {
+            byte val;
             switch (statorSignal)
             {
-                case StatorSignals.X:
-                    SendCommand(CommandSubaddress.RANGE_ONES_DIGIT_X_STATOR_OFFSET, offset);
+                case StatorSignals.S1:
+                    val = 0x01;
                     break;
-                case StatorSignals.Y:
-                    SendCommand(CommandSubaddress.RANGE_ONES_DIGIT_Y_STATOR_OFFSET, offset);
+                case StatorSignals.S2:
+                    val = 0x02;
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(statorSignal));
-            }
-        }
-        public void SetRangeTensDigitStatorOffset(StatorSignals statorSignal, byte offset)
-        {
-            switch (statorSignal)
-            {
-                case StatorSignals.X:
-                    SendCommand(CommandSubaddress.RANGE_TENS_DIGIT_X_STATOR_OFFSET, offset);
-                    break;
-                case StatorSignals.Y:
-                    SendCommand(CommandSubaddress.RANGE_TENS_DIGIT_Y_STATOR_OFFSET, offset);
+                case StatorSignals.S3:
+                    val = 0x04;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statorSignal));
             }
+            SendCommand(CommandSubaddress.LOAD_BEARING_OFFSET_STATOR_COIL_MASK, val);
         }
-        public void SetRangeHundredsDigitStatorOffset(StatorSignals statorSignal, byte offset)
+
+        public void LoadRangeOffsetStatorCoilMask(RangeDigitStatorCoils statorSignal)
         {
-            switch (statorSignal)
-            {
-                case StatorSignals.X:
-                    SendCommand(CommandSubaddress.RANGE_HUNDREDS_DIGIT_X_STATOR_OFFSET, offset);
-                    break;
-                case StatorSignals.Y:
-                    SendCommand(CommandSubaddress.RANGE_HUNDREDS_DIGIT_Y_STATOR_OFFSET, offset);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(statorSignal));
-            }
+            SendCommand(CommandSubaddress.LOAD_BEARING_OFFSET_STATOR_COIL_MASK, (byte)statorSignal);
         }
-        public void SetRangeIndication3DigitsAllAtOnce(short indicatedRangeMiles)
-        {
-            var rangeNum = (byte)(indicatedRangeMiles / 256);
-            var positionInRange = (byte)(indicatedRangeMiles % 256);
-            if (indicatedRangeMiles >= 0 && indicatedRangeMiles <= 999)
-            {
-                SendCommand(CommandSubaddress.RANGE_3DIGIT_0TO255 + rangeNum, positionInRange);
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException(nameof(indicatedRangeMiles), string.Format(CultureInfo.InvariantCulture, "Must be >=0 and <= 999"));
-            }
-        }
-        public void SetRangeDigitsScrollMode(RangeDigitsScrollMode rangeDigitsScrollMode)
-        {
-            SendCommand(CommandSubaddress.RANGE_DIGITS_SCROLL_MODE, (byte)rangeDigitsScrollMode);
-        }
+
 
         public void SetBearingStatorSignalCoarseSetpointDeferred(StatorSignals statorSignal, byte coarseSetpoint)
         {

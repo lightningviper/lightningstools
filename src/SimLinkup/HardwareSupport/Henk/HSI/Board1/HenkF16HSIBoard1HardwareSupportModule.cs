@@ -169,14 +169,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             ConfigureDiagnosticLEDBehavior();
             ConfigureOutputChannels();
             ConfigureCalibration();
-            ConfigureRangeDigitsScrollMode();
         }
-        private void ConfigureRangeDigitsScrollMode()
-        {
-            if (_hsiBoard1DeviceInterface == null) return;
-            _hsiBoard1DeviceInterface.SetRangeDigitsScrollMode(_hsiBoard1DeviceConfig.RangeDigitsScrollMode ?? RangeDigitsScrollMode.Jump);
-        }
-
         private void ConfigureStatorOffsets()
         {
             if (_hsiBoard1DeviceInterface == null || _hsiBoard1DeviceConfig?.StatorOffsetsConfig == null) return;
@@ -189,9 +182,12 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
                 var headingS2StatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.HeadingS2Offset ?? 582;
                 var headingS3StatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.HeadingS3Offset ?? 923;
 
-                _hsiBoard1DeviceInterface.SetHeadingStatorOffset(StatorSignals.S1, (short)headingS1StatorOffset);
-                _hsiBoard1DeviceInterface.SetHeadingStatorOffset(StatorSignals.S2, (short)headingS2StatorOffset);
-                _hsiBoard1DeviceInterface.SetHeadingStatorOffset(StatorSignals.S3, (short)headingS3StatorOffset);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)headingS1StatorOffset);
+                _hsiBoard1DeviceInterface.LoadHeadingOffsetStatorCoilMask(StatorSignals.S1);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)headingS2StatorOffset);
+                _hsiBoard1DeviceInterface.LoadHeadingOffsetStatorCoilMask(StatorSignals.S2);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)headingS3StatorOffset);
+                _hsiBoard1DeviceInterface.LoadHeadingOffsetStatorCoilMask(StatorSignals.S3);
             }
             catch (Exception e)
             {
@@ -205,9 +201,13 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
                 var bearingS2StatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.BearingS2Offset ?? 582;
                 var bearingS3StatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.BearingS3Offset ?? 923;
 
-                _hsiBoard1DeviceInterface.SetBearingStatorOffset(StatorSignals.S1, (short)bearingS1StatorOffset);
-                _hsiBoard1DeviceInterface.SetBearingStatorOffset(StatorSignals.S2, (short)bearingS2StatorOffset);
-                _hsiBoard1DeviceInterface.SetBearingStatorOffset(StatorSignals.S3, (short)bearingS3StatorOffset);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)bearingS1StatorOffset);
+                _hsiBoard1DeviceInterface.LoadBearingOffsetStatorCoilMask(StatorSignals.S1);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)bearingS2StatorOffset);
+                _hsiBoard1DeviceInterface.LoadBearingOffsetStatorCoilMask(StatorSignals.S2);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)bearingS3StatorOffset);
+                _hsiBoard1DeviceInterface.LoadBearingOffsetStatorCoilMask(StatorSignals.S3);
+
             }
             catch (Exception e)
             {
@@ -220,8 +220,11 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
                 var rangeOnesDigitXStatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.RangeOnesDigitXOffset ?? 85;
                 var rangeOnesDigitYStatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.RangeOnesDigitYOffset ?? 171;
 
-                _hsiBoard1DeviceInterface.SetRangeOnesDigitStatorOffset(StatorSignals.X, (byte)rangeOnesDigitXStatorOffset);
-                _hsiBoard1DeviceInterface.SetRangeOnesDigitStatorOffset(StatorSignals.Y, (byte)rangeOnesDigitYStatorOffset);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)rangeOnesDigitXStatorOffset);
+                _hsiBoard1DeviceInterface.LoadRangeOffsetStatorCoilMask(RangeDigitStatorCoils.RANGE_ONES_DIGIT_X);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)rangeOnesDigitYStatorOffset);
+                _hsiBoard1DeviceInterface.LoadRangeOffsetStatorCoilMask(RangeDigitStatorCoils.RANGE_ONES_DIGIT_Y);
+
             }
             catch (Exception e)
             {
@@ -234,8 +237,11 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
                 var rangeTensDigitXStatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.RangeTensDigitXOffset ?? 85;
                 var rangeTensDigitYStatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.RangeTensDigitYOffset ?? 171;
 
-                _hsiBoard1DeviceInterface.SetRangeTensDigitStatorOffset(StatorSignals.X, (byte)rangeTensDigitXStatorOffset);
-                _hsiBoard1DeviceInterface.SetRangeTensDigitStatorOffset(StatorSignals.Y, (byte)rangeTensDigitYStatorOffset);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)rangeTensDigitXStatorOffset);
+                _hsiBoard1DeviceInterface.LoadRangeOffsetStatorCoilMask(RangeDigitStatorCoils.RANGE_TENS_DIGIT_X);
+
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)rangeTensDigitYStatorOffset);
+                _hsiBoard1DeviceInterface.LoadRangeOffsetStatorCoilMask(RangeDigitStatorCoils.RANGE_TENS_DIGIT_Y);
             }
             catch (Exception e)
             {
@@ -248,8 +254,11 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
                 var rangeHundredsDigitXStatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.RangeHundredsDigitXOffset ?? 85;
                 var rangeHundredsDigitYStatorOffset = _hsiBoard1DeviceConfig?.StatorOffsetsConfig?.RangeHundredsDigitYOffset ?? 171;
 
-                _hsiBoard1DeviceInterface.SetRangeTensDigitStatorOffset(StatorSignals.X, (byte)rangeHundredsDigitXStatorOffset);
-                _hsiBoard1DeviceInterface.SetRangeTensDigitStatorOffset(StatorSignals.Y, (byte)rangeHundredsDigitYStatorOffset);
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)rangeHundredsDigitXStatorOffset);
+                _hsiBoard1DeviceInterface.LoadRangeOffsetStatorCoilMask(RangeDigitStatorCoils.RANGE_HUNDREDS_DIGIT_X);
+
+                _hsiBoard1DeviceInterface.SetStatorOffsetCoilMask((short)rangeHundredsDigitYStatorOffset);
+                _hsiBoard1DeviceInterface.LoadRangeOffsetStatorCoilMask(RangeDigitStatorCoils.RANGE_HUNDREDS_DIGIT_Y);
             }
             catch (Exception e)
             {
