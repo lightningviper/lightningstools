@@ -20,7 +20,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private static string getVLinesSVG()
         {
             var sb = new StringBuilder();
-            for (var x = 0.0; x < 4095; x += 819)
+            for (var x = 0.0; x < 4095; x += 100)
             {
                 sb.Append($"M{x},0 L{x},4095 ");
             }
@@ -30,7 +30,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private static string getHLinesSVG()
         {
             var sb = new StringBuilder();
-            for (var y = 0.0; y < 4095; y += 819)
+            for (var y = 0.0; y < 4095; y += 100)
             {
                 sb.Append($"M0,{y} L4095,{y} ");
             }

@@ -199,6 +199,7 @@
     <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\CalibrationHelper.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\CenteringHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPoint.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPointInterpolationHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\GridCalibrationPattern.cs" />

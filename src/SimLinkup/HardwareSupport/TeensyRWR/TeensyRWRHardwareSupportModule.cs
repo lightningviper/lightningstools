@@ -32,6 +32,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const int VIEWBOX_HEIGHT = 4095;
 		private const int DAC_PRECISION=12;
 		private const int BEZIER_CURVE_INTERPOLATION_STEPS=100;
+        private const int SMALLEST_BEAM_MOVEMENT_DAC_STEPS = 10;
         private const bool USE_VECTOR_FONT = true;
         private readonly BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer { ActualWidth = VIEWBOX_WIDTH, ActualHeight = VIEWBOX_HEIGHT };
         private readonly BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
@@ -543,7 +544,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 try
                 {
                     if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
-                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(dacPrecisionBits:DAC_PRECISION, bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS);
+                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(dacPrecisionBits:DAC_PRECISION, bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS, stepSize: SMALLEST_BEAM_MOVEMENT_DAC_STEPS);
                     var uncalibratedDrawPoints = svgPathToDrawPointsConverter.ConvertToDrawPoints(svgPathString).ToList();
                     var calibratedDrawPoints = CalibrateDrawPoints(uncalibratedDrawPoints).ToList();
                     var drawPointsAsBytes = calibratedDrawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();

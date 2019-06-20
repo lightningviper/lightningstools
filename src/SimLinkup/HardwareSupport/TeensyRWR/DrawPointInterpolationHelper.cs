@@ -6,7 +6,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 {
     internal class DrawPointInterpolationHelper
     {
-        public static void InsertInterpolatedDrawPoints(IList<DrawPoint> drawPoints, double x, double y, bool beamOn, byte dacPrecisionBits=12,double stepSize=10)
+        public static void InsertInterpolatedDrawPoints(IList<DrawPoint> drawPoints, double x, double y, bool beamOn, byte dacPrecisionBits=12,long stepSize=10)
         {
             var maxDacValue = (ushort)(Math.Pow(2, dacPrecisionBits) - 1);
             var finalXDAC = Math.Round(x);
