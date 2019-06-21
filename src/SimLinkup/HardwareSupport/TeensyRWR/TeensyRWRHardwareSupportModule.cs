@@ -25,9 +25,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const Parity PARITY = Parity.None;
         private const StopBits STOP_BITS = StopBits.One;
         private const Handshake HANDSHAKE = Handshake.None;
-        private const int WRITE_BUFFER_SIZE = 8*1024;
+        private const int WRITE_BUFFER_SIZE = 64*1024;
         private const int SERIAL_WRITE_TIMEOUT = 500;
-        private const int MAX_UPDATE_FREQUENCY_HZ = 20;
+        private const int MAX_UPDATE_FREQUENCY_HZ = 60;
         private const int VIEWBOX_WIDTH = 4095;
         private const int VIEWBOX_HEIGHT = 4095;
 		private const int DAC_PRECISION=12;
