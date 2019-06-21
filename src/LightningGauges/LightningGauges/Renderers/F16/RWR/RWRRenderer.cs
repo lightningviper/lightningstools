@@ -23,8 +23,8 @@ namespace LightningGauges.Renderers.F16.RWR
         protected double offsetY = 0;
         protected double BigFontSize { get { return (30.0 / 300.0) * ActualHeight; } }
         protected double SmallFontSize { get { return (20.0 / 300.0) * ActualHeight; } }
-        protected double BigFontVectorScale { get { return 0.00375 * ActualHeight; } }
-        protected double SmallFontVectorScale { get { return 0.0025 * ActualHeight; } }
+        protected double BigFontVectorScale { get { return   0.0025 * ActualHeight; } }
+        protected double SmallFontVectorScale { get { return 0.002 * ActualHeight; } }
         protected double BigFontVOffset { get { return(2.0 /300.0)*ActualHeight;}}
         protected double SmallFontVOffset { get { return(1.0 /300.0)*ActualHeight;}}
         protected SolidColorBrush brush { get { return new SolidColorBrush(Color.FromRgb(5, 248, 7)); } }
