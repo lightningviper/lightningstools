@@ -325,3 +325,5 @@ ASALocalRun/
 /src/MasterBuild/vswhere.exe
 /src/MasterBuild/Git-2.16.2-64-bit.exe
 /src/MasterBuild/sdksetup.exe
+/src/MasterBuild/TeensyduinoInstall.exe
+/src/MasterBuild/arduino-1.8.9-windows.exe
