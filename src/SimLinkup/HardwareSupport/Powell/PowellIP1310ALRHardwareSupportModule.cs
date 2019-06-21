@@ -507,41 +507,35 @@ namespace SimLinkup.HardwareSupport.Powell
                     var totalBytes = 0;
                     foreach (var command in rwrCommands)
                     {
-                        //write out device identifier to memory stream
-                        var deviceIdBytes = Encoding.ASCII.GetBytes(_deviceID);
-                        ms.Write(deviceIdBytes, 0, deviceIdBytes.Length);
-                        totalBytes += deviceIdBytes.Length;
 
-                        //write out the bytes for this command to memory stream
                         var thisCommandBytes = command.ToBytes();
                         if (thisCommandBytes != null && thisCommandBytes.Length > 0)
                         {
+                            //write out device identifier to memory stream
+                            var deviceIdBytes = Encoding.ASCII.GetBytes(_deviceID);
+                            ms.Write(deviceIdBytes, 0, deviceIdBytes.Length);
+                            totalBytes += deviceIdBytes.Length;
+
+                            //write out the bytes for this command to memory stream
                             ms.Write(thisCommandBytes, 0, thisCommandBytes.Length);
                             totalBytes += thisCommandBytes.Length;
-                        }
 
-                        //write contents of memory stream to COM port
-                        ms.Seek(0, SeekOrigin.Begin);
-                        var bytesToWrite = new byte[totalBytes];
-                        Array.Copy(ms.GetBuffer(), 0, bytesToWrite, 0, totalBytes);
-                        if (bytesToWrite.SequenceEqual(_lastBytesWritten)) continue;
-                        try
-                        {
-                            _log.DebugFormat(
-                                $"Sending bytes to serial port {_comPort}:{BytesToString(bytesToWrite, 0, totalBytes)}");
-                            for (var i = 0; i < bytesToWrite.Length; i++)
+                            //write contents of memory stream to COM port
+                            ms.Seek(0, SeekOrigin.Begin);
+                            var bytesToWrite = new byte[totalBytes];
+                            Array.Copy(ms.GetBuffer(), 0, bytesToWrite, 0, totalBytes);
+                            if (bytesToWrite.SequenceEqual(_lastBytesWritten)) continue;
+                            try
                             {
-                                _serialPort.Write(bytesToWrite, i, 1);
-                                Thread.Sleep((int) _delayBetweenCharactersMillis);
-                                _serialPort.BaseStream.Flush();
+                                _serialPort.Write(bytesToWrite, 0, bytesToWrite.Length);
+                                _lastBytesWritten = bytesToWrite;
                             }
-                            _lastBytesWritten = bytesToWrite;
+                            catch (Exception e)
+                            {
+                                _log.Error(e.Message, e);
+                            }
+                            Thread.Sleep((int)_delayBetweenCommandsMillis);
                         }
-                        catch (Exception e)
-                        {
-                            _log.Error(e.Message, e);
-                        }
-                        Thread.Sleep((int) _delayBetweenCommandsMillis);
                     }
                 }
             }

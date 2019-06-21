@@ -1,0 +1,3414 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO POWELL IP-1310/ALR HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+
+    <!-- MAGNETIC HEADING (DEGREES) INPUT-->
+    <SignalMapping>
+      <!-- F4 RWR MAGNETIC HEADING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_COMPASS__MAGNETIC_HEADING_DEGREES</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR MAGNETIC HEADING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__Magnetic_Heading_Degrees</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <!-- RWR OBJECT COUNT INPUT-->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT COUNT OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__OBJECT_COUNT</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR SYMBOL COUNT INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Symbol_Count</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+
+<!-- START RWR SYMBOL INPUTS -->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 0 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[0]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 0 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[0]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 1 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[1]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 1 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[1]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 2 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[2]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 2 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[2]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 3 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[3]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 3 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[3]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 4 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[4]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 4 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[4]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 5 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[5]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 5 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[5]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 6 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[6]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 6 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[6]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 7 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[7]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 7 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[7]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 8 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[8]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 8 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[8]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 9 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[9]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 9 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[9]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 10 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[10]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 10 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[10]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 11 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[11]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 11 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[11]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 12 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[12]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 12 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[12]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 13 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[13]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 13 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[13]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 14 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[14]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 14 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[14]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 15 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[15]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 15 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[15]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 16 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[16]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 16 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[16]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 17 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[17]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 17 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[17]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 18 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[18]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 18 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[18]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 19 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[19]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 19 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[19]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 20 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[20]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 20 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[20]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 21 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[21]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 21 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[21]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 22 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[22]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 22 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[22]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 23 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[23]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 23 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[23]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 24 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[24]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 24 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[24]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 25 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[25]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 25 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[25]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 26 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[26]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 26 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[26]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 27 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[27]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 27 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[27]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 28 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[28]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 28 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[28]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 29 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[29]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 29 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[29]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 30 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[30]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 30 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[30]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 31 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[31]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 31 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[31]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 32 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[32]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 32 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[32]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 33 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[33]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 33 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[33]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 34 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[34]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 34 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[34]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 35 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[35]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 35 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[35]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 36 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[36]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 36 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[36]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 37 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[37]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 37 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[37]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT SYMBOL ID 38 OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__SYMBOL_ID[38]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 38 INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Symbol_ID[38]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+         <!-- F4 RWR OBJECT SYMBOL ID 39 OUTPUT-->
+         <Source xsi:type="AnalogSignal">
+           <Id>F4_RWR__SYMBOL_ID[39]</Id>
+         </Source>
+         <!-- POWELL IP-1310/ALR RWR OBJECT SYMBOL ID 39 INPUT-->
+         <Destination xsi:type="AnalogSignal">
+           <Id>IP1310ALR__RWR_Object_Symbol_ID[39]</Id>
+         </Destination>
+         <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+<!-- END RWR SYMBOL INPUTS -->
+
+    
+<!-- START RWR OBJECT BEARING INPUTS -->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 0 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[0]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 0 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[0]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 1 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[1]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 1 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[1]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 2 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[2]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 2 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[2]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 3 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[3]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 3 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[3]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 4 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[4]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 4 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[4]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 5 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[5]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 5 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[5]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 6 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[6]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 6 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[6]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 7 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[7]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 7 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[7]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 8 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[8]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 8 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[8]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 9 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[9]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 9 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[9]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 10 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[10]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 10 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[10]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 11 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[11]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 11 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[11]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 12 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[12]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 12 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[12]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 13 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[13]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 13 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[13]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 14 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[14]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 14 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[14]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 15 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[15]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 15 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[15]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 16 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[16]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 16 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[16]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 17 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[17]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 17 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[17]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 18 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[18]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 18 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[18]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 19 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[19]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 19 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[19]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 20 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[20]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 20 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[20]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 21 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[21]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 21 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[21]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 22 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[22]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[22]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[23]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 23 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[23]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 24 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[24]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 24 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[24]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 25 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[25]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 25 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[25]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 26 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[26]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 26 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[26]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 27 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[27]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 27 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[27]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 28 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[28]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 28 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[28]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 29 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[29]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 29 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[29]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 30 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[30]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 30 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[30]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 31 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[31]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 31 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[31]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 32 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[32]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 32 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[32]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 33 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[33]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 33 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[33]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 34 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[34]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 34 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[34]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 35 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[35]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 35 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[35]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 36 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[36]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 36 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[36]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 37 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[37]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 37 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[37]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 38 BEARING OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__BEARING_DEGREES[38]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 38 BEARING INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Bearing_Degrees[38]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+         <!-- F4 RWR OBJECT 39 BEARING OUTPUT-->
+         <Source xsi:type="AnalogSignal">
+           <Id>F4_RWR__BEARING_DEGREES[39]</Id>
+         </Source>
+         <!-- POWELL IP-1310/ALR RWR OBJECT 39 BEARING INPUT-->
+         <Destination xsi:type="AnalogSignal">
+           <Id>IP1310ALR__RWR_Object_Bearing_Degrees[39]</Id>
+         </Destination>
+         <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+<!-- END RWR OBJECT BEARING INPUTS -->
+
+ <!-- START RWR OBJECT LETHALITY INPUTS -->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 0 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[0]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 0 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[0]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 1 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[1]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 1 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[1]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 2 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[2]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 2 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[2]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 3 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[3]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 3 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[3]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 4 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[4]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 4 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[4]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 5 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[5]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 5 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[5]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 6 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[6]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 6 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[6]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 7 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[7]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 7 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[7]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 8 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[8]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 8 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[8]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 9 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[9]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 9 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[9]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 10 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[10]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 10 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[10]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 11 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[11]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 11 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[11]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 12 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[12]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 12 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[12]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 13 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[13]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 13 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[13]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 14 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[14]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 14 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[14]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 15 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[15]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 15 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[15]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 16 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[16]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 16 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[16]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 17 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[17]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 17 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[17]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 18 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[18]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 18 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[18]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 19 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[19]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 19 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[19]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 20 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[20]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 20 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[20]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 21 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[21]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 21 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[21]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 22 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[22]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[22]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[23]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 23 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[23]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 24 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[24]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 24 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[24]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 25 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[25]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 25 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[25]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 26 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[26]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 26 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[26]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 27 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[27]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 27 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[27]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 28 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[28]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 28 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[28]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 29 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[29]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 29 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[29]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 30 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[30]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 30 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[30]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 31 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[31]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 31 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[31]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 32 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[32]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 32 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[32]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 33 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[33]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 33 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[33]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 34 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[34]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 34 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[34]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 35 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[35]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 35 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[35]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 36 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[36]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 36 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[36]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 37 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[37]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 37 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[37]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 38 LETHALITY OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_RWR__LETHALITY[38]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 38 LETHALITY INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>IP1310ALR__RWR_Object_Lethality[38]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+         <!-- F4 RWR OBJECT 39 LETHALITY OUTPUT-->
+         <Source xsi:type="AnalogSignal">
+           <Id>F4_RWR__LETHALITY[39]</Id>
+         </Source>
+         <!-- POWELL IP-1310/ALR RWR OBJECT 39 LETHALITY INPUT-->
+         <Destination xsi:type="AnalogSignal">
+           <Id>IP1310ALR__RWR_Object_Lethality[39]</Id>
+         </Destination>
+         <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+<!-- END RWR OBJECT LETHALITY INPUTS -->
+
+      
+<!-- START RWR MISSILE ACTIVITY FLAG INPUTS -->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 0 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[0]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 0 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[0]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 1 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[1]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 1 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[1]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 2 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[2]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 2 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[2]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 3 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[3]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 3 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[3]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 4 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[4]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 4 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[4]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 5 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[5]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 5 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[5]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 6 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[6]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 6 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[6]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 7 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[7]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 7 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[7]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 8 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[8]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 8 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[8]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 9 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[9]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 9 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[9]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 10 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[10]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 10 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[10]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 11 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[11]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 11 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[11]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 12 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[12]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 12 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[12]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 13 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[13]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 13 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[13]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 14 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[14]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 14 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[14]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 15 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[15]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 15 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[15]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 16 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[16]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 16 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[16]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 17 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[17]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 17 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[17]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 18 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[18]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 18 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[18]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 19 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[19]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 19 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[19]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 20 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[20]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 20 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[20]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 21 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[21]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 21 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[21]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 22 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[22]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[22]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[23]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 23 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[23]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 24 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[24]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 24 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[24]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 25 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[25]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 25 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[25]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 26 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[26]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 26 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[26]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 27 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[27]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 27 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[27]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 28 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[28]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 28 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[28]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 29 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[29]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 29 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[29]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 30 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[30]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 30 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[30]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 31 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[31]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 31 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[31]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 32 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[32]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 32 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[32]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 33 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[33]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 33 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[33]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 34 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[34]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 34 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[34]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 35 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[35]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 35 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[35]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 36 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[36]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 36 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[36]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 37 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[37]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 37 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[37]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 38 MISSILE ACTIVITY FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[38]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 38 MISSILE ACTIVITY FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[38]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+         <!-- F4 RWR OBJECT 39 MISSILE ACTIVITY FLAG OUTPUT-->
+         <Source xsi:type="DigitalSignal">
+           <Id>F4_RWR__MISSILE_ACTIVITY_FLAG[39]</Id>
+         </Source>
+         <!-- POWELL IP-1310/ALR RWR OBJECT 39 MISSILE ACTIVITY FLAG INPUT-->
+         <Destination xsi:type="DigitalSignal">
+           <Id>IP1310ALR__RWR_Object_Missile_Activity_Flag[39]</Id>
+         </Destination>
+         <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+<!-- END RWR MISSILE ACTIVITY FLAG INPUTS -->
+    
+<!-- START RWR MISSILE LAUNCH FLAG INPUTS -->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 0 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[0]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 0 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[0]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 1 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[1]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 1 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[1]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 2 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[2]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 2 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[2]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 3 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[3]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 3 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[3]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 4 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[4]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 4 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[4]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 5 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[5]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 5 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[5]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 6 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[6]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 6 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[6]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 7 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[7]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 7 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[7]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 8 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[8]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 8 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[8]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 9 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[9]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 9 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[9]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 10 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[10]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 10 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[10]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 11 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[11]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 11 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[11]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 12 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[12]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 12 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[12]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 13 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[13]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 13 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[13]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 14 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[14]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 14 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[14]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 15 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[15]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 15 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[15]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 16 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[16]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 16 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[16]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 17 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[17]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 17 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[17]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 18 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[18]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 18 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[18]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 19 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[19]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 19 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[19]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 20 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[20]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 20 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[20]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 21 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[21]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 21 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[21]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 22 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[22]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[22]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[23]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 23 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[23]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 24 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[24]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 24 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[24]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 25 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[25]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 25 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[25]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 26 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[26]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 26 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[26]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 27 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[27]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 27 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[27]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 28 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[28]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 28 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[28]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 29 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[29]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 29 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[29]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 30 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[30]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 30 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[30]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 31 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[31]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 31 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[31]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 32 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[32]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 32 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[32]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 33 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[33]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 33 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[33]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 34 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[34]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 34 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[34]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 35 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[35]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 35 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[35]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 36 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[36]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 36 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[36]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 37 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[37]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 37 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[37]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 38 MISSILE LAUNCH FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__MISSILE_LAUNCH_FLAG[38]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 38 MISSILE LAUNCH FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[38]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+         <!-- F4 RWR OBJECT 39 MISSILE LAUNCH FLAG OUTPUT-->
+         <Source xsi:type="DigitalSignal">
+           <Id>F4_RWR__MISSILE_LAUNCH_FLAG[39]</Id>
+         </Source>
+         <!-- POWELL IP-1310/ALR RWR OBJECT 39 MISSILE LAUNCH FLAG INPUT-->
+         <Destination xsi:type="DigitalSignal">
+           <Id>IP1310ALR__RWR_Object_Missile_Launch_Flag[39]</Id>
+         </Destination>
+         <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+<!-- END RWR MISSILE LAUNCH FLAG INPUTS -->
+
+<!-- START RWR OBJECT SELECTED FLAG INPUTS -->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 0 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[0]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 0 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[0]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 1 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[1]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 1 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[1]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 2 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[2]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 2 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[2]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 3 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[3]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 3 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[3]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 4 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[4]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 4 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[4]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 5 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[5]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 5 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[5]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 6 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[6]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 6 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[6]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 7 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[7]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 7 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[7]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 8 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[8]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 8 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[8]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 9 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[9]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 9 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[9]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 10 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[10]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 10 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[10]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 11 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[11]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 11 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[11]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 12 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[12]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 12 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[12]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 13 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[13]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 13 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[13]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 14 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[14]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 14 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[14]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 15 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[15]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 15 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[15]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 16 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[16]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 16 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[16]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 17 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[17]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 17 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[17]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 18 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[18]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 18 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[18]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 19 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[19]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 19 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[19]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 20 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[20]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 20 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[20]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 21 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[21]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 21 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[21]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 22 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[22]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[22]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[23]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 23 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[23]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 24 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[24]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 24 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[24]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 25 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[25]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 25 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[25]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 26 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[26]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 26 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[26]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 27 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[27]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 27 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[27]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 28 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[28]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 28 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[28]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 29 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[29]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 29 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[29]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 30 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[30]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 30 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[30]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 31 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[31]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 31 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[31]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 32 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[32]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 32 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[32]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 33 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[33]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 33 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[33]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 34 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[34]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 34 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[34]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 35 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[35]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 35 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[35]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 36 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[36]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 36 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[36]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 37 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[37]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 37 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[37]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 38 SELECTED FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__SELECTED_FLAG[38]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 38 SELECTED FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_Selected_Flag[38]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+         <!-- F4 RWR OBJECT 39 SELECTED FLAG OUTPUT-->
+         <Source xsi:type="DigitalSignal">
+           <Id>F4_RWR__SELECTED_FLAG[39]</Id>
+         </Source>
+         <!-- POWELL IP-1310/ALR RWR OBJECT 39 SELECTED FLAG INPUT-->
+         <Destination xsi:type="DigitalSignal">
+           <Id>IP1310ALR__RWR_Object_Selected_Flag[39]</Id>
+         </Destination>
+         <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+<!-- END RWR OBJECT SELECTED FLAG INPUTS -->
+
+<!-- START RWR OBJECT NEW DETECTION FLAG INPUTS -->
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 0 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[0]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 0 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[0]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 1 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[1]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 1 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[1]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 2 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[2]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 2 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[2]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 3 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[3]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 3 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[3]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 4 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[4]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 4 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[4]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 5 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[5]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 5 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[5]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 6 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[6]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 6 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[6]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 7 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[7]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 7 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[7]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 8 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[8]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 8 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[8]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 9 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[9]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 9 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[9]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 10 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[10]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 10 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[10]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 11 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[11]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 11 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[11]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 12 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[12]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 12 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[12]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 13 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[13]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 13 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[13]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 14 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[14]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 14 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[14]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 15 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[15]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 15 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[15]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 16 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[16]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 16 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[16]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 17 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[17]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 17 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[17]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 18 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[18]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 18 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[18]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 19 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[19]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 19 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[19]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 20 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[20]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 20 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[20]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 21 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[21]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 21 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[21]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 22 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[22]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[22]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[23]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 23 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[23]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 24 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[24]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 24 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[24]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 25 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[25]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 25 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[25]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 26 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[26]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 26 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[26]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 27 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[27]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 27 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[27]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 28 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[28]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 28 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[28]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 29 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[29]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 29 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[29]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 30 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[30]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 30 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[30]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 31 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[31]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 31 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[31]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 32 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[32]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 32 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[32]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 33 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[33]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 33 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[33]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 34 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[34]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 34 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[34]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 35 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[35]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 35 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[35]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 36 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[36]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 36 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[36]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 37 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[37]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 37 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[37]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 RWR OBJECT 38 NEW DETECTION FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__NEWDETECTION_FLAG[38]</Id>
+      </Source>
+      <!-- POWELL IP-1310/ALR RWR OBJECT 38 NEW DETECTION FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>IP1310ALR__RWR_Object_New_Detection_Flag[38]</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+         <!-- F4 RWR OBJECT 39 NEW DETECTION FLAG OUTPUT-->
+         <Source xsi:type="DigitalSignal">
+           <Id>F4_RWR__NEWDETECTION_FLAG[39]</Id>
+         </Source>
+         <!-- POWELL IP-1310/ALR RWR OBJECT 39 NEW DETECTION FLAG INPUT-->
+         <Destination xsi:type="DigitalSignal">
+           <Id>IP1310ALR__RWR_Object_New_Detection_Flag[39]</Id>
+         </Destination>
+         <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+<!-- END RWR OBJECT NEW DETECTION FLAG INPUTS -->
+
+   
+  </SignalMappings>
+</MappingProfile>
