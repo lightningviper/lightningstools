@@ -13,17 +13,17 @@ const uint16_t MAX_DAC_VALUE = 0xFFF;
 //communication settings
 const unsigned int BAUD_RATE = 115200;
 const unsigned int SERIAL_READ_TIMEOUT_MILLIS = 0;
-const size_t RECEIVE_BUFFER_SIZE=42 * 1024;
+const size_t RECEIVE_BUFFER_SIZE= 64*1024;
 
 //beam timings
-const uint16_t BEAM_MOVEMENT_WHILE_BEAM_OFF_DELAY_MICROSECONDS = 50;
-const uint16_t BEAM_MOVEMENT_MAX_DISTANCE_DELAY_MICROSECONDS = 50;
-const uint16_t BEAM_DELAY_BETWEEN_DRAW_POINTS_MICROSECONDS=10;
-const uint16_t BLANKING_SIGNAL_SETTLING_TIME_MICROSECONDS=15;
-const uint16_t BLANKING_SIGNAL_RISE_TIME_MICROSECONDS=15;
+const float MAX_LINEAR_DISTANCE = sqrtf((MAX_DAC_VALUE * MAX_DAC_VALUE) *2.0);
+const float FULL_RANGE_BEAM_MOVEMENT_MIN_TIME_MICROSECONDS=180;  
+const float DAC_FULL_SCALE_SETTLING_TIME_MICROSECONDS=32; 
+const float DAC_CODE_TO_CODE_SETTLING_TIME_MICROSECONDS=9; 
+const float BLANKING_DELAY_MICROSECONDS=9; 
 
 //draw points buffer setup
-const size_t DRAW_POINTS_BUFFER_SIZE = 10 * 1024;
+const size_t DRAW_POINTS_BUFFER_SIZE = 21 * 1024;
 uint32_t _drawPointsBuffer[DRAW_POINTS_BUFFER_SIZE];
 size_t _drawPointsBufferLength = 0;
 
@@ -46,6 +46,7 @@ void setup()
   beamOff();
   packetSerial.begin(BAUD_RATE);
   packetSerial.setPacketHandler(&onPacketReceived);
+  beamOff();
 }
 
 void loop()
@@ -75,17 +76,8 @@ void draw()
         uint16_t xDAC = ((((uint32_t)xyzCombined) & ((uint32_t)0xFFF000)) >> 12); //bits 12-23 [12 bits]
         uint16_t yDAC = (((uint32_t)MAX_DAC_VALUE)-(((uint32_t)xyzCombined) & ((uint32_t)0xFFF))); //bits 0-11 [12 bits]
         
-        if (beamOnFlag) //we should DRAW A LINE to this point WITH THE BEAM TURNED ON
-        {
-          beamOn();
-          beamTo(xDAC, yDAC);
-        }
-        else //we should MOVE to this point WITH THE BEAM TURNED OFF
-        {
-          beamOff();
-          beamTo(xDAC, yDAC);
-        }
-        delayMicroseconds(BEAM_DELAY_BETWEEN_DRAW_POINTS_MICROSECONDS);
+        beamOnFlag ? beamOn() : beamOff();
+        beamTo(xDAC, yDAC);
       }
       beamOff();
       beamTo(0, MAX_DAC_VALUE);
@@ -116,29 +108,27 @@ void updateLED()
 
 void beamTo(uint16_t x, uint16_t y)
 {
-  float maxDistance = distance(0,0, MAX_DAC_VALUE, MAX_DAC_VALUE);
-  float dist = distance(x, y, _currentBeamLocationXDAC, _currentBeamLocationYDAC);
-  writePointToDACs(x, y);
-  delayMicroseconds((uint16_t) BEAM_MOVEMENT_MAX_DISTANCE_DELAY_MICROSECONDS * (dist / maxDistance) ); //wait for beam to get there
-  if (!_beamOn) delayMicroseconds(BEAM_MOVEMENT_WHILE_BEAM_OFF_DELAY_MICROSECONDS);
-}
-float distance(float x1, float y1, float x2, float y2)
-{
-  float dx = x2 - x1;
-  float dy = y2 - y1;
-  return fabs(sqrtf(dx * dx + dy * dy));
-}
-
-void writePointToDACs(uint16_t xDAC, uint16_t yDAC)
-{
-  if (_currentBeamLocationXDAC == xDAC && _currentBeamLocationYDAC == yDAC)
+  //update the DAC outputs
+  if (_currentBeamLocationXDAC == x && _currentBeamLocationYDAC == y)
   {
     return;
   }
-  analogWrite(X_PIN, xDAC);
-  analogWrite(Y_PIN, yDAC);
-  _currentBeamLocationXDAC = xDAC;
-  _currentBeamLocationYDAC = yDAC;
+  analogWrite(X_PIN, x);
+  analogWrite(Y_PIN, y);
+
+  //calculate expected DAC settling time
+  float dx = _currentBeamLocationXDAC - x;
+  float dy = _currentBeamLocationYDAC - y;
+  float dacSettlingTime= fmax(DAC_CODE_TO_CODE_SETTLING_TIME_MICROSECONDS, ((fmax(dx, dy)/ MAX_DAC_VALUE) * DAC_FULL_SCALE_SETTLING_TIME_MICROSECONDS));
+
+  //calculate expected beam travel time
+  float beamMovementTimeMicroseconds =  (fabs(sqrtf(dx * dx + dy * dy)) / MAX_LINEAR_DISTANCE) * FULL_RANGE_BEAM_MOVEMENT_MIN_TIME_MICROSECONDS;
+
+  //wait for (the longer of) expected DAC settling time or expected beam movement time
+  delayMicroseconds(fmax(beamMovementTimeMicroseconds, dacSettlingTime)); 
+
+  _currentBeamLocationXDAC = x;
+  _currentBeamLocationYDAC = y;
 }
 
 void beamOff()
@@ -148,7 +138,7 @@ void beamOff()
     return;
   }
   digitalWrite(Z_PIN, HIGH);
-  delayMicroseconds(BLANKING_SIGNAL_SETTLING_TIME_MICROSECONDS);
+  delayMicroseconds(BLANKING_DELAY_MICROSECONDS);
   _beamOn = false;
 }
 
@@ -159,6 +149,6 @@ void beamOn()
     return;
   }
   digitalWrite(Z_PIN, LOW);
-  delayMicroseconds(BLANKING_SIGNAL_RISE_TIME_MICROSECONDS);
+  delayMicroseconds(BLANKING_DELAY_MICROSECONDS);
   _beamOn = true;
 }
