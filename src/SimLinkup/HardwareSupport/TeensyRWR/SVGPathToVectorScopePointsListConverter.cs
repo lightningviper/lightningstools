@@ -24,7 +24,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private readonly IList<DrawPoint> _drawPoints=new List<DrawPoint>();
 
-        public SVGPathToVectorScopePointsListConverter(byte dacPrecisionBits = 12, long bezierCurveInterpolationSteps = 25, long stepSize=10)
+        public SVGPathToVectorScopePointsListConverter(byte dacPrecisionBits = 12, long bezierCurveInterpolationSteps = 25, long stepSize=1)
         {
             _dacPrecisionBits = dacPrecisionBits;
             _bezierCurveInterpolationSteps = bezierCurveInterpolationSteps;
