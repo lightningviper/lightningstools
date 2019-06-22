@@ -12,14 +12,13 @@ const uint16_t MAX_DAC_VALUE = 0xFFF;
 
 //communication settings
 const unsigned int BAUD_RATE = 115200;
-const unsigned int SERIAL_READ_TIMEOUT_MILLIS = 0;
 const size_t RECEIVE_BUFFER_SIZE= 64*1024;
 
 //beam timings
 const float MAX_LINEAR_DISTANCE = sqrtf((MAX_DAC_VALUE * MAX_DAC_VALUE) *2.0);
-const float FULL_RANGE_BEAM_MOVEMENT_MIN_TIME_MICROSECONDS=180;  
+const float FULL_RANGE_BEAM_MOVEMENT_MIN_TIME_MICROSECONDS=500;  
 const float DAC_FULL_SCALE_SETTLING_TIME_MICROSECONDS=32; 
-const float DAC_CODE_TO_CODE_SETTLING_TIME_MICROSECONDS=9; 
+const float DAC_CODE_TO_CODE_SETTLING_TIME_MICROSECONDS=15; 
 const float BLANKING_DELAY_MICROSECONDS=9; 
 
 //draw points buffer setup

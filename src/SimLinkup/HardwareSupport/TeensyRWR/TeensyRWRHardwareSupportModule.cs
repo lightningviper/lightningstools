@@ -68,6 +68,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private AnalogSignal _chaffCountInputSignal;
         private AnalogSignal _flareCountInputSignal;
 
+        private AnalogSignal _numDrawPointsSentSignal;
+        private AnalogSignal _bytesSent;
+
         private TeensyRWRHardwareSupportModule(TeensyRWRHardwareSupportModuleConfig config)
         {
             _config = config;
@@ -431,6 +434,47 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 digitalSignalsToReturn.Add(thisSignal);
             }
 
+            _numDrawPointsSentSignal = new AnalogSignal
+            {
+                Category = "Performance Tracking",
+                CollectionName = "Data Throughput",
+                FriendlyName = "# of Draw Points Sent (last packet)",
+                Id = "TeensyRWR__Num_Draw_Points_Sent_Last_Packet",
+                Index = 0,
+                PublisherObject = this,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                SubSource = null,
+                SubSourceFriendlyName = null,
+                SubSourceAddress = null,
+                State = 0,
+                MinValue = 0,
+                MaxValue = 21*1024
+            };
+            analogSignalsToReturn.Add(_numDrawPointsSentSignal);
+
+            _bytesSent = new AnalogSignal
+            {
+                Category = "Performance Tracking",
+                CollectionName = "Data Throughput",
+                FriendlyName = "# of Bytes Sent (last packet)",
+                Id = "TeensyRWR__Bytes_Sent_Last_Packet",
+                Index = 0,
+                PublisherObject = this,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                SubSource = null,
+                SubSourceFriendlyName = null,
+                SubSourceAddress = null,
+                State = 0,
+                MinValue = 0,
+                MaxValue = 64*1024
+            };
+            analogSignalsToReturn.Add(_bytesSent);
+
+
             analogSignals = analogSignalsToReturn.ToArray();
             digitalSignals = digitalSignalsToReturn.ToArray();
             textSignals = textSignalsToReturn.ToArray();
@@ -547,11 +591,18 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(dacPrecisionBits:DAC_PRECISION, bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS, stepSize: SMALLEST_BEAM_MOVEMENT_DAC_STEPS);
                     var uncalibratedDrawPoints = svgPathToDrawPointsConverter.ConvertToDrawPoints(svgPathString).ToList();
                     var calibratedDrawPoints = CalibrateDrawPoints(uncalibratedDrawPoints).ToList();
+
                     var drawPointsAsBytes = calibratedDrawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
+
                     var cobsEncodedPacket = COBS.Encode(drawPointsAsBytes);
+
                     _serialPort.Write(cobsEncodedPacket, offset: 0, count: cobsEncodedPacket.Length);
                     _serialPort.Write(new byte[]{0},0,1);
                     _serialPort.BaseStream.Flush();
+
+                    _numDrawPointsSentSignal.State = calibratedDrawPoints.Count();
+                    _bytesSent.State = cobsEncodedPacket.Length;
+
                 }
                 catch (Exception e)
                 {
