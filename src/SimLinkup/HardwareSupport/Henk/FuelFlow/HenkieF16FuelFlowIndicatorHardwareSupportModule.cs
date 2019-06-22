@@ -266,6 +266,7 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
         {
             if (_fuelFlowDeviceInterface == null || _deviceConfig?.CalibrationData == null) return;
             _calibrationData = _deviceConfig?.CalibrationData;
+            _fuelFlowDeviceInterface.SetPosition(0);
         }
 
         private void ConfigureUSBConnection()
