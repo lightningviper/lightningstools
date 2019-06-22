@@ -21,8 +21,11 @@ namespace SimLinkup
             {
                 return;
             }
-            Common.Win32.NativeMethods.SetProcessDpiAwareness(Common.Win32.NativeMethods.PROCESS_DPI_AWARENESS.Process_System_DPI_Aware);
-
+            try
+            {
+                Common.Win32.NativeMethods.SetProcessDpiAwareness(Common.Win32.NativeMethods.PROCESS_DPI_AWARENESS.Process_System_DPI_Aware);
+            }
+            catch { }
 
             Application.ThreadException += UIThreadException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
