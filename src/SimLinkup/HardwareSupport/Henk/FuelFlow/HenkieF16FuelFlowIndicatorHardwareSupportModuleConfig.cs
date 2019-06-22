@@ -43,9 +43,9 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
     [Serializable]
     public class StatorBaseAnglesConfig
     {
-        public ushort? S1BaseAngleDegrees { get; set; }
-        public ushort? S2BaseAngleDegrees { get; set; }
-        public ushort? S3BaseAngleDegrees { get; set; }
+        public double? S1BaseAngleDegrees { get; set; }
+        public double? S2BaseAngleDegrees { get; set; }
+        public double? S3BaseAngleDegrees { get; set; }
     }
 
     [Serializable]
