@@ -40,7 +40,7 @@ namespace LightningGauges.Renderers.F16.RWR
                 default:
                     throw new ArgumentException();
             }
-            toReturn.UseVectorFont = useVectorFont;
+            toReturn.FormatForVectorDisplay = useVectorFont;
             return toReturn;
            
         }

@@ -106,33 +106,35 @@ namespace LightningGauges.Renderers.F16.RWR.CARAPACE
 
             drawingContext.PushClip(new EllipseGeometry(new Point(ActualWidth / 2, ActualHeight / 2), ActualWidth / 2, ActualHeight / 2));
 
-            if (!RwrInfoContains("onbit"))
+            if (!RwrInfoContains("onbit") )
             {
-                for (int i = 0; i < 12; i++)
+                if (!FormatForVectorDisplay)
                 {
-                    double y1 = 0.65 * Math.Sin(-(i * (45 * DTR)));
-                    double x1 = 0.65 * Math.Cos(-(i * (45 * DTR)));
-                    double y2 = 0.65 * Math.Sin(-((i * (45 * DTR)) + (22.5 * DTR)));
-                    double x2 = 0.65 * Math.Cos(-((i * (45 * DTR)) + (22.5 * DTR)));
-                    DrawLine(drawingContext, x1, y1, x2, y2);
-                }
+                    for (int i = 0; i < 12; i++)
+                    {
+                        double y1 = 0.65 * Math.Sin(-(i * (45 * DTR)));
+                        double x1 = 0.65 * Math.Cos(-(i * (45 * DTR)));
+                        double y2 = 0.65 * Math.Sin(-((i * (45 * DTR)) + (22.5 * DTR)));
+                        double x2 = 0.65 * Math.Cos(-((i * (45 * DTR)) + (22.5 * DTR)));
+                        DrawLine(drawingContext, x1, y1, x2, y2);
+                    }
 
-                for (int i = 0; i < 12; i++)
-                {
-                    double y1 = 0.3 * Math.Sin(-(i * (45 * DTR)));
-                    double x1 = 0.3 * Math.Cos(-(i * (45 * DTR)));
-                    double y2 = 0.3 * Math.Sin(-((i * (45 * DTR)) + (22.5 * DTR)));
-                    double x2 = 0.3 * Math.Cos(-((i * (45 * DTR)) + (22.5 * DTR)));
-                    DrawLine(drawingContext, x1, y1, x2, y2);
-                }
+                    for (int i = 0; i < 12; i++)
+                    {
+                        double y1 = 0.3 * Math.Sin(-(i * (45 * DTR)));
+                        double x1 = 0.3 * Math.Cos(-(i * (45 * DTR)));
+                        double y2 = 0.3 * Math.Sin(-((i * (45 * DTR)) + (22.5 * DTR)));
+                        double x2 = 0.3 * Math.Cos(-((i * (45 * DTR)) + (22.5 * DTR)));
+                        DrawLine(drawingContext, x1, y1, x2, y2);
+                    }
 
-                for (int i = 0; i < 12; i++)
-                {
-                    double y = 0.9 * Math.Sin(i * (30 * DTR));
-                    double x = 0.9 * Math.Cos(i * (30 * DTR));
-                    DrawSolidCircle(drawingContext, x, y, 0.02);
+                    for (int i = 0; i < 12; i++)
+                    {
+                        double y = 0.9 * Math.Sin(i * (30 * DTR));
+                        double x = 0.9 * Math.Cos(i * (30 * DTR));
+                        DrawSolidCircle(drawingContext, x, y, 0.02);
+                    }
                 }
-
                 if (!RwrInfoContains("navfault"))
                 {
                     DrawLine(drawingContext, 0.0, -0.05, 0.0, 0.05);

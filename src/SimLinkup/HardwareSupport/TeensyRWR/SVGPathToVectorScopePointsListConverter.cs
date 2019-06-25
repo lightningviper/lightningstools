@@ -5,11 +5,6 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 {
     internal class SVGPathToVectorScopePointsListConverter
     {
-        //DAC settings
-        private readonly byte _dacPrecisionBits;
-
-        private readonly long _stepSize; 
-
         //degree of detail for Bezier curve interpolation
         private readonly long _bezierCurveInterpolationSteps;
 
@@ -24,11 +19,9 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private readonly IList<DrawPoint> _drawPoints=new List<DrawPoint>();
 
-        public SVGPathToVectorScopePointsListConverter(byte dacPrecisionBits = 12, long bezierCurveInterpolationSteps = 25, long stepSize=1)
+        public SVGPathToVectorScopePointsListConverter(long bezierCurveInterpolationSteps = 25)
         {
-            _dacPrecisionBits = dacPrecisionBits;
             _bezierCurveInterpolationSteps = bezierCurveInterpolationSteps;
-            _stepSize = stepSize;
         }
 
 
@@ -293,14 +286,14 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         {
             _figureStartX = x;
             _figureStartY = y;
-            DrawPointInterpolationHelper.InsertInterpolatedDrawPoints(_drawPoints, x, y, beamOn: false, dacPrecisionBits:_dacPrecisionBits, stepSize: _stepSize);
+            _drawPoints.Add(new DrawPoint { BeamOn = false, X = x, Y = y });
             _currentX = x;
             _currentY = y;
         }
 
         private void LineTo(double x, double y)
         {
-            DrawPointInterpolationHelper.InsertInterpolatedDrawPoints(_drawPoints, x, y, beamOn:true, dacPrecisionBits: _dacPrecisionBits,stepSize: _stepSize);
+            _drawPoints.Add(new DrawPoint { BeamOn = true, X = x, Y = y });
             _currentX = x;
             _currentY = y;
         }

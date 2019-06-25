@@ -30,9 +30,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private const int MAX_UPDATE_FREQUENCY_HZ = 60;
         private const int VIEWBOX_WIDTH = 4095;
         private const int VIEWBOX_HEIGHT = 4095;
-		private const int DAC_PRECISION=12;
-		private const int BEZIER_CURVE_INTERPOLATION_STEPS=100;
-        private const int SMALLEST_BEAM_MOVEMENT_DAC_STEPS = 10;
+		private const int BEZIER_CURVE_INTERPOLATION_STEPS=25;
         private const bool USE_VECTOR_FONT = true;
         private readonly BMSRWRRenderer _drawingCommandRenderer = new BMSRWRRenderer { ActualWidth = VIEWBOX_WIDTH, ActualHeight = VIEWBOX_HEIGHT };
         private readonly BMSRWRRenderer _uiRenderer = new BMSRWRRenderer();
@@ -570,6 +568,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
             drawingContext.PushTransform(new RotateTransform(_config.RotationDegrees, VIEWBOX_WIDTH /2.0, VIEWBOX_HEIGHT/2.0));
+            drawingContext.PushTransform(new ScaleTransform(1, -1, VIEWBOX_WIDTH / 2.0, VIEWBOX_HEIGHT / 2.0));
             _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
             drawingContext.Close();
             return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
@@ -588,12 +587,12 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 try
                 {
                     if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
-                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(dacPrecisionBits:DAC_PRECISION, bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS, stepSize: SMALLEST_BEAM_MOVEMENT_DAC_STEPS);
-                    var uncalibratedDrawPoints = svgPathToDrawPointsConverter.ConvertToDrawPoints(svgPathString).ToList();
+                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS);
+                    var uncalibratedDrawPoints = svgPathToDrawPointsConverter
+                                                    .ConvertToDrawPoints(svgPathString)
+                                                    .ToList();
                     var calibratedDrawPoints = CalibrateDrawPoints(uncalibratedDrawPoints).ToList();
-
                     var drawPointsAsBytes = calibratedDrawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
-
                     var cobsEncodedPacket = COBS.Encode(drawPointsAsBytes);
 
                     _serialPort.Write(cobsEncodedPacket, offset: 0, count: cobsEncodedPacket.Length);

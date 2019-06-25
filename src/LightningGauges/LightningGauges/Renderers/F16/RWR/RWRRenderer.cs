@@ -23,8 +23,8 @@ namespace LightningGauges.Renderers.F16.RWR
         protected double offsetY = 0;
         protected double BigFontSize { get { return (30.0 / 300.0) * ActualHeight; } }
         protected double SmallFontSize { get { return (20.0 / 300.0) * ActualHeight; } }
-        protected double BigFontVectorScale { get { return   0.0025 * ActualHeight; } }
-        protected double SmallFontVectorScale { get { return 0.002 * ActualHeight; } }
+        protected double BigFontVectorScale { get { return   0.0027 * ActualHeight; } }
+        protected double SmallFontVectorScale { get { return 0.0018 * ActualHeight; } }
         protected double BigFontVOffset { get { return(2.0 /300.0)*ActualHeight;}}
         protected double SmallFontVOffset { get { return(1.0 /300.0)*ActualHeight;}}
         protected SolidColorBrush brush { get { return new SolidColorBrush(Color.FromRgb(5, 248, 7)); } }
@@ -33,7 +33,7 @@ namespace LightningGauges.Renderers.F16.RWR
 			FontStyles.Normal,
             FontWeights.Normal,
             FontStretches.Normal);
-        public bool UseVectorFont { get; set; }
+        public bool FormatForVectorDisplay { get; set; }
         public InstrumentState InstrumentState { get; set; } = new InstrumentState();
         public virtual void Render(DrawingContext drawingContext){}
         public override void Render(Common.Drawing.Graphics destinationGraphics, Common.Drawing.Rectangle destinationRectangle)
@@ -135,7 +135,7 @@ namespace LightningGauges.Renderers.F16.RWR
         }
         protected double TextHeight(bool big)
         {
-            return UseVectorFont ? TextHeightVectorFont(big) : TextHeightTrueTypeFont(big);
+            return FormatForVectorDisplay ? TextHeightVectorFont(big) : TextHeightTrueTypeFont(big);
         }
 
         protected double TextHeightTrueTypeFont(bool big)
@@ -165,7 +165,7 @@ namespace LightningGauges.Renderers.F16.RWR
 
         protected double TextWidth(string text, bool big)
         {
-            return UseVectorFont ? TextWidthVectorFont(text, big) : TextWidthTrueTypeFont(text, big);
+            return FormatForVectorDisplay ? TextWidthVectorFont(text, big) : TextWidthTrueTypeFont(text, big);
         }
         protected double TextWidthTrueTypeFont(string text, bool big)
         {
@@ -199,7 +199,7 @@ namespace LightningGauges.Renderers.F16.RWR
         }
         protected void DrawTextCenteredVertical(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
-            if (UseVectorFont)
+            if (FormatForVectorDisplay)
                 DrawTextCenteredVerticalVectorFont(drawingContext, text, x, y, big);
             else
                 DrawTextCenteredVerticalTrueTypeFont(drawingContext, text, x, y, big);
@@ -265,7 +265,7 @@ namespace LightningGauges.Renderers.F16.RWR
         }
         protected void DrawTextCenter(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
-            if (UseVectorFont)
+            if (FormatForVectorDisplay)
                 DrawTextCenteredVerticalVectorFont(drawingContext, text, x, y, big);
             else
                 DrawTextCenteredVerticalTrueTypeFont(drawingContext, text, x, y, big);
@@ -331,7 +331,7 @@ namespace LightningGauges.Renderers.F16.RWR
         }
         protected void DrawTextLeft(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
-            if (UseVectorFont)
+            if (FormatForVectorDisplay)
                 DrawTextLeftVectorFont(drawingContext, text, x, y, big);
             else
                 DrawTextLeftTrueTypeFont(drawingContext, text, x, y, big);
@@ -397,7 +397,7 @@ namespace LightningGauges.Renderers.F16.RWR
         }
         protected void DrawTextRight(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
-            if (UseVectorFont)
+            if (FormatForVectorDisplay)
                 DrawTextRightVectorFont(drawingContext, text, x, y, big);
             else
                 DrawTextRightTrueTypeFont(drawingContext, text, x, y, big);

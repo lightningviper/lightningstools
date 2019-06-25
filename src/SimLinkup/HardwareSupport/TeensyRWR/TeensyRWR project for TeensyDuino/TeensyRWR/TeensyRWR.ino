@@ -6,25 +6,28 @@ const int Y_PIN = A22;
 const int Z_PIN = A20;
 const int BUILTIN_LED_PIN = 13;
 
+//inversion settings
+const bool INVERT_X = false;
+const bool INVERT_Y = false;
+const bool INVERT_Z = true;
+
 //DAC precision & scale
 const unsigned int DAC_PRECISION_BITS = 12;
 const uint16_t MAX_DAC_VALUE = 0xFFF;
-
-//communication settings
-const unsigned int BAUD_RATE = 115200;
-const size_t RECEIVE_BUFFER_SIZE= 64*1024;
-
-//beam timings
-const float MAX_LINEAR_DISTANCE = sqrtf((MAX_DAC_VALUE * MAX_DAC_VALUE) *2.0);
-const float FULL_RANGE_BEAM_MOVEMENT_MIN_TIME_MICROSECONDS=500;  
-const float DAC_FULL_SCALE_SETTLING_TIME_MICROSECONDS=32; 
-const float DAC_CODE_TO_CODE_SETTLING_TIME_MICROSECONDS=15; 
-const float BLANKING_DELAY_MICROSECONDS=9; 
 
 //draw points buffer setup
 const size_t DRAW_POINTS_BUFFER_SIZE = 21 * 1024;
 uint32_t _drawPointsBuffer[DRAW_POINTS_BUFFER_SIZE];
 size_t _drawPointsBufferLength = 0;
+
+//communication settings
+const unsigned int BAUD_RATE = 115200;
+const size_t RECEIVE_BUFFER_SIZE= 64*1024;
+PacketSerial_<COBS, 0, RECEIVE_BUFFER_SIZE> packetSerial;
+
+//beam timings
+const float BEAM_INCREMENT_MOVEMENT_DELAY_MICROSECONDS=0.3;
+const float BLANKING_DELAY_MICROSECONDS=7;
 
 //beam location and state
 uint16_t _currentBeamLocationXDAC = 0;
@@ -34,18 +37,19 @@ bool _beamOn = true; //set to true at initialization time but will be turned off
 //LED state
 bool _ledOn = false;
 
-PacketSerial_<COBS, 0, RECEIVE_BUFFER_SIZE> packetSerial;
 
 void setup()
 {
   pinMode(Z_PIN, OUTPUT);
+  beamOff();
+
   pinMode(BUILTIN_LED_PIN, OUTPUT);
   analogWriteResolution(DAC_PRECISION_BITS);
   LEDOn();
-  beamOff();
+  
   packetSerial.begin(BAUD_RATE);
   packetSerial.setPacketHandler(&onPacketReceived);
-  beamOff();
+
 }
 
 void loop()
@@ -62,24 +66,20 @@ void onPacketReceived(const uint8_t* buffer, size_t size)
 }
 
 void draw()
-{
-      if (_drawPointsBufferLength <= 0)
-      {
-        return;
-      }
+{ 
+      if (_drawPointsBufferLength <= 0) return;
+
       for (size_t i = 0; i < _drawPointsBufferLength; i++)
       {
-        uint32_t xyzCombined = _drawPointsBuffer[i];
-    
-        bool beamOnFlag = ((((uint32_t)xyzCombined) & ((uint32_t)0x1000000)) == (uint32_t)0x1000000); //bit 24
-        uint16_t xDAC = ((((uint32_t)xyzCombined) & ((uint32_t)0xFFF000)) >> 12); //bits 12-23 [12 bits]
-        uint16_t yDAC = (((uint32_t)MAX_DAC_VALUE)-(((uint32_t)xyzCombined) & ((uint32_t)0xFFF))); //bits 0-11 [12 bits]
-        
+        uint32_t point = _drawPointsBuffer[i];
+        bool beamOnFlag = ((((uint32_t)point) & ((uint32_t)0x1000000)) == (uint32_t)0x1000000); //bit 24
+        uint16_t xDAC = ((((uint32_t)point) & ((uint32_t)0xFFF000)) >> 12); //bits 12-23 [12 bits]
+        uint16_t yDAC = (((((uint32_t)point) & ((uint32_t)0xFFF)))); //bits 0-11 [12 bits]
         beamOnFlag ? beamOn() : beamOff();
-        beamTo(xDAC, yDAC);
+        drawPoint(xDAC, yDAC, beamOnFlag);
       }
       beamOff();
-      beamTo(0, MAX_DAC_VALUE);
+      drawPoint(0, MAX_DAC_VALUE, false);
 }
 
 void LEDOff()
@@ -105,49 +105,64 @@ void updateLED()
   digitalWrite(BUILTIN_LED_PIN, _ledOn ? HIGH : LOW);
 }
 
-void beamTo(uint16_t x, uint16_t y)
+void drawPoint(uint16_t x, uint16_t y, bool beamOnFlag)
 {
-  //update the DAC outputs
-  if (_currentBeamLocationXDAC == x && _currentBeamLocationYDAC == y)
+  if (x <0) x = 0;
+  else if (x > MAX_DAC_VALUE) x = MAX_DAC_VALUE;
+
+  if (y <0) y = 0;
+  else if (y > MAX_DAC_VALUE) y = MAX_DAC_VALUE;
+
+  if (_currentBeamLocationXDAC == x && _currentBeamLocationYDAC == y) return;
+
+  uint16_t startX = _currentBeamLocationXDAC;
+  uint16_t startY = _currentBeamLocationYDAC;
+  
+  //calculate the distance the beam will move
+  float xDist = x-startX;
+  float yDist = y-startY;
+  float euclideanDist=fabs(sqrtf((xDist * xDist) + (yDist * yDist)));
+  uint32_t numSteps=fmax(1, (ceilf(euclideanDist)));
+
+ if (beamOnFlag) 
   {
-    return;
+    float dx = (xDist/numSteps);
+    float dy = (yDist/numSteps);
+    for (uint32_t i=1;i<numSteps;i++) 
+    {
+      updateDACOutputs((startX + (dx * i)), (startY + (dy * i)));
+      delayMicroseconds(BEAM_INCREMENT_MOVEMENT_DELAY_MICROSECONDS);
+    }
+    updateDACOutputs(x,y);
+    delayMicroseconds(BEAM_INCREMENT_MOVEMENT_DELAY_MICROSECONDS);
   }
-  analogWrite(X_PIN, x);
-  analogWrite(Y_PIN, y);
-
-  //calculate expected DAC settling time
-  float dx = _currentBeamLocationXDAC - x;
-  float dy = _currentBeamLocationYDAC - y;
-  float dacSettlingTime= fmax(DAC_CODE_TO_CODE_SETTLING_TIME_MICROSECONDS, ((fmax(dx, dy)/ MAX_DAC_VALUE) * DAC_FULL_SCALE_SETTLING_TIME_MICROSECONDS));
-
-  //calculate expected beam travel time
-  float beamMovementTimeMicroseconds =  (fabs(sqrtf(dx * dx + dy * dy)) / MAX_LINEAR_DISTANCE) * FULL_RANGE_BEAM_MOVEMENT_MIN_TIME_MICROSECONDS;
-
-  //wait for (the longer of) expected DAC settling time or expected beam movement time
-  delayMicroseconds(fmax(beamMovementTimeMicroseconds, dacSettlingTime)); 
-
+  else 
+  {
+    updateDACOutputs (x,y);
+    delayMicroseconds(euclideanDist * BEAM_INCREMENT_MOVEMENT_DELAY_MICROSECONDS);
+  }
+  
   _currentBeamLocationXDAC = x;
   _currentBeamLocationYDAC = y;
+}
+void updateDACOutputs(uint16_t xDAC, uint16_t yDAC) 
+{
+    analogWrite(X_PIN, INVERT_X ? MAX_DAC_VALUE - xDAC : xDAC);
+    analogWrite(Y_PIN, INVERT_Y ? MAX_DAC_VALUE - yDAC : yDAC);
 }
 
 void beamOff()
 {
-  if (!_beamOn)
-  {
-    return;
-  }
-  digitalWrite(Z_PIN, HIGH);
+  if (!_beamOn) return;
+  digitalWrite(Z_PIN, INVERT_Z ? HIGH : LOW);
   delayMicroseconds(BLANKING_DELAY_MICROSECONDS);
-  _beamOn = false;
+  _beamOn=false;
 }
 
 void beamOn()
 {
-  if (_beamOn)
-  {
-    return;
-  }
-  digitalWrite(Z_PIN, LOW);
+  if (_beamOn) return;
+  digitalWrite(Z_PIN, INVERT_Z ? LOW: HIGH);
   delayMicroseconds(BLANKING_DELAY_MICROSECONDS);
-  _beamOn = true;
+  _beamOn=true;
 }
