@@ -107,11 +107,8 @@ void updateLED()
 
 void drawPoint(uint16_t x, uint16_t y, bool beamOnFlag)
 {
-  if (x <0) x = 0;
-  else if (x > MAX_DAC_VALUE) x = MAX_DAC_VALUE;
-
-  if (y <0) y = 0;
-  else if (y > MAX_DAC_VALUE) y = MAX_DAC_VALUE;
+  x = x < 0 ? 0 : x > MAX_DAC_VALUE ? MAX_DAC_VALUE : x;
+  y = y < 0 ? 0 : y > MAX_DAC_VALUE ? MAX_DAC_VALUE : y;
 
   if (_currentBeamLocationXDAC == x && _currentBeamLocationYDAC == y) return;
 

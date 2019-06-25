@@ -53,7 +53,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
             var calTableInputSegmentRange = (ceil.Input - floor.Input);
             
-            if (double.IsNaN(1 / calTableInputSegmentRange) )
+            if (calTableInputSegmentRange == 0 || double.IsNaN(1 / calTableInputSegmentRange) )
             {
                 return inputVal;
             }
