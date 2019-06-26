@@ -124,12 +124,12 @@ namespace SimLinkup.Scripting
             {
                 if (ssm.SimOutputs != null)
                 {
-                    foreach (var output in ssm.SimOutputs.Values)
+                    foreach (var output in ssm.SimOutputs.Values.OrderBy(x=>x.FriendlyName).ToList())
                         this[output.Id] = output;
                 }
                 if (ssm.SimCommands != null)
                 {
-                    foreach (var command in ssm.SimCommands.Values)
+                    foreach (var command in ssm.SimCommands.Values.OrderBy(x => x.FriendlyName).ToList())
                         this[command.In.Id] = command.In;
                 }
             }

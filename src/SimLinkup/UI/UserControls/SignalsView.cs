@@ -110,7 +110,7 @@ namespace SimLinkup.UI.UserControls
         {
             var lvi = new ListViewItem
             {
-                Text = signal.FriendlyName,
+                Text = string.IsNullOrWhiteSpace(signal.SubcollectionName) ?  signal.FriendlyName :  (signal.SubcollectionName + " : " + signal.FriendlyName),
                 Tag = signal
             };
             return lvi;
@@ -219,8 +219,9 @@ namespace SimLinkup.UI.UserControls
                                 lvSignals.Items.Add(lvi);
                                 signalsAlreadyAdded.Add(signal);
                             }
+                            
                         }
-                        foreach (var signal in signalsThisCollection.Except(signalsAlreadyAdded))
+                        foreach (var signal in signalsThisCollection.Except(signalsAlreadyAdded).OrderBy(x=>x.FriendlyName))
                         {
                             var lvi = CreateListViewItemFromSignal(signal);
                             lvSignals.Items.Add(lvi);
