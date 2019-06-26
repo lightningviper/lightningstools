@@ -143,7 +143,11 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                             _serialPort.DiscardOutBuffer();
                             _serialPort.Close();
                         }
-                        GC.ReRegisterForFinalize(_serialPort.BaseStream);
+                        try
+                        {
+                            GC.ReRegisterForFinalize(_serialPort.BaseStream);
+                        }
+                        catch { }
                         _serialPort.Dispose();
                     }
                     catch (Exception e)
