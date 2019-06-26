@@ -1524,11 +1524,11 @@ namespace F4Utils.SimSupport
 
             for (var i = 0; i < 5; i++)
             {
-                AddF4SimOutput(CreateNewF4SimOutput("DED", $"Line {i + 1}", "Text", F4SimOutputs.DED__LINES, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("DED", $"Line {i + 1}", "Inverse Characters", F4SimOutputs.DED__INVERT_LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("DED", $"DED Line {i + 1}", "Text", F4SimOutputs.DED__LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("DED", $"DED Line {i + 1}", "Inverse Characters", F4SimOutputs.DED__INVERT_LINES, i, typeof(string)));
 
-                AddF4SimOutput(CreateNewF4SimOutput("PFL", $"Line {i + 1}", "Text", F4SimOutputs.PFL__LINES, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("PFL", $"Line {i + 1}", "Inverse Characters", F4SimOutputs.PFL__INVERT_LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("PFL", $"PFL Line {i + 1}", "Text", F4SimOutputs.PFL__LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("PFL", $"PFL Line {i + 1}", "Inverse Characters", F4SimOutputs.PFL__INVERT_LINES, i, typeof(string)));
             }
 
             AddF4SimOutput(CreateNewF4SimOutput("Up-Front Controls", "TACAN Channel", F4SimOutputs.UFC__TACAN_CHANNEL, typeof(int), 0, 199));
@@ -1550,12 +1550,12 @@ namespace F4Utils.SimSupport
 
             for (var i = 0; i < 20; i++)
             {
-                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 1", F4SimOutputs.LMFD__OSB_LABEL_LINES1, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 2", F4SimOutputs.LMFD__OSB_LABEL_LINES2, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Inverted Flag", F4SimOutputs.LMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
-                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 1", F4SimOutputs.RMFD__OSB_LABEL_LINES1, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 2", F4SimOutputs.RMFD__OSB_LABEL_LINES2, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Inverted Flag", F4SimOutputs.RMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 1", F4SimOutputs.LMFD__OSB_LABEL_LINES1, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 2", F4SimOutputs.LMFD__OSB_LABEL_LINES2, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Inverted Flag", F4SimOutputs.LMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 1", F4SimOutputs.RMFD__OSB_LABEL_LINES1, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 2", F4SimOutputs.RMFD__OSB_LABEL_LINES2, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Inverted Flag", F4SimOutputs.RMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
             }
 
             AddF4SimOutput(CreateNewF4SimOutput("Left Eyebrow Lights", "Master Caution Light", F4SimOutputs.MASTER_CAUTION_LIGHT, typeof(bool)));
@@ -1695,8 +1695,8 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Power", "Standby Generator flag", F4SimOutputs.POWER__STANDBY_GENERATOR, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Power", "Jet Fuel Starter flag", F4SimOutputs.POWER__JET_FUEL_STARTER, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Version Numbers", "Shared Memory Area \"FlightData\" Version Number", F4SimOutputs.SIM__FLIGHTDATA_VERSION_NUM, null, typeof(int), 0, 999));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Version Numbers", "Shared Memory Area \"FlightData2\" Version Number", F4SimOutputs.SIM__FLIGHTDATA2_VERSION_NUM, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Version Numbers", "Shared Memory Area \"FlightData\" Version Number", F4SimOutputs.SIM__FLIGHTDATA_VERSION_NUM, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Version Numbers", "Shared Memory Area \"FlightData2\" Version Number", F4SimOutputs.SIM__FLIGHTDATA2_VERSION_NUM, null, typeof(int), 0, 999));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Current Time", F4SimOutputs.SIM__CURRENT_TIME, typeof(int), int.MinValue, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "'Pilot Is Flying' flag", F4SimOutputs.SIM__BMS_PLAYER_IS_FLYING, typeof(bool)));
             for (var i = 0; i < 32; i++)
@@ -1716,28 +1716,28 @@ namespace F4Utils.SimSupport
                  */
             }
 
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "AA Missile Fired", F4SimOutputs.SIM__AA_MISSILE_FIRED, typeof(int), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Bomb Dropped", F4SimOutputs.SIM__BOMB_DROPPED, typeof(int), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Flare Dropped", F4SimOutputs.SIM__FLARE_DROPPED, typeof(int), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Chaff Dropped", F4SimOutputs.SIM__CHAFF_DROPPED, typeof(int), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Bullets Fired", F4SimOutputs.SIM__BULLETS_FIRED, typeof(int), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Collision Counter", F4SimOutputs.SIM__COLLISION_COUNTER, typeof(int), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "g Force", F4SimOutputs.SIM__GFORCE, typeof(float), 0, 10));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Last Damage", F4SimOutputs.SIM__LAST_DAMAGE, typeof(int), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Damage Force", F4SimOutputs.SIM__DAMAGE_FORCE, typeof(float), 0, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "When Damage", F4SimOutputs.SIM__WHEN_DAMAGE, typeof(int), int.MinValue, int.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Eye X", F4SimOutputs.SIM__EYE_X, typeof(float), float.MinValue, float.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Eye Y", F4SimOutputs.SIM__EYE_Y, typeof(float), float.MinValue, float.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Eye Z", F4SimOutputs.SIM__EYE_Z, typeof(float), float.MinValue, float.MaxValue));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is Firing Gun flag", F4SimOutputs.SIM__IS_FIRING_GUN, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is End Flight flag", F4SimOutputs.SIM__IS_END_FLIGHT, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is Ejecting flag", F4SimOutputs.SIM__IS_EJECTING, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "In 3D flag", F4SimOutputs.SIM__IN_3D, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is Paused flag", F4SimOutputs.SIM__IS_PAUSED, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is Frozen flag", F4SimOutputs.SIM__IS_FROZEN, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is Over G flag", F4SimOutputs.SIM__IS_OVER_G, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is On Ground flag", F4SimOutputs.SIM__IS_ON_GROUND, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Is Exit Game flag", F4SimOutputs.SIM__IS_EXIT_GAME, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "AA Missile Fired", F4SimOutputs.SIM__AA_MISSILE_FIRED,0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Bomb Dropped", F4SimOutputs.SIM__BOMB_DROPPED, 0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Flare Dropped", F4SimOutputs.SIM__FLARE_DROPPED, 0,typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Chaff Dropped", F4SimOutputs.SIM__CHAFF_DROPPED,0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Bullets Fired", F4SimOutputs.SIM__BULLETS_FIRED, 0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Collision Counter", F4SimOutputs.SIM__COLLISION_COUNTER, 0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "g Force", F4SimOutputs.SIM__GFORCE, 0, typeof(float), 0, 10));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Last Damage", F4SimOutputs.SIM__LAST_DAMAGE, 0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Damage Force", F4SimOutputs.SIM__DAMAGE_FORCE, 0, typeof(float), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "When Damage", F4SimOutputs.SIM__WHEN_DAMAGE, 0, typeof(int), int.MinValue, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Eye X", F4SimOutputs.SIM__EYE_X, 0, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Eye Y", F4SimOutputs.SIM__EYE_Y, 0, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Eye Z", F4SimOutputs.SIM__EYE_Z, 0, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Firing Gun flag", F4SimOutputs.SIM__IS_FIRING_GUN, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is End Flight flag", F4SimOutputs.SIM__IS_END_FLIGHT, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Ejecting flag", F4SimOutputs.SIM__IS_EJECTING, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "In 3D flag", F4SimOutputs.SIM__IN_3D, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Paused flag", F4SimOutputs.SIM__IS_PAUSED, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Frozen flag", F4SimOutputs.SIM__IS_FROZEN, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Over G flag", F4SimOutputs.SIM__IS_OVER_G, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is On Ground flag", F4SimOutputs.SIM__IS_ON_GROUND, 0, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Exit Game flag", F4SimOutputs.SIM__IS_EXIT_GAME, 0, typeof(bool)));
 
             AddF4SimOutput(CreateNewF4SimOutput("Radio Client", "Status", "Client Active flag", F4SimOutputs.RADIO_CLIENT_STATUS__CLIENT_ACTIVE_FLAG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Radio Client", "Status", "Connection Fail flag", F4SimOutputs.RADIO_CLIENT_STATUS__CONNECTION_FAIL_FLAG, null, typeof(bool)));
