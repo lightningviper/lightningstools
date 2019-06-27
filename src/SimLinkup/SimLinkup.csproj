@@ -198,10 +198,8 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
-    <Compile Include="HardwareSupport\TeensyRWR\CalibrationHelper.cs" />
-    <Compile Include="HardwareSupport\TeensyRWR\CenteringHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPoint.cs" />
-    <Compile Include="HardwareSupport\TeensyRWR\GridCalibrationPattern.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\DrawPointExtensions.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\SVGPathToVectorScopePointsListConverter.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawingGroupExtensions.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />
@@ -472,10 +470,10 @@
     <Content Include="Content\Mapping\PowellRWR\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
+    <Content Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>

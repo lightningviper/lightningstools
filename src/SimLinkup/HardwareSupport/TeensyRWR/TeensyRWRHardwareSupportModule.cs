@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -129,36 +128,6 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 $"A serial port error occurred communicating on COM port {_config.COMPort}.\r\nError Type: {e.EventType}\r\nError Description:{e}");
         }
 
-        private void CloseSerialPortConnection()
-        {
-            lock (_serialPortLock)
-            {
-                if (_serialPort != null)
-                {
-                    try
-                    {
-                        if (_serialPort.IsOpen)
-                        {
-                            _log.DebugFormat($"Closing serial port {_config.COMPort}");
-                            _serialPort.DiscardOutBuffer();
-                            _serialPort.Close();
-                        }
-                        try
-                        {
-                            GC.ReRegisterForFinalize(_serialPort.BaseStream);
-                        }
-                        catch { }
-                        _serialPort.Dispose();
-                    }
-                    catch (Exception e)
-                    {
-                        _log.Error(e.Message, e);
-                    }
-                    _serialPort = null;
-                }
-                _unsuccessfulConnectionAttempts = 0; //reset unsuccessful connection attempts counter
-            }
-        }
 
         private void CreateInputSignals(out AnalogSignal[] analogSignals, out DigitalSignal[] digitalSignals, out TextSignal[] textSignals)
         {
@@ -502,22 +471,69 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             };
             return instrumentState;
         }
-        private void Dispose(bool disposing)
+
+        private void UpdateOutputs()
         {
-            if (!_isDisposed)
+            if (DateTime.Now.Subtract(_lastCommandListSentTime).TotalMilliseconds < (1000 / MAX_UPDATE_FREQUENCY_HZ))
+            {
+                return;
+            }
+            var connected = EnsureSerialPortConnected();
+            if (!connected) return;
+            var commandList = GenerateDrawingCommands();
+            if (_lastCommandList != null && commandList == _lastCommandList) return;
+            SendDrawingCommands(commandList);
+            _lastCommandList = commandList;
+            _lastCommandListSentTime = DateTime.Now;
+        }
+
+
+        private string GenerateDrawingCommands()
+        {
+            var instrumentState = GetInstrumentState();
+            var drawingGroup = new DrawingGroup();
+            var drawingContext = drawingGroup.Append();
+            _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
+            
+            drawingContext.Close();
+            return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
+        }
+
+        private void SendDrawingCommands(string svgPathString)
+        {
+            lock (_serialPortLock)
             {
                 try
                 {
-                    CloseSerialPortConnection();
+                    if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
+                    var drawPoints = new SVGPathToVectorScopePointsListConverter(bezierCurveInterpolationSteps: BEZIER_CURVE_INTERPOLATION_STEPS)
+                                        .ConvertToDrawPoints(svgPathString)
+                                        .ApplyCentering(_config.Centering)
+                                        .ApplyInversion(VIEWBOX_WIDTH, VIEWBOX_HEIGHT, invertX: false, invertY: true)
+                                        .ApplyRotation(VIEWBOX_WIDTH / 2.0, VIEWBOX_HEIGHT / 2.0, _config.RotationDegrees)
+                                         .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY, VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
+                                         .ApplyCalibration(_config.XAxisCalibrationData, _config.YAxisCalibrationData)
+                                        .ApplyClipping(VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
+                                      ;
+
+                    var drawPointsAsBytes = drawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
+
+                    var cobsEncodedPacket = COBS.Encode(drawPointsAsBytes);
+
+                    _serialPort.Write(cobsEncodedPacket, offset: 0, count: cobsEncodedPacket.Length);
+                    _serialPort.Write(new byte[]{0},0,1);
+                    _serialPort.BaseStream.Flush();
+
+                    _numDrawPointsSentSignal.State = drawPoints.Count();
+                    _bytesSent.State = cobsEncodedPacket.Length;
+
                 }
                 catch (Exception e)
                 {
                     _log.Error(e.Message, e);
                 }
             }
-            _isDisposed = true;
         }
-        
 
         private bool EnsureSerialPortConnected()
         {
@@ -558,75 +574,58 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                         _log.Error(e.Message, e);
                     }
                 }
-                else if (_serialPort !=null && _serialPort.IsOpen)
+                else if (_serialPort != null && _serialPort.IsOpen)
                 {
                     return true;
                 }
                 return false;
             }
         }
-
-        private string GenerateDrawingCommands()
-        {
-            var instrumentState = GetInstrumentState();
-            var drawingGroup = new DrawingGroup();
-            var drawingContext = drawingGroup.Append();
-            drawingContext.PushTransform(new RotateTransform(_config.RotationDegrees, VIEWBOX_WIDTH /2.0, VIEWBOX_HEIGHT/2.0));
-            drawingContext.PushTransform(new ScaleTransform(1, -1, VIEWBOX_WIDTH / 2.0, VIEWBOX_HEIGHT / 2.0));
-            _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
-            drawingContext.Close();
-            return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
-        }
-
-        private IEnumerable<DrawPoint> CalibrateDrawPoints(IEnumerable<DrawPoint> uncalibratedDrawPoints)
-        {
-            return uncalibratedDrawPoints.Select(drawPoint =>
-                CalibrationHelper.CalibrateDrawPoint(drawPoint, _config.XAxisCalibrationData,
-                    _config.YAxisCalibrationData));
-        }
-        private void SendDrawingCommands(string svgPathString)
+        private void CloseSerialPortConnection()
         {
             lock (_serialPortLock)
             {
+                if (_serialPort != null)
+                {
+                    try
+                    {
+                        if (_serialPort.IsOpen)
+                        {
+                            _log.DebugFormat($"Closing serial port {_config.COMPort}");
+                            _serialPort.DiscardOutBuffer();
+                            _serialPort.Close();
+                        }
+                        try
+                        {
+                            GC.ReRegisterForFinalize(_serialPort.BaseStream);
+                        }
+                        catch { }
+                        _serialPort.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        _log.Error(e.Message, e);
+                    }
+                    _serialPort = null;
+                }
+                _unsuccessfulConnectionAttempts = 0; //reset unsuccessful connection attempts counter
+            }
+        }
+        private void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
                 try
                 {
-                    if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
-                    var svgPathToDrawPointsConverter = new SVGPathToVectorScopePointsListConverter(bezierCurveInterpolationSteps:BEZIER_CURVE_INTERPOLATION_STEPS);
-                    var uncalibratedDrawPoints = svgPathToDrawPointsConverter
-                                                    .ConvertToDrawPoints(svgPathString)
-                                                    .ToList();
-                    var calibratedDrawPoints = CalibrateDrawPoints(uncalibratedDrawPoints).ToList();
-                    var drawPointsAsBytes = calibratedDrawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
-                    var cobsEncodedPacket = COBS.Encode(drawPointsAsBytes);
-
-                    _serialPort.Write(cobsEncodedPacket, offset: 0, count: cobsEncodedPacket.Length);
-                    _serialPort.Write(new byte[]{0},0,1);
-                    _serialPort.BaseStream.Flush();
-
-                    _numDrawPointsSentSignal.State = calibratedDrawPoints.Count();
-                    _bytesSent.State = cobsEncodedPacket.Length;
-
+                    CloseSerialPortConnection();
                 }
                 catch (Exception e)
                 {
                     _log.Error(e.Message, e);
                 }
             }
+            _isDisposed = true;
         }
 
-        private void UpdateOutputs()
-        {
-            if (DateTime.Now.Subtract(_lastCommandListSentTime).TotalMilliseconds < (1000/MAX_UPDATE_FREQUENCY_HZ))
-            {
-                return;
-            }
-            var connected = EnsureSerialPortConnected();
-            if (!connected) return;
-            var commandList = GenerateDrawingCommands();
-            if (_lastCommandList != null && commandList == _lastCommandList) return;
-            SendDrawingCommands(commandList);
-            _lastCommandList = commandList;
-            _lastCommandListSentTime = DateTime.Now;
-        }
     }
 }

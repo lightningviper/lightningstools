@@ -314,7 +314,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var startY = _currentY;
             for (var i = 0; i < _bezierCurveInterpolationSteps; i++)
             {
-                BezierCurveHelper.PointOnCubicBezierCurve(startX, startY, x1, y1, x2, y2, x, y, (double)i / (_bezierCurveInterpolationSteps - 1),
+                BezierCurveHelper.PointOnCubicBezierCurve(startX, startY, x1, y1, x2, y2, x, y, (double)i / _bezierCurveInterpolationSteps,
                     out var nextPointX, out var nextPointY);
                 LineTo(nextPointX, nextPointY);
             }
@@ -330,7 +330,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var startY = _currentY;
             for (var i = 0; i < _bezierCurveInterpolationSteps; i++)
             {
-                BezierCurveHelper.PointOnQuadraticBezierCurve(startX, startY, x1, y1, x, y, (double)i / (_bezierCurveInterpolationSteps - 1),
+                BezierCurveHelper.PointOnQuadraticBezierCurve(startX, startY, x1, y1, x, y, (double)i / _bezierCurveInterpolationSteps,
                     out var nextPointX, out var nextPointY);
                 LineTo(nextPointX, nextPointY);
             }
@@ -348,7 +348,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             for (var i = 0; i < _bezierCurveInterpolationSteps; i++)
             {
                 BezierCurveHelper.PointOnEllipticalArc(startX, startY, rx, ry, xAxisRotation, largeArcFlag, sweepDirectionFlag, x, y,
-                    (double)i / (_bezierCurveInterpolationSteps - 1), out var nextPointX, out var nextPointY);
+                    (double)i / _bezierCurveInterpolationSteps, out var nextPointX, out var nextPointY);
                 LineTo(nextPointX, nextPointY);
             }
 
