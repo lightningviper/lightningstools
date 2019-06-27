@@ -31,6 +31,7 @@ namespace LightningGauges.Renderers.F16.RWR.CARAPACE
 
         public override void Render(DrawingContext drawingContext)
         {
+            base.Render(drawingContext);
             string rwrInfoBuffer = string.Empty;
             for (int i = 0; i < InstrumentState.RwrInfo.Length; i++)
             {
@@ -108,7 +109,7 @@ namespace LightningGauges.Renderers.F16.RWR.CARAPACE
 
             if (!RwrInfoContains("onbit") )
             {
-                if (!FormatForVectorDisplay)
+                if (!FormatForVectorDisplay )
                 {
                     for (int i = 0; i < 12; i++)
                     {

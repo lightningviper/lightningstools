@@ -32,6 +32,8 @@ namespace LightningGauges.Renderers.F16.RWR.ALR69
 
         public override void Render(DrawingContext drawingContext)
         {
+            base.Render(drawingContext);
+
             string rwrInfoBuffer = string.Empty;
             for (int i = 0; i < InstrumentState.RwrInfo.Length; i++)
             {
