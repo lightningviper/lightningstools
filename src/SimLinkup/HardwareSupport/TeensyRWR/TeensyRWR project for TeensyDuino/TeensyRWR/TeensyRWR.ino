@@ -67,19 +67,19 @@ void onPacketReceived(const uint8_t* buffer, size_t size)
 
 void draw()
 { 
-      if (_drawPointsBufferLength <= 0) return;
+  if (_drawPointsBufferLength <= 0) return;
 
-      for (size_t i = 0; i < _drawPointsBufferLength; i++)
-      {
-        uint32_t point = _drawPointsBuffer[i];
-        bool beamOnFlag = ((((uint32_t)point) & ((uint32_t)0x1000000)) == (uint32_t)0x1000000); //bit 24
-        uint16_t xDAC = ((((uint32_t)point) & ((uint32_t)0xFFF000)) >> 12); //bits 12-23 [12 bits]
-        uint16_t yDAC = (((((uint32_t)point) & ((uint32_t)0xFFF)))); //bits 0-11 [12 bits]
-        beamOnFlag ? beamOn() : beamOff();
-        drawPoint(xDAC, yDAC, beamOnFlag);
-      }
-      beamOff();
-      drawPoint(0, MAX_DAC_VALUE, false);
+  for (size_t i = 0; i < _drawPointsBufferLength; i++)
+  {
+    uint32_t point = _drawPointsBuffer[i];
+    bool beamOnFlag = ((((uint32_t)point) & ((uint32_t)0x1000000)) == (uint32_t)0x1000000); //bit 24
+    uint16_t xDAC = ((((uint32_t)point) & ((uint32_t)0xFFF000)) >> 12); //bits 12-23 [12 bits]
+    uint16_t yDAC = (((((uint32_t)point) & ((uint32_t)0xFFF)))); //bits 0-11 [12 bits]
+    beamOnFlag ? beamOn() : beamOff();
+    beamTo(xDAC, yDAC, beamOnFlag);
+  }
+  beamOff();
+  beamTo(0, MAX_DAC_VALUE, false);
 }
 
 void LEDOff()
@@ -105,7 +105,7 @@ void updateLED()
   digitalWrite(BUILTIN_LED_PIN, _ledOn ? HIGH : LOW);
 }
 
-void drawPoint(uint16_t x, uint16_t y, bool beamOnFlag)
+void beamTo(uint16_t x, uint16_t y, bool beamOnFlag)
 {
   x = x < 0 ? 0 : x > MAX_DAC_VALUE ? MAX_DAC_VALUE : x;
   y = y < 0 ? 0 : y > MAX_DAC_VALUE ? MAX_DAC_VALUE : y;
