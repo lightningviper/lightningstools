@@ -12,6 +12,13 @@ IF ERRORLEVEL 1 GOTO END
 ECHO Installing Visual Studio 2019 Community Edition...
 "%MASTERBUILDDIR%vs_community.exe" --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NativeDesktop --passive --wait --norestart
 
+for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -products * -requires Microsoft.Component.MSBuild -property instanceId`) do (
+  set InstanceId=%%i
+)
+
+REM Delete Visual Studio reboot-required marker so we can proceed with installation of add-ins
+IF EXISTS "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\%InstanceId%\reboot.sem" DEL "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\%InstanceId%\reboot.sem"
+
 :END
 
 
