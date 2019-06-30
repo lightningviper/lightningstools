@@ -10,8 +10,8 @@ for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -pr
   set InstanceId=%%i
 )
 
-IF NOT EXIST "%MASTERBUILDDIR%InstallerProjects.vsix" bitsadmin /transfer VisualStudio2017InstallerProjectsAddIn /dynamic /download /priority HIGH https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/0.8.8/1531988283007/InstallerProjects.vsix "%MASTERBUILDDIR%InstallerProjects.vsix" 
-
+IF NOT EXIST "%MASTERBUILDDIR%InstallerProjects.vsix" bitsadmin /transfer VisualStudioInstallerProjectsAddIn /dynamic /download /priority HIGH https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/0.8.8/1531988283007/InstallerProjects.vsix "%MASTERBUILDDIR%InstallerProjects.vsix" 
+IF ERRORLEVEL 1 GOTO END
 
 IF ERRORLEVEL 1 GOTO END
 ECHO Installing Visual Studio Installer Project add-in...
