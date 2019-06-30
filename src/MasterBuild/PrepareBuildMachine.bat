@@ -18,9 +18,13 @@ CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 CALL %MASTERBUILDDIR%InstallVisualStudioInstallerProjectAddIn.bat
 CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 
+REM Install Microsoft Code Analysis 2019 add-in
 CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 CALL %MASTERBUILDDIR%InstallMicrosoftCodeAnalysis2019AddIn.bat
 CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
+
+REM Install TortoiseGit
+CALL %MASTERBUILDDIR%InstallTortoiseGit.bat
 
 REM Install Windows 10 SDK
 CALL %MASTERBUILDDIR%InstallWindowsSDK.bat
