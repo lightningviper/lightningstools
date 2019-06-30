@@ -65,7 +65,7 @@ bitsadmin /transfer LightningsToolsBootstrap /dynamic /download /priority HIGH "
 The above command will clone the repository to a local folder, `\lightningstools`, located in the root of the current drive where the above command was run from (typically, this folder will be located at `c:\lightningstools`).  
   
 The following prerequisites will be installed:  
-- Visual Studio 2017 Community Edition  
+- Visual Studio 2019 Community Edition  
 - Visual Studio Installer Project add-in  
 - .NET Framework 4.6.1 (required by all projects)  
 - Command-line Build tools

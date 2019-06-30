@@ -17,7 +17,7 @@ SET SOLUTION=%1
 IF "%SOLUTION%"=="" SET SOLUTION=%MASTERBUILDDIR%BuildAll.sln
 
 ECHO Restoring packages for solution: %SOLUTION%
-"%MASTERBUILDDIR%nuget.exe" restore "%SOLUTION%" -NoCache -NonInteractive -MsbuildPath "%InstallDir%\MSBuild\15.0\Bin"
+"%MASTERBUILDDIR%nuget.exe" restore "%SOLUTION%" -NoCache -NonInteractive -MsbuildPath "%InstallDir%\MSBuild\Current\Bin"
 
 :END
 

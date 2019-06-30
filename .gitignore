@@ -316,14 +316,12 @@ ASALocalRun/
 
 # MSBuild Binary and Structured Log
 *.binlog
-/src/MasterBuild/DXSDK_Jun10.exe
-/src/MasterBuild/InstallerProjects.vsix
-/src/MasterBuild/TortoiseGit-2.5.0.0-64bit.msi
-/src/MasterBuild/dotnetfx35setup.exe
-/src/MasterBuild/nuget.exe
-/src/MasterBuild/vs_community.exe
-/src/MasterBuild/vswhere.exe
-/src/MasterBuild/Git-2.16.2-64-bit.exe
-/src/MasterBuild/sdksetup.exe
-/src/MasterBuild/TeensyduinoInstall.exe
-/src/MasterBuild/arduino-1.8.9-windows.exe
+
+
+#binary build tools in MasterBuild folder
+/src/MasterBuild/*.exe
+/src/MasterBuild/*.vsix
+/src/MasterBuild/*.msi
+
+#Fody generated outputs
+FodyWeavers.xsd
