@@ -5,7 +5,7 @@ SET MASTERBUILDDIR=%~dp0
 IF EXIST "%MASTERBUILDDIR%vs_community.exe" DEL "%MASTERBUILDDIR%vs_community.exe"
 IF ERRORLEVEL 1 GOTO END
 
-bitsadmin /transfer VisualStudio2019CommunityEdition /dynamic /download /priority HIGH https://download.visualstudio.microsoft.com/download/pr/08ad1141-4528-456b-8319-2d1eb127bd85/f6577aed743a858a9a523a2c5c6bc53d/vs_community.exe "%MASTERBUILDDIR%vs_community.exe" 
+bitsadmin /transfer VisualStudio2019CommunityEdition /dynamic /download /priority HIGH "https://download.visualstudio.microsoft.com/download/pr/08ad1141-4528-456b-8319-2d1eb127bd85/f6577aed743a858a9a523a2c5c6bc53d/vs_community.exe" "%MASTERBUILDDIR%vs_community.exe" 
 
 IF ERRORLEVEL 1 GOTO END
 
@@ -17,7 +17,7 @@ for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -pr
 )
 
 REM Delete Visual Studio reboot-required marker so we can proceed with installation of add-ins
-IF EXISTS "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\%InstanceId%\reboot.sem" DEL "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\%InstanceId%\reboot.sem"
+IF EXISTS "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\.\%InstanceId%\reboot.sem" DEL "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\%InstanceId%\reboot.sem"
 
 :END
 
