@@ -18,5 +18,9 @@ CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 CALL %MASTERBUILDDIR%InstallVisualStudioInstallerProjectAddIn.bat
 CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 
+CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
+CALL %MASTERBUILDDIR%InstallMicrosoftCodeAnalysis2019AddIn.bat
+CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
+
 REM Install Windows 10 SDK
 CALL %MASTERBUILDDIR%InstallWindowsSDK.bat
