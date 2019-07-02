@@ -130,6 +130,6 @@
     <Error Condition="!Exists('$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets'))" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props'))" />
   </Target>
-  <Import Project="$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets')" />
-  <Import Project="$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" />
+  <Import Project="$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props" Condition="Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" />
 </Project>
