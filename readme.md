@@ -65,11 +65,13 @@ bitsadmin /transfer LightningsToolsBootstrap /dynamic /download /priority HIGH "
 The above command will clone the repository to a local folder, `\lightningstools`, located in the root of the current drive where the above command was run from (typically, this folder will be located at `c:\lightningstools`).  
   
 The following prerequisites will be installed:  
+- Git for Windows
 - Visual Studio 2019 Community Edition  
 - Visual Studio Installer Project add-in  
-- .NET Framework 4.6.1 (required by all projects)  
+- .NET Framework 4.7.2 (required by all projects)  
 - Command-line Build tools
 - Windows 10 SDK version 10.0.10586.0 
+- TortoiseGit
   
 The above command will also restore all required NuGet packages for all projects and solutions in the repository.
   

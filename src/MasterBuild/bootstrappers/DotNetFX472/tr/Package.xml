@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" Name="DisplayName" Culture="Culture" LicenseAgreement="eula.rtf">
+  <!-- Defines list of files to be copied on build -->
+  <PackageFiles CopyAllPackageFiles="false">
+    <PackageFile Name="eula.rtf"/>
+    <PackageFile Name="NDP472-KB4054530-x86-x64-AllOS-TRK.exe" HomeSite="DotNetFX472FullLanguagePackBootstrapper" PublicKey="3082010a0282010100a829fed410c8ff550a9e990003528fdcb0bff9abf851fe5c8c54c227ce4c2b96ebdb811ccb862b79ca757eb867832686bdd62f1c3ec758aa8f6f95fb5afca7c61bc1c3e84c174e223db75b565c7fd75af52dbabba609bf067cee98fe40f930b86bfe406f74b3b8d63849c9d087072f31dfb6bc4ea3d09eb7627b5670754f67bf05cca3aebe0092c21b50a1613b100001b186d029f340f50fd9a30f57ab6309a8dca96ae74743a7be15c43d27a4e8565288cf5999a10084369bd039d22a0d2fe604e2bf13968883a95137184189e2f9859d8e651a3d0364ccc5de50705df20b85a98fb145e877ff839d09bb72e0e6560895b92b83128931fce758721dbdf983230203010001"/>
+  </PackageFiles>
+  <InstallChecks>
+    <RegistryCheck Property="DotNetFullLangPack_Release" Key="HKLM\Software\Microsoft\NET Framework Setup\NDP\v4\Full\1055" Value="Release"/>
+    <RegistryCheck Property="DotNetFullLangPack_OS_LCID" Key="HKLM\SYSTEM\CurrentControlSet\Control\MUI\UILanguages\tr-TR" Value="LCID"/>
+    <RegistryCheck Property="DotNetFullLangPack_OSIntegrated" Key="HKLM\SOFTWARE\Microsoft\NET Framework Setup\OS Integration" Value="v4"/>
+  </InstallChecks>
+  <!-- Defines how to invoke the setup for .NET Framework redist -->
+  <Commands>
+    <Command PackageFile="NDP472-KB4054530-x86-x64-AllOS-TRK.exe" Arguments=" /q /norestart /skipenucheck /ChainingPackage FullX64ClickOnce" EstimatedInstalledBytes="130718421" EstimatedTempBytes="77473415" EstimatedInstallSeconds="90">
+      <!-- These checks determine whether the package is to be installed  in the cases where .NET is not integrated into the OS (MSI install)-->
+      <InstallConditions>
+        <!-- This indicates .NET Framework is already installed -->
+        <BypassIf Property="DotNetFullLangPack_Release" Compare="ValueGreaterThanOrEqualTo" Value="461808"/>
+        <!--  If netfx is part of the OS, then bypass this command.  --> 
+        <BypassIf Property="DotNetFullLangPack_OSIntegrated" Compare="ValueEqualTo" Value="1"/> 
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired"/>
+        <!-- Block install on less than Windows 7 RTM -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.1.0" String="InvalidPlatformWinNT"/>
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture"/>
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success"/>
+        <ExitCode Value="3010" Result="SuccessReboot"/>
+        <DefaultExitCode Result="Success" FormatMessageFromSystem="false" String="GeneralFailure"/>
+      </ExitCodes>
+    </Command>
+    <Command PackageFile="NDP472-KB4054530-x86-x64-AllOS-TRK.exe" Arguments=" /q /norestart /skipenucheck /ChainingPackage FullX64ClickOnce" EstimatedInstalledBytes="130718421" EstimatedTempBytes="77473415" EstimatedInstallSeconds="90">
+      <!-- These checks determine whether the package is to be installed in the cases where .NET is integrated into the OS -->
+      <InstallConditions>
+        <!-- This indicates .NET Framework is already installed -->
+        <BypassIf Property="DotNetFullLangPack_Release" Compare="ValueGreaterThanOrEqualTo" Value="461808"/>
+        <!--  If netfx is not part of the OS, then bypass this command.  --> 
+        <BypassIf Property="DotNetFullLangPack_OSIntegrated" Compare="ValueNotEqualTo" Value="1"/> 
+        <BypassIf Property="DotNetFullLangPack_OSIntegrated" Compare="ValueNotExists" Value="1"/>           
+        <!-- Do not attempt to install on OS where NetFx is integrated in OS and MUI LCID doesn't match with this package. -->
+        <BypassIf Property="DotNetFullLangPack_OS_LCID" Compare="ValueNotEqualTo" Value="1055"/>
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired"/>
+        <!-- Block install on OS less than Windows 8.0 -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.2.0" String="InvalidPlatformWinNT"/>
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture"/>
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success"/>
+        <ExitCode Value="3010" Result="SuccessReboot"/>
+        <DefaultExitCode Result="Success" FormatMessageFromSystem="false" String="GeneralFailure"/>
+      </ExitCodes>
+    </Command>
+  </Commands>
+  <!-- Defines a localizable string table for error messages-->
+  <Strings>
+    <String Name="DisplayName">Microsoft .NET Framework 4.7.2 (x86 ve x64)</String>
+    <String Name="Culture">tr</String>
+    <String Name="AdminRequired">Microsoft .NET Framework 4.7.2'i yüklemek için yönetici izinleri gerekir. Yöneticinize başvurun.</String>
+    <String Name="InvalidPlatformWinNT">Microsoft .NET Framework 4.7.2 yüklemesi bu işletim sisteminde desteklenmiyor. Uygulama satıcınıza başvurun.</String>
+    <String Name="InvalidPlatformArchitecture">Bu Microsoft .NET Framework 4.7.2 sürümü IA-64 işletim sisteminde desteklenmiyor. Uygulama satıcınıza başvurun.</String>
+    <String Name="DotNetFX472FullWebBootstrapper">http://go.microsoft.com/fwlink/?LinkId=863262&amp;clcid=0x41f</String>
+    <String Name="DotNetFX472FullLanguagePackBootstrapper">http://go.microsoft.com/fwlink/?LinkId=863258&amp;clcid=0x41f</String>
+    <String Name="GeneralFailure">Microsoft .NET Framework 4.7.2 yüklenmeye çalışılırken bir hata oluştu.</String>
+  </Strings>
+</Package>

@@ -5,7 +5,7 @@ SET ProgFiles86Root=%ProgramFiles%
 
 :start
 SET MASTERBUILDDIR=%~dp0
-xcopy /S /E /Y "%MASTERBUILDDIR%\Bootstrappers" "%ProgFiles86Root%\Microsoft SDKs\ClickOnce Bootstrapper\Packages\"  
+xcopy /S /E /N "%MASTERBUILDDIR%\Bootstrappers" "%ProgFiles86Root%\Microsoft SDKs\ClickOnce Bootstrapper\Packages\"  
 :END
 
 

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AnalogDevices</RootNamespace>
     <AssemblyName>AnalogDevices</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>
@@ -89,22 +89,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-      <HintPath>$(SolutionDir)\packages\System.Buffers.4.5.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>$(SolutionDir)\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>$(SolutionDir)\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="WinUSBNet, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\WinUSBNet.1.0.3\lib\net35\WinUSBNet.dll</HintPath>
@@ -220,9 +205,9 @@
     <Error Condition="!Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props'))" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props'))" />
   </Target>
-  <Import Project="$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets')" />
-  <Import Project="$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props" Condition="Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" />
-  <Import Project="$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props" Condition="Exists('$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props')" />
+  <Import Project="$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" />
+  <Import Project="$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

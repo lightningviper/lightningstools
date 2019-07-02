@@ -180,12 +180,14 @@ namespace LightningGauges.Renderers.F16.RWR
                 fontSize = SmallFontSize;
             }
 
+#pragma warning disable CS0618 // Type or member is obsolete
             FormattedText ft = new FormattedText(text,
                     CultureInfo.InvariantCulture,
                     FlowDirection.LeftToRight,
                     typeface,
                     fontSize,
                     Brushes.Black);
+#pragma warning restore CS0618 // Type or member is obsolete
             double width = ft.Width;
 
             return width / (ActualWidth / 2.0);
@@ -222,21 +224,25 @@ namespace LightningGauges.Renderers.F16.RWR
                 vOffset = SmallFontVOffset;
             }
 
+#pragma warning disable CS0618 // Type or member is obsolete
             FormattedText ft = new FormattedText(text,
                     CultureInfo.InvariantCulture,
                     FlowDirection.LeftToRight,
                     typeface,
                     fontSize,
                     Brushes.Black);
+#pragma warning restore CS0618 // Type or member is obsolete
             double width = ft.Width;
             double height = ft.Height;
 
             drawingContext.DrawText(
+#pragma warning disable CS0618 // Type or member is obsolete
                 new FormattedText(text,
                 CultureInfo.InvariantCulture,
                 FlowDirection.LeftToRight,
                 typeface,
                 fontSize, brush),
+#pragma warning restore CS0618 // Type or member is obsolete
                 new Point(x - (width / 2.0), y - (height / 2.0) + vOffset));
         }
         protected void DrawTextCenteredVerticalVectorFont(DrawingContext drawingContext, string text, double x, double y, bool big)
@@ -288,21 +294,25 @@ namespace LightningGauges.Renderers.F16.RWR
                 vOffset = SmallFontVOffset * 2;
             }
 
+#pragma warning disable CS0618 // Type or member is obsolete
             FormattedText ft = new FormattedText(text,
                     CultureInfo.InvariantCulture,
                     FlowDirection.LeftToRight,
                     typeface,
                     fontSize,
                     Brushes.Black);
+#pragma warning restore CS0618 // Type or member is obsolete
             double width = ft.Width;
             double height = ft.Height;
 
             drawingContext.DrawText(
+#pragma warning disable CS0618 // Type or member is obsolete
                 new FormattedText(text,
                 CultureInfo.InvariantCulture,
                 FlowDirection.LeftToRight,
                 typeface,
                 fontSize, brush),
+#pragma warning restore CS0618 // Type or member is obsolete
                 new Point(x - (width / 2.0), y - (fontSize * 0.5) + vOffset));
         }
        protected void DrawTextCenterVectorFont(DrawingContext drawingContext, string text, double x, double y, bool big)
@@ -354,21 +364,25 @@ namespace LightningGauges.Renderers.F16.RWR
                 vOffset = SmallFontVOffset * 2;
             }
 
+#pragma warning disable CS0618 // Type or member is obsolete
             FormattedText ft = new FormattedText(text,
                     CultureInfo.InvariantCulture,
                     FlowDirection.LeftToRight,
                     typeface,
                     fontSize,
                     Brushes.Black);
+#pragma warning restore CS0618 // Type or member is obsolete
             double width = ft.Width;
             double height = ft.Height;
 
             drawingContext.DrawText(
+#pragma warning disable CS0618 // Type or member is obsolete
                 new FormattedText(text,
                 CultureInfo.InvariantCulture,
                 FlowDirection.LeftToRight,
                 typeface,
                 fontSize, brush),
+#pragma warning restore CS0618 // Type or member is obsolete
                 new Point(x, y - (fontSize * 0.5) + vOffset));
         }
         protected void DrawTextLeftVectorFont(DrawingContext drawingContext, string text, double x, double y, bool big)
@@ -420,21 +434,25 @@ namespace LightningGauges.Renderers.F16.RWR
                 vOffset = SmallFontVOffset * 2;
             }
 
+#pragma warning disable CS0618 // Type or member is obsolete
             FormattedText ft = new FormattedText(text,
                     CultureInfo.InvariantCulture,
                     FlowDirection.LeftToRight,
                     typeface,
                     fontSize,
                     Brushes.Black);
+#pragma warning restore CS0618 // Type or member is obsolete
             double width = ft.Width;
             double height = ft.Height;
 
             drawingContext.DrawText(
+#pragma warning disable CS0618 // Type or member is obsolete
                 new FormattedText(text,
                 CultureInfo.InvariantCulture,
                 FlowDirection.LeftToRight,
                 typeface,
                 fontSize, brush),
+#pragma warning restore CS0618 // Type or member is obsolete
                 new Point(x - width, y - (fontSize * 0.5) + vOffset));
         }
 

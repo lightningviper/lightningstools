@@ -15,7 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_6F512947447BD14A852C4B0869DC9BE9"
+        "MsmKey" = "8:_3C231C04FF2E2C0E751BDA1979F3057C"
+        "OwnerKey" = "8:_F4A50C01C97227DCBC81CF18716AE17F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3C231C04FF2E2C0E751BDA1979F3057C"
+        "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5C2D9380313E1BDF0882821F967CC83E"
         "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -27,24 +39,30 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_97010471E39DC23A31E3F494F386ED40"
-        "OwnerKey" = "8:_F4A50C01C97227DCBC81CF18716AE17F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_97010471E39DC23A31E3F494F386ED40"
-        "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
         "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_D674C43D2933583FE2A853574897B193"
+        "OwnerKey" = "8:_F4A50C01C97227DCBC81CF18716AE17F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D674C43D2933583FE2A853574897B193"
+        "OwnerKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D674C43D2933583FE2A853574897B193"
+        "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F4A50C01C97227DCBC81CF18716AE17F"
         "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
         "MsmSig" = "8:_UNDEFINED"
@@ -58,31 +76,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_97010471E39DC23A31E3F494F386ED40"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
+        "OwnerKey" = "8:_5C2D9380313E1BDF0882821F967CC83E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6F512947447BD14A852C4B0869DC9BE9"
+        "OwnerKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F4A50C01C97227DCBC81CF18716AE17F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3C231C04FF2E2C0E751BDA1979F3057C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D674C43D2933583FE2A853574897B193"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -112,10 +136,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
                 }
             }
@@ -144,10 +168,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
                     {
                     "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
                 }
             }
@@ -172,28 +196,28 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.6.1"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.2"
                 "AllowLaterVersions" = "11:FALSE"
-                "InstallUrl" = "8:https://www.microsoft.com/en-us/download/details.aspx?id=49981"
+                "InstallUrl" = "8:https://go.microsoft.com/fwlink/?LinkId=863262"
                 }
             }
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6F512947447BD14A852C4B0869DC9BE9"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3C231C04FF2E2C0E751BDA1979F3057C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6F512947447BD14A852C4B0869DC9BE9"
+                    "_3C231C04FF2E2C0E751BDA1979F3057C"
                     {
-                    "Name" = "8:Costura.dll"
+                    "Name" = "8:log4net.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Costura.dll"
+            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6893A8ACEA854862B34060E3614415E6"
@@ -211,20 +235,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_97010471E39DC23A31E3F494F386ED40"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5C2D9380313E1BDF0882821F967CC83E"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Costura, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_97010471E39DC23A31E3F494F386ED40"
+                    "_5C2D9380313E1BDF0882821F967CC83E"
                     {
-                    "Name" = "8:log4net.dll"
+                    "Name" = "8:Costura.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:log4net.dll"
+            "SourcePath" = "8:Costura.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6893A8ACEA854862B34060E3614415E6"
@@ -256,6 +280,37 @@
                     }
                 }
             "SourcePath" = "8:Henkie.SDI.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6893A8ACEA854862B34060E3614415E6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D674C43D2933583FE2A853574897B193"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Phcc, Version=0.2.2.0, Culture=neutral, PublicKeyToken=d747a6aa7a16ca9c, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_D674C43D2933583FE2A853574897B193"
+                    {
+                    "Name" = "8:Phcc.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Phcc.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6893A8ACEA854862B34060E3614415E6"
@@ -372,7 +427,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SDI Test Tool"
         "ProductCode" = "8:{F8D7C2FB-2316-4031-AADC-2AEE4D2C7542}"
-        "PackageCode" = "8:{67D29297-B581-4E43-85D9-212EA3CFA2AC}"
+        "PackageCode" = "8:{4F9A74DC-8DC6-4352-9AE3-E514AF916029}"
         "UpgradeCode" = "8:{988E7AAB-A159-4025-B90D-FF778ACFB561}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -907,7 +962,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_83DE0582FF75464696D549BDE666B238"
             {
-            "SourcePath" = "8:..\\Henkie.SDI.TestTool\\obj\\x86\\Debug\\Henkie.SDI.TestTool.exe"
+            "SourcePath" = "8:..\\Henkie.SDI.TestTool\\obj\\x86\\Release\\Henkie.SDI.TestTool.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6893A8ACEA854862B34060E3614415E6"
