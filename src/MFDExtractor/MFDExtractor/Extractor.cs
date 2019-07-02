@@ -100,7 +100,7 @@ namespace MFDExtractor
                                                    new ClientSideIncomingMessageDispatcher(_inputEvents);
             if (!Settings.Default.DisableDirectInputMediator)
             {
-                Mediator = new Mediator(null);
+                Mediator = new Mediator(Application.OpenForms.Count >0 ? Application.OpenForms[0]:null);
                 _mediatorEventHandler = new MediatorStateChangeHandler(new DIHotkeyDetection(Mediator), _inputEvents);
             }
             _keyboardWatcher = keyboardWatcher ?? new KeyboardWatcher(_inputEvents, Log);
