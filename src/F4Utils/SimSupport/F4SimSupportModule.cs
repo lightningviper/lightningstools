@@ -1550,7 +1550,7 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "OFF Flag", F4SimOutputs.HSI__OFF_FLAG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "HSI mode (0=ILS/TCN, 1=TACAN, 2=NAV, 3=ILS/NAV)", F4SimOutputs.HSI__HSI_MODE, null, typeof(int), 0, 3));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "LIGHTING", "INST PNL - PRIMARY Lighting Intensity", F4SimOutputs.INSTR_LIGHTING_INTENSITY,null, typeof(int), 0, 3));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels", "LIGHTING", "PRIMARY - INST PNL Lighting Intensity (0=OFF, 1=DIM, 2=BRT)", F4SimOutputs.INSTR_LIGHTING_INTENSITY,null, typeof(int), 0, 3));
 
             AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Pitch trim (-1 to +1)", F4SimOutputs.TRIM__PITCH_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Roll trim (-1 to +1)", F4SimOutputs.TRIM__ROLL_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
@@ -1778,7 +1778,7 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is On Ground flag", F4SimOutputs.SIM__IS_ON_GROUND, 0, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Exit Game flag", F4SimOutputs.SIM__IS_EXIT_GAME, 0, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Bump Intensity", F4SimOutputs.SIM__BUMP_INTENSITY, typeof(float), 0, 1));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Bump Intensity (Intensity of a \"bump\" while taxiing/rolling [0 to 1])", F4SimOutputs.SIM__BUMP_INTENSITY, typeof(float), 0, 1));
 
             AddF4SimOutput(CreateNewF4SimOutput("Radio Client", "Status", "Client Active flag", F4SimOutputs.RADIO_CLIENT_STATUS__CLIENT_ACTIVE_FLAG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Radio Client", "Status", "Connection Fail flag", F4SimOutputs.RADIO_CLIENT_STATUS__CONNECTION_FAIL_FLAG, null, typeof(bool)));
