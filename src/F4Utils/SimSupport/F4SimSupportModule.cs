@@ -106,6 +106,12 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.MAP__GROUND_POSITION__FEET_EAST_OF_MAP_ORIGIN:
                     SetOutput((AnalogSignal) output, _lastFlightData.y);
                     break;
+                case F4SimOutputs.MAP__GROUND_POSITION__LATITUDE:
+                    SetOutput((AnalogSignal)output, _lastFlightData.latitude);
+                    break;
+                case F4SimOutputs.MAP__GROUND_POSITION__LONGITUDE:
+                    SetOutput((AnalogSignal)output, _lastFlightData.longitude);
+                    break;
 
                 case F4SimOutputs.MAP__GROUND_SPEED_VECTOR__NORTH_COMPONENT_FPS:
                     SetOutput((AnalogSignal) output, _lastFlightData.xDot);
@@ -480,6 +486,19 @@ namespace F4Utils.SimSupport
 
                 case F4SimOutputs.AUX_COMM__UHF_FREQUENCY:
                     SetOutput((AnalogSignal) output, _lastFlightData.BupUhfFreq);
+                    break;
+
+                case F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_1:
+                    SetOutput((AnalogSignal)output, _lastFlightData.iffBackupMode1Digit1);
+                    break;
+                case F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_2:
+                    SetOutput((AnalogSignal)output, _lastFlightData.iffBackupMode1Digit2);
+                    break;
+                case F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_1:
+                    SetOutput((AnalogSignal)output, _lastFlightData.iffBackupMode3ADigit1);
+                    break;
+                case F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_2:
+                    SetOutput((AnalogSignal)output, _lastFlightData.iffBackupMode3ADigit2);
                     break;
 
                 case F4SimOutputs.FUEL_QTY__FOREWARD_QTY_LBS:
@@ -1071,6 +1090,15 @@ namespace F4Utils.SimSupport
                     ((DigitalSignal) output).State = _lastFlightData.IntellivibeData.IsExitGame;
                     break;
 
+                case F4SimOutputs.SIM__BUMP_INTENSITY:
+                    SetOutput((AnalogSignal)output, _lastFlightData.bumpIntensity);
+                    break;
+
+                case F4SimOutputs.INSTR_LIGHTING_INTENSITY:
+                    SetOutput((AnalogSignal)output, _lastFlightData.instrLight);
+                    break;
+
+
                 case F4SimOutputs.RADIO_CLIENT_STATUS__CLIENT_ACTIVE_FLAG:
                     ((DigitalSignal) output).State = ((ClientFlags) _lastFlightData.RadioClientStatus.ClientFlags & ClientFlags.ClientActive) == ClientFlags.ClientActive;
                     break;
@@ -1413,9 +1441,13 @@ namespace F4Utils.SimSupport
             _simOutputs.Clear();
 
             AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Position", "Feet North of Map Origin", F4SimOutputs.MAP__GROUND_POSITION__FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), int.MinValue, int.MaxValue));
+                CreateNewF4SimOutput("Map", "Ground Position", "Feet North of Map Origin", F4SimOutputs.MAP__GROUND_POSITION__FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
             AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Position", "Feet East of Map Origin)", F4SimOutputs.MAP__GROUND_POSITION__FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), int.MinValue, int.MaxValue));
+                CreateNewF4SimOutput("Map", "Ground Position", "Feet East of Map Origin", F4SimOutputs.MAP__GROUND_POSITION__FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(
+                CreateNewF4SimOutput("Map", "Ground Position", "Latitude", F4SimOutputs.MAP__GROUND_POSITION__LATITUDE, null, typeof(float), -90, 90));
+            AddF4SimOutput(
+                CreateNewF4SimOutput("Map", "Ground Position", "Longitude", F4SimOutputs.MAP__GROUND_POSITION__LONGITUDE, null, typeof(float), -180, 180));
             AddF4SimOutput(
                 CreateNewF4SimOutput("Map", "Ground Speed", "Speed Vector - North Component (feet/sec)", F4SimOutputs.MAP__GROUND_SPEED_VECTOR__NORTH_COMPONENT_FPS, null, typeof(float), -1450, 1450));
             AddF4SimOutput(
@@ -1518,6 +1550,8 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "OFF Flag", F4SimOutputs.HSI__OFF_FLAG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "HSI mode (0=ILS/TCN, 1=TACAN, 2=NAV, 3=ILS/NAV)", F4SimOutputs.HSI__HSI_MODE, null, typeof(int), 0, 3));
 
+            AddF4SimOutput(CreateNewF4SimOutput("Panels", "LIGHTING", "INST PNL - PRIMARY Lighting Intensity", F4SimOutputs.INSTR_LIGHTING_INTENSITY,null, typeof(int), 0, 3));
+
             AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Pitch trim (-1 to +1)", F4SimOutputs.TRIM__PITCH_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Roll trim (-1 to +1)", F4SimOutputs.TRIM__ROLL_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Yaw trim (-1 to +1)", F4SimOutputs.TRIM__YAW_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
@@ -1541,6 +1575,11 @@ namespace F4Utils.SimSupport
 
             AddF4SimOutput(CreateNewF4SimOutput("UHF", "UHF Preset", F4SimOutputs.AUX_COMM__UHF_PRESET, typeof(int), 1, 19));
             AddF4SimOutput(CreateNewF4SimOutput("UHF", "UHF Frequency", F4SimOutputs.AUX_COMM__UHF_FREQUENCY, typeof(int), 0, 399975));
+
+            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 1 Digit 1", F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_1, typeof(int), 0, 9));
+            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 1 Digit 2", F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_2, typeof(int), 0, 9));
+            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 3A Digit 1", F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_1, typeof(int), 0, 9));
+            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 3A Digit 2", F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_2, typeof(int), 0, 9));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Fuel QTY", "Internal fuel (pounds)", F4SimOutputs.FUEL_QTY__INTERNAL_FUEL_POUNDS, null, typeof(float), 0, 42000));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Fuel QTY", "External fuel (pounds)", F4SimOutputs.FUEL_QTY__EXTERNAL_FUEL_POUNDS, null, typeof(float), 0, 42000));
@@ -1738,6 +1777,8 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Over G flag", F4SimOutputs.SIM__IS_OVER_G, 0, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is On Ground flag", F4SimOutputs.SIM__IS_ON_GROUND, 0, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Is Exit Game flag", F4SimOutputs.SIM__IS_EXIT_GAME, 0, typeof(bool)));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Bump Intensity", F4SimOutputs.SIM__BUMP_INTENSITY, typeof(float), 0, 1));
 
             AddF4SimOutput(CreateNewF4SimOutput("Radio Client", "Status", "Client Active flag", F4SimOutputs.RADIO_CLIENT_STATUS__CLIENT_ACTIVE_FLAG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Radio Client", "Status", "Connection Fail flag", F4SimOutputs.RADIO_CLIENT_STATUS__CONNECTION_FAIL_FLAG, null, typeof(bool)));
