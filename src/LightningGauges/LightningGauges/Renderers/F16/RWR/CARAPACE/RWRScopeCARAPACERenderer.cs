@@ -149,12 +149,13 @@ namespace LightningGauges.Renderers.F16.RWR.CARAPACE
 
                 if (RwrInfoContains("onpri"))
                 {
-                    DrawSolidBox(drawingContext, -TextWidth("000", false), -1 + (TextHeight(false) * 2), TextWidth("00", false), -1 + TextHeight(false), Color.FromRgb(7, 18, 8));
-                    DrawLine(drawingContext, -TextWidth("000", false), -1 + (TextHeight(false) * 2), TextWidth("00", false), -1 + (TextHeight(false) * 2));
-                    DrawLine(drawingContext, -TextWidth("000", false), -1 + TextHeight(false), TextWidth("00", false), -1 + TextHeight(false));
-                    DrawLine(drawingContext, 0, -1 + TextHeight(false), 0, -1 + (TextHeight(false) * 2));
-                    DrawLine(drawingContext, -TextWidth("000", false), -1 + TextHeight(false), -TextWidth("000", false), -1 + (TextHeight(false) * 2));
-                    DrawLine(drawingContext, TextWidth("00", false), -1 + TextHeight(false), TextWidth("00", false), -1 + (TextHeight(false) * 2));
+                    var vOffset = FormatForVectorDisplay ? 0.06 : 0.035;
+                    DrawSolidBox(drawingContext, -TextWidth("000", false), -1 + (TextHeight(false) * 2) + vOffset, TextWidth("00", false), -1 + TextHeight(false) + vOffset, Color.FromRgb(7, 18, 8));
+                    DrawLine(drawingContext, -TextWidth("000", false), -1 + (TextHeight(false) * 2) + vOffset, TextWidth("00", false), -1 + (TextHeight(false) * 2) + vOffset);
+                    DrawLine(drawingContext, -TextWidth("000", false), -1 + TextHeight(false) + vOffset, TextWidth("00", false), -1 + TextHeight(false) + vOffset);
+                    DrawLine(drawingContext, 0, -1 + TextHeight(false) + vOffset, 0, -1 + (TextHeight(false) * 2) + vOffset);
+                    DrawLine(drawingContext, -TextWidth("000", false), -1 + TextHeight(false) + vOffset, -TextWidth("000", false), -1 + (TextHeight(false) * 2) + vOffset);
+                    DrawLine(drawingContext, TextWidth("00", false), -1 + TextHeight(false) + vOffset, TextWidth("00", false), -1 + (TextHeight(false) * 2) + vOffset);
 
                     if (RwrInfoContains("prih"))
                     {
