@@ -19,6 +19,7 @@ const uint16_t MAX_DAC_VALUE = 0xFFF;
 const size_t DRAW_POINTS_BUFFER_SIZE = 21 * 1024;
 uint32_t _drawPointsBuffer[DRAW_POINTS_BUFFER_SIZE];
 size_t _drawPointsBufferLength = 0;
+elapsedMillis _timeSinceLastDrawPointsSentMillis;
 
 //communication settings
 const unsigned int BAUD_RATE = 115200;
@@ -37,6 +38,8 @@ bool _beamOn = true; //set to true at initialization time but will be turned off
 //LED state
 bool _ledOn = false;
 
+//"Screensaver" timeout
+const unsigned int SCREENSAVER_TIMEOUT_SECONDS=30; //screen will be blanked if no new draw points are received within this timout period. 
 
 void setup()
 {
@@ -63,11 +66,12 @@ void onPacketReceived(const uint8_t* buffer, size_t size)
   size_t bytesToCopy = min(DRAW_POINTS_BUFFER_SIZE * sizeof(uint32_t), size);
   memcpy (_drawPointsBuffer, buffer, bytesToCopy);
   _drawPointsBufferLength=bytesToCopy/sizeof(uint32_t);
+  _timeSinceLastDrawPointsSentMillis=0;
 }
 
 void draw()
 { 
-  if (_drawPointsBufferLength <= 0) return;
+  if (_drawPointsBufferLength <= 0 || _timeSinceLastDrawPointsSentMillis > (SCREENSAVER_TIMEOUT_SECONDS * 1000) ) return;
 
   for (size_t i = 0; i < _drawPointsBufferLength; i++)
   {
