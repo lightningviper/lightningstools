@@ -52,13 +52,13 @@
         "Entry"
         {
         "MsmKey" = "8:_D674C43D2933583FE2A853574897B193"
-        "OwnerKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
+        "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D674C43D2933583FE2A853574897B193"
-        "OwnerKey" = "8:_83DE0582FF75464696D549BDE666B238"
+        "OwnerKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -82,19 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5C2D9380313E1BDF0882821F967CC83E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F4A50C01C97227DCBC81CF18716AE17F"
+        "OwnerKey" = "8:_D674C43D2933583FE2A853574897B193"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +94,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D674C43D2933583FE2A853574897B193"
+        "OwnerKey" = "8:_F4A50C01C97227DCBC81CF18716AE17F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A284536D8A9E21E3D152A4801739F6A6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5C2D9380313E1BDF0882821F967CC83E"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -211,11 +211,6 @@
             "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_3C231C04FF2E2C0E751BDA1979F3057C"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
@@ -242,11 +237,6 @@
             "AssemblyAsmDisplayName" = "8:Costura, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5C2D9380313E1BDF0882821F967CC83E"
-                    {
-                    "Name" = "8:Costura.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Costura.dll"
             "TargetName" = "8:"
@@ -273,11 +263,6 @@
             "AssemblyAsmDisplayName" = "8:Henkie.SDI, Version=0.1.0.0, Culture=neutral, PublicKeyToken=81b1c007ef9a37db, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_A284536D8A9E21E3D152A4801739F6A6"
-                    {
-                    "Name" = "8:Henkie.SDI.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Henkie.SDI.dll"
             "TargetName" = "8:"
@@ -304,11 +289,6 @@
             "AssemblyAsmDisplayName" = "8:Phcc, Version=0.2.2.0, Culture=neutral, PublicKeyToken=d747a6aa7a16ca9c, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_D674C43D2933583FE2A853574897B193"
-                    {
-                    "Name" = "8:Phcc.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Phcc.dll"
             "TargetName" = "8:"
@@ -335,11 +315,6 @@
             "AssemblyAsmDisplayName" = "8:Henkie.Common, Version=0.1.0.0, Culture=neutral, PublicKeyToken=e34baf6b42194c12, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_F4A50C01C97227DCBC81CF18716AE17F"
-                    {
-                    "Name" = "8:Henkie.Common.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Henkie.Common.dll"
             "TargetName" = "8:"
@@ -399,7 +374,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_8D9ADC64D9C7460D83C3E246645D6C61"
                     {
-                    "Name" = "8:SDI Test Tool"
+                    "Name" = "8:Henkie SDI Test Tool"
                     "AlwaysCreate" = "11:TRUE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -425,7 +400,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:SDI Test Tool"
+        "ProductName" = "8:Henkie SDI Test Tool"
         "ProductCode" = "8:{F8D7C2FB-2316-4031-AADC-2AEE4D2C7542}"
         "PackageCode" = "8:{4F9A74DC-8DC6-4352-9AE3-E514AF916029}"
         "UpgradeCode" = "8:{988E7AAB-A159-4025-B90D-FF778ACFB561}"
@@ -438,10 +413,10 @@
         "Manufacturer" = "8:lightning"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/lightningviper/lightningstools"
-        "Title" = "8:SDI Test Tool Setup"
-        "Subject" = "8:SDI Test Tool"
+        "Title" = "8:Henkie SDI Test Tool Setup"
+        "Subject" = "8:Henkie SDI Test Tool"
         "ARPCONTACT" = "8:lightning"
-        "Keywords" = "8:SDI Test Tool"
+        "Keywords" = "8:Henkie SDI Test Tool"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:https://github.com/lightningviper/lightningstools"
         "ARPPRODUCTICON" = "8:_83DE0582FF75464696D549BDE666B238"
@@ -549,7 +524,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6B7F9ED942314DB68CB315EC87E5C644"
             {
-            "Name" = "8:SDI Test Tool"
+            "Name" = "8:Henkie SDI Test Tool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
