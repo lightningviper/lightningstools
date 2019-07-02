@@ -329,6 +329,28 @@
             this.gvDED = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFD2Vars = new System.Windows.Forms.TabPage();
+            this.lblRTT_area5 = new System.Windows.Forms.Label();
+            this.txtRTT_area5 = new System.Windows.Forms.TextBox();
+            this.lblRTT_area4 = new System.Windows.Forms.Label();
+            this.txtRTT_area4 = new System.Windows.Forms.TextBox();
+            this.lblRTT_area3 = new System.Windows.Forms.Label();
+            this.txtRTT_area3 = new System.Windows.Forms.TextBox();
+            this.lblRTT_area2 = new System.Windows.Forms.Label();
+            this.txtRTT_area2 = new System.Windows.Forms.TextBox();
+            this.lblRTT_area1 = new System.Windows.Forms.Label();
+            this.txtRTT_area1 = new System.Windows.Forms.TextBox();
+            this.lblRTT_area0 = new System.Windows.Forms.Label();
+            this.txtRTT_area0 = new System.Windows.Forms.TextBox();
+            this.lblRTT_Size = new System.Windows.Forms.Label();
+            this.txtRTT_size = new System.Windows.Forms.TextBox();
+            this.lblInstrLight = new System.Windows.Forms.Label();
+            this.txtInstrLight = new System.Windows.Forms.TextBox();
+            this.lblBumpIntensity = new System.Windows.Forms.Label();
+            this.txtBumpIntensity = new System.Windows.Forms.TextBox();
+            this.lblLongitude = new System.Windows.Forms.Label();
+            this.txtLongitude = new System.Windows.Forms.TextBox();
+            this.lblLatitude = new System.Windows.Forms.Label();
+            this.txtLatitude = new System.Windows.Forms.TextBox();
             this.lblVtolPos = new System.Windows.Forms.Label();
             this.txtVtolPos = new System.Windows.Forms.TextBox();
             this.lblVehicleACD = new System.Windows.Forms.Label();
@@ -555,6 +577,10 @@
             this.lblFlightData = new System.Windows.Forms.Label();
             this.lblLightBitsUint = new System.Windows.Forms.Label();
             this.txtLightBitsUint = new System.Windows.Forms.TextBox();
+            this.lblRTT_area6 = new System.Windows.Forms.Label();
+            this.txtRTT_area6 = new System.Windows.Forms.TextBox();
+            this.lblIFF_BackupModeDigits = new System.Windows.Forms.Label();
+            this.txtIFF_BackupModeDigits = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabFDBits.SuspendLayout();
             this.tabFDVars.SuspendLayout();
@@ -590,7 +616,7 @@
             this.tabControl1.Controls.Add(this.tabRawBits);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(660, 571);
@@ -714,9 +740,9 @@
             this.tabFDBits.Controls.Add(this.chkRefuelAR);
             this.tabFDBits.Controls.Add(this.chkRefuelRDY);
             this.tabFDBits.Location = new System.Drawing.Point(4, 22);
-            this.tabFDBits.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFDBits.Margin = new System.Windows.Forms.Padding(2);
             this.tabFDBits.Name = "tabFDBits";
-            this.tabFDBits.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFDBits.Padding = new System.Windows.Forms.Padding(2);
             this.tabFDBits.Size = new System.Drawing.Size(652, 545);
             this.tabFDBits.TabIndex = 0;
             this.tabFDBits.Text = "FD Bits";
@@ -737,7 +763,7 @@
             this.chkToTrue.AutoSize = true;
             this.chkToTrue.Enabled = false;
             this.chkToTrue.Location = new System.Drawing.Point(428, 24);
-            this.chkToTrue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkToTrue.Margin = new System.Windows.Forms.Padding(2);
             this.chkToTrue.Name = "chkToTrue";
             this.chkToTrue.Size = new System.Drawing.Size(61, 17);
             this.chkToTrue.TabIndex = 99;
@@ -749,7 +775,7 @@
             this.chkIlsWarning.AutoSize = true;
             this.chkIlsWarning.Enabled = false;
             this.chkIlsWarning.Location = new System.Drawing.Point(428, 40);
-            this.chkIlsWarning.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIlsWarning.Margin = new System.Windows.Forms.Padding(2);
             this.chkIlsWarning.Name = "chkIlsWarning";
             this.chkIlsWarning.Size = new System.Drawing.Size(76, 17);
             this.chkIlsWarning.TabIndex = 100;
@@ -761,7 +787,7 @@
             this.chkCourseWarning.AutoSize = true;
             this.chkCourseWarning.Enabled = false;
             this.chkCourseWarning.Location = new System.Drawing.Point(428, 56);
-            this.chkCourseWarning.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCourseWarning.Margin = new System.Windows.Forms.Padding(2);
             this.chkCourseWarning.Name = "chkCourseWarning";
             this.chkCourseWarning.Size = new System.Drawing.Size(99, 17);
             this.chkCourseWarning.TabIndex = 101;
@@ -773,7 +799,7 @@
             this.chkInit.AutoSize = true;
             this.chkInit.Enabled = false;
             this.chkInit.Location = new System.Drawing.Point(428, 72);
-            this.chkInit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkInit.Margin = new System.Windows.Forms.Padding(2);
             this.chkInit.Name = "chkInit";
             this.chkInit.Size = new System.Drawing.Size(40, 17);
             this.chkInit.TabIndex = 102;
@@ -785,7 +811,7 @@
             this.chkTotalFlags.AutoSize = true;
             this.chkTotalFlags.Enabled = false;
             this.chkTotalFlags.Location = new System.Drawing.Point(428, 88);
-            this.chkTotalFlags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTotalFlags.Margin = new System.Windows.Forms.Padding(2);
             this.chkTotalFlags.Name = "chkTotalFlags";
             this.chkTotalFlags.Size = new System.Drawing.Size(75, 17);
             this.chkTotalFlags.TabIndex = 103;
@@ -797,7 +823,7 @@
             this.chkADI_OFF.AutoSize = true;
             this.chkADI_OFF.Enabled = false;
             this.chkADI_OFF.Location = new System.Drawing.Point(428, 104);
-            this.chkADI_OFF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkADI_OFF.Margin = new System.Windows.Forms.Padding(2);
             this.chkADI_OFF.Name = "chkADI_OFF";
             this.chkADI_OFF.Size = new System.Drawing.Size(70, 17);
             this.chkADI_OFF.TabIndex = 104;
@@ -809,7 +835,7 @@
             this.chkADI_AUX.AutoSize = true;
             this.chkADI_AUX.Enabled = false;
             this.chkADI_AUX.Location = new System.Drawing.Point(428, 120);
-            this.chkADI_AUX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkADI_AUX.Margin = new System.Windows.Forms.Padding(2);
             this.chkADI_AUX.Name = "chkADI_AUX";
             this.chkADI_AUX.Size = new System.Drawing.Size(72, 17);
             this.chkADI_AUX.TabIndex = 105;
@@ -821,7 +847,7 @@
             this.chkADI_GS.AutoSize = true;
             this.chkADI_GS.Enabled = false;
             this.chkADI_GS.Location = new System.Drawing.Point(428, 136);
-            this.chkADI_GS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkADI_GS.Margin = new System.Windows.Forms.Padding(2);
             this.chkADI_GS.Name = "chkADI_GS";
             this.chkADI_GS.Size = new System.Drawing.Size(65, 17);
             this.chkADI_GS.TabIndex = 106;
@@ -833,7 +859,7 @@
             this.chkADI_LOC.AutoSize = true;
             this.chkADI_LOC.Enabled = false;
             this.chkADI_LOC.Location = new System.Drawing.Point(428, 152);
-            this.chkADI_LOC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkADI_LOC.Margin = new System.Windows.Forms.Padding(2);
             this.chkADI_LOC.Name = "chkADI_LOC";
             this.chkADI_LOC.Size = new System.Drawing.Size(71, 17);
             this.chkADI_LOC.TabIndex = 107;
@@ -845,7 +871,7 @@
             this.chkHSI_OFF.AutoSize = true;
             this.chkHSI_OFF.Enabled = false;
             this.chkHSI_OFF.Location = new System.Drawing.Point(428, 168);
-            this.chkHSI_OFF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHSI_OFF.Margin = new System.Windows.Forms.Padding(2);
             this.chkHSI_OFF.Name = "chkHSI_OFF";
             this.chkHSI_OFF.Size = new System.Drawing.Size(70, 17);
             this.chkHSI_OFF.TabIndex = 108;
@@ -857,7 +883,7 @@
             this.chkBUP_ADI_OFF.AutoSize = true;
             this.chkBUP_ADI_OFF.Enabled = false;
             this.chkBUP_ADI_OFF.Location = new System.Drawing.Point(428, 185);
-            this.chkBUP_ADI_OFF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBUP_ADI_OFF.Margin = new System.Windows.Forms.Padding(2);
             this.chkBUP_ADI_OFF.Name = "chkBUP_ADI_OFF";
             this.chkBUP_ADI_OFF.Size = new System.Drawing.Size(98, 17);
             this.chkBUP_ADI_OFF.TabIndex = 109;
@@ -869,7 +895,7 @@
             this.chkVVI.AutoSize = true;
             this.chkVVI.Enabled = false;
             this.chkVVI.Location = new System.Drawing.Point(428, 201);
-            this.chkVVI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkVVI.Margin = new System.Windows.Forms.Padding(2);
             this.chkVVI.Name = "chkVVI";
             this.chkVVI.Size = new System.Drawing.Size(43, 17);
             this.chkVVI.TabIndex = 110;
@@ -881,7 +907,7 @@
             this.chkFlying.AutoSize = true;
             this.chkFlying.Enabled = false;
             this.chkFlying.Location = new System.Drawing.Point(428, 296);
-            this.chkFlying.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlying.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlying.Name = "chkFlying";
             this.chkFlying.Size = new System.Drawing.Size(53, 17);
             this.chkFlying.TabIndex = 116;
@@ -893,7 +919,7 @@
             this.chkAOA.AutoSize = true;
             this.chkAOA.Enabled = false;
             this.chkAOA.Location = new System.Drawing.Point(428, 217);
-            this.chkAOA.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAOA.Margin = new System.Windows.Forms.Padding(2);
             this.chkAOA.Name = "chkAOA";
             this.chkAOA.Size = new System.Drawing.Size(48, 17);
             this.chkAOA.TabIndex = 111;
@@ -905,7 +931,7 @@
             this.chkFromTrue.AutoSize = true;
             this.chkFromTrue.Enabled = false;
             this.chkFromTrue.Location = new System.Drawing.Point(428, 280);
-            this.chkFromTrue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFromTrue.Margin = new System.Windows.Forms.Padding(2);
             this.chkFromTrue.Name = "chkFromTrue";
             this.chkFromTrue.Size = new System.Drawing.Size(71, 17);
             this.chkFromTrue.TabIndex = 115;
@@ -917,7 +943,7 @@
             this.chkAVTR.AutoSize = true;
             this.chkAVTR.Enabled = false;
             this.chkAVTR.Location = new System.Drawing.Point(428, 233);
-            this.chkAVTR.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAVTR.Margin = new System.Windows.Forms.Padding(2);
             this.chkAVTR.Name = "chkAVTR";
             this.chkAVTR.Size = new System.Drawing.Size(55, 17);
             this.chkAVTR.TabIndex = 112;
@@ -929,7 +955,7 @@
             this.chkMiddleMarker.AutoSize = true;
             this.chkMiddleMarker.Enabled = false;
             this.chkMiddleMarker.Location = new System.Drawing.Point(428, 265);
-            this.chkMiddleMarker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMiddleMarker.Margin = new System.Windows.Forms.Padding(2);
             this.chkMiddleMarker.Name = "chkMiddleMarker";
             this.chkMiddleMarker.Size = new System.Drawing.Size(90, 17);
             this.chkMiddleMarker.TabIndex = 114;
@@ -941,7 +967,7 @@
             this.chkOuterMarker.AutoSize = true;
             this.chkOuterMarker.Enabled = false;
             this.chkOuterMarker.Location = new System.Drawing.Point(428, 249);
-            this.chkOuterMarker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkOuterMarker.Margin = new System.Windows.Forms.Padding(2);
             this.chkOuterMarker.Name = "chkOuterMarker";
             this.chkOuterMarker.Size = new System.Drawing.Size(85, 17);
             this.chkOuterMarker.TabIndex = 113;
@@ -964,7 +990,7 @@
             this.chkFlcsPmg.AutoSize = true;
             this.chkFlcsPmg.Enabled = false;
             this.chkFlcsPmg.Location = new System.Drawing.Point(288, 24);
-            this.chkFlcsPmg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlcsPmg.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlcsPmg.Name = "chkFlcsPmg";
             this.chkFlcsPmg.Size = new System.Drawing.Size(66, 17);
             this.chkFlcsPmg.TabIndex = 67;
@@ -976,7 +1002,7 @@
             this.chkMainGen.AutoSize = true;
             this.chkMainGen.Enabled = false;
             this.chkMainGen.Location = new System.Drawing.Point(288, 40);
-            this.chkMainGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMainGen.Margin = new System.Windows.Forms.Padding(2);
             this.chkMainGen.Name = "chkMainGen";
             this.chkMainGen.Size = new System.Drawing.Size(69, 17);
             this.chkMainGen.TabIndex = 68;
@@ -988,7 +1014,7 @@
             this.chkATF_Not_Engaged.AutoSize = true;
             this.chkATF_Not_Engaged.Enabled = false;
             this.chkATF_Not_Engaged.Location = new System.Drawing.Point(288, 452);
-            this.chkATF_Not_Engaged.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkATF_Not_Engaged.Margin = new System.Windows.Forms.Padding(2);
             this.chkATF_Not_Engaged.Name = "chkATF_Not_Engaged";
             this.chkATF_Not_Engaged.Size = new System.Drawing.Size(118, 17);
             this.chkATF_Not_Engaged.TabIndex = 94;
@@ -1000,7 +1026,7 @@
             this.chkStbyGen.AutoSize = true;
             this.chkStbyGen.Enabled = false;
             this.chkStbyGen.Location = new System.Drawing.Point(288, 56);
-            this.chkStbyGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkStbyGen.Margin = new System.Windows.Forms.Padding(2);
             this.chkStbyGen.Name = "chkStbyGen";
             this.chkStbyGen.Size = new System.Drawing.Size(67, 17);
             this.chkStbyGen.TabIndex = 69;
@@ -1012,7 +1038,7 @@
             this.chkNLGWOW.AutoSize = true;
             this.chkNLGWOW.Enabled = false;
             this.chkNLGWOW.Location = new System.Drawing.Point(288, 436);
-            this.chkNLGWOW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkNLGWOW.Margin = new System.Windows.Forms.Padding(2);
             this.chkNLGWOW.Name = "chkNLGWOW";
             this.chkNLGWOW.Size = new System.Drawing.Size(78, 17);
             this.chkNLGWOW.TabIndex = 93;
@@ -1024,7 +1050,7 @@
             this.chkEpuGen.AutoSize = true;
             this.chkEpuGen.Enabled = false;
             this.chkEpuGen.Location = new System.Drawing.Point(288, 72);
-            this.chkEpuGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEpuGen.Margin = new System.Windows.Forms.Padding(2);
             this.chkEpuGen.Name = "chkEpuGen";
             this.chkEpuGen.Size = new System.Drawing.Size(65, 17);
             this.chkEpuGen.TabIndex = 70;
@@ -1036,7 +1062,7 @@
             this.chkMLGWOW.AutoSize = true;
             this.chkMLGWOW.Enabled = false;
             this.chkMLGWOW.Location = new System.Drawing.Point(288, 421);
-            this.chkMLGWOW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMLGWOW.Margin = new System.Windows.Forms.Padding(2);
             this.chkMLGWOW.Name = "chkMLGWOW";
             this.chkMLGWOW.Size = new System.Drawing.Size(79, 17);
             this.chkMLGWOW.TabIndex = 92;
@@ -1048,7 +1074,7 @@
             this.chkEpuPmg.AutoSize = true;
             this.chkEpuPmg.Enabled = false;
             this.chkEpuPmg.Location = new System.Drawing.Point(288, 88);
-            this.chkEpuPmg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEpuPmg.Margin = new System.Windows.Forms.Padding(2);
             this.chkEpuPmg.Name = "chkEpuPmg";
             this.chkEpuPmg.Size = new System.Drawing.Size(66, 17);
             this.chkEpuPmg.TabIndex = 71;
@@ -1060,7 +1086,7 @@
             this.chkMCAnnounced.AutoSize = true;
             this.chkMCAnnounced.Enabled = false;
             this.chkMCAnnounced.Location = new System.Drawing.Point(288, 405);
-            this.chkMCAnnounced.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMCAnnounced.Margin = new System.Windows.Forms.Padding(2);
             this.chkMCAnnounced.Name = "chkMCAnnounced";
             this.chkMCAnnounced.Size = new System.Drawing.Size(97, 17);
             this.chkMCAnnounced.TabIndex = 91;
@@ -1072,7 +1098,7 @@
             this.chkToFlcs.AutoSize = true;
             this.chkToFlcs.Enabled = false;
             this.chkToFlcs.Location = new System.Drawing.Point(288, 104);
-            this.chkToFlcs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkToFlcs.Margin = new System.Windows.Forms.Padding(2);
             this.chkToFlcs.Name = "chkToFlcs";
             this.chkToFlcs.Size = new System.Drawing.Size(58, 17);
             this.chkToFlcs.TabIndex = 72;
@@ -1084,7 +1110,7 @@
             this.chkSysTest.AutoSize = true;
             this.chkSysTest.Enabled = false;
             this.chkSysTest.Location = new System.Drawing.Point(288, 389);
-            this.chkSysTest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSysTest.Margin = new System.Windows.Forms.Padding(2);
             this.chkSysTest.Name = "chkSysTest";
             this.chkSysTest.Size = new System.Drawing.Size(64, 17);
             this.chkSysTest.TabIndex = 90;
@@ -1096,7 +1122,7 @@
             this.chkFlcsRly.AutoSize = true;
             this.chkFlcsRly.Enabled = false;
             this.chkFlcsRly.Location = new System.Drawing.Point(288, 120);
-            this.chkFlcsRly.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlcsRly.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlcsRly.Name = "chkFlcsRly";
             this.chkFlcsRly.Size = new System.Drawing.Size(60, 17);
             this.chkFlcsRly.TabIndex = 73;
@@ -1108,7 +1134,7 @@
             this.chkSpeedbrake.AutoSize = true;
             this.chkSpeedbrake.Enabled = false;
             this.chkSpeedbrake.Location = new System.Drawing.Point(288, 374);
-            this.chkSpeedbrake.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSpeedbrake.Margin = new System.Windows.Forms.Padding(2);
             this.chkSpeedbrake.Name = "chkSpeedbrake";
             this.chkSpeedbrake.Size = new System.Drawing.Size(84, 17);
             this.chkSpeedbrake.TabIndex = 89;
@@ -1120,7 +1146,7 @@
             this.chkBatFail.AutoSize = true;
             this.chkBatFail.Enabled = false;
             this.chkBatFail.Location = new System.Drawing.Point(288, 136);
-            this.chkBatFail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBatFail.Margin = new System.Windows.Forms.Padding(2);
             this.chkBatFail.Name = "chkBatFail";
             this.chkBatFail.Size = new System.Drawing.Size(58, 17);
             this.chkBatFail.TabIndex = 74;
@@ -1132,7 +1158,7 @@
             this.chkCadc.AutoSize = true;
             this.chkCadc.Enabled = false;
             this.chkCadc.Location = new System.Drawing.Point(288, 358);
-            this.chkCadc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCadc.Margin = new System.Windows.Forms.Padding(2);
             this.chkCadc.Name = "chkCadc";
             this.chkCadc.Size = new System.Drawing.Size(50, 17);
             this.chkCadc.TabIndex = 88;
@@ -1144,7 +1170,7 @@
             this.chkHydrazine.AutoSize = true;
             this.chkHydrazine.Enabled = false;
             this.chkHydrazine.Location = new System.Drawing.Point(288, 152);
-            this.chkHydrazine.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHydrazine.Margin = new System.Windows.Forms.Padding(2);
             this.chkHydrazine.Name = "chkHydrazine";
             this.chkHydrazine.Size = new System.Drawing.Size(73, 17);
             this.chkHydrazine.TabIndex = 75;
@@ -1156,7 +1182,7 @@
             this.chkPower_Off.AutoSize = true;
             this.chkPower_Off.Enabled = false;
             this.chkPower_Off.Location = new System.Drawing.Point(288, 343);
-            this.chkPower_Off.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkPower_Off.Margin = new System.Windows.Forms.Padding(2);
             this.chkPower_Off.Name = "chkPower_Off";
             this.chkPower_Off.Size = new System.Drawing.Size(76, 17);
             this.chkPower_Off.TabIndex = 87;
@@ -1168,7 +1194,7 @@
             this.chkAir.AutoSize = true;
             this.chkAir.Enabled = false;
             this.chkAir.Location = new System.Drawing.Point(288, 168);
-            this.chkAir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAir.Margin = new System.Windows.Forms.Padding(2);
             this.chkAir.Name = "chkAir";
             this.chkAir.Size = new System.Drawing.Size(38, 17);
             this.chkAir.TabIndex = 76;
@@ -1180,7 +1206,7 @@
             this.chkParkBrakeOn.AutoSize = true;
             this.chkParkBrakeOn.Enabled = false;
             this.chkParkBrakeOn.Location = new System.Drawing.Point(288, 327);
-            this.chkParkBrakeOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkParkBrakeOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkParkBrakeOn.Name = "chkParkBrakeOn";
             this.chkParkBrakeOn.Size = new System.Drawing.Size(90, 17);
             this.chkParkBrakeOn.TabIndex = 86;
@@ -1192,7 +1218,7 @@
             this.chkElec_Fault.AutoSize = true;
             this.chkElec_Fault.Enabled = false;
             this.chkElec_Fault.Location = new System.Drawing.Point(288, 185);
-            this.chkElec_Fault.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkElec_Fault.Margin = new System.Windows.Forms.Padding(2);
             this.chkElec_Fault.Name = "chkElec_Fault";
             this.chkElec_Fault.Size = new System.Drawing.Size(76, 17);
             this.chkElec_Fault.TabIndex = 77;
@@ -1204,7 +1230,7 @@
             this.chkRightGearDown.AutoSize = true;
             this.chkRightGearDown.Enabled = false;
             this.chkRightGearDown.Location = new System.Drawing.Point(288, 311);
-            this.chkRightGearDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRightGearDown.Margin = new System.Windows.Forms.Padding(2);
             this.chkRightGearDown.Name = "chkRightGearDown";
             this.chkRightGearDown.Size = new System.Drawing.Size(102, 17);
             this.chkRightGearDown.TabIndex = 85;
@@ -1216,7 +1242,7 @@
             this.chkLef_Fault.AutoSize = true;
             this.chkLef_Fault.Enabled = false;
             this.chkLef_Fault.Location = new System.Drawing.Point(288, 201);
-            this.chkLef_Fault.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLef_Fault.Margin = new System.Windows.Forms.Padding(2);
             this.chkLef_Fault.Name = "chkLef_Fault";
             this.chkLef_Fault.Size = new System.Drawing.Size(70, 17);
             this.chkLef_Fault.TabIndex = 78;
@@ -1228,7 +1254,7 @@
             this.chkLeftGearDown.AutoSize = true;
             this.chkLeftGearDown.Enabled = false;
             this.chkLeftGearDown.Location = new System.Drawing.Point(288, 296);
-            this.chkLeftGearDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLeftGearDown.Margin = new System.Windows.Forms.Padding(2);
             this.chkLeftGearDown.Name = "chkLeftGearDown";
             this.chkLeftGearDown.Size = new System.Drawing.Size(95, 17);
             this.chkLeftGearDown.TabIndex = 84;
@@ -1240,7 +1266,7 @@
             this.chkOnGround_.AutoSize = true;
             this.chkOnGround_.Enabled = false;
             this.chkOnGround_.Location = new System.Drawing.Point(288, 217);
-            this.chkOnGround_.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkOnGround_.Margin = new System.Windows.Forms.Padding(2);
             this.chkOnGround_.Name = "chkOnGround_";
             this.chkOnGround_.Size = new System.Drawing.Size(75, 17);
             this.chkOnGround_.TabIndex = 79;
@@ -1252,7 +1278,7 @@
             this.chkNoseGearDown.AutoSize = true;
             this.chkNoseGearDown.Enabled = false;
             this.chkNoseGearDown.Location = new System.Drawing.Point(288, 280);
-            this.chkNoseGearDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkNoseGearDown.Margin = new System.Windows.Forms.Padding(2);
             this.chkNoseGearDown.Name = "chkNoseGearDown";
             this.chkNoseGearDown.Size = new System.Drawing.Size(102, 17);
             this.chkNoseGearDown.TabIndex = 83;
@@ -1264,7 +1290,7 @@
             this.chkFlcsBitRun.AutoSize = true;
             this.chkFlcsBitRun.Enabled = false;
             this.chkFlcsBitRun.Location = new System.Drawing.Point(288, 233);
-            this.chkFlcsBitRun.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlcsBitRun.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlcsBitRun.Name = "chkFlcsBitRun";
             this.chkFlcsBitRun.Size = new System.Drawing.Size(77, 17);
             this.chkFlcsBitRun.TabIndex = 80;
@@ -1276,7 +1302,7 @@
             this.chkDbuWarn.AutoSize = true;
             this.chkDbuWarn.Enabled = false;
             this.chkDbuWarn.Location = new System.Drawing.Point(288, 265);
-            this.chkDbuWarn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkDbuWarn.Margin = new System.Windows.Forms.Padding(2);
             this.chkDbuWarn.Name = "chkDbuWarn";
             this.chkDbuWarn.Size = new System.Drawing.Size(72, 17);
             this.chkDbuWarn.TabIndex = 82;
@@ -1288,7 +1314,7 @@
             this.chkFlcsBitFail.AutoSize = true;
             this.chkFlcsBitFail.Enabled = false;
             this.chkFlcsBitFail.Location = new System.Drawing.Point(288, 249);
-            this.chkFlcsBitFail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlcsBitFail.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlcsBitFail.Name = "chkFlcsBitFail";
             this.chkFlcsBitFail.Size = new System.Drawing.Size(73, 17);
             this.chkFlcsBitFail.TabIndex = 81;
@@ -1300,7 +1326,7 @@
             this.chkENGINE.AutoSize = true;
             this.chkENGINE.Enabled = false;
             this.chkENGINE.Location = new System.Drawing.Point(150, 515);
-            this.chkENGINE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkENGINE.Margin = new System.Windows.Forms.Padding(2);
             this.chkENGINE.Name = "chkENGINE";
             this.chkENGINE.Size = new System.Drawing.Size(67, 17);
             this.chkENGINE.TabIndex = 66;
@@ -1312,7 +1338,7 @@
             this.chkAOAOn.AutoSize = true;
             this.chkAOAOn.Enabled = false;
             this.chkAOAOn.Location = new System.Drawing.Point(10, 233);
-            this.chkAOAOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAOAOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkAOAOn.Name = "chkAOAOn";
             this.chkAOAOn.Size = new System.Drawing.Size(62, 17);
             this.chkAOAOn.TabIndex = 65;
@@ -1335,7 +1361,7 @@
             this.chkGEARHANDLE.AutoSize = true;
             this.chkGEARHANDLE.Enabled = false;
             this.chkGEARHANDLE.Location = new System.Drawing.Point(150, 499);
-            this.chkGEARHANDLE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkGEARHANDLE.Margin = new System.Windows.Forms.Padding(2);
             this.chkGEARHANDLE.Name = "chkGEARHANDLE";
             this.chkGEARHANDLE.Size = new System.Drawing.Size(100, 17);
             this.chkGEARHANDLE.TabIndex = 63;
@@ -1347,7 +1373,7 @@
             this.chkTFR_ENGAGED.AutoSize = true;
             this.chkTFR_ENGAGED.Enabled = false;
             this.chkTFR_ENGAGED.Location = new System.Drawing.Point(150, 483);
-            this.chkTFR_ENGAGED.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTFR_ENGAGED.Margin = new System.Windows.Forms.Padding(2);
             this.chkTFR_ENGAGED.Name = "chkTFR_ENGAGED";
             this.chkTFR_ENGAGED.Size = new System.Drawing.Size(106, 17);
             this.chkTFR_ENGAGED.TabIndex = 62;
@@ -1359,7 +1385,7 @@
             this.chkHandoff.AutoSize = true;
             this.chkHandoff.Enabled = false;
             this.chkHandoff.Location = new System.Drawing.Point(150, 24);
-            this.chkHandoff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHandoff.Margin = new System.Windows.Forms.Padding(2);
             this.chkHandoff.Name = "chkHandoff";
             this.chkHandoff.Size = new System.Drawing.Size(64, 17);
             this.chkHandoff.TabIndex = 33;
@@ -1371,7 +1397,7 @@
             this.chkANTI_SKID.AutoSize = true;
             this.chkANTI_SKID.Enabled = false;
             this.chkANTI_SKID.Location = new System.Drawing.Point(150, 467);
-            this.chkANTI_SKID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkANTI_SKID.Margin = new System.Windows.Forms.Padding(2);
             this.chkANTI_SKID.Name = "chkANTI_SKID";
             this.chkANTI_SKID.Size = new System.Drawing.Size(82, 17);
             this.chkANTI_SKID.TabIndex = 61;
@@ -1383,7 +1409,7 @@
             this.chkLaunch.AutoSize = true;
             this.chkLaunch.Enabled = false;
             this.chkLaunch.Location = new System.Drawing.Point(150, 40);
-            this.chkLaunch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLaunch.Margin = new System.Windows.Forms.Padding(2);
             this.chkLaunch.Name = "chkLaunch";
             this.chkLaunch.Size = new System.Drawing.Size(62, 17);
             this.chkLaunch.TabIndex = 34;
@@ -1395,7 +1421,7 @@
             this.chkFUEL_OIL_HOT.AutoSize = true;
             this.chkFUEL_OIL_HOT.Enabled = false;
             this.chkFUEL_OIL_HOT.Location = new System.Drawing.Point(150, 452);
-            this.chkFUEL_OIL_HOT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFUEL_OIL_HOT.Margin = new System.Windows.Forms.Padding(2);
             this.chkFUEL_OIL_HOT.Name = "chkFUEL_OIL_HOT";
             this.chkFUEL_OIL_HOT.Size = new System.Drawing.Size(105, 17);
             this.chkFUEL_OIL_HOT.TabIndex = 60;
@@ -1407,7 +1433,7 @@
             this.chkPriMode.AutoSize = true;
             this.chkPriMode.Enabled = false;
             this.chkPriMode.Location = new System.Drawing.Point(150, 56);
-            this.chkPriMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkPriMode.Margin = new System.Windows.Forms.Padding(2);
             this.chkPriMode.Name = "chkPriMode";
             this.chkPriMode.Size = new System.Drawing.Size(65, 17);
             this.chkPriMode.TabIndex = 35;
@@ -1419,7 +1445,7 @@
             this.chkBUC.AutoSize = true;
             this.chkBUC.Enabled = false;
             this.chkBUC.Location = new System.Drawing.Point(150, 436);
-            this.chkBUC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBUC.Margin = new System.Windows.Forms.Padding(2);
             this.chkBUC.Name = "chkBUC";
             this.chkBUC.Size = new System.Drawing.Size(48, 17);
             this.chkBUC.TabIndex = 59;
@@ -1431,7 +1457,7 @@
             this.chkNaval.AutoSize = true;
             this.chkNaval.Enabled = false;
             this.chkNaval.Location = new System.Drawing.Point(150, 72);
-            this.chkNaval.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkNaval.Margin = new System.Windows.Forms.Padding(2);
             this.chkNaval.Name = "chkNaval";
             this.chkNaval.Size = new System.Drawing.Size(54, 17);
             this.chkNaval.TabIndex = 36;
@@ -1443,7 +1469,7 @@
             this.chkSEAT_ARM.AutoSize = true;
             this.chkSEAT_ARM.Enabled = false;
             this.chkSEAT_ARM.Location = new System.Drawing.Point(150, 421);
-            this.chkSEAT_ARM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSEAT_ARM.Margin = new System.Windows.Forms.Padding(2);
             this.chkSEAT_ARM.Name = "chkSEAT_ARM";
             this.chkSEAT_ARM.Size = new System.Drawing.Size(84, 17);
             this.chkSEAT_ARM.TabIndex = 58;
@@ -1455,7 +1481,7 @@
             this.chkUnk.AutoSize = true;
             this.chkUnk.Enabled = false;
             this.chkUnk.Location = new System.Drawing.Point(150, 88);
-            this.chkUnk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkUnk.Margin = new System.Windows.Forms.Padding(2);
             this.chkUnk.Name = "chkUnk";
             this.chkUnk.Size = new System.Drawing.Size(46, 17);
             this.chkUnk.TabIndex = 37;
@@ -1467,7 +1493,7 @@
             this.chkPROBEHEAT.AutoSize = true;
             this.chkPROBEHEAT.Enabled = false;
             this.chkPROBEHEAT.Location = new System.Drawing.Point(150, 405);
-            this.chkPROBEHEAT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkPROBEHEAT.Margin = new System.Windows.Forms.Padding(2);
             this.chkPROBEHEAT.Name = "chkPROBEHEAT";
             this.chkPROBEHEAT.Size = new System.Drawing.Size(92, 17);
             this.chkPROBEHEAT.TabIndex = 57;
@@ -1479,7 +1505,7 @@
             this.chkTgtSep.AutoSize = true;
             this.chkTgtSep.Enabled = false;
             this.chkTgtSep.Location = new System.Drawing.Point(150, 104);
-            this.chkTgtSep.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTgtSep.Margin = new System.Windows.Forms.Padding(2);
             this.chkTgtSep.Name = "chkTgtSep";
             this.chkTgtSep.Size = new System.Drawing.Size(61, 17);
             this.chkTgtSep.TabIndex = 38;
@@ -1491,7 +1517,7 @@
             this.chkOXY_LOW.AutoSize = true;
             this.chkOXY_LOW.Enabled = false;
             this.chkOXY_LOW.Location = new System.Drawing.Point(150, 389);
-            this.chkOXY_LOW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkOXY_LOW.Margin = new System.Windows.Forms.Padding(2);
             this.chkOXY_LOW.Name = "chkOXY_LOW";
             this.chkOXY_LOW.Size = new System.Drawing.Size(79, 17);
             this.chkOXY_LOW.TabIndex = 56;
@@ -1503,7 +1529,7 @@
             this.chkGo.AutoSize = true;
             this.chkGo.Enabled = false;
             this.chkGo.Location = new System.Drawing.Point(150, 120);
-            this.chkGo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkGo.Margin = new System.Windows.Forms.Padding(2);
             this.chkGo.Name = "chkGo";
             this.chkGo.Size = new System.Drawing.Size(40, 17);
             this.chkGo.TabIndex = 39;
@@ -1515,7 +1541,7 @@
             this.chkSEC.AutoSize = true;
             this.chkSEC.Enabled = false;
             this.chkSEC.Location = new System.Drawing.Point(150, 374);
-            this.chkSEC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSEC.Margin = new System.Windows.Forms.Padding(2);
             this.chkSEC.Name = "chkSEC";
             this.chkSEC.Size = new System.Drawing.Size(47, 17);
             this.chkSEC.TabIndex = 55;
@@ -1527,7 +1553,7 @@
             this.chkNoGo.AutoSize = true;
             this.chkNoGo.Enabled = false;
             this.chkNoGo.Location = new System.Drawing.Point(150, 136);
-            this.chkNoGo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkNoGo.Margin = new System.Windows.Forms.Padding(2);
             this.chkNoGo.Name = "chkNoGo";
             this.chkNoGo.Size = new System.Drawing.Size(54, 17);
             this.chkNoGo.TabIndex = 40;
@@ -1539,7 +1565,7 @@
             this.chkJFSOn.AutoSize = true;
             this.chkJFSOn.Enabled = false;
             this.chkJFSOn.Location = new System.Drawing.Point(150, 358);
-            this.chkJFSOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkJFSOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkJFSOn.Name = "chkJFSOn";
             this.chkJFSOn.Size = new System.Drawing.Size(58, 17);
             this.chkJFSOn.TabIndex = 54;
@@ -1551,7 +1577,7 @@
             this.chkDegr.AutoSize = true;
             this.chkDegr.Enabled = false;
             this.chkDegr.Location = new System.Drawing.Point(150, 152);
-            this.chkDegr.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkDegr.Margin = new System.Windows.Forms.Padding(2);
             this.chkDegr.Name = "chkDegr";
             this.chkDegr.Size = new System.Drawing.Size(49, 17);
             this.chkDegr.TabIndex = 41;
@@ -1563,7 +1589,7 @@
             this.chkEPUOn.AutoSize = true;
             this.chkEPUOn.Enabled = false;
             this.chkEPUOn.Location = new System.Drawing.Point(150, 343);
-            this.chkEPUOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEPUOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkEPUOn.Name = "chkEPUOn";
             this.chkEPUOn.Size = new System.Drawing.Size(62, 17);
             this.chkEPUOn.TabIndex = 53;
@@ -1575,7 +1601,7 @@
             this.chkRdy.AutoSize = true;
             this.chkRdy.Enabled = false;
             this.chkRdy.Location = new System.Drawing.Point(150, 168);
-            this.chkRdy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRdy.Margin = new System.Windows.Forms.Padding(2);
             this.chkRdy.Name = "chkRdy";
             this.chkRdy.Size = new System.Drawing.Size(45, 17);
             this.chkRdy.TabIndex = 42;
@@ -1587,7 +1613,7 @@
             this.chkAftFuelLow.AutoSize = true;
             this.chkAftFuelLow.Enabled = false;
             this.chkAftFuelLow.Location = new System.Drawing.Point(150, 327);
-            this.chkAftFuelLow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAftFuelLow.Margin = new System.Windows.Forms.Padding(2);
             this.chkAftFuelLow.Name = "chkAftFuelLow";
             this.chkAftFuelLow.Size = new System.Drawing.Size(79, 17);
             this.chkAftFuelLow.TabIndex = 52;
@@ -1599,7 +1625,7 @@
             this.chkChaffLo.AutoSize = true;
             this.chkChaffLo.Enabled = false;
             this.chkChaffLo.Location = new System.Drawing.Point(150, 185);
-            this.chkChaffLo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkChaffLo.Margin = new System.Windows.Forms.Padding(2);
             this.chkChaffLo.Name = "chkChaffLo";
             this.chkChaffLo.Size = new System.Drawing.Size(63, 17);
             this.chkChaffLo.TabIndex = 43;
@@ -1611,7 +1637,7 @@
             this.chkFwdFuelLow.AutoSize = true;
             this.chkFwdFuelLow.Enabled = false;
             this.chkFwdFuelLow.Location = new System.Drawing.Point(150, 311);
-            this.chkFwdFuelLow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFwdFuelLow.Margin = new System.Windows.Forms.Padding(2);
             this.chkFwdFuelLow.Name = "chkFwdFuelLow";
             this.chkFwdFuelLow.Size = new System.Drawing.Size(86, 17);
             this.chkFwdFuelLow.TabIndex = 51;
@@ -1623,7 +1649,7 @@
             this.chkFlareLo.AutoSize = true;
             this.chkFlareLo.Enabled = false;
             this.chkFlareLo.Location = new System.Drawing.Point(150, 201);
-            this.chkFlareLo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlareLo.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlareLo.Name = "chkFlareLo";
             this.chkFlareLo.Size = new System.Drawing.Size(61, 17);
             this.chkFlareLo.TabIndex = 44;
@@ -1635,7 +1661,7 @@
             this.chkEcmFail.AutoSize = true;
             this.chkEcmFail.Enabled = false;
             this.chkEcmFail.Location = new System.Drawing.Point(150, 296);
-            this.chkEcmFail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEcmFail.Margin = new System.Windows.Forms.Padding(2);
             this.chkEcmFail.Name = "chkEcmFail";
             this.chkEcmFail.Size = new System.Drawing.Size(63, 17);
             this.chkEcmFail.TabIndex = 50;
@@ -1647,7 +1673,7 @@
             this.chkAuxSrch.AutoSize = true;
             this.chkAuxSrch.Enabled = false;
             this.chkAuxSrch.Location = new System.Drawing.Point(150, 217);
-            this.chkAuxSrch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAuxSrch.Margin = new System.Windows.Forms.Padding(2);
             this.chkAuxSrch.Name = "chkAuxSrch";
             this.chkAuxSrch.Size = new System.Drawing.Size(66, 17);
             this.chkAuxSrch.TabIndex = 45;
@@ -1659,7 +1685,7 @@
             this.chkEcmPwr.AutoSize = true;
             this.chkEcmPwr.Enabled = false;
             this.chkEcmPwr.Location = new System.Drawing.Point(150, 280);
-            this.chkEcmPwr.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEcmPwr.Margin = new System.Windows.Forms.Padding(2);
             this.chkEcmPwr.Name = "chkEcmPwr";
             this.chkEcmPwr.Size = new System.Drawing.Size(65, 17);
             this.chkEcmPwr.TabIndex = 49;
@@ -1671,7 +1697,7 @@
             this.chkAuxAct.AutoSize = true;
             this.chkAuxAct.Enabled = false;
             this.chkAuxAct.Location = new System.Drawing.Point(150, 233);
-            this.chkAuxAct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAuxAct.Margin = new System.Windows.Forms.Padding(2);
             this.chkAuxAct.Name = "chkAuxAct";
             this.chkAuxAct.Size = new System.Drawing.Size(60, 17);
             this.chkAuxAct.TabIndex = 46;
@@ -1683,7 +1709,7 @@
             this.chkAuxPwr.AutoSize = true;
             this.chkAuxPwr.Enabled = false;
             this.chkAuxPwr.Location = new System.Drawing.Point(150, 265);
-            this.chkAuxPwr.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAuxPwr.Margin = new System.Windows.Forms.Padding(2);
             this.chkAuxPwr.Name = "chkAuxPwr";
             this.chkAuxPwr.Size = new System.Drawing.Size(62, 17);
             this.chkAuxPwr.TabIndex = 48;
@@ -1695,7 +1721,7 @@
             this.chkAuxLow.AutoSize = true;
             this.chkAuxLow.Enabled = false;
             this.chkAuxLow.Location = new System.Drawing.Point(150, 249);
-            this.chkAuxLow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAuxLow.Margin = new System.Windows.Forms.Padding(2);
             this.chkAuxLow.Name = "chkAuxLow";
             this.chkAuxLow.Size = new System.Drawing.Size(64, 17);
             this.chkAuxLow.TabIndex = 47;
@@ -1718,7 +1744,7 @@
             this.chkTFR_STBY.AutoSize = true;
             this.chkTFR_STBY.Enabled = false;
             this.chkTFR_STBY.Location = new System.Drawing.Point(10, 515);
-            this.chkTFR_STBY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTFR_STBY.Margin = new System.Windows.Forms.Padding(2);
             this.chkTFR_STBY.Name = "chkTFR_STBY";
             this.chkTFR_STBY.Size = new System.Drawing.Size(81, 17);
             this.chkTFR_STBY.TabIndex = 31;
@@ -1730,7 +1756,7 @@
             this.chkAutoPilotOn.AutoSize = true;
             this.chkAutoPilotOn.Enabled = false;
             this.chkAutoPilotOn.Location = new System.Drawing.Point(10, 499);
-            this.chkAutoPilotOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAutoPilotOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkAutoPilotOn.Name = "chkAutoPilotOn";
             this.chkAutoPilotOn.Size = new System.Drawing.Size(82, 17);
             this.chkAutoPilotOn.TabIndex = 30;
@@ -1742,7 +1768,7 @@
             this.chkMasterCaution.AutoSize = true;
             this.chkMasterCaution.Enabled = false;
             this.chkMasterCaution.Location = new System.Drawing.Point(10, 24);
-            this.chkMasterCaution.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMasterCaution.Margin = new System.Windows.Forms.Padding(2);
             this.chkMasterCaution.Name = "chkMasterCaution";
             this.chkMasterCaution.Size = new System.Drawing.Size(97, 17);
             this.chkMasterCaution.TabIndex = 1;
@@ -1754,7 +1780,7 @@
             this.chkCabinPress.AutoSize = true;
             this.chkCabinPress.Enabled = false;
             this.chkCabinPress.Location = new System.Drawing.Point(10, 484);
-            this.chkCabinPress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCabinPress.Margin = new System.Windows.Forms.Padding(2);
             this.chkCabinPress.Name = "chkCabinPress";
             this.chkCabinPress.Size = new System.Drawing.Size(79, 17);
             this.chkCabinPress.TabIndex = 29;
@@ -1766,7 +1792,7 @@
             this.chkTF.AutoSize = true;
             this.chkTF.Enabled = false;
             this.chkTF.Location = new System.Drawing.Point(10, 40);
-            this.chkTF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTF.Margin = new System.Windows.Forms.Padding(2);
             this.chkTF.Name = "chkTF";
             this.chkTF.Size = new System.Drawing.Size(39, 17);
             this.chkTF.TabIndex = 2;
@@ -1778,7 +1804,7 @@
             this.chkNWSFail.AutoSize = true;
             this.chkNWSFail.Enabled = false;
             this.chkNWSFail.Location = new System.Drawing.Point(10, 468);
-            this.chkNWSFail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkNWSFail.Margin = new System.Windows.Forms.Padding(2);
             this.chkNWSFail.Name = "chkNWSFail";
             this.chkNWSFail.Size = new System.Drawing.Size(68, 17);
             this.chkNWSFail.TabIndex = 28;
@@ -1790,7 +1816,7 @@
             this.chkOXY_BROW.AutoSize = true;
             this.chkOXY_BROW.Enabled = false;
             this.chkOXY_BROW.Location = new System.Drawing.Point(10, 56);
-            this.chkOXY_BROW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkOXY_BROW.Margin = new System.Windows.Forms.Padding(2);
             this.chkOXY_BROW.Name = "chkOXY_BROW";
             this.chkOXY_BROW.Size = new System.Drawing.Size(88, 17);
             this.chkOXY_BROW.TabIndex = 3;
@@ -1802,7 +1828,7 @@
             this.chkHook.AutoSize = true;
             this.chkHook.Enabled = false;
             this.chkHook.Location = new System.Drawing.Point(10, 452);
-            this.chkHook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHook.Margin = new System.Windows.Forms.Padding(2);
             this.chkHook.Name = "chkHook";
             this.chkHook.Size = new System.Drawing.Size(52, 17);
             this.chkHook.TabIndex = 27;
@@ -1814,7 +1840,7 @@
             this.chkEQUIP_HOT.AutoSize = true;
             this.chkEQUIP_HOT.Enabled = false;
             this.chkEQUIP_HOT.Location = new System.Drawing.Point(10, 72);
-            this.chkEQUIP_HOT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEQUIP_HOT.Margin = new System.Windows.Forms.Padding(2);
             this.chkEQUIP_HOT.Name = "chkEQUIP_HOT";
             this.chkEQUIP_HOT.Size = new System.Drawing.Size(88, 17);
             this.chkEQUIP_HOT.TabIndex = 4;
@@ -1826,7 +1852,7 @@
             this.chkECM.AutoSize = true;
             this.chkECM.Enabled = false;
             this.chkECM.Location = new System.Drawing.Point(10, 437);
-            this.chkECM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkECM.Margin = new System.Windows.Forms.Padding(2);
             this.chkECM.Name = "chkECM";
             this.chkECM.Size = new System.Drawing.Size(49, 17);
             this.chkECM.TabIndex = 26;
@@ -1838,7 +1864,7 @@
             this.chkONGROUND.AutoSize = true;
             this.chkONGROUND.Enabled = false;
             this.chkONGROUND.Location = new System.Drawing.Point(10, 88);
-            this.chkONGROUND.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkONGROUND.Margin = new System.Windows.Forms.Padding(2);
             this.chkONGROUND.Name = "chkONGROUND";
             this.chkONGROUND.Size = new System.Drawing.Size(90, 17);
             this.chkONGROUND.TabIndex = 5;
@@ -1850,7 +1876,7 @@
             this.chkIFF.AutoSize = true;
             this.chkIFF.Enabled = false;
             this.chkIFF.Location = new System.Drawing.Point(10, 421);
-            this.chkIFF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIFF.Margin = new System.Windows.Forms.Padding(2);
             this.chkIFF.Name = "chkIFF";
             this.chkIFF.Size = new System.Drawing.Size(41, 17);
             this.chkIFF.TabIndex = 25;
@@ -1862,7 +1888,7 @@
             this.chkENG_FIRE.AutoSize = true;
             this.chkENG_FIRE.Enabled = false;
             this.chkENG_FIRE.Location = new System.Drawing.Point(10, 104);
-            this.chkENG_FIRE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkENG_FIRE.Margin = new System.Windows.Forms.Padding(2);
             this.chkENG_FIRE.Name = "chkENG_FIRE";
             this.chkENG_FIRE.Size = new System.Drawing.Size(79, 17);
             this.chkENG_FIRE.TabIndex = 6;
@@ -1874,7 +1900,7 @@
             this.chkRadarAlt.AutoSize = true;
             this.chkRadarAlt.Enabled = false;
             this.chkRadarAlt.Location = new System.Drawing.Point(10, 406);
-            this.chkRadarAlt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRadarAlt.Margin = new System.Windows.Forms.Padding(2);
             this.chkRadarAlt.Name = "chkRadarAlt";
             this.chkRadarAlt.Size = new System.Drawing.Size(67, 17);
             this.chkRadarAlt.TabIndex = 24;
@@ -1886,7 +1912,7 @@
             this.chkCONFIG.AutoSize = true;
             this.chkCONFIG.Enabled = false;
             this.chkCONFIG.Location = new System.Drawing.Point(10, 120);
-            this.chkCONFIG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCONFIG.Margin = new System.Windows.Forms.Padding(2);
             this.chkCONFIG.Name = "chkCONFIG";
             this.chkCONFIG.Size = new System.Drawing.Size(66, 17);
             this.chkCONFIG.TabIndex = 7;
@@ -1898,7 +1924,7 @@
             this.chkAvionics.AutoSize = true;
             this.chkAvionics.Enabled = false;
             this.chkAvionics.Location = new System.Drawing.Point(10, 390);
-            this.chkAvionics.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAvionics.Margin = new System.Windows.Forms.Padding(2);
             this.chkAvionics.Name = "chkAvionics";
             this.chkAvionics.Size = new System.Drawing.Size(66, 17);
             this.chkAvionics.TabIndex = 23;
@@ -1910,7 +1936,7 @@
             this.chkHYD.AutoSize = true;
             this.chkHYD.Enabled = false;
             this.chkHYD.Location = new System.Drawing.Point(10, 136);
-            this.chkHYD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHYD.Margin = new System.Windows.Forms.Padding(2);
             this.chkHYD.Name = "chkHYD";
             this.chkHYD.Size = new System.Drawing.Size(49, 17);
             this.chkHYD.TabIndex = 8;
@@ -1922,7 +1948,7 @@
             this.chkFuelLow.AutoSize = true;
             this.chkFuelLow.Enabled = false;
             this.chkFuelLow.Location = new System.Drawing.Point(10, 374);
-            this.chkFuelLow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFuelLow.Margin = new System.Windows.Forms.Padding(2);
             this.chkFuelLow.Name = "chkFuelLow";
             this.chkFuelLow.Size = new System.Drawing.Size(66, 17);
             this.chkFuelLow.TabIndex = 22;
@@ -1934,7 +1960,7 @@
             this.chkFlcs_ABCD.AutoSize = true;
             this.chkFlcs_ABCD.Enabled = false;
             this.chkFlcs_ABCD.Location = new System.Drawing.Point(10, 152);
-            this.chkFlcs_ABCD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlcs_ABCD.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlcs_ABCD.Name = "chkFlcs_ABCD";
             this.chkFlcs_ABCD.Size = new System.Drawing.Size(80, 17);
             this.chkFlcs_ABCD.TabIndex = 9;
@@ -1946,7 +1972,7 @@
             this.chkOverheat.AutoSize = true;
             this.chkOverheat.Enabled = false;
             this.chkOverheat.Location = new System.Drawing.Point(10, 359);
-            this.chkOverheat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkOverheat.Margin = new System.Windows.Forms.Padding(2);
             this.chkOverheat.Name = "chkOverheat";
             this.chkOverheat.Size = new System.Drawing.Size(70, 17);
             this.chkOverheat.TabIndex = 21;
@@ -1958,7 +1984,7 @@
             this.chkFLCS.AutoSize = true;
             this.chkFLCS.Enabled = false;
             this.chkFLCS.Location = new System.Drawing.Point(10, 168);
-            this.chkFLCS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFLCS.Margin = new System.Windows.Forms.Padding(2);
             this.chkFLCS.Name = "chkFLCS";
             this.chkFLCS.Size = new System.Drawing.Size(52, 17);
             this.chkFLCS.TabIndex = 10;
@@ -1970,7 +1996,7 @@
             this.chkEngineFault.AutoSize = true;
             this.chkEngineFault.Enabled = false;
             this.chkEngineFault.Location = new System.Drawing.Point(10, 343);
-            this.chkEngineFault.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEngineFault.Margin = new System.Windows.Forms.Padding(2);
             this.chkEngineFault.Name = "chkEngineFault";
             this.chkEngineFault.Size = new System.Drawing.Size(82, 17);
             this.chkEngineFault.TabIndex = 20;
@@ -1982,7 +2008,7 @@
             this.chkCAN.AutoSize = true;
             this.chkCAN.Enabled = false;
             this.chkCAN.Location = new System.Drawing.Point(10, 185);
-            this.chkCAN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCAN.Margin = new System.Windows.Forms.Padding(2);
             this.chkCAN.Name = "chkCAN";
             this.chkCAN.Size = new System.Drawing.Size(48, 17);
             this.chkCAN.TabIndex = 11;
@@ -1994,7 +2020,7 @@
             this.chkLEFlaps.AutoSize = true;
             this.chkLEFlaps.Enabled = false;
             this.chkLEFlaps.Location = new System.Drawing.Point(10, 328);
-            this.chkLEFlaps.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLEFlaps.Margin = new System.Windows.Forms.Padding(2);
             this.chkLEFlaps.Name = "chkLEFlaps";
             this.chkLEFlaps.Size = new System.Drawing.Size(64, 17);
             this.chkLEFlaps.TabIndex = 19;
@@ -2006,7 +2032,7 @@
             this.chkT_L_CFG.AutoSize = true;
             this.chkT_L_CFG.Enabled = false;
             this.chkT_L_CFG.Location = new System.Drawing.Point(10, 201);
-            this.chkT_L_CFG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkT_L_CFG.Margin = new System.Windows.Forms.Padding(2);
             this.chkT_L_CFG.Name = "chkT_L_CFG";
             this.chkT_L_CFG.Size = new System.Drawing.Size(72, 17);
             this.chkT_L_CFG.TabIndex = 12;
@@ -2018,7 +2044,7 @@
             this.chkFltControlSys.AutoSize = true;
             this.chkFltControlSys.Enabled = false;
             this.chkFltControlSys.Location = new System.Drawing.Point(10, 312);
-            this.chkFltControlSys.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFltControlSys.Margin = new System.Windows.Forms.Padding(2);
             this.chkFltControlSys.Name = "chkFltControlSys";
             this.chkFltControlSys.Size = new System.Drawing.Size(87, 17);
             this.chkFltControlSys.TabIndex = 18;
@@ -2030,7 +2056,7 @@
             this.chkAOAAbove.AutoSize = true;
             this.chkAOAAbove.Enabled = false;
             this.chkAOAAbove.Location = new System.Drawing.Point(10, 217);
-            this.chkAOAAbove.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAOAAbove.Margin = new System.Windows.Forms.Padding(2);
             this.chkAOAAbove.Name = "chkAOAAbove";
             this.chkAOAAbove.Size = new System.Drawing.Size(79, 17);
             this.chkAOAAbove.TabIndex = 13;
@@ -2042,7 +2068,7 @@
             this.chkRefuelDSC.AutoSize = true;
             this.chkRefuelDSC.Enabled = false;
             this.chkRefuelDSC.Location = new System.Drawing.Point(10, 296);
-            this.chkRefuelDSC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRefuelDSC.Margin = new System.Windows.Forms.Padding(2);
             this.chkRefuelDSC.Name = "chkRefuelDSC";
             this.chkRefuelDSC.Size = new System.Drawing.Size(79, 17);
             this.chkRefuelDSC.TabIndex = 17;
@@ -2054,7 +2080,7 @@
             this.chkAOABelow.AutoSize = true;
             this.chkAOABelow.Enabled = false;
             this.chkAOABelow.Location = new System.Drawing.Point(10, 249);
-            this.chkAOABelow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAOABelow.Margin = new System.Windows.Forms.Padding(2);
             this.chkAOABelow.Name = "chkAOABelow";
             this.chkAOABelow.Size = new System.Drawing.Size(77, 17);
             this.chkAOABelow.TabIndex = 14;
@@ -2066,7 +2092,7 @@
             this.chkRefuelAR.AutoSize = true;
             this.chkRefuelAR.Enabled = false;
             this.chkRefuelAR.Location = new System.Drawing.Point(10, 281);
-            this.chkRefuelAR.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRefuelAR.Margin = new System.Windows.Forms.Padding(2);
             this.chkRefuelAR.Name = "chkRefuelAR";
             this.chkRefuelAR.Size = new System.Drawing.Size(72, 17);
             this.chkRefuelAR.TabIndex = 16;
@@ -2078,7 +2104,7 @@
             this.chkRefuelRDY.AutoSize = true;
             this.chkRefuelRDY.Enabled = false;
             this.chkRefuelRDY.Location = new System.Drawing.Point(10, 265);
-            this.chkRefuelRDY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRefuelRDY.Margin = new System.Windows.Forms.Padding(2);
             this.chkRefuelRDY.Name = "chkRefuelRDY";
             this.chkRefuelRDY.Size = new System.Drawing.Size(80, 17);
             this.chkRefuelRDY.TabIndex = 15;
@@ -2207,9 +2233,9 @@
             this.tabFDVars.Controls.Add(this.lblVersionNum);
             this.tabFDVars.Controls.Add(this.txtVersionNum);
             this.tabFDVars.Location = new System.Drawing.Point(4, 22);
-            this.tabFDVars.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFDVars.Margin = new System.Windows.Forms.Padding(2);
             this.tabFDVars.Name = "tabFDVars";
-            this.tabFDVars.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFDVars.Padding = new System.Windows.Forms.Padding(2);
             this.tabFDVars.Size = new System.Drawing.Size(652, 545);
             this.tabFDVars.TabIndex = 1;
             this.tabFDVars.Text = "FD Vars";
@@ -2230,7 +2256,7 @@
             // 
             this.txtTotalValues.Enabled = false;
             this.txtTotalValues.Location = new System.Drawing.Point(514, 321);
-            this.txtTotalValues.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTotalValues.Margin = new System.Windows.Forms.Padding(2);
             this.txtTotalValues.Name = "txtTotalValues";
             this.txtTotalValues.Size = new System.Drawing.Size(106, 20);
             this.txtTotalValues.TabIndex = 116;
@@ -2251,7 +2277,7 @@
             // 
             this.txtAirbaseY.Enabled = false;
             this.txtAirbaseY.Location = new System.Drawing.Point(514, 302);
-            this.txtAirbaseY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAirbaseY.Margin = new System.Windows.Forms.Padding(2);
             this.txtAirbaseY.Name = "txtAirbaseY";
             this.txtAirbaseY.Size = new System.Drawing.Size(106, 20);
             this.txtAirbaseY.TabIndex = 114;
@@ -2272,7 +2298,7 @@
             // 
             this.txtAirbaseX.Enabled = false;
             this.txtAirbaseX.Location = new System.Drawing.Point(514, 282);
-            this.txtAirbaseX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAirbaseX.Margin = new System.Windows.Forms.Padding(2);
             this.txtAirbaseX.Name = "txtAirbaseX";
             this.txtAirbaseX.Size = new System.Drawing.Size(106, 20);
             this.txtAirbaseX.TabIndex = 112;
@@ -2293,7 +2319,7 @@
             // 
             this.txtLocalizerCourse.Enabled = false;
             this.txtLocalizerCourse.Location = new System.Drawing.Point(514, 263);
-            this.txtLocalizerCourse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLocalizerCourse.Margin = new System.Windows.Forms.Padding(2);
             this.txtLocalizerCourse.Name = "txtLocalizerCourse";
             this.txtLocalizerCourse.Size = new System.Drawing.Size(106, 20);
             this.txtLocalizerCourse.TabIndex = 110;
@@ -2314,7 +2340,7 @@
             // 
             this.txtHalfDeviationLimit.Enabled = false;
             this.txtHalfDeviationLimit.Location = new System.Drawing.Point(514, 244);
-            this.txtHalfDeviationLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHalfDeviationLimit.Margin = new System.Windows.Forms.Padding(2);
             this.txtHalfDeviationLimit.Name = "txtHalfDeviationLimit";
             this.txtHalfDeviationLimit.Size = new System.Drawing.Size(106, 20);
             this.txtHalfDeviationLimit.TabIndex = 108;
@@ -2335,7 +2361,7 @@
             // 
             this.txtDeviationLimit.Enabled = false;
             this.txtDeviationLimit.Location = new System.Drawing.Point(514, 225);
-            this.txtDeviationLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDeviationLimit.Margin = new System.Windows.Forms.Padding(2);
             this.txtDeviationLimit.Name = "txtDeviationLimit";
             this.txtDeviationLimit.Size = new System.Drawing.Size(106, 20);
             this.txtDeviationLimit.TabIndex = 106;
@@ -2356,7 +2382,7 @@
             // 
             this.txtDesiredHeading.Enabled = false;
             this.txtDesiredHeading.Location = new System.Drawing.Point(514, 205);
-            this.txtDesiredHeading.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDesiredHeading.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesiredHeading.Name = "txtDesiredHeading";
             this.txtDesiredHeading.Size = new System.Drawing.Size(106, 20);
             this.txtDesiredHeading.TabIndex = 104;
@@ -2377,7 +2403,7 @@
             // 
             this.txtCurrentHeading.Enabled = false;
             this.txtCurrentHeading.Location = new System.Drawing.Point(514, 186);
-            this.txtCurrentHeading.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCurrentHeading.Margin = new System.Windows.Forms.Padding(2);
             this.txtCurrentHeading.Name = "txtCurrentHeading";
             this.txtCurrentHeading.Size = new System.Drawing.Size(106, 20);
             this.txtCurrentHeading.TabIndex = 102;
@@ -2398,7 +2424,7 @@
             // 
             this.txtBearingToBeacon.Enabled = false;
             this.txtBearingToBeacon.Location = new System.Drawing.Point(514, 167);
-            this.txtBearingToBeacon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBearingToBeacon.Margin = new System.Windows.Forms.Padding(2);
             this.txtBearingToBeacon.Name = "txtBearingToBeacon";
             this.txtBearingToBeacon.Size = new System.Drawing.Size(106, 20);
             this.txtBearingToBeacon.TabIndex = 100;
@@ -2419,7 +2445,7 @@
             // 
             this.txtDistanceToBeacon.Enabled = false;
             this.txtDistanceToBeacon.Location = new System.Drawing.Point(514, 148);
-            this.txtDistanceToBeacon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDistanceToBeacon.Margin = new System.Windows.Forms.Padding(2);
             this.txtDistanceToBeacon.Name = "txtDistanceToBeacon";
             this.txtDistanceToBeacon.Size = new System.Drawing.Size(106, 20);
             this.txtDistanceToBeacon.TabIndex = 98;
@@ -2440,7 +2466,7 @@
             // 
             this.txtDesiredCourse.Enabled = false;
             this.txtDesiredCourse.Location = new System.Drawing.Point(514, 128);
-            this.txtDesiredCourse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDesiredCourse.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesiredCourse.Name = "txtDesiredCourse";
             this.txtDesiredCourse.Size = new System.Drawing.Size(106, 20);
             this.txtDesiredCourse.TabIndex = 96;
@@ -2461,7 +2487,7 @@
             // 
             this.txtCourseDeviation.Enabled = false;
             this.txtCourseDeviation.Location = new System.Drawing.Point(514, 109);
-            this.txtCourseDeviation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCourseDeviation.Margin = new System.Windows.Forms.Padding(2);
             this.txtCourseDeviation.Name = "txtCourseDeviation";
             this.txtCourseDeviation.Size = new System.Drawing.Size(106, 20);
             this.txtCourseDeviation.TabIndex = 94;
@@ -2482,7 +2508,7 @@
             // 
             this.txtTotalStates.Enabled = false;
             this.txtTotalStates.Location = new System.Drawing.Point(514, 90);
-            this.txtTotalStates.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTotalStates.Margin = new System.Windows.Forms.Padding(2);
             this.txtTotalStates.Name = "txtTotalStates";
             this.txtTotalStates.Size = new System.Drawing.Size(106, 20);
             this.txtTotalStates.TabIndex = 92;
@@ -2503,7 +2529,7 @@
             // 
             this.txtHeadingState.Enabled = false;
             this.txtHeadingState.Location = new System.Drawing.Point(514, 71);
-            this.txtHeadingState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHeadingState.Margin = new System.Windows.Forms.Padding(2);
             this.txtHeadingState.Name = "txtHeadingState";
             this.txtHeadingState.Size = new System.Drawing.Size(106, 20);
             this.txtHeadingState.TabIndex = 90;
@@ -2524,7 +2550,7 @@
             // 
             this.txtCourseState.Enabled = false;
             this.txtCourseState.Location = new System.Drawing.Point(514, 51);
-            this.txtCourseState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCourseState.Margin = new System.Windows.Forms.Padding(2);
             this.txtCourseState.Name = "txtCourseState";
             this.txtCourseState.Size = new System.Drawing.Size(106, 20);
             this.txtCourseState.TabIndex = 88;
@@ -2545,7 +2571,7 @@
             // 
             this.txtAdiIlsVerPos.Enabled = false;
             this.txtAdiIlsVerPos.Location = new System.Drawing.Point(514, 32);
-            this.txtAdiIlsVerPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAdiIlsVerPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtAdiIlsVerPos.Name = "txtAdiIlsVerPos";
             this.txtAdiIlsVerPos.Size = new System.Drawing.Size(106, 20);
             this.txtAdiIlsVerPos.TabIndex = 86;
@@ -2566,7 +2592,7 @@
             // 
             this.txtAdiIlsHorPos.Enabled = false;
             this.txtAdiIlsHorPos.Location = new System.Drawing.Point(514, 13);
-            this.txtAdiIlsHorPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAdiIlsHorPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtAdiIlsHorPos.Name = "txtAdiIlsHorPos";
             this.txtAdiIlsHorPos.Size = new System.Drawing.Size(106, 20);
             this.txtAdiIlsHorPos.TabIndex = 84;
@@ -2587,7 +2613,7 @@
             // 
             this.txtAUXTChan.Enabled = false;
             this.txtAUXTChan.Location = new System.Drawing.Point(292, 399);
-            this.txtAUXTChan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAUXTChan.Margin = new System.Windows.Forms.Padding(2);
             this.txtAUXTChan.Name = "txtAUXTChan";
             this.txtAUXTChan.Size = new System.Drawing.Size(106, 20);
             this.txtAUXTChan.TabIndex = 82;
@@ -2608,7 +2634,7 @@
             // 
             this.txtUFCTChan.Enabled = false;
             this.txtUFCTChan.Location = new System.Drawing.Point(292, 380);
-            this.txtUFCTChan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUFCTChan.Margin = new System.Windows.Forms.Padding(2);
             this.txtUFCTChan.Name = "txtUFCTChan";
             this.txtUFCTChan.Size = new System.Drawing.Size(106, 20);
             this.txtUFCTChan.TabIndex = 80;
@@ -2629,7 +2655,7 @@
             // 
             this.txtMainPower.Enabled = false;
             this.txtMainPower.Location = new System.Drawing.Point(292, 361);
-            this.txtMainPower.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMainPower.Margin = new System.Windows.Forms.Padding(2);
             this.txtMainPower.Name = "txtMainPower";
             this.txtMainPower.Size = new System.Drawing.Size(106, 20);
             this.txtMainPower.TabIndex = 78;
@@ -2650,7 +2676,7 @@
             // 
             this.txtRightGearPos.Enabled = false;
             this.txtRightGearPos.Location = new System.Drawing.Point(292, 342);
-            this.txtRightGearPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRightGearPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtRightGearPos.Name = "txtRightGearPos";
             this.txtRightGearPos.Size = new System.Drawing.Size(106, 20);
             this.txtRightGearPos.TabIndex = 76;
@@ -2671,7 +2697,7 @@
             // 
             this.txtLeftGearPos.Enabled = false;
             this.txtLeftGearPos.Location = new System.Drawing.Point(292, 322);
-            this.txtLeftGearPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLeftGearPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtLeftGearPos.Name = "txtLeftGearPos";
             this.txtLeftGearPos.Size = new System.Drawing.Size(106, 20);
             this.txtLeftGearPos.TabIndex = 74;
@@ -2692,7 +2718,7 @@
             // 
             this.txtNoseGearPos.Enabled = false;
             this.txtNoseGearPos.Location = new System.Drawing.Point(292, 303);
-            this.txtNoseGearPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNoseGearPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtNoseGearPos.Name = "txtNoseGearPos";
             this.txtNoseGearPos.Size = new System.Drawing.Size(106, 20);
             this.txtNoseGearPos.TabIndex = 72;
@@ -2713,7 +2739,7 @@
             // 
             this.txtGearPos.Enabled = false;
             this.txtGearPos.Location = new System.Drawing.Point(292, 284);
-            this.txtGearPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtGearPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtGearPos.Name = "txtGearPos";
             this.txtGearPos.Size = new System.Drawing.Size(106, 20);
             this.txtGearPos.TabIndex = 70;
@@ -2734,7 +2760,7 @@
             // 
             this.txtFlareCount.Enabled = false;
             this.txtFlareCount.Location = new System.Drawing.Point(292, 265);
-            this.txtFlareCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFlareCount.Margin = new System.Windows.Forms.Padding(2);
             this.txtFlareCount.Name = "txtFlareCount";
             this.txtFlareCount.Size = new System.Drawing.Size(106, 20);
             this.txtFlareCount.TabIndex = 68;
@@ -2755,7 +2781,7 @@
             // 
             this.txtChaffCount.Enabled = false;
             this.txtChaffCount.Location = new System.Drawing.Point(292, 245);
-            this.txtChaffCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtChaffCount.Margin = new System.Windows.Forms.Padding(2);
             this.txtChaffCount.Name = "txtChaffCount";
             this.txtChaffCount.Size = new System.Drawing.Size(106, 20);
             this.txtChaffCount.TabIndex = 66;
@@ -2776,7 +2802,7 @@
             // 
             this.txtSpeedBrake.Enabled = false;
             this.txtSpeedBrake.Location = new System.Drawing.Point(292, 226);
-            this.txtSpeedBrake.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSpeedBrake.Margin = new System.Windows.Forms.Padding(2);
             this.txtSpeedBrake.Name = "txtSpeedBrake";
             this.txtSpeedBrake.Size = new System.Drawing.Size(106, 20);
             this.txtSpeedBrake.TabIndex = 64;
@@ -2797,7 +2823,7 @@
             // 
             this.txtEpuFuel.Enabled = false;
             this.txtEpuFuel.Location = new System.Drawing.Point(292, 207);
-            this.txtEpuFuel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEpuFuel.Margin = new System.Windows.Forms.Padding(2);
             this.txtEpuFuel.Name = "txtEpuFuel";
             this.txtEpuFuel.Size = new System.Drawing.Size(106, 20);
             this.txtEpuFuel.TabIndex = 62;
@@ -2818,7 +2844,7 @@
             // 
             this.txtTotal.Enabled = false;
             this.txtTotal.Location = new System.Drawing.Point(292, 188);
-            this.txtTotal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(2);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(106, 20);
             this.txtTotal.TabIndex = 60;
@@ -2839,7 +2865,7 @@
             // 
             this.txtAft.Enabled = false;
             this.txtAft.Location = new System.Drawing.Point(292, 168);
-            this.txtAft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAft.Margin = new System.Windows.Forms.Padding(2);
             this.txtAft.Name = "txtAft";
             this.txtAft.Size = new System.Drawing.Size(106, 20);
             this.txtAft.TabIndex = 58;
@@ -2860,7 +2886,7 @@
             // 
             this.txtFwd.Enabled = false;
             this.txtFwd.Location = new System.Drawing.Point(292, 149);
-            this.txtFwd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFwd.Margin = new System.Windows.Forms.Padding(2);
             this.txtFwd.Name = "txtFwd";
             this.txtFwd.Size = new System.Drawing.Size(106, 20);
             this.txtFwd.TabIndex = 56;
@@ -2881,7 +2907,7 @@
             // 
             this.txtFuelFlow.Enabled = false;
             this.txtFuelFlow.Location = new System.Drawing.Point(292, 130);
-            this.txtFuelFlow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFuelFlow.Margin = new System.Windows.Forms.Padding(2);
             this.txtFuelFlow.Name = "txtFuelFlow";
             this.txtFuelFlow.Size = new System.Drawing.Size(106, 20);
             this.txtFuelFlow.TabIndex = 54;
@@ -2902,7 +2928,7 @@
             // 
             this.txtExternalFuel.Enabled = false;
             this.txtExternalFuel.Location = new System.Drawing.Point(292, 111);
-            this.txtExternalFuel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtExternalFuel.Margin = new System.Windows.Forms.Padding(2);
             this.txtExternalFuel.Name = "txtExternalFuel";
             this.txtExternalFuel.Size = new System.Drawing.Size(106, 20);
             this.txtExternalFuel.TabIndex = 52;
@@ -2923,7 +2949,7 @@
             // 
             this.txtInternalFuel.Enabled = false;
             this.txtInternalFuel.Location = new System.Drawing.Point(292, 92);
-            this.txtInternalFuel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtInternalFuel.Margin = new System.Windows.Forms.Padding(2);
             this.txtInternalFuel.Name = "txtInternalFuel";
             this.txtInternalFuel.Size = new System.Drawing.Size(106, 20);
             this.txtInternalFuel.TabIndex = 50;
@@ -2944,7 +2970,7 @@
             // 
             this.txtOilPressure.Enabled = false;
             this.txtOilPressure.Location = new System.Drawing.Point(292, 72);
-            this.txtOilPressure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOilPressure.Margin = new System.Windows.Forms.Padding(2);
             this.txtOilPressure.Name = "txtOilPressure";
             this.txtOilPressure.Size = new System.Drawing.Size(106, 20);
             this.txtOilPressure.TabIndex = 48;
@@ -2965,7 +2991,7 @@
             // 
             this.txtFtit.Enabled = false;
             this.txtFtit.Location = new System.Drawing.Point(292, 53);
-            this.txtFtit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFtit.Margin = new System.Windows.Forms.Padding(2);
             this.txtFtit.Name = "txtFtit";
             this.txtFtit.Size = new System.Drawing.Size(106, 20);
             this.txtFtit.TabIndex = 46;
@@ -2986,7 +3012,7 @@
             // 
             this.txtRpm.Enabled = false;
             this.txtRpm.Location = new System.Drawing.Point(292, 34);
-            this.txtRpm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRpm.Margin = new System.Windows.Forms.Padding(2);
             this.txtRpm.Name = "txtRpm";
             this.txtRpm.Size = new System.Drawing.Size(106, 20);
             this.txtRpm.TabIndex = 44;
@@ -3007,7 +3033,7 @@
             // 
             this.txtNozzlePos.Enabled = false;
             this.txtNozzlePos.Location = new System.Drawing.Point(292, 15);
-            this.txtNozzlePos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNozzlePos.Margin = new System.Windows.Forms.Padding(2);
             this.txtNozzlePos.Name = "txtNozzlePos";
             this.txtNozzlePos.Size = new System.Drawing.Size(106, 20);
             this.txtNozzlePos.TabIndex = 42;
@@ -3028,7 +3054,7 @@
             // 
             this.txtTrimYaw.Enabled = false;
             this.txtTrimYaw.Location = new System.Drawing.Point(89, 401);
-            this.txtTrimYaw.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTrimYaw.Margin = new System.Windows.Forms.Padding(2);
             this.txtTrimYaw.Name = "txtTrimYaw";
             this.txtTrimYaw.Size = new System.Drawing.Size(106, 20);
             this.txtTrimYaw.TabIndex = 40;
@@ -3049,7 +3075,7 @@
             // 
             this.txtTrimRoll.Enabled = false;
             this.txtTrimRoll.Location = new System.Drawing.Point(89, 382);
-            this.txtTrimRoll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTrimRoll.Margin = new System.Windows.Forms.Padding(2);
             this.txtTrimRoll.Name = "txtTrimRoll";
             this.txtTrimRoll.Size = new System.Drawing.Size(106, 20);
             this.txtTrimRoll.TabIndex = 38;
@@ -3070,7 +3096,7 @@
             // 
             this.txtTrimPitch.Enabled = false;
             this.txtTrimPitch.Location = new System.Drawing.Point(89, 362);
-            this.txtTrimPitch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTrimPitch.Margin = new System.Windows.Forms.Padding(2);
             this.txtTrimPitch.Name = "txtTrimPitch";
             this.txtTrimPitch.Size = new System.Drawing.Size(106, 20);
             this.txtTrimPitch.TabIndex = 36;
@@ -3091,7 +3117,7 @@
             // 
             this.txtWindOffset.Enabled = false;
             this.txtWindOffset.Location = new System.Drawing.Point(89, 343);
-            this.txtWindOffset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtWindOffset.Margin = new System.Windows.Forms.Padding(2);
             this.txtWindOffset.Name = "txtWindOffset";
             this.txtWindOffset.Size = new System.Drawing.Size(106, 20);
             this.txtWindOffset.TabIndex = 34;
@@ -3112,7 +3138,7 @@
             // 
             this.txtGs.Enabled = false;
             this.txtGs.Location = new System.Drawing.Point(89, 324);
-            this.txtGs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtGs.Margin = new System.Windows.Forms.Padding(2);
             this.txtGs.Name = "txtGs";
             this.txtGs.Size = new System.Drawing.Size(106, 20);
             this.txtGs.TabIndex = 32;
@@ -3133,7 +3159,7 @@
             // 
             this.txtVt.Enabled = false;
             this.txtVt.Location = new System.Drawing.Point(89, 305);
-            this.txtVt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVt.Margin = new System.Windows.Forms.Padding(2);
             this.txtVt.Name = "txtVt";
             this.txtVt.Size = new System.Drawing.Size(106, 20);
             this.txtVt.TabIndex = 30;
@@ -3154,7 +3180,7 @@
             // 
             this.txtKias.Enabled = false;
             this.txtKias.Location = new System.Drawing.Point(89, 285);
-            this.txtKias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtKias.Margin = new System.Windows.Forms.Padding(2);
             this.txtKias.Name = "txtKias";
             this.txtKias.Size = new System.Drawing.Size(106, 20);
             this.txtKias.TabIndex = 28;
@@ -3175,7 +3201,7 @@
             // 
             this.txtMach.Enabled = false;
             this.txtMach.Location = new System.Drawing.Point(89, 266);
-            this.txtMach.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMach.Margin = new System.Windows.Forms.Padding(2);
             this.txtMach.Name = "txtMach";
             this.txtMach.Size = new System.Drawing.Size(106, 20);
             this.txtMach.TabIndex = 26;
@@ -3196,7 +3222,7 @@
             // 
             this.txtYaw.Enabled = false;
             this.txtYaw.Location = new System.Drawing.Point(89, 247);
-            this.txtYaw.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtYaw.Margin = new System.Windows.Forms.Padding(2);
             this.txtYaw.Name = "txtYaw";
             this.txtYaw.Size = new System.Drawing.Size(106, 20);
             this.txtYaw.TabIndex = 24;
@@ -3217,7 +3243,7 @@
             // 
             this.txtRoll.Enabled = false;
             this.txtRoll.Location = new System.Drawing.Point(89, 228);
-            this.txtRoll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRoll.Margin = new System.Windows.Forms.Padding(2);
             this.txtRoll.Name = "txtRoll";
             this.txtRoll.Size = new System.Drawing.Size(106, 20);
             this.txtRoll.TabIndex = 22;
@@ -3238,7 +3264,7 @@
             // 
             this.txtPitch.Enabled = false;
             this.txtPitch.Location = new System.Drawing.Point(89, 209);
-            this.txtPitch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPitch.Margin = new System.Windows.Forms.Padding(2);
             this.txtPitch.Name = "txtPitch";
             this.txtPitch.Size = new System.Drawing.Size(106, 20);
             this.txtPitch.TabIndex = 20;
@@ -3259,7 +3285,7 @@
             // 
             this.txtGamma.Enabled = false;
             this.txtGamma.Location = new System.Drawing.Point(89, 189);
-            this.txtGamma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtGamma.Margin = new System.Windows.Forms.Padding(2);
             this.txtGamma.Name = "txtGamma";
             this.txtGamma.Size = new System.Drawing.Size(106, 20);
             this.txtGamma.TabIndex = 18;
@@ -3280,7 +3306,7 @@
             // 
             this.txtBeta.Enabled = false;
             this.txtBeta.Location = new System.Drawing.Point(89, 170);
-            this.txtBeta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBeta.Margin = new System.Windows.Forms.Padding(2);
             this.txtBeta.Name = "txtBeta";
             this.txtBeta.Size = new System.Drawing.Size(106, 20);
             this.txtBeta.TabIndex = 16;
@@ -3301,7 +3327,7 @@
             // 
             this.txtAlpha.Enabled = false;
             this.txtAlpha.Location = new System.Drawing.Point(89, 151);
-            this.txtAlpha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAlpha.Margin = new System.Windows.Forms.Padding(2);
             this.txtAlpha.Name = "txtAlpha";
             this.txtAlpha.Size = new System.Drawing.Size(106, 20);
             this.txtAlpha.TabIndex = 14;
@@ -3322,7 +3348,7 @@
             // 
             this.txtZDot.Enabled = false;
             this.txtZDot.Location = new System.Drawing.Point(89, 132);
-            this.txtZDot.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtZDot.Margin = new System.Windows.Forms.Padding(2);
             this.txtZDot.Name = "txtZDot";
             this.txtZDot.Size = new System.Drawing.Size(106, 20);
             this.txtZDot.TabIndex = 12;
@@ -3343,7 +3369,7 @@
             // 
             this.txtYDot.Enabled = false;
             this.txtYDot.Location = new System.Drawing.Point(89, 112);
-            this.txtYDot.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtYDot.Margin = new System.Windows.Forms.Padding(2);
             this.txtYDot.Name = "txtYDot";
             this.txtYDot.Size = new System.Drawing.Size(106, 20);
             this.txtYDot.TabIndex = 10;
@@ -3364,7 +3390,7 @@
             // 
             this.txtXDot.Enabled = false;
             this.txtXDot.Location = new System.Drawing.Point(89, 93);
-            this.txtXDot.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtXDot.Margin = new System.Windows.Forms.Padding(2);
             this.txtXDot.Name = "txtXDot";
             this.txtXDot.Size = new System.Drawing.Size(106, 20);
             this.txtXDot.TabIndex = 8;
@@ -3385,7 +3411,7 @@
             // 
             this.txtZ.Enabled = false;
             this.txtZ.Location = new System.Drawing.Point(89, 74);
-            this.txtZ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtZ.Margin = new System.Windows.Forms.Padding(2);
             this.txtZ.Name = "txtZ";
             this.txtZ.Size = new System.Drawing.Size(106, 20);
             this.txtZ.TabIndex = 6;
@@ -3406,7 +3432,7 @@
             // 
             this.txtY.Enabled = false;
             this.txtY.Location = new System.Drawing.Point(89, 55);
-            this.txtY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtY.Margin = new System.Windows.Forms.Padding(2);
             this.txtY.Name = "txtY";
             this.txtY.Size = new System.Drawing.Size(106, 20);
             this.txtY.TabIndex = 4;
@@ -3427,7 +3453,7 @@
             // 
             this.txtX.Enabled = false;
             this.txtX.Location = new System.Drawing.Point(89, 35);
-            this.txtX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtX.Margin = new System.Windows.Forms.Padding(2);
             this.txtX.Name = "txtX";
             this.txtX.Size = new System.Drawing.Size(106, 20);
             this.txtX.TabIndex = 2;
@@ -3447,7 +3473,7 @@
             // 
             this.txtVersionNum.Enabled = false;
             this.txtVersionNum.Location = new System.Drawing.Point(89, 16);
-            this.txtVersionNum.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVersionNum.Margin = new System.Windows.Forms.Padding(2);
             this.txtVersionNum.Name = "txtVersionNum";
             this.txtVersionNum.Size = new System.Drawing.Size(106, 20);
             this.txtVersionNum.TabIndex = 0;
@@ -3459,9 +3485,9 @@
             this.tabRWR.Controls.Add(this.lblRWRObjectCount);
             this.tabRWR.Controls.Add(this.gvRWR);
             this.tabRWR.Location = new System.Drawing.Point(4, 22);
-            this.tabRWR.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabRWR.Margin = new System.Windows.Forms.Padding(2);
             this.tabRWR.Name = "tabRWR";
-            this.tabRWR.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabRWR.Padding = new System.Windows.Forms.Padding(2);
             this.tabRWR.Size = new System.Drawing.Size(652, 545);
             this.tabRWR.TabIndex = 2;
             this.tabRWR.Text = "FD RWR";
@@ -3470,9 +3496,8 @@
             // 
             this.txtRwrObjectCount.Enabled = false;
             this.txtRwrObjectCount.Location = new System.Drawing.Point(93, 12);
-            this.txtRwrObjectCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRwrObjectCount.Margin = new System.Windows.Forms.Padding(2);
             this.txtRwrObjectCount.Name = "txtRwrObjectCount";
-            this.txtRwrObjectCount.ReadOnly = false;
             this.txtRwrObjectCount.Size = new System.Drawing.Size(52, 20);
             this.txtRwrObjectCount.TabIndex = 2;
             // 
@@ -3516,7 +3541,7 @@
             this.gvRWR.Enabled = false;
             this.gvRWR.GridColor = System.Drawing.SystemColors.Control;
             this.gvRWR.Location = new System.Drawing.Point(7, 39);
-            this.gvRWR.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvRWR.Margin = new System.Windows.Forms.Padding(2);
             this.gvRWR.Name = "gvRWR";
             this.gvRWR.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -3656,9 +3681,9 @@
             this.tabDED_PFL.Controls.Add(this.gvPFL);
             this.tabDED_PFL.Controls.Add(this.gvDED);
             this.tabDED_PFL.Location = new System.Drawing.Point(4, 22);
-            this.tabDED_PFL.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabDED_PFL.Margin = new System.Windows.Forms.Padding(2);
             this.tabDED_PFL.Name = "tabDED_PFL";
-            this.tabDED_PFL.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabDED_PFL.Padding = new System.Windows.Forms.Padding(2);
             this.tabDED_PFL.Size = new System.Drawing.Size(652, 545);
             this.tabDED_PFL.TabIndex = 3;
             this.tabDED_PFL.Text = "FD DED/PFL";
@@ -3716,7 +3741,7 @@
             this.gvPFL.Enabled = false;
             this.gvPFL.GridColor = System.Drawing.SystemColors.Control;
             this.gvPFL.Location = new System.Drawing.Point(16, 190);
-            this.gvPFL.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvPFL.Margin = new System.Windows.Forms.Padding(2);
             this.gvPFL.Name = "gvPFL";
             this.gvPFL.ReadOnly = true;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -3789,7 +3814,7 @@
             this.gvDED.Enabled = false;
             this.gvDED.GridColor = System.Drawing.SystemColors.Control;
             this.gvDED.Location = new System.Drawing.Point(16, 34);
-            this.gvDED.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvDED.Margin = new System.Windows.Forms.Padding(2);
             this.gvDED.Name = "gvDED";
             this.gvDED.ReadOnly = true;
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -3834,6 +3859,32 @@
             // 
             // tabFD2Vars
             // 
+            this.tabFD2Vars.Controls.Add(this.lblIFF_BackupModeDigits);
+            this.tabFD2Vars.Controls.Add(this.txtIFF_BackupModeDigits);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_area6);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_area6);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_area5);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_area5);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_area4);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_area4);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_area3);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_area3);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_area2);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_area2);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_area1);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_area1);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_area0);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_area0);
+            this.tabFD2Vars.Controls.Add(this.lblRTT_Size);
+            this.tabFD2Vars.Controls.Add(this.txtRTT_size);
+            this.tabFD2Vars.Controls.Add(this.lblInstrLight);
+            this.tabFD2Vars.Controls.Add(this.txtInstrLight);
+            this.tabFD2Vars.Controls.Add(this.lblBumpIntensity);
+            this.tabFD2Vars.Controls.Add(this.txtBumpIntensity);
+            this.tabFD2Vars.Controls.Add(this.lblLongitude);
+            this.tabFD2Vars.Controls.Add(this.txtLongitude);
+            this.tabFD2Vars.Controls.Add(this.lblLatitude);
+            this.tabFD2Vars.Controls.Add(this.txtLatitude);
             this.tabFD2Vars.Controls.Add(this.lblVtolPos);
             this.tabFD2Vars.Controls.Add(this.txtVtolPos);
             this.tabFD2Vars.Controls.Add(this.lblVehicleACD);
@@ -3917,13 +3968,244 @@
             this.tabFD2Vars.Controls.Add(this.chkBB_JFSOn_Slow);
             this.tabFD2Vars.Controls.Add(this.chkBB_JFSOn_Fast);
             this.tabFD2Vars.Location = new System.Drawing.Point(4, 22);
-            this.tabFD2Vars.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFD2Vars.Margin = new System.Windows.Forms.Padding(2);
             this.tabFD2Vars.Name = "tabFD2Vars";
-            this.tabFD2Vars.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFD2Vars.Padding = new System.Windows.Forms.Padding(2);
             this.tabFD2Vars.Size = new System.Drawing.Size(652, 545);
             this.tabFD2Vars.TabIndex = 4;
             this.tabFD2Vars.Text = "FD2";
             this.tabFD2Vars.UseVisualStyleBackColor = true;
+            // 
+            // lblRTT_area5
+            // 
+            this.lblRTT_area5.AutoSize = true;
+            this.lblRTT_area5.Enabled = false;
+            this.lblRTT_area5.Location = new System.Drawing.Point(469, 377);
+            this.lblRTT_area5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area5.Name = "lblRTT_area5";
+            this.lblRTT_area5.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area5.TabIndex = 136;
+            this.lblRTT_area5.Text = "rtt_area[5]";
+            this.lblRTT_area5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area5
+            // 
+            this.txtRTT_area5.Enabled = false;
+            this.txtRTT_area5.Location = new System.Drawing.Point(528, 376);
+            this.txtRTT_area5.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area5.Name = "txtRTT_area5";
+            this.txtRTT_area5.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area5.TabIndex = 135;
+            // 
+            // lblRTT_area4
+            // 
+            this.lblRTT_area4.AutoSize = true;
+            this.lblRTT_area4.Enabled = false;
+            this.lblRTT_area4.Location = new System.Drawing.Point(469, 358);
+            this.lblRTT_area4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area4.Name = "lblRTT_area4";
+            this.lblRTT_area4.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area4.TabIndex = 134;
+            this.lblRTT_area4.Text = "rtt_area[4]";
+            this.lblRTT_area4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area4
+            // 
+            this.txtRTT_area4.Enabled = false;
+            this.txtRTT_area4.Location = new System.Drawing.Point(528, 356);
+            this.txtRTT_area4.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area4.Name = "txtRTT_area4";
+            this.txtRTT_area4.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area4.TabIndex = 133;
+            // 
+            // lblRTT_area3
+            // 
+            this.lblRTT_area3.AutoSize = true;
+            this.lblRTT_area3.Enabled = false;
+            this.lblRTT_area3.Location = new System.Drawing.Point(469, 338);
+            this.lblRTT_area3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area3.Name = "lblRTT_area3";
+            this.lblRTT_area3.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area3.TabIndex = 132;
+            this.lblRTT_area3.Text = "rtt_area[3]";
+            this.lblRTT_area3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area3
+            // 
+            this.txtRTT_area3.Enabled = false;
+            this.txtRTT_area3.Location = new System.Drawing.Point(528, 337);
+            this.txtRTT_area3.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area3.Name = "txtRTT_area3";
+            this.txtRTT_area3.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area3.TabIndex = 131;
+            // 
+            // lblRTT_area2
+            // 
+            this.lblRTT_area2.AutoSize = true;
+            this.lblRTT_area2.Enabled = false;
+            this.lblRTT_area2.Location = new System.Drawing.Point(469, 319);
+            this.lblRTT_area2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area2.Name = "lblRTT_area2";
+            this.lblRTT_area2.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area2.TabIndex = 130;
+            this.lblRTT_area2.Text = "rtt_area[2]";
+            this.lblRTT_area2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area2
+            // 
+            this.txtRTT_area2.Enabled = false;
+            this.txtRTT_area2.Location = new System.Drawing.Point(528, 317);
+            this.txtRTT_area2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area2.Name = "txtRTT_area2";
+            this.txtRTT_area2.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area2.TabIndex = 129;
+            // 
+            // lblRTT_area1
+            // 
+            this.lblRTT_area1.AutoSize = true;
+            this.lblRTT_area1.Enabled = false;
+            this.lblRTT_area1.Location = new System.Drawing.Point(469, 300);
+            this.lblRTT_area1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area1.Name = "lblRTT_area1";
+            this.lblRTT_area1.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area1.TabIndex = 128;
+            this.lblRTT_area1.Text = "rtt_area[1]";
+            this.lblRTT_area1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area1
+            // 
+            this.txtRTT_area1.Enabled = false;
+            this.txtRTT_area1.Location = new System.Drawing.Point(528, 298);
+            this.txtRTT_area1.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area1.Name = "txtRTT_area1";
+            this.txtRTT_area1.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area1.TabIndex = 127;
+            // 
+            // lblRTT_area0
+            // 
+            this.lblRTT_area0.AutoSize = true;
+            this.lblRTT_area0.Enabled = false;
+            this.lblRTT_area0.Location = new System.Drawing.Point(469, 280);
+            this.lblRTT_area0.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area0.Name = "lblRTT_area0";
+            this.lblRTT_area0.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area0.TabIndex = 126;
+            this.lblRTT_area0.Text = "rtt_area[0]";
+            this.lblRTT_area0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area0
+            // 
+            this.txtRTT_area0.Enabled = false;
+            this.txtRTT_area0.Location = new System.Drawing.Point(528, 279);
+            this.txtRTT_area0.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area0.Name = "txtRTT_area0";
+            this.txtRTT_area0.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area0.TabIndex = 125;
+            // 
+            // lblRTT_Size
+            // 
+            this.lblRTT_Size.AutoSize = true;
+            this.lblRTT_Size.Enabled = false;
+            this.lblRTT_Size.Location = new System.Drawing.Point(471, 261);
+            this.lblRTT_Size.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_Size.Name = "lblRTT_Size";
+            this.lblRTT_Size.Size = new System.Drawing.Size(53, 13);
+            this.lblRTT_Size.TabIndex = 124;
+            this.lblRTT_Size.Text = "RTT_size";
+            this.lblRTT_Size.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_size
+            // 
+            this.txtRTT_size.Enabled = false;
+            this.txtRTT_size.Location = new System.Drawing.Point(528, 260);
+            this.txtRTT_size.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_size.Name = "txtRTT_size";
+            this.txtRTT_size.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_size.TabIndex = 123;
+            // 
+            // lblInstrLight
+            // 
+            this.lblInstrLight.AutoSize = true;
+            this.lblInstrLight.Enabled = false;
+            this.lblInstrLight.Location = new System.Drawing.Point(245, 472);
+            this.lblInstrLight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblInstrLight.Name = "lblInstrLight";
+            this.lblInstrLight.Size = new System.Drawing.Size(49, 13);
+            this.lblInstrLight.TabIndex = 122;
+            this.lblInstrLight.Text = "instrLight";
+            this.lblInstrLight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtInstrLight
+            // 
+            this.txtInstrLight.Enabled = false;
+            this.txtInstrLight.Location = new System.Drawing.Point(297, 471);
+            this.txtInstrLight.Margin = new System.Windows.Forms.Padding(2);
+            this.txtInstrLight.Name = "txtInstrLight";
+            this.txtInstrLight.Size = new System.Drawing.Size(106, 20);
+            this.txtInstrLight.TabIndex = 121;
+            // 
+            // lblBumpIntensity
+            // 
+            this.lblBumpIntensity.AutoSize = true;
+            this.lblBumpIntensity.Enabled = false;
+            this.lblBumpIntensity.Location = new System.Drawing.Point(222, 453);
+            this.lblBumpIntensity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBumpIntensity.Name = "lblBumpIntensity";
+            this.lblBumpIntensity.Size = new System.Drawing.Size(72, 13);
+            this.lblBumpIntensity.TabIndex = 120;
+            this.lblBumpIntensity.Text = "bumpIntensity";
+            this.lblBumpIntensity.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBumpIntensity
+            // 
+            this.txtBumpIntensity.Enabled = false;
+            this.txtBumpIntensity.Location = new System.Drawing.Point(297, 451);
+            this.txtBumpIntensity.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBumpIntensity.Name = "txtBumpIntensity";
+            this.txtBumpIntensity.Size = new System.Drawing.Size(106, 20);
+            this.txtBumpIntensity.TabIndex = 119;
+            // 
+            // lblLongitude
+            // 
+            this.lblLongitude.AutoSize = true;
+            this.lblLongitude.Enabled = false;
+            this.lblLongitude.Location = new System.Drawing.Point(34, 470);
+            this.lblLongitude.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLongitude.Name = "lblLongitude";
+            this.lblLongitude.Size = new System.Drawing.Size(50, 13);
+            this.lblLongitude.TabIndex = 118;
+            this.lblLongitude.Text = "longitude";
+            this.lblLongitude.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtLongitude
+            // 
+            this.txtLongitude.Enabled = false;
+            this.txtLongitude.Location = new System.Drawing.Point(86, 468);
+            this.txtLongitude.Margin = new System.Windows.Forms.Padding(2);
+            this.txtLongitude.Name = "txtLongitude";
+            this.txtLongitude.Size = new System.Drawing.Size(106, 20);
+            this.txtLongitude.TabIndex = 117;
+            // 
+            // lblLatitude
+            // 
+            this.lblLatitude.AutoSize = true;
+            this.lblLatitude.Enabled = false;
+            this.lblLatitude.Location = new System.Drawing.Point(43, 450);
+            this.lblLatitude.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLatitude.Name = "lblLatitude";
+            this.lblLatitude.Size = new System.Drawing.Size(41, 13);
+            this.lblLatitude.TabIndex = 116;
+            this.lblLatitude.Text = "latitude";
+            this.lblLatitude.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtLatitude
+            // 
+            this.txtLatitude.Enabled = false;
+            this.txtLatitude.Location = new System.Drawing.Point(86, 449);
+            this.txtLatitude.Margin = new System.Windows.Forms.Padding(2);
+            this.txtLatitude.Name = "txtLatitude";
+            this.txtLatitude.Size = new System.Drawing.Size(106, 20);
+            this.txtLatitude.TabIndex = 115;
             // 
             // lblVtolPos
             // 
@@ -3941,7 +4223,7 @@
             // 
             this.txtVtolPos.Enabled = false;
             this.txtVtolPos.Location = new System.Drawing.Point(297, 432);
-            this.txtVtolPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVtolPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtVtolPos.Name = "txtVtolPos";
             this.txtVtolPos.Size = new System.Drawing.Size(106, 20);
             this.txtVtolPos.TabIndex = 113;
@@ -3962,7 +4244,7 @@
             // 
             this.txtVehicleACD.Enabled = false;
             this.txtVehicleACD.Location = new System.Drawing.Point(297, 412);
-            this.txtVehicleACD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVehicleACD.Margin = new System.Windows.Forms.Padding(2);
             this.txtVehicleACD.Name = "txtVehicleACD";
             this.txtVehicleACD.Size = new System.Drawing.Size(106, 20);
             this.txtVehicleACD.TabIndex = 111;
@@ -3983,7 +4265,7 @@
             // 
             this.txtCurrentTime.Enabled = false;
             this.txtCurrentTime.Location = new System.Drawing.Point(297, 393);
-            this.txtCurrentTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCurrentTime.Margin = new System.Windows.Forms.Padding(2);
             this.txtCurrentTime.Name = "txtCurrentTime";
             this.txtCurrentTime.Size = new System.Drawing.Size(106, 20);
             this.txtCurrentTime.TabIndex = 109;
@@ -4004,7 +4286,7 @@
             // 
             this.txtBupUhfFreq.Enabled = false;
             this.txtBupUhfFreq.Location = new System.Drawing.Point(297, 374);
-            this.txtBupUhfFreq.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBupUhfFreq.Margin = new System.Windows.Forms.Padding(2);
             this.txtBupUhfFreq.Name = "txtBupUhfFreq";
             this.txtBupUhfFreq.Size = new System.Drawing.Size(106, 20);
             this.txtBupUhfFreq.TabIndex = 107;
@@ -4025,7 +4307,7 @@
             // 
             this.txtBupUhfPreset.Enabled = false;
             this.txtBupUhfPreset.Location = new System.Drawing.Point(297, 355);
-            this.txtBupUhfPreset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBupUhfPreset.Margin = new System.Windows.Forms.Padding(2);
             this.txtBupUhfPreset.Name = "txtBupUhfPreset";
             this.txtBupUhfPreset.Size = new System.Drawing.Size(106, 20);
             this.txtBupUhfPreset.TabIndex = 105;
@@ -4046,7 +4328,7 @@
             // 
             this.txtCabinAlt.Enabled = false;
             this.txtCabinAlt.Location = new System.Drawing.Point(297, 335);
-            this.txtCabinAlt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCabinAlt.Margin = new System.Windows.Forms.Padding(2);
             this.txtCabinAlt.Name = "txtCabinAlt";
             this.txtCabinAlt.Size = new System.Drawing.Size(106, 20);
             this.txtCabinAlt.TabIndex = 103;
@@ -4067,7 +4349,7 @@
             // 
             this.txtAltCalReading.Enabled = false;
             this.txtAltCalReading.Location = new System.Drawing.Point(297, 316);
-            this.txtAltCalReading.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAltCalReading.Margin = new System.Windows.Forms.Padding(2);
             this.txtAltCalReading.Name = "txtAltCalReading";
             this.txtAltCalReading.Size = new System.Drawing.Size(106, 20);
             this.txtAltCalReading.TabIndex = 101;
@@ -4088,7 +4370,7 @@
             // 
             this.txtAAUZ.Enabled = false;
             this.txtAAUZ.Location = new System.Drawing.Point(297, 297);
-            this.txtAAUZ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAAUZ.Margin = new System.Windows.Forms.Padding(2);
             this.txtAAUZ.Name = "txtAAUZ";
             this.txtAAUZ.Size = new System.Drawing.Size(106, 20);
             this.txtAAUZ.TabIndex = 99;
@@ -4109,7 +4391,7 @@
             // 
             this.txtCmdsMode.Enabled = false;
             this.txtCmdsMode.Location = new System.Drawing.Point(297, 278);
-            this.txtCmdsMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCmdsMode.Margin = new System.Windows.Forms.Padding(2);
             this.txtCmdsMode.Name = "txtCmdsMode";
             this.txtCmdsMode.Size = new System.Drawing.Size(106, 20);
             this.txtCmdsMode.TabIndex = 97;
@@ -4130,7 +4412,7 @@
             // 
             this.txtNavMode.Enabled = false;
             this.txtNavMode.Location = new System.Drawing.Point(297, 258);
-            this.txtNavMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNavMode.Margin = new System.Windows.Forms.Padding(2);
             this.txtNavMode.Name = "txtNavMode";
             this.txtNavMode.Size = new System.Drawing.Size(106, 20);
             this.txtNavMode.TabIndex = 95;
@@ -4151,7 +4433,7 @@
             // 
             this.txtTefPos.Enabled = false;
             this.txtTefPos.Location = new System.Drawing.Point(86, 430);
-            this.txtTefPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTefPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtTefPos.Name = "txtTefPos";
             this.txtTefPos.Size = new System.Drawing.Size(106, 20);
             this.txtTefPos.TabIndex = 93;
@@ -4172,7 +4454,7 @@
             // 
             this.txtLefPos.Enabled = false;
             this.txtLefPos.Location = new System.Drawing.Point(86, 411);
-            this.txtLefPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLefPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtLefPos.Name = "txtLefPos";
             this.txtLefPos.Size = new System.Drawing.Size(106, 20);
             this.txtLefPos.TabIndex = 91;
@@ -4193,7 +4475,7 @@
             // 
             this.txtFuelFlow2.Enabled = false;
             this.txtFuelFlow2.Location = new System.Drawing.Point(86, 392);
-            this.txtFuelFlow2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFuelFlow2.Margin = new System.Windows.Forms.Padding(2);
             this.txtFuelFlow2.Name = "txtFuelFlow2";
             this.txtFuelFlow2.Size = new System.Drawing.Size(106, 20);
             this.txtFuelFlow2.TabIndex = 89;
@@ -4214,7 +4496,7 @@
             // 
             this.txtHydPressureB.Enabled = false;
             this.txtHydPressureB.Location = new System.Drawing.Point(86, 372);
-            this.txtHydPressureB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHydPressureB.Margin = new System.Windows.Forms.Padding(2);
             this.txtHydPressureB.Name = "txtHydPressureB";
             this.txtHydPressureB.Size = new System.Drawing.Size(106, 20);
             this.txtHydPressureB.TabIndex = 87;
@@ -4235,7 +4517,7 @@
             // 
             this.txtHydPressureA.Enabled = false;
             this.txtHydPressureA.Location = new System.Drawing.Point(86, 353);
-            this.txtHydPressureA.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHydPressureA.Margin = new System.Windows.Forms.Padding(2);
             this.txtHydPressureA.Name = "txtHydPressureA";
             this.txtHydPressureA.Size = new System.Drawing.Size(106, 20);
             this.txtHydPressureA.TabIndex = 85;
@@ -4256,7 +4538,7 @@
             // 
             this.txtOilPressure2.Enabled = false;
             this.txtOilPressure2.Location = new System.Drawing.Point(86, 334);
-            this.txtOilPressure2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOilPressure2.Margin = new System.Windows.Forms.Padding(2);
             this.txtOilPressure2.Name = "txtOilPressure2";
             this.txtOilPressure2.Size = new System.Drawing.Size(106, 20);
             this.txtOilPressure2.TabIndex = 83;
@@ -4277,7 +4559,7 @@
             // 
             this.txtFtit2.Enabled = false;
             this.txtFtit2.Location = new System.Drawing.Point(86, 315);
-            this.txtFtit2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFtit2.Margin = new System.Windows.Forms.Padding(2);
             this.txtFtit2.Name = "txtFtit2";
             this.txtFtit2.Size = new System.Drawing.Size(106, 20);
             this.txtFtit2.TabIndex = 81;
@@ -4298,7 +4580,7 @@
             // 
             this.txtRpm2.Enabled = false;
             this.txtRpm2.Location = new System.Drawing.Point(86, 295);
-            this.txtRpm2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRpm2.Margin = new System.Windows.Forms.Padding(2);
             this.txtRpm2.Name = "txtRpm2";
             this.txtRpm2.Size = new System.Drawing.Size(106, 20);
             this.txtRpm2.TabIndex = 79;
@@ -4319,7 +4601,7 @@
             // 
             this.txtNozzlePos2.Enabled = false;
             this.txtNozzlePos2.Location = new System.Drawing.Point(86, 276);
-            this.txtNozzlePos2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNozzlePos2.Margin = new System.Windows.Forms.Padding(2);
             this.txtNozzlePos2.Name = "txtNozzlePos2";
             this.txtNozzlePos2.Size = new System.Drawing.Size(106, 20);
             this.txtNozzlePos2.TabIndex = 77;
@@ -4340,7 +4622,7 @@
             // 
             this.txtFD2_VersionNum.Enabled = false;
             this.txtFD2_VersionNum.Location = new System.Drawing.Point(86, 257);
-            this.txtFD2_VersionNum.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFD2_VersionNum.Margin = new System.Windows.Forms.Padding(2);
             this.txtFD2_VersionNum.Name = "txtFD2_VersionNum";
             this.txtFD2_VersionNum.Size = new System.Drawing.Size(106, 20);
             this.txtFD2_VersionNum.TabIndex = 75;
@@ -4361,7 +4643,7 @@
             this.chkCalType.AutoSize = true;
             this.chkCalType.Enabled = false;
             this.chkCalType.Location = new System.Drawing.Point(434, 28);
-            this.chkCalType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCalType.Margin = new System.Windows.Forms.Padding(2);
             this.chkCalType.Name = "chkCalType";
             this.chkCalType.Size = new System.Drawing.Size(65, 17);
             this.chkCalType.TabIndex = 72;
@@ -4373,7 +4655,7 @@
             this.chkPneuFlag.AutoSize = true;
             this.chkPneuFlag.Enabled = false;
             this.chkPneuFlag.Location = new System.Drawing.Point(434, 43);
-            this.chkPneuFlag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkPneuFlag.Margin = new System.Windows.Forms.Padding(2);
             this.chkPneuFlag.Name = "chkPneuFlag";
             this.chkPneuFlag.Size = new System.Drawing.Size(71, 17);
             this.chkPneuFlag.TabIndex = 73;
@@ -4396,7 +4678,7 @@
             this.chkUfcTacanIsAA.AutoSize = true;
             this.chkUfcTacanIsAA.Enabled = false;
             this.chkUfcTacanIsAA.Location = new System.Drawing.Point(310, 28);
-            this.chkUfcTacanIsAA.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkUfcTacanIsAA.Margin = new System.Windows.Forms.Padding(2);
             this.chkUfcTacanIsAA.Name = "chkUfcTacanIsAA";
             this.chkUfcTacanIsAA.Size = new System.Drawing.Size(96, 17);
             this.chkUfcTacanIsAA.TabIndex = 67;
@@ -4408,7 +4690,7 @@
             this.chkAuxTacanIsAA.AutoSize = true;
             this.chkAuxTacanIsAA.Enabled = false;
             this.chkAuxTacanIsAA.Location = new System.Drawing.Point(310, 43);
-            this.chkAuxTacanIsAA.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAuxTacanIsAA.Margin = new System.Windows.Forms.Padding(2);
             this.chkAuxTacanIsAA.Name = "chkAuxTacanIsAA";
             this.chkAuxTacanIsAA.Size = new System.Drawing.Size(97, 17);
             this.chkAuxTacanIsAA.TabIndex = 68;
@@ -4420,7 +4702,7 @@
             this.chkUfcTacanIsX.AutoSize = true;
             this.chkUfcTacanIsX.Enabled = false;
             this.chkUfcTacanIsX.Location = new System.Drawing.Point(310, 59);
-            this.chkUfcTacanIsX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkUfcTacanIsX.Margin = new System.Windows.Forms.Padding(2);
             this.chkUfcTacanIsX.Name = "chkUfcTacanIsX";
             this.chkUfcTacanIsX.Size = new System.Drawing.Size(89, 17);
             this.chkUfcTacanIsX.TabIndex = 69;
@@ -4432,7 +4714,7 @@
             this.chkAuxTacanIsX.AutoSize = true;
             this.chkAuxTacanIsX.Enabled = false;
             this.chkAuxTacanIsX.Location = new System.Drawing.Point(310, 75);
-            this.chkAuxTacanIsX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAuxTacanIsX.Margin = new System.Windows.Forms.Padding(2);
             this.chkAuxTacanIsX.Name = "chkAuxTacanIsX";
             this.chkAuxTacanIsX.Size = new System.Drawing.Size(90, 17);
             this.chkAuxTacanIsX.TabIndex = 70;
@@ -4455,7 +4737,7 @@
             this.chkBusPowerBattery.AutoSize = true;
             this.chkBusPowerBattery.Enabled = false;
             this.chkBusPowerBattery.Location = new System.Drawing.Point(162, 28);
-            this.chkBusPowerBattery.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBusPowerBattery.Margin = new System.Windows.Forms.Padding(2);
             this.chkBusPowerBattery.Name = "chkBusPowerBattery";
             this.chkBusPowerBattery.Size = new System.Drawing.Size(107, 17);
             this.chkBusPowerBattery.TabIndex = 59;
@@ -4467,7 +4749,7 @@
             this.chkBusPowerEmergency.AutoSize = true;
             this.chkBusPowerEmergency.Enabled = false;
             this.chkBusPowerEmergency.Location = new System.Drawing.Point(162, 43);
-            this.chkBusPowerEmergency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBusPowerEmergency.Margin = new System.Windows.Forms.Padding(2);
             this.chkBusPowerEmergency.Name = "chkBusPowerEmergency";
             this.chkBusPowerEmergency.Size = new System.Drawing.Size(127, 17);
             this.chkBusPowerEmergency.TabIndex = 60;
@@ -4479,7 +4761,7 @@
             this.chkBusPowerEssential.AutoSize = true;
             this.chkBusPowerEssential.Enabled = false;
             this.chkBusPowerEssential.Location = new System.Drawing.Point(162, 59);
-            this.chkBusPowerEssential.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBusPowerEssential.Margin = new System.Windows.Forms.Padding(2);
             this.chkBusPowerEssential.Name = "chkBusPowerEssential";
             this.chkBusPowerEssential.Size = new System.Drawing.Size(116, 17);
             this.chkBusPowerEssential.TabIndex = 61;
@@ -4491,7 +4773,7 @@
             this.chkBusPowerNonEssential.AutoSize = true;
             this.chkBusPowerNonEssential.Enabled = false;
             this.chkBusPowerNonEssential.Location = new System.Drawing.Point(162, 75);
-            this.chkBusPowerNonEssential.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBusPowerNonEssential.Margin = new System.Windows.Forms.Padding(2);
             this.chkBusPowerNonEssential.Name = "chkBusPowerNonEssential";
             this.chkBusPowerNonEssential.Size = new System.Drawing.Size(136, 17);
             this.chkBusPowerNonEssential.TabIndex = 62;
@@ -4503,7 +4785,7 @@
             this.chkMainGenerator.AutoSize = true;
             this.chkMainGenerator.Enabled = false;
             this.chkMainGenerator.Location = new System.Drawing.Point(162, 91);
-            this.chkMainGenerator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkMainGenerator.Margin = new System.Windows.Forms.Padding(2);
             this.chkMainGenerator.Name = "chkMainGenerator";
             this.chkMainGenerator.Size = new System.Drawing.Size(96, 17);
             this.chkMainGenerator.TabIndex = 63;
@@ -4515,7 +4797,7 @@
             this.chkStandbyGenerator.AutoSize = true;
             this.chkStandbyGenerator.Enabled = false;
             this.chkStandbyGenerator.Location = new System.Drawing.Point(162, 107);
-            this.chkStandbyGenerator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkStandbyGenerator.Margin = new System.Windows.Forms.Padding(2);
             this.chkStandbyGenerator.Name = "chkStandbyGenerator";
             this.chkStandbyGenerator.Size = new System.Drawing.Size(112, 17);
             this.chkStandbyGenerator.TabIndex = 64;
@@ -4527,7 +4809,7 @@
             this.chkJetFuelStarter.AutoSize = true;
             this.chkJetFuelStarter.Enabled = false;
             this.chkJetFuelStarter.Location = new System.Drawing.Point(162, 123);
-            this.chkJetFuelStarter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkJetFuelStarter.Margin = new System.Windows.Forms.Padding(2);
             this.chkJetFuelStarter.Name = "chkJetFuelStarter";
             this.chkJetFuelStarter.Size = new System.Drawing.Size(91, 17);
             this.chkJetFuelStarter.TabIndex = 65;
@@ -4538,7 +4820,7 @@
             // 
             this.chkLB_OuterMarker.Enabled = false;
             this.chkLB_OuterMarker.Location = new System.Drawing.Point(22, 30);
-            this.chkLB_OuterMarker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_OuterMarker.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_OuterMarker.Name = "chkLB_OuterMarker";
             this.chkLB_OuterMarker.Size = new System.Drawing.Size(14, 15);
             this.chkLB_OuterMarker.TabIndex = 47;
@@ -4548,7 +4830,7 @@
             // 
             this.chkLB_MiddleMarker.Enabled = false;
             this.chkLB_MiddleMarker.Location = new System.Drawing.Point(22, 45);
-            this.chkLB_MiddleMarker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_MiddleMarker.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_MiddleMarker.Name = "chkLB_MiddleMarker";
             this.chkLB_MiddleMarker.Size = new System.Drawing.Size(14, 15);
             this.chkLB_MiddleMarker.TabIndex = 48;
@@ -4558,7 +4840,7 @@
             // 
             this.chkLB_PROBEHEAT.Enabled = false;
             this.chkLB_PROBEHEAT.Location = new System.Drawing.Point(22, 61);
-            this.chkLB_PROBEHEAT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_PROBEHEAT.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_PROBEHEAT.Name = "chkLB_PROBEHEAT";
             this.chkLB_PROBEHEAT.Size = new System.Drawing.Size(14, 15);
             this.chkLB_PROBEHEAT.TabIndex = 49;
@@ -4568,7 +4850,7 @@
             // 
             this.chkLB_AuxSrch.Enabled = false;
             this.chkLB_AuxSrch.Location = new System.Drawing.Point(22, 77);
-            this.chkLB_AuxSrch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_AuxSrch.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_AuxSrch.Name = "chkLB_AuxSrch";
             this.chkLB_AuxSrch.Size = new System.Drawing.Size(14, 15);
             this.chkLB_AuxSrch.TabIndex = 50;
@@ -4578,7 +4860,7 @@
             // 
             this.chkLB_Launch.Enabled = false;
             this.chkLB_Launch.Location = new System.Drawing.Point(22, 93);
-            this.chkLB_Launch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_Launch.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_Launch.Name = "chkLB_Launch";
             this.chkLB_Launch.Size = new System.Drawing.Size(14, 15);
             this.chkLB_Launch.TabIndex = 51;
@@ -4588,7 +4870,7 @@
             // 
             this.chkLB_PriMode.Enabled = false;
             this.chkLB_PriMode.Location = new System.Drawing.Point(22, 109);
-            this.chkLB_PriMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_PriMode.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_PriMode.Name = "chkLB_PriMode";
             this.chkLB_PriMode.Size = new System.Drawing.Size(14, 15);
             this.chkLB_PriMode.TabIndex = 52;
@@ -4598,7 +4880,7 @@
             // 
             this.chkLB_Unk.Enabled = false;
             this.chkLB_Unk.Location = new System.Drawing.Point(22, 125);
-            this.chkLB_Unk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_Unk.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_Unk.Name = "chkLB_Unk";
             this.chkLB_Unk.Size = new System.Drawing.Size(14, 15);
             this.chkLB_Unk.TabIndex = 53;
@@ -4608,7 +4890,7 @@
             // 
             this.chkLB_Elec_Fault.Enabled = false;
             this.chkLB_Elec_Fault.Location = new System.Drawing.Point(22, 141);
-            this.chkLB_Elec_Fault.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_Elec_Fault.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_Elec_Fault.Name = "chkLB_Elec_Fault";
             this.chkLB_Elec_Fault.Size = new System.Drawing.Size(14, 15);
             this.chkLB_Elec_Fault.TabIndex = 54;
@@ -4618,7 +4900,7 @@
             // 
             this.chkLB_OXY_BROW.Enabled = false;
             this.chkLB_OXY_BROW.Location = new System.Drawing.Point(22, 158);
-            this.chkLB_OXY_BROW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_OXY_BROW.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_OXY_BROW.Name = "chkLB_OXY_BROW";
             this.chkLB_OXY_BROW.Size = new System.Drawing.Size(14, 15);
             this.chkLB_OXY_BROW.TabIndex = 55;
@@ -4628,7 +4910,7 @@
             // 
             this.chkLB_EPUOn.Enabled = false;
             this.chkLB_EPUOn.Location = new System.Drawing.Point(22, 174);
-            this.chkLB_EPUOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_EPUOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_EPUOn.Name = "chkLB_EPUOn";
             this.chkLB_EPUOn.Size = new System.Drawing.Size(14, 15);
             this.chkLB_EPUOn.TabIndex = 56;
@@ -4638,7 +4920,7 @@
             // 
             this.chkLB_JFSOn_Slow.Enabled = false;
             this.chkLB_JFSOn_Slow.Location = new System.Drawing.Point(22, 190);
-            this.chkLB_JFSOn_Slow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_JFSOn_Slow.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_JFSOn_Slow.Name = "chkLB_JFSOn_Slow";
             this.chkLB_JFSOn_Slow.Size = new System.Drawing.Size(14, 15);
             this.chkLB_JFSOn_Slow.TabIndex = 57;
@@ -4648,7 +4930,7 @@
             // 
             this.chkLB_JFSOn_Fast.Enabled = false;
             this.chkLB_JFSOn_Fast.Location = new System.Drawing.Point(22, 206);
-            this.chkLB_JFSOn_Fast.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLB_JFSOn_Fast.Margin = new System.Windows.Forms.Padding(2);
             this.chkLB_JFSOn_Fast.Name = "chkLB_JFSOn_Fast";
             this.chkLB_JFSOn_Fast.Size = new System.Drawing.Size(14, 15);
             this.chkLB_JFSOn_Fast.TabIndex = 58;
@@ -4681,7 +4963,7 @@
             this.chkBB_OuterMarker.AutoSize = true;
             this.chkBB_OuterMarker.Enabled = false;
             this.chkBB_OuterMarker.Location = new System.Drawing.Point(46, 28);
-            this.chkBB_OuterMarker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_OuterMarker.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_OuterMarker.Name = "chkBB_OuterMarker";
             this.chkBB_OuterMarker.Size = new System.Drawing.Size(85, 17);
             this.chkBB_OuterMarker.TabIndex = 33;
@@ -4693,7 +4975,7 @@
             this.chkBB_MiddleMarker.AutoSize = true;
             this.chkBB_MiddleMarker.Enabled = false;
             this.chkBB_MiddleMarker.Location = new System.Drawing.Point(46, 43);
-            this.chkBB_MiddleMarker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_MiddleMarker.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_MiddleMarker.Name = "chkBB_MiddleMarker";
             this.chkBB_MiddleMarker.Size = new System.Drawing.Size(90, 17);
             this.chkBB_MiddleMarker.TabIndex = 34;
@@ -4705,7 +4987,7 @@
             this.chkBB_PROBEHEAT.AutoSize = true;
             this.chkBB_PROBEHEAT.Enabled = false;
             this.chkBB_PROBEHEAT.Location = new System.Drawing.Point(46, 59);
-            this.chkBB_PROBEHEAT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_PROBEHEAT.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_PROBEHEAT.Name = "chkBB_PROBEHEAT";
             this.chkBB_PROBEHEAT.Size = new System.Drawing.Size(92, 17);
             this.chkBB_PROBEHEAT.TabIndex = 35;
@@ -4717,7 +4999,7 @@
             this.chkBB_AuxSrch.AutoSize = true;
             this.chkBB_AuxSrch.Enabled = false;
             this.chkBB_AuxSrch.Location = new System.Drawing.Point(46, 75);
-            this.chkBB_AuxSrch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_AuxSrch.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_AuxSrch.Name = "chkBB_AuxSrch";
             this.chkBB_AuxSrch.Size = new System.Drawing.Size(66, 17);
             this.chkBB_AuxSrch.TabIndex = 36;
@@ -4729,7 +5011,7 @@
             this.chkBB_Launch.AutoSize = true;
             this.chkBB_Launch.Enabled = false;
             this.chkBB_Launch.Location = new System.Drawing.Point(46, 91);
-            this.chkBB_Launch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_Launch.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_Launch.Name = "chkBB_Launch";
             this.chkBB_Launch.Size = new System.Drawing.Size(62, 17);
             this.chkBB_Launch.TabIndex = 37;
@@ -4741,7 +5023,7 @@
             this.chkBB_PriMode.AutoSize = true;
             this.chkBB_PriMode.Enabled = false;
             this.chkBB_PriMode.Location = new System.Drawing.Point(46, 107);
-            this.chkBB_PriMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_PriMode.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_PriMode.Name = "chkBB_PriMode";
             this.chkBB_PriMode.Size = new System.Drawing.Size(65, 17);
             this.chkBB_PriMode.TabIndex = 38;
@@ -4753,7 +5035,7 @@
             this.chkBB_Unk.AutoSize = true;
             this.chkBB_Unk.Enabled = false;
             this.chkBB_Unk.Location = new System.Drawing.Point(46, 123);
-            this.chkBB_Unk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_Unk.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_Unk.Name = "chkBB_Unk";
             this.chkBB_Unk.Size = new System.Drawing.Size(46, 17);
             this.chkBB_Unk.TabIndex = 39;
@@ -4765,7 +5047,7 @@
             this.chkBB_Elec_Fault.AutoSize = true;
             this.chkBB_Elec_Fault.Enabled = false;
             this.chkBB_Elec_Fault.Location = new System.Drawing.Point(46, 139);
-            this.chkBB_Elec_Fault.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_Elec_Fault.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_Elec_Fault.Name = "chkBB_Elec_Fault";
             this.chkBB_Elec_Fault.Size = new System.Drawing.Size(76, 17);
             this.chkBB_Elec_Fault.TabIndex = 40;
@@ -4777,7 +5059,7 @@
             this.chkBB_OXY_BROW.AutoSize = true;
             this.chkBB_OXY_BROW.Enabled = false;
             this.chkBB_OXY_BROW.Location = new System.Drawing.Point(46, 155);
-            this.chkBB_OXY_BROW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_OXY_BROW.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_OXY_BROW.Name = "chkBB_OXY_BROW";
             this.chkBB_OXY_BROW.Size = new System.Drawing.Size(88, 17);
             this.chkBB_OXY_BROW.TabIndex = 41;
@@ -4789,7 +5071,7 @@
             this.chkBB_EPUOn.AutoSize = true;
             this.chkBB_EPUOn.Enabled = false;
             this.chkBB_EPUOn.Location = new System.Drawing.Point(46, 172);
-            this.chkBB_EPUOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_EPUOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_EPUOn.Name = "chkBB_EPUOn";
             this.chkBB_EPUOn.Size = new System.Drawing.Size(62, 17);
             this.chkBB_EPUOn.TabIndex = 42;
@@ -4801,7 +5083,7 @@
             this.chkBB_JFSOn_Slow.AutoSize = true;
             this.chkBB_JFSOn_Slow.Enabled = false;
             this.chkBB_JFSOn_Slow.Location = new System.Drawing.Point(46, 188);
-            this.chkBB_JFSOn_Slow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_JFSOn_Slow.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_JFSOn_Slow.Name = "chkBB_JFSOn_Slow";
             this.chkBB_JFSOn_Slow.Size = new System.Drawing.Size(87, 17);
             this.chkBB_JFSOn_Slow.TabIndex = 43;
@@ -4813,7 +5095,7 @@
             this.chkBB_JFSOn_Fast.AutoSize = true;
             this.chkBB_JFSOn_Fast.Enabled = false;
             this.chkBB_JFSOn_Fast.Location = new System.Drawing.Point(46, 204);
-            this.chkBB_JFSOn_Fast.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBB_JFSOn_Fast.Margin = new System.Windows.Forms.Padding(2);
             this.chkBB_JFSOn_Fast.Name = "chkBB_JFSOn_Fast";
             this.chkBB_JFSOn_Fast.Size = new System.Drawing.Size(84, 17);
             this.chkBB_JFSOn_Fast.TabIndex = 44;
@@ -4828,9 +5110,9 @@
             this.tabFD2RWRPilots.Controls.Add(this.lblRWRInfo);
             this.tabFD2RWRPilots.Controls.Add(this.gvRwrInfo);
             this.tabFD2RWRPilots.Location = new System.Drawing.Point(4, 22);
-            this.tabFD2RWRPilots.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFD2RWRPilots.Margin = new System.Windows.Forms.Padding(2);
             this.tabFD2RWRPilots.Name = "tabFD2RWRPilots";
-            this.tabFD2RWRPilots.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabFD2RWRPilots.Padding = new System.Windows.Forms.Padding(2);
             this.tabFD2RWRPilots.Size = new System.Drawing.Size(652, 545);
             this.tabFD2RWRPilots.TabIndex = 5;
             this.tabFD2RWRPilots.Text = "FD2 RWR/Pilots";
@@ -4840,7 +5122,7 @@
             // 
             this.txtPilotsInSession.Enabled = false;
             this.txtPilotsInSession.Location = new System.Drawing.Point(422, 9);
-            this.txtPilotsInSession.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPilotsInSession.Margin = new System.Windows.Forms.Padding(2);
             this.txtPilotsInSession.Name = "txtPilotsInSession";
             this.txtPilotsInSession.Size = new System.Drawing.Size(106, 20);
             this.txtPilotsInSession.TabIndex = 96;
@@ -4879,7 +5161,7 @@
             this.gvPilotsInSession.Enabled = false;
             this.gvPilotsInSession.GridColor = System.Drawing.SystemColors.Control;
             this.gvPilotsInSession.Location = new System.Drawing.Point(336, 29);
-            this.gvPilotsInSession.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvPilotsInSession.Margin = new System.Windows.Forms.Padding(2);
             this.gvPilotsInSession.Name = "gvPilotsInSession";
             this.gvPilotsInSession.ReadOnly = true;
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -4976,7 +5258,7 @@
             this.gvRwrInfo.Enabled = false;
             this.gvRwrInfo.GridColor = System.Drawing.SystemColors.Control;
             this.gvRwrInfo.Location = new System.Drawing.Point(6, 29);
-            this.gvRwrInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvRwrInfo.Margin = new System.Windows.Forms.Padding(2);
             this.gvRwrInfo.Name = "gvRwrInfo";
             this.gvRwrInfo.ReadOnly = true;
             dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -5026,10 +5308,10 @@
             this.tabOSB.Controls.Add(this.lblLeftMfd);
             this.tabOSB.Controls.Add(this.gvLeftMfd);
             this.tabOSB.Location = new System.Drawing.Point(4, 22);
-            this.tabOSB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabOSB.Margin = new System.Windows.Forms.Padding(2);
             this.tabOSB.Name = "tabOSB";
-            this.tabOSB.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabOSB.Size = new System.Drawing.Size(652, 536);
+            this.tabOSB.Padding = new System.Windows.Forms.Padding(2);
+            this.tabOSB.Size = new System.Drawing.Size(652, 545);
             this.tabOSB.TabIndex = 6;
             this.tabOSB.Text = "OSB";
             this.tabOSB.UseVisualStyleBackColor = true;
@@ -5069,7 +5351,7 @@
             this.gvRightMfd.Enabled = false;
             this.gvRightMfd.GridColor = System.Drawing.SystemColors.Control;
             this.gvRightMfd.Location = new System.Drawing.Point(306, 30);
-            this.gvRightMfd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvRightMfd.Margin = new System.Windows.Forms.Padding(2);
             this.gvRightMfd.Name = "gvRightMfd";
             this.gvRightMfd.ReadOnly = true;
             dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -5163,7 +5445,7 @@
             this.gvLeftMfd.Enabled = false;
             this.gvLeftMfd.GridColor = System.Drawing.SystemColors.Control;
             this.gvLeftMfd.Location = new System.Drawing.Point(10, 30);
-            this.gvLeftMfd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvLeftMfd.Margin = new System.Windows.Forms.Padding(2);
             this.gvLeftMfd.Name = "gvLeftMfd";
             this.gvLeftMfd.ReadOnly = true;
             dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -5262,10 +5544,10 @@
             this.tabIVibe.Controls.Add(this.chkIsOnGround);
             this.tabIVibe.Controls.Add(this.chkIsExitGame);
             this.tabIVibe.Location = new System.Drawing.Point(4, 22);
-            this.tabIVibe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabIVibe.Margin = new System.Windows.Forms.Padding(2);
             this.tabIVibe.Name = "tabIVibe";
-            this.tabIVibe.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabIVibe.Size = new System.Drawing.Size(652, 536);
+            this.tabIVibe.Padding = new System.Windows.Forms.Padding(2);
+            this.tabIVibe.Size = new System.Drawing.Size(652, 545);
             this.tabIVibe.TabIndex = 7;
             this.tabIVibe.Text = "iVibe";
             this.tabIVibe.UseVisualStyleBackColor = true;
@@ -5286,7 +5568,7 @@
             // 
             this.txtEyeZ.Enabled = false;
             this.txtEyeZ.Location = new System.Drawing.Point(98, 269);
-            this.txtEyeZ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEyeZ.Margin = new System.Windows.Forms.Padding(2);
             this.txtEyeZ.Name = "txtEyeZ";
             this.txtEyeZ.Size = new System.Drawing.Size(106, 20);
             this.txtEyeZ.TabIndex = 94;
@@ -5307,7 +5589,7 @@
             // 
             this.txtEyeY.Enabled = false;
             this.txtEyeY.Location = new System.Drawing.Point(98, 250);
-            this.txtEyeY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEyeY.Margin = new System.Windows.Forms.Padding(2);
             this.txtEyeY.Name = "txtEyeY";
             this.txtEyeY.Size = new System.Drawing.Size(106, 20);
             this.txtEyeY.TabIndex = 92;
@@ -5328,7 +5610,7 @@
             // 
             this.txtEyeX.Enabled = false;
             this.txtEyeX.Location = new System.Drawing.Point(98, 231);
-            this.txtEyeX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEyeX.Margin = new System.Windows.Forms.Padding(2);
             this.txtEyeX.Name = "txtEyeX";
             this.txtEyeX.Size = new System.Drawing.Size(106, 20);
             this.txtEyeX.TabIndex = 90;
@@ -5349,7 +5631,7 @@
             // 
             this.txtWhenDamage.Enabled = false;
             this.txtWhenDamage.Location = new System.Drawing.Point(98, 212);
-            this.txtWhenDamage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtWhenDamage.Margin = new System.Windows.Forms.Padding(2);
             this.txtWhenDamage.Name = "txtWhenDamage";
             this.txtWhenDamage.Size = new System.Drawing.Size(106, 20);
             this.txtWhenDamage.TabIndex = 88;
@@ -5370,7 +5652,7 @@
             // 
             this.txtDamageforce.Enabled = false;
             this.txtDamageforce.Location = new System.Drawing.Point(98, 192);
-            this.txtDamageforce.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDamageforce.Margin = new System.Windows.Forms.Padding(2);
             this.txtDamageforce.Name = "txtDamageforce";
             this.txtDamageforce.Size = new System.Drawing.Size(106, 20);
             this.txtDamageforce.TabIndex = 86;
@@ -5391,7 +5673,7 @@
             // 
             this.txtLastDamage.Enabled = false;
             this.txtLastDamage.Location = new System.Drawing.Point(98, 173);
-            this.txtLastDamage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLastDamage.Margin = new System.Windows.Forms.Padding(2);
             this.txtLastDamage.Name = "txtLastDamage";
             this.txtLastDamage.Size = new System.Drawing.Size(106, 20);
             this.txtLastDamage.TabIndex = 84;
@@ -5412,7 +5694,7 @@
             // 
             this.txtGForce.Enabled = false;
             this.txtGForce.Location = new System.Drawing.Point(98, 154);
-            this.txtGForce.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtGForce.Margin = new System.Windows.Forms.Padding(2);
             this.txtGForce.Name = "txtGForce";
             this.txtGForce.Size = new System.Drawing.Size(106, 20);
             this.txtGForce.TabIndex = 82;
@@ -5433,7 +5715,7 @@
             // 
             this.txtCollisionCounter.Enabled = false;
             this.txtCollisionCounter.Location = new System.Drawing.Point(98, 135);
-            this.txtCollisionCounter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCollisionCounter.Margin = new System.Windows.Forms.Padding(2);
             this.txtCollisionCounter.Name = "txtCollisionCounter";
             this.txtCollisionCounter.Size = new System.Drawing.Size(106, 20);
             this.txtCollisionCounter.TabIndex = 80;
@@ -5454,7 +5736,7 @@
             // 
             this.txtBulletsFired.Enabled = false;
             this.txtBulletsFired.Location = new System.Drawing.Point(98, 115);
-            this.txtBulletsFired.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBulletsFired.Margin = new System.Windows.Forms.Padding(2);
             this.txtBulletsFired.Name = "txtBulletsFired";
             this.txtBulletsFired.Size = new System.Drawing.Size(106, 20);
             this.txtBulletsFired.TabIndex = 78;
@@ -5475,7 +5757,7 @@
             // 
             this.txtChaffDropped.Enabled = false;
             this.txtChaffDropped.Location = new System.Drawing.Point(98, 96);
-            this.txtChaffDropped.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtChaffDropped.Margin = new System.Windows.Forms.Padding(2);
             this.txtChaffDropped.Name = "txtChaffDropped";
             this.txtChaffDropped.Size = new System.Drawing.Size(106, 20);
             this.txtChaffDropped.TabIndex = 76;
@@ -5496,7 +5778,7 @@
             // 
             this.txtFlareDropped.Enabled = false;
             this.txtFlareDropped.Location = new System.Drawing.Point(98, 77);
-            this.txtFlareDropped.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFlareDropped.Margin = new System.Windows.Forms.Padding(2);
             this.txtFlareDropped.Name = "txtFlareDropped";
             this.txtFlareDropped.Size = new System.Drawing.Size(106, 20);
             this.txtFlareDropped.TabIndex = 74;
@@ -5517,7 +5799,7 @@
             // 
             this.txtBombDropped.Enabled = false;
             this.txtBombDropped.Location = new System.Drawing.Point(98, 58);
-            this.txtBombDropped.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBombDropped.Margin = new System.Windows.Forms.Padding(2);
             this.txtBombDropped.Name = "txtBombDropped";
             this.txtBombDropped.Size = new System.Drawing.Size(106, 20);
             this.txtBombDropped.TabIndex = 72;
@@ -5538,7 +5820,7 @@
             // 
             this.txtAGMissileFired.Enabled = false;
             this.txtAGMissileFired.Location = new System.Drawing.Point(98, 38);
-            this.txtAGMissileFired.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAGMissileFired.Margin = new System.Windows.Forms.Padding(2);
             this.txtAGMissileFired.Name = "txtAGMissileFired";
             this.txtAGMissileFired.Size = new System.Drawing.Size(106, 20);
             this.txtAGMissileFired.TabIndex = 70;
@@ -5559,7 +5841,7 @@
             // 
             this.txtAAMissileFired.Enabled = false;
             this.txtAAMissileFired.Location = new System.Drawing.Point(98, 19);
-            this.txtAAMissileFired.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAAMissileFired.Margin = new System.Windows.Forms.Padding(2);
             this.txtAAMissileFired.Name = "txtAAMissileFired";
             this.txtAAMissileFired.Size = new System.Drawing.Size(106, 20);
             this.txtAAMissileFired.TabIndex = 68;
@@ -5569,7 +5851,7 @@
             this.chkIsFiringGun.AutoSize = true;
             this.chkIsFiringGun.Enabled = false;
             this.chkIsFiringGun.Location = new System.Drawing.Point(248, 19);
-            this.chkIsFiringGun.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsFiringGun.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsFiringGun.Name = "chkIsFiringGun";
             this.chkIsFiringGun.Size = new System.Drawing.Size(79, 17);
             this.chkIsFiringGun.TabIndex = 59;
@@ -5581,7 +5863,7 @@
             this.chkIsEndFlight.AutoSize = true;
             this.chkIsEndFlight.Enabled = false;
             this.chkIsEndFlight.Location = new System.Drawing.Point(248, 35);
-            this.chkIsEndFlight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsEndFlight.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsEndFlight.Name = "chkIsEndFlight";
             this.chkIsEndFlight.Size = new System.Drawing.Size(78, 17);
             this.chkIsEndFlight.TabIndex = 60;
@@ -5593,7 +5875,7 @@
             this.chkIsEjecting.AutoSize = true;
             this.chkIsEjecting.Enabled = false;
             this.chkIsEjecting.Location = new System.Drawing.Point(248, 50);
-            this.chkIsEjecting.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsEjecting.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsEjecting.Name = "chkIsEjecting";
             this.chkIsEjecting.Size = new System.Drawing.Size(72, 17);
             this.chkIsEjecting.TabIndex = 61;
@@ -5605,7 +5887,7 @@
             this.chkIn3D.AutoSize = true;
             this.chkIn3D.Enabled = false;
             this.chkIn3D.Location = new System.Drawing.Point(248, 67);
-            this.chkIn3D.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIn3D.Margin = new System.Windows.Forms.Padding(2);
             this.chkIn3D.Name = "chkIn3D";
             this.chkIn3D.Size = new System.Drawing.Size(49, 17);
             this.chkIn3D.TabIndex = 62;
@@ -5617,7 +5899,7 @@
             this.chkIsPaused.AutoSize = true;
             this.chkIsPaused.Enabled = false;
             this.chkIsPaused.Location = new System.Drawing.Point(248, 83);
-            this.chkIsPaused.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsPaused.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsPaused.Name = "chkIsPaused";
             this.chkIsPaused.Size = new System.Drawing.Size(70, 17);
             this.chkIsPaused.TabIndex = 63;
@@ -5629,7 +5911,7 @@
             this.chkIsFrozen.AutoSize = true;
             this.chkIsFrozen.Enabled = false;
             this.chkIsFrozen.Location = new System.Drawing.Point(248, 99);
-            this.chkIsFrozen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsFrozen.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsFrozen.Name = "chkIsFrozen";
             this.chkIsFrozen.Size = new System.Drawing.Size(66, 17);
             this.chkIsFrozen.TabIndex = 64;
@@ -5641,7 +5923,7 @@
             this.chkIsOverG.AutoSize = true;
             this.chkIsOverG.Enabled = false;
             this.chkIsOverG.Location = new System.Drawing.Point(248, 115);
-            this.chkIsOverG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsOverG.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsOverG.Name = "chkIsOverG";
             this.chkIsOverG.Size = new System.Drawing.Size(65, 17);
             this.chkIsOverG.TabIndex = 65;
@@ -5653,7 +5935,7 @@
             this.chkIsOnGround.AutoSize = true;
             this.chkIsOnGround.Enabled = false;
             this.chkIsOnGround.Location = new System.Drawing.Point(248, 131);
-            this.chkIsOnGround.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsOnGround.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsOnGround.Name = "chkIsOnGround";
             this.chkIsOnGround.Size = new System.Drawing.Size(83, 17);
             this.chkIsOnGround.TabIndex = 66;
@@ -5665,7 +5947,7 @@
             this.chkIsExitGame.AutoSize = true;
             this.chkIsExitGame.Enabled = false;
             this.chkIsExitGame.Location = new System.Drawing.Point(248, 147);
-            this.chkIsExitGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsExitGame.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsExitGame.Name = "chkIsExitGame";
             this.chkIsExitGame.Size = new System.Drawing.Size(79, 17);
             this.chkIsExitGame.TabIndex = 67;
@@ -5725,10 +6007,10 @@
             this.tabIVC_RCS_RCC.Controls.Add(this.lblUhfFrequency);
             this.tabIVC_RCS_RCC.Controls.Add(this.txtUhfFrequency);
             this.tabIVC_RCS_RCC.Location = new System.Drawing.Point(4, 22);
-            this.tabIVC_RCS_RCC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabIVC_RCS_RCC.Margin = new System.Windows.Forms.Padding(2);
             this.tabIVC_RCS_RCC.Name = "tabIVC_RCS_RCC";
-            this.tabIVC_RCS_RCC.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabIVC_RCS_RCC.Size = new System.Drawing.Size(652, 536);
+            this.tabIVC_RCS_RCC.Padding = new System.Windows.Forms.Padding(2);
+            this.tabIVC_RCS_RCC.Size = new System.Drawing.Size(652, 545);
             this.tabIVC_RCS_RCC.TabIndex = 8;
             this.tabIVC_RCS_RCC.Text = "IVC RCS/RCC";
             this.tabIVC_RCS_RCC.UseVisualStyleBackColor = true;
@@ -5738,7 +6020,7 @@
             this.chkNoSpeakers.AutoSize = true;
             this.chkNoSpeakers.Enabled = false;
             this.chkNoSpeakers.Location = new System.Drawing.Point(306, 27);
-            this.chkNoSpeakers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkNoSpeakers.Margin = new System.Windows.Forms.Padding(2);
             this.chkNoSpeakers.Name = "chkNoSpeakers";
             this.chkNoSpeakers.Size = new System.Drawing.Size(81, 17);
             this.chkNoSpeakers.TabIndex = 126;
@@ -5750,7 +6032,7 @@
             this.chkBadPassword.AutoSize = true;
             this.chkBadPassword.Enabled = false;
             this.chkBadPassword.Location = new System.Drawing.Point(201, 27);
-            this.chkBadPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBadPassword.Margin = new System.Windows.Forms.Padding(2);
             this.chkBadPassword.Name = "chkBadPassword";
             this.chkBadPassword.Size = new System.Drawing.Size(89, 17);
             this.chkBadPassword.TabIndex = 124;
@@ -5762,7 +6044,7 @@
             this.chkNoMicrophone.AutoSize = true;
             this.chkNoMicrophone.Enabled = false;
             this.chkNoMicrophone.Location = new System.Drawing.Point(201, 43);
-            this.chkNoMicrophone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkNoMicrophone.Margin = new System.Windows.Forms.Padding(2);
             this.chkNoMicrophone.Name = "chkNoMicrophone";
             this.chkNoMicrophone.Size = new System.Drawing.Size(93, 17);
             this.chkNoMicrophone.TabIndex = 125;
@@ -5774,7 +6056,7 @@
             this.chkConnectionFail.AutoSize = true;
             this.chkConnectionFail.Enabled = false;
             this.chkConnectionFail.Location = new System.Drawing.Point(102, 27);
-            this.chkConnectionFail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkConnectionFail.Margin = new System.Windows.Forms.Padding(2);
             this.chkConnectionFail.Name = "chkConnectionFail";
             this.chkConnectionFail.Size = new System.Drawing.Size(92, 17);
             this.chkConnectionFail.TabIndex = 122;
@@ -5786,7 +6068,7 @@
             this.chkHostUnknown.AutoSize = true;
             this.chkHostUnknown.Enabled = false;
             this.chkHostUnknown.Location = new System.Drawing.Point(102, 43);
-            this.chkHostUnknown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHostUnknown.Margin = new System.Windows.Forms.Padding(2);
             this.chkHostUnknown.Name = "chkHostUnknown";
             this.chkHostUnknown.Size = new System.Drawing.Size(90, 17);
             this.chkHostUnknown.TabIndex = 123;
@@ -5798,7 +6080,7 @@
             this.chkClientActive.AutoSize = true;
             this.chkClientActive.Enabled = false;
             this.chkClientActive.Location = new System.Drawing.Point(16, 27);
-            this.chkClientActive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkClientActive.Margin = new System.Windows.Forms.Padding(2);
             this.chkClientActive.Name = "chkClientActive";
             this.chkClientActive.Size = new System.Drawing.Size(80, 17);
             this.chkClientActive.TabIndex = 120;
@@ -5810,7 +6092,7 @@
             this.chkConnected.AutoSize = true;
             this.chkConnected.Enabled = false;
             this.chkConnected.Location = new System.Drawing.Point(16, 43);
-            this.chkConnected.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkConnected.Margin = new System.Windows.Forms.Padding(2);
             this.chkConnected.Name = "chkConnected";
             this.chkConnected.Size = new System.Drawing.Size(77, 17);
             this.chkConnected.TabIndex = 121;
@@ -5864,7 +6146,7 @@
             this.gvTelemetry.Enabled = false;
             this.gvTelemetry.GridColor = System.Drawing.SystemColors.Control;
             this.gvTelemetry.Location = new System.Drawing.Point(16, 322);
-            this.gvTelemetry.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gvTelemetry.Margin = new System.Windows.Forms.Padding(2);
             this.gvTelemetry.Name = "gvTelemetry";
             this.gvTelemetry.ReadOnly = true;
             dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -5964,7 +6246,7 @@
             // 
             this.txtIcVolume.Enabled = false;
             this.txtIcVolume.Location = new System.Drawing.Point(405, 248);
-            this.txtIcVolume.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIcVolume.Margin = new System.Windows.Forms.Padding(2);
             this.txtIcVolume.Name = "txtIcVolume";
             this.txtIcVolume.Size = new System.Drawing.Size(106, 20);
             this.txtIcVolume.TabIndex = 115;
@@ -5985,7 +6267,7 @@
             this.chkFlightMode.AutoSize = true;
             this.chkFlightMode.Enabled = false;
             this.chkFlightMode.Location = new System.Drawing.Point(519, 136);
-            this.chkFlightMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFlightMode.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlightMode.Name = "chkFlightMode";
             this.chkFlightMode.Size = new System.Drawing.Size(78, 17);
             this.chkFlightMode.TabIndex = 112;
@@ -5997,7 +6279,7 @@
             this.chkUseAGC.AutoSize = true;
             this.chkUseAGC.Enabled = false;
             this.chkUseAGC.Location = new System.Drawing.Point(519, 151);
-            this.chkUseAGC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkUseAGC.Margin = new System.Windows.Forms.Padding(2);
             this.chkUseAGC.Name = "chkUseAGC";
             this.chkUseAGC.Size = new System.Drawing.Size(67, 17);
             this.chkUseAGC.TabIndex = 113;
@@ -6020,7 +6302,7 @@
             // 
             this.txtPlayerCount.Enabled = false;
             this.txtPlayerCount.Location = new System.Drawing.Point(405, 180);
-            this.txtPlayerCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPlayerCount.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerCount.Name = "txtPlayerCount";
             this.txtPlayerCount.Size = new System.Drawing.Size(106, 20);
             this.txtPlayerCount.TabIndex = 110;
@@ -6041,7 +6323,7 @@
             // 
             this.txtPassword.Enabled = false;
             this.txtPassword.Location = new System.Drawing.Point(405, 161);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(106, 20);
             this.txtPassword.TabIndex = 108;
@@ -6062,7 +6344,7 @@
             // 
             this.txtPortNumber.Enabled = false;
             this.txtPortNumber.Location = new System.Drawing.Point(405, 141);
-            this.txtPortNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPortNumber.Margin = new System.Windows.Forms.Padding(2);
             this.txtPortNumber.Name = "txtPortNumber";
             this.txtPortNumber.Size = new System.Drawing.Size(106, 20);
             this.txtPortNumber.TabIndex = 106;
@@ -6072,7 +6354,7 @@
             this.chkSignalConnect.AutoSize = true;
             this.chkSignalConnect.Enabled = false;
             this.chkSignalConnect.Location = new System.Drawing.Point(519, 105);
-            this.chkSignalConnect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSignalConnect.Margin = new System.Windows.Forms.Padding(2);
             this.chkSignalConnect.Name = "chkSignalConnect";
             this.chkSignalConnect.Size = new System.Drawing.Size(95, 17);
             this.chkSignalConnect.TabIndex = 104;
@@ -6084,7 +6366,7 @@
             this.chkTerminateClient.AutoSize = true;
             this.chkTerminateClient.Enabled = false;
             this.chkTerminateClient.Location = new System.Drawing.Point(519, 120);
-            this.chkTerminateClient.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTerminateClient.Margin = new System.Windows.Forms.Padding(2);
             this.chkTerminateClient.Name = "chkTerminateClient";
             this.chkTerminateClient.Size = new System.Drawing.Size(99, 17);
             this.chkTerminateClient.TabIndex = 105;
@@ -6107,7 +6389,7 @@
             // 
             this.txtAddress.Enabled = false;
             this.txtAddress.Location = new System.Drawing.Point(405, 122);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(106, 20);
             this.txtAddress.TabIndex = 102;
@@ -6139,7 +6421,7 @@
             // 
             this.txtNickname.Enabled = false;
             this.txtNickname.Location = new System.Drawing.Point(405, 103);
-            this.txtNickname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNickname.Margin = new System.Windows.Forms.Padding(2);
             this.txtNickname.Name = "txtNickname";
             this.txtNickname.Size = new System.Drawing.Size(106, 20);
             this.txtNickname.TabIndex = 99;
@@ -6149,7 +6431,7 @@
             this.chkGuardIsOn.AutoSize = true;
             this.chkGuardIsOn.Enabled = false;
             this.chkGuardIsOn.Location = new System.Drawing.Point(196, 248);
-            this.chkGuardIsOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkGuardIsOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkGuardIsOn.Name = "chkGuardIsOn";
             this.chkGuardIsOn.Size = new System.Drawing.Size(48, 17);
             this.chkGuardIsOn.TabIndex = 97;
@@ -6161,7 +6443,7 @@
             this.chkGuardPttDepressed.AutoSize = true;
             this.chkGuardPttDepressed.Enabled = false;
             this.chkGuardPttDepressed.Location = new System.Drawing.Point(196, 264);
-            this.chkGuardPttDepressed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkGuardPttDepressed.Margin = new System.Windows.Forms.Padding(2);
             this.chkGuardPttDepressed.Name = "chkGuardPttDepressed";
             this.chkGuardPttDepressed.Size = new System.Drawing.Size(90, 17);
             this.chkGuardPttDepressed.TabIndex = 98;
@@ -6184,7 +6466,7 @@
             // 
             this.txtGuardRxVolume.Enabled = false;
             this.txtGuardRxVolume.Location = new System.Drawing.Point(82, 266);
-            this.txtGuardRxVolume.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtGuardRxVolume.Margin = new System.Windows.Forms.Padding(2);
             this.txtGuardRxVolume.Name = "txtGuardRxVolume";
             this.txtGuardRxVolume.Size = new System.Drawing.Size(106, 20);
             this.txtGuardRxVolume.TabIndex = 95;
@@ -6216,7 +6498,7 @@
             // 
             this.txtGuardFrequency.Enabled = false;
             this.txtGuardFrequency.Location = new System.Drawing.Point(82, 246);
-            this.txtGuardFrequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtGuardFrequency.Margin = new System.Windows.Forms.Padding(2);
             this.txtGuardFrequency.Name = "txtGuardFrequency";
             this.txtGuardFrequency.Size = new System.Drawing.Size(106, 20);
             this.txtGuardFrequency.TabIndex = 92;
@@ -6226,7 +6508,7 @@
             this.chkVhfIsOn.AutoSize = true;
             this.chkVhfIsOn.Enabled = false;
             this.chkVhfIsOn.Location = new System.Drawing.Point(196, 173);
-            this.chkVhfIsOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkVhfIsOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkVhfIsOn.Name = "chkVhfIsOn";
             this.chkVhfIsOn.Size = new System.Drawing.Size(48, 17);
             this.chkVhfIsOn.TabIndex = 90;
@@ -6238,7 +6520,7 @@
             this.chkVhfPttDepressed.AutoSize = true;
             this.chkVhfPttDepressed.Enabled = false;
             this.chkVhfPttDepressed.Location = new System.Drawing.Point(196, 188);
-            this.chkVhfPttDepressed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkVhfPttDepressed.Margin = new System.Windows.Forms.Padding(2);
             this.chkVhfPttDepressed.Name = "chkVhfPttDepressed";
             this.chkVhfPttDepressed.Size = new System.Drawing.Size(90, 17);
             this.chkVhfPttDepressed.TabIndex = 91;
@@ -6261,7 +6543,7 @@
             // 
             this.txtVhfRxVolume.Enabled = false;
             this.txtVhfRxVolume.Location = new System.Drawing.Point(82, 190);
-            this.txtVhfRxVolume.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVhfRxVolume.Margin = new System.Windows.Forms.Padding(2);
             this.txtVhfRxVolume.Name = "txtVhfRxVolume";
             this.txtVhfRxVolume.Size = new System.Drawing.Size(106, 20);
             this.txtVhfRxVolume.TabIndex = 88;
@@ -6293,7 +6575,7 @@
             // 
             this.txtVhfFrequency.Enabled = false;
             this.txtVhfFrequency.Location = new System.Drawing.Point(82, 171);
-            this.txtVhfFrequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVhfFrequency.Margin = new System.Windows.Forms.Padding(2);
             this.txtVhfFrequency.Name = "txtVhfFrequency";
             this.txtVhfFrequency.Size = new System.Drawing.Size(106, 20);
             this.txtVhfFrequency.TabIndex = 85;
@@ -6303,7 +6585,7 @@
             this.chkUhfIsOn.AutoSize = true;
             this.chkUhfIsOn.Enabled = false;
             this.chkUhfIsOn.Location = new System.Drawing.Point(196, 105);
-            this.chkUhfIsOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkUhfIsOn.Margin = new System.Windows.Forms.Padding(2);
             this.chkUhfIsOn.Name = "chkUhfIsOn";
             this.chkUhfIsOn.Size = new System.Drawing.Size(48, 17);
             this.chkUhfIsOn.TabIndex = 83;
@@ -6315,7 +6597,7 @@
             this.chkUhfPttDepressed.AutoSize = true;
             this.chkUhfPttDepressed.Enabled = false;
             this.chkUhfPttDepressed.Location = new System.Drawing.Point(196, 120);
-            this.chkUhfPttDepressed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkUhfPttDepressed.Margin = new System.Windows.Forms.Padding(2);
             this.chkUhfPttDepressed.Name = "chkUhfPttDepressed";
             this.chkUhfPttDepressed.Size = new System.Drawing.Size(90, 17);
             this.chkUhfPttDepressed.TabIndex = 84;
@@ -6338,7 +6620,7 @@
             // 
             this.txtUhfRxVolume.Enabled = false;
             this.txtUhfRxVolume.Location = new System.Drawing.Point(82, 122);
-            this.txtUhfRxVolume.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUhfRxVolume.Margin = new System.Windows.Forms.Padding(2);
             this.txtUhfRxVolume.Name = "txtUhfRxVolume";
             this.txtUhfRxVolume.Size = new System.Drawing.Size(106, 20);
             this.txtUhfRxVolume.TabIndex = 81;
@@ -6381,7 +6663,7 @@
             // 
             this.txtUhfFrequency.Enabled = false;
             this.txtUhfFrequency.Location = new System.Drawing.Point(82, 103);
-            this.txtUhfFrequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUhfFrequency.Margin = new System.Windows.Forms.Padding(2);
             this.txtUhfFrequency.Name = "txtUhfFrequency";
             this.txtUhfFrequency.Size = new System.Drawing.Size(106, 20);
             this.txtUhfFrequency.TabIndex = 77;
@@ -6421,10 +6703,10 @@
             this.tabRawBits.Controls.Add(this.lblLightBitsUint);
             this.tabRawBits.Controls.Add(this.txtLightBitsUint);
             this.tabRawBits.Location = new System.Drawing.Point(4, 22);
-            this.tabRawBits.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabRawBits.Margin = new System.Windows.Forms.Padding(2);
             this.tabRawBits.Name = "tabRawBits";
-            this.tabRawBits.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabRawBits.Size = new System.Drawing.Size(652, 536);
+            this.tabRawBits.Padding = new System.Windows.Forms.Padding(2);
+            this.tabRawBits.Size = new System.Drawing.Size(652, 545);
             this.tabRawBits.TabIndex = 9;
             this.tabRawBits.Text = "Raw Bits";
             this.tabRawBits.UseVisualStyleBackColor = true;
@@ -6445,7 +6727,7 @@
             // 
             this.txtBlinkBitsHex.Enabled = false;
             this.txtBlinkBitsHex.Location = new System.Drawing.Point(302, 183);
-            this.txtBlinkBitsHex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBlinkBitsHex.Margin = new System.Windows.Forms.Padding(2);
             this.txtBlinkBitsHex.Name = "txtBlinkBitsHex";
             this.txtBlinkBitsHex.Size = new System.Drawing.Size(106, 20);
             this.txtBlinkBitsHex.TabIndex = 140;
@@ -6466,7 +6748,7 @@
             // 
             this.txtPowerBitsHex.Enabled = false;
             this.txtPowerBitsHex.Location = new System.Drawing.Point(302, 163);
-            this.txtPowerBitsHex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPowerBitsHex.Margin = new System.Windows.Forms.Padding(2);
             this.txtPowerBitsHex.Name = "txtPowerBitsHex";
             this.txtPowerBitsHex.Size = new System.Drawing.Size(106, 20);
             this.txtPowerBitsHex.TabIndex = 138;
@@ -6498,7 +6780,7 @@
             // 
             this.txtAltBitsHex.Enabled = false;
             this.txtAltBitsHex.Location = new System.Drawing.Point(302, 144);
-            this.txtAltBitsHex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAltBitsHex.Margin = new System.Windows.Forms.Padding(2);
             this.txtAltBitsHex.Name = "txtAltBitsHex";
             this.txtAltBitsHex.Size = new System.Drawing.Size(106, 20);
             this.txtAltBitsHex.TabIndex = 135;
@@ -6519,7 +6801,7 @@
             // 
             this.txtHsiBitsHex.Enabled = false;
             this.txtHsiBitsHex.Location = new System.Drawing.Point(79, 202);
-            this.txtHsiBitsHex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHsiBitsHex.Margin = new System.Windows.Forms.Padding(2);
             this.txtHsiBitsHex.Name = "txtHsiBitsHex";
             this.txtHsiBitsHex.Size = new System.Drawing.Size(106, 20);
             this.txtHsiBitsHex.TabIndex = 133;
@@ -6540,7 +6822,7 @@
             // 
             this.txtLightBits3Hex.Enabled = false;
             this.txtLightBits3Hex.Location = new System.Drawing.Point(79, 183);
-            this.txtLightBits3Hex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLightBits3Hex.Margin = new System.Windows.Forms.Padding(2);
             this.txtLightBits3Hex.Name = "txtLightBits3Hex";
             this.txtLightBits3Hex.Size = new System.Drawing.Size(106, 20);
             this.txtLightBits3Hex.TabIndex = 131;
@@ -6561,7 +6843,7 @@
             // 
             this.txtLightBits2Hex.Enabled = false;
             this.txtLightBits2Hex.Location = new System.Drawing.Point(79, 163);
-            this.txtLightBits2Hex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLightBits2Hex.Margin = new System.Windows.Forms.Padding(2);
             this.txtLightBits2Hex.Name = "txtLightBits2Hex";
             this.txtLightBits2Hex.Size = new System.Drawing.Size(106, 20);
             this.txtLightBits2Hex.TabIndex = 129;
@@ -6593,7 +6875,7 @@
             // 
             this.txtLightBitsHex.Enabled = false;
             this.txtLightBitsHex.Location = new System.Drawing.Point(79, 144);
-            this.txtLightBitsHex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLightBitsHex.Margin = new System.Windows.Forms.Padding(2);
             this.txtLightBitsHex.Name = "txtLightBitsHex";
             this.txtLightBitsHex.Size = new System.Drawing.Size(106, 20);
             this.txtLightBitsHex.TabIndex = 126;
@@ -6614,7 +6896,7 @@
             // 
             this.txtBlinkBitsUint.Enabled = false;
             this.txtBlinkBitsUint.Location = new System.Drawing.Point(302, 72);
-            this.txtBlinkBitsUint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBlinkBitsUint.Margin = new System.Windows.Forms.Padding(2);
             this.txtBlinkBitsUint.Name = "txtBlinkBitsUint";
             this.txtBlinkBitsUint.Size = new System.Drawing.Size(106, 20);
             this.txtBlinkBitsUint.TabIndex = 124;
@@ -6635,7 +6917,7 @@
             // 
             this.txtPowerBitsUint.Enabled = false;
             this.txtPowerBitsUint.Location = new System.Drawing.Point(302, 53);
-            this.txtPowerBitsUint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPowerBitsUint.Margin = new System.Windows.Forms.Padding(2);
             this.txtPowerBitsUint.Name = "txtPowerBitsUint";
             this.txtPowerBitsUint.Size = new System.Drawing.Size(106, 20);
             this.txtPowerBitsUint.TabIndex = 122;
@@ -6667,7 +6949,7 @@
             // 
             this.txtAltBitsUint.Enabled = false;
             this.txtAltBitsUint.Location = new System.Drawing.Point(302, 33);
-            this.txtAltBitsUint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAltBitsUint.Margin = new System.Windows.Forms.Padding(2);
             this.txtAltBitsUint.Name = "txtAltBitsUint";
             this.txtAltBitsUint.Size = new System.Drawing.Size(106, 20);
             this.txtAltBitsUint.TabIndex = 119;
@@ -6688,7 +6970,7 @@
             // 
             this.txtHsiBitsUint.Enabled = false;
             this.txtHsiBitsUint.Location = new System.Drawing.Point(79, 91);
-            this.txtHsiBitsUint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHsiBitsUint.Margin = new System.Windows.Forms.Padding(2);
             this.txtHsiBitsUint.Name = "txtHsiBitsUint";
             this.txtHsiBitsUint.Size = new System.Drawing.Size(106, 20);
             this.txtHsiBitsUint.TabIndex = 117;
@@ -6709,7 +6991,7 @@
             // 
             this.txtLightBits3Uint.Enabled = false;
             this.txtLightBits3Uint.Location = new System.Drawing.Point(79, 72);
-            this.txtLightBits3Uint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLightBits3Uint.Margin = new System.Windows.Forms.Padding(2);
             this.txtLightBits3Uint.Name = "txtLightBits3Uint";
             this.txtLightBits3Uint.Size = new System.Drawing.Size(106, 20);
             this.txtLightBits3Uint.TabIndex = 115;
@@ -6730,7 +7012,7 @@
             // 
             this.txtLightBits2Uint.Enabled = false;
             this.txtLightBits2Uint.Location = new System.Drawing.Point(79, 53);
-            this.txtLightBits2Uint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLightBits2Uint.Margin = new System.Windows.Forms.Padding(2);
             this.txtLightBits2Uint.Name = "txtLightBits2Uint";
             this.txtLightBits2Uint.Size = new System.Drawing.Size(106, 20);
             this.txtLightBits2Uint.TabIndex = 113;
@@ -6762,10 +7044,52 @@
             // 
             this.txtLightBitsUint.Enabled = false;
             this.txtLightBitsUint.Location = new System.Drawing.Point(79, 33);
-            this.txtLightBitsUint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLightBitsUint.Margin = new System.Windows.Forms.Padding(2);
             this.txtLightBitsUint.Name = "txtLightBitsUint";
             this.txtLightBitsUint.Size = new System.Drawing.Size(106, 20);
             this.txtLightBitsUint.TabIndex = 110;
+            // 
+            // lblRTT_area6
+            // 
+            this.lblRTT_area6.AutoSize = true;
+            this.lblRTT_area6.Enabled = false;
+            this.lblRTT_area6.Location = new System.Drawing.Point(469, 397);
+            this.lblRTT_area6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area6.Name = "lblRTT_area6";
+            this.lblRTT_area6.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area6.TabIndex = 138;
+            this.lblRTT_area6.Text = "rtt_area[6]";
+            this.lblRTT_area6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area6
+            // 
+            this.txtRTT_area6.Enabled = false;
+            this.txtRTT_area6.Location = new System.Drawing.Point(528, 396);
+            this.txtRTT_area6.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area6.Name = "txtRTT_area6";
+            this.txtRTT_area6.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area6.TabIndex = 137;
+            // 
+            // lblIFF_BackupModeDigits
+            // 
+            this.lblIFF_BackupModeDigits.AutoSize = true;
+            this.lblIFF_BackupModeDigits.Enabled = false;
+            this.lblIFF_BackupModeDigits.Location = new System.Drawing.Point(406, 416);
+            this.lblIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblIFF_BackupModeDigits.Name = "lblIFF_BackupModeDigits";
+            this.lblIFF_BackupModeDigits.Size = new System.Drawing.Size(118, 13);
+            this.lblIFF_BackupModeDigits.TabIndex = 140;
+            this.lblIFF_BackupModeDigits.Text = "IFF_BackupModeDigits";
+            this.lblIFF_BackupModeDigits.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtIFF_BackupModeDigits
+            // 
+            this.txtIFF_BackupModeDigits.Enabled = false;
+            this.txtIFF_BackupModeDigits.Location = new System.Drawing.Point(528, 415);
+            this.txtIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2);
+            this.txtIFF_BackupModeDigits.Name = "txtIFF_BackupModeDigits";
+            this.txtIFF_BackupModeDigits.Size = new System.Drawing.Size(106, 20);
+            this.txtIFF_BackupModeDigits.TabIndex = 139;
             // 
             // SharedMemoryViewer
             // 
@@ -6775,7 +7099,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(660, 571);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(21, 413);
             this.Name = "SharedMemoryViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -7295,6 +7619,31 @@
         private System.Windows.Forms.CheckBox chkClientActive;
         private System.Windows.Forms.CheckBox chkConnected;
         private System.Windows.Forms.Label lblRadioClientStatus;
-
+        private System.Windows.Forms.Label lblRTT_area5;
+        private System.Windows.Forms.TextBox txtRTT_area5;
+        private System.Windows.Forms.Label lblRTT_area4;
+        private System.Windows.Forms.TextBox txtRTT_area4;
+        private System.Windows.Forms.Label lblRTT_area3;
+        private System.Windows.Forms.TextBox txtRTT_area3;
+        private System.Windows.Forms.Label lblRTT_area2;
+        private System.Windows.Forms.TextBox txtRTT_area2;
+        private System.Windows.Forms.Label lblRTT_area1;
+        private System.Windows.Forms.TextBox txtRTT_area1;
+        private System.Windows.Forms.Label lblRTT_area0;
+        private System.Windows.Forms.TextBox txtRTT_area0;
+        private System.Windows.Forms.Label lblRTT_Size;
+        private System.Windows.Forms.TextBox txtRTT_size;
+        private System.Windows.Forms.Label lblInstrLight;
+        private System.Windows.Forms.TextBox txtInstrLight;
+        private System.Windows.Forms.Label lblBumpIntensity;
+        private System.Windows.Forms.TextBox txtBumpIntensity;
+        private System.Windows.Forms.Label lblLongitude;
+        private System.Windows.Forms.TextBox txtLongitude;
+        private System.Windows.Forms.Label lblLatitude;
+        private System.Windows.Forms.TextBox txtLatitude;
+        private System.Windows.Forms.Label lblIFF_BackupModeDigits;
+        private System.Windows.Forms.TextBox txtIFF_BackupModeDigits;
+        private System.Windows.Forms.Label lblRTT_area6;
+        private System.Windows.Forms.TextBox txtRTT_area6;
     }
 }

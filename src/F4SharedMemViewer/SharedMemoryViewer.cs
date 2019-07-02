@@ -1,16 +1,12 @@
-﻿using Common;
-using Common.Math;
+﻿using Common.Math;
 using Common.Strings;
 using F4SharedMem;
 using F4SharedMem.Headers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace F4SharedMemViewer
 {
@@ -443,6 +439,8 @@ namespace F4SharedMemViewer
             txtFuelFlow2.Text = _lastFlightData.fuelFlow2.FormatDecimal(decimalPlaces: 2);
             txtLefPos.Text = _lastFlightData.lefPos.FormatDecimal(decimalPlaces: 2);
             txtTefPos.Text = _lastFlightData.tefPos.FormatDecimal(decimalPlaces: 2);
+            txtLatitude.Text = _lastFlightData.latitude.FormatDecimal(decimalPlaces: 4).PadLeft(8, '0');
+            txtLongitude.Text = _lastFlightData.longitude.FormatDecimal(decimalPlaces: 4).PadLeft(8, '0');
             txtNavMode.Text = string.Format("({0}) {1}",
                 _lastFlightData.navMode.ToString(),
                 ((NavModes)_lastFlightData.navMode).ToString()
@@ -459,9 +457,65 @@ namespace F4SharedMemViewer
             txtCurrentTime.Text = _lastFlightData.currentTime.ToString();
             txtVehicleACD.Text = _lastFlightData.vehicleACD.ToString();
             txtVtolPos.Text = _lastFlightData.vtolPos.FormatDecimal(decimalPlaces: 2);
-
+            txtBumpIntensity.Text = _lastFlightData.bumpIntensity.FormatDecimal(decimalPlaces: 2);
+            txtInstrLight.Text = string.Format("({0}) {1}",
+                _lastFlightData.instrLight.ToString(),
+                ((InstrLight)_lastFlightData.instrLight).ToString().Replace("INSTR_LIGHT_", "")
+            );
+            txtRTT_size.Text = string.Format("{0} {1}",
+                _lastFlightData.RTT_size[0].ToString(),
+                _lastFlightData.RTT_size[1].ToString()
+            );
+            txtRTT_area0.Text = string.Format("{0} {1} {2} {3}",
+                _lastFlightData.RTT_area[0].ToString(),
+                _lastFlightData.RTT_area[1].ToString(),
+                _lastFlightData.RTT_area[2].ToString(),
+                _lastFlightData.RTT_area[3].ToString()
+            );
+            txtRTT_area1.Text = string.Format("{0} {1} {2} {3}",
+                _lastFlightData.RTT_area[4].ToString(),
+                _lastFlightData.RTT_area[5].ToString(),
+                _lastFlightData.RTT_area[6].ToString(),
+                _lastFlightData.RTT_area[7].ToString()
+            );
+            txtRTT_area2.Text = string.Format("{0} {1} {2} {3}",
+                _lastFlightData.RTT_area[8].ToString(),
+                _lastFlightData.RTT_area[9].ToString(),
+                _lastFlightData.RTT_area[10].ToString(),
+                _lastFlightData.RTT_area[11].ToString()
+            );
+            txtRTT_area3.Text = string.Format("{0} {1} {2} {3}",
+                _lastFlightData.RTT_area[12].ToString(),
+                _lastFlightData.RTT_area[13].ToString(),
+                _lastFlightData.RTT_area[14].ToString(),
+                _lastFlightData.RTT_area[15].ToString()
+            );
+            txtRTT_area4.Text = string.Format("{0} {1} {2} {3}",
+                _lastFlightData.RTT_area[16].ToString(),
+                _lastFlightData.RTT_area[17].ToString(),
+                _lastFlightData.RTT_area[18].ToString(),
+                _lastFlightData.RTT_area[19].ToString()
+            );
+            txtRTT_area5.Text = string.Format("{0} {1} {2} {3}",
+                _lastFlightData.RTT_area[20].ToString(),
+                _lastFlightData.RTT_area[21].ToString(),
+                _lastFlightData.RTT_area[22].ToString(),
+                _lastFlightData.RTT_area[23].ToString()
+            );
+            txtRTT_area6.Text = string.Format("{0} {1} {2} {3}",
+                _lastFlightData.RTT_area[24].ToString(),
+                _lastFlightData.RTT_area[25].ToString(),
+                _lastFlightData.RTT_area[26].ToString(),
+                _lastFlightData.RTT_area[27].ToString()
+            );
+            txtIFF_BackupModeDigits.Text = string.Format("{0} {1} {2} {3}",
+                ((byte)(_lastFlightData.iffBackupMode1Digit1)).ToString(),
+                ((byte)(_lastFlightData.iffBackupMode1Digit2)).ToString(),
+                ((byte)(_lastFlightData.iffBackupMode3ADigit1)).ToString(),
+                ((byte)(_lastFlightData.iffBackupMode3ADigit2)).ToString()
+            );
         }
-       
+
         private void BindFD2RWRInfoToFormElements()
         {
             var dataGridView = gvRwrInfo;
@@ -771,6 +825,7 @@ namespace F4SharedMemViewer
             Common.Util.DisposeObject(_sharedMemReader);
             base.OnClosing(e);
         }
+
     }
         
 }

@@ -330,11 +330,26 @@ namespace F4SharedMem
 
         public byte pilotsOnline;       // Number of pilots in an MP session
 
-        // RWRINFO_SIZE  512
-        // CALLSIGN_LEN  12
-        // MAX_CALLSIGNS  32
         public string[] pilotsCallsign;   // [MAX_CALLSIGNS][CALLSIGN_LEN] List of pilots callsign connected to an MP session
         public byte[] pilotsStatus;     // [MAX_CALLSIGNS] Status of the MP pilots, see enum FlyStates
+
+        public float bumpIntensity; // Intensity of a "bump" while taxiing/rolling, 0..1
+        public float latitude; // Ownship latitude in degrees (as known by avionics)
+        public float longitude; // Ownship longitude in degrees (as known by avionics)
+
+        //VERSION 12
+        public short[] RTT_size;  //[2]                    RTT overall width and height
+        public short[] RTT_area;  // [RTT_noOfAreas][4]    For each area: left/top/right/bottom
+
+        // VERSION 13
+        public byte iffBackupMode1Digit1;                     // IFF panel backup Mode1 digit 1
+        public byte iffBackupMode1Digit2;                     // IFF panel backup Mode1 digit 2
+        public byte iffBackupMode3ADigit1;                    // IFF panel backup Mode3A digit 1
+        public byte iffBackupMode3ADigit2;                    // IFF panel backup Mode3A digit 2
+
+        // VERSION 14
+        public byte instrLight;  // (unsigned char) current instrument backlight brightness setting, see InstrLight enum for details
+
 
         public OptionSelectButtonLabel[] leftMFD;
         public OptionSelectButtonLabel[] rightMFD;
