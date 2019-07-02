@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-[assembly: AssemblyTitle("Falcon 4 Shared Memory Reader")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Falcon BMS 4.34 Shared Memory Reader")]
+[assembly: AssemblyDescription("Falcon BMS 4.34 Shared Memory Reader")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Falcon 4 Shared Memory Reader")]
+[assembly: AssemblyProduct("Falcon BMS 4.34 Shared Memory Reader")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

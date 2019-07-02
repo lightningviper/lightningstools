@@ -19,7 +19,6 @@ namespace F4SharedMemViewer
         public SharedMemoryViewer()
         {
             InitializeComponent();
-            Text = Text + " " + Assembly.GetEntryAssembly().GetName().Version.Major + "." + Assembly.GetEntryAssembly().GetName().Version.Minor;
             SetTabPanelBackgroundColors(tabControl1, SystemColors.ButtonHighlight);
             DisableControlsAllTabs();
             InitializeDEDGridView();

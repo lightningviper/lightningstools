@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4SharedMemMirror", "F4SharedMemMirror\F4SharedMemMirror.csproj", "{86FAAD28-7697-4497-BD7B-9794FADB41D6}"
 EndProject
@@ -34,7 +34,6 @@ Global
 		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Release|x86.ActiveCfg = Release|x86
 		{517D1B4D-E8C7-4331-BBE7-300FD6B78441}.Release|x86.Build.0 = Release|x86
 		{C2879FDA-BB09-4413-9DB0-D8F8767E99B2}.Debug|x86.ActiveCfg = Debug
-		{C2879FDA-BB09-4413-9DB0-D8F8767E99B2}.Debug|x86.Build.0 = Debug
 		{C2879FDA-BB09-4413-9DB0-D8F8767E99B2}.Release|x86.ActiveCfg = Release
 		{C2879FDA-BB09-4413-9DB0-D8F8767E99B2}.Release|x86.Build.0 = Release
 		{3FC238BA-7FC2-47AE-AE45-7CF199EDBE08}.Debug|x86.ActiveCfg = Debug|x86
@@ -62,5 +61,8 @@ Global
 		{188090E9-8B00-457B-85EB-F48BCDD94B0B} = {879EA352-ED6C-425A-8421-6165E14FFEFC}
 		{ABA9CC75-B778-4E46-A6F6-AFEC27F2EB59} = {879EA352-ED6C-425A-8421-6165E14FFEFC}
 		{5649A340-1475-4116-B5A1-CD21A99387F5} = {879EA352-ED6C-425A-8421-6165E14FFEFC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40523912-FB27-4983-BA95-71C0F454449A}
 	EndGlobalSection
 EndGlobal
