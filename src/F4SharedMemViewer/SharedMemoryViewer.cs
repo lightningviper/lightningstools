@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 namespace F4SharedMemViewer
@@ -18,6 +19,7 @@ namespace F4SharedMemViewer
         public SharedMemoryViewer()
         {
             InitializeComponent();
+            Text = Text + " " + Assembly.GetEntryAssembly().GetName().Version.Major + "." + Assembly.GetEntryAssembly().GetName().Version.Minor;
             SetTabPanelBackgroundColors(tabControl1, SystemColors.ButtonHighlight);
             DisableControlsAllTabs();
             InitializeDEDGridView();

@@ -329,6 +329,10 @@
             this.gvDED = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFD2Vars = new System.Windows.Forms.TabPage();
+            this.lblIFF_BackupModeDigits = new System.Windows.Forms.Label();
+            this.txtIFF_BackupModeDigits = new System.Windows.Forms.TextBox();
+            this.lblRTT_area6 = new System.Windows.Forms.Label();
+            this.txtRTT_area6 = new System.Windows.Forms.TextBox();
             this.lblRTT_area5 = new System.Windows.Forms.Label();
             this.txtRTT_area5 = new System.Windows.Forms.TextBox();
             this.lblRTT_area4 = new System.Windows.Forms.Label();
@@ -577,10 +581,6 @@
             this.lblFlightData = new System.Windows.Forms.Label();
             this.lblLightBitsUint = new System.Windows.Forms.Label();
             this.txtLightBitsUint = new System.Windows.Forms.TextBox();
-            this.lblRTT_area6 = new System.Windows.Forms.Label();
-            this.txtRTT_area6 = new System.Windows.Forms.TextBox();
-            this.lblIFF_BackupModeDigits = new System.Windows.Forms.Label();
-            this.txtIFF_BackupModeDigits = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabFDBits.SuspendLayout();
             this.tabFDVars.SuspendLayout();
@@ -3976,6 +3976,48 @@
             this.tabFD2Vars.Text = "FD2";
             this.tabFD2Vars.UseVisualStyleBackColor = true;
             // 
+            // lblIFF_BackupModeDigits
+            // 
+            this.lblIFF_BackupModeDigits.AutoSize = true;
+            this.lblIFF_BackupModeDigits.Enabled = false;
+            this.lblIFF_BackupModeDigits.Location = new System.Drawing.Point(406, 416);
+            this.lblIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblIFF_BackupModeDigits.Name = "lblIFF_BackupModeDigits";
+            this.lblIFF_BackupModeDigits.Size = new System.Drawing.Size(118, 13);
+            this.lblIFF_BackupModeDigits.TabIndex = 140;
+            this.lblIFF_BackupModeDigits.Text = "IFF_BackupModeDigits";
+            this.lblIFF_BackupModeDigits.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtIFF_BackupModeDigits
+            // 
+            this.txtIFF_BackupModeDigits.Enabled = false;
+            this.txtIFF_BackupModeDigits.Location = new System.Drawing.Point(528, 415);
+            this.txtIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2);
+            this.txtIFF_BackupModeDigits.Name = "txtIFF_BackupModeDigits";
+            this.txtIFF_BackupModeDigits.Size = new System.Drawing.Size(106, 20);
+            this.txtIFF_BackupModeDigits.TabIndex = 139;
+            // 
+            // lblRTT_area6
+            // 
+            this.lblRTT_area6.AutoSize = true;
+            this.lblRTT_area6.Enabled = false;
+            this.lblRTT_area6.Location = new System.Drawing.Point(469, 397);
+            this.lblRTT_area6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRTT_area6.Name = "lblRTT_area6";
+            this.lblRTT_area6.Size = new System.Drawing.Size(55, 13);
+            this.lblRTT_area6.TabIndex = 138;
+            this.lblRTT_area6.Text = "rtt_area[6]";
+            this.lblRTT_area6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRTT_area6
+            // 
+            this.txtRTT_area6.Enabled = false;
+            this.txtRTT_area6.Location = new System.Drawing.Point(528, 396);
+            this.txtRTT_area6.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRTT_area6.Name = "txtRTT_area6";
+            this.txtRTT_area6.Size = new System.Drawing.Size(106, 20);
+            this.txtRTT_area6.TabIndex = 137;
+            // 
             // lblRTT_area5
             // 
             this.lblRTT_area5.AutoSize = true;
@@ -7049,48 +7091,6 @@
             this.txtLightBitsUint.Size = new System.Drawing.Size(106, 20);
             this.txtLightBitsUint.TabIndex = 110;
             // 
-            // lblRTT_area6
-            // 
-            this.lblRTT_area6.AutoSize = true;
-            this.lblRTT_area6.Enabled = false;
-            this.lblRTT_area6.Location = new System.Drawing.Point(469, 397);
-            this.lblRTT_area6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRTT_area6.Name = "lblRTT_area6";
-            this.lblRTT_area6.Size = new System.Drawing.Size(55, 13);
-            this.lblRTT_area6.TabIndex = 138;
-            this.lblRTT_area6.Text = "rtt_area[6]";
-            this.lblRTT_area6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtRTT_area6
-            // 
-            this.txtRTT_area6.Enabled = false;
-            this.txtRTT_area6.Location = new System.Drawing.Point(528, 396);
-            this.txtRTT_area6.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRTT_area6.Name = "txtRTT_area6";
-            this.txtRTT_area6.Size = new System.Drawing.Size(106, 20);
-            this.txtRTT_area6.TabIndex = 137;
-            // 
-            // lblIFF_BackupModeDigits
-            // 
-            this.lblIFF_BackupModeDigits.AutoSize = true;
-            this.lblIFF_BackupModeDigits.Enabled = false;
-            this.lblIFF_BackupModeDigits.Location = new System.Drawing.Point(406, 416);
-            this.lblIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblIFF_BackupModeDigits.Name = "lblIFF_BackupModeDigits";
-            this.lblIFF_BackupModeDigits.Size = new System.Drawing.Size(118, 13);
-            this.lblIFF_BackupModeDigits.TabIndex = 140;
-            this.lblIFF_BackupModeDigits.Text = "IFF_BackupModeDigits";
-            this.lblIFF_BackupModeDigits.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtIFF_BackupModeDigits
-            // 
-            this.txtIFF_BackupModeDigits.Enabled = false;
-            this.txtIFF_BackupModeDigits.Location = new System.Drawing.Point(528, 415);
-            this.txtIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIFF_BackupModeDigits.Name = "txtIFF_BackupModeDigits";
-            this.txtIFF_BackupModeDigits.Size = new System.Drawing.Size(106, 20);
-            this.txtIFF_BackupModeDigits.TabIndex = 139;
-            // 
             // SharedMemoryViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -7103,7 +7103,7 @@
             this.MinimumSize = new System.Drawing.Size(21, 413);
             this.Name = "SharedMemoryViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Falcon 4 Shared Memory Viewer";
+            this.Text = "Shared Memory Viewer for Falcon BMS";
             this.tabControl1.ResumeLayout(false);
             this.tabFDBits.ResumeLayout(false);
             this.tabFDBits.PerformLayout();
