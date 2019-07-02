@@ -17,13 +17,13 @@ Desktop application providing a semi-realistic simulation of the Raytheon F-16 C
 #### [Falcon 4 Keyfile Viewer](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%204%20Keyfile%20Viewer)
 Desktop application for viewing Falcon .key files.  Demonstrates the use of the `F4KeyFile` library.
 
-#### [Falcon 4 Shared Memory Mirror](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Mirror)
+#### [Falcon 4 Shared Memory Mirror](https://github.com/lightningviper/lightningstools/blob/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Mirror/for%20Falcon%20BMS%204.34/F4SharedMemMirror_for_Falcon_BMS_4_34__x86.zip)
 Desktop client-server application that mirrors the contents of Falcon's shared memory areas to one or more remote networked PCs.
 
-#### [Falcon 4 Shared Memory Recorder](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Recorder)
+#### [Falcon 4 Shared Memory Recorder](https://github.com/lightningviper/lightningstools/blob/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Recorder/for%20Falcon%20BMS%204.34/Shared_Memory_Recorder_for_Falcon_BMS_4_34__x86.zip)
 Desktop application that enables recording and playback of Falcon shared memory data.
 
-#### [Falcon 4 Shared Memory Viewer](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Viewer)
+#### [Falcon 4 Shared Memory Viewer](https://github.com/lightningviper/lightningstools/blob/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Viewer/for%20Falcon%20BMS%204.34/Shared_Memory_Viewer_for_Falcon_BMS_4_34__x86.zip)
 Desktop application that displays the contents of Falcon's shared memory areas.
 
 #### [Falcon BMS Textures Shared Memory Tester](https://github.com/lightningviper/lightningstools/tree/master/releases/End%20User%20Applications/Falcon%20BMS%20Textures%20Shared%20Memory%20Tester)
