@@ -150,7 +150,7 @@ namespace LightningGauges.Renderers.F16.RWR.CARAPACE
                 if (RwrInfoContains("onpri"))
                 {
                     var vOffset = FormatForVectorDisplay ? 0.06 : 0.035;
-                    DrawSolidBox(drawingContext, -TextWidth("000", false), -1 + (TextHeight(false) * 2) + vOffset, TextWidth("00", false), -1 + TextHeight(false) + vOffset, Color.FromRgb(7, 18, 8));
+                    DrawRectangle(drawingContext, -TextWidth("000", false), -1 + (TextHeight(false) * 2) + vOffset, TextWidth("00", false), -1 + TextHeight(false) + vOffset, Color.FromRgb(7, 18, 8));
                     DrawLine(drawingContext, -TextWidth("000", false), -1 + (TextHeight(false) * 2) + vOffset, TextWidth("00", false), -1 + (TextHeight(false) * 2) + vOffset);
                     DrawLine(drawingContext, -TextWidth("000", false), -1 + TextHeight(false) + vOffset, TextWidth("00", false), -1 + TextHeight(false) + vOffset);
                     DrawLine(drawingContext, 0, -1 + TextHeight(false) + vOffset, 0, -1 + (TextHeight(false) * 2) + vOffset);

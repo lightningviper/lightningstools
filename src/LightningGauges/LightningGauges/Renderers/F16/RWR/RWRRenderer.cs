@@ -98,11 +98,11 @@ namespace LightningGauges.Renderers.F16.RWR
             drawingContext.DrawLine(pen, new Point(ConvertXPos(x1 + offsetX), ConvertYPos(y1 + offsetY)), new Point(ConvertXPos(x2 + offsetX), ConvertYPos(y2 + offsetY)));
         }
 
-        protected void DrawSolidBox(DrawingContext drawingContext, double x1, double y1, double x2, double y2, Color color)
+        protected void DrawRectangle(DrawingContext drawingContext, double x1, double y1, double x2, double y2, Color color)
         {
             Pen pen = new Pen();
-            pen.Thickness = 2;
             pen.Brush = new SolidColorBrush(color);
+            pen.Thickness = 2;
             Rect size = new Rect(new Point(ConvertXPos(x1 + offsetX), ConvertYPos(y1 + offsetY)), new Point(ConvertXPos(x2 + offsetX), ConvertYPos(y2 + offsetY)));
             drawingContext.DrawRectangle(new SolidColorBrush(color), pen, size);
         }
@@ -119,10 +119,28 @@ namespace LightningGauges.Renderers.F16.RWR
         protected void DrawSolidCircle(DrawingContext drawingContext, double x, double y, double radius)
         {
             Pen pen = new Pen();
-            pen.Thickness = 2;
             pen.Brush = brush;
+            if (FormatForVectorDisplay)
+            {
+                //draw outline of circle
+                DrawCircle(drawingContext, x, y, radius);
 
-            drawingContext.DrawEllipse(brush, pen, new Point(ConvertXPos(x + offsetX), ConvertYPos(y + offsetY)), ConvertLen(radius), ConvertLen(radius));
+                //fill circle with a series of chord lines 
+                for (var thisOffset=0.0;thisOffset<radius;thisOffset+=(radius / 10.0))
+                {
+                    pen.Thickness = 1;
+                    var thisY = y + thisOffset;
+                    var thisChordHalfWidth = Math.Sqrt(Math.Abs((radius * radius) - (thisOffset * thisOffset)));
+                    DrawLine(drawingContext, x - thisChordHalfWidth, thisY, x + thisChordHalfWidth, thisY);
+                    thisY = y - thisOffset;
+                    DrawLine(drawingContext, x - thisChordHalfWidth, thisY, x + thisChordHalfWidth, thisY);
+                }
+            }
+            else
+            {
+                pen.Thickness = 2;
+                drawingContext.DrawEllipse(brush, pen, new Point(ConvertXPos(x + offsetX), ConvertYPos(y + offsetY)), ConvertLen(radius), ConvertLen(radius));
+            }
         }
 
         protected void DrawArc(DrawingContext drawingContext, double x, double y, double radius, double start, double stop)
