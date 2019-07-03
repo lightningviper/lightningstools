@@ -1456,12 +1456,12 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Map", "Airbase Position", "Feet North of Map Origin", F4SimOutputs.MAP__AIRBASE_FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), -3500000, 3500000));
             AddF4SimOutput(CreateNewF4SimOutput("Map", "Airbase Position", "Feet East of Map Origin", F4SimOutputs.MAP__AIRBASE_FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), -3500000, 3500000));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Altimeter", "Indicated Altitude (feet MSL)", F4SimOutputs.ALTIMETER__INDICATED_ALTITUDE__MSL, null, typeof(float), -1000, 80000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Altimeter", "Barometric Pressure (inches Hg)", F4SimOutputs.ALTIMETER__BAROMETRIC_PRESSURE_INCHES_HG, null, typeof(float), 28.10, 31.00));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Altimeter", "Indicated Altitude (feet MSL)", F4SimOutputs.ALTIMETER__INDICATED_ALTITUDE__MSL, null, typeof(float), -1000, 80000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Altimeter", "Barometric Pressure (inches Hg)", F4SimOutputs.ALTIMETER__BAROMETRIC_PRESSURE_INCHES_HG, null, typeof(float), 28.10, 31.00));
 
             AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "Vertical Velocity Indicator (VVI)", "Vertical Velocity (feet/min)", F4SimOutputs.VVI__VERTICAL_VELOCITY_FPM, null, typeof(float), -6000, 6000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Vertical Velocity Indicator (VVI)", "OFF flag", F4SimOutputs.VVI__OFF_FLAG, null, typeof(bool)));
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Vertical Velocity Indicator (VVI)", "Vertical Velocity (feet/min)", F4SimOutputs.VVI__VERTICAL_VELOCITY_FPM, null, typeof(float), -6000, 6000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Vertical Velocity Indicator (VVI)", "OFF flag", F4SimOutputs.VVI__OFF_FLAG, null, typeof(bool)));
 
             AddF4SimOutput(CreateNewF4SimOutput("Flight dynamics", "Sideslip angle [beta] (degrees)", F4SimOutputs.FLIGHT_DYNAMICS__SIDESLIP_ANGLE_DEGREES, typeof(float), -180, 180, true));
             AddF4SimOutput(CreateNewF4SimOutput("Flight dynamics", "Climb/Dive Angle [gamma] (degrees)", F4SimOutputs.FLIGHT_DYNAMICS__CLIMBDIVE_ANGLE_DEGREES, typeof(float), -90, 90, true));
@@ -1469,177 +1469,177 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Flight dynamics", "True Airspeed (knots)", F4SimOutputs.AIRSPEED_MACH_INDICATOR__TRUE_AIRSPEED_KNOTS, typeof(float), 0, 1700));
             AddF4SimOutput(CreateNewF4SimOutput("Flight dynamics", "True Altitude (feet MSL)", F4SimOutputs.TRUE_ALTITUDE__MSL, typeof(float), -1000, 80000));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Airspeed indicator/Machmeter", "Mach number", F4SimOutputs.AIRSPEED_MACH_INDICATOR__MACH_NUMBER, null, typeof(float), 0, 2.5, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Airspeed indicator/Machmeter", "Mach number", F4SimOutputs.AIRSPEED_MACH_INDICATOR__MACH_NUMBER, null, typeof(float), 0, 2.5, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(
                 CreateNewF4SimOutput(
-                    "Instruments", "Airspeed indicator/Machmeter", "Indicated Airspeed (knots)", F4SimOutputs.AIRSPEED_MACH_INDICATOR__INDICATED_AIRSPEED_KNOTS, null, typeof(float), 0, 850));
+                    "Instruments, Displays and Gauges", "Airspeed indicator/Machmeter", "Indicated Airspeed (knots)", F4SimOutputs.AIRSPEED_MACH_INDICATOR__INDICATED_AIRSPEED_KNOTS, null, typeof(float), 0, 850));
 
-            AddF4SimOutput(CreateNewF4SimOutput("HUD", "HUD", "Wind delta to flight path marker (degrees)", F4SimOutputs.HUD__WIND_DELTA_TO_FLIGHT_PATH_MARKER_DEGREES, null, typeof(float), -90, 90, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "Nozzle Position Indicator", "Engine #1 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS1__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "Nozzle Position Indicator", "Engine #2 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS2__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Hydraulic Pressure Indicators", "HYD A (Pounds per Square Inch)", F4SimOutputs.HYD_PRESSURE_A__PSI, null, typeof(float), 0, 4000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Hydraulic Pressure Indicators", "HYD B (Pounds per Square Inch)", F4SimOutputs.HYD_PRESSURE_B__PSI, null, typeof(float), 0, 4000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HUD", "Wind delta to flight path marker (degrees)", F4SimOutputs.HUD__WIND_DELTA_TO_FLIGHT_PATH_MARKER_DEGREES, null, typeof(float), -90, 90, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
 
             AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "Fuel Flow Indicator", "Engine #1 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Nozzle Position Indicator", "Engine #1 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS1__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "Fuel Flow Indicator", "Engine #2 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "RPM", "Engine #1 RPM (Percent 0-103)", F4SimOutputs.RPM1__RPM_PERCENT, null, typeof(float), 0, 103, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "RPM", "Engine #2 RPM(Percent 0-103)", F4SimOutputs.RPM2__RPM_PERCENT, null, typeof(float), 0, 103, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "FTIT", "Engine #1 Forward Turbine Inlet Temp (Degrees C)", F4SimOutputs.FTIT1__FTIT_TEMP_DEG_CELCIUS, null, typeof(float), 0, 1200, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "FTIT", "Engine #2 Forward Turbine Inlet Temp (Degrees C)", F4SimOutputs.FTIT2__FTIT_TEMP_DEG_CELCIUS, null, typeof(float), 0, 1200, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Nozzle Position Indicator", "Engine #2 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS2__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Hydraulic Pressure Indicators", "HYD A (Pounds per Square Inch)", F4SimOutputs.HYD_PRESSURE_A__PSI, null, typeof(float), 0, 4000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Hydraulic Pressure Indicators", "HYD B (Pounds per Square Inch)", F4SimOutputs.HYD_PRESSURE_B__PSI, null, typeof(float), 0, 4000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+
             AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "Speedbrake", "Speedbrake position (0 = closed, 1 = 60 Degrees open)", F4SimOutputs.SPEED_BRAKE__POSITION, null, typeof(float), 0, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Speedbrake", "Speedbrake Not Stowed Flag", F4SimOutputs.SPEED_BRAKE__NOT_STOWED_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "EPU Fuel", "EPU fuel (Percent 0-100)", F4SimOutputs.EPU_FUEL__EPU_FUEL_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel Flow Indicator", "Engine #1 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
             AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "OIL Pressure", "Engine #1 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS1__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel Flow Indicator", "Engine #2 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RPM", "Engine #1 RPM (Percent 0-103)", F4SimOutputs.RPM1__RPM_PERCENT, null, typeof(float), 0, 103, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RPM", "Engine #2 RPM(Percent 0-103)", F4SimOutputs.RPM2__RPM_PERCENT, null, typeof(float), 0, 103, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "FTIT", "Engine #1 Forward Turbine Inlet Temp (Degrees C)", F4SimOutputs.FTIT1__FTIT_TEMP_DEG_CELCIUS, null, typeof(float), 0, 1200, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "FTIT", "Engine #2 Forward Turbine Inlet Temp (Degrees C)", F4SimOutputs.FTIT2__FTIT_TEMP_DEG_CELCIUS, null, typeof(float), 0, 1200, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "OIL Pressure", "Engine #2 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS2__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Speedbrake", "Speedbrake position (0 = closed, 1 = 60 Degrees open)", F4SimOutputs.SPEED_BRAKE__POSITION, null, typeof(float), 0, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Speedbrake", "Speedbrake Not Stowed Flag", F4SimOutputs.SPEED_BRAKE__NOT_STOWED_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "EPU Fuel", "EPU fuel (Percent 0-100)", F4SimOutputs.EPU_FUEL__EPU_FUEL_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments", "Cabin Pressure Altimeter", "Cabin Pressure Altitude (in Feet MSL)", F4SimOutputs.CABIN_PRESS__CABIN_PRESS_FEET_MSL, null, typeof(float), 0, 50000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "OIL Pressure", "Engine #1 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS1__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "OIL Pressure", "Engine #2 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS2__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(
+                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Cabin Pressure Altimeter", "Cabin Pressure Altitude (in Feet MSL)", F4SimOutputs.CABIN_PRESS__CABIN_PRESS_FEET_MSL, null, typeof(float), 0, 50000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Compass", "Magnetic Heading (degrees)", F4SimOutputs.COMPASS__MAGNETIC_HEADING_DEGREES, null, typeof(float), 0, 360, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Compass", "Magnetic Heading (degrees)", F4SimOutputs.COMPASS__MAGNETIC_HEADING_DEGREES, null, typeof(float), 0, 360, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Gear position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__GEAR_POSITION, null, typeof(float), 0, 1, false, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Nose Gear Down Light", F4SimOutputs.GEAR_PANEL__NOSE_GEAR_DOWN_LIGHT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Left Gear Down Light", F4SimOutputs.GEAR_PANEL__LEFT_GEAR_DOWN_LIGHT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Right Gear Down Light", F4SimOutputs.GEAR_PANEL__RIGHT_GEAR_DOWN_LIGHT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Nose Gear Position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__NOSE_GEAR_POSITION, null, typeof(float), 0, 1, false, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Left Gear Position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__LEFT_GEAR_POSITION, null, typeof(float), 0, 1, false, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Right Gear Position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__RIGHT_GEAR_POSITION, null, typeof(float), 0, 1, false, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Gear handle 'Lollipop' light", F4SimOutputs.GEAR_PANEL__GEAR_HANDLE_LIGHT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "GEAR", "Parking brake engaged flag", F4SimOutputs.GEAR_PANEL__PARKING_BRAKE_ENGAGED_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Gear position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__GEAR_POSITION, null, typeof(float), 0, 1, false, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Nose Gear Down Light", F4SimOutputs.GEAR_PANEL__NOSE_GEAR_DOWN_LIGHT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Left Gear Down Light", F4SimOutputs.GEAR_PANEL__LEFT_GEAR_DOWN_LIGHT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Right Gear Down Light", F4SimOutputs.GEAR_PANEL__RIGHT_GEAR_DOWN_LIGHT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Nose Gear Position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__NOSE_GEAR_POSITION, null, typeof(float), 0, 1, false, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Left Gear Position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__LEFT_GEAR_POSITION, null, typeof(float), 0, 1, false, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Right Gear Position (0 = up, 1 = down)", F4SimOutputs.GEAR_PANEL__RIGHT_GEAR_POSITION, null, typeof(float), 0, 1, false, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Gear handle 'Lollipop' light", F4SimOutputs.GEAR_PANEL__GEAR_HANDLE_LIGHT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "GEAR", "Parking brake engaged flag", F4SimOutputs.GEAR_PANEL__PARKING_BRAKE_ENGAGED_FLAG, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "Pitch (degrees)", F4SimOutputs.ADI__PITCH_DEGREES, null, typeof(float), -90, 90, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "Roll (degrees)", F4SimOutputs.ADI__ROLL_DEGREES, null, typeof(float), -180, 180, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "ILS command bars enabled flag", F4SimOutputs.ADI__ILS_SHOW_COMMAND_BARS, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "ILS glideslope bar Position", F4SimOutputs.ADI__ILS_HORIZONTAL_BAR_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "ILS localizer bar Position", F4SimOutputs.ADI__ILS_VERTICAL_BAR_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "Rate of Turn Indicator Position", F4SimOutputs.ADI__RATE_OF_TURN_INDICATOR_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "Inclinometer Position", F4SimOutputs.ADI__INCLINOMETER_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "Pitch (degrees)", F4SimOutputs.ADI__PITCH_DEGREES, null, typeof(float), -90, 90, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "Roll (degrees)", F4SimOutputs.ADI__ROLL_DEGREES, null, typeof(float), -180, 180, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "ILS command bars enabled flag", F4SimOutputs.ADI__ILS_SHOW_COMMAND_BARS, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "ILS glideslope bar Position", F4SimOutputs.ADI__ILS_HORIZONTAL_BAR_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "ILS localizer bar Position", F4SimOutputs.ADI__ILS_VERTICAL_BAR_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "Rate of Turn Indicator Position", F4SimOutputs.ADI__RATE_OF_TURN_INDICATOR_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "Inclinometer Position", F4SimOutputs.ADI__INCLINOMETER_POSITION, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "OFF flag", F4SimOutputs.ADI__OFF_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "AUX flag", F4SimOutputs.ADI__AUX_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "GS flag", F4SimOutputs.ADI__GS_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "ADI", "LOC flag", F4SimOutputs.ADI__LOC_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "OFF flag", F4SimOutputs.ADI__OFF_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "AUX flag", F4SimOutputs.ADI__AUX_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "GS flag", F4SimOutputs.ADI__GS_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "ADI", "LOC flag", F4SimOutputs.ADI__LOC_FLAG, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Standby ADI", "OFF flag", F4SimOutputs.STBY_ADI__OFF_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Standby ADI", "Pitch (degrees)", F4SimOutputs.STBY_ADI__PITCH_DEGREES, null, typeof(float), -90, 90, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Standby ADI", "Roll (degrees)", F4SimOutputs.STBY_ADI__ROLL_DEGREES, null, typeof(float), -180, 180, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Standby ADI", "OFF flag", F4SimOutputs.STBY_ADI__OFF_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Standby ADI", "Pitch (degrees)", F4SimOutputs.STBY_ADI__PITCH_DEGREES, null, typeof(float), -90, 90, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Standby ADI", "Roll (degrees)", F4SimOutputs.STBY_ADI__ROLL_DEGREES, null, typeof(float), -180, 180, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "AOA Indicator", "Angle of Attack [alpha] (degrees)", F4SimOutputs.AOA_INDICATOR__AOA_DEGREES, null, typeof(float), -5, 40, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "AOA Indicator", "OFF flag", F4SimOutputs.AOA_INDICATOR__OFF_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "AOA Indicator", "Angle of Attack [alpha] (degrees)", F4SimOutputs.AOA_INDICATOR__AOA_DEGREES, null, typeof(float), -5, 40, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "AOA Indicator", "OFF flag", F4SimOutputs.AOA_INDICATOR__OFF_FLAG, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Course deviation invalid flag", F4SimOutputs.HSI__COURSE_DEVIATION_INVALID_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Distance invalid flag", F4SimOutputs.HSI__DISTANCE_INVALID_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Desired course (degrees)", F4SimOutputs.HSI__DESIRED_COURSE_DEGREES, null, typeof(float), 0, 360, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Course deviation (degrees)", F4SimOutputs.HSI__COURSE_DEVIATION_DEGREES, null, typeof(float), -10, 10, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Course deviation limit (degrees)", F4SimOutputs.HSI__COURSE_DEVIATION_LIMIT_DEGREES, null, typeof(float), -10, 10, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Distance to beacon (nautical miles)", F4SimOutputs.HSI__DISTANCE_TO_BEACON_NAUTICAL_MILES, null, typeof(float), 0, 1000));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Bearing to beacon (degrees)", F4SimOutputs.HSI__BEARING_TO_BEACON_DEGREES, null, typeof(float), 0, 360, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Current heading (degrees)", F4SimOutputs.HSI__CURRENT_HEADING_DEGREES, null, typeof(float), 0, 360, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Desired heading (degrees)", F4SimOutputs.HSI__DESIRED_HEADING_DEGREES, null, typeof(float), 0, 360, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "Localizer course (degrees)", F4SimOutputs.HSI__LOCALIZER_COURSE_DEGREES, null, typeof(float), 0, 360, true));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "TO Flag", F4SimOutputs.HSI__TO_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "FROM Flag", F4SimOutputs.HSI__FROM_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "OFF Flag", F4SimOutputs.HSI__OFF_FLAG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "HSI", "HSI mode (0=ILS/TCN, 1=TACAN, 2=NAV, 3=ILS/NAV)", F4SimOutputs.HSI__HSI_MODE, null, typeof(int), 0, 3));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Course deviation invalid flag", F4SimOutputs.HSI__COURSE_DEVIATION_INVALID_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Distance invalid flag", F4SimOutputs.HSI__DISTANCE_INVALID_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Desired course (degrees)", F4SimOutputs.HSI__DESIRED_COURSE_DEGREES, null, typeof(float), 0, 360, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Course deviation (degrees)", F4SimOutputs.HSI__COURSE_DEVIATION_DEGREES, null, typeof(float), -10, 10, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Course deviation limit (degrees)", F4SimOutputs.HSI__COURSE_DEVIATION_LIMIT_DEGREES, null, typeof(float), -10, 10, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Distance to beacon (nautical miles)", F4SimOutputs.HSI__DISTANCE_TO_BEACON_NAUTICAL_MILES, null, typeof(float), 0, 1000));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Bearing to beacon (degrees)", F4SimOutputs.HSI__BEARING_TO_BEACON_DEGREES, null, typeof(float), 0, 360, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Current heading (degrees)", F4SimOutputs.HSI__CURRENT_HEADING_DEGREES, null, typeof(float), 0, 360, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Desired heading (degrees)", F4SimOutputs.HSI__DESIRED_HEADING_DEGREES, null, typeof(float), 0, 360, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "Localizer course (degrees)", F4SimOutputs.HSI__LOCALIZER_COURSE_DEGREES, null, typeof(float), 0, 360, true));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "TO Flag", F4SimOutputs.HSI__TO_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "FROM Flag", F4SimOutputs.HSI__FROM_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "OFF Flag", F4SimOutputs.HSI__OFF_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HSI", "HSI mode (0=ILS/TCN, 1=TACAN, 2=NAV, 3=ILS/NAV)", F4SimOutputs.HSI__HSI_MODE, null, typeof(int), 0, 3));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "LIGHTING", "PRIMARY - INST PNL Lighting Intensity (0=OFF, 1=DIM, 2=BRT)", F4SimOutputs.INSTR_LIGHTING_INTENSITY,null, typeof(int), 0, 3));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "LIGHTING", "PRIMARY - INST PNL Lighting Intensity (0=OFF, 1=DIM, 2=BRT)", F4SimOutputs.INSTR_LIGHTING_INTENSITY,null, typeof(int), 0, 3));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Pitch trim (-1 to +1)", F4SimOutputs.TRIM__PITCH_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Roll trim (-1 to +1)", F4SimOutputs.TRIM__ROLL_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "TRIM", "Yaw trim (-1 to +1)", F4SimOutputs.TRIM__YAW_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "TRIM", "Pitch trim (-1 to +1)", F4SimOutputs.TRIM__PITCH_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "TRIM", "Roll trim (-1 to +1)", F4SimOutputs.TRIM__ROLL_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "TRIM", "Yaw trim (-1 to +1)", F4SimOutputs.TRIM__YAW_TRIM, null, typeof(float), -1, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
 
             for (var i = 0; i < 5; i++)
             {
-                AddF4SimOutput(CreateNewF4SimOutput("DED", $"DED Line {i + 1}", "Text", F4SimOutputs.DED__LINES, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("DED", $"DED Line {i + 1}", "Inverse Characters", F4SimOutputs.DED__INVERT_LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "DED", $"DED Line {i + 1} Text", F4SimOutputs.DED__LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "DED", $"DED Line {i + 1} Inverse Characters", F4SimOutputs.DED__INVERT_LINES, i, typeof(string)));
 
-                AddF4SimOutput(CreateNewF4SimOutput("PFL", $"PFL Line {i + 1}", "Text", F4SimOutputs.PFL__LINES, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("PFL", $"PFL Line {i + 1}", "Inverse Characters", F4SimOutputs.PFL__INVERT_LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "PFL", $"PFL Line {i + 1} Text", F4SimOutputs.PFL__LINES, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "PFL", $"PFL Line {i + 1} Inverse Characters", F4SimOutputs.PFL__INVERT_LINES, i, typeof(string)));
             }
 
-            AddF4SimOutput(CreateNewF4SimOutput("Up-Front Controls", "TACAN Channel", F4SimOutputs.UFC__TACAN_CHANNEL, typeof(int), 0, 199));
-            AddF4SimOutput(CreateNewF4SimOutput("Up-Front Controls", "Tacan Band is X", F4SimOutputs.UFC__TACAN_BAND_IS_X, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Up-Front Controls", "Tacan Mode is AA", F4SimOutputs.UFC__TACAN_MODE_IS_AA, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Up-Front Controls", "TACAN Channel", F4SimOutputs.UFC__TACAN_CHANNEL, null, typeof(int), 0, 199));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Up-Front Controls", "Tacan Band is X", F4SimOutputs.UFC__TACAN_BAND_IS_X, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Up-Front Controls", "Tacan Mode is AA", F4SimOutputs.UFC__TACAN_MODE_IS_AA, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("AUX COMM", "TACAN Channel", F4SimOutputs.AUX_COMM__TACAN_CHANNEL, typeof(int), 0, 199));
-            AddF4SimOutput(CreateNewF4SimOutput("AUX COMM", "Tacan Band is X", F4SimOutputs.AUX_COMM__TACAN_BAND_IS_X, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("AUX COMM", "Tacan Mode is AA", F4SimOutputs.AUX_COMM__TACAN_MODE_IS_AA, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "AUX COMM", "TACAN Channel", F4SimOutputs.AUX_COMM__TACAN_CHANNEL, null, typeof(int),0, 199));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "AUX COMM", "Tacan Band is X", F4SimOutputs.AUX_COMM__TACAN_BAND_IS_X, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "AUX COMM", "Tacan Mode is AA", F4SimOutputs.AUX_COMM__TACAN_MODE_IS_AA, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("UHF", "UHF Preset", F4SimOutputs.AUX_COMM__UHF_PRESET, typeof(int), 1, 19));
-            AddF4SimOutput(CreateNewF4SimOutput("UHF", "UHF Frequency", F4SimOutputs.AUX_COMM__UHF_FREQUENCY, typeof(int), 0, 399975));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "UHF", "UHF Preset", F4SimOutputs.AUX_COMM__UHF_PRESET, null, typeof(int), 1, 19));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "UHF", "UHF Frequency", F4SimOutputs.AUX_COMM__UHF_FREQUENCY, null, typeof(int), 0, 399975));
 
-            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 1 Digit 1", F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_1, typeof(int), 0, 9));
-            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 1 Digit 2", F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_2, typeof(int), 0, 9));
-            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 3A Digit 1", F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_1, typeof(int), 0, 9));
-            AddF4SimOutput(CreateNewF4SimOutput("IFF", "IFF Backup Mode 3A Digit 2", F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_2, typeof(int), 0, 9));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "IFF", "IFF Backup Mode 1 Digit 1", F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_1, null, typeof(int), 0, 9));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "IFF", "IFF Backup Mode 1 Digit 2", F4SimOutputs.IFF__BACKUP_MODE_1_DIGIT_2, null, typeof(int), 0, 9));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "IFF", "IFF Backup Mode 3A Digit 1", F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_1, null, typeof(int), 0, 9));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "IFF", "IFF Backup Mode 3A Digit 2", F4SimOutputs.IFF__BACKUP_MODE_3A_DIGIT_2, null, typeof(int), 0, 9));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Fuel QTY", "Internal fuel (pounds)", F4SimOutputs.FUEL_QTY__INTERNAL_FUEL_POUNDS, null, typeof(float), 0, 42000));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Fuel QTY", "External fuel (pounds)", F4SimOutputs.FUEL_QTY__EXTERNAL_FUEL_POUNDS, null, typeof(float), 0, 42000));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Fuel QTY", "Foreward fuel quantity (lbs)", F4SimOutputs.FUEL_QTY__FOREWARD_QTY_LBS, null, typeof(float), 0, 42000));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Fuel QTY", "Aft fuel quantity (lbs) ", F4SimOutputs.FUEL_QTY__AFT_QTY_LBS, null, typeof(float), 0, 42000));
-            AddF4SimOutput(CreateNewF4SimOutput("Instruments", "Fuel QTY", "Total fuel (lbs)", F4SimOutputs.FUEL_QTY__TOTAL_FUEL_LBS, null, typeof(float), 0, 20100));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel QTY", "Internal fuel (pounds)", F4SimOutputs.FUEL_QTY__INTERNAL_FUEL_POUNDS, null, typeof(float), 0, 42000));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel QTY", "External fuel (pounds)", F4SimOutputs.FUEL_QTY__EXTERNAL_FUEL_POUNDS, null, typeof(float), 0, 42000));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel QTY", "Foreward fuel quantity (lbs)", F4SimOutputs.FUEL_QTY__FOREWARD_QTY_LBS, null, typeof(float), 0, 42000));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel QTY", "Aft fuel quantity (lbs) ", F4SimOutputs.FUEL_QTY__AFT_QTY_LBS, null, typeof(float), 0, 42000));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel QTY", "Total fuel (lbs)", F4SimOutputs.FUEL_QTY__TOTAL_FUEL_LBS, null, typeof(float), 0, 20100));
 
             for (var i = 0; i < 20; i++)
             {
-                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 1", F4SimOutputs.LMFD__OSB_LABEL_LINES1, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 2", F4SimOutputs.LMFD__OSB_LABEL_LINES2, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Inverted Flag", F4SimOutputs.LMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
-                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 1", F4SimOutputs.RMFD__OSB_LABEL_LINES1, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Line 2", F4SimOutputs.RMFD__OSB_LABEL_LINES2, i, typeof(string)));
-                AddF4SimOutput(CreateNewF4SimOutput("Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label", "Inverted Flag", F4SimOutputs.RMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label - Line 1", F4SimOutputs.LMFD__OSB_LABEL_LINES1, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label - Line 2", F4SimOutputs.LMFD__OSB_LABEL_LINES2, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Left MFD", $"LMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label - Inverted Flag", F4SimOutputs.LMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label - Line 1", F4SimOutputs.RMFD__OSB_LABEL_LINES1, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label - Line 2", F4SimOutputs.RMFD__OSB_LABEL_LINES2, i, typeof(string)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Right MFD", $"RMFD OSB #{(i + 1).ToString().PadLeft(2, '0')} Label - Inverted Flag", F4SimOutputs.RMFD__OSB_INVERTED_FLAGS, i, typeof(bool)));
             }
 
-            AddF4SimOutput(CreateNewF4SimOutput("Left Eyebrow Lights", "Master Caution Light", F4SimOutputs.MASTER_CAUTION_LIGHT, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Left Eyebrow Lights", "Master Caution Announced", F4SimOutputs.MASTER_CAUTION_ANNOUNCED, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Left Eyebrow Lights", "TF-FAIL Light", F4SimOutputs.LEFT_EYEBROW_LIGHTS__TFFAIL, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Left Eyebrow Lights", "ALT LOW Light", F4SimOutputs.LEFT_EYEBROW_LIGHTS__ALTLOW, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Left Eyebrow Lights", "OBS WRN Light", F4SimOutputs.LEFT_EYEBROW_LIGHTS__OBSWRN, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Left Eyebrow Lights", "Master Caution Light", F4SimOutputs.MASTER_CAUTION_LIGHT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Left Eyebrow Lights", "Master Caution Announced", F4SimOutputs.MASTER_CAUTION_ANNOUNCED, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Left Eyebrow Lights", "TF-FAIL Light", F4SimOutputs.LEFT_EYEBROW_LIGHTS__TFFAIL, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Left Eyebrow Lights", "ALT LOW Light", F4SimOutputs.LEFT_EYEBROW_LIGHTS__ALTLOW, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Left Eyebrow Lights", "OBS WRN Light", F4SimOutputs.LEFT_EYEBROW_LIGHTS__OBSWRN, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "ENG FIRE Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGFIRE, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "Engine 2 Fire flag", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGINE_2_FIRE, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "ENGINE Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGINE, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "HYD/OIL PRESS Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__HYDOIL, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "DUAL FC Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__DUALFC, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "FLCS Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__FLCS, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "CANOPY Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__CANOPY, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "TO/LDG CONFIG Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__TO_LDG_CONFIG, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "OXY LOW Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__OXY_LOW, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Right Eyebrow Lights", "DBU ON Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__DBU_ON, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "ENG FIRE Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGFIRE, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "Engine 2 Fire flag", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGINE_2_FIRE, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "ENGINE Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGINE, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "HYD/OIL PRESS Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__HYDOIL, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "DUAL FC Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__DUALFC, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "FLCS Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__FLCS, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "CANOPY Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__CANOPY, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "TO/LDG CONFIG Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__TO_LDG_CONFIG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "OXY LOW Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__OXY_LOW, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Right Eyebrow Lights", "DBU ON Light", F4SimOutputs.RIGHT_EYEBROW_LIGHTS__DBU_ON, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "FLCS FAULT Light", F4SimOutputs.CAUTION_PANEL__FLCS_FAULT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "LE FLAPS Light", F4SimOutputs.CAUTION_PANEL__LE_FLAPS, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "ELEC SYS Light", F4SimOutputs.CAUTION_PANEL__ELEC_SYS, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "ENGINE FAULT Light", F4SimOutputs.CAUTION_PANEL__ENGINE_FAULT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "SEC Light", F4SimOutputs.CAUTION_PANEL__SEC, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "FWD FUEL LOW Light", F4SimOutputs.CAUTION_PANEL__FWD_FUEL_LOW, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "AFT FUEL LOW Light", F4SimOutputs.CAUTION_PANEL__AFT_FUEL_LOW, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "OVERHEAT Light", F4SimOutputs.CAUTION_PANEL__OVERHEAT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "BUC Light", F4SimOutputs.CAUTION_PANEL__BUC, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "FUEL OIL HOT Light", F4SimOutputs.CAUTION_PANEL__FUEL_OIL_HOT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "SEAT NOT ARMED Light", F4SimOutputs.CAUTION_PANEL__SEAT_NOT_ARMED, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "AVIONICS FAULT Light", F4SimOutputs.CAUTION_PANEL__AVIONICS_FAULT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "RADAR ALT Light", F4SimOutputs.CAUTION_PANEL__RADAR_ALT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "EQUIP HOT Light", F4SimOutputs.CAUTION_PANEL__EQUIP_HOT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "ECM Light", F4SimOutputs.CAUTION_PANEL__ECM, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "STORES CONFIG Light", F4SimOutputs.CAUTION_PANEL__STORES_CONFIG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "ANTI SKID Light", F4SimOutputs.CAUTION_PANEL__ANTI_SKID, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "HOOK Light", F4SimOutputs.CAUTION_PANEL__HOOK, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "NWS FAIL Light", F4SimOutputs.CAUTION_PANEL__NWS_FAIL, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "CABIN PRESS Light", F4SimOutputs.CAUTION_PANEL__CABIN_PRESS, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "OXY LOW Light", F4SimOutputs.CAUTION_PANEL__OXY_LOW, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "PROBE HEAT Light", F4SimOutputs.CAUTION_PANEL__PROBE_HEAT, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "FUEL LOW Light", F4SimOutputs.CAUTION_PANEL__FUEL_LOW, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "IFF Light", F4SimOutputs.CAUTION_PANEL__IFF, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "C ADC Light", F4SimOutputs.CAUTION_PANEL__C_ADC, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Caution", "ATF NOT ENGAGED Light", F4SimOutputs.CAUTION_PANEL__ATF_NOT_ENGAGED, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "FLCS FAULT Light", F4SimOutputs.CAUTION_PANEL__FLCS_FAULT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "LE FLAPS Light", F4SimOutputs.CAUTION_PANEL__LE_FLAPS, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "ELEC SYS Light", F4SimOutputs.CAUTION_PANEL__ELEC_SYS, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "ENGINE FAULT Light", F4SimOutputs.CAUTION_PANEL__ENGINE_FAULT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "SEC Light", F4SimOutputs.CAUTION_PANEL__SEC, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "FWD FUEL LOW Light", F4SimOutputs.CAUTION_PANEL__FWD_FUEL_LOW, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "AFT FUEL LOW Light", F4SimOutputs.CAUTION_PANEL__AFT_FUEL_LOW, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "OVERHEAT Light", F4SimOutputs.CAUTION_PANEL__OVERHEAT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "BUC Light", F4SimOutputs.CAUTION_PANEL__BUC, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "FUEL OIL HOT Light", F4SimOutputs.CAUTION_PANEL__FUEL_OIL_HOT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "SEAT NOT ARMED Light", F4SimOutputs.CAUTION_PANEL__SEAT_NOT_ARMED, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "AVIONICS FAULT Light", F4SimOutputs.CAUTION_PANEL__AVIONICS_FAULT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "RADAR ALT Light", F4SimOutputs.CAUTION_PANEL__RADAR_ALT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "EQUIP HOT Light", F4SimOutputs.CAUTION_PANEL__EQUIP_HOT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "ECM Light", F4SimOutputs.CAUTION_PANEL__ECM, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "STORES CONFIG Light", F4SimOutputs.CAUTION_PANEL__STORES_CONFIG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "ANTI SKID Light", F4SimOutputs.CAUTION_PANEL__ANTI_SKID, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "HOOK Light", F4SimOutputs.CAUTION_PANEL__HOOK, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "NWS FAIL Light", F4SimOutputs.CAUTION_PANEL__NWS_FAIL, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "CABIN PRESS Light", F4SimOutputs.CAUTION_PANEL__CABIN_PRESS, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "OXY LOW Light", F4SimOutputs.CAUTION_PANEL__OXY_LOW, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "PROBE HEAT Light", F4SimOutputs.CAUTION_PANEL__PROBE_HEAT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "FUEL LOW Light", F4SimOutputs.CAUTION_PANEL__FUEL_LOW, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "IFF Light", F4SimOutputs.CAUTION_PANEL__IFF, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "C ADC Light", F4SimOutputs.CAUTION_PANEL__C_ADC, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "ATF NOT ENGAGED Light", F4SimOutputs.CAUTION_PANEL__ATF_NOT_ENGAGED, null, typeof(bool)));
 
             /*
              * MISSING CAUTION PANEL FLAGS
@@ -1655,66 +1655,66 @@ namespace F4Utils.SimSupport
              * 
             */
 
-            AddF4SimOutput(CreateNewF4SimOutput("Indexers", "AOA Indexer", "AOA Too-High Light", F4SimOutputs.AOA_INDEXER__AOA_TOO_HIGH, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Indexers", "AOA Indexer", "AOA Ideal Light", F4SimOutputs.AOA_INDEXER__AOA_IDEAL, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Indexers", "AOA Indexer", "AOA Too-Low Light", F4SimOutputs.AOA_INDEXER__AOA_TOO_LOW, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "AOA Indexer", "AOA Too-High Light", F4SimOutputs.AOA_INDEXER__AOA_TOO_HIGH, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "AOA Indexer", "AOA Ideal Light", F4SimOutputs.AOA_INDEXER__AOA_IDEAL, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "AOA Indexer", "AOA Too-Low Light", F4SimOutputs.AOA_INDEXER__AOA_TOO_LOW, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Indexers", "Refuel/NWS Indexer", "RDY Light", F4SimOutputs.NWS_INDEXER__RDY, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Indexers", "Refuel/NWS Indexer", "AR NWS Light", F4SimOutputs.NWS_INDEXER__AR_NWS, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Indexers", "Refuel/NWS Indexer", "DISC Light", F4SimOutputs.NWS_INDEXER__DISC, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Refuel/NWS Indexer", "RDY Light", F4SimOutputs.NWS_INDEXER__RDY, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Refuel/NWS Indexer", "AR NWS Light", F4SimOutputs.NWS_INDEXER__AR_NWS, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Refuel/NWS Indexer", "DISC Light", F4SimOutputs.NWS_INDEXER__DISC, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Prime", "HANDOFF Indicator Light", F4SimOutputs.TWP__HANDOFF, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Prime", "MISSILE LAUNCH Indicator Light", F4SimOutputs.TWP__MISSILE_LAUNCH, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Prime", "PRIORITY MODE OPEN Indicator Light", F4SimOutputs.TWP__PRIORITY_MODE, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Prime", "UNKNOWN Indicator Light", F4SimOutputs.TWP__UNKNOWN, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Prime", "NAVAL Indicator Light", F4SimOutputs.TWP__NAVAL, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Prime", "TGT SEP Indicator Light", F4SimOutputs.TWP__TARGET_SEP, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Prime", "SYS TEST Indicator Light", F4SimOutputs.TWP__SYS_TEST, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Prime", "HANDOFF Indicator Light", F4SimOutputs.TWP__HANDOFF, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Prime", "MISSILE LAUNCH Indicator Light", F4SimOutputs.TWP__MISSILE_LAUNCH, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Prime", "PRIORITY MODE OPEN Indicator Light", F4SimOutputs.TWP__PRIORITY_MODE, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Prime", "UNKNOWN Indicator Light", F4SimOutputs.TWP__UNKNOWN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Prime", "NAVAL Indicator Light", F4SimOutputs.TWP__NAVAL, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Prime", "TGT SEP Indicator Light", F4SimOutputs.TWP__TARGET_SEP, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Prime", "SYS TEST Indicator Light", F4SimOutputs.TWP__SYS_TEST, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Aux", "SEARCH Indicator Light", F4SimOutputs.TWA__SEARCH, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Aux", "ACTIVITY/POWER Indicator Light", F4SimOutputs.TWA__ACTIVITY_POWER, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Aux", "LOW ALTITUDE Indicator Light", F4SimOutputs.TWA__LOW_ALTITUDE, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "Threat Warning Aux", "SYSTEM POWER Indicator Light", F4SimOutputs.TWA__SYSTEM_POWER, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Aux", "SEARCH Indicator Light", F4SimOutputs.TWA__SEARCH, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Aux", "ACTIVITY/POWER Indicator Light", F4SimOutputs.TWA__ACTIVITY_POWER, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Aux", "LOW ALTITUDE Indicator Light", F4SimOutputs.TWA__LOW_ALTITUDE, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Threat Warning Aux", "SYSTEM POWER Indicator Light", F4SimOutputs.TWA__SYSTEM_POWER, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("ECM", "POWER Flag", F4SimOutputs.ECM__POWER, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("ECM", "FAIL Flag", F4SimOutputs.ECM__FAIL, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ECM", "POWER Flag", F4SimOutputs.ECM__POWER, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ECM", "FAIL Flag", F4SimOutputs.ECM__FAIL, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "MISC", "ADV MODE ACTIVE Light", F4SimOutputs.MISC__ADV_MODE_ACTIVE, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "MISC", "ADV MODE STBY Light", F4SimOutputs.MISC__ADV_MODE_STBY, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "MISC", "Autopilot engaged flag", F4SimOutputs.MISC__AUTOPILOT_ENGAGED, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "MISC", "ADV MODE ACTIVE Light", F4SimOutputs.MISC__ADV_MODE_ACTIVE, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "MISC", "ADV MODE STBY Light", F4SimOutputs.MISC__ADV_MODE_STBY, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "MISC", "Autopilot engaged flag", F4SimOutputs.MISC__AUTOPILOT_ENGAGED, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "Chaff Count (# remaining)", F4SimOutputs.CMDS__CHAFF_COUNT, null, typeof(float), 0, 99));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "Flare Count (# remaining)", F4SimOutputs.CMDS__FLARE_COUNT, null, typeof(float), 0, 99));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "GO Flag", F4SimOutputs.CMDS__GO, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "NO GO Flag", F4SimOutputs.CMDS__NOGO, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "AUTO DEGR Flag", F4SimOutputs.CMDS__AUTO_DEGR, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "DISPENSE RDY Flag", F4SimOutputs.CMDS__DISPENSE_RDY, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "CHAFF LO Flag", F4SimOutputs.CMDS__CHAFF_LO, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "FLARE LO Flag", F4SimOutputs.CMDS__FLARE_LO, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "CMDS", "MODE", F4SimOutputs.CMDS__MODE, null, typeof(int), 0, 5));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Chaff Count (# remaining)", F4SimOutputs.CMDS__CHAFF_COUNT, null, typeof(float), 0, 99));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Flare Count (# remaining)", F4SimOutputs.CMDS__FLARE_COUNT, null, typeof(float), 0, 99));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "GO Flag", F4SimOutputs.CMDS__GO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "NO GO Flag", F4SimOutputs.CMDS__NOGO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "AUTO DEGR Flag", F4SimOutputs.CMDS__AUTO_DEGR, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "DISPENSE RDY Flag", F4SimOutputs.CMDS__DISPENSE_RDY, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "CHAFF LO Flag", F4SimOutputs.CMDS__CHAFF_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "FLARE LO Flag", F4SimOutputs.CMDS__FLARE_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "MODE", F4SimOutputs.CMDS__MODE, null, typeof(int), 0, 5));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "FLCS PMG Indicator Light", F4SimOutputs.ELEC__FLCS_PMG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "MAIN GEN Indicator Light", F4SimOutputs.ELEC__MAIN_GEN, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "STBY GEN Indicator Light", F4SimOutputs.ELEC__STBY_GEN, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "EPU GEN Indicator Light", F4SimOutputs.ELEC__EPU_GEN, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "EPU PMG Indicator Light", F4SimOutputs.ELEC__EPU_PMG, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "TO FLCS Indicator Light", F4SimOutputs.ELEC__TO_FLCS, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "FLCS RLY Indicator Light", F4SimOutputs.ELEC__FLCS_RLY, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "ELEC", "BATT FAIL Indicator Light", F4SimOutputs.ELEC__BATT_FAIL, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "FLCS PMG Indicator Light", F4SimOutputs.ELEC__FLCS_PMG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "MAIN GEN Indicator Light", F4SimOutputs.ELEC__MAIN_GEN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "STBY GEN Indicator Light", F4SimOutputs.ELEC__STBY_GEN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "EPU GEN Indicator Light", F4SimOutputs.ELEC__EPU_GEN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "EPU PMG Indicator Light", F4SimOutputs.ELEC__EPU_PMG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "TO FLCS Indicator Light", F4SimOutputs.ELEC__TO_FLCS, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "FLCS RLY Indicator Light", F4SimOutputs.ELEC__FLCS_RLY, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "BATT FAIL Indicator Light", F4SimOutputs.ELEC__BATT_FAIL, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "TEST", "FLCS ABCD Indicator Light", F4SimOutputs.TEST__ABCD, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "TEST", "FLCS ABCD Indicator Light", F4SimOutputs.TEST__ABCD, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "EPU", "HYDRAZN Indicator Light", F4SimOutputs.EPU__HYDRAZN, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "EPU", "AIR Indicator Light", F4SimOutputs.EPU__AIR, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "EPU", "RUN Indicator Light", F4SimOutputs.EPU__RUN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EPU", "HYDRAZN Indicator Light", F4SimOutputs.EPU__HYDRAZN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EPU", "AIR Indicator Light", F4SimOutputs.EPU__AIR, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EPU", "RUN Indicator Light", F4SimOutputs.EPU__RUN, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "AVTR", "AVTR Indicator Light", F4SimOutputs.AVTR__AVTR, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "AVTR", "AVTR Indicator Light", F4SimOutputs.AVTR__AVTR, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "JFS", "RUN Indicator Light", F4SimOutputs.JFS__RUN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "JFS", "RUN Indicator Light", F4SimOutputs.JFS__RUN, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Marker Beacon", "MRK BCN Light", F4SimOutputs.MARKER_BEACON__MRK_BCN_LIGHT, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Marker Beacon", "Outer marker flag", F4SimOutputs.MARKER_BEACON__OUTER_MARKER_FLAG, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Marker Beacon", "Middle marker flag", F4SimOutputs.MARKER_BEACON__MIDDLE_MARKER_FLAG, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Marker Beacon", "MRK BCN Light", F4SimOutputs.MARKER_BEACON__MRK_BCN_LIGHT, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Marker Beacon", "Outer marker flag", F4SimOutputs.MARKER_BEACON__OUTER_MARKER_FLAG, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Marker Beacon", "Middle marker flag", F4SimOutputs.MARKER_BEACON__MIDDLE_MARKER_FLAG, null, typeof(bool)));
 
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "Vehicle ACD", F4SimOutputs.AIRCRAFT__VEHICLE_ACD, typeof(short)));
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "On Ground", F4SimOutputs.AIRCRAFT__ONGROUND, typeof(bool)));
@@ -1823,22 +1823,22 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Pilot", "Head yaw offset from design eye (degrees)", F4SimOutputs.PILOT__HEAD_YAW_DEGREES, null, typeof(float)));
             */
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "FLIGHT CONTROL", "RUN Indicator Light", F4SimOutputs.FLIGHT_CONTROL__RUN, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels", "FLIGHT CONTROL", "FAIL Indicator Light", F4SimOutputs.FLIGHT_CONTROL__FAIL, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "FLIGHT CONTROL", "RUN Indicator Light", F4SimOutputs.FLIGHT_CONTROL__RUN, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "FLIGHT CONTROL", "FAIL Indicator Light", F4SimOutputs.FLIGHT_CONTROL__FAIL, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("RWR", "Object Count", F4SimOutputs.RWR__OBJECT_COUNT, typeof(int)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Object Count", F4SimOutputs.RWR__OBJECT_COUNT, null, typeof(int)));
             for (var i = 0; i < 64; i++)
             {
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Symbol ID", F4SimOutputs.RWR__SYMBOL_ID, i, typeof(int), Int32.MinValue, Int32.MaxValue));
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Bearing (Degrees)", F4SimOutputs.RWR__BEARING_DEGREES, i, typeof(float), 0, 360, true));
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Missile Activity Flag", F4SimOutputs.RWR__MISSILE_ACTIVITY_FLAG, i, typeof(bool)));
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Missile Launch Flag", F4SimOutputs.RWR__MISSILE_LAUNCH_FLAG, i, typeof(bool)));
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Selected Flag", F4SimOutputs.RWR__SELECTED_FLAG, i, typeof(bool)));
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "Lethality", F4SimOutputs.RWR__LETHALITY, i, typeof(float), -1, 3));
-                AddF4SimOutput(CreateNewF4SimOutput("RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')}", "New Detection Flag", F4SimOutputs.RWR__NEWDETECTION_FLAG, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Symbol ID", F4SimOutputs.RWR__SYMBOL_ID, i, typeof(int), Int32.MinValue, Int32.MaxValue));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Bearing (Degrees)", F4SimOutputs.RWR__BEARING_DEGREES, i, typeof(float), 0, 360, true));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Missile Activity Flag", F4SimOutputs.RWR__MISSILE_ACTIVITY_FLAG, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Missile Launch Flag", F4SimOutputs.RWR__MISSILE_LAUNCH_FLAG, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Selected Flag", F4SimOutputs.RWR__SELECTED_FLAG, i, typeof(bool)));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Lethality", F4SimOutputs.RWR__LETHALITY, i, typeof(float), -1, 3));
+                AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} New Detection Flag", F4SimOutputs.RWR__NEWDETECTION_FLAG, i, typeof(bool)));
             }
 
-            AddF4SimOutput(CreateNewF4SimOutput("RWR", "Additional Info", F4SimOutputs.RWR__ADDITIONAL_INFO, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Additional Info", F4SimOutputs.RWR__ADDITIONAL_INFO, null, typeof(string)));
         }
 
         public override void Update() { UpdateSimOutputs(); }
