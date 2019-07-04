@@ -41,10 +41,6 @@ End-user desktop application providing basic testing capabilities for the PHCC m
 #### [SDI Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/SDI%20Test%20Tool)
 End-user desktop application for testing Henkie's Digital-to-Synchro (SDI) interface card. Demonstrates the use of the `SDI` class library.
 
-#### [SimLinkup](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/SimLinkup) 
-##### [ADI Special Edition](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/SimLinkup/ADI%20Special%20Edition)
-End-user desktop application for interfacing Falcon BMS with a real ARU-42/A Attitude Director Indicator instrument. 
-
 #### [TlkTool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/TlkTool)
 End-user command-line (console) application which provides the ability to edit Falcon's AI comms databases (falcon.TLK, commFile.bin, fragFile.bin, and evalFile.bin files).  
 - Supports decompressing and extracting any/all of the individual compressed audio files from within the .TLK file, to ordinary .WAV files or compressed .LH or .SPX files.  
