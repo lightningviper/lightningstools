@@ -28,3 +28,6 @@ CALL %MASTERBUILDDIR%InstallTortoiseGit.bat
 
 REM Install Windows 10 SDK
 CALL %MASTERBUILDDIR%InstallWindowsSDK.bat
+
+REM Restore NuGet packages
+CALL %MASTERBUILDDIR%RestorePackages.bat
