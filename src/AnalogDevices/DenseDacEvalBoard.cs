@@ -1,5 +1,4 @@
 ﻿using AnalogDevices.DeviceCommands;
-using Resourcer;
 
 namespace AnalogDevices
 {
@@ -38,7 +37,7 @@ namespace AnalogDevices
         public DenseDacEvalBoard(IUsbDevice usbDevice) : this(usbDevice, null)
         {
             UsbDevice = UsbDevice;
-            UploadFirmware(new IhxFile(Resource.AsStream("AD5371SPI.hex")));
+            UploadFirmware(new IhxFile(EmbeddedResourceLoader.GetResourceStream("AD5371SPI.hex")));
         }
 
         internal DenseDacEvalBoard(

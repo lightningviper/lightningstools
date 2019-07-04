@@ -84,10 +84,6 @@
       <HintPath>$(SolutionDir)\packages\LibUsbDotNet.2.2.29\lib\net45\LibUsbDotNet.LibUsbDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Resourcer, Version=1.7.3.0, Culture=neutral, PublicKeyToken=409b3227471b0f0d">
-      <HintPath>$(SolutionDir)\packages\Resourcer.Fody.1.7.3\lib\net452\Resourcer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Windows.Forms" />
@@ -104,6 +100,7 @@
     <Compile Include="ChannelAddressExtensions.cs" />
     <Compile Include="ChannelGroup.cs" />
     <Compile Include="ControlTransferSentEventArgs.cs" />
+    <Compile Include="EmbeddedResourceLoader.cs" />
     <Compile Include="IUsbDevice.cs" />
     <Compile Include="ObservableLock.cs" />
     <Compile Include="LockFactory.cs" />
@@ -177,9 +174,7 @@
     <Compile Include="WinUsbDevice.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AD5371SPI.hex">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="AD5371SPI.hex" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="sn.snk" />
@@ -203,11 +198,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets'))" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props'))" />
   </Target>
   <Import Project="$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Fody.5.1.1\build\Fody.targets')" />
   <Import Project="$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Costura.Fody.4.0.0\build\Costura.Fody.props')" />
-  <Import Project="$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props" Condition="'$(Configuration)' == 'Release' and Exists('$(SolutionDir)\packages\Resourcer.Fody.1.7.3\build\Resourcer.Fody.props')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

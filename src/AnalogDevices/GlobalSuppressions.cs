@@ -939,15 +939,6 @@ using System.Diagnostics.CodeAnalysis;
     SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
         Scope = "member", Target = "AnalogDevices.IhxFile.#.ctor(System.IO.Stream)")]
 [assembly:
-    SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Scope = "member",
-        Target = "AnalogDevices.dll.Resourcer.ResourceHelper.#.cctor()")]
-[assembly:
-    SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Scope = "member",
-        Target = "AnalogDevices.dll.Resourcer.ResourceHelper.#AsString(System.String)")]
-[assembly:
-    SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes", Scope = "member",
-        Target = "AnalogDevices.dll.Resourcer.ResourceHelper.#AsString(System.String)")]
-[assembly:
     SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member",
         Target =
             "AnalogDevices.DenseDacEvalBoard.#.ctor(AnalogDevices.IUsbDevice,AnalogDevices.DeviceCommands.IGetDeviceSymbolicName,AnalogDevices.DeviceCommands.IUploadFirmware,AnalogDevices.DeviceCommands.IGetPacketErrorCheckErrorOccurredStatus,AnalogDevices.DeviceCommands.IPerformSoftPowerDown,AnalogDevices.DeviceCommands.IPerformSoftPowerUp,AnalogDevices.DeviceCommands.IGetThermalShutdownEnabled,AnalogDevices.DeviceCommands.ISetThermalShutdownEnabled,AnalogDevices.DeviceCommands.IGetIsOverTemperature,AnalogDevices.DeviceCommands.IGetDacChannelDataSource,AnalogDevices.DeviceCommands.ISetDacChannelDataSource,AnalogDevices.DeviceCommands.ISetDacChannelDataSourceAllChannels,AnalogDevices.DeviceCommands.ISetDacChannelOffset,AnalogDevices.DeviceCommands.IGetDacChannelOffset,AnalogDevices.DeviceCommands.ISetDacChannelGain,AnalogDevices.DeviceCommands.IGetDacChannelGain,AnalogDevices.DeviceCommands.IGetDacChannelDataValueA,AnalogDevices.DeviceCommands.ISetDacChannelDataValueA,AnalogDevices.DeviceCommands.IGetDacChannelDataValueB,AnalogDevices.DeviceCommands.ISetDacChannelDataValueB,AnalogDevices.DeviceCommands.ISetOffsetDAC0,AnalogDevices.DeviceCommands.ISetOffsetDAC1,AnalogDevices.DeviceCommands.IReadbackOFS0Register,AnalogDevices.DeviceCommands.IReadbackOFS1Register,AnalogDevices.DeviceCommands.ISetCLRPinLow,AnalogDevices.DeviceCommands.ISetCLRPinHigh,AnalogDevices.DeviceCommands.ISetRESETPinLow,AnalogDevices.DeviceCommands.ISetRESETPinHigh,AnalogDevices.DeviceCommands.ISetLDACPinHigh,AnalogDevices.DeviceCommands.ISetLDACPinLow,AnalogDevices.DeviceCommands.IPulseLDACPin,AnalogDevices.DeviceCommands.IToggleReset)")]
