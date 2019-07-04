@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<SimSupportModuleRegistry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SimSupportModules>
-    <Module>F4Utils.SimSupport.Falcon4SimSupportModule, F4Utils.SimSupport, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null</Module>
-  </SimSupportModules>
-</SimSupportModuleRegistry>

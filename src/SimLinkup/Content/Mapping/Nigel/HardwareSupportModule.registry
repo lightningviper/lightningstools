@@ -30,7 +30,6 @@
     <Module>SimLinkup.HardwareSupport.AMI.AMI900278002HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Gould.GouldHS070D51341HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101079HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
-    <!--<Module>SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
     <!--<Module>SimLinkup.HardwareSupport.Westin.Westin521993HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
     <Module>SimLinkup.HardwareSupport.Henk.ADI.HenkF16ADISupportBoardHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Henk.SDI.HenkSDIHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>

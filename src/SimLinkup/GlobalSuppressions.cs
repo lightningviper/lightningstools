@@ -43,12 +43,8 @@
     SuppressMessage("Design", "CC0004:Catch block cannot be empty", Justification = "<Pending>", Scope = "member",
         Target =
             "~M:SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule.UnregisterForInputEvents(Phcc.Device,Phcc.AnalogInputChangedEventHandler,Phcc.DigitalInputChangedEventHandler,Phcc.I2CDataReceivedEventHandler)")]
-[assembly:
-    SuppressMessage("Design", "CC0004:Catch block cannot be empty", Justification = "<Pending>", Scope = "member",
-        Target = "~M:SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.CloseSerialPortConnection")]
-[assembly:
-    SuppressMessage("Design", "CC0004:Catch block cannot be empty", Justification = "<Pending>", Scope = "member",
-        Target = "~M:SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.Dispose(System.Boolean)")]
+
+
 [assembly:
     SuppressMessage("Design", "CC0004:Catch block cannot be empty", Justification = "<Pending>", Scope = "member",
         Target = "~M:SimLinkup.HardwareSupport.Simtek.Simtek100207HardwareSupportModule.UnregisterForInputEvents")]
@@ -472,16 +468,7 @@
 [assembly:
     SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "type",
         Target = "~T:SimLinkup.UI.frmOptions")]
-[assembly:
-    SuppressMessage("Potential Code Quality Issues",
-        "RECS0022:A catch clause that catches System.Exception and has an empty body", Justification = "<Pending>",
-        Scope = "member",
-        Target = "~M:SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.CloseSerialPortConnection")]
-[assembly:
-    SuppressMessage("Potential Code Quality Issues",
-        "RECS0022:A catch clause that catches System.Exception and has an empty body", Justification = "<Pending>",
-        Scope = "member",
-        Target = "~M:SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.Dispose(System.Boolean)")]
+
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sim", Scope = "namespace", Target = "SimLinkup")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "AMI", Scope = "namespace", Target = "SimLinkup.HardwareSupport.AMI")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sim", Scope = "namespace", Target = "SimLinkup.HardwareSupport.AMI")]
@@ -510,7 +497,6 @@
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sim", Scope = "namespace", Target = "SimLinkup.HardwareSupport.Malwin")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Phcc", Scope = "namespace", Target = "SimLinkup.HardwareSupport.Phcc")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sim", Scope = "namespace", Target = "SimLinkup.HardwareSupport.Phcc")]
-[assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sim", Scope = "namespace", Target = "SimLinkup.HardwareSupport.Powell")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sim", Scope = "namespace", Target = "SimLinkup.HardwareSupport.Simtek")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Simtek", Scope = "namespace", Target = "SimLinkup.HardwareSupport.Simtek")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "RWR", Scope = "namespace", Target = "SimLinkup.HardwareSupport.TeensyRWR")]
@@ -629,10 +615,6 @@
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "PWM", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.SDI.OutputChannelsConfig.#DIG_PWM_7")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "OUT", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.SDI.OutputChannelsConfig.#PWM_OUT")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "PWM", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.SDI.OutputChannelsConfig.#PWM_OUT")]
-[assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ALR", Scope = "type", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule")]
-[assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ALR", Scope = "type", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModuleConfig")]
-[assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "COM", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModuleConfig.#COMPort")]
-[assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ID", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModuleConfig.#DeviceID")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Hg", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100285HardwareSupportModuleConfig.#MinBaroPressureInHg")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Hg", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100285HardwareSupportModuleConfig.#MaxBaroPressureInHg")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "RWR", Scope = "type", Target = "SimLinkup.HardwareSupport.TeensyRWR.TeensyRWRHardwareSupportModule")]
@@ -790,11 +772,6 @@
 [assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule.#SendCalibrations(Phcc.Device,Phcc.DeviceManager.Config.Motherboard)")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule.#StartTalking(Phcc.Device)")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule.#StopTalking(Phcc.Device)")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#GetInstances()")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#CloseSerialPortConnection()")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#Dispose(System.Boolean)")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#EnsureSerialPortConnected()")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#SendCommandList(System.Collections.Generic.IEnumerable`1<SimLinkup.HardwareSupport.Powell.RWRCommand>)")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100285HardwareSupportModule.#LoadConfig()")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100294HardwareSupportModule.#LoadConfig()")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "SimLinkup.HardwareSupport.TeensyRWR.TeensyRWRHardwareSupportModule.#GetInstances()")]
@@ -884,16 +861,6 @@
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.Byte.ConvertToDrawPoints(System.String)", Scope = "member", Target = "SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule.#DOAAircoreOutputSignalChanged(System.Object,Common.MacroProgramming.AnalogSignalChangedEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.Byte.ConvertToDrawPoints(System.String)", Scope = "member", Target = "SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule.#DOAAnOut1SignalChanged(System.Object,Common.MacroProgramming.AnalogSignalChangedEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.Byte.ConvertToDrawPoints(System.String)", Scope = "member", Target = "SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule.#DOAStepperSignalChanged(System.Object,Common.MacroProgramming.AnalogSignalChangedEventArgs)")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.Int32.ToString", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.FalconRWRSymbolTranslator.#Translate(SimLinkup.HardwareSupport.Powell.FalconRWRSymbol,System.Double,System.Boolean,System.Boolean)")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.Int32.ConvertToDrawPoints(System.String)", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.FalconRWRSymbolTranslator.#Translate(SimLinkup.HardwareSupport.Powell.FalconRWRSymbol,System.Double,System.Boolean,System.Boolean)")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#_serialPort_ErrorReceived(System.Object,System.IO.Ports.SerialErrorReceivedEventArgs)")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "log4net.ILog.ErrorFormat(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#_serialPort_ErrorReceived(System.Object,System.IO.Ports.SerialErrorReceivedEventArgs)")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#BytesToString(System.Byte[],System.Int32,System.Int32)")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "log4net.ILog.DebugFormat(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#CloseSerialPortConnection()")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#CreateInputSignals(Common.MacroProgramming.AnalogSignal[]&,Common.MacroProgramming.DigitalSignal[]&)")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#EnsureSerialPortConnected()")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "log4net.ILog.DebugFormat(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#EnsureSerialPortConnected()")]
-[assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "log4net.ILog.DebugFormat(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#SendCommandList(System.Collections.Generic.IEnumerable`1<SimLinkup.HardwareSupport.Powell.RWRCommand>)")]
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object,System.Object)", Scope = "member", Target = "SimLinkup.HardwareSupport.TeensyRWR.TeensyRWRHardwareSupportModule.#_serialPort_ErrorReceived(System.Object,System.IO.Ports.SerialErrorReceivedEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "log4net.ILog.ErrorFormat(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.TeensyRWR.TeensyRWRHardwareSupportModule.#_serialPort_ErrorReceived(System.Object,System.IO.Ports.SerialErrorReceivedEventArgs)")]
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "log4net.ILog.DebugFormat(System.String,System.Object[])", Scope = "member", Target = "SimLinkup.HardwareSupport.TeensyRWR.TeensyRWRHardwareSupportModule.#CloseSerialPortConnection()")]
@@ -912,8 +879,6 @@
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.SDI.HenkSDIHardwareSupportModule.#ConfigurePhccConnection()")]
 [assembly: SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.SDI.HenkSDIHardwareSupportModule.#ConfigureUSBConnection()")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.TeensyRWR.TeensyRWRHardwareSupportModule.#GetInstrumentState()")]
-[assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Scope = "type", Target = "SimLinkup.HardwareSupport.Powell.FalconRWRSymbolTranslator")]
-[assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.FalconRWRSymbolTranslator.#Translate(SimLinkup.HardwareSupport.Powell.FalconRWRSymbol,System.Double,System.Boolean,System.Boolean)")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100194HardwareSupportModule.#UpdateAirspeedOutputValues()")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100194HardwareSupportModule.#UpdateMachOutputValues()")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek101082HardwareSupportModule.#UpdateAirspeedOutputValues()")]
@@ -925,7 +890,6 @@
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.HSI.HenkF16HSIBoard1HardwareSupportModule.#ConfigureStatorOffsets()")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.SDI.HenkSDIHardwareSupportModule.#OutputChannelInitialValue(Henkie.SDI.OutputChannels)")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.Henk.SDI.HenkSDIHardwareSupportModule.#OutputChannelMode(Henkie.SDI.OutputChannels)")]
-[assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.FalconRWRSymbolTranslator.#Translate(SimLinkup.HardwareSupport.Powell.FalconRWRSymbol,System.Double,System.Boolean,System.Boolean)")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100194HardwareSupportModule.#UpdateAirspeedOutputValues()")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100194HardwareSupportModule.#UpdateMachOutputValues()")]
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100207HardwareSupportModule.#UpdateOutputValues()")]
@@ -960,7 +924,6 @@
 [assembly: SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "SimLinkup.HardwareSupport.Lilbern.Lilbern3239HardwareSupportModule.#.ctor()")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "SimLinkup.HardwareSupport.Malwin.Malwin19581HardwareSupportModule.#.ctor()")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "SimLinkup.HardwareSupport.Malwin.Malwin246102HardwareSupportModule.#.ctor()")]
-[assembly: SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#.ctor(System.String,System.String,System.UInt32,System.UInt32)")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100194HardwareSupportModule.#.ctor()")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100207HardwareSupportModule.#.ctor()")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "SimLinkup.HardwareSupport.Simtek.Simtek100216HardwareSupportModule.#.ctor()")]
@@ -1057,7 +1020,6 @@
 [assembly: SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "Sim", Scope = "member", Target = "SimLinkup.UI.frmOptions.#InitializeComponent()")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "HelpAbout", Scope = "member", Target = "SimLinkup.UI.HelpAbout.#InitializeComponent()")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly", Scope = "member", Target = "SimLinkup.HardwareSupport.TeensyRWR.TeensyRWRHardwareSupportModule.#EnsureSerialPortConnected()")]
-[assembly: SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly", Scope = "member", Target = "SimLinkup.HardwareSupport.Powell.PowellIP1310ALRHardwareSupportModule.#EnsureSerialPortConnected()")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1824:MarkAssembliesWithNeutralResourcesLanguage")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes", Scope = "member", Target = "SimLinkup.PacketEncoding.COBS.#CheckRange(System.Int32,System.Int32,System.Byte[])")]
 [assembly: SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes", Scope = "member", Target = "SimLinkup.PacketEncoding.COBS.#Decode(System.Byte[],System.Int32,System.Int32,System.Collections.Generic.List`1<System.Byte[]>)")]

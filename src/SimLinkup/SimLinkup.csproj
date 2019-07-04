@@ -121,7 +121,7 @@
       <DependentUpon>ModuleList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\SignalsView.resx">
-      <DependentUpon>SignalsView.cs</DependentUpon> 
+      <DependentUpon>SignalsView.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HardwareSupport\AMI\AMI900158001HardwareSupportModule.cs" />
@@ -148,15 +148,6 @@
     <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
-    <Compile Include="HardwareSupport\Powell\DrawBlipsCommand.cs" />
-    <Compile Include="HardwareSupport\Powell\FalconRWRSymbol.cs" />
-    <Compile Include="HardwareSupport\Powell\FalconRWRSymbolTranslator.cs" />
-    <Compile Include="HardwareSupport\Powell\PowellIP1310ALRHardwareSupportModule.cs" />
-    <Compile Include="HardwareSupport\Powell\PowellIP1310ALRHardwareSupportModuleConfig.cs" />
-    <Compile Include="HardwareSupport\Powell\Blip.cs" />
-    <Compile Include="HardwareSupport\Powell\ResetCommand.cs" />
-    <Compile Include="HardwareSupport\Powell\RWRCommand.cs" />
-    <Compile Include="HardwareSupport\Powell\Symbols.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModuleConfig.cs" />
@@ -437,19 +428,6 @@
     <Content Include="Content\Mapping\HenkHSI\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\PowellRWR\PowellIP1310ALRazimuthindicator.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\PowellRWR\PowellIP1310ALRHardwareSupportModule.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\PowellRWR\HardwareSupportModule.registry">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\PowellRWR\SimSupportModule.registry">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -496,9 +474,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Malwin246102CabinPressureAltimeter.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\PowellIP1310ALRazimuthindicator.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping.disabled">
@@ -560,9 +535,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <Content Include="Content\Mapping\Nigel\PowellIP1310ALRHardwareSupportModule.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
