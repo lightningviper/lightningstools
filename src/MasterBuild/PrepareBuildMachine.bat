@@ -10,6 +10,9 @@ CALL %MASTERBUILDDIR%Clone.bat
 REM Install Visual Studio 2019 Community Edition
 CALL %MASTERBUILDDIR%InstallVisualStudio2019CommunityEdition.bat
 
+REM Install Windows 10 SDK
+CALL %MASTERBUILDDIR%InstallWindowsSDK.bat
+
 REM Install Bootstrappers
 CALL %MASTERBUILDDIR%InstallBootstrappers.bat
 
@@ -25,9 +28,6 @@ CALL %MASTERBUILDDIR%SetRegCapCompatibilityModeFlags.bat
 
 REM Install TortoiseGit
 CALL %MASTERBUILDDIR%InstallTortoiseGit.bat
-
-REM Install Windows 10 SDK
-CALL %MASTERBUILDDIR%InstallWindowsSDK.bat
 
 REM Restore NuGet packages
 CALL %MASTERBUILDDIR%RestoreAllPackages.bat

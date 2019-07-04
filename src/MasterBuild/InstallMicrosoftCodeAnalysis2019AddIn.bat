@@ -10,7 +10,7 @@ for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -pr
   set InstanceId=%%i
 )
 
-IF NOT EXIST "%MASTERBUILDDIR%Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix" bitsadmin /transfer VisualStudio2017InstallerProjectsAddIn /dynamic /download /priority HIGH "https://visualstudioplatformteam.gallerycdn.vsassets.io/extensions/visualstudioplatformteam/microsoftcodeanalysis2019/3.0.0.1925803/1557326995287/Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix" "%MASTERBUILDDIR%Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix" 
+IF NOT EXIST "%MASTERBUILDDIR%Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix" bitsadmin /transfer MicrosoftCodeAnalysis2019AddIn /dynamic /download /priority HIGH "https://visualstudioplatformteam.gallerycdn.vsassets.io/extensions/visualstudioplatformteam/microsoftcodeanalysis2019/3.0.0.1925803/1557326995287/Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix" "%MASTERBUILDDIR%Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix" 
 
 
 IF ERRORLEVEL 1 GOTO END

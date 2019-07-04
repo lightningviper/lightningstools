@@ -3,7 +3,7 @@
 IF EXIST "%TEMP%\LightningsToolsInstall" RD /S /Q "%TEMP%\LightningsToolsInstall"
 MKDIR "%TEMP%\LightningsToolsInstall"
 
-IF NOT EXIST "%TEMP%\LightningsToolsInstall\InstallGitForWindows.bat" bitsadmin /transfer GitForWindows /dynamic /download /priority HIGH https://raw.githubusercontent.com/lightningviper/lightningstools/master/src/MasterBuild/InstallGitForWindows.bat "%TEMP%\LightningsToolsInstall\InstallGitForWindows.bat" 
+IF NOT EXIST "%TEMP%\LightningsToolsInstall\InstallGitForWindows.bat" bitsadmin /transfer InstallGitForWindows.bat /dynamic /download /priority HIGH https://raw.githubusercontent.com/lightningviper/lightningstools/master/src/MasterBuild/InstallGitForWindows.bat "%TEMP%\LightningsToolsInstall\InstallGitForWindows.bat" 
 IF ERRORLEVEL 1 GOTO END
 
 CD "%TEMP%\LightningsToolsInstall"
