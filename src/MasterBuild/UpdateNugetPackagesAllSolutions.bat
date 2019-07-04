@@ -1,9 +1,0 @@
-@ECHO OFF
-:start
-SET MASTERBUILDDIR=%~dp0
-
-FOR /R "%MASTERBUILDDIR%".. %%S IN (*.sln) DO (
-	CALL %MASTERBUILDDIR%UpdateNugetPackages.bat "%%S"
-	IF ERRORLEVEL 1 GOTO END
-)
-:END
