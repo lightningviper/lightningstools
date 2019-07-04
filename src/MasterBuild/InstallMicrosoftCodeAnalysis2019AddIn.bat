@@ -15,7 +15,7 @@ IF NOT EXIST "%MASTERBUILDDIR%Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix" 
 
 IF ERRORLEVEL 1 GOTO END
 ECHO Installing Microsoft Code Analysis 2019 add-in...
-"%InstallDir%\Common7\IDE\VsixInstaller.exe" /quiet "%MASTERBUILDDIR%Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix"
+"%InstallDir%\Common7\IDE\VsixInstaller.exe" /a /q "%MASTERBUILDDIR%Microsoft.CodeAnalysis.FxCopAnalyzers.Setup.vsix"
 IF ERRORLEVEL 1 GOTO END
 
 "%InstallDir%\Common7\IDE\CommonExtensions\Microsoft\VSI\bin\regcap.exe"

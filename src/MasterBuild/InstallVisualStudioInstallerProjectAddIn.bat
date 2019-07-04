@@ -15,7 +15,7 @@ IF ERRORLEVEL 1 GOTO END
 
 IF ERRORLEVEL 1 GOTO END
 ECHO Installing Visual Studio Installer Project add-in...
-"%InstallDir%\Common7\IDE\VsixInstaller.exe" /quiet "%MASTERBUILDDIR%InstallerProjects.vsix"
+"%InstallDir%\Common7\IDE\VsixInstaller.exe" /a /q "%MASTERBUILDDIR%InstallerProjects.vsix"
 IF ERRORLEVEL 1 GOTO END
 
 "%InstallDir%\Common7\IDE\CommonExtensions\Microsoft\VSI\bin\regcap.exe"
