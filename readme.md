@@ -63,7 +63,8 @@ The above command will clone the repository to a local folder, `\lightningstools
 The following prerequisites will be installed:  
 - Git for Windows
 - Visual Studio 2019 Community Edition  
-- Visual Studio Installer Project add-in  
+- Visual Studio Installer Project Add-In  
+- Microsoft Code Analysis 2019 Add-In 
 - .NET Framework 4.7.2 (required by all projects)  
 - Command-line Build tools
 - Windows 10 SDK version 10.0.10586.0 
