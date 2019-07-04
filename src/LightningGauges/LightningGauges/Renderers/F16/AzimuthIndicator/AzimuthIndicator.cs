@@ -21,7 +21,7 @@ namespace LightningGauges.Renderers.F16.AzimuthIndicator
         private const string RWR_BACKGROUND_IP1310ALR_IMAGE_FILENAME = "rwr.bmp";
         private const string RWR_BACKGROUND_HAF_IMAGE_FILENAME = "rwr2.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private const int RWR_SYMBOL_SUBIMAGE_WIDTH_PIXELS = 32;
 
@@ -52,8 +52,8 @@ namespace LightningGauges.Renderers.F16.AzimuthIndicator
         {
             if (_imagesLoaded) return;
 
-            _backgroundIP1310ALR = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + RWR_BACKGROUND_IP1310ALR_IMAGE_FILENAME);
-            _backgroundHAF = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + RWR_BACKGROUND_HAF_IMAGE_FILENAME);
+            _backgroundIP1310ALR = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + RWR_BACKGROUND_IP1310ALR_IMAGE_FILENAME);
+            _backgroundHAF = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + RWR_BACKGROUND_HAF_IMAGE_FILENAME);
 
             _imagesLoaded = true;
         }

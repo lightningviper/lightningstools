@@ -22,7 +22,7 @@ namespace LightningGauges.Renderers.F16
         private const string AOAI_AOA_HIGH_IMAGE_FILENAME = "aoaup.bmp";
         private const string AOAI_AOA_HIGH_MASK_FILENAME = "aoaup_mask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -37,22 +37,22 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_BACKGROUND_MASK_FILENAME);
             }
             if (_aoaLow == null)
             {
-                _aoaLow = ImageMaskPair.CreateFromFiles(
+                _aoaLow = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_AOA_LOW_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_AOA_LOW_MASK_FILENAME);
             }
             if (_aoaOn == null)
             {
-                _aoaOn = ImageMaskPair.CreateFromFiles(
+                _aoaOn = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_AOA_ON_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_AOA_ON_RANGE_MASK_FILENAME);
             }
             if (_aoaHigh == null)
             {
-                _aoaHigh = ImageMaskPair.CreateFromFiles(
+                _aoaHigh = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_AOA_HIGH_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOAI_AOA_HIGH_MASK_FILENAME);
             }
             _imagesLoaded = true;

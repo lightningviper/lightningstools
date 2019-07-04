@@ -207,6 +207,7 @@
     <Compile Include="Renderers\F16\ISIS\TopRectangleRenderer.cs" />
     <Compile Include="Renderers\F16\ISIS\ZenithNadirSymbolRenderer.cs" />
     <Compile Include="Renderers\F16\IVerticalVelocityIndicator.cs" />
+    <Compile Include="ResourceUtil.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -323,660 +324,224 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\accelerometerface.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\accelerometerneed.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\accelerometerneed2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\accelerometerneed_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adi.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiarrows.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiarrows_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiaux.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiball.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\isis_ilsdot.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiflags_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adigs.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adigsflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adihorbar.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adihorbar_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiloc.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adioff.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiplane.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiplane_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adislip.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adislip_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiverbar.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adiverbar_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\adi_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\alt.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\alt2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\alt2noflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\alt2_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\altarrow.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\altarrow_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\altnoflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\altten.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\alttenthou.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\altthou.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\alt_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoa.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoadn.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoadn_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoaflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoaflag_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoanum.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoaon.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoaon_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoastrip.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoastrip_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoaup.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoaup_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\aoa_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\arrowrpm.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\arrowrpmmask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\arrow_asi.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\arrow_asimask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\arrow_rpm.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\arrow_rpmmask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\asi.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\asiinner.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\asiinnermask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\asispeed.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\asispeed_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadi.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadiball.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadiflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadiflag_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadiplane.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadiplane_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadislip.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadislip_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\buadi_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cabinpress.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cabprneed.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cabprneed_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau1.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau10.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau11.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau12.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau13.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau14.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau15.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau16.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau17.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau18.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau19.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau20.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau21.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau22.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau23.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau24.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau25.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau26.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau27.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau29.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau3.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau4.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau5.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau6.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau7.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau8.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cau9.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\caution.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\caution_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\cmds.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\compass.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\compasstape.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\compass_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\compneedle.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\compneedle_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ded.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ded_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ehsioff.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ehsioff_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ehsipls.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ehsirangeflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ehsirangeflag_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ehsitcn.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\epu.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ffdig.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ffnum.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ffnumk.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ffnumkk.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\Font1.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ftit.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ftit2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuel.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelalarrow.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelalarrowd.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelalarrowd_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelalarrow_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelflow.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelflow_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelfrarrow.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelfrarrowd.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelfrarrowd_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuelfrarrow_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\fuel_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\gear.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\gear_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsi.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsibeac.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsibeac_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsicdflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsicdflag_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsicomp.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsicomp_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsicorsdev.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsicorsdev_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsiheadref.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsiheadref_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsiinner.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsiinner_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsiplane.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsiplane_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsirangeflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsirangeflag_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsitofalse.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsitofalse_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsitotrue.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsitotrue_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hsi_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hyd.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hydneedle.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\hydneedle_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ind2disc.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ind2disc_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ind2nws.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ind2nws_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ind2ready.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ind2ready_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\index.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\index2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\index2_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\index_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\leftgr.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\leftgr_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\normal.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\nosegr.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\nosegr_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\noz.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\noz2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\oil.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\oil2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\pitchtrim.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\pitchtrimneedle.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\pitchtrimneedle_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rightgr.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rightgr_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rolltrim.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rolltrimneed.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rolltrimneed_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rpm.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rpm2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rwr.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rwr2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rwrac1.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rwrac2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\sbclosed.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\sbclosed2.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\sbopen.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\speedbrake.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\speedbrake_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttdback.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttdcomp.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttddn.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttdsep.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttdsepi.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttdsepi_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttdsep_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\ttdup.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvi.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvieuro.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvieuroflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvieuroflag_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vviflag.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vviflag_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvinum.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvistrip.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvistrip_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\vvi_mask.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="images\accelerometerface.bmp" />
+    <EmbeddedResource Include="images\accelerometerneed.bmp" />
+    <EmbeddedResource Include="images\accelerometerneed2.bmp" />
+    <EmbeddedResource Include="images\accelerometerneed_mask.bmp" />
+    <EmbeddedResource Include="images\adi.bmp" />
+    <EmbeddedResource Include="images\adiarrows.bmp" />
+    <EmbeddedResource Include="images\adiarrows_mask.bmp" />
+    <EmbeddedResource Include="images\adiaux.bmp" />
+    <EmbeddedResource Include="images\adiball.bmp" />
+    <EmbeddedResource Include="images\isis_ilsdot.bmp" />
+    <EmbeddedResource Include="images\adiflags_mask.bmp" />
+    <EmbeddedResource Include="images\adigs.bmp" />
+    <EmbeddedResource Include="images\adigsflag.bmp" />
+    <EmbeddedResource Include="images\adihorbar.bmp" />
+    <EmbeddedResource Include="images\adihorbar_mask.bmp" />
+    <EmbeddedResource Include="images\adiloc.bmp" />
+    <EmbeddedResource Include="images\adioff.bmp" />
+    <EmbeddedResource Include="images\adiplane.bmp" />
+    <EmbeddedResource Include="images\adiplane_mask.bmp" />
+    <EmbeddedResource Include="images\adislip.bmp" />
+    <EmbeddedResource Include="images\adislip_mask.bmp" />
+    <EmbeddedResource Include="images\adiverbar.bmp" />
+    <EmbeddedResource Include="images\adiverbar_mask.bmp" />
+    <EmbeddedResource Include="images\adi_mask.bmp" />
+    <EmbeddedResource Include="images\alt.bmp" />
+    <EmbeddedResource Include="images\alt2.bmp" />
+    <EmbeddedResource Include="images\alt2noflag.bmp" />
+    <EmbeddedResource Include="images\alt2_mask.bmp" />
+    <EmbeddedResource Include="images\altarrow.bmp" />
+    <EmbeddedResource Include="images\altarrow_mask.bmp" />
+    <EmbeddedResource Include="images\altnoflag.bmp" />
+    <EmbeddedResource Include="images\altten.bmp" />
+    <EmbeddedResource Include="images\alttenthou.bmp" />
+    <EmbeddedResource Include="images\altthou.bmp" />
+    <EmbeddedResource Include="images\alt_mask.bmp" />
+    <EmbeddedResource Include="images\aoa.bmp" />
+    <EmbeddedResource Include="images\aoadn.bmp" />
+    <EmbeddedResource Include="images\aoadn_mask.bmp" />
+    <EmbeddedResource Include="images\aoaflag.bmp" />
+    <EmbeddedResource Include="images\aoaflag_mask.bmp" />
+    <EmbeddedResource Include="images\aoanum.bmp" />
+    <EmbeddedResource Include="images\aoaon.bmp" />
+    <EmbeddedResource Include="images\aoaon_mask.bmp" />
+    <EmbeddedResource Include="images\aoastrip.bmp" />
+    <EmbeddedResource Include="images\aoastrip_mask.bmp" />
+    <EmbeddedResource Include="images\aoaup.bmp" />
+    <EmbeddedResource Include="images\aoaup_mask.bmp" />
+    <EmbeddedResource Include="images\aoa_mask.bmp" />
+    <EmbeddedResource Include="images\arrowrpm.bmp" />
+    <EmbeddedResource Include="images\arrowrpmmask.bmp" />
+    <EmbeddedResource Include="images\arrow_asi.bmp" />
+    <EmbeddedResource Include="images\arrow_asimask.bmp" />
+    <EmbeddedResource Include="images\arrow_rpm.bmp" />
+    <EmbeddedResource Include="images\arrow_rpmmask.bmp" />
+    <EmbeddedResource Include="images\asi.bmp" />
+    <EmbeddedResource Include="images\asiinner.bmp" />
+    <EmbeddedResource Include="images\asiinnermask.bmp" />
+    <EmbeddedResource Include="images\asispeed.bmp" />
+    <EmbeddedResource Include="images\asispeed_mask.bmp" />
+    <EmbeddedResource Include="images\buadi.bmp" />
+    <EmbeddedResource Include="images\buadiball.bmp" />
+    <EmbeddedResource Include="images\buadiflag.bmp" />
+    <EmbeddedResource Include="images\buadiflag_mask.bmp" />
+    <EmbeddedResource Include="images\buadiplane.bmp" />
+    <EmbeddedResource Include="images\buadiplane_mask.bmp" />
+    <EmbeddedResource Include="images\buadislip.bmp" />
+    <EmbeddedResource Include="images\buadislip_mask.bmp" />
+    <EmbeddedResource Include="images\buadi_mask.bmp" />
+    <EmbeddedResource Include="images\cabinpress.bmp" />
+    <EmbeddedResource Include="images\cabprneed.bmp" />
+    <EmbeddedResource Include="images\cabprneed_mask.bmp" />
+    <EmbeddedResource Include="images\cau1.bmp" />
+    <EmbeddedResource Include="images\cau10.bmp" />
+    <EmbeddedResource Include="images\cau11.bmp" />
+    <EmbeddedResource Include="images\cau12.bmp" />
+    <EmbeddedResource Include="images\cau13.bmp" />
+    <EmbeddedResource Include="images\cau14.bmp" />
+    <EmbeddedResource Include="images\cau15.bmp" />
+    <EmbeddedResource Include="images\cau16.bmp" />
+    <EmbeddedResource Include="images\cau17.bmp" />
+    <EmbeddedResource Include="images\cau18.bmp" />
+    <EmbeddedResource Include="images\cau19.bmp" />
+    <EmbeddedResource Include="images\cau2.bmp" />
+    <EmbeddedResource Include="images\cau20.bmp" />
+    <EmbeddedResource Include="images\cau21.bmp" />
+    <EmbeddedResource Include="images\cau22.bmp" />
+    <EmbeddedResource Include="images\cau23.bmp" />
+    <EmbeddedResource Include="images\cau24.bmp" />
+    <EmbeddedResource Include="images\cau25.bmp" />
+    <EmbeddedResource Include="images\cau26.bmp" />
+    <EmbeddedResource Include="images\cau27.bmp" />
+    <EmbeddedResource Include="images\cau29.bmp" />
+    <EmbeddedResource Include="images\cau3.bmp" />
+    <EmbeddedResource Include="images\cau4.bmp" />
+    <EmbeddedResource Include="images\cau5.bmp" />
+    <EmbeddedResource Include="images\cau6.bmp" />
+    <EmbeddedResource Include="images\cau7.bmp" />
+    <EmbeddedResource Include="images\cau8.bmp" />
+    <EmbeddedResource Include="images\cau9.bmp" />
+    <EmbeddedResource Include="images\caution.bmp" />
+    <EmbeddedResource Include="images\caution_mask.bmp" />
+    <EmbeddedResource Include="images\cmds.bmp" />
+    <EmbeddedResource Include="images\compass.bmp" />
+    <EmbeddedResource Include="images\compasstape.bmp" />
+    <EmbeddedResource Include="images\compass_mask.bmp" />
+    <EmbeddedResource Include="images\compneedle.bmp" />
+    <EmbeddedResource Include="images\compneedle_mask.bmp" />
+    <EmbeddedResource Include="images\ded.bmp" />
+    <EmbeddedResource Include="images\ded_mask.bmp" />
+    <EmbeddedResource Include="images\ehsioff.bmp" />
+    <EmbeddedResource Include="images\ehsioff_mask.bmp" />
+    <EmbeddedResource Include="images\ehsipls.bmp" />
+    <EmbeddedResource Include="images\ehsirangeflag.bmp" />
+    <EmbeddedResource Include="images\ehsirangeflag_mask.bmp" />
+    <EmbeddedResource Include="images\ehsitcn.bmp" />
+    <EmbeddedResource Include="images\epu.bmp" />
+    <EmbeddedResource Include="images\ffdig.bmp" />
+    <EmbeddedResource Include="images\ffnum.bmp" />
+    <EmbeddedResource Include="images\ffnumk.bmp" />
+    <EmbeddedResource Include="images\ffnumkk.bmp" />
+    <EmbeddedResource Include="images\Font1.bmp" />
+    <EmbeddedResource Include="images\ftit.bmp" />
+    <EmbeddedResource Include="images\ftit2.bmp" />
+    <EmbeddedResource Include="images\fuel.bmp" />
+    <EmbeddedResource Include="images\fuelalarrow.bmp" />
+    <EmbeddedResource Include="images\fuelalarrowd.bmp" />
+    <EmbeddedResource Include="images\fuelalarrowd_mask.bmp" />
+    <EmbeddedResource Include="images\fuelalarrow_mask.bmp" />
+    <EmbeddedResource Include="images\fuelflow.bmp" />
+    <EmbeddedResource Include="images\fuelflow_mask.bmp" />
+    <EmbeddedResource Include="images\fuelfrarrow.bmp" />
+    <EmbeddedResource Include="images\fuelfrarrowd.bmp" />
+    <EmbeddedResource Include="images\fuelfrarrowd_mask.bmp" />
+    <EmbeddedResource Include="images\fuelfrarrow_mask.bmp" />
+    <EmbeddedResource Include="images\fuel_mask.bmp" />
+    <EmbeddedResource Include="images\gear.bmp" />
+    <EmbeddedResource Include="images\gear_mask.bmp" />
+    <EmbeddedResource Include="images\hsi.bmp" />
+    <EmbeddedResource Include="images\hsibeac.bmp" />
+    <EmbeddedResource Include="images\hsibeac_mask.bmp" />
+    <EmbeddedResource Include="images\hsicdflag.bmp" />
+    <EmbeddedResource Include="images\hsicdflag_mask.bmp" />
+    <EmbeddedResource Include="images\hsicomp.bmp" />
+    <EmbeddedResource Include="images\hsicomp_mask.bmp" />
+    <EmbeddedResource Include="images\hsicorsdev.bmp" />
+    <EmbeddedResource Include="images\hsicorsdev_mask.bmp" />
+    <EmbeddedResource Include="images\hsiheadref.bmp" />
+    <EmbeddedResource Include="images\hsiheadref_mask.bmp" />
+    <EmbeddedResource Include="images\hsiinner.bmp" />
+    <EmbeddedResource Include="images\hsiinner_mask.bmp" />
+    <EmbeddedResource Include="images\hsiplane.bmp" />
+    <EmbeddedResource Include="images\hsiplane_mask.bmp" />
+    <EmbeddedResource Include="images\hsirangeflag.bmp" />
+    <EmbeddedResource Include="images\hsirangeflag_mask.bmp" />
+    <EmbeddedResource Include="images\hsitofalse.bmp" />
+    <EmbeddedResource Include="images\hsitofalse_mask.bmp" />
+    <EmbeddedResource Include="images\hsitotrue.bmp" />
+    <EmbeddedResource Include="images\hsitotrue_mask.bmp" />
+    <EmbeddedResource Include="images\hsi_mask.bmp" />
+    <EmbeddedResource Include="images\hyd.bmp" />
+    <EmbeddedResource Include="images\hydneedle.bmp" />
+    <EmbeddedResource Include="images\hydneedle_mask.bmp" />
+    <EmbeddedResource Include="images\ind2disc.bmp" />
+    <EmbeddedResource Include="images\ind2disc_mask.bmp" />
+    <EmbeddedResource Include="images\ind2nws.bmp" />
+    <EmbeddedResource Include="images\ind2nws_mask.bmp" />
+    <EmbeddedResource Include="images\ind2ready.bmp" />
+    <EmbeddedResource Include="images\ind2ready_mask.bmp" />
+    <EmbeddedResource Include="images\index.bmp" />
+    <EmbeddedResource Include="images\index2.bmp" />
+    <EmbeddedResource Include="images\index2_mask.bmp" />
+    <EmbeddedResource Include="images\index_mask.bmp" />
+    <EmbeddedResource Include="images\leftgr.bmp" />
+    <EmbeddedResource Include="images\leftgr_mask.bmp" />
+    <EmbeddedResource Include="images\normal.bmp" />
+    <EmbeddedResource Include="images\nosegr.bmp" />
+    <EmbeddedResource Include="images\nosegr_mask.bmp" />
+    <EmbeddedResource Include="images\noz.bmp" />
+    <EmbeddedResource Include="images\noz2.bmp" />
+    <EmbeddedResource Include="images\oil.bmp" />
+    <EmbeddedResource Include="images\oil2.bmp" />
+    <EmbeddedResource Include="images\pitchtrim.bmp" />
+    <EmbeddedResource Include="images\pitchtrimneedle.bmp" />
+    <EmbeddedResource Include="images\pitchtrimneedle_mask.bmp" />
+    <EmbeddedResource Include="images\rightgr.bmp" />
+    <EmbeddedResource Include="images\rightgr_mask.bmp" />
+    <EmbeddedResource Include="images\rolltrim.bmp" />
+    <EmbeddedResource Include="images\rolltrimneed.bmp" />
+    <EmbeddedResource Include="images\rolltrimneed_mask.bmp" />
+    <EmbeddedResource Include="images\rpm.bmp" />
+    <EmbeddedResource Include="images\rpm2.bmp" />
+    <EmbeddedResource Include="images\rwr.bmp" />
+    <EmbeddedResource Include="images\rwr2.bmp" />
+    <EmbeddedResource Include="images\rwrac1.bmp" />
+    <EmbeddedResource Include="images\rwrac2.bmp" />
+    <EmbeddedResource Include="images\sbclosed.bmp" />
+    <EmbeddedResource Include="images\sbclosed2.bmp" />
+    <EmbeddedResource Include="images\sbopen.bmp" />
+    <EmbeddedResource Include="images\speedbrake.bmp" />
+    <EmbeddedResource Include="images\speedbrake_mask.bmp" />
+    <EmbeddedResource Include="images\ttdback.bmp" />
+    <EmbeddedResource Include="images\ttdcomp.bmp" />
+    <EmbeddedResource Include="images\ttddn.bmp" />
+    <EmbeddedResource Include="images\ttdsep.bmp" />
+    <EmbeddedResource Include="images\ttdsepi.bmp" />
+    <EmbeddedResource Include="images\ttdsepi_mask.bmp" />
+    <EmbeddedResource Include="images\ttdsep_mask.bmp" />
+    <EmbeddedResource Include="images\ttdup.bmp" />
+    <EmbeddedResource Include="images\vvi.bmp" />
+    <EmbeddedResource Include="images\vvieuro.bmp" />
+    <EmbeddedResource Include="images\vvieuroflag.bmp" />
+    <EmbeddedResource Include="images\vvieuroflag_mask.bmp" />
+    <EmbeddedResource Include="images\vviflag.bmp" />
+    <EmbeddedResource Include="images\vviflag_mask.bmp" />
+    <EmbeddedResource Include="images\vvinum.bmp" />
+    <EmbeddedResource Include="images\vvistrip.bmp" />
+    <EmbeddedResource Include="images\vvistrip_mask.bmp" />
+    <EmbeddedResource Include="images\vvi_mask.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

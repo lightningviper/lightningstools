@@ -23,7 +23,7 @@ namespace LightningGauges.Renderers.F16
 
         private const string AOA_NUMBER_TAPE_IMAGE_FILENAME = "aoanum.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -38,20 +38,20 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_BACKGROUND_MASK_FILENAME);
             }
             if (_offFlag == null)
             {
-                _offFlag = ImageMaskPair.CreateFromFiles(
+                _offFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_OFF_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_OFF_FLAG_MASK_FILENAME);
             }
             if (_indicatorLine == null)
             {
-                _indicatorLine = ImageMaskPair.CreateFromFiles(
+                _indicatorLine = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_INDICATOR_LINE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_INDICATOR_LINE_MASK_FILENAME);
             }
-            if (_numberTape == null) _numberTape = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_NUMBER_TAPE_IMAGE_FILENAME);
+            if (_numberTape == null) _numberTape = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AOA_NUMBER_TAPE_IMAGE_FILENAME);
             _imagesLoaded = true;
         }
 

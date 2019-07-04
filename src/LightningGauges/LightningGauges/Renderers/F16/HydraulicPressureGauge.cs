@@ -19,7 +19,7 @@ namespace LightningGauges.Renderers.F16
         private const string HYD_NEEDLE_IMAGE_FILENAME = "hydneedle.bmp";
         private const string HYD_NEEDLE_MASK_FILENAME = "hydneedle_mask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static Bitmap _background;
         private static ImageMaskPair _needle;
@@ -36,10 +36,10 @@ namespace LightningGauges.Renderers.F16
         {
             lock (_imagesLock)
             {
-                if (_background == null) _background = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HYD_BACKGROUND_IMAGE_FILENAME);
+                if (_background == null) _background = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HYD_BACKGROUND_IMAGE_FILENAME);
                 if (_needle == null)
                 {
-                    _needle = ImageMaskPair.CreateFromFiles(
+                    _needle = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                         IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HYD_NEEDLE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HYD_NEEDLE_MASK_FILENAME);
                     _needle.Use1BitAlpha = true;
                 }

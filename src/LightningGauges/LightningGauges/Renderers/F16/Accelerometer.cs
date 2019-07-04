@@ -20,7 +20,7 @@ namespace LightningGauges.Renderers.F16
         private const string ACCELEROMETER_NEEDLE_MASK_FILENAME = "accelerometerneed_mask.bmp";
         private const string ACCELEROMETER_NEEDLE2_IMAGE_FILENAME = "accelerometerneed2.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME = "images";
 
         private static Bitmap _background;
         private static ImageMaskPair _needle;
@@ -38,16 +38,16 @@ namespace LightningGauges.Renderers.F16
         {
             lock (_imagesLock)
             {
-                if (_background == null) _background = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ACCELEROMETER_BACKGROUND_IMAGE_FILENAME);
+                if (_background == null) _background = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ACCELEROMETER_BACKGROUND_IMAGE_FILENAME);
                 if (_needle == null)
                 {
-                    _needle = ImageMaskPair.CreateFromFiles(
+                    _needle = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                         IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ACCELEROMETER_NEEDLE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ACCELEROMETER_NEEDLE_MASK_FILENAME);
                     _needle.Use1BitAlpha = true;
                 }
                 if (_needle2 == null)
                 {
-                    _needle2 = ImageMaskPair.CreateFromFiles(
+                    _needle2 = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                         IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ACCELEROMETER_NEEDLE2_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ACCELEROMETER_NEEDLE_MASK_FILENAME);
                     _needle2.Use1BitAlpha = true;
                 }

@@ -13,7 +13,7 @@ namespace LightningGauges.Renderers.F16
         private readonly Bitmap[] _invertCharBitmaps = new Bitmap[256];
         private bool _disposed;
 
-        public DEDPFLFont(string fileName) { _font = (Bitmap) Util.LoadBitmapFromFile(fileName); }
+        public DEDPFLFont(string fileName) { _font = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(fileName); }
 
         public void Dispose()
         {

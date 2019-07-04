@@ -17,7 +17,7 @@ namespace LightningGauges.Renderers.F16
         private const string ROLLTRIM_NEEDLE_IMAGE_FILENAME = "rolltrimneed.bmp";
         private const string ROLLTRIM_NEEDLE_MASK_FILENAME = "rolltrimneed_mask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static Bitmap _background;
@@ -28,10 +28,10 @@ namespace LightningGauges.Renderers.F16
 
         private static void LoadImageResources()
         {
-            if (_background == null) _background = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ROLLTRIM_BACKGROUND_IMAGE_FILENAME);
+            if (_background == null) _background = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ROLLTRIM_BACKGROUND_IMAGE_FILENAME);
             if (_needle == null)
             {
-                using (var needleWithMask = ImageMaskPair.CreateFromFiles(
+                using (var needleWithMask = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ROLLTRIM_NEEDLE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ROLLTRIM_NEEDLE_MASK_FILENAME))
                 {
                     needleWithMask.Use1BitAlpha = true;

@@ -40,7 +40,7 @@ namespace LightningGauges.Renderers.F16.HSI
 
         private const string HSI_RANGE_FONT_FILENAME = "font1.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _hsiBackground;
@@ -65,72 +65,72 @@ namespace LightningGauges.Renderers.F16.HSI
         {
             if (_hsiBackground == null)
             {
-                _hsiBackground = ImageMaskPair.CreateFromFiles(
+                _hsiBackground = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_BACKGROUND_MASK_FILENAME);
             }
             if (_hsiBearingToBeaconNeedle == null)
             {
-                _hsiBearingToBeaconNeedle = ImageMaskPair.CreateFromFiles(
+                _hsiBearingToBeaconNeedle = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_BEARING_TO_BEACON_NEEDLE_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_BEARING_TO_BEACON_NEEDLE_MASK_FILENAME);
                 _hsiBearingToBeaconNeedle.Use1BitAlpha = true;
             }
             if (_hsiCDIFlag == null)
             {
-                _hsiCDIFlag = ImageMaskPair.CreateFromFiles(
+                _hsiCDIFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_CDI_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_CDI_FLAG_MASK_FILENAME);
                 _hsiCDIFlag.Use1BitAlpha = true;
             }
             if (_compassRose == null)
             {
-                _compassRose = ImageMaskPair.CreateFromFiles(
+                _compassRose = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_COMPASS_ROSE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_COMPASS_ROSE_MASK_FILENAME);
             }
             if (_hsiCourseDeviationIndicator == null)
             {
-                _hsiCourseDeviationIndicator = ImageMaskPair.CreateFromFiles(
+                _hsiCourseDeviationIndicator = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_COURSE_DEVIATION_INDICATOR_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_COURSE_DEVIATION_INDICATOR_MASK_FILENAME);
                 _hsiCourseDeviationIndicator.Use1BitAlpha = true;
             }
             if (_hsiHeadingBug == null)
             {
-                _hsiHeadingBug = ImageMaskPair.CreateFromFiles(
+                _hsiHeadingBug = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_HEADING_BUG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_HEADING_BUG_MASK_FILENAME);
                 _hsiHeadingBug.Use1BitAlpha = true;
             }
             if (_hsiInnerWheel == null)
             {
-                _hsiInnerWheel = ImageMaskPair.CreateFromFiles(
+                _hsiInnerWheel = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_INNER_WHEEL_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_INNER_WHEEL_MASK_FILENAME);
             }
             if (_airplaneSymbol == null)
             {
-                _airplaneSymbol = ImageMaskPair.CreateFromFiles(
+                _airplaneSymbol = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_AIRPLANE_SYMBOL_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_AIRPLANE_SYMBOL_MASK_FILENAME);
                 _airplaneSymbol.Use1BitAlpha = true;
             }
             if (_hsiRangeFlag == null)
             {
-                _hsiRangeFlag = ImageMaskPair.CreateFromFiles(
+                _hsiRangeFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_RANGE_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_RANGE_FLAG_MASK_FILENAME);
                 _hsiRangeFlag.Use1BitAlpha = true;
             }
             if (_toFlag == null)
             {
-                _toFlag = ImageMaskPair.CreateFromFiles(
+                _toFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_TO_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_TO_FLAG_MASK_FILENAME);
                 _toFlag.Use1BitAlpha = true;
             }
             if (_fromFlag == null)
             {
-                _fromFlag = ImageMaskPair.CreateFromFiles(
+                _fromFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_FROM_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_FROM_FLAG_MASK_FILENAME);
                 _fromFlag.Use1BitAlpha = true;
             }
             if (_hsiOffFlag == null)
             {
-                _hsiOffFlag = ImageMaskPair.CreateFromFiles(
+                _hsiOffFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_OFF_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + HSI_OFF_FLAG_MASK_FILENAME);
             }
 

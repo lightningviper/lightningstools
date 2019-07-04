@@ -22,7 +22,7 @@ namespace LightningGauges.Renderers.F16
         private const string NWSI_RDY_IMAGE_FILENAME = "ind2ready.bmp";
         private const string NWSI_RDY_MASK_FILENAME = "ind2ready_mask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -37,23 +37,23 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_BACKGROUND_MASK_FILENAME);
                 _background.Use1BitAlpha = true;
             }
             if (_disc == null)
             {
-                _disc = ImageMaskPair.CreateFromFiles(
+                _disc = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_DISC_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_DISC_MASK_FILENAME);
             }
             if (_nws == null)
             {
-                _nws = ImageMaskPair.CreateFromFiles(
+                _nws = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_NWS_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_NWS_MASK_FILENAME);
             }
             if (_rdy == null)
             {
-                _rdy = ImageMaskPair.CreateFromFiles(
+                _rdy = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_RDY_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + NWSI_RDY_MASK_FILENAME);
             }
             _imagesLoaded = true;

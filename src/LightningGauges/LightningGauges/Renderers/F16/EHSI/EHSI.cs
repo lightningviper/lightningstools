@@ -17,7 +17,7 @@ namespace LightningGauges.Renderers.F16.EHSI
 
     public class EHSI : InstrumentRendererBase, IEHSI
     {
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private const string EHSI_NO_DATA_IMAGE_FILENAME = "ehsioff.bmp";
         private const string EHSI_NO_DATA_MASK_FILENAME = "ehsioff_mask.bmp";
@@ -39,7 +39,7 @@ namespace LightningGauges.Renderers.F16.EHSI
         {
             if (_noData == null)
             {
-                _noData = ImageMaskPair.CreateFromFiles(
+                _noData = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + EHSI_NO_DATA_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + EHSI_NO_DATA_MASK_FILENAME);
             }
             _imagesLoaded = true;

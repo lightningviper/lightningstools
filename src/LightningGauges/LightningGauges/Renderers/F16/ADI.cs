@@ -35,7 +35,7 @@ namespace LightningGauges.Renderers.F16
         private const string ADI_SLIP_INDICATOR_BALL_IMAGE_FILENAME = "adislip.bmp";
         private const string ADI_SLIP_INDICATOR_BALL_MASK_FILENAME = "adislip_mask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -57,60 +57,60 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_BACKGROUND_MASK_FILENAME);
             }
 
-            if (_ball == null) _ball = Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_BALL_IMAGE_FILENAME);
+            if (_ball == null) _ball = ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_BALL_IMAGE_FILENAME);
 
             if (_arrows == null)
             {
-                _arrows = ImageMaskPair.CreateFromFiles(
+                _arrows = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_ARROWS_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_ARROWS_MASK_FILENAME);
             }
 
             if (_auxFlag == null)
             {
-                _auxFlag = ImageMaskPair.CreateFromFiles(
+                _auxFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_AUX_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_AUX_FLAG_MASK_FILENAME);
             }
 
             if (_glideslopeFlag == null)
             {
-                _glideslopeFlag = ImageMaskPair.CreateFromFiles(
+                _glideslopeFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_GLIDESLOPE_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_GLIDESLOPE_FLAG_MASK_FILENAME);
             }
 
             if (_localizerFlag == null)
             {
-                _localizerFlag = ImageMaskPair.CreateFromFiles(
+                _localizerFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_LOCALIZER_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_LOCALIZER_FLAG_MASK_FILENAME);
             }
 
             if (_offFlag == null)
             {
-                _offFlag = ImageMaskPair.CreateFromFiles(
+                _offFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_OFF_FLAG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_OFF_FLAG_MASK_FILENAME);
             }
             if (_horizontalBar == null)
             {
-                _horizontalBar = ImageMaskPair.CreateFromFiles(
+                _horizontalBar = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_HORIZONTAL_BAR_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_HORIZONTAL_BAR_MASK_FILENAME);
             }
             if (_verticalBar == null)
             {
-                _verticalBar = ImageMaskPair.CreateFromFiles(
+                _verticalBar = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_VERTICAL_BAR_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_VERTICAL_BAR_MASK_FILENAME);
             }
             if (_airplaneSymbol == null)
             {
-                _airplaneSymbol = ImageMaskPair.CreateFromFiles(
+                _airplaneSymbol = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_AIRPLANE_SYMBOL_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_AIRPLANE_SYMBOL_MASK_FILENAME);
             }
 
             if (_slipIndicatorBall == null)
             {
-                _slipIndicatorBall = ImageMaskPair.CreateFromFiles(
+                _slipIndicatorBall = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_SLIP_INDICATOR_BALL_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ADI_SLIP_INDICATOR_BALL_MASK_FILENAME);
             }

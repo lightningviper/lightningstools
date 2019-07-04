@@ -9,7 +9,7 @@ namespace LightningGauges.Renderers.F16.ISIS
     internal static class ILSBarsRenderer
     {
         private const string ISIS_ILS_DOT_IMAGE_FILENAME = "isis_ilsdot.bmp";
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         internal static readonly Bitmap MarkerDiamond;
 
@@ -17,7 +17,7 @@ namespace LightningGauges.Renderers.F16.ISIS
         {
             if (MarkerDiamond == null)
             {
-                using (var markerDiamond = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ISIS_ILS_DOT_IMAGE_FILENAME))
+                using (var markerDiamond = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ISIS_ILS_DOT_IMAGE_FILENAME))
                 {
                     markerDiamond.MakeTransparent(Color.FromArgb(255, 0, 255));
                     MarkerDiamond = (Bitmap) Util.ResizeBitmap(markerDiamond, new Size(15, 15));

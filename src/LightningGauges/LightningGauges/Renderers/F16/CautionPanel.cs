@@ -48,7 +48,7 @@ namespace LightningGauges.Renderers.F16
         private const string CAUTION_PANEL_SLOT31_IMAGE_FILENAME = "cau27.bmp";
         private const string CAUTION_PANEL_SLOT32_IMAGE_FILENAME = "cau27.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -92,46 +92,46 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_BACKGROUND_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_BACKGROUND_MASK_FILENAME);
             }
 
-            if (_flcsFault == null) _flcsFault = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_FLCS_FAULT_IMAGE_FILENAME);
-            if (_engineFault == null) _engineFault = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ENGINE_FAULT_IMAGE_FILENAME);
-            if (_avionicsFault == null) _avionicsFault = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_AVIONICS_FAULT_IMAGE_FILENAME);
-            if (_seatNotArmed == null) _seatNotArmed = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SEAT_NOT_ARMED_IMAGE_FILENAME);
-            if (_elecSys == null) _elecSys = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ELEC_SYS_IMAGE_FILENAME);
-            if (_sec == null) _sec = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SEC_IMAGE_FILENAME);
-            if (_equipHot == null) _equipHot = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_EQUIP_HOT_IMAGE_FILENAME);
-            if (_nwsFail == null) _nwsFail = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_NWS_FAIL_IMAGE_FILENAME);
-            if (_probeHeat == null) _probeHeat = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_PROBE_HEAT_IMAGE_FILENAME);
-            if (_fuelOilHot == null) _fuelOilHot = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_FUEL_OIL_HOT_IMAGE_FILENAME);
-            if (_radarAlt == null) _radarAlt = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_RADAR_ALT_IMAGE_FILENAME);
-            if (_antiSkid == null) _antiSkid = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ANTI_SKID_IMAGE_FILENAME);
-            if (_CADC == null) _CADC = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_C_ADC_IMAGE_FILENAME);
-            if (_inletIcing == null) _inletIcing = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_INLET_ICING_IMAGE_FILENAME);
-            if (_iff == null) _iff = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_IFF_IMAGE_FILENAME);
-            if (_hook == null) _hook = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_HOOK_IMAGE_FILENAME);
-            if (_storesConfig == null) _storesConfig = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_STORES_CONFIG_IMAGE_FILENAME);
-            if (_overheat == null) _overheat = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_OVERHEAT_IMAGE_FILENAME);
-            if (_nuclear == null) _nuclear = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_NUCLEAR_IMAGE_FILENAME);
-            if (_oxyLow == null) _oxyLow = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_OXY_LOW_IMAGE_FILENAME);
-            if (_atfNotEngaged == null) _atfNotEngaged = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ATF_NOT_ENGAGED_IMAGE_FILENAME);
-            if (_EEC == null) _EEC = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_EEC_IMAGE_FILENAME);
-            if (_ECM == null) _ECM = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ECM_IMAGE_FILENAME);
-            if (_cabinPress == null) _cabinPress = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_CABIN_PRESS_IMAGE_FILENAME);
-            if (_fwdFuelLow == null) _fwdFuelLow = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_FWD_FUEL_LOW_IMAGE_FILENAME);
-            if (_BUC == null) _BUC = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_BUC_IMAGE_FILENAME);
-            if (_slot27 == null) _slot27 = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT27_IMAGE_FILENAME);
-            if (_slot28 == null) _slot28 = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT28_IMAGE_FILENAME);
+            if (_flcsFault == null) _flcsFault = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_FLCS_FAULT_IMAGE_FILENAME);
+            if (_engineFault == null) _engineFault = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ENGINE_FAULT_IMAGE_FILENAME);
+            if (_avionicsFault == null) _avionicsFault = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_AVIONICS_FAULT_IMAGE_FILENAME);
+            if (_seatNotArmed == null) _seatNotArmed = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SEAT_NOT_ARMED_IMAGE_FILENAME);
+            if (_elecSys == null) _elecSys = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ELEC_SYS_IMAGE_FILENAME);
+            if (_sec == null) _sec = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SEC_IMAGE_FILENAME);
+            if (_equipHot == null) _equipHot = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_EQUIP_HOT_IMAGE_FILENAME);
+            if (_nwsFail == null) _nwsFail = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_NWS_FAIL_IMAGE_FILENAME);
+            if (_probeHeat == null) _probeHeat = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_PROBE_HEAT_IMAGE_FILENAME);
+            if (_fuelOilHot == null) _fuelOilHot = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_FUEL_OIL_HOT_IMAGE_FILENAME);
+            if (_radarAlt == null) _radarAlt = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_RADAR_ALT_IMAGE_FILENAME);
+            if (_antiSkid == null) _antiSkid = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ANTI_SKID_IMAGE_FILENAME);
+            if (_CADC == null) _CADC = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_C_ADC_IMAGE_FILENAME);
+            if (_inletIcing == null) _inletIcing = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_INLET_ICING_IMAGE_FILENAME);
+            if (_iff == null) _iff = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_IFF_IMAGE_FILENAME);
+            if (_hook == null) _hook = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_HOOK_IMAGE_FILENAME);
+            if (_storesConfig == null) _storesConfig = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_STORES_CONFIG_IMAGE_FILENAME);
+            if (_overheat == null) _overheat = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_OVERHEAT_IMAGE_FILENAME);
+            if (_nuclear == null) _nuclear = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_NUCLEAR_IMAGE_FILENAME);
+            if (_oxyLow == null) _oxyLow = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_OXY_LOW_IMAGE_FILENAME);
+            if (_atfNotEngaged == null) _atfNotEngaged = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ATF_NOT_ENGAGED_IMAGE_FILENAME);
+            if (_EEC == null) _EEC = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_EEC_IMAGE_FILENAME);
+            if (_ECM == null) _ECM = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_ECM_IMAGE_FILENAME);
+            if (_cabinPress == null) _cabinPress = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_CABIN_PRESS_IMAGE_FILENAME);
+            if (_fwdFuelLow == null) _fwdFuelLow = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_FWD_FUEL_LOW_IMAGE_FILENAME);
+            if (_BUC == null) _BUC = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_BUC_IMAGE_FILENAME);
+            if (_slot27 == null) _slot27 = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT27_IMAGE_FILENAME);
+            if (_slot28 == null) _slot28 = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT28_IMAGE_FILENAME);
             if (_aftFuelLow == null)
             {
-                _aftFuelLow = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_AFT_FUEL_LOW_IMAGE_FILENAME);
+                _aftFuelLow = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_AFT_FUEL_LOW_IMAGE_FILENAME);
             }
-            if (_slot30 == null) _slot30 = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT30_IMAGE_FILENAME);
-            if (_slot31 == null) _slot31 = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT31_IMAGE_FILENAME);
-            if (_slot32 == null) _slot32 = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT32_IMAGE_FILENAME);
+            if (_slot30 == null) _slot30 = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT30_IMAGE_FILENAME);
+            if (_slot31 == null) _slot31 = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT31_IMAGE_FILENAME);
+            if (_slot32 == null) _slot32 = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + CAUTION_PANEL_SLOT32_IMAGE_FILENAME);
             _imagesLoaded = true;
         }
 

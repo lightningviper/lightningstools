@@ -7,7 +7,7 @@ namespace Common.Imaging
 {
     public class ImageMaskPair : IDisposable
     {
-        private readonly bool _disposeImagesAtDisposalTime;
+        private readonly bool _disposeImagesAtDisposalTime=true;
         private bool _disposed;
         private Bitmap _maskedImage;
 
@@ -19,12 +19,6 @@ namespace Common.Imaging
 
         private ImageMaskPair()
         {
-        }
-
-        private ImageMaskPair(Bitmap image, Bitmap mask, bool disposeImagesAtDisposalTime)
-            : this(image, mask)
-        {
-            _disposeImagesAtDisposalTime = disposeImagesAtDisposalTime;
         }
 
         public Bitmap Image { get; set; }
@@ -127,7 +121,7 @@ namespace Common.Imaging
             var mask = Drawing.Image.FromFile(maskPath);
             Util.ConvertPixelFormat(ref image, PixelFormat.Format32bppArgb);
             Util.ConvertPixelFormat(ref mask, PixelFormat.Format32bppArgb);
-            return new ImageMaskPair((Bitmap) image, (Bitmap) mask, true);
+            return new ImageMaskPair((Bitmap) image, (Bitmap) mask);
         }
 
         private void Dispose(bool disposing)

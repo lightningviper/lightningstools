@@ -22,7 +22,7 @@ namespace LightningGauges.Renderers.F16
         private const string AIRSPEED_POINTER_IMAGE_FILENAME = "arrow_asi.bmp";
         private const string AIRSPEED_POINTER_MASK_FILENAME = "arrow_asimask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static Bitmap _background;
@@ -35,22 +35,22 @@ namespace LightningGauges.Renderers.F16
 
         private static void LoadImageResources()
         {
-            if (_background == null) _background = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_BACKGROUND_IMAGE_FILENAME);
+            if (_background == null) _background = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_BACKGROUND_IMAGE_FILENAME);
             if (_machWheel == null)
             {
-                _machWheel = ImageMaskPair.CreateFromFiles(
+                _machWheel = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_MACH_WHEEL_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_MACH_WHEEL_MASK_FILENAME);
                 _machWheel.Use1BitAlpha = true;
             }
             if (_speedBug == null)
             {
-                _speedBug = ImageMaskPair.CreateFromFiles(
+                _speedBug = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_SPEED_BUG_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_SPEED_BUG_MASK_FILENAME);
             }
 
             if (_airspeedPointerWheel == null)
             {
-                _airspeedPointerWheel = ImageMaskPair.CreateFromFiles(
+                _airspeedPointerWheel = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_POINTER_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + AIRSPEED_POINTER_MASK_FILENAME);
                 _airspeedPointerWheel.Use1BitAlpha = true;
             }

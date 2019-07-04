@@ -19,7 +19,7 @@ namespace LightningGauges.Renderers.F16
         private const string COMPASS_NEEDLE_IMAGE_FILENAME = "compneedle.bmp";
         private const string COMPASS_NEEDLE_MASK_FILENAME = "compneedle_mask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -33,16 +33,16 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + COMPASS_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + COMPASS_BACKGROUND_MASK_FILENAME);
                 _background.Use1BitAlpha = true;
             }
             if (_needle == null)
             {
-                _needle = ImageMaskPair.CreateFromFiles(
+                _needle = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + COMPASS_NEEDLE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + COMPASS_NEEDLE_MASK_FILENAME);
             }
-            if (_tape == null) _tape = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + COMPASS_TAPE_IMAGE_FILENAME);
+            if (_tape == null) _tape = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + COMPASS_TAPE_IMAGE_FILENAME);
             _imagesLoaded = true;
         }
 

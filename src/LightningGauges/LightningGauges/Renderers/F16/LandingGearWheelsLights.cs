@@ -23,7 +23,7 @@ namespace LightningGauges.Renderers.F16
         private const string GEAR_NOSE_GEAR_LIGHT_IMAGE_FILENAME = "nosegr.bmp";
         private const string GEAR_NOSE_GEAR_LIGHT_MASK_FILENAME = "nosegr_mask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -38,25 +38,25 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_BACKGROUND_MASK_FILENAME);
                 _background.Use1BitAlpha = true;
             }
             if (_leftGearLight == null)
             {
-                _leftGearLight = ImageMaskPair.CreateFromFiles(
+                _leftGearLight = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_LEFT_GEAR_LIGHT_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_LEFT_GEAR_LIGHT_MASK_FILENAME);
             }
 
             if (_rightGearLight == null)
             {
-                _rightGearLight = ImageMaskPair.CreateFromFiles(
+                _rightGearLight = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_RIGHT_GEAR_LIGHT_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_RIGHT_GEAR_LIGHT_MASK_FILENAME);
             }
 
             if (_noseGearLight == null)
             {
-                _noseGearLight = ImageMaskPair.CreateFromFiles(
+                _noseGearLight = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_NOSE_GEAR_LIGHT_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + GEAR_NOSE_GEAR_LIGHT_MASK_FILENAME);
             }
             _imagesLoaded = true;

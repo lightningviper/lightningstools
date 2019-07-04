@@ -19,7 +19,7 @@ namespace LightningGauges.Renderers.F16
         private const string SB_POWER_OFF_IMAGE_FILENAME = "sbclosed.bmp";
         private const string SB_OPEN_IMAGE_FILENAME = "sbopen.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -34,12 +34,12 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_BACKGROUND_MASK_FILENAME);
             }
-            if (_closed == null) _closed = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_CLOSED_IMAGE_FILENAME);
-            if (_powerLoss == null) _powerLoss = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_POWER_OFF_IMAGE_FILENAME);
-            if (_open == null) _open = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_OPEN_IMAGE_FILENAME);
+            if (_closed == null) _closed = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_CLOSED_IMAGE_FILENAME);
+            if (_powerLoss == null) _powerLoss = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_POWER_OFF_IMAGE_FILENAME);
+            if (_open == null) _open = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + SB_OPEN_IMAGE_FILENAME);
             _imagesLoaded = true;
         }
 

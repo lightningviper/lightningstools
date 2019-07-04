@@ -13,7 +13,7 @@ namespace LightningGauges
         private static readonly ThreadLocal<Brush> _charBrush = new ThreadLocal<Brush>(()=>Brushes.Black);
         private readonly Bitmap _fontBitmap;
         private bool _disposed;
-        public FontGraphic(string fileName) { _fontBitmap = (Bitmap) Util.LoadBitmapFromFile(fileName); }
+        public FontGraphic(string fileName) { _fontBitmap = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(fileName); }
 
         public void Dispose()
         {

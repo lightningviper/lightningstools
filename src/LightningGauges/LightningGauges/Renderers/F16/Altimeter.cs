@@ -29,7 +29,7 @@ namespace LightningGauges.Renderers.F16
         private const string ALT_HUNDREDS_IMAGE_FILENAME = "altten.bmp";
         private const string ALT_DIGIT_FONT_FILENAME = "lcddot.ttf";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object ImagesLock = new object();
         private static ImageMaskPair _backgroundElectroMechanical;
@@ -68,49 +68,49 @@ namespace LightningGauges.Renderers.F16
         {
             if (_backgroundElectroMechanical == null)
             {
-                _backgroundElectroMechanical = ImageMaskPair.CreateFromFiles(
+                _backgroundElectroMechanical = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTROMECHANICAL_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTROMECHANICAL_MASK_FILENAME);
             }
             if (_backgroundElectroMechanicalNoFlag == null)
             {
-                _backgroundElectroMechanicalNoFlag = ImageMaskPair.CreateFromFiles(
+                _backgroundElectroMechanicalNoFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTROMECHANICAL_NOFLAG_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTROMECHANICAL_MASK_FILENAME);
             }
             if (_backgroundElectronic == null)
             {
-                _backgroundElectronic = ImageMaskPair.CreateFromFiles(
+                _backgroundElectronic = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTRONIC_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTRONIC_MASK_FILENAME);
                 _backgroundElectronic.Use1BitAlpha = true;
             }
             if (_backgroundElectronicNoFlag == null)
             {
-                _backgroundElectronicNoFlag = ImageMaskPair.CreateFromFiles(
+                _backgroundElectronicNoFlag = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTRONIC_NOFLAG_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_BACKGROUND_ELECTRONIC_MASK_FILENAME);
                 _backgroundElectronicNoFlag.Use1BitAlpha = true;
             }
             if (_needle == null)
             {
-                _needle = ImageMaskPair.CreateFromFiles(
+                _needle = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_NEEDLE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_NEEDLE_MASK_FILENAME);
             }
             if (_tenThousandsDigitsElectroMechanical == null)
             {
-                _tenThousandsDigitsElectroMechanical = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_TEN_THOUSANDS_IMAGE_FILENAME);
+                _tenThousandsDigitsElectroMechanical = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_TEN_THOUSANDS_IMAGE_FILENAME);
                 _tenThousandsDigitsElectroMechanical.MakeTransparent(Color.Black);
             }
 
             if (_thousandsDigitsElectroMechanical == null)
             {
-                _thousandsDigitsElectroMechanical = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_THOUSANDS_IMAGE_FILENAME);
+                _thousandsDigitsElectroMechanical = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_THOUSANDS_IMAGE_FILENAME);
                 _thousandsDigitsElectroMechanical.MakeTransparent(Color.Black);
             }
             if (_hundredsDigitsElectroMechanical == null)
             {
-                _hundredsDigitsElectroMechanical = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_HUNDREDS_IMAGE_FILENAME);
+                _hundredsDigitsElectroMechanical = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + ALT_HUNDREDS_IMAGE_FILENAME);
                 _hundredsDigitsElectroMechanical.MakeTransparent(Color.Black);
             }
             _imagesLoaded = true;

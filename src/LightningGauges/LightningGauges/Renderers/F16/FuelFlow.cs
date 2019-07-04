@@ -20,7 +20,7 @@ namespace LightningGauges.Renderers.F16
         private const string FF_THOUSANDS_DIGIT_IMAGE_FILENAME = "ffnumk.bmp";
         private const string FF_TEN_THOUSANDS_DIGIT_IMAGE_FILENAME = "ffnumkk.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -35,22 +35,22 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_BACKGROUND_MASK_FILENAME);
             }
             if (_hundredsDigits == null)
             {
-                _hundredsDigits = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_HUNDREDS_DIGIT_IMAGE_FILENAME);
+                _hundredsDigits = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_HUNDREDS_DIGIT_IMAGE_FILENAME);
                 _hundredsDigits.MakeTransparent(Color.Black);
             }
             if (_thousandsDigits == null)
             {
-                _thousandsDigits = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_THOUSANDS_DIGIT_IMAGE_FILENAME);
+                _thousandsDigits = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_THOUSANDS_DIGIT_IMAGE_FILENAME);
                 _thousandsDigits.MakeTransparent(Color.Black);
             }
             if (_tenThousandsDigits == null)
             {
-                _tenThousandsDigits = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_TEN_THOUSANDS_DIGIT_IMAGE_FILENAME);
+                _tenThousandsDigits = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FF_TEN_THOUSANDS_DIGIT_IMAGE_FILENAME);
                 _tenThousandsDigits.MakeTransparent(Color.Black);
             }
             _imagesLoaded = true;

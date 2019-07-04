@@ -29,7 +29,7 @@ namespace LightningGauges.Renderers.F16
 
         private const string FUEL_DIGITS_FILENAME = "ffnum.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static ImageMaskPair _background;
@@ -50,12 +50,12 @@ namespace LightningGauges.Renderers.F16
         {
             if (_background == null)
             {
-                _background = ImageMaskPair.CreateFromFiles(
+                _background = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_BACKGROUND_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_BACKGROUND_MASK_FILENAME);
             }
             if (_foreRightArrowCModel == null)
             {
-                _foreRightArrowCModel = ImageMaskPair.CreateFromFiles(
+                _foreRightArrowCModel = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_FORE_RIGHT_C_MODEL_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_FORE_RIGHT_C_MODEL_MASK_FILENAME);
                 _foreRightArrowCModel.Use1BitAlpha = true;
@@ -63,7 +63,7 @@ namespace LightningGauges.Renderers.F16
 
             if (_foreRightArrowDModel == null)
             {
-                _foreRightArrowDModel = ImageMaskPair.CreateFromFiles(
+                _foreRightArrowDModel = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_FORE_RIGHT_D_MODEL_IMAGE_FILENAME,
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_FORE_RIGHT_D_MODEL_MASK_FILENAME);
                 _foreRightArrowDModel.Use1BitAlpha = true;
@@ -71,21 +71,21 @@ namespace LightningGauges.Renderers.F16
 
             if (_aftLeftArrowCModel == null)
             {
-                _aftLeftArrowCModel = ImageMaskPair.CreateFromFiles(
+                _aftLeftArrowCModel = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_AFT_LEFT_C_MODEL_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_AFT_LEFT_C_MODEL_MASK_FILENAME);
                 _aftLeftArrowCModel.Use1BitAlpha = true;
             }
 
             if (_aftLeftArrowDModel == null)
             {
-                _aftLeftArrowDModel = ImageMaskPair.CreateFromFiles(
+                _aftLeftArrowDModel = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_AFT_LEFT_D_MODEL_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_AFT_LEFT_D_MODEL_MASK_FILENAME);
                 _aftLeftArrowDModel.Use1BitAlpha = true;
             }
 
             if (_digits == null)
             {
-                _digits = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_DIGITS_FILENAME);
+                _digits = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + FUEL_DIGITS_FILENAME);
                 _digits.MakeTransparent(Color.Black);
             }
             _imagesLoaded = true;

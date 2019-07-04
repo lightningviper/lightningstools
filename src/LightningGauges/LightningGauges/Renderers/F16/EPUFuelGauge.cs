@@ -18,7 +18,7 @@ namespace LightningGauges.Renderers.F16
         private const string EPU_NEEDLE_IMAGE_FILENAME = "arrow_rpm.bmp";
         private const string EPU_NEEDLE_MASK_FILENAME = "arrow_rpmmask.bmp";
 
-        private static readonly string IMAGES_FOLDER_NAME = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName + Path.DirectorySeparatorChar + "images";
+        private static readonly string IMAGES_FOLDER_NAME =  "images";
 
         private static readonly object _imagesLock = new object();
         private static Bitmap _background;
@@ -29,10 +29,10 @@ namespace LightningGauges.Renderers.F16
 
         private static void LoadImageResources()
         {
-            if (_background == null) _background = (Bitmap) Util.LoadBitmapFromFile(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + EPU_BACKGROUND_IMAGE_FILENAME);
+            if (_background == null) _background = (Bitmap) ResourceUtil.LoadBitmapFromEmbeddedResource(IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + EPU_BACKGROUND_IMAGE_FILENAME);
             if (_needle == null)
             {
-                _needle = ImageMaskPair.CreateFromFiles(
+                _needle = ResourceUtil.CreateImageMaskPairFromEmbeddedResources(
                     IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + EPU_NEEDLE_IMAGE_FILENAME, IMAGES_FOLDER_NAME + Path.DirectorySeparatorChar + EPU_NEEDLE_MASK_FILENAME);
             }
             _imagesLoaded = true;
