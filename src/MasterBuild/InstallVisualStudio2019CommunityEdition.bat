@@ -10,7 +10,7 @@ bitsadmin /transfer VisualStudio2019CommunityEdition /dynamic /download /priorit
 IF ERRORLEVEL 1 GOTO END
 
 ECHO Installing Visual Studio 2019 Community Edition...
-"%MASTERBUILDDIR%vs_community.exe" --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -add Microsoft.Component.ClickOnce --passive --wait --norestart
+"%MASTERBUILDDIR%vs_community.exe" --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.Component.ClickOnce --passive --wait --norestart
 
 CALL %MASTERBUILDDIR%GetVSWhere.bat
 for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -products * -requires Microsoft.Component.MSBuild -property instanceId`) do (
