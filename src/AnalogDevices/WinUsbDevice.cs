@@ -19,7 +19,7 @@ namespace AnalogDevices
         {
             get
             {
-                return UsbDevice.AllWinUsbDevices.Select(x => new WinUsbDevice(USBDevice.GetSingleDevice(
+                return UsbDevice.AllWinUsbDevices.Where(x=>x.Device !=null).Select(x => new WinUsbDevice(USBDevice.GetSingleDevice(
                     x.SymbolicName.Substring(x.SymbolicName.IndexOf('{') + 1, 36))));
             }
         }
