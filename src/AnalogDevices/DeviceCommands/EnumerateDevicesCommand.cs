@@ -18,7 +18,7 @@ namespace AnalogDevices.DeviceCommands
             //var devs = WinUsbDevice.AllDevices.ToArray();
             foreach (var device in devs)
             {
-                if (device?.Vid != 0x0456 || (ushort) device.Pid != 0xB20F && (ushort) device.Pid != 0xB20E)
+                if (device == null || device.Vid != 0x0456 || (ushort)device.Pid != 0xB20F && (ushort)device.Pid != 0xB20E)
                 {
                     continue;
                 }

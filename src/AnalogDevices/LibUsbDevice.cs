@@ -17,7 +17,7 @@ namespace AnalogDevices
 
         public static IEnumerable<LibUsbDevice> AllDevices
         {
-            get { return UsbDevice.AllDevices.Select(x => new LibUsbDevice(x.Device)); }
+            get { return UsbDevice.AllDevices.Where(x=>x.Device!=null).Select(x => new LibUsbDevice(x.Device)); }
         }
 
         public virtual void ControlTransfer(byte requestType, byte request, int value, int index, byte[] buffer = null,
