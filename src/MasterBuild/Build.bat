@@ -19,9 +19,9 @@ SET SOLUTION=%1
 IF "%SOLUTION%"=="" SET SOLUTION=%MASTERBUILDDIR%BuildAll.sln
 CALL %MASTERBUILDDIR%RestorePackages.bat %SOLUTION%
 
-"%InstallDir%\Common7\IDE\devenv.com"  /Build "Release" "%SOLUTION%"
-IF ERRORLEVEL 1 GOTO END
 "%InstallDir%\Common7\IDE\devenv.com"  /Build "Debug" "%SOLUTION%"
+IF ERRORLEVEL 1 GOTO END
+"%InstallDir%\Common7\IDE\devenv.com"  /Build "Release" "%SOLUTION%"
 IF ERRORLEVEL 1 GOTO END
 
 :END
