@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 namespace F4SharedMem.Headers
 {
     [ComVisible(true)]
-    [Flags]
     [Serializable]
     public enum TriStateSwitchStates : byte
     {
@@ -14,7 +13,6 @@ namespace F4SharedMem.Headers
     };
 
     [ComVisible(true)]
-    [Flags]
     [Serializable]
     public enum BiStateSwitchStates : byte
     {
