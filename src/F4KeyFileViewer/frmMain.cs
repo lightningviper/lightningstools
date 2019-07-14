@@ -205,7 +205,7 @@ namespace F4KeyFileViewer
                                   CheckFileExists = true,
                                   CheckPathExists = true,
                                   DefaultExt = ".key",
-                                  Filter = "Falcon 4 Key Files (*.key)|*.key",
+                                  Filter = "Falcon BMS Key Files (*.key)|*.key",
                                   FilterIndex = 0,
                                   DereferenceLinks = true,
                                   Multiselect = false,

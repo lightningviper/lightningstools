@@ -15,68 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_12BE19DDB6A5B79EB8EA98B64EA62269"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_16AA6829BEEB6B14ECA8A2F0F11973EB"
-        "OwnerKey" = "8:_5623F020C540EBA1DCEA21B38E1FFFC2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_16AA6829BEEB6B14ECA8A2F0F11973EB"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5623F020C540EBA1DCEA21B38E1FFFC2"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AD756757C6EF114869755ECFF56B9D45"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_16AA6829BEEB6B14ECA8A2F0F11973EB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AD756757C6EF114869755ECFF56B9D45"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_12BE19DDB6A5B79EB8EA98B64EA62269"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5623F020C540EBA1DCEA21B38E1FFFC2"
+        "MsmKey" = "8:_8B2ABEE37A7A46D29A52029ABC519262"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -174,21 +120,10 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_12BE19DDB6A5B79EB8EA98B64EA62269"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B2ABEE37A7A46D29A52029ABC519262"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:F4SharedMem, Version=3.1.1.0, Culture=neutral, PublicKeyToken=98c24c6603c8861c, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_12BE19DDB6A5B79EB8EA98B64EA62269"
-                    {
-                    "Name" = "8:F4SharedMem.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:F4SharedMem.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\F4SharedMemViewer.ico"
+            "TargetName" = "8:F4SharedMemViewer.ico"
             "Tag" = "8:"
             "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
             "Condition" = "8:"
@@ -201,101 +136,8 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_16AA6829BEEB6B14ECA8A2F0F11973EB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_16AA6829BEEB6B14ECA8A2F0F11973EB"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:log4net.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5623F020C540EBA1DCEA21B38E1FFFC2"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=abd82ffe41e2ab64, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_5623F020C540EBA1DCEA21B38E1FFFC2"
-                    {
-                    "Name" = "8:Common.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Common.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AD756757C6EF114869755ECFF56B9D45"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Costura, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_AD756757C6EF114869755ECFF56B9D45"
-                    {
-                    "Name" = "8:Costura.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Costura.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -338,7 +180,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_D1C489858CC849D29FD20B14A1686671"
                     {
-                    "Name" = "8:Falcon 4 Shared Memory Viewer"
+                    "Name" = "8:Falcon BMS Shared Memory Viewer"
                     "AlwaysCreate" = "11:TRUE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -488,16 +330,16 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E6F8A11E1F164D6D8BFBDE52EA65D473"
             {
-            "Name" = "8:Falcon 4 Shared Memory Viewer"
+            "Name" = "8:Falcon BMS Shared Memory Viewer"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:32512"
+            "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
             "Folder" = "8:_D1C489858CC849D29FD20B14A1686671"
             "WorkingFolder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
-            "Icon" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
+            "Icon" = "8:_8B2ABEE37A7A46D29A52029ABC519262"
             "Feature" = "8:"
             }
         }

@@ -41,8 +41,8 @@
             this.btnOpenFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.grid = new System.Windows.Forms.DataGridView();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.grid = new System.Windows.Forms.DataGridView();
             this.LineNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,8 +67,7 @@
             this.mnuHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1893, 35);
+            this.menuStrip1.Size = new System.Drawing.Size(1262, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -79,26 +78,26 @@
             this.toolStripMenuItem1,
             this.mnuFileExit});
             this.mnuFile.Name = "mnuFile";
-            this.mnuFile.Size = new System.Drawing.Size(50, 29);
+            this.mnuFile.Size = new System.Drawing.Size(37, 20);
             this.mnuFile.Text = "&File";
             // 
             // mnuFileOpen
             // 
             this.mnuFileOpen.Image = ((System.Drawing.Image)(resources.GetObject("mnuFileOpen.Image")));
             this.mnuFileOpen.Name = "mnuFileOpen";
-            this.mnuFileOpen.Size = new System.Drawing.Size(166, 30);
+            this.mnuFileOpen.Size = new System.Drawing.Size(112, 22);
             this.mnuFileOpen.Text = "&Open...";
             this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(163, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
             // 
             // mnuFileExit
             // 
             this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(166, 30);
+            this.mnuFileExit.Size = new System.Drawing.Size(112, 22);
             this.mnuFileExit.Text = "E&xit";
             this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
             // 
@@ -107,13 +106,13 @@
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuHelpAbout});
             this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(61, 29);
+            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
             this.mnuHelp.Text = "&Help";
             // 
             // mnuHelpAbout
             // 
             this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.Size = new System.Drawing.Size(146, 30);
+            this.mnuHelpAbout.Size = new System.Drawing.Size(116, 22);
             this.mnuHelpAbout.Text = "&About...";
             this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
@@ -123,10 +122,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnOpenFile,
             this.toolStripSeparator});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 35);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1893, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1262, 31);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -150,10 +148,21 @@
             this.panel1.Controls.Add(this.progressBar1);
             this.panel1.Controls.Add(this.grid);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 66);
+            this.panel1.Location = new System.Drawing.Point(0, 55);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1893, 603);
+            this.panel1.Size = new System.Drawing.Size(1262, 380);
             this.panel1.TabIndex = 2;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(357, 184);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(300, 23);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 4;
+            this.progressBar1.Visible = false;
             // 
             // grid
             // 
@@ -176,23 +185,13 @@
             this.diCallbackInvocationBehavior});
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid.Location = new System.Drawing.Point(0, 0);
-            this.grid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grid.Name = "grid";
             this.grid.ReadOnly = true;
             this.grid.RowHeadersVisible = false;
             this.grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grid.RowTemplate.Height = 15;
-            this.grid.Size = new System.Drawing.Size(1893, 603);
+            this.grid.Size = new System.Drawing.Size(1262, 380);
             this.grid.TabIndex = 3;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(535, 283);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(450, 35);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 4;
-            this.progressBar1.Visible = false;
             // 
             // LineNum
             // 
@@ -200,7 +199,7 @@
             this.LineNum.HeaderText = "Line Number";
             this.LineNum.Name = "LineNum";
             this.LineNum.ReadOnly = true;
-            this.LineNum.Width = 124;
+            this.LineNum.Width = 85;
             // 
             // LineType
             // 
@@ -208,7 +207,7 @@
             this.LineType.HeaderText = "Line Type";
             this.LineType.Name = "LineType";
             this.LineType.ReadOnly = true;
-            this.LineType.Width = 102;
+            this.LineType.Width = 73;
             // 
             // Description
             // 
@@ -216,7 +215,7 @@
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
-            this.Description.Width = 114;
+            this.Description.Width = 85;
             // 
             // Callback
             // 
@@ -224,7 +223,7 @@
             this.Callback.HeaderText = "Callback";
             this.Callback.Name = "Callback";
             this.Callback.ReadOnly = true;
-            this.Callback.Width = 94;
+            this.Callback.Width = 73;
             // 
             // kbKey
             // 
@@ -232,7 +231,7 @@
             this.kbKey.HeaderText = "Key(s)";
             this.kbKey.Name = "kbKey";
             this.kbKey.ReadOnly = true;
-            this.kbKey.Width = 78;
+            this.kbKey.Width = 61;
             // 
             // kbComboKey
             // 
@@ -240,7 +239,7 @@
             this.kbComboKey.HeaderText = "Combo Key(s)";
             this.kbComboKey.Name = "kbComboKey";
             this.kbComboKey.ReadOnly = true;
-            this.kbComboKey.Width = 133;
+            this.kbComboKey.Width = 89;
             // 
             // kbUIVisibility
             // 
@@ -248,7 +247,7 @@
             this.kbUIVisibility.HeaderText = "UI Visibility";
             this.kbUIVisibility.Name = "kbUIVisibility";
             this.kbUIVisibility.ReadOnly = true;
-            this.kbUIVisibility.Width = 110;
+            this.kbUIVisibility.Width = 76;
             // 
             // SoundId
             // 
@@ -256,7 +255,7 @@
             this.SoundId.HeaderText = "Sound ID";
             this.SoundId.Name = "SoundId";
             this.SoundId.ReadOnly = true;
-            this.SoundId.Width = 102;
+            this.SoundId.Width = 71;
             // 
             // diButton
             // 
@@ -264,7 +263,7 @@
             this.diButton.HeaderText = "DirectInput Item";
             this.diButton.Name = "diButton";
             this.diButton.ReadOnly = true;
-            this.diButton.Width = 136;
+            this.diButton.Width = 98;
             // 
             // diCallbackInvocationBehavior
             // 
@@ -272,22 +271,21 @@
             this.diCallbackInvocationBehavior.HeaderText = "Callback Invocation Behavior";
             this.diCallbackInvocationBehavior.Name = "diCallbackInvocationBehavior";
             this.diCallbackInvocationBehavior.ReadOnly = true;
-            this.diCallbackInvocationBehavior.Width = 215;
+            this.diCallbackInvocationBehavior.Width = 156;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1893, 669);
+            this.ClientSize = new System.Drawing.Size(1262, 435);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmMain";
-            this.Text = "Falcon KeyFile Viewer";
+            this.Text = "Falcon BMS KeyFile Viewer";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

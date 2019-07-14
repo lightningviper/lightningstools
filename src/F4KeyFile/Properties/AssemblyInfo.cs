@@ -2,11 +2,11 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-[assembly: AssemblyTitle("Falcon 4 Keyfile Reader/Writer for .NET")]
+[assembly: AssemblyTitle("Falcon BMS Keyfile Reader/Writer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Falcon 4 Keyfile Reader/Writer for .NET")]
+[assembly: AssemblyProduct("Falcon BMS Keyfile Reader/Writer")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

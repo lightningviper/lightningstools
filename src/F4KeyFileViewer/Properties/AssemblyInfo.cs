@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using log4net.Config;
-[assembly: AssemblyTitle("Falcon 4 Keyfile Viewer")]
+[assembly: AssemblyTitle("Falcon BMS Keyfile Viewer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Falcon 4 Keyfile Viewer")]
+[assembly: AssemblyProduct("Falcon BMS Keyfile Viewer")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
