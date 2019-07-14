@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 namespace F4SharedMem.Headers
 {
     [ComVisible(true)]
-    [Flags]
     [Serializable]
     // RTT area indices
     public enum RTT_areas : int
