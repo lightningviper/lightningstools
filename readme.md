@@ -14,16 +14,16 @@ Desktop application for testing Analog Devices AD536x and AD537x digital-to-anal
 #### [F16 Center Pedestal Display](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/F16%20Center%20Pedestal%20Display)
 Desktop application providing a semi-realistic simulation of the Raytheon F-16 Center Pedestal Display for use with Falcon BMS.  
 
-#### [Falcon 4 Keyfile Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%204%20Keyfile%20Viewer)
+#### [Falcon BMS Keyfile Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Keyfile%20Viewer)
 Desktop application for viewing Falcon .key files.  Demonstrates the use of the `F4KeyFile` library.
 
-#### [Falcon 4 Shared Memory Mirror](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Mirror/for%20Falcon%20BMS%204.34/F4SharedMemMirror_for_Falcon_BMS_4_34__x86.zip)
+#### [Falcon BMS Shared Memory Mirror](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Mirror/for%20Falcon%20BMS%204.34/F4SharedMemMirror_for_Falcon_BMS_4_34__x86.zip)
 Desktop client-server application that mirrors the contents of Falcon's shared memory areas to one or more remote networked PCs.
 
-#### [Falcon 4 Shared Memory Recorder](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Recorder/for%20Falcon%20BMS%204.34/Shared_Memory_Recorder_for_Falcon_BMS_4_34__x86.zip)
+#### [Falcon BMS Shared Memory Recorder](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Recorder/for%20Falcon%20BMS%204.34/Shared_Memory_Recorder_for_Falcon_BMS_4_34__x86.zip)
 Desktop application that enables recording and playback of Falcon shared memory data.
 
-#### [Falcon 4 Shared Memory Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%204%20Shared%20Memory%20Viewer/for%20Falcon%20BMS%204.34/Shared_Memory_Viewer_for_Falcon_BMS_4_34__x86.zip)
+#### [Falcon BMS Shared Memory Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Viewer/for%20Falcon%20BMS%204.34/Shared_Memory_Viewer_for_Falcon_BMS_4_34__x86.zip)
 Desktop application that displays the contents of Falcon's shared memory areas.
 
 #### [Falcon BMS Textures Shared Memory Tester](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Textures%20Shared%20Memory%20Tester)
@@ -149,7 +149,7 @@ Desktop application for viewing Falcon .key files.  Demonstrates the use of the 
 Desktop application for viewing the contents of Falcon resource files.  Originally intended as an editor, it is a currently a read-only tool used to validate the corresponding functionality in the underlying F4Utils libraries.
 
 [F4SharedMem](https://github.com/lightningviper/lightningstools/tree/master/src/F4SharedMem/)  
-C# class library for reading values from Falcon 4's shared memory area. 
+C# class library for reading values from Falcon BMS shared memory area. 
 
 [F4SharedMemMirror](https://github.com/lightningviper/lightningstools/tree/master/src/F4SharedMemMirror/)  
 Desktop client-server application that mirrors the contents of Falcon's shared memory areas to one or more remote networked PCs.
@@ -167,10 +167,10 @@ C# class library for reading images from Falcon BMS' "textures shared memory" ar
 Desktop application for displaying the contents of Falcon BMS' "Textures Shared Memory" area.   Demonstrates the use of the [F4TexSharedMem](https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMem/) library.
 
 [F4Utils](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/)  
-C# class libraries which provide support for detecting Falcon operating characteristics,  interacting with the simulation programmatically, and reading from and writing to various low-level Falcon 4 file formats.  
+C# class libraries which provide support for detecting Falcon operating characteristics,  interacting with the simulation programmatically, and reading from and writing to various low-level Falcon file formats.  
 _Namespaces_:  
     - [F4Utils.Campaign](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/Campaign/)  
-    Read F4 Campaign files (.CAM/.TRN/.TAC) and the Falcon 4 class table  
+    Read F4 Campaign files (.CAM/.TRN/.TAC) and the Falcon class table  
     - [F4Utils.PlayerOp](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/PlayerOp/)  
     Read the Player Options file (used for determining attributes like the current pilot callsign, etc.)  
     - [F4Utils.Process](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/Process/)  
@@ -215,7 +215,7 @@ Desktop application for remapping analog and digital inputs from DirectInput dev
 C# class library which provides GDI+ renderers for various flight instruments and gauges as found in the F-16.  
 
 [Lzss](https://github.com/lightningviper/lightningstools/tree/master/src/Lzss/)  
-Class libraries that support compressing and decompressing binary content in the LZSS format used in the binary file formats within Hasbro & Microprose games such as Falcon 4.  
+Class libraries that support compressing and decompressing binary content in the LZSS format used in the binary file formats within Hasbro & Microprose games such as Falcon.  
 - [LzssNative](https://github.com/lightningviper/lightningstools/tree/master/src/Lzss/LzssNative/)  
     C++ (native) class library  
 - [LzssManaged](https://github.com/lightningviper/lightningstools/tree/master/src/Lzss/LzssManaged/)  
@@ -243,7 +243,7 @@ End-user GUI application for configuring PHCC motherboard and peripherals.
 End-user desktop application providing basic testing capabilities for the PHCC motherboard and attached peripherals.  Demonstrates the use of the [PHCC](https://github.com/lightningviper/lightningstools/tree/master/src/PHCC/) class library.  
 
 [SimLinkup](https://github.com/lightningviper/lightningstools/tree/master/src/SimLinkup/)  
-End-user desktop application for controlling various simulator-related I/O hardware and physical instruments using data from simulation software, and for controlling the simulation by reading inputs from their I/O hardware.  Provides out-of-the-box support for Falcon 4, PHCC devices and popular peripherals, BetaInnovations devices, DirectInput devices, Analog Devices AD536x and AD537x evaluation boards, and a variety of simulated instrumentation.  
+End-user desktop application for controlling various simulator-related I/O hardware and physical instruments using data from simulation software, and for controlling the simulation by reading inputs from their I/O hardware.  Provides out-of-the-box support for Falcon BMS, PHCC devices and popular peripherals, BetaInnovations devices, DirectInput devices, Analog Devices AD536x and AD537x evaluation boards, and a variety of simulated instrumentation. 
 
 [SpeexInvoke](https://github.com/lightningviper/lightningstools/tree/master/src/SpeexInvoke/)  
 C# wrapper for the open-source Speex audio compression library.  
