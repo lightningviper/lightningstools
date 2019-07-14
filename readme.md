@@ -5,16 +5,16 @@
 
 ### [End User Applications](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications)
 
-#### [ADI Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/ADI%20Test%20Tool)
+#### [ADI Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/ADI%20Test%20Tool/Version%200.1.0.0/ADITestTool_v0_1_0_0__x86.zip)
 Desktop application for testing Henkie's F-16 ADI Support Board with a real ARU-42/A Attitude Director Indicator instrument.
 
-#### [Analog Devices AD536x-AD537x Eval Board Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Analog%20Devices%20AD536x-AD537x%20Eval%20Board%20Test%20Tool)
+#### [Analog Devices AD536x-AD537x Eval Board Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Analog%20Devices%20AD536x-AD537x%20Eval%20Board%20Test%20Tool/Version%200.1.0.0/AnalogDevicesAD536xAD537xEvalBoardTestTool_v0_1_0_0.zip)
 Desktop application for testing Analog Devices AD536x and AD537x digital-to-analog converter evaluation boards [providing +/-10VDC analog outputs in order to drive military-grade simulated flight instruments]. Demonstrates the use of the `AnalogDevices` class library.
 
-#### [F16 Center Pedestal Display](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/F16%20Center%20Pedestal%20Display)
+#### [F16 Center Pedestal Display](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/F16%20Center%20Pedestal%20Display/Version%200.5.8.1/F16CPD_v0_5_8_1__x86.zip)
 Desktop application providing a semi-realistic simulation of the Raytheon F-16 Center Pedestal Display for use with Falcon BMS.  
 
-#### [Falcon BMS Keyfile Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Keyfile%20Viewer)
+#### [Falcon BMS Keyfile Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Keyfile%20Viewer/Version%200.1.0.0/Falcon_BMS_Keyfile_Viewer_v0_1_0_0__x86.zip)
 Desktop application for viewing Falcon .key files.  Demonstrates the use of the `F4KeyFile` library.
 
 #### [Falcon BMS Shared Memory Mirror](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Mirror/for%20Falcon%20BMS%204.34/F4SharedMemMirror_for_Falcon_BMS_4_34__x86.zip)
@@ -26,22 +26,22 @@ Desktop application that enables recording and playback of Falcon shared memory 
 #### [Falcon BMS Shared Memory Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Viewer/for%20Falcon%20BMS%204.34/Shared_Memory_Viewer_for_Falcon_BMS_4_34__x86.zip)
 Desktop application that displays the contents of Falcon's shared memory areas.
 
-#### [Falcon BMS Textures Shared Memory Tester](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Textures%20Shared%20Memory%20Tester)
+#### [Falcon BMS Textures Shared Memory Tester](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Textures%20Shared%20Memory%20Tester/Version%200.1.4.0/Falcon_BMS_Textures_Shared_Memory_Tester_v0_1_4_0__x86.zip)
 Desktop application for displaying the contents of Falcon BMS' "Textures Shared Memory" area.   Demonstrates the use of the `F4TexSharedMem` library.
 
-#### [MFDExtractor](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20MFD%20Extractor)
+#### [MFDExtractor](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20MFD%20Extractor/Version%200.6.3.0/Falcon_MFD_Extractor_v0_6_3_0__x86.zip)
 End user client/server application that allows extracting various flight instruments from Falcon.    
 
-#### [JoyMapper](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/JoyMapper)
+#### [JoyMapper](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/JoyMapper/Version%200.4.1.0/JoyMapper_v0_4_1_0__x86_Setup.zip)
 Desktop application for remapping analog and digital inputs from DirectInput devices, BetaInnovations non-Joystick-class HID devices, and PHCC devices using PPJoy virtual joystick drivers.  
 
-#### [PHCC Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/PHCC%20Test%20Tool)
+#### [PHCC Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/PHCC%20Test%20Tool/v0.1.2.0/PHCC_Test_Tool_v0_1_2_0__x86.zip)
 End-user desktop application providing basic testing capabilities for the PHCC motherboard and attached peripherals.  Demonstrates the use of the `PHCC` class library.
 
-#### [SDI Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/SDI%20Test%20Tool)
+#### [SDI Test Tool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/SDI%20Test%20Tool/Version%200.1.0.0/SDITestTool_v0_1_0_0__x86.zip)
 End-user desktop application for testing Henkie's Digital-to-Synchro (SDI) interface card. Demonstrates the use of the `SDI` class library.
 
-#### [TlkTool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/TlkTool)
+#### [TlkTool](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/TlkTool/TlkTool_v0_2_4_0__x86.zip)
 End-user command-line (console) application which provides the ability to edit Falcon's AI comms databases (falcon.TLK, commFile.bin, fragFile.bin, and evalFile.bin files).  
 - Supports decompressing and extracting any/all of the individual compressed audio files from within the .TLK file, to ordinary .WAV files or compressed .LH or .SPX files.  
 - Supports exporting the commFile.bin, fragFile.bin, and evalFile.bin files to plain colon-delimited text files, which can then be edited in any text editor or spreadsheet.  
