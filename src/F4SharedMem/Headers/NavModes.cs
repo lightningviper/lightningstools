@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
-    public enum NavModes : int
+    public enum NavModes : byte
     {
         ILS_TACAN = 0,
         TACAN = 1,

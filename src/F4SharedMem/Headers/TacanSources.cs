@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
-    public enum TacanSources : int
+    public enum TacanSources : byte
     {
         UFC = 0,
         AUX = 1,

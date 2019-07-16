@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum LightBits3 : int
+    public enum LightBits3 : uint
     {
         // Elec panel
         FlcsPmg = 0x1,

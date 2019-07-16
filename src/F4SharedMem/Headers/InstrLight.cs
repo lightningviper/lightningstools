@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
     // instrument backlight brightness
     public enum InstrLight : byte

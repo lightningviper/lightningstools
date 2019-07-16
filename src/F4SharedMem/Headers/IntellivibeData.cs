@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct IntellivibeData
@@ -33,7 +28,7 @@ namespace F4SharedMem.Headers
         [MarshalAs(UnmanagedType.I4)]
         public int CollisionCounter; // Collisions
 
-        [MarshalAs (UnmanagedType.U1)]
+        [MarshalAs(UnmanagedType.U1)]
         public bool IsFiringGun; // gun is firing
 
         [MarshalAs(UnmanagedType.U1)]

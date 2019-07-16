@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {	// BLINKING LIGHTS - only indicating *IF* a lamp is blinking, not implementing the actual on/off/blinking pattern logic!
-    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum BlinkBits : int
+    public enum BlinkBits : uint
     {
         // currently working
         OuterMarker = 0x01,	// defined in HsiBits    - slow flashing for outer marker

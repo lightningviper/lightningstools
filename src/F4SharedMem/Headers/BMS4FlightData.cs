@@ -13,7 +13,6 @@ namespace F4SharedMem.Headers
     // 116: bitfields are now unsigned instead of signed
     // 117: added ATF_Not_Engaged to LightBits3
 
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct BMS4FlightData
@@ -117,6 +116,7 @@ namespace F4SharedMem.Headers
         //TacanChannel
         public int UFCTChan;
         public int AUXTChan;
+
         //RWR
         public int RwrObjectCount;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
@@ -139,11 +139,13 @@ namespace F4SharedMem.Headers
         public float aft;
         public float total;
 
-        public int VersionNum;    //Version of Mem area
+        public int VersionNum;    // Version of FlightData mem area
 
+        // New values added here for header file compatibility but not implemented
+        // in this version of the code at present.
         public float headX;        // Head X offset from design eye (feet)
         public float headY;        // Head Y offset from design eye (feet)
         public float headZ;        // Head Z offset from design eye (feet)
-        public int MainPower;
+        public int MainPower; // Main Power switch state, 0=down, 1=middle, 2=up
     }
 }

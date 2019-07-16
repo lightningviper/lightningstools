@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum HsiBits : int
+    public enum HsiBits : uint
     {
         ToTrue = 0x01,    // HSI_FLAG_TO_TRUE == 1, TO
         IlsWarning = 0x02,    // HSI_FLAG_ILS_WARN
@@ -26,7 +24,7 @@ namespace F4SharedMem.Headers
         MiddleMarker = 0x8000,  // MARKER beacon light for middle marker
         FromTrue = 0x10000, // HSI_FLAG_TO_TRUE == 2, FROM
 
-        Flying = -2147483648,  //0x80000000, // true if player is attached to an aircraft (i.e. not in UI state).  NOTE: Not a lamp bit
+        Flying = 0x80000000, // true if player is attached to an aircraft (i.e. not in UI state).  NOTE: Not a lamp bit
 
         // Used with the MAL/IND light code to light up "everything"
         // please update this is you add/change bits!

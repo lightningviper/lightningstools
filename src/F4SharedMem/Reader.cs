@@ -1,13 +1,11 @@
+using F4SharedMem.Headers;
+using F4SharedMem.Win32;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using F4SharedMem.Headers;
-using F4SharedMem.Win32;
 
 namespace F4SharedMem
 {
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDual)]
     public sealed class Reader : IDisposable
     {
         private const string PrimarySharedMemoryAreaFileName = "FalconSharedMemoryArea";
@@ -67,7 +65,7 @@ namespace F4SharedMem
             if (!_hOsbSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
                 var fileSizeBytes = GetMaxMemFileSize(_lpOsbSharedMemoryAreaBaseAddress);
-                if (fileSizeBytes > Marshal.SizeOf(typeof (OSBData))) fileSizeBytes = Marshal.SizeOf(typeof (OSBData));
+                if (fileSizeBytes > Marshal.SizeOf(typeof(OSBData))) fileSizeBytes = Marshal.SizeOf(typeof(OSBData));
                 for (var i = 0; i < fileSizeBytes; i++)
                 {
                     try
@@ -196,8 +194,8 @@ namespace F4SharedMem
             if (!_hSecondarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
                 var fileSizeBytes = GetMaxMemFileSize(_lpSecondarySharedMemoryAreaBaseAddress);
-                if (fileSizeBytes > Marshal.SizeOf(typeof (FlightData2)))
-                    fileSizeBytes = Marshal.SizeOf(typeof (FlightData2));
+                if (fileSizeBytes > Marshal.SizeOf(typeof(FlightData2)))
+                    fileSizeBytes = Marshal.SizeOf(typeof(FlightData2));
                 for (var i = 0; i < fileSizeBytes; i++)
                 {
                     try
@@ -228,8 +226,8 @@ namespace F4SharedMem
             if (!_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
                 var fileSizeBytes = GetMaxMemFileSize(_lpPrimarySharedMemoryAreaBaseAddress);
-                if (fileSizeBytes > Marshal.SizeOf(typeof (BMS4FlightData)))
-                    fileSizeBytes = Marshal.SizeOf(typeof (BMS4FlightData));
+                if (fileSizeBytes > Marshal.SizeOf(typeof(BMS4FlightData)))
+                    fileSizeBytes = Marshal.SizeOf(typeof(BMS4FlightData));
                 for (var i = 0; i < fileSizeBytes; i++)
                 {
                     try
@@ -248,7 +246,7 @@ namespace F4SharedMem
 
         public FlightData GetCurrentData()
         {
-            var dataType = typeof (BMS4FlightData);
+            var dataType = typeof(BMS4FlightData);
 
             if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
@@ -259,18 +257,18 @@ namespace F4SharedMem
                 return null;
             }
 
-            var data = Convert.ChangeType(Marshal.PtrToStructure(_lpPrimarySharedMemoryAreaBaseAddress, dataType),dataType);
-            var toReturn = new FlightData((BMS4FlightData) data);
+            var data = Convert.ChangeType(Marshal.PtrToStructure(_lpPrimarySharedMemoryAreaBaseAddress, dataType), dataType);
+            var toReturn = new FlightData((BMS4FlightData)data);
 
             if (!_hSecondarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
-                data = (FlightData2)(Marshal.PtrToStructure(_lpSecondarySharedMemoryAreaBaseAddress, typeof (FlightData2)));
+                data = (FlightData2)(Marshal.PtrToStructure(_lpSecondarySharedMemoryAreaBaseAddress, typeof(FlightData2)));
                 toReturn.PopulateFromStruct(data);
             }
 
             if (!_hOsbSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
-                data = (OSBData)(Marshal.PtrToStructure(_lpOsbSharedMemoryAreaBaseAddress, typeof (OSBData)));
+                data = (OSBData)(Marshal.PtrToStructure(_lpOsbSharedMemoryAreaBaseAddress, typeof(OSBData)));
                 toReturn.PopulateFromStruct(data);
             }
 
@@ -298,13 +296,13 @@ namespace F4SharedMem
         private void ConnectToFalcon()
         {
             if (!_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero)) return;
-            
+
             _hPrimarySharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ,
                 false, PrimarySharedMemoryAreaFileName);
             _lpPrimarySharedMemoryAreaBaseAddress =
                 NativeMethods.MapViewOfFile(_hPrimarySharedMemoryAreaFileMappingObject, NativeMethods.SECTION_MAP_READ,
                     0, 0, IntPtr.Zero);
-            
+
             _hSecondarySharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(
                 NativeMethods.SECTION_MAP_READ, false, SecondarySharedMemoryFileName);
             _lpSecondarySharedMemoryAreaBaseAddress =

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum PowerBits : int
+    public enum PowerBits : uint
     {
         BusPowerBattery = 0x01,	// true if at least the battery bus is powered
         BusPowerEmergency = 0x02,	// true if at least the emergency bus is powered

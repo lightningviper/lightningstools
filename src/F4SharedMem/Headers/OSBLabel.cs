@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 namespace F4SharedMem.Headers
 {
     // MFD On Screen Button Labels(OF)
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct OSBLabel

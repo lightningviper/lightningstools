@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct FlightData2
@@ -37,13 +36,13 @@ namespace F4SharedMem.Headers
         public byte navMode;  // current mode selected for HSI/eHSI (added in BMS4)
         public float aauz; // Ownship barometric altitude given by AAU (depends on calibration)
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)TacanSources.NUMBER_OF_SOURCES)]
-        public byte[] tacanInfo;      // Tacan band/mode settings for UFC and AUX COMM
+        public sbyte[] tacanInfo;      // Tacan band/mode settings for UFC and AUX COMM
 
         // VERSION 2
         public int AltCalReading;	// barometric altitude calibration (depends on CalType)
-        public int altBits;		// various altimeter bits, see AltBits enum for details
-        public int powerBits;		// Ownship power bus / generator states, see PowerBits enum for details
-        public int blinkBits;		// Cockpit indicator lights blink status, see BlinkBits enum for details
+        public uint altBits;		// various altimeter bits, see AltBits enum for details
+        public uint powerBits;		// Ownship power bus / generator states, see PowerBits enum for details
+        public uint blinkBits;		// Cockpit indicator lights blink status, see BlinkBits enum for details
         // NOTE: these bits indicate only *if* a lamp is blinking, in addition to the
         // existing on/off bits. It's up to the external program to implement the
         // *actual* blinking.
@@ -64,7 +63,7 @@ namespace F4SharedMem.Headers
 
         // VERSION 5 / 8
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = RWRINFO_SIZE)]
-        public byte[] RwrInfo;     //[512] New RWR Info
+        public sbyte[] RwrInfo;     //[512] New RWR Info
         public float lefPos;       // Ownship LEF position
         public float tefPos;       // Ownship TEF position
 
@@ -72,13 +71,13 @@ namespace F4SharedMem.Headers
         public float vtolPos;      // Ownship VTOL exhaust angle
 
         // VERSION 9
-        public byte pilotsOnline;                  // Number of pilots in an MP session
+        public sbyte pilotsOnline;                  // Number of pilots in an MP session
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_CALLSIGNS)]
         public Callsign_LineOfText[] pilotsCallsign;        // [MAX_CALLSIGNS][CALLSIGN_LEN] List of pilots callsign connected to an MP session
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_CALLSIGNS)]
-        public byte[] pilotsStatus;                // [MAX_CALLSIGNS] Status of the MP pilots, see enum FlyStates
+        public sbyte[] pilotsStatus;                // [MAX_CALLSIGNS] Status of the MP pilots, see enum FlyStates
 
 
         //VERSION 10
@@ -90,18 +89,18 @@ namespace F4SharedMem.Headers
 
         //VERSION 12
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public short[] RTT_size;                 // RTT overall width and height
+        public ushort[] RTT_size;                 // RTT overall width and height
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)RTT_areas.RTT_noOfAreas * 4)]
-        public short[] RTT_area;  // For each area: left/top/right/bottom
+        public ushort[] RTT_area;  // For each area: left/top/right/bottom
 
         // VERSION 13
-        public byte iffBackupMode1Digit1;                     // IFF panel backup Mode1 digit 1
-        public byte iffBackupMode1Digit2;                     // IFF panel backup Mode1 digit 2
-        public byte iffBackupMode3ADigit1;                    // IFF panel backup Mode3A digit 1
-        public byte iffBackupMode3ADigit2;                    // IFF panel backup Mode3A digit 2
+        public sbyte iffBackupMode1Digit1;                     // IFF panel backup Mode1 digit 1
+        public sbyte iffBackupMode1Digit2;                     // IFF panel backup Mode1 digit 2
+        public sbyte iffBackupMode3ADigit1;                    // IFF panel backup Mode3A digit 1
+        public sbyte iffBackupMode3ADigit2;                    // IFF panel backup Mode3A digit 2
 
         // VERSION 14
-        public byte instrLight;  // (unsigned char) current instrument backlight brightness setting, see InstrLight enum for details
+        public sbyte instrLight;  // (unsigned char) current instrument backlight brightness setting, see InstrLight enum for details
 
     }
 

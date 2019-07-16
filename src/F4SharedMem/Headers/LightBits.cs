@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum LightBits : int
+    public enum LightBits : uint
     {
         MasterCaution = 0x1,  // Left eyebrow
 
@@ -49,10 +47,10 @@ namespace F4SharedMem.Headers
 
         AutoPilotOn = 0x40000000,  // TRUE if is AP on.  NB: This is not a lamp bit!
         //TFR_STBY = 0x80000000,  // MISC panel; lower half of split face TFR lamp
-        TFR_STBY = -2147483648,  // MISC panel; lower half of split face TFR lamp
+        TFR_STBY = 0x80000000,  // MISC panel; lower half of split face TFR lamp
 
         // Used with the MAL/IND light code to light up "everything"
         // please update this is you add/change bits!
-        AllLampBitsOn = -1073741841 //0xBFFFFFEF
+        AllLampBitsOn = 0xBFFFFFEF
     };
 }

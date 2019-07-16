@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
-    public enum FlyStates : byte
+    public enum FlyStates : sbyte
     {
         IN_UI = 0, // UI      - in the UI
         LOADING = 1, // UI>3D   - loading the sim data

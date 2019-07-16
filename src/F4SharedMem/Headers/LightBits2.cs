@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum LightBits2 : int
+    public enum LightBits2 : uint
     {
         // Threat Warning Prime
         HandOff = 0x1,
@@ -52,10 +50,12 @@ namespace F4SharedMem.Headers
 
         TFR_ENGAGED = 0x20000000,  // MISC panel; upper half of split face TFR lamp
         GEARHANDLE = 0x40000000,  // Lamp in gear handle lights on fault or gear in motion
-        ENGINE = -2147483648, //0x80000000,  // Lower half of right eyebrow ENG FIRE/ENGINE lamp
+        ENGINE = 0x80000000,  // Lower half of right eyebrow ENG FIRE/ENGINE lamp
 
         // Used with the MAL/IND light code to light up "everything"
         // please update this is you add/change bits!
-        AllLampBits2On = -4033//0xFFFFF03F  //ATARIBABY EWS CMDS bits excluded from test lamps
+        AllLampBits2On = 0xFFFFF03F,  //ATARIBABY EWS CMDS bits excluded from test lamps
+        AllLampBits2OnExceptCarapace = AllLampBits2On ^ HandOff ^ Launch ^ PriMode ^ Naval ^ Unk ^ TgtSep ^ AuxSrch ^ AuxAct ^ AuxLow ^ AuxPwr
+
     };
 }

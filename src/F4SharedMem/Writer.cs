@@ -101,7 +101,7 @@ namespace F4SharedMem
             CloseSharedMemFile(ref _lpRadioClientControlSharedMemoryAreaBaseAddress, ref _hRadioClientControlSharedMemoryAreaFileMappingObject);
             CloseSharedMemFile(ref _lpRadioClientStatusSharedMemoryAreaBaseAddress, ref _hRadioClientStatusSharedMemoryAreaFileMappingObject);
         }
-        private static void CloseSharedMemFile(ref IntPtr lpBaseAddress, ref IntPtr hFileMappingObject) 
+        private static void CloseSharedMemFile(ref IntPtr lpBaseAddress, ref IntPtr hFileMappingObject)
         {
             if (!hFileMappingObject.Equals(IntPtr.Zero))
             {

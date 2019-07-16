@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
     // RTT area indices
-    public enum RTT_areas : int
+    public enum RTT_areas : byte
     {
         RTT_HUD = 0,
         RTT_PFL,

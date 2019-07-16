@@ -3,40 +3,39 @@ using System.Runtime.InteropServices;
 
 namespace F4SharedMem.Headers
 {
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct RadioClientControl
     {
         [MarshalAs(UnmanagedType.I4)]
-        public int  PortNumber;                        // socket number to use in contacting the server
+        public int PortNumber;                        // socket number to use in contacting the server
 
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType=UnmanagedType.U1, SizeConst=Constants.RCC_STRING_LENGTH)]
-	    public byte[] Address;                       // string representation of server IPv4 dotted number address
-        
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = Constants.RCC_STRING_LENGTH)]
-	    public byte[] Password;                    // plain text of password for voice server access
-        
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = Constants.RCC_STRING_LENGTH)]
-	    public byte[] Nickname;                      // player nickname 
-        
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst=Constants.NUMBER_OF_RADIOS)]
-	    public RadioChannel[] Radios;  
-        
-        [MarshalAs(UnmanagedType.U1)]
-	    public bool SignalConnect;                     // tell the client we are ready to try a connection with the current settings
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.RCC_STRING_LENGTH)]
+        public sbyte[] Address;                       // string representation of server IPv4 dotted number address
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.RCC_STRING_LENGTH)]
+        public sbyte[] Password;                    // plain text of password for voice server access
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.RCC_STRING_LENGTH)]
+        public sbyte[] Nickname;                      // player nickname 
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.NUMBER_OF_RADIOS)]
+        public RadioChannel[] Radios;
 
         [MarshalAs(UnmanagedType.U1)]
-	    public bool TerminateClient;                   // indicate to external client that it should shut down now
+        public bool SignalConnect;                     // tell the client we are ready to try a connection with the current settings
 
         [MarshalAs(UnmanagedType.U1)]
-	    public bool FlightMode;						 // true when in 3D world, false for UI state
+        public bool TerminateClient;                   // indicate to external client that it should shut down now
 
         [MarshalAs(UnmanagedType.U1)]
-	    public bool UseAGC;							 // true when external voice client should use AGC features
+        public bool FlightMode;						 // true when in 3D world, false for UI state
+
+        [MarshalAs(UnmanagedType.U1)]
+        public bool UseAGC;							 // true when external voice client should use AGC features
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.NUMBER_OF_DEVICES)]
-	    public RadioDevice[] Devices;
+        public RadioDevice[] Devices;
 
         [MarshalAs(UnmanagedType.I4)]
         public int PlayerCount;                        // number of players for whom we have data in the telemetry map
@@ -45,9 +44,8 @@ namespace F4SharedMem.Headers
         public Telemetry[] PlayerMap;    // array of player telemetry data relative to ownship (held in entry zero)
     }
 
-    [ComVisible(true)]
     [Serializable]
-    public enum Radios
+    public enum Radios : byte
     {
         UHF = 0,
         VHF,
@@ -55,15 +53,13 @@ namespace F4SharedMem.Headers
         NUMBER_OF_RADIOS,
     };
 
-    [ComVisible(true)]
     [Serializable]
-    public enum Devices
+    public enum Devices : byte
     {
         MAIN = 0,
         NUMBER_OF_DEVICES,
     };
 
-    [ComVisible(true)]
     [Serializable]
     public struct Constants
     {
@@ -77,7 +73,6 @@ namespace F4SharedMem.Headers
         public const int RCC_STRING_LENGTH = 64;
     }
 
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Telemetry
@@ -92,8 +87,8 @@ namespace F4SharedMem.Headers
         [MarshalAs(UnmanagedType.U4)]
         public uint Flags;  // status information
 
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = Constants.NAME_LEN + 1)]
-        public byte[] LogbookName;  // copy of player logbook name
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.NAME_LEN + 1)]
+        public sbyte[] LogbookName;  // copy of player logbook name
 
         [MarshalAs(UnmanagedType.U1)]
         public byte padding1;
@@ -105,7 +100,6 @@ namespace F4SharedMem.Headers
         public byte padding3;
     }
 
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Explicit)]
     public struct RadioDevice
@@ -115,7 +109,6 @@ namespace F4SharedMem.Headers
         public int IcVolume; // INTERCOM volume
     }
 
-    [ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct RadioChannel
@@ -138,10 +131,9 @@ namespace F4SharedMem.Headers
         [MarshalAs(UnmanagedType.U1)]
         public byte padding2;
     }
-    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum TelemetryFlags:byte
+    public enum TelemetryFlags : byte
     {
         NoFlags = 0x00,
         HasPlayerLoS = 0x01,

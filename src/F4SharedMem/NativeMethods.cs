@@ -36,7 +36,7 @@ namespace F4SharedMem.Win32
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr OpenFileMapping(uint dwDesiredAccess, 
+        public static extern IntPtr OpenFileMapping(uint dwDesiredAccess,
             bool bInheritHandle,
            string lpName);
 
@@ -45,11 +45,11 @@ namespace F4SharedMem.Win32
            dwDesiredAccess, uint dwFileOffsetHigh, uint dwFileOffsetLow,
            IntPtr dwNumberOfBytesToMap);
 
-        [DllImport("kernel32.dll", SetLastError=true)]
+        [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool UnmapViewOfFile(IntPtr lpBaseAddress);
 
-        [DllImport("kernel32.dll", SetLastError=true)]
+        [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CloseHandle(IntPtr hObject);
 
@@ -61,7 +61,7 @@ namespace F4SharedMem.Win32
         );
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct MEMORY_BASIC_INFORMATION 
+        public struct MEMORY_BASIC_INFORMATION
         {
             public UIntPtr BaseAddress;
             public UIntPtr AllocationBase;

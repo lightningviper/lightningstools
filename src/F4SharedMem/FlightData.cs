@@ -1,21 +1,15 @@
+using F4SharedMem.Headers;
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
-using F4SharedMem.Headers;
-using System.Collections.Generic;
 
 namespace F4SharedMem
 {
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDual)]
     [Serializable]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public sealed class FlightData
     {
-        [ComVisible(true)]
         [Serializable]
         public struct OptionSelectButtonLabel
         {
@@ -30,12 +24,11 @@ namespace F4SharedMem
         {
             PopulateFromStruct(data);
         }
-        private static Dictionary<Type, FieldInfo[]> _headerFields =new Dictionary<Type, FieldInfo[]>();
+        private static Dictionary<Type, FieldInfo[]> _headerFields = new Dictionary<Type, FieldInfo[]>();
         private static Dictionary<string, FieldInfo> _flightDataFields = new Dictionary<string, FieldInfo>();
         internal void PopulateFromStruct<T>(T data)
         {
-            FieldInfo[] relevantHeaderFields = null;
-            var foundRelevantHeaderFields = _headerFields.TryGetValue(data.GetType(), out relevantHeaderFields);
+            var foundRelevantHeaderFields = _headerFields.TryGetValue(data.GetType(), out FieldInfo[] relevantHeaderFields);
             if (!foundRelevantHeaderFields)
             {
                 relevantHeaderFields = data.GetType().GetFields(BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -43,22 +36,21 @@ namespace F4SharedMem
                 {
                     return;
                 }
-                _headerFields[data.GetType()]= relevantHeaderFields;
+                _headerFields[data.GetType()] = relevantHeaderFields;
             }
             foreach (var currentField in relevantHeaderFields)
             {
-                FieldInfo thisFlightDataField = null;
-                var fieldInfoFoundInCache=_flightDataFields.TryGetValue(currentField.Name, out thisFlightDataField);
+                var fieldInfoFoundInCache = _flightDataFields.TryGetValue(currentField.Name, out FieldInfo thisFlightDataField);
                 if (!fieldInfoFoundInCache)
                 {
                     thisFlightDataField = typeof(FlightData).GetField(currentField.Name, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                    if (thisFlightDataField !=null)
+                    if (thisFlightDataField != null)
                     {
-                        _flightDataFields[currentField.Name]=thisFlightDataField;
+                        _flightDataFields[currentField.Name] = thisFlightDataField;
                     }
                 }
-                    
-                    
+
+
                 if (thisFlightDataField == null) continue;
                 var currentFieldType = currentField.FieldType;
                 if (currentFieldType.IsArray)
@@ -81,10 +73,6 @@ namespace F4SharedMem
                         thisFlightDataField.SetValue(this, currentValue);
                     }
                 }
-                else if (currentFieldType.Name.ToLowerInvariant().Contains("uint"))
-                {
-                    thisFlightDataField.SetValue(this, BitConverter.ToInt32(BitConverter.GetBytes((uint)currentField.GetValue(data)), 0));
-                }
                 else
                 {
 
@@ -95,7 +83,7 @@ namespace F4SharedMem
 
         private void PopulateDedPflLineOfText(object data, FieldInfo currentField, FieldInfo thisField)
         {
-            var currentValue = (DED_PFL_LineOfText[]) currentField.GetValue(data);
+            var currentValue = (DED_PFL_LineOfText[])currentField.GetValue(data);
             var valuesToAssign = new string[currentValue.Length];
             for (var j = 0; j < currentValue.Length; j++)
             {
@@ -108,7 +96,7 @@ namespace F4SharedMem
                     {
                         if (chr == 0x02)
                         {
-                            sb.Append((char) chr);
+                            sb.Append((char)chr);
                         }
                         else
                         {
@@ -119,7 +107,7 @@ namespace F4SharedMem
                     {
                         if (chr != 0)
                         {
-                            sb.Append((char) chr);
+                            sb.Append((char)chr);
                         }
                     }
                 }
@@ -130,7 +118,7 @@ namespace F4SharedMem
 
         private void PopulateCallsignLineOfText(object data, FieldInfo currentField, FieldInfo thisField)
         {
-            var currentValue = (Callsign_LineOfText[]) currentField.GetValue(data);
+            var currentValue = (Callsign_LineOfText[])currentField.GetValue(data);
             var valuesToAssign = new string[currentValue.Length];
             for (var j = 0; j < currentValue.Length; j++)
             {
@@ -138,7 +126,7 @@ namespace F4SharedMem
                 var sb = new StringBuilder(currentItem.chars.Length);
                 foreach (var chr in currentItem.chars.Where(chr => chr != 0))
                 {
-                    sb.Append((char) chr);
+                    sb.Append((char)chr);
                 }
                 valuesToAssign[j] = sb.ToString();
             }
@@ -147,7 +135,7 @@ namespace F4SharedMem
 
         private void PopulateOSBLabel(object data, FieldInfo currentField, FieldInfo thisField)
         {
-            var currentValue = (OSBLabel[]) currentField.GetValue(data);
+            var currentValue = (OSBLabel[])currentField.GetValue(data);
             var valuesToAssign = new OptionSelectButtonLabel[currentValue.Length];
             for (var j = 0; j < currentValue.Length; j++)
             {
@@ -163,7 +151,7 @@ namespace F4SharedMem
                     }
                     else
                     {
-                        lineBuilder.Append((char) chr);
+                        lineBuilder.Append((char)chr);
                     }
                 }
                 label.Line1 = lineBuilder.ToString();
@@ -176,7 +164,7 @@ namespace F4SharedMem
                     }
                     else
                     {
-                        lineBuilder.Append((char) chr);
+                        lineBuilder.Append((char)chr);
                     }
                 }
                 label.Line2 = lineBuilder.ToString();
@@ -219,7 +207,7 @@ namespace F4SharedMem
         public float oilPressure2; // Ownship Oil Pressure2 (Percent 0-100)
         public float hydPressureA;  // Ownship Hydraulic Pressure A
         public float hydPressureB;  // Ownship Hydraulic Pressure B
-        public int lightBits;    // Cockpit Indicator Lights, one bit per bulb. See enum
+        public uint lightBits;    // Cockpit Indicator Lights, one bit per bulb. See enum
 
         // These are inputs. Use them carefully
         // NB: these do not work when TrackIR device is enabled
@@ -228,8 +216,8 @@ namespace F4SharedMem
         public float headYaw;      // Head yaw offset from design eye (radians)
 
         // new lights
-        public int lightBits2;   // Cockpit Indicator Lights, one bit per bulb. See enum
-        public int lightBits3;   // Cockpit Indicator Lights, one bit per bulb. See enum
+        public uint lightBits2;   // Cockpit Indicator Lights, one bit per bulb. See enum
+        public uint lightBits3;   // Cockpit Indicator Lights, one bit per bulb. See enum
 
         // chaff/flare
         public float ChaffCount;   // Number of Chaff left
@@ -268,7 +256,7 @@ namespace F4SharedMem
         public float TrimYaw;    // Value of trim in yaw axis, -0.5 to +0.5
 
         // HSI flags
-        public int hsiBits;      // HSI flags
+        public uint hsiBits;      // HSI flags
 
         //DED Lines
         public string[] DEDLines;  //25 usable chars
@@ -286,11 +274,11 @@ namespace F4SharedMem
         public int RwrObjectCount;
         public int[] RWRsymbol;
         public float[] bearing;
-        public int[] missileActivity;
-        public int[] missileLaunch;
-        public int[] selected;
+        public uint[] missileActivity;
+        public uint[] missileLaunch;
+        public uint[] selected;
         public float[] lethality;
-        public int[] newDetection;
+        public uint[] newDetection;
 
         //fuel values
         public float fwd;
@@ -307,45 +295,45 @@ namespace F4SharedMem
         public byte navMode; //HSI nav mode (new in BMS4)
         public float aauz; //AAU altimeter indicated altitude (new in BMS4)
         public int AltCalReading;	// barometric altitude calibration (depends on CalType)
-        public int altBits;		// various altimeter bits, see AltBits enum for details
+        public uint altBits;		// various altimeter bits, see AltBits enum for details
         public float cabinAlt;		// Ownship cabin altitude
 
         public int BupUhfPreset;	// BUP UHF channel preset
         public int BupUhfFreq;		// BUP UHF channel frequency
 
-        public int powerBits;		// Ownship power bus / generator states, see PowerBits enum for details
-        public int blinkBits;		// Cockpit indicator lights blink status, see BlinkBits enum for details
+        public uint powerBits;		// Ownship power bus / generator states, see PowerBits enum for details
+        public uint blinkBits;		// Cockpit indicator lights blink status, see BlinkBits enum for details
         // NOTE: these bits indicate only *if* a lamp is blinking, in addition to the
         // existing on/off bits. It's up to the external program to implement the
         // *actual* blinking.
         public int cmdsMode;		// Ownship CMDS mode state, see CmdsModes enum for details
         public int currentTime;	    // Current time in seconds (max 60 * 60 * 24)
         public short vehicleACD;	// Ownship ACD index number, i.e. which aircraft type are we flying.
-        public byte[] tacanInfo;    //TACAN info (new in BMS4)
+        public sbyte[] tacanInfo;    //TACAN info (new in BMS4)
         public float fuelFlow2;     // Ownship fuel flow2 (Lbs/Hour)
-        public byte[] RwrInfo;      //[512] New RWR Info
+        public sbyte[] RwrInfo;      //[512] New RWR Info
         public float lefPos;       // Ownship LEF position
         public float tefPos;       // Ownship TEF position
         public float vtolPos;      // Ownship VTOL exhaust angle
 
-        public byte pilotsOnline;       // Number of pilots in an MP session
+        public sbyte pilotsOnline;       // Number of pilots in an MP session
 
         public string[] pilotsCallsign;   // [MAX_CALLSIGNS][CALLSIGN_LEN] List of pilots callsign connected to an MP session
-        public byte[] pilotsStatus;     // [MAX_CALLSIGNS] Status of the MP pilots, see enum FlyStates
+        public sbyte[] pilotsStatus;     // [MAX_CALLSIGNS] Status of the MP pilots, see enum FlyStates
 
         public float bumpIntensity; // Intensity of a "bump" while taxiing/rolling, 0..1
         public float latitude; // Ownship latitude in degrees (as known by avionics)
         public float longitude; // Ownship longitude in degrees (as known by avionics)
 
         //VERSION 12
-        public short[] RTT_size;  //[2]                    RTT overall width and height
-        public short[] RTT_area;  // [RTT_noOfAreas][4]    For each area: left/top/right/bottom
+        public ushort[] RTT_size;  //[2]                    RTT overall width and height
+        public ushort[] RTT_area;  // [RTT_noOfAreas][4]    For each area: left/top/right/bottom
 
         // VERSION 13
-        public byte iffBackupMode1Digit1;                     // IFF panel backup Mode1 digit 1
-        public byte iffBackupMode1Digit2;                     // IFF panel backup Mode1 digit 2
-        public byte iffBackupMode3ADigit1;                    // IFF panel backup Mode3A digit 1
-        public byte iffBackupMode3ADigit2;                    // IFF panel backup Mode3A digit 2
+        public sbyte iffBackupMode1Digit1;                     // IFF panel backup Mode1 digit 1
+        public sbyte iffBackupMode1Digit2;                     // IFF panel backup Mode1 digit 2
+        public sbyte iffBackupMode3ADigit1;                    // IFF panel backup Mode3A digit 1
+        public sbyte iffBackupMode3ADigit2;                    // IFF panel backup Mode3A digit 2
 
         // VERSION 14
         public byte instrLight;  // (unsigned char) current instrument backlight brightness setting, see InstrLight enum for details
@@ -355,7 +343,7 @@ namespace F4SharedMem
         public OptionSelectButtonLabel[] rightMFD;
         public object ExtensionData;
 
-        public bool UfcTacanIsAA { get { return (tacanInfo !=null && ((tacanInfo[(int)TacanSources.UFC] & (byte)TacanBits.mode) != 0)); } }
+        public bool UfcTacanIsAA { get { return (tacanInfo != null && ((tacanInfo[(int)TacanSources.UFC] & (byte)TacanBits.mode) != 0)); } }
         public bool AuxTacanIsAA { get { return (tacanInfo != null && ((tacanInfo[(int)TacanSources.AUX] & (byte)TacanBits.mode) != 0)); } }
         public bool UfcTacanIsX { get { return (tacanInfo != null && ((tacanInfo[(int)TacanSources.UFC] & (byte)TacanBits.band) != 0)); } }
         public bool AuxTacanIsX { get { return (tacanInfo != null && ((tacanInfo[(int)TacanSources.AUX] & (byte)TacanBits.band) != 0)); } }
@@ -364,6 +352,6 @@ namespace F4SharedMem
 
         public RadioClientControl RadioClientControlData { get; set; }
         public RadioClientStatus RadioClientStatus { get; set; }
-        
+
     }
 }
