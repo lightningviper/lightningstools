@@ -460,13 +460,13 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                 ChaffCount = (float)_chaffCountInputSignal.State,
                 FlareCount = (float)_flareCountInputSignal.State,
                 lethality = _rwrObjectLethalityInputSignals.OrderBy(x => x.Index).Select(x => (float)x.State).ToArray(),
-                missileActivity = _rwrObjectMissileActivityFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1: 0)).ToArray(),
-                missileLaunch = _rwrObjectMissileLaunchFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1 : 0)).ToArray(),
-                newDetection = _rwrObjectNewDetectionFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1 : 0)).ToArray(),
+                missileActivity = _rwrObjectMissileActivityFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1u: 0u)).ToArray(),
+                missileLaunch = _rwrObjectMissileLaunchFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1u : 0u)).ToArray(),
+                newDetection = _rwrObjectNewDetectionFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1u : 0u)).ToArray(),
                 RwrInfo = Encoding.Default.GetBytes(_rwrInfoInputSignal.State ?? string.Empty),
                 RwrObjectCount = (int)_rwrSymbolCountInputSignal.State,
                 RWRsymbol = _rwrObjectSymbolIDInputSignals.OrderBy(x => x.Index).Select(x => (int)x.State).ToArray(),
-                selected = _rwrObjectSelectedFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1: 0)).ToArray(),
+                selected = _rwrObjectSelectedFlagInputSignals.OrderBy(x => x.Index).Select(x => (x.State ? 1u: 0u)).ToArray(),
                 yaw = (float)(_magneticHeadingDegreesInputSignal.State * RADIANS_PER_DEGREE)
             };
             return instrumentState;

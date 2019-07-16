@@ -22,9 +22,9 @@ namespace LightningGauges.Renderers.F16.AzimuthIndicator
         }
 
 
-        public int MissileActivity { get; set; }
-        public int MissileLaunch { get; set; }
-        public int Selected { get; set; }
+        public uint MissileActivity { get; set; }
+        public uint MissileLaunch { get; set; }
+        public uint Selected { get; set; }
         private float _lethality;
 
 
@@ -39,7 +39,7 @@ namespace LightningGauges.Renderers.F16.AzimuthIndicator
         }
 
 
-        public int NewDetection { get; set; }
+        public uint NewDetection { get; set; }
         public bool Visible { get; set; }
     }
 }
