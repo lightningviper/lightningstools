@@ -458,7 +458,7 @@ namespace F4SharedMemViewer
             txtCurrentTime.Text = _lastFlightData.currentTime.ToString();
             txtVehicleACD.Text = _lastFlightData.vehicleACD.ToString();
             txtVtolPos.Text = _lastFlightData.vtolPos.FormatDecimal(decimalPlaces: 2);
-            txtBumpIntensity.Text = _lastFlightData.bumpIntensity.FormatDecimal(decimalPlaces: 2);
+            txtBumpIntensity.Text = _lastFlightData.bumpIntensity.FormatDecimal(decimalPlaces: 4);
             txtInstrLight.Text = string.Format("({0}) {1}",
                 _lastFlightData.instrLight.ToString(),
                 ((InstrLight)_lastFlightData.instrLight).ToString().Replace("INSTR_LIGHT_", "")
