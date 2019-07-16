@@ -11,13 +11,13 @@ namespace F4SharedMem.Headers
         public int PortNumber;                        // socket number to use in contacting the server
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.RCC_STRING_LENGTH)]
-        public sbyte[] Address;                       // string representation of server IPv4 dotted number address
+        public byte[] Address;                       // string representation of server IPv4 dotted number address
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.RCC_STRING_LENGTH)]
-        public sbyte[] Password;                    // plain text of password for voice server access
+        public byte[] Password;                    // plain text of password for voice server access
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.RCC_STRING_LENGTH)]
-        public sbyte[] Nickname;                      // player nickname 
+        public byte[] Nickname;                      // player nickname 
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.NUMBER_OF_RADIOS)]
         public RadioChannel[] Radios;
@@ -88,7 +88,7 @@ namespace F4SharedMem.Headers
         public uint Flags;  // status information
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.NAME_LEN + 1)]
-        public sbyte[] LogbookName;  // copy of player logbook name
+        public byte[] LogbookName;  // copy of player logbook name
 
         [MarshalAs(UnmanagedType.U1)]
         public byte padding1;

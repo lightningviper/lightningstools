@@ -10,6 +10,6 @@ namespace F4SharedMem.Headers
         public const int CALLSIGN_LEN = 12;
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = CALLSIGN_LEN)]
-        public sbyte[] chars;
+        public byte[] chars;
     }
 }

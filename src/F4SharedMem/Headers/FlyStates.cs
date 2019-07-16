@@ -3,7 +3,7 @@
 namespace F4SharedMem.Headers
 {
     [Serializable]
-    public enum FlyStates : sbyte
+    public enum FlyStates : byte
     {
         IN_UI = 0, // UI      - in the UI
         LOADING = 1, // UI>3D   - loading the sim data

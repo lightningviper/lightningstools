@@ -8,6 +8,6 @@ namespace F4SharedMem.Headers
     public struct DED_PFL_LineOfText
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 26)]
-        public sbyte[] chars;
+        public byte[] chars;
     }
 }
