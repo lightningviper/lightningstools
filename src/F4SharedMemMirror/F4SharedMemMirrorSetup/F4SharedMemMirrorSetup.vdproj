@@ -400,7 +400,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:4.34"
-        "Manufacturer" = "8:NA"
+        "Manufacturer" = "8:lightning"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/lightningviper/lightningstools"
         "Title" = "8:Falcon 4 Shared Memory Mirror Setup"
