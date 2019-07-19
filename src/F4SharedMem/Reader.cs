@@ -14,6 +14,7 @@ namespace F4SharedMem
         private const string IntelliVibeSharedMemoryAreaFileName = "FalconIntellivibeSharedMemoryArea";
         private const string RadioClientControlSharedMemoryAreaFileName = "FalconRccSharedMemoryArea";
         private const string RadioClientStatusSharedMemoryAreaFileName = "FalconRcsSharedMemoryArea";
+        private const string VectorsSharedMemoryAreaFileName = "FalconVectorsSharedMemoryArea";
         private bool _disposed;
         private IntPtr _hOsbSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _hPrimarySharedMemoryAreaFileMappingObject = IntPtr.Zero;
@@ -21,13 +22,15 @@ namespace F4SharedMem
         private IntPtr _hIntelliVibeSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _hRadioClientControlSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _hRadioClientStatusSharedMemoryAreaFileMappingObject = IntPtr.Zero;
+        private IntPtr _hVectorsSharedMemoryAreaFileMappingObject = IntPtr.Zero;
+
         private IntPtr _lpOsbSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpPrimarySharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpSecondarySharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpIntelliVibeSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpRadioClientControlSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpRadioClientStatusSharedMemoryAreaBaseAddress = IntPtr.Zero;
-
+        private IntPtr _lpVectorsSharedMemoryAreaBaseAddress = IntPtr.Zero;
 
         public bool IsFalconRunning
         {
@@ -50,6 +53,7 @@ namespace F4SharedMem
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
 
         public byte[] GetRawOSBData()
         {
@@ -172,7 +176,30 @@ namespace F4SharedMem
             var toReturn = bytesRead.ToArray();
             return toReturn.Length == 0 ? null : toReturn;
         }
+        public byte[] GetRawVectorsData()
+        {
+            if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                ConnectToFalcon();
+            }
+            if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                return null;
+            }
+            if (!_hVectorsSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                var length = Marshal.ReadInt32(_lpVectorsSharedMemoryAreaBaseAddress);
 
+                var buf = new byte[length];
+                try
+                {
+                    Marshal.Copy(_lpVectorsSharedMemoryAreaBaseAddress + sizeof(long), buf, 0, length);
+                }
+                catch {}
+                return buf.Length == 0 ? null : buf;
+            }
+            return null;
+        }
         private static long GetMaxMemFileSize(IntPtr pMemAreaBaseAddr)
         {
             var mbi = new NativeMethods.MEMORY_BASIC_INFORMATION();
@@ -329,6 +356,10 @@ namespace F4SharedMem
             _lpRadioClientStatusSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hRadioClientStatusSharedMemoryAreaFileMappingObject,
                 NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
 
+            _hVectorsSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
+                VectorsSharedMemoryAreaFileName);
+            _lpVectorsSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hVectorsSharedMemoryAreaFileMappingObject,
+                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
         }
 
         private void Disconnect()
@@ -367,6 +398,12 @@ namespace F4SharedMem
             {
                 NativeMethods.UnmapViewOfFile(_lpRadioClientStatusSharedMemoryAreaBaseAddress);
                 NativeMethods.CloseHandle(_hRadioClientStatusSharedMemoryAreaFileMappingObject);
+            }
+
+            if (!_hVectorsSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                NativeMethods.UnmapViewOfFile(_lpVectorsSharedMemoryAreaBaseAddress);
+                NativeMethods.CloseHandle(_hVectorsSharedMemoryAreaFileMappingObject);
             }
         }
 

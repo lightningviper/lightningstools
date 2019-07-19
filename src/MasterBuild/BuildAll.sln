@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogDevices", "..\AnalogDevices\AnalogDevices.csproj", "{E8F9E0E2-6DCA-4C39-8E0C-2818C1D87DA9}"
 EndProject
@@ -200,6 +200,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Henkie.SDI", "Henkie.SDI", "{96173973-38DE-4B3D-BBFE-56F0D03B9F78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.HSI", "..\Henkie\Henkie.HSI\Henkie.HSI.csproj", "{B1BC2014-526E-4EE0-B77A-95988DF30B39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4VectorsSharedMemTestTool", "..\F4VectorsSharedMemTestTool\F4VectorsSharedMemTestTool.csproj", "{9B192287-D442-46E0-AC67-0A32B74E8CC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -492,6 +494,10 @@ Global
 		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Debug|x86.Build.0 = Debug|x86
 		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Release|x86.ActiveCfg = Release|x86
 		{B1BC2014-526E-4EE0-B77A-95988DF30B39}.Release|x86.Build.0 = Release|x86
+		{9B192287-D442-46E0-AC67-0A32B74E8CC0}.Debug|x86.ActiveCfg = Debug|x86
+		{9B192287-D442-46E0-AC67-0A32B74E8CC0}.Debug|x86.Build.0 = Debug|x86
+		{9B192287-D442-46E0-AC67-0A32B74E8CC0}.Release|x86.ActiveCfg = Release|x86
+		{9B192287-D442-46E0-AC67-0A32B74E8CC0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -576,6 +582,7 @@ Global
 		{54D00DE2-B14E-42AA-BC1F-358779CD5AEA} = {270B93E1-525F-4CFE-B10C-655710CE0A10}
 		{96173973-38DE-4B3D-BBFE-56F0D03B9F78} = {270B93E1-525F-4CFE-B10C-655710CE0A10}
 		{B1BC2014-526E-4EE0-B77A-95988DF30B39} = {270B93E1-525F-4CFE-B10C-655710CE0A10}
+		{9B192287-D442-46E0-AC67-0A32B74E8CC0} = {CFD91C3A-9264-4829-A8C7-77C62AA82137}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {984B51B5-9BB7-41EF-99B8-4D28491B74AB}
