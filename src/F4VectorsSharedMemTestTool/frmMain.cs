@@ -13,7 +13,7 @@ namespace BMSVectorsharedMemTestTool
         private Color _color = Color.Green;
         private Brush _brush = new SolidBrush(Color.Green);
         private Pen _pen = new Pen(Color.Green, width: 1);
-        private static Font _smallFont = new Font(FontFamily.GenericSansSerif, 14);
+        private static Font _smallFont = new Font(FontFamily.GenericSansSerif, 12);
         private static Font _bigFont = new Font(FontFamily.GenericSansSerif, 16);
         private static Font _warnFont = new Font(FontFamily.GenericSansSerif, 18);
         private Font _font = _smallFont;
@@ -64,49 +64,49 @@ namespace BMSVectorsharedMemTestTool
                         if (!command.TrimEnd().EndsWith(";")) continue;
                         try
                         {
-                            if (command.StartsWith("FONT:"))
+                            if (command.StartsWith("F:"))
                             {
-                                var args = command.Replace("FONT:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("F:", "").TrimEnd(';').Split(',');
                                 try { SetFont(int.Parse(args[0])); } catch { };
                             }
-                            else if (command.StartsWith("FONTEX:"))
+                            else if (command.StartsWith("FE:"))
                             {
-                                var args = command.Replace("FONTEX:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("FE:", "").TrimEnd(';').Split(',');
                                 try { SetFontEx(int.Parse(args[0])); } catch { };
                             }
-                            else if (command.StartsWith("POINT:"))
+                            else if (command.StartsWith("P:"))
                             {
-                                var args = command.Replace("POINT:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("P:", "").TrimEnd(';').Split(',');
                                 try { Render2DPoint(float.Parse(args[0]), float.Parse(args[1]), g); } catch { };
                             }
-                            else if (command.StartsWith("LINE:"))
+                            else if (command.StartsWith("L:"))
                             {
-                                var args = command.Replace("LINE:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("L:", "").TrimEnd(';').Split(',');
                                 try { Render2DLine(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]), g); } catch { };
                             }
-                            else if (command.StartsWith("TRI:"))
+                            else if (command.StartsWith("T:"))
                             {
-                                var args = command.Replace("TRI:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("T:", "").TrimEnd(';').Split(',');
                                 try { Render2DTri(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]), g); } catch { };
                             }
-                            else if (command.StartsWith("TEXT:"))
+                            else if (command.StartsWith("ST:"))
                             {
-                                var args = EscapeQuotedComma(command).Replace("TEXT:", "").TrimEnd(';').Split(',');
+                                var args = EscapeQuotedComma(command).Replace("ST:", "").TrimEnd(';').Split(',');
                                 try { ScreenText(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), int.Parse(args[3]), g); } catch { };
                             }
-                            else if (command.StartsWith("TEXTROTATED:"))
+                            else if (command.StartsWith("STR:"))
                             {
-                                var args = EscapeQuotedComma(command).Replace("TEXTROTATED:", "").TrimEnd(';').Split(',');
+                                var args = EscapeQuotedComma(command).Replace("STR:", "").TrimEnd(';').Split(',');
                                 try { ScreenTextRotated(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), float.Parse(args[3]), g); } catch { };
                             }
-                            else if (command.StartsWith("FORECOLOR:"))
+                            else if (command.StartsWith("FG:"))
                             {
-                                var args = command.Replace("FORECOLOR:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("FG:", "").TrimEnd(';').Split(',');
                                 try { SetColor(uint.Parse(args[0])); } catch { };
                             }
-                            else if (command.StartsWith("BACKCOLOR:"))
+                            else if (command.StartsWith("BG:"))
                             {
-                                var args = command.Replace("BACKCOLOR:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("BG:", "").TrimEnd(';').Split(',');
                                 try { SetBackground(uint.Parse(args[0]), g); } catch { };
                             }
                         }
@@ -215,7 +215,7 @@ namespace BMSVectorsharedMemTestTool
             rawVectorData[2] = 0x32;
             rawVectorData[3] = 0x32;
             if (rawVectorData == null) return;
-            var commands = Encoding.Default.GetString(rawVectorData);
+            var commands = Encoding.Default.GetString(rawVectorData).Replace("TRI:", "T:");
             var hudStart = commands.IndexOf("START:HUD");
             var hudEnd = commands.IndexOf("END:HUD;") + 8;
             var rwrStart = commands.IndexOf("START:RWR");
