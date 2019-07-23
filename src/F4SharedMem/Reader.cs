@@ -188,15 +188,15 @@ namespace F4SharedMem
             }
             if (!_hVectorsSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
-                var length = Marshal.ReadInt32(_lpVectorsSharedMemoryAreaBaseAddress);
-
-                var buf = new byte[length];
                 try
                 {
-                    Marshal.Copy(_lpVectorsSharedMemoryAreaBaseAddress + sizeof(long), buf, 0, length);
+                    var length = Marshal.ReadInt32(_lpVectorsSharedMemoryAreaBaseAddress);
+                    if (length < 1) return null;
+                    var buf = new byte[sizeof(int) + length];
+                    Marshal.Copy(_lpVectorsSharedMemoryAreaBaseAddress, buf, 0, sizeof(int) + length);
+                    return buf.Length > 0 ? buf : null;
                 }
-                catch {}
-                return buf.Length == 0 ? null : buf;
+                catch { }
             }
             return null;
         }
