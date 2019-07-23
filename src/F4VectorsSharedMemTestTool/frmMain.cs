@@ -139,9 +139,9 @@ namespace BMSVectorsharedMemTestTool
         {
             bool quoteOpen = false;
             var toReturn = new StringBuilder();
-            for (var i=0;i<line.Length;i++)
+            for (var i = 0; i < line.Length; i++)
             {
-               
+
                 if (line[i] == '"')
                 {
                     quoteOpen = !quoteOpen;
@@ -160,9 +160,9 @@ namespace BMSVectorsharedMemTestTool
         }
         private Color ColorFromPackedABGR(uint packedABGR)
         {
-            return Color.FromArgb(alpha: (int)((packedABGR & 0xFF000000) >> 24), blue: (int)((packedABGR & 0xFF0000)>>16), green: (int)((packedABGR & 0xFF00)>>8), red: (int)(packedABGR & 0xFF)); ;
+            return Color.FromArgb(alpha: (int)((packedABGR & 0xFF000000) >> 24), blue: (int)((packedABGR & 0xFF0000) >> 16), green: (int)((packedABGR & 0xFF00) >> 8), red: (int)(packedABGR & 0xFF)); ;
         }
-        private void SetBackground (uint packedABGR, Graphics g)
+        private void SetBackground(uint packedABGR, Graphics g)
         {
             g.Clear(ColorFromPackedABGR(packedABGR));
         }
@@ -174,7 +174,7 @@ namespace BMSVectorsharedMemTestTool
         }
         private void SetFont(int newFont)
         {
-            
+
         }
         private void SetFontEx(int newFontEx)
         {
@@ -210,106 +210,58 @@ namespace BMSVectorsharedMemTestTool
         private void Timer1_Tick(object sender, EventArgs e)
         {
             var rawVectorData = _smReader.GetRawVectorsData();
+            if (rawVectorData == null || rawVectorData.Length < 4) return;
             rawVectorData[0] = 0x32;
             rawVectorData[1] = 0x32;
             rawVectorData[2] = 0x32;
             rawVectorData[3] = 0x32;
-            if (rawVectorData == null) return;
-            var commands = Encoding.Default.GetString(rawVectorData).Replace("TRI:", "T:");
-            var hudStart = commands.IndexOf("START:HUD");
-            var hudEnd = commands.IndexOf("END:HUD;") + 8;
-            var rwrStart = commands.IndexOf("START:RWR");
-            var rwrEnd = commands.IndexOf("END:RWR;") + 8;
-            var hmsStart = commands.IndexOf("START:HMS");
-            var hmsEnd = commands.IndexOf("END:HMS;") + 8;
+            var commands = Encoding.Default.GetString(rawVectorData);
 
-            _HUDCommands = hudStart >=0 && hudEnd >= hudStart ? commands.Substring(hudStart, hudEnd - hudStart) : "";
-            txtHUD.Text = _HUDCommands.Replace(";", ";\r\n");
-            txtHUD.Update();
-            lblHUDDataSize.Text = $"Data Size: {(int)(_HUDCommands.Length / 1024)} KB";
-            if (!string.IsNullOrWhiteSpace(_HUDCommands))
+            Process(commands, "HUD", txtHUD, lblHUDDataSize, pbHUD, ref _HUDImage, out _HUDCommands);
+            Draw(_HUDImage, _HUDCommands, pbHUD);
+            Process(commands, "RWR", txtRWR, lblRWRDataSize, pbRWR, ref _RWRImage, out _RWRCommands);
+            Draw(_RWRImage, _RWRCommands, pbRWR);
+            Process(commands, "HMS", txtHMS, lblHMSDataSize, pbHMS, ref _HMSImage, out _HMSCommands);
+            Draw(_HMSImage, _HMSCommands, pbHMS);
+        }
+        private void Process(string allCommands, string displayName, TextBox textBox, Label dataSizeLabel, PictureBox pictureBox, ref Image displayImage, out string displayCommands)
+        {
+            var start = allCommands.IndexOf($"START:{displayName}");
+            var end = allCommands.IndexOf($"END:{displayName};") + 8;
+
+            displayCommands = start >= 0 && end >= start ? allCommands.Substring(start, end - start) : "";
+            textBox.Text = displayCommands.Replace(";", ";\r\n");
+            textBox.Update();
+            dataSizeLabel.Text = $"Data Size: {(int)(displayCommands.Length / 1024)} KB";
+            if (!string.IsNullOrWhiteSpace(displayCommands))
             {
-                var resStart = _HUDCommands.IndexOf("(")+1;
-                var resEnd = _HUDCommands.IndexOf(")") ;
-                var resX = int.Parse(_HUDCommands.Substring(resStart, resEnd - resStart).Split(',')[0]);
-                var resY = int.Parse(_HUDCommands.Substring(resStart, resEnd - resStart).Split(',')[1]);
-                if (_HUDImage == null || _HUDImage.Width != resX || _HUDImage.Height != resY)
+                var resStart = displayCommands.IndexOf("(") + 1;
+                var resEnd = displayCommands.IndexOf(")");
+                var resX = int.Parse(displayCommands.Substring(resStart, resEnd - resStart).Split(',')[0]);
+                var resY = int.Parse(displayCommands.Substring(resStart, resEnd - resStart).Split(',')[1]);
+                if (displayImage == null || displayImage.Width != resX || displayImage.Height != resY)
                 {
-                    _HUDImage = new Bitmap(resX, resY);
-                    pbHUD.Image = _HUDImage;
-                    pbHUD.Refresh();
+                    displayImage = new Bitmap(resX, resY);
+                    pictureBox.Image = displayImage;
+                    pictureBox.Refresh();
                 }
-            }
-
-            _RWRCommands = rwrStart >=0 && rwrEnd >= rwrStart ? commands.Substring(rwrStart, rwrEnd - rwrStart) : "";
-            txtRWR.Text = _RWRCommands.Replace(";", ";\r\n");
-            txtRWR.Update();
-            lblRWRDataSize.Text = $"Data Size: {(int)(_RWRCommands.Length / 1024)} KB";
-            if (!string.IsNullOrWhiteSpace(_RWRCommands))
-            {
-                var resStart = _RWRCommands.IndexOf("(") + 1;
-                var resEnd = _RWRCommands.IndexOf(")") ;
-                var resX = int.Parse(_RWRCommands.Substring(resStart, resEnd - resStart).Split(',')[0]);
-                var resY = int.Parse(_RWRCommands.Substring(resStart, resEnd - resStart).Split(',')[1]);
-                if (_RWRImage == null || _RWRImage.Width != resX || _RWRImage.Height != resY)
-                {
-                    _RWRImage = new Bitmap(resX, resY);
-                    pbRWR.Image = _RWRImage;
-                    pbRWR.Refresh();
-                }
-            }
-
-            _HMSCommands = hmsStart >= 0 && hmsEnd >= hmsStart ? commands.Substring(hmsStart, hmsEnd - hmsStart) : "";
-            txtHMS.Text = _HMSCommands.Replace(";", ";\r\n");
-            txtHMS.Update();
-            lblHMSDataSize.Text = $"Data Size: {(int)(_HMSCommands.Length / 1024)} KB";
-            if (!string.IsNullOrWhiteSpace(_HMSCommands))
-            {
-                var resStart = _HMSCommands.IndexOf("(") + 1;
-                var resEnd = _HMSCommands.IndexOf(")") ;
-                var resX = int.Parse(_HMSCommands.Substring(resStart, resEnd - resStart).Split(',')[0]);
-                var resY = int.Parse(_HMSCommands.Substring(resStart, resEnd - resStart).Split(',')[1]);
-                if (_HMSImage == null || _HMSImage.Width != resX || _HMSImage.Height != resY)
-                {
-                    _HMSImage = new Bitmap(resX, resY);
-                    pbHMS.Image = _HMSImage;
-                    pbHMS.Refresh();
-                }
-            }
-
-            using (var g = Graphics.FromImage(_HUDImage))
-            {
-
-                g.Clear(Color.Black);
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.TextRenderingHint = TextRenderingHint.AntiAlias;
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                DrawOnto(g, _HUDCommands);
-                pbHUD.Update();
-                pbHUD.Refresh();
-            }
-            using (var g = Graphics.FromImage(_RWRImage))
-            {
-
-                g.Clear(Color.Black);
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.TextRenderingHint = TextRenderingHint.AntiAlias;
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                DrawOnto(g, _RWRCommands);
-                pbRWR.Update();
-                pbRWR.Refresh();
-            }
-            using (var g = Graphics.FromImage(_HMSImage))
-            {
-
-                g.Clear(Color.Black);
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.TextRenderingHint = TextRenderingHint.AntiAlias;
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                DrawOnto(g, _HMSCommands);
-                pbHMS.Update();
-                pbHMS.Refresh();
             }
         }
+        private void Draw(Image target, string commands, PictureBox pictureBox)
+        {
+            using (var g = Graphics.FromImage(target))
+            {
+
+                g.Clear(Color.Black);
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                DrawOnto(g, commands);
+                pictureBox.Update();
+                pictureBox.Refresh();
+            }
+
+        }
+
     }
 }
