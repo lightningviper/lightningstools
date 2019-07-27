@@ -17,6 +17,7 @@ namespace BMSVectorsharedMemTestTool
         private Color _color = Color.Green;
         private Brush _brush = new SolidBrush(Color.Green);
         private Pen _pen = new Pen(Color.Green, width: 1);
+        private ImageAttributes _imageAttribs;
         private string _fontTexture;
         private HashSet<BmsFont> _bmsFonts=new HashSet<BmsFont>();
         private Image _HUDImage;
@@ -168,6 +169,19 @@ namespace BMSVectorsharedMemTestTool
             _color = ColorFromPackedABGR(packedABGR);
             _pen = new Pen(_color, width: 1);
             _brush = new SolidBrush(_color);
+            _imageAttribs = new ImageAttributes();
+            var colorMatrix = new ColorMatrix
+            (
+                new float[][]
+                {
+                        new float[] {_color.R/255, 0, 0, 0, 0}, //red %
+                        new float[] { 0,_color.G/255, 0, 0, 0 }, //green
+                        new float[] {0, 0, _color.B/255, 0, 0}, //blue %
+                        new float[] {0, 0, 0, _color.A/255, 0}, //alpha %
+                        new float[] {0, 0, 0, 0, 1} //add
+                }
+            );
+            _imageAttribs.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default);
         }
         private void SetFontTexture(string fontTexture)
         {
@@ -199,22 +213,7 @@ namespace BMSVectorsharedMemTestTool
                 curX += charMetric.lead;
                 var destRect = new Rectangle((int)curX, (int)curY, charMetric.width, charMetric.height);
                 var srcRect = new RectangleF(charMetric.left, charMetric.top, charMetric.width, charMetric.height);
-
-                var imageAttribs = new ImageAttributes();
-                var colorMatrix = new ColorMatrix
-                (
-                    new float[][]
-                    {
-                        new float[] {_color.R/255, 0, 0, 0, 0}, //red %
-                        new float[] { 0,_color.G/255, 0, 0, 0 }, //green
-                        new float[] {0, 0, _color.B/255, 0, 0}, //blue %
-                        new float[] {0, 0, 0, _color.A/255, 0}, //alpha %
-                        new float[] {-1, 0, -1, 0, 1} //add
-                    }
-                );
-                imageAttribs.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default);
-
-                g.DrawImage(font.Texture, destRect, srcRect.X, srcRect.Y, srcRect.Width, srcRect.Height, GraphicsUnit.Pixel, imageAttribs);
+                g.DrawImage(font.Texture, destRect, srcRect.X, srcRect.Y, srcRect.Width, srcRect.Height, GraphicsUnit.Pixel, _imageAttribs);
                 curX += charMetric.width;
                 curX += charMetric.trail;
             }
@@ -305,9 +304,9 @@ namespace BMSVectorsharedMemTestTool
         private BmsFont LoadBmsFont(string fontTexture)
         {
 
-            if (_bmsFonts.Any(x=> String.Equals(x.TextureFile, fontTexture, StringComparison.OrdinalIgnoreCase)))
+            if (_bmsFonts.Any(x=> String.Equals(Path.GetFileName(x.TextureFile), fontTexture, StringComparison.OrdinalIgnoreCase)))
             {
-                return _bmsFonts.Where(x => x.TextureFile == fontTexture).First();
+                return _bmsFonts.Where(x => String.Equals(Path.GetFileName(x.TextureFile), fontTexture, StringComparison.OrdinalIgnoreCase)).First();
             }
             var texturePath = Path.Combine(_fontDir, fontTexture);
             var rctPath = Path.Combine(_fontDir, Path.GetFileNameWithoutExtension(fontTexture) + ".rct");
