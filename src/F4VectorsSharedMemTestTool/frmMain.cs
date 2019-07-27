@@ -1,8 +1,10 @@
-﻿using System;
+﻿using F4SharedMem.Headers;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,10 +15,7 @@ namespace BMSVectorsharedMemTestTool
         private Color _color = Color.Green;
         private Brush _brush = new SolidBrush(Color.Green);
         private Pen _pen = new Pen(Color.Green, width: 1);
-        private static Font _smallFont = new Font(FontFamily.GenericSansSerif, 12);
-        private static Font _bigFont = new Font(FontFamily.GenericSansSerif, 16);
-        private static Font _warnFont = new Font(FontFamily.GenericSansSerif, 18);
-        private Font _font = _smallFont;
+        private Font _font = new Font(FontFamily.GenericSansSerif, 12);
 
         private Image _HUDImage;
         private Image _RWRImage;
@@ -69,9 +68,9 @@ namespace BMSVectorsharedMemTestTool
                                 var args = command.Replace("F:", "").TrimEnd(';').Split(',');
                                 try { SetFont(int.Parse(args[0])); } catch { };
                             }
-                            else if (command.StartsWith("FE:"))
+                            else if (command.StartsWith("FX:"))
                             {
-                                var args = command.Replace("FE:", "").TrimEnd(';').Split(',');
+                                var args = command.Replace("FX:", "").TrimEnd(';').Split(',');
                                 try { SetFontEx(int.Parse(args[0])); } catch { };
                             }
                             else if (command.StartsWith("P:"))
@@ -89,14 +88,14 @@ namespace BMSVectorsharedMemTestTool
                                 var args = command.Replace("T:", "").TrimEnd(';').Split(',');
                                 try { Render2DTri(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]), g); } catch { };
                             }
-                            else if (command.StartsWith("ST:"))
+                            else if (command.StartsWith("S:"))
                             {
-                                var args = EscapeQuotedComma(command).Replace("ST:", "").TrimEnd(';').Split(',');
+                                var args = EscapeQuotedComma(command).Replace("S:", "").TrimEnd(';').Split(',');
                                 try { ScreenText(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), int.Parse(args[3]), g); } catch { };
                             }
-                            else if (command.StartsWith("STR:"))
+                            else if (command.StartsWith("SR:"))
                             {
-                                var args = EscapeQuotedComma(command).Replace("STR:", "").TrimEnd(';').Split(',');
+                                var args = EscapeQuotedComma(command).Replace("SR:", "").TrimEnd(';').Split(',');
                                 try { ScreenTextRotated(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), float.Parse(args[3]), g); } catch { };
                             }
                             else if (command.StartsWith("FG:"))
@@ -209,19 +208,26 @@ namespace BMSVectorsharedMemTestTool
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            var rawVectorData = _smReader.GetRawVectorsData();
-            if (rawVectorData == null || rawVectorData.Length < 4) return;
-            rawVectorData[0] = 0x32;
-            rawVectorData[1] = 0x32;
-            rawVectorData[2] = 0x32;
-            rawVectorData[3] = 0x32;
-            var commands = Encoding.Default.GetString(rawVectorData);
+            var curData = _smReader.GetCurrentData();
+            var stringData = curData != null ? curData.StringData : null;
+            var stringDataData = stringData != null ? stringData.data : null;
+            var hudCommands = stringDataData !=null && stringDataData.Any(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHUD) 
+                                ? stringDataData.Where(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHUD).First().value
+                                : "";
 
-            Process(commands, "HUD", txtHUD, lblHUDDataSize, pbHUD, ref _HUDImage, out _HUDCommands);
+            var rwrCommands = stringDataData != null && stringDataData.Any(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForRWR)
+                                ? stringDataData.Where(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForRWR).First().value
+                                : "";
+
+            var hmsCommands = stringDataData != null && stringDataData.Any(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHMS)
+                                ? stringDataData.Where(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHMS).First().value
+                                : "";
+
+            Process(hudCommands, "HUD", txtHUD, lblHUDDataSize, pbHUD, ref _HUDImage, out _HUDCommands);
             Draw(_HUDImage, _HUDCommands, pbHUD);
-            Process(commands, "RWR", txtRWR, lblRWRDataSize, pbRWR, ref _RWRImage, out _RWRCommands);
+            Process(rwrCommands, "RWR", txtRWR, lblRWRDataSize, pbRWR, ref _RWRImage, out _RWRCommands);
             Draw(_RWRImage, _RWRCommands, pbRWR);
-            Process(commands, "HMS", txtHMS, lblHMSDataSize, pbHMS, ref _HMSImage, out _HMSCommands);
+            Process(hmsCommands, "HMS", txtHMS, lblHMSDataSize, pbHMS, ref _HMSImage, out _HMSCommands);
             Draw(_HMSImage, _HMSCommands, pbHMS);
         }
         private void Process(string allCommands, string displayName, TextBox textBox, Label dataSizeLabel, PictureBox pictureBox, ref Image displayImage, out string displayCommands)
@@ -230,25 +236,35 @@ namespace BMSVectorsharedMemTestTool
             var end = allCommands.IndexOf($"END:{displayName};") + 8;
 
             displayCommands = start >= 0 && end >= start ? allCommands.Substring(start, end - start) : "";
-            textBox.Text = displayCommands.Replace(";", ";\r\n");
-            textBox.Update();
-            dataSizeLabel.Text = $"Data Size: {(int)(displayCommands.Length / 1024)} KB";
+            if (textBox != null)
+            {
+                textBox.Text = displayCommands.Replace(";", ";\r\n");
+                textBox.Update();
+            }
+            if (dataSizeLabel !=null) dataSizeLabel.Text = $"Data Size: {(int)(displayCommands.Length / 1024)} KB";
             if (!string.IsNullOrWhiteSpace(displayCommands))
             {
                 var resStart = displayCommands.IndexOf("(") + 1;
                 var resEnd = displayCommands.IndexOf(")");
-                var resX = int.Parse(displayCommands.Substring(resStart, resEnd - resStart).Split(',')[0]);
-                var resY = int.Parse(displayCommands.Substring(resStart, resEnd - resStart).Split(',')[1]);
-                if (displayImage == null || displayImage.Width != resX || displayImage.Height != resY)
+                if (resStart > -1 && resEnd > resStart)
                 {
-                    displayImage = new Bitmap(resX, resY);
-                    pictureBox.Image = displayImage;
-                    pictureBox.Refresh();
+                    var resX = int.Parse(displayCommands.Substring(resStart, resEnd - resStart).Split(',')[0]);
+                    var resY = int.Parse(displayCommands.Substring(resStart, resEnd - resStart).Split(',')[1]);
+                    if (displayImage == null || displayImage.Width != resX || displayImage.Height != resY)
+                    {
+                        displayImage = new Bitmap(resX, resY);
+                        if (pictureBox != null)
+                        {
+                            pictureBox.Image = displayImage;
+                            pictureBox.Refresh();
+                        }
+                    }
                 }
             }
         }
         private void Draw(Image target, string commands, PictureBox pictureBox)
         {
+            if (target == null || string.IsNullOrWhiteSpace(commands) || pictureBox == null) return;
             using (var g = Graphics.FromImage(target))
             {
 
