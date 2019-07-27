@@ -45,7 +45,7 @@ namespace BMSVectorsharedMemTestTool
             timer1.Start();
         }
 
-        private void DrawOnto(Graphics g, string commands)
+        private void DrawCommands(Graphics g, string commands)
         {
             using (var sr = new StringReader(commands))
             {
@@ -202,6 +202,7 @@ namespace BMSVectorsharedMemTestTool
         }
         private void DrawString(float xLeft, float yTop, string textString, int boxed, Graphics g)
         {
+            if (xLeft < -10000 || yTop < -10000) return; //prevent overflow errors when exiting BMS flying
             var curX = xLeft;
             var curY = yTop;
             var font = _bmsFonts.Where(x=>string.Equals(Path.GetFileName(x.TextureFile), _fontTexture, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
@@ -261,15 +262,16 @@ namespace BMSVectorsharedMemTestTool
         {
             if (textBox != null)
             {
-                textBox.Text = commands !=null ? commands.Replace(";", ";\r\n"): "";
-                textBox.Update();
+                var toDisplay = commands.Replace(";", ";\r\n");
+                if (!string.Equals(textBox.Text, toDisplay)) textBox.Text = commands != null ? toDisplay : "";
             }
-            if (dataSizeLabel !=null) dataSizeLabel.Text = $"Data Size: {(int)((commands ?? "").Length / 1024)} KB";
-            if (!string.IsNullOrWhiteSpace(commands))
+            var dataSizeInKB = (commands ?? "").Length / 1024.0;
+            if (dataSizeLabel !=null) dataSizeLabel.Text = $"Data Size: {dataSizeInKB.ToString("0.00")} KB";
+            if (commands !=null)
             {
                 var resStart = commands.IndexOf("R:") + 2;
-                var resEnd = commands.IndexOf(";", resStart);
-                if (resStart > -1 && resEnd > resStart)
+                var resEnd = resStart > 1 ? commands.IndexOf(";", resStart) : resStart;
+                if (resStart > 1 && resEnd > resStart)
                 {
                     var resX = int.Parse(commands.Substring(resStart, resEnd - resStart).Split(',')[0]);
                     var resY = int.Parse(commands.Substring(resStart, resEnd - resStart).Split(',')[1]);
@@ -287,7 +289,7 @@ namespace BMSVectorsharedMemTestTool
         }
         private void Draw(Image target, string commands, PictureBox pictureBox)
         {
-            if (target == null || string.IsNullOrWhiteSpace(commands) || pictureBox == null) return;
+            if (target == null || commands ==null || pictureBox == null) return;
             using (var g = Graphics.FromImage(target))
             {
 
@@ -295,7 +297,7 @@ namespace BMSVectorsharedMemTestTool
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.TextRenderingHint = TextRenderingHint.AntiAlias;
                 g.CompositingQuality = CompositingQuality.HighQuality;
-                DrawOnto(g, commands);
+                DrawCommands(g, commands);
                 pictureBox.Update();
                 pictureBox.Refresh();
             }
@@ -303,11 +305,8 @@ namespace BMSVectorsharedMemTestTool
         }
         private BmsFont LoadBmsFont(string fontTexture)
         {
-
-            if (_bmsFonts.Any(x=> String.Equals(Path.GetFileName(x.TextureFile), fontTexture, StringComparison.OrdinalIgnoreCase)))
-            {
-                return _bmsFonts.Where(x => String.Equals(Path.GetFileName(x.TextureFile), fontTexture, StringComparison.OrdinalIgnoreCase)).First();
-            }
+            var alreadyLoadedFont = _bmsFonts.Where(x => String.Equals(Path.GetFileName(x.TextureFile), fontTexture, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            if (alreadyLoadedFont != null) return alreadyLoadedFont;
             var texturePath = Path.Combine(_fontDir, fontTexture);
             var rctPath = Path.Combine(_fontDir, Path.GetFileNameWithoutExtension(fontTexture) + ".rct");
             var bmsFont = new BmsFont(texturePath, rctPath);
