@@ -17,7 +17,9 @@ namespace BMSVectorsharedMemTestTool
         public IEnumerable<FontMetric> FontMetrics { get; private set; } = new List<FontMetric>();
         private void Load(string texturePath, string rctPath)
         {
-            Texture = Image.FromFile(texturePath);
+            var sourceTexture = new Bitmap(Image.FromFile(texturePath));
+            sourceTexture.MakeTransparent(Color.Black);
+            Texture = sourceTexture;
             TextureFile = texturePath;
             using (var reader = new StreamReader(rctPath))
             {
