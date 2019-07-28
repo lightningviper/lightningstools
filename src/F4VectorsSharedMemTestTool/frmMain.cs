@@ -14,10 +14,13 @@ namespace BMSVectorsharedMemTestTool
 {
     public partial class frmMain : Form
     {
-        private Color _color = Color.Green;
+        private Color _foreColor = Color.Green;
+        private Color _backColor = Color.Black;
+
         private Brush _brush = new SolidBrush(Color.Green);
         private Pen _pen = new Pen(Color.Green, width: 1);
-        private ImageAttributes _imageAttribs;
+        private ImageAttributes _imageAttrs;
+
         private string _fontTexture;
         private HashSet<BmsFont> _bmsFonts=new HashSet<BmsFont>();
         private Image _HUDImage;
@@ -70,7 +73,7 @@ namespace BMSVectorsharedMemTestTool
                             if (command.StartsWith("F:"))
                             {
                                 var args = command.Replace("F:", "").TrimEnd(';').Split(',');
-                                try { SetFontTexture(RemoveSurroundingQuotes(args[0])); } catch { };
+                                try { SetFont(RemoveSurroundingQuotes(args[0])); } catch { };
                             }
                             else if (command.StartsWith("P:"))
                             {
@@ -90,7 +93,7 @@ namespace BMSVectorsharedMemTestTool
                             else if (command.StartsWith("S:"))
                             {
                                 var args = EscapeQuotedComma(command).Replace("S:", "").TrimEnd(';').Split(',');
-                                try { DrawString(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), int.Parse(args[3]), g); } catch { };
+                                try { DrawString(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), byte.Parse(args[3]), g); } catch { };
                             }
                             else if (command.StartsWith("SR:"))
                             {
@@ -105,7 +108,7 @@ namespace BMSVectorsharedMemTestTool
                             else if (command.StartsWith("BG:"))
                             {
                                 var args = command.Replace("BG:", "").TrimEnd(';').Split(',');
-                                try { SetBackgroundColor(uint.Parse(args[0]), g); } catch { };
+                                try { SetBackgroundColor(uint.Parse(args[0])); } catch { };
                             }
                         }
                         catch { }
@@ -160,33 +163,45 @@ namespace BMSVectorsharedMemTestTool
         {
             return Color.FromArgb(alpha: (int)((packedABGR & 0xFF000000) >> 24), blue: (int)((packedABGR & 0xFF0000) >> 16), green: (int)((packedABGR & 0xFF00) >> 8), red: (int)(packedABGR & 0xFF)); ;
         }
-        private void SetBackgroundColor(uint packedABGR, Graphics g)
+        private void SetBackgroundColor(uint packedABGR)
         {
-            g.Clear(ColorFromPackedABGR(packedABGR));
+            var backgroundColor = ColorFromPackedABGR(packedABGR);
+            SetBackgroundColor(backgroundColor);
+        }
+        private void SetBackgroundColor(Color backgroundColor)
+        {
+            _backColor = backgroundColor;
         }
         private void SetForegroundColor(uint packedABGR)
         {
-            _color = ColorFromPackedABGR(packedABGR);
-            _pen = new Pen(_color, width: 1);
-            _brush = new SolidBrush(_color);
-            _imageAttribs = new ImageAttributes();
+            var foregroundColor = ColorFromPackedABGR(packedABGR);
+            SetForegroundColor(foregroundColor);
+        }
+
+        private void SetForegroundColor(Color foregroundColor)
+        {
+            _foreColor = foregroundColor;
+            _pen = new Pen(_foreColor, width: 1);
+            _brush = new SolidBrush(_foreColor);
+            _imageAttrs = new ImageAttributes();
             var colorMatrix = new ColorMatrix
             (
                 new float[][]
                 {
-                        new float[] {_color.R/255, 0, 0, 0, 0}, //red %
-                        new float[] { 0,_color.G/255, 0, 0, 0 }, //green
-                        new float[] {0, 0, _color.B/255, 0, 0}, //blue %
-                        new float[] {0, 0, 0, _color.A/255, 0}, //alpha %
+                        new float[] {_foreColor.R/255.0f, 0, 0, 0, 0}, //red %
+                        new float[] { 0,_foreColor.G/255.0f, 0, 0, 0 }, //green
+                        new float[] {0, 0, _foreColor.B/255.0f, 0, 0}, //blue %
+                        new float[] {0, 0, 0, _foreColor.A/255.0f, 0}, //alpha %
                         new float[] {0, 0, 0, 0, 1} //add
                 }
             );
-            _imageAttribs.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default);
+            _imageAttrs.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default);
         }
-        private void SetFontTexture(string fontTexture)
+
+        private void SetFont(string fontFile)
         {
-            LoadBmsFont(fontTexture);
-            _fontTexture = fontTexture;
+            LoadBmsFont(fontFile);
+            _fontTexture = fontFile;
         }
         private void DrawPoint(float x1, float y1, Graphics g)
         {
@@ -200,23 +215,40 @@ namespace BMSVectorsharedMemTestTool
         {
             g.FillPolygon(_brush, new[] { new PointF(x1, y1), new PointF(x2, y2), new PointF(x3, y3) });
         }
-        private void DrawString(float xLeft, float yTop, string textString, int boxed, Graphics g)
+        private void DrawString(float xLeft, float yTop, string textString, byte invert, Graphics g)
         {
             if (xLeft < -10000 || yTop < -10000) return; //prevent overflow errors when exiting BMS flying
             var curX = xLeft;
             var curY = yTop;
             var font = _bmsFonts.Where(x=>string.Equals(Path.GetFileName(x.TextureFile), _fontTexture, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             if (font == null) return;
-
+            var originalForegroundColor = _foreColor;
+            var originalBackgroundColor = _backColor;
+            if (invert == 1) //invert text
+            {
+                //swap foreground and background colors
+                SetForegroundColor(originalBackgroundColor);
+                SetBackgroundColor(originalForegroundColor);
+            }
             foreach (var character in UnescapeComma(textString).ToCharArray())
             {
                 var charMetric = font.FontMetrics.Where(x => x.idx == character).First();
                 curX += charMetric.lead;
                 var destRect = new Rectangle((int)curX, (int)curY, charMetric.width, charMetric.height);
                 var srcRect = new RectangleF(charMetric.left, charMetric.top, charMetric.width, charMetric.height);
-                g.DrawImage(font.Texture, destRect, srcRect.X, srcRect.Y, srcRect.Width, srcRect.Height, GraphicsUnit.Pixel, _imageAttribs);
+                if (invert == 1)
+                {
+                    g.FillRectangle(new SolidBrush(originalForegroundColor), destRect);
+                }
+                g.DrawImage(font.Texture, destRect, srcRect.X, srcRect.Y, srcRect.Width, srcRect.Height, GraphicsUnit.Pixel, _imageAttrs);
                 curX += charMetric.width;
                 curX += charMetric.trail;
+            }
+            if (invert == 1) //invert text
+            {
+                //swap foreground and background colors back to originals
+                SetForegroundColor(originalForegroundColor);
+                SetBackgroundColor(originalBackgroundColor);
             }
         }
         private void DrawStringRotated(float xLeft, float yTop, string textString, float angle, Graphics g)
@@ -303,13 +335,13 @@ namespace BMSVectorsharedMemTestTool
             }
 
         }
-        private BmsFont LoadBmsFont(string fontTexture)
+        private BmsFont LoadBmsFont(string fontFile)
         {
-            var alreadyLoadedFont = _bmsFonts.Where(x => String.Equals(Path.GetFileName(x.TextureFile), fontTexture, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            var alreadyLoadedFont = _bmsFonts.Where(x => String.Equals(Path.GetFileName(x.TextureFile), fontFile, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             if (alreadyLoadedFont != null) return alreadyLoadedFont;
-            var texturePath = Path.Combine(_fontDir, fontTexture);
-            var rctPath = Path.Combine(_fontDir, Path.GetFileNameWithoutExtension(fontTexture) + ".rct");
-            var bmsFont = new BmsFont(texturePath, rctPath);
+            var fontFullPath = Path.Combine(_fontDir, fontFile);
+            var rctPath = Path.Combine(_fontDir, Path.GetFileNameWithoutExtension(fontFile) + ".rct");
+            var bmsFont = new BmsFont(fontFullPath, rctPath);
             _bmsFonts.Add(bmsFont);
             return bmsFont;
         }
