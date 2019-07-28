@@ -39,6 +39,9 @@
             this.txtHMS = new System.Windows.Forms.TextBox();
             this.lblRWRDataSize = new System.Windows.Forms.Label();
             this.lblHMSDataSize = new System.Windows.Forms.Label();
+            this.lblRWR = new System.Windows.Forms.Label();
+            this.lblHUD = new System.Windows.Forms.Label();
+            this.lblHMS = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbHUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRWR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHMS)).BeginInit();
@@ -146,10 +149,43 @@
             this.lblHMSDataSize.TabIndex = 8;
             this.lblHMSDataSize.Text = "Data Size:";
             // 
+            // lblRWR
+            // 
+            this.lblRWR.AutoSize = true;
+            this.lblRWR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRWR.Location = new System.Drawing.Point(591, 403);
+            this.lblRWR.Name = "lblRWR";
+            this.lblRWR.Size = new System.Drawing.Size(37, 13);
+            this.lblRWR.TabIndex = 10;
+            this.lblRWR.Text = "RWR";
+            // 
+            // lblHUD
+            // 
+            this.lblHUD.AutoSize = true;
+            this.lblHUD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHUD.Location = new System.Drawing.Point(186, 403);
+            this.lblHUD.Name = "lblHUD";
+            this.lblHUD.Size = new System.Drawing.Size(34, 13);
+            this.lblHUD.TabIndex = 11;
+            this.lblHUD.Text = "HUD";
+            // 
+            // lblHMS
+            // 
+            this.lblHMS.AutoSize = true;
+            this.lblHMS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHMS.Location = new System.Drawing.Point(998, 403);
+            this.lblHMS.Name = "lblHMS";
+            this.lblHMS.Size = new System.Drawing.Size(34, 13);
+            this.lblHMS.TabIndex = 12;
+            this.lblHMS.Text = "HMS";
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1216, 823);
+            this.Controls.Add(this.lblHMS);
+            this.Controls.Add(this.lblHUD);
+            this.Controls.Add(this.lblRWR);
             this.Controls.Add(this.lblHMSDataSize);
             this.Controls.Add(this.lblRWRDataSize);
             this.Controls.Add(this.txtHMS);
@@ -184,6 +220,9 @@
         private System.Windows.Forms.TextBox txtHMS;
         private System.Windows.Forms.Label lblRWRDataSize;
         private System.Windows.Forms.Label lblHMSDataSize;
+        private System.Windows.Forms.Label lblRWR;
+        private System.Windows.Forms.Label lblHUD;
+        private System.Windows.Forms.Label lblHMS;
     }
 }
 
