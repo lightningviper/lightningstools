@@ -352,7 +352,7 @@ namespace F4SharedMem
         public int BMSBuildNumber;          //              build 20050
         public uint StringAreaSize; // the overall size of the StringData/FalconSharedMemoryAreaString shared memory area
         public uint StringAreaTime; // last time the StringData/FalconSharedMemoryAreaString shared memory area has been changed - you only need to re-read the string shared mem if this changes
-
+        public uint DrawingAreaSize;// the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
 
         public OptionSelectButtonLabel[] leftMFD;
         public OptionSelectButtonLabel[] rightMFD;
@@ -369,6 +369,7 @@ namespace F4SharedMem
         public RadioClientStatus RadioClientStatus { get; set; }
 
         public StringData StringData { get; set; }
+        public DrawingData DrawingData { get; set; }
 
     }
 }

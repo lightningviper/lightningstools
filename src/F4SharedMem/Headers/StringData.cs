@@ -25,6 +25,7 @@ namespace F4SharedMem.Headers
             offset += sizeof(uint);
             for (var i = 0; i < toReturn.NoOfStrings; i++)
             {
+                if (offset >= data.Length - sizeof(uint)) break;
                 var sStruct = new StringStruct();
                 sStruct.strId = BitConverter.ToUInt32(data, offset);
                 offset += sizeof(uint);
@@ -32,7 +33,7 @@ namespace F4SharedMem.Headers
                 offset += sizeof(uint);
                 sStruct.strData = new byte[sStruct.strLength];
                 Array.Copy(data, offset, sStruct.strData, 0, Math.Min(sStruct.strLength, data.Length-offset));
-                offset += (int)sStruct.strLength;
+                offset += (int)sStruct.strLength +1;
                 (toReturn.data as IList<StringStruct>).Add(sStruct);
             }
             return toReturn;

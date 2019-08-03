@@ -22,7 +22,7 @@ namespace F4SharedMem.Headers
         // 12: added RTT info
         // 13: added IFF panel backup digits
         // 14: added instrument backlight brightness
-        // 15: added MiscBits, BettyBits, radar altitude, bingo fuel, cara alow, bullseye, BMS version information, string area size/time,
+        // 15: added MiscBits, BettyBits, radar altitude, bingo fuel, cara alow, bullseye, BMS version information, string area size/time, drawing area size
 
         public const int RWRINFO_SIZE = 512;
         public const int MAX_CALLSIGNS = 32;
@@ -117,7 +117,7 @@ namespace F4SharedMem.Headers
         public int BMSBuildNumber;          //              build 20050
         public uint StringAreaSize; // the overall size of the StringData/FalconSharedMemoryAreaString shared memory area
         public uint StringAreaTime; // last time the StringData/FalconSharedMemoryAreaString shared memory area has been changed - you only need to re-read the string shared mem if this changes
-
+        public uint DrawingAreaSize;// the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
     }
 
 }

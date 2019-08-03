@@ -73,6 +73,7 @@
     <Compile Include="Headers\CmdsModes.cs" />
     <Compile Include="Headers\DED_PFL_LineOfText.cs" />
     <Compile Include="FlightData.cs" />
+    <Compile Include="Headers\DrawingData.cs" />
     <Compile Include="Headers\FlightData2.cs" />
     <Compile Include="Headers\FlyStates.cs" />
     <Compile Include="Headers\HsiBits.cs" />

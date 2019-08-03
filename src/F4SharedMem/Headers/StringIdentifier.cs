@@ -40,10 +40,6 @@ namespace F4SharedMem.Headers
         AcName,                  // Current AC name
         AcNCTR,                  // Current AC NCTR
 
-        DrawingCommandsForHUD,  //drawing commands for HUD
-        DrawingCommandsForRWR,  //drawing commands for RWR
-        DrawingCommandsForHMS,  //drawing commands for HMS
-
         StringIdentifier_DIM     // (number of identifiers; add new IDs only *above* this one)
     };
 }

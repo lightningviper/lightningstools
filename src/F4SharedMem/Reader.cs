@@ -15,6 +15,7 @@ namespace F4SharedMem
         private const string RadioClientControlSharedMemoryAreaFileName = "FalconRccSharedMemoryArea";
         private const string RadioClientStatusSharedMemoryAreaFileName = "FalconRcsSharedMemoryArea";
         private const string StringSharedMemoryAreaFileName = "FalconSharedMemoryAreaString";
+        private const string DrawingSharedMemoryAreaFileName = "FalconSharedMemoryAreaDrawing";
 
         private bool _disposed;
 
@@ -25,6 +26,7 @@ namespace F4SharedMem
         private IntPtr _hRadioClientControlSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _hRadioClientStatusSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _hStringSharedMemoryAreaFileMappingObject = IntPtr.Zero;
+        private IntPtr _hDrawingSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _lpOsbSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpPrimarySharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpSecondarySharedMemoryAreaBaseAddress = IntPtr.Zero;
@@ -32,6 +34,7 @@ namespace F4SharedMem
         private IntPtr _lpRadioClientControlSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpRadioClientStatusSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpStringSharedMemoryAreaBaseAddress = IntPtr.Zero;
+        private IntPtr _lpDrawingSharedMemoryAreaBaseAddress = IntPtr.Zero;
 
 
         public bool IsFalconRunning
@@ -177,7 +180,7 @@ namespace F4SharedMem
             var toReturn = bytesRead.ToArray();
             return toReturn.Length == 0 ? null : toReturn;
         }
-        public byte[] GetRawStringData()
+        public byte[] GetRawStringData(uint stringAreaSize)
         {
             if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
@@ -191,10 +194,26 @@ namespace F4SharedMem
             {
                 return null;
             }
-            var offset = sizeof(int) + sizeof(uint);
-            var dataSize = (uint)Marshal.ReadInt32(_lpStringSharedMemoryAreaBaseAddress, offset);
-            var toReturn = new byte[dataSize];
-            Marshal.Copy(_lpStringSharedMemoryAreaBaseAddress, toReturn, 0, (int)dataSize);
+            var toReturn = new byte[stringAreaSize];
+            Marshal.Copy(_lpStringSharedMemoryAreaBaseAddress, toReturn, 0, (int)stringAreaSize);
+            return toReturn.Length == 0 ? null : toReturn;
+        }
+        public byte[] GetRawDrawingData(uint drawingAreaSize)
+        {
+            if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                ConnectToFalcon();
+            }
+            if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                return null;
+            }
+            if (_hDrawingSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero) || _lpDrawingSharedMemoryAreaBaseAddress.Equals(IntPtr.Zero))
+            {
+                return null;
+            }
+            var toReturn = new byte[drawingAreaSize];
+            Marshal.Copy(_lpDrawingSharedMemoryAreaBaseAddress, toReturn, 0, (int)drawingAreaSize);
             return toReturn.Length == 0 ? null : toReturn;
         }
         private static long GetMaxMemFilePageSize(IntPtr pMemAreaBaseAddr)
@@ -316,8 +335,14 @@ namespace F4SharedMem
 
             if (!_hStringSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
-                var rawStringData = GetRawStringData();
+                var rawStringData = GetRawStringData(toReturn.StringAreaSize);
                 toReturn.StringData = StringData.GetStringData(rawStringData);
+            }
+
+            if (!_hDrawingSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                var rawDrawingData = GetRawDrawingData(toReturn.DrawingAreaSize);
+                toReturn.DrawingData = DrawingData.GetDrawingData(rawDrawingData);
             }
 
             return toReturn;
@@ -364,6 +389,10 @@ namespace F4SharedMem
             _lpStringSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hStringSharedMemoryAreaFileMappingObject,
                 NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
 
+            _hDrawingSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
+                DrawingSharedMemoryAreaFileName);
+            _lpDrawingSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hDrawingSharedMemoryAreaFileMappingObject,
+                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
         }
 
         private void Disconnect()
@@ -410,6 +439,11 @@ namespace F4SharedMem
                 NativeMethods.CloseHandle(_hStringSharedMemoryAreaFileMappingObject);
             }
 
+            if (!_hDrawingSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                NativeMethods.UnmapViewOfFile(_lpDrawingSharedMemoryAreaBaseAddress);
+                NativeMethods.CloseHandle(_hDrawingSharedMemoryAreaFileMappingObject);
+            }
         }
 
         internal void Dispose(bool disposing)
