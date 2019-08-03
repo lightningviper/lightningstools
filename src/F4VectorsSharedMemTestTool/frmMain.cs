@@ -265,19 +265,21 @@ namespace BMSVectorsharedMemTestTool
         private void Timer1_Tick(object sender, EventArgs e)
         {
             var curData = _smReader.GetCurrentData();
+            var drawingData = curData != null ? curData.DrawingData : null;
             var stringData = curData != null ? curData.StringData : null;
-            var stringDataData = stringData != null ? stringData.data : null;
-            _HUDCommands= stringDataData !=null && stringDataData.Any(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHUD) 
-                                ? stringDataData.Where(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHUD).First().value
+            var stringDataData = stringData !=null ? stringData.data : null;
+            _HUDCommands= drawingData !=null && !(string.IsNullOrWhiteSpace(drawingData.HUD_commands))
+                                ? drawingData.HUD_commands
                                 : "";
 
-           _RWRCommands = stringDataData != null && stringDataData.Any(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForRWR)
-                                ? stringDataData.Where(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForRWR).First().value
+           _RWRCommands = drawingData != null && !(string.IsNullOrWhiteSpace(drawingData.RWR_commands))
+                                ? drawingData.RWR_commands
                                 : "";
 
-            _HMSCommands= stringDataData != null && stringDataData.Any(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHMS)
-                                ? stringDataData.Where(sd => sd.strId == (uint)StringIdentifier.DrawingCommandsForHMS).First().value
+            _HMSCommands = drawingData != null && !(string.IsNullOrWhiteSpace(drawingData.HMS_commands))
+                                ? drawingData.HMS_commands
                                 : "";
+
             var cockpitArtDir = stringDataData != null && stringDataData.Any(sd => sd.strId == (uint)StringIdentifier.ThrCockpitdir)
                                 ? stringDataData.Where(sd => sd.strId == (uint)StringIdentifier.ThrCockpitdir).First().value
                                 : "";
