@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BMSVectorsharedMemTestTool.Properties
+namespace BMSDrawingSharedMemTester.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace BMSVectorsharedMemTestTool.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BMSVectorsharedMemTestTool.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BMSDrawingSharedMemTester.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

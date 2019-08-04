@@ -356,43 +356,43 @@ namespace F4SharedMem
                 false, PrimarySharedMemoryAreaFileName);
             _lpPrimarySharedMemoryAreaBaseAddress =
                 NativeMethods.MapViewOfFile(_hPrimarySharedMemoryAreaFileMappingObject, NativeMethods.SECTION_MAP_READ,
-                    0, 0, IntPtr.Zero);
+                    0, 0, 0);
 
             _hSecondarySharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(
                 NativeMethods.SECTION_MAP_READ, false, SecondarySharedMemoryFileName);
             _lpSecondarySharedMemoryAreaBaseAddress =
                 NativeMethods.MapViewOfFile(_hSecondarySharedMemoryAreaFileMappingObject, NativeMethods.SECTION_MAP_READ,
-                    0, 0, IntPtr.Zero);
+                    0, 0, 0);
 
             _hOsbSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
                 OsbSharedMemoryAreaFileName);
             _lpOsbSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hOsbSharedMemoryAreaFileMappingObject,
-                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
+                NativeMethods.SECTION_MAP_READ, 0, 0, 0);
 
             _hIntelliVibeSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
                 IntelliVibeSharedMemoryAreaFileName);
             _lpIntelliVibeSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hIntelliVibeSharedMemoryAreaFileMappingObject,
-                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
+                NativeMethods.SECTION_MAP_READ, 0, 0, 0);
 
             _hRadioClientControlSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
                 RadioClientControlSharedMemoryAreaFileName);
             _lpRadioClientControlSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hRadioClientControlSharedMemoryAreaFileMappingObject,
-                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
+                NativeMethods.SECTION_MAP_READ, 0, 0, 0);
 
             _hRadioClientStatusSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
                 RadioClientStatusSharedMemoryAreaFileName);
             _lpRadioClientStatusSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hRadioClientStatusSharedMemoryAreaFileMappingObject,
-                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
+                NativeMethods.SECTION_MAP_READ, 0, 0, 0);
 
             _hStringSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
                 StringSharedMemoryAreaFileName);
             _lpStringSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hStringSharedMemoryAreaFileMappingObject,
-                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
+                NativeMethods.SECTION_MAP_READ, 0, 0, 0);
 
             _hDrawingSharedMemoryAreaFileMappingObject = NativeMethods.OpenFileMapping(NativeMethods.SECTION_MAP_READ, false,
                 DrawingSharedMemoryAreaFileName);
             _lpDrawingSharedMemoryAreaBaseAddress = NativeMethods.MapViewOfFile(_hDrawingSharedMemoryAreaFileMappingObject,
-                NativeMethods.SECTION_MAP_READ, 0, 0, IntPtr.Zero);
+                NativeMethods.SECTION_MAP_READ, 0, 0, 0);
         }
 
         private void Disconnect()

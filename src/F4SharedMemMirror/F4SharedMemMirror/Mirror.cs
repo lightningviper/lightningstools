@@ -108,6 +108,8 @@ namespace F4SharedMemMirror
                     byte[] intellivibeData = null;
                     byte[] radioClientControlData = null;
                     byte[] radioClientStatusData = null;
+                    byte[] stringData = null;
+                    byte[] drawingData = null;
 
                     if (client != null)
                     {
@@ -119,6 +121,8 @@ namespace F4SharedMemMirror
                             intellivibeData = client.GetIntellivibeData();
                             radioClientControlData = client.GetRadioClientControlData();
                             radioClientStatusData = client.GetRadioClientStatusData();
+                            stringData = client.GetStringData();
+                            drawingData = client.GetDrawingData();
                         }
                         catch (RemotingException e)
                         {
@@ -131,6 +135,8 @@ namespace F4SharedMemMirror
                         _writer.WriteIntellivibeData(intellivibeData);
                         _writer.WriteRadioClientControlData(radioClientControlData);
                         _writer.WriteRadioClientStatusData(radioClientStatusData);
+                        _writer.WriteStringData(stringData);
+                        _writer.WriteDrawingData(drawingData);
                     }
                 }
                 catch (Exception e)
@@ -172,12 +178,15 @@ namespace F4SharedMemMirror
             {
                 try
                 {
+                    var fd = _smReader.GetCurrentData();
                     var primaryFlightData = _smReader.GetRawPrimaryFlightData();
                     var flightData2 = _smReader.GetRawFlightData2();
                     var osbData = _smReader.GetRawOSBData();
                     var intellivibeData = _smReader.GetRawIntelliVibeData();
                     var radioClientControlData = _smReader.GetRawRadioClientControlData();
                     var radioClientStatusData = _smReader.GetRawRadioClientStatusData();
+                    var stringData = _smReader.GetRawStringData(fd.StringAreaSize);
+                    var drawingData = _smReader.GetRawDrawingData(fd.DrawingAreaSize);
 
                     SharedMemoryMirrorServer.SetPrimaryFlightData(primaryFlightData);
                     SharedMemoryMirrorServer.SetFlightData2(flightData2);
@@ -185,6 +194,9 @@ namespace F4SharedMemMirror
                     SharedMemoryMirrorServer.SetIntellivibeData(intellivibeData);
                     SharedMemoryMirrorServer.SetRadioClientControlData(radioClientControlData);
                     SharedMemoryMirrorServer.SetRadioClientStatusData(radioClientStatusData);
+                    SharedMemoryMirrorServer.SetStringData(stringData);
+                    SharedMemoryMirrorServer.SetDrawingData(drawingData);
+
                     Thread.Sleep(Settings.Default.PollingFrequencyMillis);
                     Application.DoEvents();
                 }

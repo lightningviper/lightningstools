@@ -1,4 +1,5 @@
-﻿using System;
+﻿using F4SharedMem.Headers;
+using System;
 using System.Runtime.InteropServices;
 
 namespace F4SharedMem
@@ -12,12 +13,16 @@ namespace F4SharedMem
         private IntPtr _hIntellivibeSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _hRadioClientControlSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _hRadioClientStatusSharedMemoryAreaFileMappingObject = IntPtr.Zero;
+        private IntPtr _hStringSharedMemoryAreaFileMappingObject = IntPtr.Zero;
+        private IntPtr _hDrawingSharedMemoryAreaFileMappingObject = IntPtr.Zero;
         private IntPtr _lpPrimarySharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpSecondarySharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpOsbSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpIntellivibeSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpRadioClientControlSharedMemoryAreaBaseAddress = IntPtr.Zero;
         private IntPtr _lpRadioClientStatusSharedMemoryAreaBaseAddress = IntPtr.Zero;
+        private IntPtr _lpStringSharedMemoryAreaBaseAddress = IntPtr.Zero;
+        private IntPtr _lpDrawingSharedMemoryAreaBaseAddress = IntPtr.Zero;
 
         private const string _primarySharedMemoryAreaFileName = "FalconSharedMemoryArea";
         private const string _secondarySharedMemoryFileName = "FalconSharedMemoryArea2";
@@ -25,6 +30,8 @@ namespace F4SharedMem
         private const string _intellivibeSharedMemoryAreaFileName = "FalconIntellivibeSharedMemoryArea";
         private const string _radioClientControlSharedMemoryAreaFileName = "FalconRccSharedMemoryArea";
         private const string _radioClientStatusSharedMemoryAreaFileName = "FalconRcsSharedMemoryArea";
+        private const string _stringSharedMemoryAreaFileName = "FalconSharedMemoryAreaString";
+        private const string _drawingSharedMemoryAreaFileName = "FalconSharedMemoryAreaDrawing";
 
         #region IDisposable Members
 
@@ -38,37 +45,45 @@ namespace F4SharedMem
 
         public void WritePrimaryFlightData(byte[] data)
         {
-            WriteSharedMemData(data, _primarySharedMemoryAreaFileName, ref _hPrimarySharedMemoryAreaFileMappingObject, ref _lpPrimarySharedMemoryAreaBaseAddress);
+            WriteSharedMemData(data, (uint)data.Length, _primarySharedMemoryAreaFileName, ref _hPrimarySharedMemoryAreaFileMappingObject, ref _lpPrimarySharedMemoryAreaBaseAddress);
         }
 
         public void WriteOSBData(byte[] data)
         {
-            WriteSharedMemData(data, _osbSharedMemoryAreaFileName, ref _hOsbSharedMemoryAreaFileMappingObject, ref _lpOsbSharedMemoryAreaBaseAddress);
+            WriteSharedMemData(data, (uint)data.Length, _osbSharedMemoryAreaFileName, ref _hOsbSharedMemoryAreaFileMappingObject, ref _lpOsbSharedMemoryAreaBaseAddress);
         }
 
         public void WriteFlightData2(byte[] data)
         {
-            WriteSharedMemData(data, _secondarySharedMemoryFileName, ref _hSecondarySharedMemoryAreaFileMappingObject, ref _lpSecondarySharedMemoryAreaBaseAddress);
+            WriteSharedMemData(data, (uint)data.Length, _secondarySharedMemoryFileName, ref _hSecondarySharedMemoryAreaFileMappingObject, ref _lpSecondarySharedMemoryAreaBaseAddress);
         }
 
         public void WriteIntellivibeData(byte[] data)
         {
-            WriteSharedMemData(data, _intellivibeSharedMemoryAreaFileName, ref _hIntellivibeSharedMemoryAreaFileMappingObject, ref _lpIntellivibeSharedMemoryAreaBaseAddress);
+            WriteSharedMemData(data, (uint)data.Length, _intellivibeSharedMemoryAreaFileName, ref _hIntellivibeSharedMemoryAreaFileMappingObject, ref _lpIntellivibeSharedMemoryAreaBaseAddress);
         }
         public void WriteRadioClientControlData(byte[] data)
         {
-            WriteSharedMemData(data, _radioClientControlSharedMemoryAreaFileName, ref _hRadioClientControlSharedMemoryAreaFileMappingObject, ref _lpRadioClientControlSharedMemoryAreaBaseAddress);
+            WriteSharedMemData(data, (uint)data.Length, _radioClientControlSharedMemoryAreaFileName, ref _hRadioClientControlSharedMemoryAreaFileMappingObject, ref _lpRadioClientControlSharedMemoryAreaBaseAddress);
         }
         public void WriteRadioClientStatusData(byte[] data)
         {
-            WriteSharedMemData(data, _radioClientStatusSharedMemoryAreaFileName, ref _hRadioClientStatusSharedMemoryAreaFileMappingObject, ref _lpRadioClientStatusSharedMemoryAreaBaseAddress);
+            WriteSharedMemData(data, (uint)data.Length, _radioClientStatusSharedMemoryAreaFileName, ref _hRadioClientStatusSharedMemoryAreaFileMappingObject, ref _lpRadioClientStatusSharedMemoryAreaBaseAddress);
         }
-        private static void WriteSharedMemData(byte[] data, string sharedMemoryAreaFileName, ref IntPtr hSharedMemoryFileMappingObject, ref IntPtr lpDestination)
+        public void WriteStringData(byte[] data)
+        {
+            WriteSharedMemData(data, StringData.STRINGDATA_AREA_SIZE_MAX, _stringSharedMemoryAreaFileName, ref _hStringSharedMemoryAreaFileMappingObject, ref _lpStringSharedMemoryAreaBaseAddress);
+        }
+        public void WriteDrawingData(byte[] data)
+        {
+            WriteSharedMemData(data, DrawingData.DRAWINGDATA_AREA_SIZE_MAX, _drawingSharedMemoryAreaFileName, ref _hDrawingSharedMemoryAreaFileMappingObject, ref _lpDrawingSharedMemoryAreaBaseAddress);
+        }
+        private static void WriteSharedMemData(byte[] data, uint maxSize, string sharedMemoryAreaFileName, ref IntPtr hSharedMemoryFileMappingObject, ref IntPtr lpDestination)
         {
             if (data == null || data.Length == 0) return;
             if (hSharedMemoryFileMappingObject.Equals(IntPtr.Zero))
             {
-                CreateSharedMemoryArea(sharedMemoryAreaFileName, (ushort)data.Length, out hSharedMemoryFileMappingObject, out lpDestination);
+                CreateSharedMemoryArea(sharedMemoryAreaFileName, maxSize, out hSharedMemoryFileMappingObject, out lpDestination);
             }
             if (hSharedMemoryFileMappingObject.Equals(IntPtr.Zero))
             {
@@ -76,19 +91,20 @@ namespace F4SharedMem
             }
             if (!hSharedMemoryFileMappingObject.Equals(IntPtr.Zero))
             {
-                Marshal.Copy(data, 0, lpDestination, data.Length);
+                F4SharedMem.Win32.NativeMethods.VirtualAlloc(lpDestination, (uint)data.Length, Win32.NativeMethods.AllocationType.Commit, Win32.NativeMethods.PageProtection.ReadWrite);
+                Marshal.Copy(data, 0, lpDestination, (int)Math.Min(maxSize, data.Length));
             }
         }
-        private static void CreateSharedMemoryArea(string sharedMemoryAreaFileName, ushort length, out IntPtr hFileMappingObject, out IntPtr lpBaseAddress)
+        private static void CreateSharedMemoryArea(string sharedMemoryAreaFileName, uint length, out IntPtr hFileMappingObject, out IntPtr lpBaseAddress)
         {
+            var createFileMappingFlags = (uint)F4SharedMem.Win32.NativeMethods.PageProtection.ReadWrite | (uint)Win32.NativeMethods.SecurityAttributes.Reserve;
             hFileMappingObject =
                 F4SharedMem.Win32.NativeMethods.CreateFileMapping(new IntPtr(F4SharedMem.Win32.NativeMethods.INVALID_HANDLE_VALUE), IntPtr.Zero,
-                                                F4SharedMem.Win32.NativeMethods.PageProtection.ReadWrite, 0, length,
+                                                (F4SharedMem.Win32.NativeMethods.PageProtection)createFileMappingFlags, 0, length,
                                                 sharedMemoryAreaFileName);
             lpBaseAddress =
                 F4SharedMem.Win32.NativeMethods.MapViewOfFile(hFileMappingObject,
-                                            F4SharedMem.Win32.NativeMethods.SECTION_MAP_READ | F4SharedMem.Win32.NativeMethods.SECTION_MAP_WRITE, 0, 0,
-                                            IntPtr.Zero);
+                                            F4SharedMem.Win32.NativeMethods.SECTION_MAP_READ | F4SharedMem.Win32.NativeMethods.SECTION_MAP_WRITE, 0, 0, length);
         }
 
 

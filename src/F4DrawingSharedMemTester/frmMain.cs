@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace BMSVectorsharedMemTestTool
+namespace BMSDrawingSharedMemTester
 {
     public partial class frmMain : Form
     {

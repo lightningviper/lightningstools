@@ -201,7 +201,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Henkie.SDI", "Henkie.SDI", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.HSI", "..\Henkie\Henkie.HSI\Henkie.HSI.csproj", "{B1BC2014-526E-4EE0-B77A-95988DF30B39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4VectorsSharedMemTestTool", "..\F4VectorsSharedMemTestTool\F4VectorsSharedMemTestTool.csproj", "{9B192287-D442-46E0-AC67-0A32B74E8CC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4DrawingSharedMemTester", "..\F4DrawingSharedMemTester\F4DrawingSharedMemTester.csproj", "{9B192287-D442-46E0-AC67-0A32B74E8CC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

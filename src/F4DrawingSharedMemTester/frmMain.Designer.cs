@@ -1,4 +1,4 @@
-﻿namespace BMSVectorsharedMemTestTool
+﻿namespace BMSDrawingSharedMemTester
 {
     partial class frmMain
     {
@@ -199,7 +199,7 @@
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "BMS Vectors Shared Memory Test Tool";
+            this.Text = "Falcon BMS Drawing Shared Memory Test Tool";
             ((System.ComponentModel.ISupportInitialize)(this.pbHUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRWR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHMS)).EndInit();

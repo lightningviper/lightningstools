@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4VectorsSharedMemTestTool", "F4VectorsSharedMemTestTool.csproj", "{9B192287-D442-46E0-AC67-0A32B74E8CC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4DrawingSharedMemTester", "F4DrawingSharedMemTester.csproj", "{9B192287-D442-46E0-AC67-0A32B74E8CC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F4SharedMem", "..\F4SharedMem\F4SharedMem.csproj", "{517D1B4D-E8C7-4331-BBE7-300FD6B78441}"
 EndProject

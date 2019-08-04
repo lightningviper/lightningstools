@@ -239,7 +239,7 @@ namespace F4SharedMemoryRecorder.Runtime
             using (var writer = new BinaryWriter(output: _fileStream, encoding: Encoding.UTF8, leaveOpen: true))
             {
                 var header = new SharedMemoryRecordingHeader();
-                header.Magic = new byte[4] { (byte)'S', (byte)'M', (byte)'X', (byte)'1' };
+                header.Magic = new byte[4] { (byte)'S', (byte)'M', (byte)'X', (byte)'2' };
                 header.NumSamples = NumSamples;
                 header.SampleInterval = DEFAULT_SAMPLING_INTERVAL_MS;
                 writer.Write(header.Magic, 0, header.Magic.Length);
@@ -252,35 +252,45 @@ namespace F4SharedMemoryRecorder.Runtime
         private SharedMemorySample ReadNextSampleFromFile()
         {
             var sample = new SharedMemorySample();
-            sample.PrimaryFlightDataLength = _gzipStreamBinaryReader.ReadUInt16();
+            sample.PrimaryFlightDataLength = _gzipStreamBinaryReader.ReadUInt32();
             if (sample.PrimaryFlightDataLength > 0)
             {
-                sample.PrimaryFlightData = _gzipStreamBinaryReader.ReadBytes(sample.PrimaryFlightDataLength);
+                sample.PrimaryFlightData = _gzipStreamBinaryReader.ReadBytes((int)sample.PrimaryFlightDataLength);
             }
-            sample.FlightData2Length = _gzipStreamBinaryReader.ReadUInt16();
+            sample.FlightData2Length = _gzipStreamBinaryReader.ReadUInt32();
             if (sample.FlightData2Length > 0)
             {
-                sample.FlightData2 = _gzipStreamBinaryReader.ReadBytes(sample.FlightData2Length);
+                sample.FlightData2 = _gzipStreamBinaryReader.ReadBytes((int)sample.FlightData2Length);
             }
-            sample.OSBDataLength = _gzipStreamBinaryReader.ReadUInt16();
+            sample.OSBDataLength = _gzipStreamBinaryReader.ReadUInt32();
             if (sample.OSBDataLength > 0)
             {
-                sample.OSBData = _gzipStreamBinaryReader.ReadBytes(sample.OSBDataLength);
+                sample.OSBData = _gzipStreamBinaryReader.ReadBytes((int)sample.OSBDataLength);
             }
-            sample.IntellivibeDataLength = _gzipStreamBinaryReader.ReadUInt16();
+            sample.IntellivibeDataLength = _gzipStreamBinaryReader.ReadUInt32();
             if (sample.IntellivibeDataLength > 0)
             {
-                sample.IntellivibeData = _gzipStreamBinaryReader.ReadBytes(sample.IntellivibeDataLength);
+                sample.IntellivibeData = _gzipStreamBinaryReader.ReadBytes((int)sample.IntellivibeDataLength);
             }
-            sample.RadioClientStatusDataLength = _gzipStreamBinaryReader.ReadUInt16();
+            sample.RadioClientStatusDataLength = _gzipStreamBinaryReader.ReadUInt32();
             if (sample.RadioClientStatusDataLength > 0)
             {
-                sample.RadioClientStatusData = _gzipStreamBinaryReader.ReadBytes(sample.RadioClientStatusDataLength);
+                sample.RadioClientStatusData = _gzipStreamBinaryReader.ReadBytes((int)sample.RadioClientStatusDataLength);
             }
-            sample.RadioClientControlDataLength = _gzipStreamBinaryReader.ReadUInt16();
+            sample.RadioClientControlDataLength = _gzipStreamBinaryReader.ReadUInt32();
             if (sample.RadioClientControlDataLength > 0)
             {
-                sample.RadioClientControlData = _gzipStreamBinaryReader.ReadBytes(sample.RadioClientControlDataLength);
+                sample.RadioClientControlData = _gzipStreamBinaryReader.ReadBytes((int)sample.RadioClientControlDataLength);
+            }
+            sample.StringDataLength = _gzipStreamBinaryReader.ReadUInt32();
+            if (sample.StringDataLength > 0)
+            {
+                sample.StringData = _gzipStreamBinaryReader.ReadBytes((int)sample.StringDataLength);
+            }
+            sample.DrawingDataLength = _gzipStreamBinaryReader.ReadUInt32();
+            if (sample.DrawingDataLength > 0)
+            {
+                sample.DrawingData = _gzipStreamBinaryReader.ReadBytes((int)sample.DrawingDataLength);
             }
             return sample;
         }
@@ -320,6 +330,17 @@ namespace F4SharedMemoryRecorder.Runtime
             {
                 _gzipStreamBinaryWriter.Write(sample.RadioClientControlData);
             }
+            _gzipStreamBinaryWriter.Write(sample.StringDataLength);
+            if (sample.StringDataLength > 0)
+            {
+                _gzipStreamBinaryWriter.Write(sample.StringData);
+            }
+            _gzipStreamBinaryWriter.Write(sample.DrawingDataLength);
+            if (sample.DrawingDataLength > 0)
+            {
+                _gzipStreamBinaryWriter.Write(sample.DrawingData);
+            }
+
             _gzipStreamBinaryWriter.Flush();
             _gzipStream.Flush();
             _fileStream.Flush();
@@ -327,18 +348,23 @@ namespace F4SharedMemoryRecorder.Runtime
         private SharedMemorySample ReadSampleFromSharedmem()
         {
             var sample = new SharedMemorySample();
+            var fd = _sharedMemoryReader.GetCurrentData();
             sample.PrimaryFlightData = _sharedMemoryReader.GetRawPrimaryFlightData();
-            sample.PrimaryFlightDataLength = (ushort)(sample.PrimaryFlightData != null ? sample.PrimaryFlightData.Length : 0);
+            sample.PrimaryFlightDataLength = (uint)(sample.PrimaryFlightData != null ? sample.PrimaryFlightData.Length : 0);
             sample.FlightData2 = _sharedMemoryReader.GetRawFlightData2();
-            sample.FlightData2Length = (ushort)(sample.FlightData2 != null ? sample.FlightData2.Length : 0);
+            sample.FlightData2Length = (uint)(sample.FlightData2 != null ? sample.FlightData2.Length : 0);
             sample.OSBData = _sharedMemoryReader.GetRawOSBData();
-            sample.OSBDataLength = (ushort)(sample.OSBData != null ? sample.OSBData.Length : 0);
+            sample.OSBDataLength = (uint)(sample.OSBData != null ? sample.OSBData.Length : 0);
             sample.IntellivibeData = _sharedMemoryReader.GetRawIntelliVibeData();
-            sample.IntellivibeDataLength = (ushort)(sample.IntellivibeData != null ? sample.IntellivibeData.Length : 0);
+            sample.IntellivibeDataLength = (uint)(sample.IntellivibeData != null ? sample.IntellivibeData.Length : 0);
             sample.RadioClientControlData = _sharedMemoryReader.GetRawRadioClientControlData();
-            sample.RadioClientControlDataLength = (ushort)(sample.RadioClientControlData != null ? sample.RadioClientControlData.Length : 0);
+            sample.RadioClientControlDataLength = (uint)(sample.RadioClientControlData != null ? sample.RadioClientControlData.Length : 0);
             sample.RadioClientStatusData = _sharedMemoryReader.GetRawRadioClientStatusData();
-            sample.RadioClientStatusDataLength = (ushort)(sample.RadioClientStatusData != null ? sample.RadioClientStatusData.Length : 0);
+            sample.RadioClientStatusDataLength = (uint)(sample.RadioClientStatusData != null ? sample.RadioClientStatusData.Length : 0);
+            sample.StringData = _sharedMemoryReader.GetRawStringData(fd.StringAreaSize);
+            sample.StringDataLength = (uint)(sample.DrawingData != null ? sample.DrawingData.Length : 0);
+            sample.DrawingData = _sharedMemoryReader.GetRawDrawingData(fd.DrawingAreaSize);
+            sample.DrawingDataLength = (uint)(sample.DrawingData != null ? sample.DrawingData.Length : 0);
             return sample;
 
         }
@@ -392,8 +418,24 @@ namespace F4SharedMemoryRecorder.Runtime
                 }
                 catch { }
             }
+            if (sample.StringData != null)
+            {
+                try
+                {
+                    _sharedMemoryWriter.WriteDrawingData(sample.StringData);
+                }
+                catch { }
+            }
+            if (sample.DrawingData != null)
+            {
+                try
+                {
+                    _sharedMemoryWriter.WriteDrawingData(sample.DrawingData);
+                }
+                catch { }
+            }
         }
-        
+
         public void Dispose()
         {
             Dispose(true);

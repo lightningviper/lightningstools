@@ -16,6 +16,8 @@ namespace F4SharedMemMirror
         byte[] GetIntellivibeData();
         byte[] GetRadioClientControlData();
         byte[] GetRadioClientStatusData();
+        byte[] GetStringData();
+        byte[] GetDrawingData();
     }
 
     public interface ISharedMemoryMirrorServer
@@ -26,6 +28,8 @@ namespace F4SharedMemMirror
         byte[] GetIntellivibeData();
         byte[] GetRadioClientControlData();
         byte[] GetRadioClientStatusData();
+        byte[] GetStringData();
+        byte[] GetDrawingData();
     }
 
     public class SharedMemoryMirrorClient : ISharedMemoryMirrorClient
@@ -108,6 +112,14 @@ namespace F4SharedMemMirror
         {
             return _server.GetRadioClientStatusData();
         }
+        public byte[] GetStringData()
+        {
+            return _server.GetStringData();
+        }
+        public byte[] GetDrawingData()
+        {
+            return _server.GetDrawingData();
+        }
         #endregion
     }
 
@@ -119,6 +131,8 @@ namespace F4SharedMemMirror
         private static byte[] _intellivibeData;
         private static byte[] _radioClientControlData;
         private static byte[] _radioClientStatusData;
+        private static byte[] _stringData;
+        private static byte[] _drawingData;
 
         private SharedMemoryMirrorServer()
         {
@@ -151,6 +165,14 @@ namespace F4SharedMemMirror
         public byte[] GetRadioClientStatusData()
         {
             return _radioClientStatusData;
+        }
+        public byte[] GetStringData()
+        {
+            return _stringData;
+        }
+        public byte[] GetDrawingData()
+        {
+            return _drawingData;
         }
 
         #endregion
@@ -244,6 +266,14 @@ namespace F4SharedMemMirror
         public static void SetRadioClientStatusData(byte[] data)
         {
             _radioClientStatusData = data;
+        }
+        public static void SetStringData(byte[] data)
+        {
+            _stringData = data;
+        }
+        public static void SetDrawingData(byte[] data)
+        {
+            _drawingData = data;
         }
     }
 }

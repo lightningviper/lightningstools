@@ -3,6 +3,9 @@ using System.Text;
 
 namespace F4SharedMem.Headers
 {
+    // - NOTE: Check DrawingAreaSize in FalconSharedMemoryArea2 for the actual size of this area!
+    // - NOTE: Treat this shared memory area as a pure "char*", not as "DrawingData*", since the size is not fixed!
+
     // changelog:
     // 1: initial BMS 4.35 version: added export of 2D drawing commands for HUD, RWR, and HMS in the following string variables
     //     HUD_commands  (only populated if g_bExportDrawingCommandsForHUD is set to 1 in Falcon BMS config)
@@ -68,10 +71,12 @@ namespace F4SharedMem.Headers
     //                                                                   green: bits 8-15
     //                                                                   red:   bits 0-7 (least significant 8 bits)
 
-    // *** "FalconSharedMemoryAreaString" ***
+    // *** "FalconSharedMemoryAreaDrawing" ***
     [Serializable]
     public class DrawingData
     {
+        public const uint DRAWINGDATA_AREA_SIZE_MAX = 1024 * 1024;
+
         public uint VersionNum;      // Version of the DrawingData shared memory area
 
         public uint HUD_length;      // The length of the string in "HUD_commands", *without* termination, note that HUD_commands *does* have termination

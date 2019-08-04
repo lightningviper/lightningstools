@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.IO;
 
-namespace BMSVectorsharedMemTestTool
+namespace BMSDrawingSharedMemTester
 {
     public class BmsFont
     {

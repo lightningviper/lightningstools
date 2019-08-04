@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Falcon BMS Vectors Shared Memory Test Tool")]
+[assembly: AssemblyTitle("Falcon BMS Drawing Shared Memory Test Tool")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Falcon BMS Vectors Shared Memory Test Tool")]
+[assembly: AssemblyProduct("Falcon BMS Drawing Shared Memory Test Tool")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

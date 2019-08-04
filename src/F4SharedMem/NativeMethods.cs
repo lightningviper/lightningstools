@@ -34,7 +34,29 @@ namespace F4SharedMem.Win32
             NoCache = 0x200,
             WriteCombine = 0x400,
         }
-
+        [Flags]
+        public enum SecurityAttributes : uint
+        {
+            Commit= 0x8000000,
+            Image= 0x1000000,
+            ImageNoExecute= 0x11000000,
+            LargePages= 0x80000000,
+            NoCache= 0x10000000,
+            Reserve= 0x4000000,
+            WriteCombine= 0x40000000,
+        }
+        [Flags]
+        public enum AllocationType : uint
+        {
+            Commit= 0x00001000,
+            Reserve= 0x00002000,
+            Reset= 0x00080000,
+            ResetUndo= 0x1000000,
+            LargePages= 0x20000000,
+            Physical= 0x00400000,
+            TopDown= 0x00100000,
+            WriteWatch= 0x00200000
+        }
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr OpenFileMapping(uint dwDesiredAccess,
             bool bInheritHandle,
@@ -43,7 +65,7 @@ namespace F4SharedMem.Win32
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr MapViewOfFile(IntPtr hFileMappingObject, uint
            dwDesiredAccess, uint dwFileOffsetHigh, uint dwFileOffsetLow,
-           IntPtr dwNumberOfBytesToMap);
+           uint dwNumberOfBytesToMap);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -53,7 +75,7 @@ namespace F4SharedMem.Win32
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CloseHandle(IntPtr hObject);
 
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError =true)]
         public static extern int VirtualQuery(
             ref IntPtr lpAddress,
             ref MEMORY_BASIC_INFORMATION lpBuffer,
@@ -71,7 +93,7 @@ namespace F4SharedMem.Win32
             public uint Protect;
             public uint Type;
         }
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError =true)]
         public static extern bool GetFileSizeEx(IntPtr hFile, out IntPtr lpFileSize);
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -79,6 +101,7 @@ namespace F4SharedMem.Win32
                                                         IntPtr lpFileMappingAttributes, PageProtection flProtect,
                                                         uint dwMaximumSizeHigh,
                                                         uint dwMaximumSizeLow, string lpName);
-
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr VirtualAlloc(IntPtr lpAddress, uint dwSize, AllocationType flAllocationType, PageProtection flProtect);
     }
 }
