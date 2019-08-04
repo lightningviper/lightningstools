@@ -98,19 +98,19 @@ namespace F4SharedMem.Headers
             result.HUD_length = BitConverter.ToUInt32(rawDrawingData, offset);
             offset += sizeof(uint);
             if (offset + result.HUD_length + 1> rawDrawingData.Length) return result;
-            result.HUD_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HUD_length + 1);
+            result.HUD_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HUD_length);
             offset += (int)result.HUD_length +1;
 
             result.RWR_length = BitConverter.ToUInt32(rawDrawingData, offset);
             offset += sizeof(uint);
             if (offset + result.RWR_length + 1 > rawDrawingData.Length) return result;
-            result.RWR_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.RWR_length + 1);
+            result.RWR_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.RWR_length);
             offset += (int)result.RWR_length + 1;
 
             result.HMS_length = BitConverter.ToUInt32(rawDrawingData, offset);
             offset += sizeof(uint);
             if (offset + result.HMS_length + 1 > rawDrawingData.Length) return result;
-            result.HMS_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HMS_length + 1);
+            result.HMS_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HMS_length);
 
             return result;
         }

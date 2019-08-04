@@ -46,7 +46,7 @@ namespace F4SharedMem.Headers
         public uint strId;
         public uint strLength;     // The length of the string in "strData", stored *without* termination!
         public byte[] strData;
-        public string value { get { return Encoding.Default.GetString(strData); } } 
+        public string value { get { return Encoding.Default.GetString(strData, 0, (int)strLength); } } 
         public override string ToString()
         {
             var identifier = Enum.GetName(typeof(StringIdentifier), strId);
