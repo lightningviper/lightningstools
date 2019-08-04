@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9B192287-D442-46E0-AC67-0A32B74E8CC0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>F4VectorsSharedMemTestTool</RootNamespace>
-    <AssemblyName>F4VectorsSharedMemTestTool</AssemblyName>
+    <RootNamespace>BMSDrawingSharedMemTester</RootNamespace>
+    <AssemblyName>BMSDrawingSharedMemTester</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -67,6 +67,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
