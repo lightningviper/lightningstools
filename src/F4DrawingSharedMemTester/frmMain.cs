@@ -31,12 +31,13 @@ namespace BMSDrawingSharedMemTester
         private string _HUDCommands;
         private string _RWRCommands;
         private string _HMSCommands;
-
+        private Dictionary<string, string> _previousCommands = new Dictionary<string, string>();
         private F4SharedMem.Reader _smReader = new F4SharedMem.Reader();
 
         public frmMain()
         {
             InitializeComponent();
+
             pbHUD.Image = _HUDImage;
             pbRWR.Image = _RWRImage;
             pbHMS.Image = _HMSImage;
@@ -292,12 +293,19 @@ namespace BMSDrawingSharedMemTester
             Process(_HMSCommands, "HMS", txtHMS, lblHMSDataSize, pbHMS, ref _HMSImage);
             Draw(_HMSImage, _HMSCommands, pbHMS);
         }
+
         private void Process(string commands, string displayName, TextBox textBox, Label dataSizeLabel, PictureBox pictureBox, ref Image displayImage)
         {
             if (textBox != null)
             {
                 var toDisplay = commands.Replace(";", ";\r\n");
-                if (!string.Equals(textBox.Text, toDisplay)) textBox.Text = commands != null ? toDisplay : "";
+                var previousCommands = _previousCommands.ContainsKey(displayName) ? _previousCommands[displayName] : "";
+                if (toDisplay != previousCommands)
+                {
+                    var newVal = commands != null ? toDisplay : "";
+                    textBox.Text = newVal;
+                    _previousCommands[displayName] = newVal;
+                }
             }
             var dataSizeInKB = (commands ?? "").Length / 1024.0;
             if (dataSizeLabel !=null) dataSizeLabel.Text = $"Data Size: {dataSizeInKB.ToString("0.00")} KB";
