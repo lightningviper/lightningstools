@@ -34,15 +34,15 @@ namespace BMSDrawingSharedMemTester
         }
         private FontMetric parseRctLine(string rctLine )
         {
-            var tokens = rctLine.Split(' ');
+            var tokens = rctLine.Split(new[] { ' ', '\t'}, System.StringSplitOptions.RemoveEmptyEntries);
             var fontMetric = new FontMetric();
-            fontMetric.idx = int.Parse(tokens[0]);
-            fontMetric.left = int.Parse(tokens[1]);
-            fontMetric.top = int.Parse(tokens[2]);
-            fontMetric.width = int.Parse(tokens[3]);
-            fontMetric.height = int.Parse(tokens[4]);
-            fontMetric.lead = int.Parse(tokens[5]);
-            fontMetric.trail = int.Parse(tokens[6]);
+            fontMetric.idx = tokens.Length > 0 ? int.Parse(tokens[0]) : 0;
+            fontMetric.left = tokens.Length > 1 ? int.Parse(tokens[1]) : 0;
+            fontMetric.top = tokens.Length > 2 ? int.Parse(tokens[2]) : 0;
+            fontMetric.width = tokens.Length > 3 ? int.Parse(tokens[3]) : 0;
+            fontMetric.height = tokens.Length > 4 ? int.Parse(tokens[4]) : 0;
+            fontMetric.lead = tokens.Length > 5 ? int.Parse(tokens[5]) : 0;
+            fontMetric.trail = tokens.Length > 6 ? int.Parse(tokens[6]) : 0;
             return fontMetric;
         }
         public struct FontMetric
