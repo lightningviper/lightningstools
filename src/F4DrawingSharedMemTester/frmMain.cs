@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,15 +24,17 @@ namespace BMSDrawingSharedMemTester
 
         private string _fontTexture;
         private HashSet<BmsFont> _bmsFonts=new HashSet<BmsFont>();
+        private string _fontDir;
+
         private Image _HUDImage;
         private Image _RWRImage;
         private Image _HMSImage;
-        private string _fontDir;
 
         private string _HUDCommands;
         private string _RWRCommands;
         private string _HMSCommands;
         private Dictionary<string, string> _previousCommands = new Dictionary<string, string>();
+
         private F4SharedMem.Reader _smReader = new F4SharedMem.Reader();
 
         public frmMain()
@@ -79,27 +82,27 @@ namespace BMSDrawingSharedMemTester
                             else if (command.StartsWith("P:"))
                             {
                                 var args = command.Replace("P:", "").TrimEnd(';').Split(',');
-                                try { DrawPoint(float.Parse(args[0]), float.Parse(args[1]), g); } catch { };
+                                try { DrawPoint(ParseFloat(args[0]), ParseFloat(args[1]), g); } catch { };
                             }
                             else if (command.StartsWith("L:"))
                             {
                                 var args = command.Replace("L:", "").TrimEnd(';').Split(',');
-                                try { DrawLine(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]), g); } catch { };
+                                try { DrawLine(ParseFloat(args[0]), ParseFloat(args[1]), ParseFloat(args[2]), ParseFloat(args[3]), g); } catch { };
                             }
                             else if (command.StartsWith("T:"))
                             {
                                 var args = command.Replace("T:", "").TrimEnd(';').Split(',');
-                                try { DrawTri(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]), g); } catch { };
+                                try { DrawTri(ParseFloat(args[0]), ParseFloat(args[1]), ParseFloat(args[2]), ParseFloat(args[3]), ParseFloat(args[4]), ParseFloat(args[5]), g); } catch { };
                             }
                             else if (command.StartsWith("S:"))
                             {
                                 var args = EscapeQuotedComma(command).Replace("S:", "").TrimEnd(';').Split(',');
-                                try { DrawString(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), byte.Parse(args[3]), g); } catch { };
+                                try { DrawString(ParseFloat(args[0]), ParseFloat(args[1]), RemoveSurroundingQuotes(args[2]), byte.Parse(args[3]), g); } catch { };
                             }
                             else if (command.StartsWith("SR:"))
                             {
                                 var args = EscapeQuotedComma(command).Replace("SR:", "").TrimEnd(';').Split(',');
-                                try { DrawStringRotated(float.Parse(args[0]), float.Parse(args[1]), RemoveSurroundingQuotes(args[2]), float.Parse(args[3]), g); } catch { };
+                                try { DrawStringRotated(ParseFloat(args[0]), ParseFloat(args[1]), RemoveSurroundingQuotes(args[2]), ParseFloat(args[3]), g); } catch { };
                             }
                             else if (command.StartsWith("FG:"))
                             {
@@ -354,6 +357,12 @@ namespace BMSDrawingSharedMemTester
             var bmsFont = new BmsFont(fontFullPath, rctPath);
             _bmsFonts.Add(bmsFont);
             return bmsFont;
+        }
+
+        private static readonly CultureInfo USCultureInfo = new CultureInfo("en-US");
+        private float ParseFloat (string toParse)
+        {
+            return float.Parse(toParse, USCultureInfo);
         }
     }
 }
