@@ -95,6 +95,7 @@
     <Compile Include="TerrainTextureByTextureIdRetriever.cs" />
     <Compile Include="TextureDotBinFileReader.cs" />
     <Compile Include="TheaterDotLxFileReader.cs" />
+    <Compile Include="TheaterDotLxFileInfoWriter.cs" />
     <Compile Include="TheaterDotMapFileReader.cs" />
     <Compile Include="TheaterDotTdfFileReader.cs" />
     <Compile Include="TheaterMapBuilder.cs" />
