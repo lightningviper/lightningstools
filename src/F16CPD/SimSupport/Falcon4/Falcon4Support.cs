@@ -237,8 +237,8 @@ namespace F16CPD.SimSupport.Falcon4
 
                 UpdateCpdPowerState(flightData, fromFalcon);
 
-                flightData.RadarAltimeterOffFlag = ((fromFalcon.lightBits & (int) LightBits.RadarAlt) ==
-                                                    (int) LightBits.RadarAlt);
+                flightData.RadarAltimeterOffFlag = !((fromFalcon.miscBits & (int) MiscBits.RALT_Valid) ==
+                                                    (int) MiscBits.RALT_Valid);
                 flightData.BarometricPressure = (fromFalcon.AltCalReading/100.00f);
                 flightData.AltimeterUnits = (((AltBits)fromFalcon.altBits & AltBits.CalType) == AltBits.CalType) ? AltimeterUnits.Hg : AltimeterUnits.hPa;
                 flightData.AltimeterMode = (((AltBits)fromFalcon.altBits & AltBits.PneuFlag) == AltBits.PneuFlag) ? AltimeterMode.Pneumatic : AltimeterMode.Electronic;

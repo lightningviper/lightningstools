@@ -31,6 +31,7 @@ namespace LightningGauges.Renderers.F16.ISIS
         private float _rollDegrees;
         private float _verticalVelocityFeetPerMinute;
         private float _radarAltitudeAGL;
+        private bool _radarAltitudeValid;
         private float _indicatedAltitudeFeetMSL;
 
         public InstrumentState()
@@ -41,6 +42,8 @@ namespace LightningGauges.Renderers.F16.ISIS
             MachNumber = 0;
             NeverExceedSpeedKnots = 0;
             IndicatedAltitudeFeetMSL = 0;
+            RadarAltitudeAGL = 0;
+            RadarAltitudeValid = false;
             VerticalVelocityFeetPerMinute = 0;
             GlideslopeDeviationLimitDegrees = DEFAULT_GLIDESLOPE_DEVIATION_LIMIT_DEGREES;
             GlideslopeDeviationDegrees = 0;
@@ -117,6 +120,11 @@ namespace LightningGauges.Renderers.F16.ISIS
                 if (float.IsNaN(value) || float.IsInfinity(value)) value = 0;
                 _radarAltitudeAGL = value;
             }
+        }
+        public bool RadarAltitudeValid
+        {
+            get => _radarAltitudeValid;
+            set => _radarAltitudeValid = value;
         }
 
 
