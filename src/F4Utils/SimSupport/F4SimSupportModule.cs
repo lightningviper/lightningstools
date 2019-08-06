@@ -87,7 +87,7 @@ namespace F4Utils.SimSupport
 
             if (_lastFlightData == null) return;
 
-            var subscribedSimOutputs = _simOutputs.Values.Where(x => x.HasListeners);
+            var subscribedSimOutputs = _simOutputs.Values.Where(x => x.HasListeners || x is TextSignal);
             Parallel.ForEach(subscribedSimOutputs, simOutput => UpdateSimOutput(showToFromFlag, showCommandBars, courseDeviationDegrees, deviationLimitDegrees, simOutput));
         }
 
@@ -99,18 +99,27 @@ namespace F4Utils.SimSupport
 
             switch (simOutput)
             {
-                case F4SimOutputs.MAP__GROUND_POSITION__FEET_NORTH_OF_MAP_ORIGIN:
+                case F4SimOutputs.MAP__OWNSHIP_POSITION__FEET_NORTH_OF_MAP_ORIGIN:
                     SetOutput((AnalogSignal) output, _lastFlightData.x);
                     break;
 
-                case F4SimOutputs.MAP__GROUND_POSITION__FEET_EAST_OF_MAP_ORIGIN:
+                case F4SimOutputs.MAP__OWNSHIP_POSITION__FEET_EAST_OF_MAP_ORIGIN:
                     SetOutput((AnalogSignal) output, _lastFlightData.y);
                     break;
-                case F4SimOutputs.MAP__GROUND_POSITION__LATITUDE:
+
+                case F4SimOutputs.MAP__OWNSHIP_POSITION__LATITUDE:
                     SetOutput((AnalogSignal)output, _lastFlightData.latitude);
                     break;
-                case F4SimOutputs.MAP__GROUND_POSITION__LONGITUDE:
+                case F4SimOutputs.MAP__OWNSHIP_POSITION__LONGITUDE:
                     SetOutput((AnalogSignal)output, _lastFlightData.longitude);
+                    break;
+
+                case F4SimOutputs.MAP__BULLSEYE_POSITION__FEET_NORTH_OF_MAP_ORIGIN:
+                    SetOutput((AnalogSignal)output, _lastFlightData.bullseyeX);
+                    break;
+
+                case F4SimOutputs.MAP__BULLSEYE_POSITION__FEET_EAST_OF_MAP_ORIGIN:
+                    SetOutput((AnalogSignal)output, _lastFlightData.bullseyeY);
                     break;
 
                 case F4SimOutputs.MAP__GROUND_SPEED_VECTOR__NORTH_COMPONENT_FPS:
@@ -145,6 +154,14 @@ namespace F4Utils.SimSupport
 
                 case F4SimOutputs.TRUE_ALTITUDE__MSL:
                     SetOutput((AnalogSignal) output, -_lastFlightData.z);
+                    break;
+
+                case F4SimOutputs.RADAR_ALTIMETER__ALTITUDE__AGL:
+                    SetOutput((AnalogSignal)output, -_lastFlightData.RALT);
+                    break;
+
+                case F4SimOutputs.RADAR_ALTIMETER__RALT_VALID:
+                    ((DigitalSignal)output).State = ((MiscBits)_lastFlightData.miscBits & MiscBits.RALT_Valid) == MiscBits.RALT_Valid;
                     break;
 
                 case F4SimOutputs.VVI__VERTICAL_VELOCITY_FPM:
@@ -965,6 +982,89 @@ namespace F4Utils.SimSupport
                     ((DigitalSignal) output).State = ((PowerBits) _lastFlightData.powerBits & PowerBits.JetFuelStarter) == PowerBits.JetFuelStarter;
                     break;
 
+
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__ALL_WORDS:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Allwords) == BettyBits.Betty_Allwords;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__PULL_UP:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Pullup) == BettyBits.Betty_Pullup;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__ALTITUDE:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Altitude) == BettyBits.Betty_Altitude;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__WARNING:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Warning) == BettyBits.Betty_Warning;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__JAMMER:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Jammer) == BettyBits.Betty_Jammer;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__COUNTER:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Counter) == BettyBits.Betty_Counter;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__CHAFFFLARE:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_ChaffFlare) == BettyBits.Betty_ChaffFlare;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__CHAFFFLARE_LOW:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_ChaffFlare_Low) == BettyBits.Betty_ChaffFlare_Low;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__CHAFFFLARE_OUT:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_ChaffFlare_Out) == BettyBits.Betty_ChaffFlare_Out;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__LOCK:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Lock) == BettyBits.Betty_Lock;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__CAUTION:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Caution) == BettyBits.Betty_Caution;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__DATA:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Data) == BettyBits.Betty_Data;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__BINGO:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Bingo) == BettyBits.Betty_Bingo;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__IFF:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_IFF) == BettyBits.Betty_IFF;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__LOWSPEED:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Lowspeed) == BettyBits.Betty_Lowspeed;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__BEEPS:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_Beeps) == BettyBits.Betty_Beeps;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__AOA:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_AOA) == BettyBits.Betty_AOA;
+                    break;
+
+                case F4SimOutputs.VOICE_MESSAGE_SYSTEM__MAXG:
+                    ((DigitalSignal)output).State = ((BettyBits)_lastFlightData.bettyBits & BettyBits.Betty_MaxG) == BettyBits.Betty_MaxG;
+                    break;
+
+                case F4SimOutputs.ICP__BINGO_FUEL_LEVEL:
+                    SetOutput((AnalogSignal)output, _lastFlightData.bingoFuel);
+                    break;
+
+                case F4SimOutputs.ICP__CARA_ALOW:
+                    SetOutput((AnalogSignal)output, _lastFlightData.caraAlow);
+                    break;
+
+
                 case F4SimOutputs.SIM__BMS_PLAYER_IS_FLYING:
                     ((DigitalSignal) output).State = ((HsiBits) _lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying;
                     break;
@@ -1292,6 +1392,142 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.RIGHT_EYEBROW_LIGHTS__DUALFC: break;
                 case F4SimOutputs.POWER__BUS_POWER_MAIN_GENERATOR: break;
                 case F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGINE_2_FIRE: break;
+
+                case F4SimOutputs.SIM__BMS_EXE:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x=>x.strId == (uint)StringIdentifier.BmsExe).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_BASE_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBasedir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_BIN_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBinDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_UI_ART_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsUIArtDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_USER_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsUserDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_ACMI_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsAcmiDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_BRIEFINGS_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBriefingsDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_LOGS_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsLogsDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_CONFIG_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsConfigDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_PATCH_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsPatchDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_PICTURE_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsPictureDirectory).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__THEATER_NAME:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrName).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__CAMPAIGN_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrCampaigndir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__ART_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrArtdir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__MOVIE_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrMoviedir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__UI_SOUND_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrUisounddir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__OBJECT_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrObjectdir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__3D_DATA_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.Thr3ddatadir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__MISC_TEX_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrMisctexdir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__SOUND_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSounddir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__TAC_REF_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrTacrefdir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__SPLASH_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSplashdir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__COCKPIT_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrCockpitdir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__SIM_DATA_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSimdatadir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__SUBTITLES_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSubtitlesdir).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.THEATER__TAC_REF_PICS_DIRECTORY:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrTacrefpicsdir).First().value ?? string.Empty;
+                    break;
+
+                case F4SimOutputs.SIM_KEYFILE_PATH:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.KeyFile).First().value ?? string.Empty;
+                    break;
+
+                case F4SimOutputs.AIRCRAFT_NAME:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.AcName).First().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.AIRCRAFT_NCTR_DESIGNATION:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.AcNCTR).First().value ?? string.Empty;
+                    break;
+
+                case F4SimOutputs.SIM__BMS_VERSION:
+                    ((TextSignal)output).State = $"{_lastFlightData.BMSVersionMajor}.{_lastFlightData.BMSVersionMinor}.{_lastFlightData.BMSVersionMicro}.{_lastFlightData.BMSBuildNumber}";
+                        break;
+
+                case F4SimOutputs.SIM__STRING_AREA_SIZE:
+                    SetOutput((AnalogSignal)output, _lastFlightData.StringAreaSize);
+                    break;
+
+                case F4SimOutputs.SIM__STRING_DATA_VERSION_NUM:
+                    SetOutput((AnalogSignal)output, _lastFlightData.StringData?.VersionNum ?? float.NaN);
+                    break;
+
+                case F4SimOutputs.SIM__DRAWING_AREA_SIZE:
+                    SetOutput((AnalogSignal)output, _lastFlightData.DrawingAreaSize);
+                    break;
+
+                case F4SimOutputs.SIM__DRAWING_DATA_VERSION_NUM:
+                    SetOutput((AnalogSignal)output, _lastFlightData.DrawingData?.VersionNum ?? float.NaN);
+                    break;
+
+
+                case F4SimOutputs.HUD__DRAWING_COMMANDS_LENGTH:
+                    SetOutput((AnalogSignal)output, _lastFlightData.DrawingData?.HUD_length ?? float.NaN);
+                    break;
+
+                case F4SimOutputs.HUD__DRAWING_COMMANDS:
+                    ((TextSignal)output).State = _lastFlightData.DrawingData?.HUD_commands ?? string.Empty;
+                    break;
+
+                case F4SimOutputs.RWR__DRAWING_COMMANDS_LENGTH:
+                    SetOutput((AnalogSignal)output, _lastFlightData.DrawingData?.RWR_length ?? float.NaN);
+                    break;
+
+                case F4SimOutputs.RWR__DRAWING_COMMANDS:
+                    ((TextSignal)output).State = _lastFlightData.DrawingData?.RWR_commands ?? string.Empty;
+                    break;
+
+                case F4SimOutputs.HMS__DRAWING_COMMANDS_LENGTH:
+                    SetOutput((AnalogSignal)output, _lastFlightData.DrawingData?.HMS_length ?? float.NaN);
+                    break;
+
+                case F4SimOutputs.HMS__DRAWING_COMMANDS:
+                    ((TextSignal)output).State = _lastFlightData.DrawingData?.HMS_commands ?? string.Empty;
+                    break;
+
             }
         }
 
@@ -1440,27 +1676,26 @@ namespace F4Utils.SimSupport
         {
             _simOutputs.Clear();
 
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Position", "Feet North of Map Origin", F4SimOutputs.MAP__GROUND_POSITION__FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Position", "Feet East of Map Origin", F4SimOutputs.MAP__GROUND_POSITION__FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Position", "Latitude", F4SimOutputs.MAP__GROUND_POSITION__LATITUDE, null, typeof(float), -90, 90));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Position", "Longitude", F4SimOutputs.MAP__GROUND_POSITION__LONGITUDE, null, typeof(float), -180, 180));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Speed", "Speed Vector - North Component (feet/sec)", F4SimOutputs.MAP__GROUND_SPEED_VECTOR__NORTH_COMPONENT_FPS, null, typeof(float), -1450, 1450));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Map", "Ground Speed", "Speed Vector - East Component (feet/sec)", F4SimOutputs.MAP__GROUND_SPEED_VECTOR__EAST_COMPONENT_FPS, null, typeof(float), -1450, 1450));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Ownship Position", "Feet North of Map Origin", F4SimOutputs.MAP__OWNSHIP_POSITION__FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Ownship Position", "Feet East of Map Origin", F4SimOutputs.MAP__OWNSHIP_POSITION__FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Ownship Position", "Latitude", F4SimOutputs.MAP__OWNSHIP_POSITION__LATITUDE, null, typeof(float), -90, 90));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Ownship Position", "Longitude", F4SimOutputs.MAP__OWNSHIP_POSITION__LONGITUDE, null, typeof(float), -180, 180));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Ground Speed", "Speed Vector - North Component (feet/sec)", F4SimOutputs.MAP__GROUND_SPEED_VECTOR__NORTH_COMPONENT_FPS, null, typeof(float), -1450, 1450));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Ground Speed", "Speed Vector - East Component (feet/sec)", F4SimOutputs.MAP__GROUND_SPEED_VECTOR__EAST_COMPONENT_FPS, null, typeof(float), -1450, 1450));
             AddF4SimOutput(CreateNewF4SimOutput("Map", "Ground Speed", "Ground Speed (knots)", F4SimOutputs.MAP__GROUND_SPEED_KNOTS, null, typeof(float), 0, 1000));
-            AddF4SimOutput(CreateNewF4SimOutput("Map", "Airbase Position", "Feet North of Map Origin", F4SimOutputs.MAP__AIRBASE_FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), -3500000, 3500000));
-            AddF4SimOutput(CreateNewF4SimOutput("Map", "Airbase Position", "Feet East of Map Origin", F4SimOutputs.MAP__AIRBASE_FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), -3500000, 3500000));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Airbase Position", "Feet North of Map Origin", F4SimOutputs.MAP__AIRBASE_FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Airbase Position", "Feet East of Map Origin", F4SimOutputs.MAP__AIRBASE_FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Bullseye Position", "Feet North of Map Origin", F4SimOutputs.MAP__BULLSEYE_POSITION__FEET_NORTH_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Map", "Bullseye Position", "Feet East of Map Origin", F4SimOutputs.MAP__BULLSEYE_POSITION__FEET_EAST_OF_MAP_ORIGIN, null, typeof(float), float.MinValue, float.MaxValue));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Altimeter", "Indicated Altitude (feet MSL)", F4SimOutputs.ALTIMETER__INDICATED_ALTITUDE__MSL, null, typeof(float), -1000, 80000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Altimeter", "Barometric Pressure (inches Hg)", F4SimOutputs.ALTIMETER__BAROMETRIC_PRESSURE_INCHES_HG, null, typeof(float), 28.10, 31.00));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Radar Altimeter", "Radar Altitude (feet AGL)", F4SimOutputs.RADAR_ALTIMETER__ALTITUDE__AGL, null, typeof(float), -1000, 100000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Radar Altimeter", "RALT Valid Flag", F4SimOutputs.RADAR_ALTIMETER__RALT_VALID, null, typeof(bool)));
 
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Vertical Velocity Indicator (VVI)", "Vertical Velocity (feet/min)", F4SimOutputs.VVI__VERTICAL_VELOCITY_FPM, null, typeof(float), -6000, 6000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Vertical Velocity Indicator (VVI)", "Vertical Velocity (feet/min)", F4SimOutputs.VVI__VERTICAL_VELOCITY_FPM, null, typeof(float), -6000, 6000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Vertical Velocity Indicator (VVI)", "OFF flag", F4SimOutputs.VVI__OFF_FLAG, null, typeof(bool)));
 
             AddF4SimOutput(CreateNewF4SimOutput("Flight dynamics", "Sideslip angle [beta] (degrees)", F4SimOutputs.FLIGHT_DYNAMICS__SIDESLIP_ANGLE_DEGREES, typeof(float), -180, 180, true));
@@ -1470,38 +1705,33 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Flight dynamics", "True Altitude (feet MSL)", F4SimOutputs.TRUE_ALTITUDE__MSL, typeof(float), -1000, 80000));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Airspeed indicator/Machmeter", "Mach number", F4SimOutputs.AIRSPEED_MACH_INDICATOR__MACH_NUMBER, null, typeof(float), 0, 2.5, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(
-                CreateNewF4SimOutput(
-                    "Instruments, Displays and Gauges", "Airspeed indicator/Machmeter", "Indicated Airspeed (knots)", F4SimOutputs.AIRSPEED_MACH_INDICATOR__INDICATED_AIRSPEED_KNOTS, null, typeof(float), 0, 850));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Airspeed indicator/Machmeter", "Indicated Airspeed (knots)", F4SimOutputs.AIRSPEED_MACH_INDICATOR__INDICATED_AIRSPEED_KNOTS, null, typeof(float), 0, 850));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HUD", "Wind delta to flight path marker (degrees)", F4SimOutputs.HUD__WIND_DELTA_TO_FLIGHT_PATH_MARKER_DEGREES, null, typeof(float), -90, 90, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HUD", "Drawing Commands length", F4SimOutputs.HUD__DRAWING_COMMANDS_LENGTH, null, typeof(uint), 0, uint.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HUD", "Drawing Commands", F4SimOutputs.HUD__DRAWING_COMMANDS, null, typeof(string)));
 
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Nozzle Position Indicator", "Engine #1 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS1__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Nozzle Position Indicator", "Engine #2 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS2__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HMS", "Drawing Commands length", F4SimOutputs.HMS__DRAWING_COMMANDS_LENGTH, null, typeof(uint), 0, uint.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "HMS", "Drawing Commands", F4SimOutputs.HMS__DRAWING_COMMANDS, null, typeof(string)));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Nozzle Position Indicator", "Engine #1 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS1__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Nozzle Position Indicator", "Engine #2 Nozzle Position (Percent Open 0-100)", F4SimOutputs.NOZ_POS2__NOZZLE_PERCENT_OPEN, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Hydraulic Pressure Indicators", "HYD A (Pounds per Square Inch)", F4SimOutputs.HYD_PRESSURE_A__PSI, null, typeof(float), 0, 4000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Hydraulic Pressure Indicators", "HYD B (Pounds per Square Inch)", F4SimOutputs.HYD_PRESSURE_B__PSI, null, typeof(float), 0, 4000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
 
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel Flow Indicator", "Engine #1 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel Flow Indicator", "Engine #2 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel Flow Indicator", "Engine #1 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Fuel Flow Indicator", "Engine #2 Fuel flow (pounds/hour)", F4SimOutputs.FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR, null, typeof(float), 0, 99900.00));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RPM", "Engine #1 RPM (Percent 0-103)", F4SimOutputs.RPM1__RPM_PERCENT, null, typeof(float), 0, 103, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RPM", "Engine #2 RPM(Percent 0-103)", F4SimOutputs.RPM2__RPM_PERCENT, null, typeof(float), 0, 103, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "FTIT", "Engine #1 Forward Turbine Inlet Temp (Degrees C)", F4SimOutputs.FTIT1__FTIT_TEMP_DEG_CELCIUS, null, typeof(float), 0, 1200, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "FTIT", "Engine #2 Forward Turbine Inlet Temp (Degrees C)", F4SimOutputs.FTIT2__FTIT_TEMP_DEG_CELCIUS, null, typeof(float), 0, 1200, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Speedbrake", "Speedbrake position (0 = closed, 1 = 60 Degrees open)", F4SimOutputs.SPEED_BRAKE__POSITION, null, typeof(float), 0, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Speedbrake", "Speedbrake position (0 = closed, 1 = 60 Degrees open)", F4SimOutputs.SPEED_BRAKE__POSITION, null, typeof(float), 0, 1, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Speedbrake", "Speedbrake Not Stowed Flag", F4SimOutputs.SPEED_BRAKE__NOT_STOWED_FLAG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "EPU Fuel", "EPU fuel (Percent 0-100)", F4SimOutputs.EPU_FUEL__EPU_FUEL_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "OIL Pressure", "Engine #1 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS1__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "OIL Pressure", "Engine #2 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS2__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
-            AddF4SimOutput(
-                CreateNewF4SimOutput("Instruments, Displays and Gauges", "Cabin Pressure Altimeter", "Cabin Pressure Altitude (in Feet MSL)", F4SimOutputs.CABIN_PRESS__CABIN_PRESS_FEET_MSL, null, typeof(float), 0, 50000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "OIL Pressure", "Engine #1 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS1__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "OIL Pressure", "Engine #2 Oil Pressure (Percent 0-100)", F4SimOutputs.OIL_PRESS2__OIL_PRESS_PERCENT, null, typeof(float), 0, 100, false, true, BASIC_SMOOTHING_TIME_CONSTANT));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Cabin Pressure Altimeter", "Cabin Pressure Altitude (in Feet MSL)", F4SimOutputs.CABIN_PRESS__CABIN_PRESS_FEET_MSL, null, typeof(float), 0, 50000, false, false, BASIC_SMOOTHING_TIME_CONSTANT));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "Compass", "Magnetic Heading (degrees)", F4SimOutputs.COMPASS__MAGNETIC_HEADING_DEGREES, null, typeof(float), 0, 360, true, false, BASIC_SMOOTHING_TIME_CONSTANT));
 
@@ -1641,6 +1871,7 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "C ADC Light", F4SimOutputs.CAUTION_PANEL__C_ADC, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Caution", "ATF NOT ENGAGED Light", F4SimOutputs.CAUTION_PANEL__ATF_NOT_ENGAGED, null, typeof(bool)));
 
+
             /*
              * MISSING CAUTION PANEL FLAGS
             ADC
@@ -1716,6 +1947,8 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Marker Beacon", "Outer marker flag", F4SimOutputs.MARKER_BEACON__OUTER_MARKER_FLAG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "Marker Beacon", "Middle marker flag", F4SimOutputs.MARKER_BEACON__MIDDLE_MARKER_FLAG, null, typeof(bool)));
 
+            AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "Aircraft Name", F4SimOutputs.AIRCRAFT_NAME, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "Aircraft NCTR Designation", F4SimOutputs.AIRCRAFT_NCTR_DESIGNATION, typeof(string)));
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "Vehicle ACD", F4SimOutputs.AIRCRAFT__VEHICLE_ACD, typeof(short)));
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "On Ground", F4SimOutputs.AIRCRAFT__ONGROUND, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "Main Landing Gear - Weight on Wheels", F4SimOutputs.AIRCRAFT__MAIN_LANDING_GEAR__WEIGHT_ON_WHEELS, typeof(bool)));
@@ -1723,6 +1956,7 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "Leading edge flaps position", F4SimOutputs.AIRCRAFT__LEADING_EDGE_FLAPS_POSITION, typeof(float), 0, 1, false, true));
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "Trailing edge flaps position", F4SimOutputs.AIRCRAFT__TRAILING_EDGE_FLAPS_POSITION, typeof(float), 0, 1, false, true));
             AddF4SimOutput(CreateNewF4SimOutput("Aircraft", "VTOL position", F4SimOutputs.AIRCRAFT__VTOL_POSITION, typeof(float), 0, 1, false, true));
+
 
             AddF4SimOutput(CreateNewF4SimOutput("Power", "Electrical Power OFF flag", F4SimOutputs.POWER__ELEC_POWER_OFF, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Power", "Main Power Switch (Down = 0, Middle = 1, Up = 2)", F4SimOutputs.POWER__MAIN_POWER, typeof(int), 0, 2));
@@ -1734,17 +1968,43 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Power", "Standby Generator flag", F4SimOutputs.POWER__STANDBY_GENERATOR, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Power", "Jet Fuel Starter flag", F4SimOutputs.POWER__JET_FUEL_STARTER, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Version Numbers", "Shared Memory Area \"FlightData\" Version Number", F4SimOutputs.SIM__FLIGHTDATA_VERSION_NUM, null, typeof(int), 0, 999));
-            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Version Numbers", "Shared Memory Area \"FlightData2\" Version Number", F4SimOutputs.SIM__FLIGHTDATA2_VERSION_NUM, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "Test (All Words) Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__ALL_WORDS, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"PULL UP\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__PULL_UP, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"ALTITUDE\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__ALTITUDE, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"WARNING\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__WARNING, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"JAMMER\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__JAMMER, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"COUNTER\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__COUNTER, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"CHAFF/FLARE\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__CHAFFFLARE, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"CHAFF/FLARE LOW\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__CHAFFFLARE_LOW, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"CHAFF/FLARE OUT\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__CHAFFFLARE_OUT, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"LOCK\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__LOCK, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"CAUTION\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__CAUTION, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"BINGO\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__BINGO, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"DATA\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__DATA, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"IFF\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__IFF, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"LOW SPEED\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__LOWSPEED, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"BEEPS\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__BEEPS, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"AOA\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__AOA, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Voice Message System (VMS)", "\"MAX G\" Message Is Playing flag", F4SimOutputs.VOICE_MESSAGE_SYSTEM__MAXG, typeof(bool)));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Integrated Control Panel (ICP)", "BINGO Fuel Level", F4SimOutputs.ICP__BINGO_FUEL_LEVEL, typeof(float), 0, 100000));
+            AddF4SimOutput(CreateNewF4SimOutput("Integrated Control Panel (ICP)", "CARA ALOW", F4SimOutputs.ICP__CARA_ALOW, typeof(float), 0, 100000));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Descriptors", "Shared Memory Area \"FlightData\" Version Number", F4SimOutputs.SIM__FLIGHTDATA_VERSION_NUM, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Descriptors", "Shared Memory Area \"FlightData2\" Version Number", F4SimOutputs.SIM__FLIGHTDATA2_VERSION_NUM, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Descriptors", "Shared Memory Area \"StringData\" Version Number", F4SimOutputs.SIM__STRING_DATA_VERSION_NUM, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Descriptors", "Shared Memory Area \"StringData\" Size (bytes)", F4SimOutputs.SIM__STRING_AREA_SIZE, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Descriptors", "Shared Memory Area \"DrawingData\" Version Number", F4SimOutputs.SIM__DRAWING_DATA_VERSION_NUM, null, typeof(int), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Shared Memory Area Descriptors", "Shared Memory Area \"DrawingData\" Size (bytes)", F4SimOutputs.SIM__DRAWING_AREA_SIZE, null, typeof(int), 0, 999));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "BMS Version Number (Major.Minor.Micro.Build)", F4SimOutputs.SIM__BMS_VERSION, typeof(string)));
+
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Current Time", F4SimOutputs.SIM__CURRENT_TIME, typeof(int), int.MinValue, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "'Pilot Is Flying' flag", F4SimOutputs.SIM__BMS_PLAYER_IS_FLYING, typeof(bool)));
             for (var i = 0; i < 32; i++)
             {
                 AddF4SimOutput(CreateNewF4SimOutput("Pilots", $"Pilot #{(i + 1).ToString().PadLeft(2, '0')}", "Callsign", F4SimOutputs.SIM__PILOT_CALLSIGN, i, typeof(string)));
-                AddF4SimOutput(
-                    CreateNewF4SimOutput(
-                        "Pilots", $"Pilot #{(i + 1).ToString().PadLeft(2, '0')}", "Status (0=In UI, 1=Loading, 2=Waiting, 3=Flying, 4=Dead, 5=Unknown)", F4SimOutputs.SIM__PILOT_STATUS, i, typeof(int),
-                        0, 5));
+                AddF4SimOutput(CreateNewF4SimOutput("Pilots", $"Pilot #{(i + 1).ToString().PadLeft(2, '0')}", "Status (0=In UI, 1=Loading, 2=Waiting, 3=Flying, 4=Dead, 5=Unknown)", F4SimOutputs.SIM__PILOT_STATUS, i, typeof(int),0, 5));
                 /*
                  IN_UI = 0, // UI      - in the UI
                 LOADING = 1, // UI>3D   - loading the sim data
@@ -1839,6 +2099,37 @@ namespace F4Utils.SimSupport
             }
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Additional Info", F4SimOutputs.RWR__ADDITIONAL_INFO, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Drawing Commands length", F4SimOutputs.RWR__DRAWING_COMMANDS_LENGTH, null, typeof(uint), 0, uint.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Drawing Commands", F4SimOutputs.RWR__DRAWING_COMMANDS, null, typeof(string)));
+
+
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "EXE Path", F4SimOutputs.SIM__BMS_EXE, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Keyfile Path", F4SimOutputs.SIM_KEYFILE_PATH, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Base Directory", F4SimOutputs.SIM__BMS_BASE_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Bin Directory", F4SimOutputs.SIM__BMS_BIN_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "UI Art Directory", F4SimOutputs.SIM__BMS_UI_ART_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "User directory", F4SimOutputs.SIM__BMS_USER_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "ACMI directory", F4SimOutputs.SIM__BMS_ACMI_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Briefings directory", F4SimOutputs.SIM__BMS_BRIEFINGS_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Logs directory", F4SimOutputs.SIM__BMS_LOGS_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Config directory", F4SimOutputs.SIM__BMS_CONFIG_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Patch directory", F4SimOutputs.SIM__BMS_PATCH_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Picture directory", F4SimOutputs.SIM__BMS_PICTURE_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Theater", "Theater name", F4SimOutputs.THEATER__THEATER_NAME, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Campaign directory", F4SimOutputs.THEATER__CAMPAIGN_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Art directory", F4SimOutputs.THEATER__ART_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater UI Sound directory", F4SimOutputs.THEATER__UI_SOUND_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Object directory", F4SimOutputs.THEATER__OBJECT_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater 3D data directory", F4SimOutputs.THEATER__3D_DATA_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Miscellaneous textures directory", F4SimOutputs.THEATER__MISC_TEX_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Sound directory", F4SimOutputs.THEATER__SOUND_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater TacRef directory", F4SimOutputs.THEATER__TAC_REF_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater TacRef Pictures directory", F4SimOutputs.THEATER__TAC_REF_PICS_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Splash directory", F4SimOutputs.THEATER__SPLASH_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Cockpit directory", F4SimOutputs.THEATER__COCKPIT_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Sim Data directory", F4SimOutputs.THEATER__SIM_DATA_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Subtitles directory", F4SimOutputs.THEATER__SUBTITLES_DIRECTORY, null, typeof(string)));
+
         }
 
         public override void Update() { UpdateSimOutputs(); }
