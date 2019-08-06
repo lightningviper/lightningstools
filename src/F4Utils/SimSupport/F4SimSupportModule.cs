@@ -1394,93 +1394,93 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.RIGHT_EYEBROW_LIGHTS__ENGINE_2_FIRE: break;
 
                 case F4SimOutputs.SIM__BMS_EXE:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x=>x.strId == (uint)StringIdentifier.BmsExe).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x=>x.strId == (uint)StringIdentifier.BmsExe).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_BASE_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBasedir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBasedir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_BIN_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBinDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBinDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_UI_ART_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsUIArtDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsUIArtDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_USER_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsUserDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsUserDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_ACMI_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsAcmiDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsAcmiDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_BRIEFINGS_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBriefingsDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsBriefingsDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_LOGS_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsLogsDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsLogsDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_CONFIG_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsConfigDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsConfigDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_PATCH_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsPatchDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsPatchDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.SIM__BMS_PICTURE_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsPictureDirectory).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsPictureDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__THEATER_NAME:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrName).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrName).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__CAMPAIGN_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrCampaigndir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrCampaigndir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__ART_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrArtdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrArtdir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__MOVIE_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrMoviedir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrMoviedir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__UI_SOUND_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrUisounddir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrUisounddir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__OBJECT_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrObjectdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrObjectdir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__3D_DATA_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.Thr3ddatadir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.Thr3ddatadir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__MISC_TEX_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrMisctexdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrMisctexdir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__SOUND_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSounddir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSounddir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__TAC_REF_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrTacrefdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrTacrefdir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__SPLASH_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSplashdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSplashdir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__COCKPIT_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrCockpitdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrCockpitdir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__SIM_DATA_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSimdatadir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSimdatadir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__SUBTITLES_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSubtitlesdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrSubtitlesdir).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.THEATER__TAC_REF_PICS_DIRECTORY:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrTacrefpicsdir).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrTacrefpicsdir).FirstOrDefault().value ?? string.Empty;
                     break;
 
                 case F4SimOutputs.SIM_KEYFILE_PATH:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.KeyFile).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.KeyFile).FirstOrDefault().value ?? string.Empty;
                     break;
 
                 case F4SimOutputs.AIRCRAFT_NAME:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.AcName).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.AcName).FirstOrDefault().value ?? string.Empty;
                     break;
                 case F4SimOutputs.AIRCRAFT_NCTR_DESIGNATION:
-                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.AcNCTR).First().value ?? string.Empty;
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.AcNCTR).FirstOrDefault().value ?? string.Empty;
                     break;
 
                 case F4SimOutputs.SIM__BMS_VERSION:
