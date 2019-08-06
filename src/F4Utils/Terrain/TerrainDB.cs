@@ -4,7 +4,6 @@ using F4Utils.Terrain.Structs;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.IO;
-using F4Utils.Process;
 using System.Threading.Tasks;
 
 namespace F4Utils.Terrain
@@ -63,7 +62,7 @@ namespace F4Utils.Terrain
             _nearestElevationPostColumnAndRowCalculator = new NearestElevationPostColumnAndRowCalculator(this, _distanceBetweenElevationPostsCalculator, _elevationPostCoordinateClamper);
             _terrainHeightCalculator = new TerrainHeightCalculator(this, _columnAndRowElevationPostRecordRetriever, _distanceBetweenElevationPostsCalculator, _nearestElevationPostColumnAndRowCalculator);
             _latLongCalculator = new LatLongCalculator(this);
-            _tileSetConfigValueReader = new TileSetConfigValueReader();
+            _tileSetConfigValueReader = new TileSetConfigValueReader(bmsBaseDirectory);
         }
 
         public TheaterDotTdfFileInfo TheaterDotTdf

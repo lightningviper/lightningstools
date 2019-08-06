@@ -11,7 +11,7 @@ namespace F16CPD
         private float _adiIlsLocalizerDeviationDecimalDegrees;
         private float _altitudeAboveGroundLevelInFeet;
         private float _angleOfAttackInDegrees;
-        private int _automaticLowAltitudeWarningInFeet;
+        private float _automaticLowAltitudeWarningInFeet;
         private float _barometricPressure = 29.92f;
         private float _betaAngleInDegrees;
         private float _gammaAngleInDegrees;
@@ -217,7 +217,7 @@ namespace F16CPD
             }
         }
 
-        public int AutomaticLowAltitudeWarningInFeet
+        public float AutomaticLowAltitudeWarningInFeet
         {
             get { return _automaticLowAltitudeWarningInFeet; }
             set

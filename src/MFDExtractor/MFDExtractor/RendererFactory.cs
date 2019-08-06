@@ -98,10 +98,6 @@ namespace MFDExtractor
                     return CreateLandingGearLightsRenderer();
                 case InstrumentType.LMFD:
                     return CreateLMFDRenderer();
-                case InstrumentType.MFD3:
-                    return CreateMFD3Renderer();
-                case InstrumentType.MFD4:
-                    return CreateMFD4Renderer();
                 case InstrumentType.NOZ1:
                     return CreateNOZ1Renderer();
                 case InstrumentType.NOZ2:
@@ -158,30 +154,7 @@ namespace MFDExtractor
 					}
 			};
 		}
-        private IMfdRenderer CreateMFD3Renderer()
-		{
-			return new MfdRenderer
-			{
-				Options =
-					new MfdRenderer.MfdRendererOptions
-					{
-						BlankImage = Resources.leftMFDBlankImage,
-						TestAlignmentImage = Resources.mfd3TestAlignmentImage
-					}
-			};
-		}
-		private IMfdRenderer CreateMFD4Renderer()
-		{
-			return new MfdRenderer
-			{
-				Options =
-					new MfdRenderer.MfdRendererOptions
-					{
-						BlankImage = Resources.rightMFDBlankImage,
-						TestAlignmentImage = Resources.mfd4TestAlignmentImage
-					}
-			};
-		}
+
 		private IMfdRenderer CreateHUDRenderer()
 		{
 			return new MfdRenderer

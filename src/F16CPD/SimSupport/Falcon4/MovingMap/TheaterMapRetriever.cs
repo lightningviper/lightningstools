@@ -1,15 +1,9 @@
 ﻿using F16CPD.Networking;
-using F16CPD.Properties;
 using F4Utils.Resources;
 using F4Utils.Terrain;
-using System;
-using System.Collections.Generic;
 using Common.Drawing;
 using Common.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace F16CPD.SimSupport.Falcon4.MovingMap
 {

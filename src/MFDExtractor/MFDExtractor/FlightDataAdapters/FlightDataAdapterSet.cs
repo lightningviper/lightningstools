@@ -40,8 +40,6 @@ namespace MFDExtractor.FlightDataAdapters
         IStandbyADIFlightDataAdapter StandbyADI { get; }
 		IMFDFlightDataAdapter LMFD { get;}
 		IMFDFlightDataAdapter RMFD { get;}
-		IMFDFlightDataAdapter MFD3 { get;}
-		IMFDFlightDataAdapter MFD4 { get;}
 		IMFDFlightDataAdapter HUD { get;}
 	}
 
@@ -85,8 +83,6 @@ namespace MFDExtractor.FlightDataAdapters
             StandbyADI = new StandbyADIFlightDataAdapter();
 			LMFD = new MFDFlightDataAdapter();
 			RMFD = new MFDFlightDataAdapter();
-			MFD3 = new MFDFlightDataAdapter();
-			MFD4 = new MFDFlightDataAdapter();
 			HUD = new MFDFlightDataAdapter();
 		}
 
@@ -126,8 +122,6 @@ namespace MFDExtractor.FlightDataAdapters
         public IStandbyADIFlightDataAdapter StandbyADI { get; private set; }
 		public IMFDFlightDataAdapter LMFD { get; private set; }
 		public IMFDFlightDataAdapter RMFD { get; private set; }
-		public IMFDFlightDataAdapter MFD3 { get; private set; }
-		public IMFDFlightDataAdapter MFD4 { get; private set; }
 		public IMFDFlightDataAdapter HUD { get; private set; }
     }
 }

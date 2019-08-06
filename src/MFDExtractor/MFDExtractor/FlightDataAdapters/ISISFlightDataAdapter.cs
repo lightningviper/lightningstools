@@ -23,7 +23,7 @@ namespace MFDExtractor.FlightDataAdapters
 				: PressureUnits.Millibars;
 
 	        isis.InstrumentState.BarometricPressure = flightData.AltCalReading;
-            isis.InstrumentState.RadarAltitudeAGL = ((flightData.ExtensionData as FlightDataExtensionData ?? new FlightDataExtensionData { AltitudeAGL = float.NaN }).AltitudeAGL);
+            isis.InstrumentState.RadarAltitudeAGL = flightData.RALT;
 			isis.InstrumentState.MachNumber = flightData.mach;
             isis.InstrumentState.MagneticHeadingDegrees = (360 +(flightData.yaw/Common.Math.Constants.RADIANS_PER_DEGREE))%360;
             isis.InstrumentState.NeverExceedSpeedKnots = 850;

@@ -4,7 +4,6 @@ using Common.Math;
 using Common.Networking;
 using F4SharedMem;
 using F4SharedMem.Headers;
-using F4Utils.SimSupport;
 using MFDExtractor.FlightDataAdapters;
 using F4Utils.Terrain;
 using LightningGauges.Renderers.F16;
@@ -13,6 +12,7 @@ using LightningGauges.Renderers.F16.RWR;
 using LightningGauges.Renderers.F16.EHSI;
 using LightningGauges.Renderers.F16.HSI;
 using LightningGauges.Renderers.F16.ISIS;
+using Common.Drawing;
 
 namespace MFDExtractor
 {
@@ -29,16 +29,10 @@ namespace MFDExtractor
     internal class FlightDataUpdater : IFlightDataUpdater
     {
         private readonly IFlightDataAdapterSet _flightDataAdapterSet;
-	    private readonly TexturesSharedMemoryImageCoordinates _textureTexturesSharedMemoryImageCoordinates;
-        private readonly IRadarAltitudeCalculator _radarAltitudeCalculator;
         public FlightDataUpdater( 
-            TexturesSharedMemoryImageCoordinates textureTexturesSharedMemoryImageCoordinates, 
-            IFlightDataAdapterSet flightDataAdapterSet = null,
-            IRadarAltitudeCalculator radarAltitudeCalculator =null)
+            IFlightDataAdapterSet flightDataAdapterSet = null)
         {
-	        _textureTexturesSharedMemoryImageCoordinates = textureTexturesSharedMemoryImageCoordinates;
             _flightDataAdapterSet = flightDataAdapterSet ?? new FlightDataAdapterSet();
-            _radarAltitudeCalculator = radarAltitudeCalculator ?? new RadarAltitudeCalculator();
         }
         public void UpdateRendererStatesFromFlightData(
             IDictionary<InstrumentType,IInstrument> instruments,
@@ -60,15 +54,6 @@ namespace MFDExtractor
             if (Extractor.State.SimRunning || Extractor.State.NetworkMode == NetworkMode.Client || Extractor.State.OptionsFormIsShowing)
             {
                 var hsibits = ((HsiBits) flightData.hsiBits);
-                if (Extractor.State.NetworkMode != NetworkMode.Client) 
-                {
-                    var altitudeAgl = _radarAltitudeCalculator.ComputeRadarAltitude(flightData, terrainDB);
-                    if (flightData.ExtensionData == null)
-                    {
-                        flightData.ExtensionData = new FlightDataExtensionData();
-                    }
-                    (flightData.ExtensionData as FlightDataExtensionData).AltitudeAGL = altitudeAgl;
-                }
                 _flightDataAdapterSet.ISIS.Adapt(instruments[InstrumentType.ISIS].Renderer as IISIS, flightData);
                 _flightDataAdapterSet.VVI.Adapt(instruments[InstrumentType.VVI].Renderer as IVerticalVelocityIndicator, flightData);
                 _flightDataAdapterSet.Altimeter.Adapt(instruments[InstrumentType.Altimeter].Renderer as IAltimeter, flightData);
@@ -207,11 +192,26 @@ namespace MFDExtractor
                 ((IISIS)instruments[InstrumentType.ISIS].Renderer).InstrumentState.OffFlag = true;
                 updateEHSIBrightnessLabelVisibility();
             }
-            _flightDataAdapterSet.LMFD.Adapt(instruments[InstrumentType.LMFD], texSharedmemReader,_textureTexturesSharedMemoryImageCoordinates.LMFD, InstrumentType.LMFD);
-            _flightDataAdapterSet.RMFD.Adapt(instruments[InstrumentType.RMFD], texSharedmemReader,_textureTexturesSharedMemoryImageCoordinates.RMFD, InstrumentType.RMFD);
-            _flightDataAdapterSet.MFD3.Adapt(instruments[InstrumentType.MFD3], texSharedmemReader,_textureTexturesSharedMemoryImageCoordinates.MFD3, InstrumentType.MFD3);
-            _flightDataAdapterSet.MFD4.Adapt(instruments[InstrumentType.MFD4], texSharedmemReader,_textureTexturesSharedMemoryImageCoordinates.MFD4, InstrumentType.MFD4);
-            _flightDataAdapterSet.HUD.Adapt(instruments[InstrumentType.HUD], texSharedmemReader, _textureTexturesSharedMemoryImageCoordinates.HUD, InstrumentType.HUD);
+            var left = flightData.RTT_area[(int)RTT_areas.RTT_MFDLEFT * 4];
+            var top = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 1];
+            var right = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 2];
+            var bottom = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 3];
+            var lmfdSourceRect = new Rectangle(left, top, right - left, bottom - top);                
+            _flightDataAdapterSet.LMFD.Adapt(instruments[InstrumentType.LMFD], texSharedmemReader, lmfdSourceRect, InstrumentType.LMFD);
+
+            left = flightData.RTT_area[(int)RTT_areas.RTT_MFDRIGHT * 4];
+            top = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 1];
+            right = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 2];
+            bottom = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 3];
+            var rmfdSourceRect = new Rectangle(left, top, right - left, bottom - top);
+            _flightDataAdapterSet.RMFD.Adapt(instruments[InstrumentType.RMFD], texSharedmemReader, rmfdSourceRect, InstrumentType.RMFD);
+
+            left = flightData.RTT_area[(int)RTT_areas.RTT_HUD * 4];
+            top = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 1];
+            right = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 2];
+            bottom = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 3];
+            var hudSourceRect = new Rectangle(left, top, right - left, bottom - top);
+            _flightDataAdapterSet.HUD.Adapt(instruments[InstrumentType.HUD], texSharedmemReader, hudSourceRect, InstrumentType.HUD);
 		}
 
         private static void SetISISPitchAndRoll(IISIS isis, FlightData flightData)

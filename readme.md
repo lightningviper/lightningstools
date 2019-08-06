@@ -171,8 +171,6 @@ C# class libraries which provide support for detecting Falcon operating characte
 _Namespaces_:  
     - [F4Utils.Campaign](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/Campaign/)  
     Read F4 Campaign files (.CAM/.TRN/.TAC) and the Falcon class table  
-    - [F4Utils.PlayerOp](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/PlayerOp/)  
-    Read the Player Options file (used for determining attributes like the current pilot callsign, etc.)  
     - [F4Utils.Process](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/Process/)  
     Detect whether Falcon is running, where it is running from, and send keyboard callbacks to Falcon  
     - [F4Utils.Resources](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/Resources/)  

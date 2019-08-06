@@ -6,13 +6,12 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Common.Drawing;
 using Common.InputSupport.DirectInput;
 using Common.Networking;
 using F4SharedMem;
+using F4SharedMem.Headers;
 using F4TexSharedMem;
 using F4Utils.Process;
-using F4Utils.SimSupport;
 using F4Utils.Terrain;
 using log4net;
 using MFDExtractor.EventSystem;
@@ -70,14 +69,9 @@ namespace MFDExtractor
             new ConcurrentDictionary<InstrumentType, IInstrument>();
 
         private readonly IInstrumentFactory _instrumentFactory;
-        private readonly IThreeDeeCaptureCoordinateUpdater _threeDeeCaptureCoordinateUpdater;
         private IFlightDataRetriever _flightDataRetriever;
 
-        private readonly TexturesSharedMemoryImageCoordinates _texturesSharedMemoryImageCoordinates =
-            new TexturesSharedMemoryImageCoordinates();
-
         private readonly PerformanceCounterInstaller _performanceCounterInstaller;
-        private int _lastVehicleACD;
 
         #endregion
 
@@ -87,7 +81,6 @@ namespace MFDExtractor
             IClientSideIncomingMessageDispatcher clientSideIncomingMessageDispatcher = null,
             IServerSideIncomingMessageDispatcher serverSideIncomingMessageDispatcher = null,
             IInstrumentFactory instrumentFactory = null,
-            IThreeDeeCaptureCoordinateUpdater threeDeeCaptureCoordinateUpdater = null,
             IFlightDataRetriever flightDataRetriever = null,
             IFlightDataUpdater flightDataUpdater = null)
         {
@@ -107,10 +100,7 @@ namespace MFDExtractor
             _serverSideIncomingMessageDispatcher = serverSideIncomingMessageDispatcher ??
                                                    new ServerSideIncomingMessageDispatcher(_inputEvents);
             _flightDataRetriever = flightDataRetriever ?? new FlightDataRetriever();
-            _threeDeeCaptureCoordinateUpdater = threeDeeCaptureCoordinateUpdater ??
-                                                new ThreeDeeCaptureCoordinateUpdater(
-                                                    _texturesSharedMemoryImageCoordinates);
-            _flightDataUpdater = flightDataUpdater ?? new FlightDataUpdater(_texturesSharedMemoryImageCoordinates);
+            _flightDataUpdater = flightDataUpdater ?? new FlightDataUpdater();
             _performanceCounterInstaller = new PerformanceCounterInstaller();
         }
 
@@ -229,7 +219,7 @@ namespace MFDExtractor
                 ExtractorClient.ServiceName = "MFDExtractorService";
                 _clientSideIncomingMessageDispatcher = new ClientSideIncomingMessageDispatcher(_inputEvents);
                 _flightDataRetriever = new FlightDataRetriever();
-                _flightDataUpdater = new FlightDataUpdater(_texturesSharedMemoryImageCoordinates, null);
+                _flightDataUpdater = new FlightDataUpdater(null);
             }
             catch
             {
@@ -355,15 +345,16 @@ namespace MFDExtractor
             Application.DoEvents();
 
             ProcessNetworkMessages();
-            if (_terrainDB == null && State.NetworkMode != NetworkMode.Client)
-            {
-                _terrainDB = _terrainDBFactory.Create(false);
-            }
 
             if (State.SimRunning || State.OptionsFormIsShowing || State.NetworkMode == NetworkMode.Client)
             {
                 var currentFlightData = _flightDataRetriever.GetFlightData();
                 SetFlightData(currentFlightData);
+                if (_terrainDB == null && State.NetworkMode != NetworkMode.Client)
+                {
+                    string bmsBaseDir = currentFlightData.StringData.data.Where(x => (x.strId == (uint)StringIdentifier.BmsBasedir)).First().value;
+                    _terrainDB = _terrainDBFactory.Create(bmsBaseDir, false);
+                }
 
                 _flightDataUpdater.UpdateRendererStatesFromFlightData(_instruments, currentFlightData, _terrainDB,
                     _ehsiStateTracker.UpdateEHSIBrightnessLabelVisibility, _texSmReader);
@@ -420,91 +411,22 @@ namespace MFDExtractor
                             count = 0;
                             if (State.SimRunning || State.NetworkMode == NetworkMode.Client)
                             {
-                                try
-                                {
-                                    if (_texSmReader == null) _texSmReader = new Reader();
-                                    if (NeedToCaptureMFDsAndOrHud)
-                                    {
-                                        EnsureThreeDeeCaptureCoordinatesAreLoaded(_flightData?.vehicleACD ?? -1);
-                                    }
-                                }
-                                catch (InvalidOperationException)
-                                {
-                                }
+                                try { if (_texSmReader == null) _texSmReader = new Reader(); } catch (InvalidOperationException) { }
                             }
-                            else
-                            {
-                                ResetThreeDeeCaptureCoordinates();
-                            }
-                            if (simWasRunning && !State.SimRunning)
-                            {
-                                if (State.NetworkMode == NetworkMode.Server)
-                                {
-                                    TearDownImageServer();
-                                }
-                            }
-                            if (State.NetworkMode == NetworkMode.Server && !simWasRunning && State.SimRunning)
-                            {
-                                SetupNetworkingServer();
-                            }
+                            if (simWasRunning && !State.SimRunning && State.NetworkMode == NetworkMode.Server) TearDownImageServer();
+                            if (State.NetworkMode == NetworkMode.Server && !simWasRunning && State.SimRunning) SetupNetworkingServer();
                         }
                     }
                     Application.DoEvents();
                     Thread.Sleep(50);
                 }
             }
-            catch (ThreadAbortException)
-            {
-            }
-            catch (ThreadInterruptedException)
-            {
-            }
-        }
-
-        private void EnsureThreeDeeCaptureCoordinatesAreLoaded(int vehicleACD)
-        {
-            if (ThreeDeeCaptureCoordinatesAreEmpty || vehicleACD != _lastVehicleACD)
-            {
-                _threeDeeCaptureCoordinateUpdater.Update3DCoordinatesFromCurrentBmsDatFile(vehicleACD);
-                _lastVehicleACD = vehicleACD;
-            }
-        }
-
-        private bool ThreeDeeCaptureCoordinatesAreEmpty => _texturesSharedMemoryImageCoordinates.HUD ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.LMFD ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.RMFD ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.MFD3 ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.MFD4 ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.RWR ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.DED ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.PFL ==
-                                                           Rectangle.Empty &&
-                                                           _texturesSharedMemoryImageCoordinates.HMS == Rectangle.Empty;
-
-        private void ResetThreeDeeCaptureCoordinates()
-        {
-            _texturesSharedMemoryImageCoordinates.HUD = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.LMFD = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.RMFD = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.MFD3 = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.MFD4 = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.RWR = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.DED = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.PFL = Rectangle.Empty;
-            _texturesSharedMemoryImageCoordinates.HMS = Rectangle.Empty;
+            catch (ThreadAbortException) {}
+            catch (ThreadInterruptedException){}
         }
 
         private static bool NeedToCaptureMFDsAndOrHud => Settings.Default.EnableLMFDOutput ||
                                                          Settings.Default.EnableRMFDOutput ||
-                                                         Settings.Default.EnableMfd3Output ||
-                                                         Settings.Default.EnableMfd4Output ||
                                                          Settings.Default.EnableHudOutput ||
                                                          State.NetworkMode == NetworkMode.Server;
 

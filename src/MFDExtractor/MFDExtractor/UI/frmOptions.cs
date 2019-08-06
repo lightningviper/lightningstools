@@ -230,15 +230,11 @@ namespace MFDExtractor.UI
                 }
 
 
-                chkEnableMFD4.Checked = settings.EnableMfd4Output;
-                chkEnableMFD3.Checked = settings.EnableMfd3Output;
                 chkEnableLeftMFD.Checked = settings.EnableLMFDOutput;
                 chkEnableRightMFD.Checked = settings.EnableRMFDOutput;
                 chkEnableHud.Checked = settings.EnableHudOutput;
 
                 cmdRecoverHud.Enabled = chkEnableHud.Checked;
-                cmdRecoverMfd3.Enabled = chkEnableMFD3.Checked;
-                cmdRecoverMfd4.Enabled = chkEnableMFD4.Checked;
                 cmdRecoverLeftMfd.Enabled = chkEnableLeftMFD.Checked;
                 cmdRecoverRightMfd.Enabled = chkEnableRightMFD.Checked;
 
@@ -603,8 +599,6 @@ namespace MFDExtractor.UI
             settings.UpgradeNeeded = false;
             settings.NetworkImageFormat = cboImageFormat.SelectedItem.ToString();
             settings.CompressionType = cboCompressionType.SelectedItem.ToString();
-            settings.EnableMfd4Output = chkEnableMFD4.Checked;
-            settings.EnableMfd3Output = chkEnableMFD3.Checked;
             settings.EnableLMFDOutput = chkEnableLeftMFD.Checked;
             settings.EnableRMFDOutput = chkEnableRightMFD.Checked;
             settings.EnableHudOutput = chkEnableHud.Checked;
@@ -923,22 +917,6 @@ namespace MFDExtractor.UI
                 _extractor.LoadSettings();
                 _extractor.Start();
             }
-        }
-
-        private void chkEnableMFD4_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.EnableMfd4Output = chkEnableMFD4.Checked;
-            cmdRecoverMfd4.Enabled = chkEnableMFD4.Checked;
-            //StopAndRestartExtractor();
-            BringToFront();
-        }
-
-        private void chkEnableMFD3_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.EnableMfd3Output = chkEnableMFD3.Checked;
-            cmdRecoverMfd3.Enabled = chkEnableMFD3.Checked;
-            //StopAndRestartExtractor();
-            BringToFront();
         }
 
         private void chkEnableLeftMFD_CheckedChanged(object sender, EventArgs e)
@@ -1819,16 +1797,6 @@ namespace MFDExtractor.UI
         private void cmdRecoverRightMfd_Click(object sender, EventArgs e)
         {
             RecoverInstrument("RMFD");
-        }
-
-        private void cmdRecoverMfd3_Click(object sender, EventArgs e)
-        {
-            RecoverInstrument("MFD3");
-        }
-
-        private void cmdRecoverMfd4_Click(object sender, EventArgs e)
-        {
-            RecoverInstrument("MFD4");
         }
 
         private void cmdRecoverHud_Click(object sender, EventArgs e)

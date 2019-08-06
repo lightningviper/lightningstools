@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Drawing;
 using Common.SimSupport;
 using F16CPD.Mfd.Controls;
@@ -24,14 +25,12 @@ namespace F16CPD.SimSupport.Falcon4
         private const TacanBand BackupTacanBand = TacanBand.X;
         private static readonly ILog Log = LogManager.GetLogger(typeof (Falcon4Support));
         private readonly IClientSideInboundMessageProcessor _clientSideInboundMessageProcessor;
-        private readonly IDEDAlowReader _dedAlowReader;
         private readonly F4Utils.SimSupport.IIndicatedRateOfTurnCalculator _indicatedRateOfTurnCalculator =
             new IndicatedRateOfTurnCalculator();
         private readonly IInputControlEventHandler _inputControlEventHandler;
         private readonly MorseCode _morseCodeGenerator;
         private readonly IServerSideInboundMessageProcessor _serverSideInboundMessageProcessor;
         private readonly ITerrainDBFactory _terrainDBFactory = new TerrainDBFactory();
-        private readonly IThreeDeeCaptureCoordinateUpdater _threeDeeCaptureCoordinateUpdater;
 
         private bool _isDisposed;
         private KeyFile _keyFile;
@@ -44,8 +43,6 @@ namespace F16CPD.SimSupport.Falcon4
         private TacanChannelSource TacanChannelSource = TacanChannelSource.Ufc;
         private TerrainDB _terrainDB;
         private ITheaterMapRetriever _theaterMapRetriever;
-        private TexturesSharedMemoryImageCoordinates _texturesSharedMemoryImageCoordinates;
-        private int _lastVehicleAcd;
         public Falcon4Support(F16CpdMfdManager manager)
         {
             Manager = manager;
@@ -53,13 +50,10 @@ namespace F16CPD.SimSupport.Falcon4
             InitializeFlightData();
             _morseCodeGenerator = new MorseCode {CharactersPerMinute = 53};
             _morseCodeGenerator.UnitTimeTick += MorseCodeUnitTimeTick;
-            _dedAlowReader = new DEDAlowReader();
             _inputControlEventHandler = new InputControlEventHandler(Manager);
 
             _clientSideInboundMessageProcessor = new ClientSideInboundMessageProcessor();
             _serverSideInboundMessageProcessor = new ServerSideInboundMessageProcessor(Manager);
-            _texturesSharedMemoryImageCoordinates = new TexturesSharedMemoryImageCoordinates();
-            _threeDeeCaptureCoordinateUpdater = new ThreeDeeCaptureCoordinateUpdater(_texturesSharedMemoryImageCoordinates);
         }
 
         #region ISimSupportModule Members
@@ -220,7 +214,6 @@ namespace F16CPD.SimSupport.Falcon4
 
             FlightData flightData = Manager.FlightData;
 
-            string exePath = F4Utils.Process.Util.GetFalconExePath();
             CreateSharedMemReaderIfNotExists();
             F4SharedMem.FlightData fromFalcon = ReadF4SharedMem();
 
@@ -230,7 +223,7 @@ namespace F16CPD.SimSupport.Falcon4
             }
             EnsureTerrainIsLoaded();
 
-            if (exePath != null && ((_sharedMemReader != null && _sharedMemReader.IsFalconRunning)))
+            if (_sharedMemReader != null && _sharedMemReader.IsFalconRunning)
             {
                 IsSimRunning = true;
                 if (fromFalcon == null) fromFalcon = new F4SharedMem.FlightData();
@@ -462,12 +455,7 @@ namespace F16CPD.SimSupport.Falcon4
 
         private void UpdateALOW(FlightData flightData, F4SharedMem.FlightData fromFalcon)
         {
-            int newAlow;
-            var foundNewAlow = _dedAlowReader.CheckDED_ALOW(fromFalcon, out newAlow);
-            if (foundNewAlow)
-            {
-                flightData.AutomaticLowAltitudeWarningInFeet = newAlow;
-            }
+            flightData.AutomaticLowAltitudeWarningInFeet = fromFalcon.caraAlow;
         }
 
         private static void UpdateIndicatedAirspeed(FlightData flightData, F4SharedMem.FlightData fromFalcon)
@@ -679,7 +667,11 @@ namespace F16CPD.SimSupport.Falcon4
         {
             if (_terrainDB == null)
             {
-                _terrainDB = _terrainDBFactory.Create(false);
+                var curFlightData = ReadF4SharedMem();
+                if (curFlightData == null) return;
+                string bmsBaseDir = curFlightData.StringData.data.Where(x => (x.strId == (uint)StringIdentifier.BmsBasedir)).First().value;
+                if (string.IsNullOrEmpty(bmsBaseDir)) return;
+                _terrainDB = _terrainDBFactory.Create(bmsBaseDir, false);
                 if (_terrainDB != null)
                 {
                     _theaterMapRetriever = new TheaterMapRetriever(_terrainDB, Manager.Client);
@@ -714,30 +706,40 @@ namespace F16CPD.SimSupport.Falcon4
             CreateTexSharedMemReaderIfNotExists();
             if (_texSharedMemReader != null && _texSharedMemReader.IsDataAvailable)
             {
-                var latestSharedMem = ReadF4SharedMem();
-                if (latestSharedMem != null)
+                using (var image = _texSharedMemReader.GetImage(sourceRectangle))
                 {
-                    var vehicleAcd = latestSharedMem.vehicleACD;
-                    if (vehicleAcd != _lastVehicleAcd)
-                    {
-                        _threeDeeCaptureCoordinateUpdater.Update3DCoordinatesFromCurrentBmsDatFile(vehicleAcd);
-                        _lastVehicleAcd = vehicleAcd;
-                    }
-                    using (var image = _texSharedMemReader.GetImage(sourceRectangle))
-                    {
-                        return Common.Imaging.Util.BytesFromBitmap(image, "RLE", "PNG");
-                    }
+                    return Common.Imaging.Util.BytesFromBitmap(image, "RLE", "PNG");
                 }
             }
             return null;
         }
         private byte[] GetLMFDImage()
         {
-            return GetMFDImage(_texturesSharedMemoryImageCoordinates.LMFD);  
+            var latestSharedMem = ReadF4SharedMem();
+            if (latestSharedMem != null)
+            {
+                var left = latestSharedMem.RTT_area[(int)RTT_areas.RTT_MFDLEFT * 4];
+                var top = latestSharedMem.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 1];
+                var right = latestSharedMem.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 2];
+                var bottom = latestSharedMem.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 3];
+                var rect = new Rectangle(left, top, right - left, bottom - top);
+                return GetMFDImage(rect);
+            }
+            return Array.Empty<byte>();
         }
         private byte[] GetRMFDImage()
         {
-            return GetMFDImage(_texturesSharedMemoryImageCoordinates.RMFD);
+            var latestSharedMem = ReadF4SharedMem();
+            if (latestSharedMem != null)
+            {
+                var left = latestSharedMem.RTT_area[(int)RTT_areas.RTT_MFDRIGHT * 4];
+                var top = latestSharedMem.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 1];
+                var right= latestSharedMem.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 2];
+                var bottom = latestSharedMem.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 3];
+                var rect = new Rectangle(left, top, right-left, bottom-top);
+                return GetMFDImage(rect);
+            }
+            return Array.Empty<byte>();
         }
 
         private void CreateSharedMemReaderIfNotExists()

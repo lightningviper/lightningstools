@@ -28,8 +28,6 @@
         ISIS,
         GearLights,
         LMFD,
-        MFD3,
-        MFD4,
         NOZ1,
         NOZ2,
         NWSIndexer,

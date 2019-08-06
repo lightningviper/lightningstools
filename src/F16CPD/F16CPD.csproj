@@ -413,10 +413,6 @@
       <Project>{d386ec91-6d89-421f-87bc-4849e0232722}</Project>
       <Name>F4Utils.Campaign</Name>
     </ProjectReference>
-    <ProjectReference Include="..\F4Utils\PlayerOp\F4Utils.PlayerOp.csproj">
-      <Project>{ea92153f-08e5-42b1-b6c5-6b22366e7cf2}</Project>
-      <Name>F4Utils.PlayerOp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\F4Utils\Process\F4Utils.Process.csproj">
       <Project>{66242024-b7e5-4f66-ac1a-f0e2f1d70899}</Project>
       <Name>F4Utils.Process</Name>

@@ -1,4 +1,5 @@
-﻿using F4Utils.Process;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 namespace F4Utils.Terrain
 {
@@ -9,20 +10,24 @@ namespace F4Utils.Terrain
 
     internal class TileSetConfigValueReader : ITileSetConfigValueReader
     {
-        private readonly IBMSConfigFileReader _bmsConfigFileReader;
-        private readonly ITokenJoiner _tokenJoiner;
-
-        public TileSetConfigValueReader(IBMSConfigFileReader bmsConfigFileReader = null, ITokenJoiner tokenJoiner=null)
-        {
-            _bmsConfigFileReader = bmsConfigFileReader ?? new BMSConfigFileReader();
-            _tokenJoiner = tokenJoiner ?? new TokenJoiner();
-        }
+        private string _bmsBaseDir;
+        public TileSetConfigValueReader(string bmsBaseDir) { _bmsBaseDir = bmsBaseDir; }
         public string TileSetConfigValue
         {
             get
             {
-                var matchingConfigLine= _bmsConfigFileReader
-                    .ConfigLines
+                var configLines = new List<string>();
+                var configFolder = Path.Combine(_bmsBaseDir, @"\Config");
+                var bmsConfigFile = Path.Combine(configFolder, "Falcon BMS.config");
+                using (var sr = new StreamReader(bmsConfigFile))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        configLines.Add(sr.ReadLine());
+                    }
+                }
+            
+                var matchingConfigLine = configLines
                     .Select(Common.Strings.Util.Tokenize)
                     .Where(tokens =>
                         tokens.Count > 2 &&

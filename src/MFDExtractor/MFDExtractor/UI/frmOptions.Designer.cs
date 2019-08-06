@@ -39,11 +39,7 @@ namespace MFDExtractor.UI
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabOtherInstros = new System.Windows.Forms.TabControl();
             this.tabMfdsHud = new System.Windows.Forms.TabPage();
-            this.chkEnableMFD4 = new System.Windows.Forms.CheckBox();
-            this.chkEnableMFD3 = new System.Windows.Forms.CheckBox();
-            this.cmdRecoverMfd4 = new System.Windows.Forms.Button();
             this.cmdRecoverRightMfd = new System.Windows.Forms.Button();
-            this.cmdRecoverMfd3 = new System.Windows.Forms.Button();
             this.chkEnableRightMFD = new System.Windows.Forms.CheckBox();
             this.chkEnableLeftMFD = new System.Windows.Forms.CheckBox();
             this.cmdRecoverLeftMfd = new System.Windows.Forms.Button();
@@ -438,11 +434,7 @@ namespace MFDExtractor.UI
             // 
             // tabMfdsHud
             // 
-            this.tabMfdsHud.Controls.Add(this.chkEnableMFD4);
-            this.tabMfdsHud.Controls.Add(this.chkEnableMFD3);
-            this.tabMfdsHud.Controls.Add(this.cmdRecoverMfd4);
             this.tabMfdsHud.Controls.Add(this.cmdRecoverRightMfd);
-            this.tabMfdsHud.Controls.Add(this.cmdRecoverMfd3);
             this.tabMfdsHud.Controls.Add(this.chkEnableRightMFD);
             this.tabMfdsHud.Controls.Add(this.chkEnableLeftMFD);
             this.tabMfdsHud.Controls.Add(this.cmdRecoverLeftMfd);
@@ -456,41 +448,7 @@ namespace MFDExtractor.UI
             this.tabMfdsHud.TabIndex = 17;
             this.tabMfdsHud.Text = "MFDs & HUD";
             this.tabMfdsHud.UseVisualStyleBackColor = true;
-            // 
-            // chkEnableMFD4
-            // 
-            this.chkEnableMFD4.AutoSize = true;
-            this.chkEnableMFD4.Location = new System.Drawing.Point(19, 160);
-            this.chkEnableMFD4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.chkEnableMFD4.Name = "chkEnableMFD4";
-            this.chkEnableMFD4.Size = new System.Drawing.Size(259, 29);
-            this.chkEnableMFD4.TabIndex = 163;
-            this.chkEnableMFD4.Text = "Enable MFD #4 output";
-            this.chkEnableMFD4.UseVisualStyleBackColor = true;
-            this.chkEnableMFD4.CheckedChanged += new System.EventHandler(this.chkEnableMFD4_CheckedChanged);
-            // 
-            // chkEnableMFD3
-            // 
-            this.chkEnableMFD3.AutoSize = true;
-            this.chkEnableMFD3.Location = new System.Drawing.Point(19, 114);
-            this.chkEnableMFD3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.chkEnableMFD3.Name = "chkEnableMFD3";
-            this.chkEnableMFD3.Size = new System.Drawing.Size(259, 29);
-            this.chkEnableMFD3.TabIndex = 159;
-            this.chkEnableMFD3.Text = "Enable MFD #3 output";
-            this.chkEnableMFD3.UseVisualStyleBackColor = true;
-            this.chkEnableMFD3.CheckedChanged += new System.EventHandler(this.chkEnableMFD3_CheckedChanged);
-            // 
-            // cmdRecoverMfd4
-            // 
-            this.cmdRecoverMfd4.Location = new System.Drawing.Point(308, 154);
-            this.cmdRecoverMfd4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.cmdRecoverMfd4.Name = "cmdRecoverMfd4";
-            this.cmdRecoverMfd4.Size = new System.Drawing.Size(160, 44);
-            this.cmdRecoverMfd4.TabIndex = 166;
-            this.cmdRecoverMfd4.Text = "&Recover";
-            this.cmdRecoverMfd4.UseVisualStyleBackColor = true;
-            this.cmdRecoverMfd4.Click += new System.EventHandler(this.cmdRecoverMfd4_Click);
+            
             // 
             // cmdRecoverRightMfd
             // 
@@ -502,17 +460,6 @@ namespace MFDExtractor.UI
             this.cmdRecoverRightMfd.Text = "&Recover";
             this.cmdRecoverRightMfd.UseVisualStyleBackColor = true;
             this.cmdRecoverRightMfd.Click += new System.EventHandler(this.cmdRecoverRightMfd_Click);
-            // 
-            // cmdRecoverMfd3
-            // 
-            this.cmdRecoverMfd3.Location = new System.Drawing.Point(308, 106);
-            this.cmdRecoverMfd3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.cmdRecoverMfd3.Name = "cmdRecoverMfd3";
-            this.cmdRecoverMfd3.Size = new System.Drawing.Size(160, 44);
-            this.cmdRecoverMfd3.TabIndex = 162;
-            this.cmdRecoverMfd3.Text = "&Recover";
-            this.cmdRecoverMfd3.UseVisualStyleBackColor = true;
-            this.cmdRecoverMfd3.Click += new System.EventHandler(this.cmdRecoverMfd3_Click);
             // 
             // chkEnableRightMFD
             // 
@@ -3415,10 +3362,6 @@ namespace MFDExtractor.UI
         private System.Windows.Forms.CheckBox chkAccelerometer;
         private System.Windows.Forms.PictureBox pbRecoverAccelerometer;
         private System.Windows.Forms.Button cmdApply;
-		private System.Windows.Forms.Button cmdRecoverMfd4;
-		private System.Windows.Forms.CheckBox chkEnableMFD4;
-		private System.Windows.Forms.Button cmdRecoverMfd3;
-		private System.Windows.Forms.CheckBox chkEnableMFD3;
 		private System.Windows.Forms.Button cmdRecoverRightMfd;
 		private System.Windows.Forms.CheckBox chkEnableRightMFD;
 		private System.Windows.Forms.Button cmdRecoverHud;
