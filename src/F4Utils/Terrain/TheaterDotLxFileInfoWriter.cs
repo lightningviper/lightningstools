@@ -19,7 +19,7 @@ namespace F4Utils.Terrain
 
             var lFileInfo =
                 new FileInfo(Path.GetDirectoryName(theaterDotMapFilePath) + Path.DirectorySeparatorChar
-                    + "theater"
+                    + "THEATER"
                     + (tileset != null ? "_" + tileset : "")
                     + ".L" + theaterDotLxFileInfo.LoDLevel);
 
@@ -27,7 +27,7 @@ namespace F4Utils.Terrain
 
             var oFileInfo =
                 new FileInfo(Path.GetDirectoryName(theaterDotMapFilePath) + Path.DirectorySeparatorChar
-                    + "theater"
+                    + "THEATER"
                     + (tileset != null ? "_" + tileset : "")
                     + ".O" + theaterDotLxFileInfo.LoDLevel);
             WriteTheaterDotOxFile(theaterDotLxFileInfo.O, oFileInfo.FullName, theaterDotLxFileInfo.LRecordSizeBytes == 7 ? 2u : 4u);
