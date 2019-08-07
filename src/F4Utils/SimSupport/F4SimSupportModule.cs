@@ -316,6 +316,7 @@ namespace F4Utils.SimSupport
                     SetOutput((AnalogSignal) output, _lastFlightData.roll * DEGREES_PER_RADIAN);
                     break;
 
+
                 case F4SimOutputs.ADI__ILS_SHOW_COMMAND_BARS:
                     ((DigitalSignal) output).State = showCommandBars;
                     break;
@@ -329,7 +330,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.ADI__RATE_OF_TURN_INDICATOR_POSITION:
-                    var rateOfTurn = _rateOfTurnCalculator.DetermineIndicatedRateOfTurn(_lastFlightData.yaw * DEGREES_PER_RADIAN);
+                    var rateOfTurn = _lastFlightData.turnRate;
                     var percentDeflection = rateOfTurn / (IndicatedRateOfTurnCalculator.MAX_INDICATED_RATE_OF_TURN_DECIMAL_DEGREES_PER_SECOND + 1.5f);
                     if (percentDeflection > 1.0f) percentDeflection = 1.0f;
                     if (percentDeflection < -1.0f) percentDeflection = -1.0f;
@@ -1426,6 +1427,12 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.SIM__BMS_PICTURE_DIRECTORY:
                     ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.BmsPictureDirectory).FirstOrDefault().value ?? string.Empty;
                     break;
+                case F4SimOutputs.SIM__BMS_3DBUTTONS_FILE:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ButtonsFile).FirstOrDefault().value ?? string.Empty;
+                    break;
+                case F4SimOutputs.SIM__BMS_3DCOCKPIT_FILE:
+                    ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.CockpitFile).FirstOrDefault().value ?? string.Empty;
+                    break;
                 case F4SimOutputs.THEATER__THEATER_NAME:
                     ((TextSignal)output).State = _lastFlightData.StringData?.data?.Where(x => x.strId == (uint)StringIdentifier.ThrName).FirstOrDefault().value ?? string.Empty;
                     break;
@@ -2115,6 +2122,8 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Config directory", F4SimOutputs.SIM__BMS_CONFIG_DIRECTORY, null, typeof(string)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Patch directory", F4SimOutputs.SIM__BMS_PATCH_DIRECTORY, null, typeof(string)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Picture directory", F4SimOutputs.SIM__BMS_PICTURE_DIRECTORY, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "3DButtons.dat file location", F4SimOutputs.SIM__BMS_3DBUTTONS_FILE, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "3DCockpit.dat file location", F4SimOutputs.SIM__BMS_3DCOCKPIT_FILE, null, typeof(string)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Theater", "Theater name", F4SimOutputs.THEATER__THEATER_NAME, null, typeof(string)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Campaign directory", F4SimOutputs.THEATER__CAMPAIGN_DIRECTORY, null, typeof(string)));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "Paths", "Theater Art directory", F4SimOutputs.THEATER__ART_DIRECTORY, null, typeof(string)));
