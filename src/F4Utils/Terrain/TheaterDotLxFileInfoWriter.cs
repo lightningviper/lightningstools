@@ -14,7 +14,7 @@ namespace F4Utils.Terrain
         public void WriteTheaterDotOxAndLxFiles(TheaterDotLxFileInfo theaterDotLxFileInfo, string theaterDotMapFilePath, string tileset = null)
         {
             if (String.IsNullOrEmpty(theaterDotMapFilePath)) throw new ArgumentNullException(nameof(theaterDotMapFilePath));
-            if (theaterDotLxFileInfo.L == null || theaterDotLxFileInfo.O.Length == 0) throw new InvalidOperationException(nameof(theaterDotLxFileInfo) + ".L[] is null or zero-length. Nothing to write!");
+            if (theaterDotLxFileInfo.L == null || theaterDotLxFileInfo.L.Length == 0) throw new InvalidOperationException(nameof(theaterDotLxFileInfo) + ".L[] is null or zero-length. Nothing to write!");
             if (theaterDotLxFileInfo.O == null || theaterDotLxFileInfo.O.Length == 0) throw new InvalidOperationException(nameof(theaterDotLxFileInfo) + ".O[] is null or zero-length. Nothing to write!");
 
             var lFileInfo =
