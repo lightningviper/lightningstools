@@ -14,6 +14,8 @@ namespace F4Utils.Terrain
         public void WriteTheaterDotOxAndLxFiles(TheaterDotLxFileInfo theaterDotLxFileInfo, string theaterDotMapFilePath, string tileset = null)
         {
             if (String.IsNullOrEmpty(theaterDotMapFilePath)) throw new ArgumentNullException(nameof(theaterDotMapFilePath));
+            if (theaterDotLxFileInfo.L == null || theaterDotLxFileInfo.O.Length == 0) throw new InvalidOperationException(nameof(theaterDotLxFileInfo) + ".L[] is null or zero-length. Nothing to write!");
+            if (theaterDotLxFileInfo.O == null || theaterDotLxFileInfo.O.Length == 0) throw new InvalidOperationException(nameof(theaterDotLxFileInfo) + ".O[] is null or zero-length. Nothing to write!");
 
             var lFileInfo =
                 new FileInfo(Path.GetDirectoryName(theaterDotMapFilePath) + Path.DirectorySeparatorChar
@@ -21,7 +23,7 @@ namespace F4Utils.Terrain
                     + (tileset != null ? "_" + tileset : "")
                     + ".L" + theaterDotLxFileInfo.LoDLevel);
 
-            WriteTheaterDotLxFile(theaterDotLxFileInfo.L, lFileInfo.FullName, theaterDotLxFileInfo.LRecordSizeBytes);
+            WriteTheaterDotLxFile(theaterDotLxFileInfo.L, lFileInfo.FullName, theaterDotLxFileInfo.LRecordSizeBytes >0 ? theaterDotLxFileInfo.LRecordSizeBytes : 9);
 
             var oFileInfo =
                 new FileInfo(Path.GetDirectoryName(theaterDotMapFilePath) + Path.DirectorySeparatorChar
