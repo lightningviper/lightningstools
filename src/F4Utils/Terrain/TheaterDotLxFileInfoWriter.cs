@@ -65,19 +65,15 @@ namespace F4Utils.Terrain
                     if (lRecordSize == 9)
                     {
                         writer.Write(lRecord.TextureId);
-                        writer.Write(lRecord.Elevation);
-                        writer.Write(lRecord.Pallete);
-                        writer.Write(lRecord.X1);
-                        writer.Write(lRecord.X2);
                     }
                     else if (lRecordSize == 7)
                     {
                         writer.Write((ushort)lRecord.TextureId);
-                        writer.Write(lRecord.Elevation);
-                        writer.Write(lRecord.Pallete);
-                        writer.Write(lRecord.X1);
-                        writer.Write(lRecord.X2);
                     }
+                    writer.Write(lRecord.Elevation);
+                    writer.Write(lRecord.Pallete);
+                    writer.Write(lRecord.X1);
+                    writer.Write(lRecord.X2);
                 }
                 writer.Flush();
                 writer.Close();
