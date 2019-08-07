@@ -330,7 +330,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.ADI__RATE_OF_TURN_INDICATOR_POSITION:
-                    var rateOfTurn = _lastFlightData.turnRate;
+                    var rateOfTurn = _rateOfTurnCalculator.DetermineIndicatedRateOfTurn(_lastFlightData.yaw * DEGREES_PER_RADIAN);
                     var percentDeflection = rateOfTurn / (IndicatedRateOfTurnCalculator.MAX_INDICATED_RATE_OF_TURN_DECIMAL_DEGREES_PER_SECOND + 1.5f);
                     if (percentDeflection > 1.0f) percentDeflection = 1.0f;
                     if (percentDeflection < -1.0f) percentDeflection = -1.0f;
