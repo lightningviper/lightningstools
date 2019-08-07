@@ -118,6 +118,10 @@ namespace F4SharedMem.Headers
         public uint StringAreaSize; // the overall size of the StringData/FalconSharedMemoryAreaString shared memory area
         public uint StringAreaTime; // last time the StringData/FalconSharedMemoryAreaString shared memory area has been changed - you only need to re-read the string shared mem if this changes
         public uint DrawingAreaSize;// the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
+
+        // VERSION 16
+        float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+
     }
 
 }

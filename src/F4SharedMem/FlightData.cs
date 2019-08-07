@@ -354,6 +354,9 @@ namespace F4SharedMem
         public uint StringAreaTime; // last time the StringData/FalconSharedMemoryAreaString shared memory area has been changed - you only need to re-read the string shared mem if this changes
         public uint DrawingAreaSize;// the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
 
+        // VERSION 16
+        public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+
         public OptionSelectButtonLabel[] leftMFD;
         public OptionSelectButtonLabel[] rightMFD;
         public object ExtensionData;
@@ -370,6 +373,7 @@ namespace F4SharedMem
 
         public StringData StringData { get; set; }
         public DrawingData DrawingData { get; set; }
+
 
     }
 }

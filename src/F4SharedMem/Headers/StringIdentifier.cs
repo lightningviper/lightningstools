@@ -40,6 +40,9 @@ namespace F4SharedMem.Headers
         AcName,                  // Current AC name
         AcNCTR,                  // Current AC NCTR
 
+        ButtonsFile,             // Current 3dbuttons.dat file full path
+        CockpitFile,             // Current 3dckpit.dat file full path
+
         StringIdentifier_DIM     // (number of identifiers; add new IDs only *above* this one)
     };
 }
