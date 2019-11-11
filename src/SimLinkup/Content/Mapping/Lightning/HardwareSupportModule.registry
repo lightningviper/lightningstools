@@ -2,6 +2,6 @@
 <HardwareSupportModuleRegistry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <HardwareSupportModules>
     <Module>SimLinkup.HardwareSupport.AnalogDevices.AnalogDevicesHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
-    <Module>SimLinkup.HardwareSupport.Simtek.Simtek100285HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+    <Module>SimLinkup.HardwareSupport.Simtek.Simtek101081HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
   </HardwareSupportModules>
 </HardwareSupportModuleRegistry>

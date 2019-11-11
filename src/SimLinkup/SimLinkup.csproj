@@ -432,6 +432,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Content\Mapping\Lightning\Simtek101081altimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
