@@ -13,6 +13,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         [XmlElement("RotationDegrees")]
         public float RotationDegrees { get; set; }
 
+        [XmlElement("TestPattern")]
+        public int TestPattern { get; set; }
+
+
         [XmlArray("XAxisCalibrationData")]
         [XmlArrayItem(nameof(CalibrationPoint))]
         public CalibrationPoint[] XAxisCalibrationData { get; set; }

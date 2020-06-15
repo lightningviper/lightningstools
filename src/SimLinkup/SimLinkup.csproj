@@ -169,6 +169,7 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\CalibrationTestPattern1RWRRenderer.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPoint.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPointExtensions.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\SVGPathToVectorScopePointsListConverter.cs" />
