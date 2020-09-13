@@ -168,7 +168,7 @@ Connection ~ 10450 700
 Wire Wire Line
 	10450 700  10450 1050
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis1
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis1
 U 1 1 5F667DCB
 P 1050 4500
 F 0 "Dis1" H 850 4850 50  0000 L CNN
@@ -219,7 +219,7 @@ DATA
 Wire Wire Line
 	2000 5300 2000 5150
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis2
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis2
 U 1 1 5F6A7B44
 P 2400 4500
 F 0 "Dis2" H 2200 4850 50  0000 L CNN
@@ -266,7 +266,7 @@ Wire Wire Line
 Wire Wire Line
 	3250 5300 3250 5150
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis3
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis3
 U 1 1 5F6AC71F
 P 3750 4500
 F 0 "Dis3" H 3550 4850 50  0000 L CNN
@@ -313,7 +313,7 @@ Wire Wire Line
 Wire Wire Line
 	4600 5300 4600 5150
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis4
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis4
 U 1 1 5F6AC73D
 P 5100 4500
 F 0 "Dis4" H 4900 4850 50  0000 L CNN
@@ -360,7 +360,7 @@ Wire Wire Line
 Wire Wire Line
 	5950 5300 5950 5150
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis5
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis5
 U 1 1 5F6B58F9
 P 1100 6200
 F 0 "Dis5" H 900 6550 50  0000 L CNN
@@ -407,7 +407,7 @@ Wire Wire Line
 Wire Wire Line
 	1950 7000 1950 6850
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis6
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis6
 U 1 1 5F6B5917
 P 2450 6200
 F 0 "Dis6" H 2250 6550 50  0000 L CNN
@@ -454,7 +454,7 @@ Wire Wire Line
 Wire Wire Line
 	3300 7000 3300 6850
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis7
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis7
 U 1 1 5F6B5935
 P 3800 6200
 F 0 "Dis7" H 3600 6550 50  0000 L CNN
@@ -501,7 +501,7 @@ Wire Wire Line
 Wire Wire Line
 	4650 7000 4650 6850
 $Comp
-L EWMU-rescue:HCMS-2313-hcms-2313 Dis8
+L EWMU-rescue:HCMS-2313-hcms-2313-EWMU-rescue Dis8
 U 1 1 5F6B5953
 P 5150 6200
 F 0 "Dis8" H 4950 6550 50  0000 L CNN
@@ -590,9 +590,9 @@ Text Notes 8200 7650 0    50   ~ 0
 Text Notes 10650 7650 0    50   ~ 0
 0.1
 Text Notes 10445 1075 3    50   ~ 0
-C
-Text Notes 10440 1380 3    50   ~ 0
 E
+Text Notes 10440 1380 3    50   ~ 0
+C
 Text Notes 10230 1250 0    50   ~ 0
 B
 Text GLabel 10600 600  2    50   Input ~ 0
@@ -657,9 +657,9 @@ Connection ~ 10450 1850
 Wire Wire Line
 	10450 1850 10450 2200
 Text Notes 10445 2225 3    50   ~ 0
-C
-Text Notes 10440 2530 3    50   ~ 0
 E
+Text Notes 10440 2530 3    50   ~ 0
+C
 Text Notes 10230 2400 0    50   ~ 0
 B
 Text GLabel 10600 1750 2    50   Input ~ 0
@@ -724,9 +724,9 @@ Connection ~ 10450 3000
 Wire Wire Line
 	10450 3000 10450 3350
 Text Notes 10445 3375 3    50   ~ 0
-C
-Text Notes 10440 3680 3    50   ~ 0
 E
+Text Notes 10440 3680 3    50   ~ 0
+C
 Text Notes 10230 3550 0    50   ~ 0
 B
 Text GLabel 10600 2900 2    50   Input ~ 0
@@ -791,9 +791,9 @@ Connection ~ 10450 4150
 Wire Wire Line
 	10450 4150 10450 4500
 Text Notes 10445 4525 3    50   ~ 0
-C
-Text Notes 10440 4830 3    50   ~ 0
 E
+Text Notes 10440 4830 3    50   ~ 0
+C
 Text Notes 10230 4700 0    50   ~ 0
 B
 Text GLabel 10600 4050 2    50   Input ~ 0
@@ -858,9 +858,9 @@ Connection ~ 10450 5300
 Wire Wire Line
 	10450 5300 10450 5650
 Text Notes 10445 5675 3    50   ~ 0
-C
-Text Notes 10440 5980 3    50   ~ 0
 E
+Text Notes 10440 5980 3    50   ~ 0
+C
 Text Notes 10230 5850 0    50   ~ 0
 B
 Text GLabel 10600 5200 2    50   Input ~ 0
