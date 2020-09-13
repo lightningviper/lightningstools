@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:EWMU-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
@@ -167,7 +168,7 @@ Connection ~ 10450 700
 Wire Wire Line
 	10450 700  10450 1050
 $Comp
-L hcms-2313:HCMS-2313 Dis1
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis1
 U 1 1 5F667DCB
 P 1050 4500
 F 0 "Dis1" H 850 4850 50  0000 L CNN
@@ -218,7 +219,7 @@ DATA
 Wire Wire Line
 	2000 5300 2000 5150
 $Comp
-L hcms-2313:HCMS-2313 Dis2
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis2
 U 1 1 5F6A7B44
 P 2400 4500
 F 0 "Dis2" H 2200 4850 50  0000 L CNN
@@ -265,7 +266,7 @@ Wire Wire Line
 Wire Wire Line
 	3250 5300 3250 5150
 $Comp
-L hcms-2313:HCMS-2313 Dis3
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis3
 U 1 1 5F6AC71F
 P 3750 4500
 F 0 "Dis3" H 3550 4850 50  0000 L CNN
@@ -312,7 +313,7 @@ Wire Wire Line
 Wire Wire Line
 	4600 5300 4600 5150
 $Comp
-L hcms-2313:HCMS-2313 Dis4
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis4
 U 1 1 5F6AC73D
 P 5100 4500
 F 0 "Dis4" H 4900 4850 50  0000 L CNN
@@ -359,7 +360,7 @@ Wire Wire Line
 Wire Wire Line
 	5950 5300 5950 5150
 $Comp
-L hcms-2313:HCMS-2313 Dis5
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis5
 U 1 1 5F6B58F9
 P 1100 6200
 F 0 "Dis5" H 900 6550 50  0000 L CNN
@@ -406,7 +407,7 @@ Wire Wire Line
 Wire Wire Line
 	1950 7000 1950 6850
 $Comp
-L hcms-2313:HCMS-2313 Dis6
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis6
 U 1 1 5F6B5917
 P 2450 6200
 F 0 "Dis6" H 2250 6550 50  0000 L CNN
@@ -453,7 +454,7 @@ Wire Wire Line
 Wire Wire Line
 	3300 7000 3300 6850
 $Comp
-L hcms-2313:HCMS-2313 Dis7
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis7
 U 1 1 5F6B5935
 P 3800 6200
 F 0 "Dis7" H 3600 6550 50  0000 L CNN
@@ -500,7 +501,7 @@ Wire Wire Line
 Wire Wire Line
 	4650 7000 4650 6850
 $Comp
-L hcms-2313:HCMS-2313 Dis8
+L EWMU-rescue:HCMS-2313-hcms-2313 Dis8
 U 1 1 5F6B5953
 P 5150 6200
 F 0 "Dis8" H 4950 6550 50  0000 L CNN
@@ -574,7 +575,7 @@ Wire Wire Line
 	750  7300 2050 7300
 Wire Wire Line
 	2050 7300 2050 6850
-Text GLabel 850  3600 3    50   Output ~ 0
+Text GLabel 850  3600 3    50   Input ~ 0
 GND
 Wire Wire Line
 	850  3600 850  3350
