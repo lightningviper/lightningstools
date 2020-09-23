@@ -82,10 +82,15 @@ namespace F4SharedMemViewer
                 BindDEDToFormElements();
                 BindPFLToFormElements();
             }
+            else if (tabControl1.SelectedTab == tabFD2Bits)
+            {
+                EnableChildControls(tabFD2Bits);
+                BindFD2VarsToFormElements();
+            }
             else if (tabControl1.SelectedTab == tabFD2Vars)
             {
                 EnableChildControls(tabFD2Vars);
-                BindFD2ToFormElements();
+                BindFD2VarsToFormElements();
             }
             else if (tabControl1.SelectedTab == tabFD2RWRPilots)
             {
@@ -219,6 +224,7 @@ namespace F4SharedMemViewer
             chkMLGWOW.Checked = (lightBits3 & LightBits3.MLGWOW) == LightBits3.MLGWOW;
             chkNLGWOW.Checked = (lightBits3 & LightBits3.NLGWOW) == LightBits3.NLGWOW;
             chkATF_Not_Engaged.Checked = (lightBits3 & LightBits3.ATF_Not_Engaged) == LightBits3.ATF_Not_Engaged;
+            chkInlet_Icing.Checked = (lightBits3 & LightBits3.Inlet_Icing) == LightBits3.Inlet_Icing;
         }
         private void BindHsiBitsToFormElements()
         {
@@ -387,7 +393,7 @@ namespace F4SharedMemViewer
             dataGridView.CurrentCell = null;
             dataGridView.ResumeLayout();
         }
-        private void BindFD2ToFormElements()
+        private void BindFD2VarsToFormElements()
         {
             chkLB_OuterMarker.Checked = (((HsiBits)_lastFlightData.hsiBits) & HsiBits.OuterMarker) == HsiBits.OuterMarker;
             chkBB_OuterMarker.Checked = (((BlinkBits)_lastFlightData.blinkBits) & BlinkBits.OuterMarker) == BlinkBits.OuterMarker;
@@ -429,6 +435,31 @@ namespace F4SharedMemViewer
             chkCalType.Checked = (((AltBits)_lastFlightData.altBits) & AltBits.CalType) == AltBits.CalType;
             chkPneuFlag.Checked = (((AltBits)_lastFlightData.altBits) & AltBits.PneuFlag) == AltBits.PneuFlag;
 
+            chkRALT_Valid.Checked = (((MiscBits)_lastFlightData.miscBits) & MiscBits.RALT_Valid) == MiscBits.RALT_Valid;
+            chkFlcs_flcc_A.Checked = (((MiscBits)_lastFlightData.miscBits) & MiscBits.Flcs_Flcc_A) == MiscBits.Flcs_Flcc_A;
+            chkFlcs_flcc_B.Checked = (((MiscBits)_lastFlightData.miscBits) & MiscBits.Flcs_Flcc_B) == MiscBits.Flcs_Flcc_B;
+            chkFlcs_flcc_C.Checked = (((MiscBits)_lastFlightData.miscBits) & MiscBits.Flcs_Flcc_C) == MiscBits.Flcs_Flcc_C;
+            chkFlcs_flcc_D.Checked = (((MiscBits)_lastFlightData.miscBits) & MiscBits.Flcs_Flcc_D) == MiscBits.Flcs_Flcc_D;
+            chkSolenoidStatus.Checked = (((MiscBits)_lastFlightData.miscBits) & MiscBits.SolenoidStatus) == MiscBits.SolenoidStatus;
+
+            chkAllWords.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Allwords) == BettyBits.Betty_Allwords;
+            chkPullup.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Pullup) == BettyBits.Betty_Pullup;
+            chkAltitude.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Altitude) == BettyBits.Betty_Altitude;
+            chkWarning.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Warning) == BettyBits.Betty_Warning;
+            chkJammer.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Jammer) == BettyBits.Betty_Jammer;
+            chkCounter.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Counter) == BettyBits.Betty_Counter;
+            chkChaffFlare.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_ChaffFlare) == BettyBits.Betty_ChaffFlare;
+            chkChaffFlare_Low.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_ChaffFlare_Low) == BettyBits.Betty_ChaffFlare_Low;
+            chkChaffFlareOut.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_ChaffFlare_Out) == BettyBits.Betty_ChaffFlare_Out;
+            chkLock.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Lock) == BettyBits.Betty_Lock;
+            chkCaution.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Caution) == BettyBits.Betty_Caution;
+            chkBingo.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Bingo) == BettyBits.Betty_Bingo;
+            chkData.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Data) == BettyBits.Betty_Data;
+            chkBettyIFF.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_IFF) == BettyBits.Betty_IFF;
+            chkLowSpeed.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Lowspeed) == BettyBits.Betty_Lowspeed;
+            chkBeeps.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_Beeps) == BettyBits.Betty_Beeps;
+            chkAOA.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_AOA) == BettyBits.Betty_AOA;
+            chkMaxG.Checked = (((BettyBits)_lastFlightData.bettyBits) & BettyBits.Betty_MaxG) == BettyBits.Betty_MaxG;
 
             txtFD2_VersionNum.Text = _lastFlightData.VersionNum2.ToString();
             txtNozzlePos2.Text = _lastFlightData.nozzlePos2.FormatDecimal(decimalPlaces: 2);
@@ -442,6 +473,12 @@ namespace F4SharedMemViewer
             txtTefPos.Text = _lastFlightData.tefPos.FormatDecimal(decimalPlaces: 2);
             txtLatitude.Text = _lastFlightData.latitude.FormatDecimal(decimalPlaces: 4).PadLeft(8, '0');
             txtLongitude.Text = _lastFlightData.longitude.FormatDecimal(decimalPlaces: 4).PadLeft(8, '0');
+            txtRALT.Text = _lastFlightData.RALT.FormatDecimal(decimalPlaces: 2);
+            txtStringAreaSize.Text = _lastFlightData.StringAreaSize.ToString();
+            txtStringAreaTime.Text = _lastFlightData.StringAreaTime.ToString();
+
+
+
             txtNavMode.Text = string.Format("({0}) {1}",
                 _lastFlightData.navMode.ToString(),
                 ((NavModes)_lastFlightData.navMode).ToString()
@@ -463,6 +500,18 @@ namespace F4SharedMemViewer
                 _lastFlightData.instrLight.ToString(),
                 ((InstrLight)_lastFlightData.instrLight).ToString().Replace("INSTR_LIGHT_", "")
             );
+            txtCaraAlow.Text = _lastFlightData.caraAlow.FormatDecimal(decimalPlaces: 2);
+            txtBMSVersion.Text = string.Format("{0}.{1}.{2}.{3}",
+                _lastFlightData.BMSVersionMajor.ToString(),
+                _lastFlightData.BMSVersionMinor.ToString(),
+                _lastFlightData.BMSVersionMicro.ToString(),
+                _lastFlightData.BMSBuildNumber.ToString());
+            txtDrawingAreaSize.Text = _lastFlightData.DrawingAreaSize.ToString();
+
+
+
+
+
             txtRTT_size.Text = string.Format("{0} {1}",
                 _lastFlightData.RTT_size[0].ToString(),
                 _lastFlightData.RTT_size[1].ToString()
@@ -515,6 +564,12 @@ namespace F4SharedMemViewer
                 ((byte)(_lastFlightData.iffBackupMode3ADigit1)).ToString(),
                 ((byte)(_lastFlightData.iffBackupMode3ADigit2)).ToString()
             );
+
+            txtBingoFuel.Text = _lastFlightData.bingoFuel.FormatDecimal(decimalPlaces: 2);
+            txtBullseyeX.Text = _lastFlightData.bullseyeX.FormatDecimal(decimalPlaces: 2);
+            txtBullseyeY.Text = _lastFlightData.bullseyeY.FormatDecimal(decimalPlaces: 2);
+            txtTurnRate.Text = _lastFlightData.turnRate.FormatDecimal(decimalPlaces: 2);
+
         }
 
         private void BindFD2RWRInfoToFormElements()

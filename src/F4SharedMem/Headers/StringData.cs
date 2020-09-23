@@ -6,6 +6,11 @@ namespace F4SharedMem.Headers
     [Serializable]
     public class StringData
     {
+        // changelog:
+        // 1: initial BMS 4.34 version
+        // 2: added 3dbuttons.dat/3dckpit.dat file paths
+        // 3: added NavPoints
+
         public const uint STRINGDATA_AREA_SIZE_MAX = 1024 * 1024;
 
         public int VersionNum;  // Version of the StringData shared memory area - only indicates changes to the StringIdentifier enum
