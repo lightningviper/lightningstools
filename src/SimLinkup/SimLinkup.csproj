@@ -167,6 +167,8 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\CalibrationTestPattern1RWRRenderer.cs" />
@@ -436,6 +438,20 @@
     <None Include="Content\Mapping\Lightning\Simtek101081altimeter.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Content\Mapping\TeensyEWMU\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWMU\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWMU\TeensyEWMU.mapping">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWMU\TeensyEWMUHardwareSupportModule.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO TEENSYEWMU HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+
+    <!-- EWMU DISPLAY STRING INPUT-->
+    <SignalMapping>
+      <!-- F4 EWMU DISPLAY STRING OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWMU__DISPLAY_STRING</Id>
+      </Source>
+      <!-- TeensyEWMU DISPLAY STRING INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__Display_String</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>
