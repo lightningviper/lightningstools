@@ -35,6 +35,7 @@ namespace F4SharedMem.Headers
                 var sStruct = new StringStruct();
                 sStruct.strId = BitConverter.ToUInt32(data, offset);
                 offset += sizeof(uint);
+                if (offset >= data.Length - sizeof(uint)) break;
                 sStruct.strLength = BitConverter.ToUInt32(data, offset);
                 offset += sizeof(uint);
                 sStruct.strData = new byte[sStruct.strLength];
