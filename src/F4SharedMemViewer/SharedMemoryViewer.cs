@@ -113,6 +113,11 @@ namespace F4SharedMemViewer
                 EnableChildControls(tabIVC_RCS_RCC);
                 Bind_IVC_RCS_RCC_DataToFormElements();
             }
+            else if (tabControl1.SelectedTab == tabStrings)
+            {
+                EnableChildControls(tabStrings);
+                BindStringsVarsToFormElements();
+            }
             else if (tabControl1.SelectedTab == tabRawBits)
             {
                 EnableChildControls(tabRawBits);
@@ -819,6 +824,23 @@ namespace F4SharedMemViewer
             txtAltBitsHex.Text = "0x" + _lastFlightData.altBits.ToString("X").PadLeft(8, '0');
             txtPowerBitsHex.Text = "0x" + _lastFlightData.powerBits.ToString("X").PadLeft(8, '0');
             txtBlinkBitsHex.Text = "0x" + _lastFlightData.blinkBits.ToString("X").PadLeft(8, '0');
+        }
+        private uint _lastStringAreaTime;
+        private void BindStringsVarsToFormElements()
+        {
+            txtStringsVersionNum.Text = ((int)_lastFlightData.StringData.VersionNum).ToString();
+            txtNoOfStrings.Text = ((int)_lastFlightData.StringData.NoOfStrings).ToString();
+            txtStringsDataSize.Text = ((uint)_lastFlightData.StringData.dataSize).ToString();
+            if (_lastFlightData.StringAreaTime != _lastStringAreaTime)
+            {
+                txtStrings.Clear();
+                foreach (var thisString in _lastFlightData.StringData.data)
+                {
+                    txtStrings.AppendText(string.Format("[id {0} ({1}), len {2}] {3}\r\n", thisString.strId, ((F4SharedMem.Headers.StringIdentifier)thisString.strId).ToString(), thisString.strLength, thisString.value));
+                }
+                _lastStringAreaTime = _lastFlightData.StringAreaTime;
+            }
+
         }
         private void InitializeFD2RWRGridView()
         {
