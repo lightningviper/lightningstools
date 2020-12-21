@@ -8,20 +8,24 @@ const byte BLANKING_PIN = 8;
 const byte CLOCK_PIN = 10; 
 const byte DATA_PIN = 12; 
 const byte BUILTIN_LED_PIN=13;
-const unsigned int MAX_STROBE_TIME_MICROSECONDS = 2000; 
 const unsigned int MAX_BRIGHTNESS=4096;
+const unsigned int MAX_COLUMN_STROBE_TIME_MICROSECONDS=2000;
 
 const byte ADC_PRECISION_BITS=12;
 
-char _charArray[NUM_CHARACTERS_TO_DISPLAY + 1];
+char _charArray[NUM_CHARACTERS_TO_DISPLAY];
+
 unsigned int _brightness=MAX_BRIGHTNESS;
+float _brightnessPct =(float)1.0;
 bool _ledOn = false;
 
 const unsigned int BAUD_RATE = 115200;
-const size_t RECEIVE_BUFFER_SIZE= 64 * 1024;
+const size_t RECEIVE_BUFFER_SIZE= 128;
 PacketSerial_<COBS, 0, RECEIVE_BUFFER_SIZE> _packetSerial;
 
 void setup() {
+  memset(_charArray, 0, sizeof(_charArray));
+  
   pinMode(BUILTIN_LED_PIN, OUTPUT);
   LEDOn();
 
@@ -39,14 +43,12 @@ void setup() {
   readBrightness();
   
   for (int i = 0; i < 5; i++) {
-    pinMode(COLUMN_DRIVER_PIN[i], OUTPUT);
-    digitalWriteFast(COLUMN_DRIVER_PIN[i], HIGH);
+    columnOff(i);
   }
 
   _packetSerial.begin(BAUD_RATE);
   _packetSerial.setPacketHandler(&onPacketReceived);
 
-  prepString("Hello World Hello World Hello World");
 }
 
 void loop() {
@@ -57,48 +59,34 @@ void loop() {
 
 void readBrightness() {
   _brightness= analogRead(BRIGHTNESS_POT_PIN);
-}
-
-void prepString(String inString) {
-  if (inString.length() < NUM_CHARACTERS_TO_DISPLAY) {
-    while (inString.length() < NUM_CHARACTERS_TO_DISPLAY) {
-      inString = inString + " ";
-    }
-  } else {
-    inString.remove(NUM_CHARACTERS_TO_DISPLAY);
-  }
-
-  inString.toCharArray(_charArray, NUM_CHARACTERS_TO_DISPLAY + 1); // +1 to leave room for the terminating char
+  _brightnessPct=((float)_brightness /(float)MAX_BRIGHTNESS);
 }
 
 void showChars() {
-    for (byte column = 0; column < 5; column++) { 
-      int pixelCounter = 0;
-      for (int thisChar = NUM_CHARACTERS_TO_DISPLAY; thisChar > 0; --thisChar) {
+    unsigned int pixelCounter[5]={0,0,0,0,0};
+    for (byte column = 0; column < 5; column++) {
+      pixelCounter[column]=0;
+      for (byte thisChar = NUM_CHARACTERS_TO_DISPLAY; thisChar--; ) {
         for (byte row = 0; row < 7; row++) { 
           digitalWriteFast(CLOCK_PIN, HIGH); 
-          delayMicroseconds(1);
-          if (bitRead((font[_charArray[thisChar - 1]][column]), (6- row))) {
+          delayMicroseconds(2); 
+          if (bitRead((font[(byte)_charArray[thisChar]][column]), (6- row))) {
             digitalWriteFast(DATA_PIN, HIGH);
-            pixelCounter++; 
+            pixelCounter[column]++; 
           } else {
             digitalWriteFast(DATA_PIN, LOW); 
           }
-          delayMicroseconds(2); 
+          delayMicroseconds(1); 
           digitalWriteFast(CLOCK_PIN, LOW); 
-          delayMicroseconds(2);
+          delayMicroseconds(5);
         }
       }
-      if(pixelCounter>0){
-        digitalWriteFast(BLANKING_PIN, HIGH);
-        digitalWriteFast(COLUMN_DRIVER_PIN[column], LOW); 
-        float brightnessPct = ((float)_brightness /(float)MAX_BRIGHTNESS);
-        unsigned int strobeTimeMicroseconds = (unsigned int) (MAX_STROBE_TIME_MICROSECONDS * brightnessPct);
-        delayMicroseconds(strobeTimeMicroseconds);
-        digitalWriteFast(COLUMN_DRIVER_PIN[column], HIGH); 
+      if (pixelCounter[column] >0) 
+      {
+        unsigned int strobeTimeMicroseconds = MAX_COLUMN_STROBE_TIME_MICROSECONDS * _brightnessPct;
+        //((float)1-((float)pixelCounter[column]/(float)(7.0 *NUM_CHARACTERS_TO_DISPLAY))) *_brightnessPct * (float)MAX_COLUMN_STROBE_TIME_MICROSECONDS;
+        strobeColumn(column, strobeTimeMicroseconds);
       }
-      digitalWriteFast(BLANKING_PIN, LOW); 
-
     }
 }
 
@@ -108,6 +96,33 @@ void onPacketReceived(const uint8_t* buffer, size_t size)
   size_t numBytesToCopy = (size_t) (min(size, NUM_CHARACTERS_TO_DISPLAY));
   memset(_charArray, 0, sizeof(_charArray));
   memcpy(_charArray, buffer, numBytesToCopy);
+}
+
+void columnOff(byte column) {
+  pinMode(COLUMN_DRIVER_PIN[column], INPUT);
+}
+
+void columnOn(byte column) {
+  pinMode(COLUMN_DRIVER_PIN[column], OUTPUT); 
+  digitalWriteFast(COLUMN_DRIVER_PIN[column], LOW);
+}
+
+void strobeColumn(byte column, unsigned int strobeTimeMicroseconds) {
+  columnOn(column);
+  unblankDisplay();
+  delayMicroseconds(strobeTimeMicroseconds);
+  columnOff(column);
+  blankDisplay();
+}
+
+void unblankDisplay() {
+  digitalWriteFast(BLANKING_PIN, HIGH);
+  delayMicroseconds(2);
+}
+
+void blankDisplay() {
+  digitalWriteFast(BLANKING_PIN, LOW); 
+  delayMicroseconds(5);
 }
 
 void LEDOff()
