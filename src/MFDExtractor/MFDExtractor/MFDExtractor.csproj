@@ -194,6 +194,7 @@
     <Compile Include="RendererFactories\FuelQualityIndicatorRendererFactory.cs" />
     <Compile Include="RendererFactories\ISISRendererFactory.cs" />
     <Compile Include="RendererFactories\AzimuthIndicatorRendererFactory.cs" />
+    <Compile Include="RendererFactories\TachometerRendererFactory.cs" />
     <Compile Include="RendererFactories\VVIRendererFactory.cs" />
     <Compile Include="RendererFactory.cs" />
     <Compile Include="Renderer\MfdRenderer.cs" />
