@@ -119,7 +119,15 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override void Render(Graphics g, Rectangle destinationRectangle)
         {
             var instrumentState = GetInstrumentState();
-            _uiRenderer.Render(g, destinationRectangle, instrumentState, USE_VECTOR_FONT);
+            if (_config.TestPattern != 0)
+            {
+                new CalibrationTestPattern1RWRRenderer(destinationRectangle.Width, destinationRectangle.Height).Render(g, destinationRectangle);
+            }
+            else
+            {
+                _uiRenderer.Render(g, destinationRectangle, instrumentState, USE_VECTOR_FONT);
+            }
+
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -481,7 +489,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var connected = EnsureSerialPortConnected();
             if (!connected) return;
             var commandList = GenerateDrawingCommands();
-            if (_lastCommandList != null && commandList == _lastCommandList) return;
+            if (_lastCommandList != null && commandList == _lastCommandList && _config.TestPattern !=0) return;
             SendDrawingCommands(commandList);
             _lastCommandList = commandList;
             _lastCommandListSentTime = DateTime.Now;
@@ -493,8 +501,14 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var instrumentState = GetInstrumentState();
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
-            _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
-            
+            if (_config.TestPattern != 0)
+            {
+                new CalibrationTestPattern1RWRRenderer(VIEWBOX_WIDTH, VIEWBOX_HEIGHT).Render(drawingContext);
+            }
+            else
+            {
+                _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
+            }
             drawingContext.Close();
             return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
         }
@@ -511,8 +525,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                                         .ApplyCentering(_config.Centering)
                                         .ApplyInversion(VIEWBOX_WIDTH, VIEWBOX_HEIGHT, invertX: false, invertY: true)
                                         .ApplyRotation(VIEWBOX_WIDTH / 2.0, VIEWBOX_HEIGHT / 2.0, _config.RotationDegrees)
-                                         .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY, VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
-                                         .ApplyCalibration(_config.XAxisCalibrationData, _config.YAxisCalibrationData)
+                                        .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY, VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
+                                        .ApplyCalibration(_config.XAxisCalibrationData, _config.YAxisCalibrationData)
                                         .ApplyClipping(VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
                                       ;
 
