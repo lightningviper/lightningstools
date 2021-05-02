@@ -592,7 +592,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.RIGHT_EYEBROW_LIGHTS__OXY_LOW:
-                    ((DigitalSignal) output).State = ((LightBits) _lastFlightData.lightBits & LightBits.OXY_BROW) == LightBits.OXY_BROW
+                    ((DigitalSignal) output).State = (((LightBits) _lastFlightData.lightBits & LightBits.OXY_BROW) == LightBits.OXY_BROW && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.OXY_BROW) == BlinkBits.OXY_BROW))
                                                      || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.OXY_BROW) == BlinkBits.OXY_BROW && DateTime.UtcNow.Millisecond % 500 < 250;
 
                     break;
@@ -611,8 +611,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__ELEC_SYS:
-                    ((DigitalSignal) output).State = ((LightBits3) _lastFlightData.lightBits3 & LightBits3.Elec_Fault) == LightBits3.Elec_Fault
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Elec_Fault) == BlinkBits.Elec_Fault && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits3) _lastFlightData.lightBits3 & LightBits3.Elec_Fault) == LightBits3.Elec_Fault && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Elec_Fault) == BlinkBits.Elec_Fault))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Elec_Fault) == BlinkBits.Elec_Fault && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__ENGINE_FAULT:
@@ -689,8 +689,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__PROBE_HEAT:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.PROBEHEAT) == LightBits2.PROBEHEAT
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PROBEHEAT) == BlinkBits.PROBEHEAT && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.PROBEHEAT) == LightBits2.PROBEHEAT && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PROBEHEAT) == BlinkBits.PROBEHEAT))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PROBEHEAT) == BlinkBits.PROBEHEAT && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__FUEL_LOW:
@@ -738,22 +738,21 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.TWP__MISSILE_LAUNCH:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch && DateTime.UtcNow.Millisecond % 250 < 125;
+                case F4SimOutputs.EWPI__ML:
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__PRIORITY_MODE:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode
-                                                     || ((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode
-                                                     && ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode
-                                                     && DateTime.UtcNow.Millisecond % 250 < 125;
+                case F4SimOutputs.EWPI__PRI:
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__UNKNOWN:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk
-                                                     || ((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk
-                                                     && ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk
-                                                     && DateTime.UtcNow.Millisecond % 250 < 125;
+                case F4SimOutputs.EWPI__UNK:
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__NAVAL:
@@ -769,8 +768,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.TWA__SEARCH:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.AuxSrch) == LightBits2.AuxSrch
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.AuxSrch) == BlinkBits.AuxSrch && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.AuxSrch) == LightBits2.AuxSrch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.AuxSrch) == BlinkBits.AuxSrch))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.AuxSrch) == BlinkBits.AuxSrch && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWA__ACTIVITY_POWER:
@@ -861,18 +860,6 @@ namespace F4Utils.SimSupport
                     ((TextSignal)output).State = Encoding.ASCII.GetString(_lastFlightData.EWPIJammerDisplayText != null ? _lastFlightData.EWPIJammerDisplayText : new byte[] { }).PadRight(8);
                     break;
 
-                case F4SimOutputs.EWPI__PRI:
-                    ((DigitalSignal)output).State = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode;
-                    break;
-
-                case F4SimOutputs.EWPI__UNK:
-                    ((DigitalSignal)output).State = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk;
-                    break;
-
-                case F4SimOutputs.EWPI__ML:
-                    ((DigitalSignal)output).State = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch;
-                    break;
-
                 case F4SimOutputs.ELEC__FLCS_PMG:
                     ((DigitalSignal) output).State = ((LightBits3) _lastFlightData.lightBits3 & LightBits3.FlcsPmg) == LightBits3.FlcsPmg;
                     break;
@@ -918,8 +905,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.EPU__RUN:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.EPUOn) == LightBits2.EPUOn
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.EPUOn) == BlinkBits.EPUOn && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.EPUOn) == LightBits2.EPUOn && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.EPUOn) == BlinkBits.EPUOn))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.EPUOn) == BlinkBits.EPUOn && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.AVTR__AVTR:
@@ -927,14 +914,14 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.JFS__RUN:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.JFSOn) == LightBits2.JFSOn
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.JFSOn) == LightBits2.JFSOn && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.JFSOn_Slow) == BlinkBits.JFSOn_Slow) && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.JFSOn_Fast) == BlinkBits.JFSOn_Fast))
                                                      || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.JFSOn_Slow) == BlinkBits.JFSOn_Slow && DateTime.UtcNow.Millisecond % 1000 < 500
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.JFSOn_Fast) == BlinkBits.JFSOn_Fast && DateTime.UtcNow.Millisecond % 250 < 125;
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.JFSOn_Fast) == BlinkBits.JFSOn_Fast && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.MARKER_BEACON__MRK_BCN_LIGHT:
-                    if (((HsiBits) _lastFlightData.hsiBits & HsiBits.OuterMarker) == HsiBits.OuterMarker) { _morseCodeGenerator.PlainText = "T"; }
-                    else if (((HsiBits) _lastFlightData.hsiBits & HsiBits.MiddleMarker) == HsiBits.MiddleMarker) _morseCodeGenerator.PlainText = "A";
+                    if (((HsiBits)_lastFlightData.hsiBits & HsiBits.OuterMarker) == HsiBits.OuterMarker) { _morseCodeGenerator.PlainText = "T"; }
+                    else if (((HsiBits)_lastFlightData.hsiBits & HsiBits.MiddleMarker) == HsiBits.MiddleMarker) { _morseCodeGenerator.PlainText = "A"; }
 
                     ((DigitalSignal) output).State =
                         (((BlinkBits) _lastFlightData.blinkBits & BlinkBits.OuterMarker) == BlinkBits.OuterMarker
