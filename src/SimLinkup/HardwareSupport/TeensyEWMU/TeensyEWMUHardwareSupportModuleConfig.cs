@@ -9,6 +9,9 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
         [XmlElement("COMPort")]
         public string COMPort { get; set; }
 
+        [XmlArray("DXOutputs"), XmlArrayItem("Output")]
+        public DXOutput[] DXOutputs { get; set; }
+
         public static TeensyEWMUHardwareSupportModuleConfig Load(string filePath)
         {
             return Common.Serialization.Util

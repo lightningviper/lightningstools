@@ -489,7 +489,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var connected = EnsureSerialPortConnected();
             if (!connected) return;
             var commandList = GenerateDrawingCommands();
-            if (_lastCommandList != null && commandList == _lastCommandList && _config.TestPattern !=0) return;
+            if (_lastCommandList != null && commandList == _lastCommandList && _config.TestPattern ==0) return;
             SendDrawingCommands(commandList);
             _lastCommandList = commandList;
             _lastCommandListSentTime = DateTime.Now;

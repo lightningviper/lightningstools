@@ -1,0 +1,764 @@
+{
+  "uuid": "73f6bcfa0ffa5943297c6b228a5bedf0",
+  "path": "Offline/TeensyEWMU",
+  "name": "TeensyEWMU",
+  "content": "",
+  "created_at": "2021-01-04 18:06:34",
+  "updated_at": "2021-04-30 12:59:11",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "083adc4304b7dcddd1fcd8a6cfaab9b9",
+      "title": "CONNECTORS& SOCKETS",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "5f9aec9ba0cc4327ac3cbf42d10fb16f": 1,
+        "669c1e24090c4bf48fd054ee2e3b85ab": 1,
+        "204bfe38dc254679902922285d170b69": 1,
+        "e8216f46e712481d8109fc063f185ab5": 1,
+        "653629b8244941dfa0dfd9bcaf082d60": 1,
+        "fa954bad4f62493f9e1888b3ead04cfe": 2,
+        "17f8844850ac45e197e99565ea71686d": 1,
+        "b1496574be8a40fe9ec32586c21a9f3a": 1,
+        "0a95f4026c6940c6b546a156d017ff29": 1,
+        "505c53ca3d744d8fafb5270d684464ef": 1,
+        "733f0881bfe640a89a227a03d293e6cd": 2,
+        "1fd8497dc4ca470294f409f89a4f386e": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "61400416121",
+          1,
+          "61400416121",
+          "USB1",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "732-2108-ND",
+            "BOM_Manufacturer": "Wurth Elektronik",
+            "BOM_Manufacturer Part": "61400416121",
+            "puuid": "ad1f248061be47b5a4d2bc184e801e1e",
+            "uuid": "0a95f4026c6940c6b546a156d017ff29"
+          }
+        ],
+        [
+          "HEADER_MALE_2X5P_2.00MM_NO_10_PIN",
+          1,
+          "PIN_HEADER_STRAIGHT_2X05_PITCH2.00MM_NO_10_PIN",
+          "H6",
+          {
+            "BOM_Manufacturer": "Adam Tech",
+            "BOM_Manufacturer Part": "2PH2-10-UA",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "2057-2PH2-10-UA-ND",
+            "puuid": "3b6b3ce17f0a4c59bca556789a3c2210",
+            "uuid": "1fd8497dc4ca470294f409f89a4f386e"
+          }
+        ],
+        [
+          "10-position (2x5) IDC Box Header 0.100\" (2.54mm) pitch",
+          1,
+          "SHDR10W64P254X254_2X5_2036X885",
+          "CN2",
+          {
+            "BOM_Manufacturer Part": "302-S101",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "ED1543-ND",
+            "BOM_Manufacturer": "On Shore Technology Inc.",
+            "puuid": "55155862a9564beba6710262e840d865",
+            "uuid": "5f9aec9ba0cc4327ac3cbf42d10fb16f"
+          }
+        ],
+        [
+          "Header-Female-2.54_1x2",
+          1,
+          "HDR-TH_2P-P2.54-V-F",
+          "H3",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC021LFBN-RC",
+            "BOM_Supplier Part": "S7000-ND",
+            "puuid": "d40e752c66064d70b099a9ff622fb237",
+            "uuid": "17f8844850ac45e197e99565ea71686d"
+          }
+        ],
+        [
+          "DC-37F Right-Angle 0.319\" (8.10mm) Backset",
+          1,
+          "DSUB-TH_DS1037-37FNAKT74-0CC",
+          "DSUB1",
+          {
+            "BOM_Manufacturer Part": "A-DF 37 A/KG-T4S",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "AE10944-ND",
+            "BOM_Manufacturer": "Assmann WSW Components",
+            "puuid": "097923d0a94d4673a4ba968f9bf5133a",
+            "uuid": "204bfe38dc254679902922285d170b69"
+          }
+        ],
+        [
+          "Switchcraft RAPC712BKZ",
+          1,
+          "RAPC712X",
+          "P2",
+          {
+            "BOM_Manufacturer Part": "RAPC712BKZ",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "SC3839-ND",
+            "BOM_Manufacturer": "Switchcraft Inc.",
+            "puuid": "76a8342d72d24328ae5c5b29bb48e404",
+            "uuid": "505c53ca3d744d8fafb5270d684464ef"
+          }
+        ],
+        [
+          "26-position (2x13) IDC Box Header 0.100\" (2.54mm) pitch",
+          1,
+          "HDR-IDC-2.54-2X13P_",
+          "CN1",
+          {
+            "BOM_Manufacturer": "On Shore Technology Inc.",
+            "BOM_Manufacturer Part": "ED10526-ND",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "302-S261",
+            "puuid": "7effb19077a2464b8e3b0012bef6982c",
+            "uuid": "669c1e24090c4bf48fd054ee2e3b85ab"
+          }
+        ],
+        [
+          "Header-Female-2.54_1x5",
+          2,
+          "HDR-TH_5P-P2.54-V",
+          "H5,H4",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC051LFBN-RC",
+            "BOM_Supplier Part": "S6103-ND",
+            "puuid": "cc2234262bb8493f8f730652d7943dad",
+            "uuid": "733f0881bfe640a89a227a03d293e6cd"
+          }
+        ],
+        [
+          "CK_DPDT_SlideSwitch_L202011MS02Q",
+          1,
+          "L202011MS02Q‎ - DPDT",
+          "S1",
+          {
+            "BOM_Manufacturer Part": "L202011MS02Q",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "CKC5100-ND",
+            "BOM_Manufacturer": "C&K",
+            "puuid": "cc7dba4ace474ffaac05c14a40cfedce",
+            "uuid": "653629b8244941dfa0dfd9bcaf082d60"
+          }
+        ],
+        [
+          "Molex 8981-4P",
+          1,
+          "MOLEX 8981-4P",
+          "P1",
+          {
+            "BOM_Manufacturer Part": "0015244449",
+            "BOM_Supplier Part": "WM9132-ND",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "Molex",
+            "puuid": "bea91c40fe564a3bb6945a3c03e6a1cc",
+            "uuid": "b1496574be8a40fe9ec32586c21a9f3a"
+          }
+        ],
+        [
+          "DB-25F Right-Angle 0.319\" (8.10mm)  Backset",
+          1,
+          "DS1037-25FNAKT74-0CC",
+          "DSUB2",
+          {
+            "BOM_Manufacturer Part": "A-DF 25 A/KG-T4S",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "AE10937-ND",
+            "BOM_Manufacturer": "Assmann WSW Components",
+            "puuid": "ce98c702c3464e8d9eea096e5bedf9dc",
+            "uuid": "e8216f46e712481d8109fc063f185ab5"
+          }
+        ],
+        [
+          "Header-Female-2.54_1x24",
+          2,
+          "S7022-ND",
+          "H1,H2",
+          {
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC241LFBN-RC",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "S7022-ND",
+            "puuid": "0d274158f1ae49ee9ef7939145755a46",
+            "uuid": "fa954bad4f62493f9e1888b3ead04cfe"
+          }
+        ],
+        [
+          "TIP122",
+          8,
+          "TO-220-3_L10.0-W4.5-P2.54-L",
+          "Q1,Q11,Q7,Q12,Q5,Q13,Q3,Q9",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "497-2543-5-ND",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "TIP122",
+            "puuid": "948e610cffd14df79f04c73832b1409b",
+            "uuid": "2b1981519cb64eea8e26a6812f79efe2"
+          }
+        ],
+        [
+          "220R",
+          5,
+          "RES-TH_BD2.5-L6.5-P10.50-D0.6",
+          "R14,R18,R15,R16,R17",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "TE Connectivity Passive Product",
+            "BOM_Manufacturer Part": "CFR16J220R",
+            "BOM_Supplier Part": "CFR16J220R-ND",
+            "puuid": "f6ffa34674dd47c09fdfebb09b99661e",
+            "uuid": "3b7b42fb41f5197113e5c078d2fbd5d9"
+          }
+        ],
+        [
+          "TIP127",
+          5,
+          "TO-220-3_L10.0-W4.5-P2.54-L",
+          "Q2,Q10,Q4,Q6,Q8",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "497-2571-5-ND",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "TIP127",
+            "puuid": "948e610cffd14df79f04c73832b1409b",
+            "uuid": "355c2e0bde164a66ab35dadfea950af4"
+          }
+        ],
+        [
+          "1K",
+          13,
+          "RES-TH_BD2.2-L6.5-P10.50-D0.6",
+          "R9,R1,R6,R3,R10,R13,R8,R12,R5,R2,R11,R7,R4",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "UniOhm",
+            "BOM_Manufacturer Part": "MFR-25FBF52-1K",
+            "BOM_Supplier Part": "1.00KXBK-ND",
+            "puuid": "666264fd42b84465ad050a9517cab8cf",
+            "uuid": "c8ab0cf3d13e4ba39868c330dd66e4a2"
+          }
+        ]
+      ],
+      "updateTime": 1619812059,
+      "createTime": 1609812533,
+      "histories": [],
+      "created_at": "2021-01-04 19:08:53",
+      "updated_at": "2021-04-30 12:47:39"
+    },
+    {
+      "uuid": "4bec47375480f4f20135454f21eab6c8",
+      "title": "COLUMN & IND LIGHT DRIVERS",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "c8ab0cf3d13e4ba39868c330dd66e4a2": 13,
+        "355c2e0bde164a66ab35dadfea950af4": 5,
+        "2b1981519cb64eea8e26a6812f79efe2": 8,
+        "3b7b42fb41f5197113e5c078d2fbd5d9": 5
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "61400416121",
+          1,
+          "61400416121",
+          "USB1",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "732-2108-ND",
+            "BOM_Manufacturer": "Wurth Elektronik",
+            "BOM_Manufacturer Part": "61400416121",
+            "puuid": "ad1f248061be47b5a4d2bc184e801e1e",
+            "uuid": "0a95f4026c6940c6b546a156d017ff29"
+          }
+        ],
+        [
+          "HEADER_MALE_2X5P_2.00MM_NO_10_PIN",
+          1,
+          "PIN_HEADER_STRAIGHT_2X05_PITCH2.00MM_NO_10_PIN",
+          "H6",
+          {
+            "BOM_Manufacturer": "Adam Tech",
+            "BOM_Manufacturer Part": "2PH2-10-UA",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "2057-2PH2-10-UA-ND",
+            "puuid": "3b6b3ce17f0a4c59bca556789a3c2210",
+            "uuid": "1fd8497dc4ca470294f409f89a4f386e"
+          }
+        ],
+        [
+          "10-position (2x5) IDC Box Header 0.100\" (2.54mm) pitch",
+          1,
+          "SHDR10W64P254X254_2X5_2036X885",
+          "CN2",
+          {
+            "BOM_Manufacturer Part": "302-S101",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "ED1543-ND",
+            "BOM_Manufacturer": "On Shore Technology Inc.",
+            "puuid": "55155862a9564beba6710262e840d865",
+            "uuid": "5f9aec9ba0cc4327ac3cbf42d10fb16f"
+          }
+        ],
+        [
+          "Header-Female-2.54_1x2",
+          1,
+          "HDR-TH_2P-P2.54-V-F",
+          "H3",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC021LFBN-RC",
+            "BOM_Supplier Part": "S7000-ND",
+            "puuid": "d40e752c66064d70b099a9ff622fb237",
+            "uuid": "17f8844850ac45e197e99565ea71686d"
+          }
+        ],
+        [
+          "DC-37F Right-Angle 0.319\" (8.10mm) Backset",
+          1,
+          "DSUB-TH_DS1037-37FNAKT74-0CC",
+          "DSUB1",
+          {
+            "BOM_Manufacturer Part": "A-DF 37 A/KG-T4S",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "AE10944-ND",
+            "BOM_Manufacturer": "Assmann WSW Components",
+            "puuid": "097923d0a94d4673a4ba968f9bf5133a",
+            "uuid": "204bfe38dc254679902922285d170b69"
+          }
+        ],
+        [
+          "Switchcraft RAPC712BKZ",
+          1,
+          "RAPC712X",
+          "P2",
+          {
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "SC3839-ND",
+            "BOM_Manufacturer": "Switchcraft Inc.",
+            "puuid": "76a8342d72d24328ae5c5b29bb48e404",
+            "uuid": "505c53ca3d744d8fafb5270d684464ef"
+          }
+        ],
+        [
+          "26-position (2x13) IDC Box Header 0.100\" (2.54mm) pitch",
+          1,
+          "HDR-IDC-2.54-2X13P_",
+          "CN1",
+          {
+            "BOM_Manufacturer": "On Shore Technology Inc.",
+            "BOM_Manufacturer Part": "ED10526-ND",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "302-S261",
+            "puuid": "7effb19077a2464b8e3b0012bef6982c",
+            "uuid": "669c1e24090c4bf48fd054ee2e3b85ab"
+          }
+        ],
+        [
+          "Header-Female-2.54_1x5",
+          1,
+          "HDR-TH_5P-P2.54-V",
+          "H5",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC051LFBN-RC",
+            "BOM_Supplier Part": "S6103-ND",
+            "puuid": "cc2234262bb8493f8f730652d7943dad",
+            "uuid": "733f0881bfe640a89a227a03d293e6cd"
+          }
+        ],
+        [
+          "CK_DPDT_SlideSwitch_L202011MS02Q",
+          1,
+          "L202011MS02Q‎ - DPDT",
+          "S1",
+          {
+            "BOM_Manufacturer Part": "L202011MS02Q",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "CKC5100-ND",
+            "BOM_Manufacturer": "C&K",
+            "puuid": "cc7dba4ace474ffaac05c14a40cfedce",
+            "uuid": "653629b8244941dfa0dfd9bcaf082d60"
+          }
+        ],
+        [
+          "Molex 8981-4P",
+          1,
+          "MOLEX 8981-4P",
+          "P1",
+          {
+            "BOM_Manufacturer Part": "0015244449",
+            "BOM_Supplier Part": "WM9132-ND",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "Molex",
+            "puuid": "bea91c40fe564a3bb6945a3c03e6a1cc",
+            "uuid": "b1496574be8a40fe9ec32586c21a9f3a"
+          }
+        ],
+        [
+          "Header-Female-2.54_1x5_NO2PIN",
+          1,
+          "HDR-TH_5P-P2.54-V-NO2PIN",
+          "H4",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC051LFBN-RC",
+            "BOM_Supplier Part": "S6103-ND",
+            "puuid": "576aec299159419a90f7759debb80570",
+            "uuid": "c79176cd09c74babb9e96553a38f7086"
+          }
+        ],
+        [
+          "DB-25F Right-Angle 0.319\" (8.10mm)  Backset",
+          1,
+          "DS1037-25FNAKT74-0CC",
+          "DSUB2",
+          {
+            "BOM_Manufacturer Part": "A-DF 25 A/KG-T4S",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "AE10937-ND",
+            "BOM_Manufacturer": "Assmann WSW Components",
+            "puuid": "ce98c702c3464e8d9eea096e5bedf9dc",
+            "uuid": "e8216f46e712481d8109fc063f185ab5"
+          }
+        ],
+        [
+          "Header-Female-2.54_1x24",
+          2,
+          "S7022-ND",
+          "H2,H1",
+          {
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC241LFBN-RC",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "S7022-ND",
+            "puuid": "0d274158f1ae49ee9ef7939145755a46",
+            "uuid": "fa954bad4f62493f9e1888b3ead04cfe"
+          }
+        ],
+        [
+          "TIP122",
+          8,
+          "TO-220-3_L10.0-W4.5-P2.54-L",
+          "Q1,Q11,Q7,Q12,Q5,Q13,Q3,Q9",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "497-2543-5-ND",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "TIP122",
+            "puuid": "948e610cffd14df79f04c73832b1409b",
+            "uuid": "2b1981519cb64eea8e26a6812f79efe2"
+          }
+        ],
+        [
+          "220R",
+          5,
+          "RES-TH_BD2.5-L6.5-P10.50-D0.6",
+          "R14,R18,R15,R16,R17",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "TE Connectivity Passive Product",
+            "BOM_Manufacturer Part": "CFR16J220R",
+            "BOM_Supplier Part": "CFR16J220R-ND",
+            "puuid": "f6ffa34674dd47c09fdfebb09b99661e",
+            "uuid": "3b7b42fb41f5197113e5c078d2fbd5d9"
+          }
+        ],
+        [
+          "TIP127",
+          5,
+          "TO-220-3_L10.0-W4.5-P2.54-L",
+          "Q2,Q10,Q4,Q6,Q8",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "497-2571-5-ND",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "TIP127",
+            "puuid": "948e610cffd14df79f04c73832b1409b",
+            "uuid": "355c2e0bde164a66ab35dadfea950af4"
+          }
+        ],
+        [
+          "1K",
+          13,
+          "RES-TH_BD2.2-L6.5-P10.50-D0.6",
+          "R9,R1,R6,R3,R10,R13,R8,R12,R5,R2,R11,R7,R4",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "UniOhm",
+            "BOM_Manufacturer Part": "MFR-25FBF52-1K",
+            "BOM_Supplier Part": "1.00KXBK-ND",
+            "puuid": "666264fd42b84465ad050a9517cab8cf",
+            "uuid": "c8ab0cf3d13e4ba39868c330dd66e4a2"
+          }
+        ]
+      ],
+      "updateTime": 1619801661,
+      "createTime": 1609843255,
+      "histories": [],
+      "created_at": "2021-01-05 03:40:55",
+      "updated_at": "2021-04-30 09:54:21"
+    },
+    {
+      "uuid": "fe7e4f5d72a135492620995dd1336a63",
+      "puuid": "73f6bcfa0ffa5943297c6b228a5bedf0",
+      "title": "PCB",
+      "filename": "PCB.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "cc2234262bb8493f8f730652d7943dad": 2,
+        "097923d0a94d4673a4ba968f9bf5133a": 1,
+        "ce98c702c3464e8d9eea096e5bedf9dc": 1,
+        "f6ffa34674dd47c09fdfebb09b99661e": 5,
+        "3b6b3ce17f0a4c59bca556789a3c2210": 1,
+        "bea91c40fe564a3bb6945a3c03e6a1cc": 1,
+        "cc7dba4ace474ffaac05c14a40cfedce": 1,
+        "ad1f248061be47b5a4d2bc184e801e1e": 1,
+        "d40e752c66064d70b099a9ff622fb237": 1,
+        "0d274158f1ae49ee9ef7939145755a46": 2,
+        "948e610cffd14df79f04c73832b1409b": 13,
+        "55155862a9564beba6710262e840d865": 1,
+        "7effb19077a2464b8e3b0012bef6982c": 1,
+        "666264fd42b84465ad050a9517cab8cf": 13,
+        "76a8342d72d24328ae5c5b29bb48e404": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "10-position (2x5) IDC Box Header 0.100\" (2.54mm) pitch",
+          1,
+          "SHDR10W64P254X254_2X5_2036X885",
+          "CN2",
+          {
+            "BOM_Manufacturer Part": "BHR-10-VUA",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "2057-BHR-10-VUA-ND",
+            "BOM_Manufacturer": "Adam Tech",
+            "puuid": "55155862a9564beba6710262e840d865",
+            "uuid": "5f9aec9ba0cc4327ac3cbf42d10fb16f"
+          }
+        ],
+        [
+          "4 Position 0.200\"(5.08mm) Term. Block",
+          1,
+          "1715747",
+          "J4",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "f7d842bcab99490c8e53690493145046",
+            "uuid": "5f79a0f07a0a479daeacfcbc5b399236"
+          }
+        ],
+        [
+          "7 Position 0.200\"(5.08mm) Screw Terminal Block",
+          1,
+          "1755897",
+          "J3",
+          {
+            "BOM_Manufacturer Part": "1755897",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "277-1755897-ND",
+            "BOM_Manufacturer": "Phoenix Contact",
+            "puuid": "b391bd38e51647a4820650f17c90354a",
+            "uuid": "7f4a228df8754315ae68ea14d8495434"
+          }
+        ],
+        [
+          "10 Position 0.200\"(5.08mm) Screw Terminal Block",
+          2,
+          "1715802",
+          "J1,J2",
+          {
+            "BOM_Manufacturer Part": "1715802",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "277-1267-ND",
+            "BOM_Manufacturer": "Phoenix Contact",
+            "puuid": "6a2a0b8cc03649f5b01eea2f330a98d2",
+            "uuid": "9bd5afa1289244e5ba1088f1c97e5654"
+          }
+        ],
+        [
+          "1x24 Position Female Pin Header Connector 0.100\" (2.54mm)",
+          2,
+          "S7022-ND",
+          "H2,H1",
+          {
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "PPTC241LFBN-RC",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "S7022-ND",
+            "puuid": "f75ed5f63bbb4aa3b3e2ae8fed05f1a1",
+            "uuid": "93c3ed1fe3614821a94b52a53ab4be6e"
+          }
+        ],
+        [
+          "26-position (2x13) IDC Box Header 0.100\" (2.54mm) pitch",
+          1,
+          "HDR-IDC-2.54-2X13P_",
+          "CN1",
+          {
+            "BOM_Manufacturer": "Adam Tech",
+            "BOM_Manufacturer Part": "BHR-26-VUA",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "2057-BHR-26-VUA-ND",
+            "puuid": "7effb19077a2464b8e3b0012bef6982c",
+            "uuid": "669c1e24090c4bf48fd054ee2e3b85ab"
+          }
+        ],
+        [
+          "TIP122",
+          5,
+          "TO-220-3_L10.0-W4.5-P2.54-L",
+          "Q5,Q9,Q7,Q3,Q1",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "497-2543-5-ND",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "TIP122",
+            "puuid": "948e610cffd14df79f04c73832b1409b",
+            "uuid": "2b1981519cb64eea8e26a6812f79efe2"
+          }
+        ],
+        [
+          "TIP127",
+          5,
+          "TO-220-3_L10.0-W4.5-P2.54-L",
+          "Q8,Q6,Q10,Q4,Q2",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "497-2571-5-ND",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "TIP127",
+            "puuid": "948e610cffd14df79f04c73832b1409b",
+            "uuid": "355c2e0bde164a66ab35dadfea950af4"
+          }
+        ],
+        [
+          "1K",
+          10,
+          "RES-TH_BD2.2-L6.5-P10.50-D0.6",
+          "R9,R6,R3,R10,R8,R4,R2,R5,R7,R1",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "UniOhm",
+            "BOM_Manufacturer Part": "MFR-25FBF52-1K",
+            "BOM_Supplier Part": "1.00KXBK-ND",
+            "puuid": "666264fd42b84465ad050a9517cab8cf",
+            "uuid": "c8ab0cf3d13e4ba39868c330dd66e4a2"
+          }
+        ],
+        [
+          "TIP122",
+          3,
+          "TO-220-3_L10.0-W4.5-P2.54-L",
+          "Q12,Q13,Q11",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Supplier Part": "497-2543-5-ND",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "TIP122",
+            "puuid": "948e610cffd14df79f04c73832b1409b",
+            "uuid": "2b1981519cb64eea8e26a6812f79efe2"
+          }
+        ],
+        [
+          "330R",
+          3,
+          "RES-TH_BD2.5-L6.5-P10.50-D0.6",
+          "R14,R15,R16",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "TE Connectivity Passive Product",
+            "BOM_Manufacturer Part": "CFR16J330R",
+            "BOM_Supplier Part": "A129436CT-ND",
+            "puuid": "f6ffa34674dd47c09fdfebb09b99661e",
+            "uuid": "3b7b42fb41f5197113e5c078d2fbd5d9"
+          }
+        ],
+        [
+          "IN4001",
+          3,
+          "IN4001",
+          "D2,D3,D1",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "6d25de4d7d2c4665b0862ff229bc79a0",
+            "uuid": "6efe348031024624b8dc87449d0d63e5"
+          }
+        ],
+        [
+          "1K",
+          3,
+          "RES-TH_BD2.2-L6.5-P10.50-D0.6",
+          "R13,R12,R11",
+          {
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer": "UniOhm",
+            "BOM_Manufacturer Part": "MFR-25FBF52-1K",
+            "BOM_Supplier Part": "1.00KXBK-ND",
+            "puuid": "666264fd42b84465ad050a9517cab8cf",
+            "uuid": "c8ab0cf3d13e4ba39868c330dd66e4a2"
+          }
+        ]
+      ],
+      "updateTime": 1619812751,
+      "createTime": 1619394532,
+      "histories": [],
+      "created_at": "2021-04-25 16:48:52",
+      "updated_at": "2021-04-30 12:59:11"
+    }
+  ],
+  "sort": [
+    "083adc4304b7dcddd1fcd8a6cfaab9b9",
+    "4bec47375480f4f20135454f21eab6c8"
+  ],
+  "title": "TeensyEWMU",
+  "foldername": "TeensyEWMU",
+  "schfilename": "TeensyEWMU.json",
+  "schfilemtime": 1619812059575
+}

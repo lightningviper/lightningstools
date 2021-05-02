@@ -167,6 +167,8 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\TeensyEWMU\DXOutput.cs" />
+    <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUCommunicationProtocolHeaders.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />

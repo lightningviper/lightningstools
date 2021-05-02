@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name EWMU-rescue)(type Legacy)(uri ${KIPRJMOD}/EWMU-rescue.lib)(options "")(descr ""))
-)
