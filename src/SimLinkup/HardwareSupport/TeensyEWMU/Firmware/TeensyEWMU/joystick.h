@@ -10,6 +10,8 @@
 #include <Sequence.h>
 #include "pinAssignments.h"
 #include "joystickAssignments.h"
+#include "hostMessageProcessing.h"
+#include "brightness.h"
 
 /* -------------- JOYSTICK CONFIGURATION --------------- */
 const bool SEND_DX_JOYSTICK_REPORTS = true;

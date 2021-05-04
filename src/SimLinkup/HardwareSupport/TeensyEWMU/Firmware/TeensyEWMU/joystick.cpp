@@ -1,30 +1,38 @@
 #include "joystick.h"
+extern uint16_t _EWMUAndCMDSBrightness;
+extern uint16_t _EWPIBrightness;
 
 /*  --------    INPUT DEBOUNCING ----------------------*/
 EasyButton _O1(O1_PIN);
 EasyButton _O2(O2_PIN);
 EasyButton _CH(CH_PIN);
 EasyButton _FL(FL_PIN);
+
 EasyButton _JETTISON(JETTISON_PIN);
+
 EasyButton _PRGM_BIT(PRGM_BIT_PIN);
 EasyButton _PRGM_1(PRGM_1_PIN);
 EasyButton _PRGM_2(PRGM_2_PIN);
 EasyButton _PRGM_3(PRGM_3_PIN);
 EasyButton _PRGM_4(PRGM_4_PIN);
+
 EasyButton _MWS(MWS_PIN);
 EasyButton _JMR(JMR_PIN);
 EasyButton _RWR(RWR_PIN);
+EasyButton _DISP(DISP_PIN);
+
 EasyButton _MODE_OFF(MODE_OFF_PIN);
 EasyButton _MODE_STBY(MODE_STBY_PIN);
 EasyButton _MODE_MAN(MODE_MAN_PIN);
 EasyButton _MODE_SEMI(MODE_SEMI_PIN);
 EasyButton _MODE_AUTO(MODE_AUTO_PIN);
 EasyButton _MODE_BYP(MODE_BYP_PIN);
+
 EasyButton _MWS_MENU(MWS_MENU_PIN);
 EasyButton _JMR_MENU(JMR_MENU_PIN);
 EasyButton _RWR_MENU(RWR_MENU_PIN);
 EasyButton _DISP_MENU(DISP_MENU_PIN);
-EasyButton _DISP(DISP_PIN);
+
 EasyButton _PRI(PRI_BUTTON_PIN);
 EasyButton _SEP(SEP_BUTTON_PIN);
 EasyButton _UNK(UNK_BUTTON_PIN);
@@ -37,7 +45,7 @@ uint8_t DX_Button_Assignments[NUM_LOGICAL_SWITCHES_AND_BUTTONS];
 
 /* -------------- GAME DEVICE HANDLING ---------------------------------------- */
 void setupButtonInputs() {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
 
   if (IS_CMDS || IS_EWMU) beginEWMUAndCMDSCommonInputDebouncing();
   if (IS_CMDS) beginCMDSpecificInputDebouncing();
@@ -53,7 +61,7 @@ void setupButtonInputs() {
 }
 
 void setupEWMUButtonMatrix() {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   if (IS_EWMU)
   {
     pinMode(EWMU_PUSHBUTTON_MATRIX_ROW1_PIN, INPUT_PULLUP);
@@ -68,7 +76,7 @@ void setupEWMUButtonMatrix() {
 
 void updateJoystickOutputs()
 {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   if (!SEND_DX_JOYSTICK_REPORTS || _timeSinceLastJoystickUpdate < DX_JOYSTICK_REPORTING_FREQUENCY_MILLIS) return;
   _timeSinceLastJoystickUpdate = 0;
 
@@ -85,7 +93,7 @@ void updateJoystickOutputs()
 }
 void SetJoystickAxis(uint8_t axisNum, uint16_t value)
 {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   switch (axisNum)
   {
     case 0: Joystick.X (value); break;
@@ -100,19 +108,21 @@ void SetJoystickAxis(uint8_t axisNum, uint16_t value)
 }
 
 void updateCMDSJoystickOutputs() {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   Joystick.button(MWS_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MWS ? !_MWS.read() : _MWS.read());
   Joystick.button(MWS_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MWS ? _MWS.read() : !_MWS.read());
   Joystick.button(JMR_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_JMR ? !_JMR.read() : _JMR.read());
   Joystick.button(JMR_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_JMR ? _JMR.read() : !_JMR.read());
   Joystick.button(RWR_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_RWR ? !_RWR.read() : _RWR.read());
   Joystick.button(RWR_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_RWR ? _RWR.read() : !_RWR.read());
+  
   Joystick.button(MODE_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_OFF ? !_MODE_OFF.read() : _MODE_OFF.read());
   Joystick.button(MODE_STBY_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_STBY ? !_MODE_STBY.read() : _MODE_STBY.read());
   Joystick.button(MODE_MAN_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_MAN ? !_MODE_MAN.read() : _MODE_MAN.read());
   Joystick.button(MODE_SEMI_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_SEMI ? !_MODE_SEMI.read() : _MODE_SEMI.read());
   Joystick.button(MODE_AUTO_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_AUTO ? !_MODE_AUTO.read() : _MODE_AUTO.read());
   Joystick.button(MODE_BYP_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_MODE_BYP ? !_MODE_BYP.read() : _MODE_BYP.read());;
+  
   Joystick.button(O1_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_O1 ? !_O1.read() : _O1.read());
   Joystick.button(O1_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_O1 ? _O1.read() : !_O1.read());
   Joystick.button(O2_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_O2 ? !_O2.read() : _O2.read());
@@ -122,7 +132,7 @@ void updateCMDSJoystickOutputs() {
   Joystick.button(FL_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_FL ? !_FL.read() : _FL.read());
   Joystick.button(FL_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_FL ? _FL.read() : !_FL.read());
 
-  Joystick.button(PRGM_BIT_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_PRGM_BIT ? !_PRGM_BIT.read( : _PRGM_BIT.read()));
+  Joystick.button(PRGM_BIT_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_PRGM_BIT ? !_PRGM_BIT.read() : _PRGM_BIT.read());
   Joystick.button(PRGM_1_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_PRGM_1 ? !_PRGM_1.read() : _PRGM_1.read());
   Joystick.button(PRGM_2_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_PRGM_2 ? !_PRGM_2.read() : _PRGM_2.read());
   Joystick.button(PRGM_3_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_PRGM_3 ? !_PRGM_3.read() : _PRGM_3.read());
@@ -131,7 +141,7 @@ void updateCMDSJoystickOutputs() {
 }
 
 void updateEWMUJoystickOutputs() {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   SetJoystickAxis (EWMU_BRIGHTNESS_DX_AXIS, (uint16_t)(((float)_EWMUAndCMDSBrightness / (float)MAX_INTENSITY) * JOYSTICK_AXIS_MAX_VAL));
   Joystick.button(MWS_MENU_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_MWS_MENU ? !_MWS_MENU.read() : _MWS_MENU.read());
   Joystick.button(MWS_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MWS ? !_MWS.read() : _MWS.read());
@@ -177,7 +187,7 @@ void updateEWMUJoystickOutputs() {
 }
 
 void updateEWPIJoystickOutputs() {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   SetJoystickAxis (EWPI_BRIGHTNESS_DX_AXIS, (uint16_t)(((float)_EWPIBrightness / (float)MAX_INTENSITY) * 1023.0f));
   Joystick.button(PRI_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWPI_PRI ? !_PRI.read() : _PRI.read());
   Joystick.button(SEP_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWPI_SEP ? !_SEP.read() : _SEP.read());
@@ -187,7 +197,7 @@ void updateEWPIJoystickOutputs() {
 }
 void beginEWMUAndCMDSCommonInputDebouncing()
 {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   _JETTISON.begin();
   _MWS.begin();
   _JMR.begin();
@@ -202,7 +212,7 @@ void beginEWMUAndCMDSCommonInputDebouncing()
 
 void beginCMDSpecificInputDebouncing()
 {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   _O1.begin();
   _O2.begin();
   _CH.begin();
@@ -217,7 +227,7 @@ void beginCMDSpecificInputDebouncing()
 }
 
 void beginEWMUSpecificInputDebouncing() {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   _MWS_MENU.begin();
   _JMR_MENU.begin();
   _RWR_MENU.begin();
@@ -228,7 +238,7 @@ void beginEWMUSpecificInputDebouncing() {
 
 void beginEWPIInputDebouncing()
 {
-#ifdef ARCADE_INTERFACE
+#ifdef JOYSTICK_INTERFACE
   _PRI.begin();
   _SEP.begin();
   _UNK.begin();

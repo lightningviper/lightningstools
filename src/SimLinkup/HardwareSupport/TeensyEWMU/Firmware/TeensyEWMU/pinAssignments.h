@@ -16,6 +16,7 @@ const uint8_t EWMU_AND_CMDS_CHARACTER_DISPLAYS_BLANKING_PIN =  8;
 const uint8_t MWS_PIN = 6;
 const uint8_t JMR_PIN = 7;
 const uint8_t RWR_PIN = 9;
+const uint8_t DISP_PIN = 11;
 
 const uint8_t MODE_OFF_PIN = 28;
 const uint8_t MODE_STBY_PIN = 29;
@@ -45,7 +46,6 @@ const uint8_t MWS_MENU_PIN = 24;
 const uint8_t JMR_MENU_PIN = 25;
 const uint8_t RWR_MENU_PIN = 26;
 const uint8_t DISP_MENU_PIN = 27;
-const uint8_t DISP_PIN = 11;
 
 const uint8_t EWMU_PUSHBUTTON_MATRIX_COL1_PIN = 36;
 const uint8_t EWMU_PUSHBUTTON_MATRIX_COL2_PIN = 37;
@@ -63,6 +63,7 @@ const uint8_t EWPI_BRIGHTNESS_POT_PIN = IS_EWMU_AND_EWPI_DAISY_CHAINED ? EWMU_AN
 const uint8_t PRI_LED_PIN = 23;
 const uint8_t UNK_LED_PIN = 22;
 const uint8_t ML_LED_PIN = 35;
+
 const uint8_t PRI_BUTTON_PIN = 19;
 const uint8_t SEP_BUTTON_PIN = 21;
 const uint8_t UNK_BUTTON_PIN = 20;
