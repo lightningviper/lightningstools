@@ -468,8 +468,12 @@
     <Content Include="Content\Mapping\TeensyEWSuite\TeensyRWRHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\Mapping\TeensyEWSuite\TeensyRWR.mapping" />
-    <None Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping" />
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyRWR.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
