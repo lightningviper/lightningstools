@@ -159,11 +159,16 @@ void updateEWMUJoystickOutputs() {
   Joystick.button(DISP_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_DISP ? !_DISP.read() : _DISP.read());
   Joystick.button(DISP_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_DISP ? _DISP.read() : !_DISP.read());
 
-  Joystick.button(MODE_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_OFF ? !_MODE_OFF.read() : _MODE_OFF.read());
-  Joystick.button(MODE_STBY_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_STBY ? !_MODE_STBY.read() : _MODE_STBY.read());
-  Joystick.button(MODE_MAN_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_MAN ? !_MODE_MAN.read() : _MODE_MAN.read());
-  Joystick.button(MODE_SEMI_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_SEMI ? !_MODE_SEMI.read() : _MODE_SEMI.read());
-  Joystick.button(MODE_AUTO_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_AUTO ? !_MODE_AUTO.read() : _MODE_AUTO.read());
+  bool modeStandby = _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_STBY ? !_MODE_STBY.read() : _MODE_STBY.read();
+  bool modeMan = _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_MAN ? !_MODE_MAN.read() : _MODE_MAN.read();
+  bool modeSemi = _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_SEMI ? !_MODE_SEMI.read() : _MODE_SEMI.read();
+  bool modeAuto = _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_AUTO ? !_MODE_AUTO.read() : _MODE_AUTO.read();
+  bool modeOff = !(modeStandby || modeMan || modeSemi || modeAuto);
+  Joystick.button(MODE_OFF_DX_BUTTON, modeOff);
+  Joystick.button(MODE_STBY_DX_BUTTON, modeStandby);
+  Joystick.button(MODE_MAN_DX_BUTTON, modeMan);
+  Joystick.button(MODE_SEMI_DX_BUTTON, modeSemi);
+  Joystick.button(MODE_AUTO_DX_BUTTON, modeAuto);
 
   pinMode(EWMU_PUSHBUTTON_MATRIX_ROW1_PIN, OUTPUT);
   digitalWriteFast(EWMU_PUSHBUTTON_MATRIX_ROW1_PIN, LOW);
@@ -172,7 +177,8 @@ void updateEWMUJoystickOutputs() {
   Joystick.button(EWMU_SET2_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_SET2  ? digitalRead(EWMU_PUSHBUTTON_MATRIX_COL2_PIN) : !digitalRead(EWMU_PUSHBUTTON_MATRIX_COL2_PIN));
   Joystick.button(EWMU_SET3_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_SET3  ? digitalRead(EWMU_PUSHBUTTON_MATRIX_COL3_PIN) : !digitalRead(EWMU_PUSHBUTTON_MATRIX_COL3_PIN));
   Joystick.button(EWMU_SET4_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_SET4  ? digitalRead(EWMU_PUSHBUTTON_MATRIX_COL4_PIN) : !digitalRead(EWMU_PUSHBUTTON_MATRIX_COL4_PIN));
-  pinMode(EWMU_PUSHBUTTON_MATRIX_ROW1_PIN, INPUT);
+  digitalWriteFast(EWMU_PUSHBUTTON_MATRIX_ROW1_PIN, HIGH);
+  pinMode(EWMU_PUSHBUTTON_MATRIX_ROW1_PIN, INPUT_PULLUP);
   conditionalDelayMicroseconds(PIN_MODE_CHANGE_DELAY_MICROSECONDS);
 
   pinMode(EWMU_PUSHBUTTON_MATRIX_ROW2_PIN, OUTPUT);
@@ -181,7 +187,8 @@ void updateEWMUJoystickOutputs() {
   Joystick.button(NXT_UP_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_NXT_UP ? digitalRead(EWMU_PUSHBUTTON_MATRIX_COL1_PIN) : !digitalRead(EWMU_PUSHBUTTON_MATRIX_COL1_PIN));
   Joystick.button(NXT_DOWN_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_NXT_DOWN ? digitalRead(EWMU_PUSHBUTTON_MATRIX_COL2_PIN) : !digitalRead(EWMU_PUSHBUTTON_MATRIX_COL2_PIN));
   Joystick.button(RTN_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_RTN ? digitalRead(EWMU_PUSHBUTTON_MATRIX_COL3_PIN) : !digitalRead(EWMU_PUSHBUTTON_MATRIX_COL3_PIN));
-  pinMode(EWMU_PUSHBUTTON_MATRIX_ROW2_PIN, INPUT);
+  digitalWriteFast(EWMU_PUSHBUTTON_MATRIX_ROW2_PIN, HIGH);
+  pinMode(EWMU_PUSHBUTTON_MATRIX_ROW2_PIN, INPUT_PULLUP);
   conditionalDelayMicroseconds(PIN_MODE_CHANGE_DELAY_MICROSECONDS);
 #endif
 }

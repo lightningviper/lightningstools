@@ -81,7 +81,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override TextSignal[] TextInputs => _textInputSignals;
         public override TextSignal[] TextOutputs => null;
 
-        public override string FriendlyName => $"Teensy RWR module for IP-1310/ALR Azimuth Indicator (RWR) on {_config.COMPort}";
+        public override string FriendlyName => $"Teensy RWR module for IP-1310/ALR Azimuth Indicator (RWR) on {(_config !=null ? _config.COMPort : "UNKNOWN")}";
 
         public void Dispose()
         {
@@ -119,15 +119,15 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override void Render(Graphics g, Rectangle destinationRectangle)
         {
             var instrumentState = GetInstrumentState();
-            if (_config.TestPattern != 0)
+            switch (_config.TestPattern)
             {
-                new CalibrationTestPattern1RWRRenderer(destinationRectangle.Width, destinationRectangle.Height).Render(g, destinationRectangle);
+                case 1:
+                    new CalibrationTestPattern1RWRRenderer(destinationRectangle.Width *2, destinationRectangle.Height *2).Render(g, destinationRectangle);
+                    break;
+                default:
+                    _uiRenderer.Render(g, destinationRectangle, instrumentState, USE_VECTOR_FONT);
+                    break;
             }
-            else
-            {
-                _uiRenderer.Render(g, destinationRectangle, instrumentState, USE_VECTOR_FONT);
-            }
-
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -482,9 +482,14 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private void UpdateOutputs()
         {
-            if (DateTime.Now.Subtract(_lastCommandListSentTime).TotalMilliseconds < (1000 / MAX_UPDATE_FREQUENCY_HZ))
+            var millisSinceLastCommand = DateTime.Now.Subtract(_lastCommandListSentTime).TotalMilliseconds;
+            if (millisSinceLastCommand < (1000 / MAX_UPDATE_FREQUENCY_HZ))
             {
                 return;
+            }
+            else if (millisSinceLastCommand > 5000)
+            {
+                _lastCommandList = string.Empty;
             }
             var connected = EnsureSerialPortConnected();
             if (!connected) return;
@@ -501,13 +506,14 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var instrumentState = GetInstrumentState();
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
-            if (_config.TestPattern != 0)
+            switch (_config.TestPattern)
             {
-                new CalibrationTestPattern1RWRRenderer(VIEWBOX_WIDTH, VIEWBOX_HEIGHT).Render(drawingContext);
-            }
-            else
-            {
-                _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
+                case 1:
+                    new CalibrationTestPattern1RWRRenderer(VIEWBOX_WIDTH, VIEWBOX_HEIGHT).Render(drawingContext);
+                    break;
+                default:
+                    _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
+                    break;
             }
             drawingContext.Close();
             return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();

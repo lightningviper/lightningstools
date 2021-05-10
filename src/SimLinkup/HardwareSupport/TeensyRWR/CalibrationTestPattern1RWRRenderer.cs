@@ -18,7 +18,8 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             DrawLine(drawingContext, 0, -1, 0, 1);
             DrawLine(drawingContext, -1, -1, 1, 1);
             DrawLine(drawingContext, -1, 1, 1, -1);
-
+            DrawLine(drawingContext, -0.22, 0, 0.22, 0);
+            DrawLine(drawingContext, 0, -0.22, 0, 0.22);
             DrawCircle(drawingContext, 0, 0, 0.22);
             DrawCircle(drawingContext, 0, 0, 0.64);
             DrawCircle(drawingContext, 0, 0, 1.00);
