@@ -528,10 +528,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
                     var drawPoints = new SVGPathToVectorScopePointsListConverter(bezierCurveInterpolationSteps: BEZIER_CURVE_INTERPOLATION_STEPS)
                                         .ConvertToDrawPoints(svgPathString)
-                                        .ApplyCentering(_config.Centering)
+                                        .ApplyCentering(_config.Centering.OffsetX, _config.Centering.OffsetY)
                                         .ApplyInversion(VIEWBOX_WIDTH, VIEWBOX_HEIGHT, invertX: false, invertY: true)
                                         .ApplyRotation(VIEWBOX_WIDTH / 2.0, VIEWBOX_HEIGHT / 2.0, _config.RotationDegrees)
-                                        .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY, VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
+                                        .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY)
                                         .ApplyCalibration(_config.XAxisCalibrationData, _config.YAxisCalibrationData)
                                         .ApplyClipping(VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
                                       ;

@@ -207,6 +207,9 @@
     <Compile Include="Renderers\F16\ISIS\TopRectangleRenderer.cs" />
     <Compile Include="Renderers\F16\ISIS\ZenithNadirSymbolRenderer.cs" />
     <Compile Include="Renderers\F16\IVerticalVelocityIndicator.cs" />
+    <Compile Include="Renderers\VectorDrawing\InstrumentState.cs" />
+    <Compile Include="Renderers\VectorDrawing\VectorDrawingRenderer.cs" />
+    <Compile Include="Renderers\VectorDrawing\VectorStrokeFont.cs" />
     <Compile Include="ResourceUtil.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -273,7 +276,6 @@
     <Compile Include="Renderers\F16\PitchTrimIndicator.cs" />
     <Compile Include="Renderers\F16\RollTrimIndicator.cs" />
     <Compile Include="Renderers\F16\RWR\InstrumentState.cs" />
-    <Compile Include="Renderers\F16\RWR\VectorStrokeFont.cs" />
     <Compile Include="Renderers\F16\SpeedbrakeIndicator.cs" />
     <Compile Include="Renderers\F16\StandbyADI.cs" />
     <Compile Include="Renderers\F16\Tachometer.cs" />
@@ -321,6 +323,10 @@
     <ProjectReference Include="..\..\Common\UI\Common.UI.csproj">
       <Project>{3fc238ba-7fc2-47ae-ae45-7cf199edbe08}</Project>
       <Name>Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\F4Utils\SimSupport\F4Utils.SimSupport.csproj">
+      <Project>{6967bfc5-944d-405c-960b-5a4900ebfd92}</Project>
+      <Name>F4Utils.SimSupport</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

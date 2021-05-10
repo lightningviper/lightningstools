@@ -176,8 +176,11 @@
     <Compile Include="HardwareSupport\TeensyRWR\CalibrationTestPattern1RWRRenderer.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPoint.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPointExtensions.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\DrawPointInterpolationHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\SVGPathToVectorScopePointsListConverter.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawingGroupExtensions.cs" />
+    <Compile Include="HardwareSupport\TeensyVectorDrawing\TeensyVectorDrawingHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\TeensyVectorDrawing\TeensyVectorDrawingHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModule.cs" />
@@ -367,10 +370,6 @@
     <Content Include="Content\Mapping\TeensyRWR\HardwareSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Mapping\TeensyRWR\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -454,6 +453,23 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyEWMU.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyEWMUHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyRWRHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Content\Mapping\TeensyEWSuite\TeensyRWR.mapping" />
+    <None Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping" />
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>

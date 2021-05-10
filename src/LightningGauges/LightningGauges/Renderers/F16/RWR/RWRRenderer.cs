@@ -5,6 +5,7 @@ using System.Windows.Media;
 using Common.SimSupport;
 using System.Windows.Media.Imaging;
 using System.IO;
+using LightningGauges.Renderers.VectorDrawing;
 
 namespace LightningGauges.Renderers.F16.RWR
 {

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace LightningGauges.Renderers.F16.RWR
+namespace LightningGauges.Renderers.VectorDrawing
 {
     internal class VectorStrokeFont
     {
@@ -12,10 +12,10 @@ namespace LightningGauges.Renderers.F16.RWR
             if (index < 0 || index > 94) return 0;
             return HersheySimplexGlyphs[index, 0];
         }
-        public static double GetCharacterHeight(char character, double scale=1.0)
+        public static double GetCharacterHeight(char character, double scaleY=1.0)
         {
             var index = character - 32;
-            if (index < 0 || index > 94) return MaxCharacterHeight(scale);
+            if (index < 0 || index > 94) return MaxCharacterHeight(scaleY);
             var numVertices = GetNumVertices(character);
             var minY = HersheySimplexGlyphs[index, 3];
             var maxY = minY;
@@ -26,68 +26,68 @@ namespace LightningGauges.Renderers.F16.RWR
                 if (y < minY) minY = y;
                 if (y > maxY) maxY = y;
             }
-            return (((maxY - minY)) * scale);
+            return (((maxY - minY)) * scaleY);
         }
-        public static double GetCharacterWidth(char character, double scale=1.0)
+        public static double GetCharacterWidth(char character, double scaleX=1.0)
         {
             var index = character - 32;
-            if (index < 0 || index > 94) return MaxCharacterWidth(scale);
-            return ((HersheySimplexGlyphs[index, 1])) * scale;
+            if (index < 0 || index > 94) return MaxCharacterWidth(scaleX);
+            return ((HersheySimplexGlyphs[index, 1])) * scaleX;
         }
-        public static double MaxCharacterWidth(double scale = 1.0)
+        public static double MaxCharacterWidth(double scaleX = 1.0)
         {
             var maxWidth = 0.0;
             for (var i = 32; i <= 126; i++)
             {
-                var width = GetCharacterWidth((char)i, scale);
+                var width = GetCharacterWidth((char)i, scaleX);
                 if (width > maxWidth) maxWidth = width;
             }
             return maxWidth;
 
         }
-        public static double MaxCharacterHeight(double scale = 1.0)
+        public static double MaxCharacterHeight(double scaleY = 1.0)
         {
             var maxHeight = 0.0;
             for (var i = 32; i <= 126; i++)
             {
-                var height = GetCharacterHeight((char)i, scale);
+                var height = GetCharacterHeight((char)i, scaleY);
                 if (height > maxHeight) maxHeight = height;
             }
             return maxHeight;
         }
 
-        public static double GetStringWidth(string text, double scale=1.0)
+        public static double GetStringWidth(string text, double scaleX=1.0)
         {
-            return text.ToCharArray().Sum(x=>GetCharacterWidth(x, scale));
+            return text.ToCharArray().Sum(x=>GetCharacterWidth(x, scaleX));
         }
-        public static double GetStringHeight(string text, double scale=1.0)
+        public static double GetStringHeight(string text, double scaleY=1.0)
         {
-            return MaxCharacterHeight(scale);
+            return MaxCharacterHeight(scaleY);
         }
-        public static void DrawText( DrawingContext drawingContext, Pen pen, string text, Point point, double scale=1.0)
+        public static void DrawText( DrawingContext drawingContext, Pen pen, string text, Point point, double scaleX=1.0, double scaleY=1.0)
         {
             var chars = text.ToCharArray();
             var x = point.X;
             var y = point.Y;
             foreach (char thisChar in chars)
             {
-                var width = GetCharacterWidth(thisChar, scale);
-                DrawCharacter(drawingContext, pen, thisChar, new Point(x, y + (6.0 * scale)), scale);
-                x += width - (2.0 * scale);
+                var width = GetCharacterWidth(thisChar, scaleX);
+                DrawCharacter(drawingContext, pen, thisChar, new Point(x, y + (6.0 * scaleY)), scaleX, scaleY);
+                x += width - (2.0 * scaleX);
             }
         }
-        public static void DrawCharacter(DrawingContext drawingContext, Pen pen, char character, Point point, double scale = 1.0)
+        public static void DrawCharacter(DrawingContext drawingContext, Pen pen, char character, Point point, double scaleX = 1.0, double scaleY=1.0)
         {
             var charIndex = character - 32;
             var numVertices = GetNumVertices(character);
             var penLocation = point;
             var penUp = true;
-            var charHeight = MaxCharacterHeight(scale);
+            var charHeight = MaxCharacterHeight(scaleY);
             for (var i = 1; i <= numVertices; i++)
             {
                 var x = HersheySimplexGlyphs[charIndex,(i*2)];
                 var y = HersheySimplexGlyphs[charIndex, (i*2)+1];
-                var vertex = new Point(point.X + (x * scale), point.Y +(charHeight/2.0) -(y * scale));
+                var vertex = new Point(point.X + (x * scaleX), point.Y +(charHeight/2.0) -(y * scaleY));
                 if (penUp && !(x == -1 && y == -1))
                 {
                     penLocation = vertex;

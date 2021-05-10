@@ -7,7 +7,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 {
     internal static class DrawPointExtensions
     {
-        internal static IEnumerable<DrawPoint> ApplyScaling(this IEnumerable<DrawPoint> drawPoints, double scaleX, double scaleY, double width, double height)
+        internal static IEnumerable<DrawPoint> ApplyScaling(this IEnumerable<DrawPoint> drawPoints, double scaleX, double scaleY)
         {
             return drawPoints.Select(dp => new DrawPoint
             {
@@ -50,13 +50,13 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         }
 
         internal static IEnumerable<DrawPoint> ApplyCentering(this IEnumerable<DrawPoint> drawPoints,
-            TeensyRWRHardwareSupportModuleConfig.CenteringConfig centeringConfig)
+            short offsetX, short offsetY)
         {
             return drawPoints.Select(drawPoint => new DrawPoint
             {
                 BeamOn = drawPoint.BeamOn,
-                X = drawPoint.X + centeringConfig.OffsetX,
-                Y = drawPoint.Y + centeringConfig.OffsetY
+                X = drawPoint.X + offsetX,
+                Y = drawPoint.Y + offsetY
             });
         }
         internal static IEnumerable<DrawPoint> ApplyCalibration(this IEnumerable<DrawPoint> drawPoints, IEnumerable<CalibrationPoint> xAxisCalibrationData, IEnumerable<CalibrationPoint> yAxisCalibrationData)
