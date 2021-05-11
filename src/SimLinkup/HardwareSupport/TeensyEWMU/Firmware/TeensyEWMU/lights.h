@@ -9,7 +9,7 @@
 
 const uint8_t ANALOG_WRITE_RESOLUTION_BITS = 8;
 const uint32_t CMDS_PWM_LIGHTING_FREQUENCY_HZ = 1*1000*1000;
-const uint32_t EWPI_PWM_LIGHTING_FREQUENCY_HZ = 488280;
+const uint32_t EWPI_PWM_LIGHTING_FREQUENCY_HZ = 2000;
 
 void setupLightOutputs();
 void setupBuiltinLED();
