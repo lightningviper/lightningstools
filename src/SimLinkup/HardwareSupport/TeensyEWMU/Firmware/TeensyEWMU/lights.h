@@ -8,6 +8,7 @@
 #include "pinAssignments.h"
 
 const uint8_t ANALOG_WRITE_RESOLUTION_BITS = 8;
+const uint16_t PWM_LIGHTING_FREQUENCY_HZ = 1*1000*1000;
 
 void setupLightOutputs();
 void setupBuiltinLED();
