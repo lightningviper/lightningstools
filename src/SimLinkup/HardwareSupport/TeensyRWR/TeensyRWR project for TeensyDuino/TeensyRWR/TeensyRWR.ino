@@ -8,7 +8,7 @@ const int BUILTIN_LED_PIN = 13;
 
 //inversion settings
 const bool INVERT_X = false;
-const bool INVERT_Y = false;
+const bool INVERT_Y = true;
 const bool INVERT_Z = true;
 
 //DAC precision & scale
@@ -43,6 +43,7 @@ const unsigned int SCREENSAVER_TIMEOUT_SECONDS=30; //screen will be blanked if n
 
 void setup()
 {
+  
   pinMode(Z_PIN, OUTPUT);
   beamOff();
 
@@ -71,10 +72,12 @@ void onPacketReceived(const uint8_t* buffer, size_t size)
 
 void draw()
 { 
+  
   if (_drawPointsBufferLength <= 0 || _timeSinceLastDrawPointsSentMillis > (SCREENSAVER_TIMEOUT_SECONDS * 1000) ) return;
 
   for (size_t i = 0; i < _drawPointsBufferLength; i++)
   {
+
     uint32_t point = _drawPointsBuffer[i];
     bool beamOnFlag = ((((uint32_t)point) & ((uint32_t)0x1000000)) == (uint32_t)0x1000000); //bit 24
     uint16_t xDAC = ((((uint32_t)point) & ((uint32_t)0xFFF000)) >> 12); //bits 12-23 [12 bits]

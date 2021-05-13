@@ -185,7 +185,16 @@
         CMDS__DISPENSE_RDY,
         CMDS__CHAFF_LO,
         CMDS__FLARE_LO,
+        CMDS__DISPLAYTEXT,
         CMDS__MODE,
+        EWMU__DISPLAYTEXT_LINE_1,
+        EWMU__DISPLAYTEXT_LINE_2,
+        EWPI__CHAFFFLARE_DISPLAYTEXT,
+        EWPI__JMR_DISPLAYTEXT,
+        EWPI__PRI,
+        EWPI__UNK,
+        EWPI__ML,
+
         ELEC__FLCS_PMG,
         ELEC__MAIN_GEN,
         ELEC__STBY_GEN,
@@ -395,8 +404,7 @@
         RWR__DRAWING_COMMANDS,
 
         HMS__DRAWING_COMMANDS_LENGTH,
-        HMS__DRAWING_COMMANDS
-
+        HMS__DRAWING_COMMANDS,
 
 }
 }

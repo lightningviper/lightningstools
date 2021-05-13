@@ -29,6 +29,9 @@ namespace F4SharedMem.Headers
         public const int RWRINFO_SIZE = 512;
         public const int MAX_CALLSIGNS = 32;
         public const int CALLSIGN_LEN = 12;
+        public const int EWMU_DISPLAY_WIDTH_CHARS=16;
+        public const int EWPI_CHAFF_FLARE_DISPLAY_WIDTH_CHARS=8;
+        public const int EWPI_JMR_DISPLAY_WIDTH_CHARS = 8;
 
 
         // VERSION 1
@@ -57,7 +60,7 @@ namespace F4SharedMem.Headers
         public float cabinAlt;		// Ownship cabin altitude
         public float hydPressureA;	// Ownship Hydraulic Pressure A
         public float hydPressureB;	// Ownship Hydraulic Pressure B
-        public int currentTime;	// Current time in seconds (max 60 * 60 * 24)
+        public uint currentTime;	// Current time in seconds (max 60 * 60 * 24)
         public short vehicleACD;	// Ownship ACD index number, i.e. which aircraft type are we flying.
         public int VersionNum2;		// Version of FlightData2 mem area
 
@@ -123,6 +126,16 @@ namespace F4SharedMem.Headers
 
         // VERSION 16
         float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+
+        //VERSION 18
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWMU_DISPLAY_WIDTH_CHARS)]
+        public byte[] EWMUDisplayTextLine1; //EWMU display text, line #1 of 2
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWMU_DISPLAY_WIDTH_CHARS)]
+        public byte[] EWMUDisplayTextLine2; //EWMU display text, line #2 of 2
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWPI_CHAFF_FLARE_DISPLAY_WIDTH_CHARS)]
+        public byte[] EWPIChaffFlareDisplayText; //EWPI chaff/flare window display text
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWPI_JMR_DISPLAY_WIDTH_CHARS)]
+        public byte[] EWPIJammerDisplayText; //EWPI jammer status window display text
 
     }
 

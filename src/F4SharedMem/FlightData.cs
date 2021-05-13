@@ -307,7 +307,7 @@ namespace F4SharedMem
         // existing on/off bits. It's up to the external program to implement the
         // *actual* blinking.
         public int cmdsMode;		// Ownship CMDS mode state, see CmdsModes enum for details
-        public int currentTime;	    // Current time in seconds (max 60 * 60 * 24)
+        public uint currentTime;	    // Current time in seconds (max 60 * 60 * 24)
         public short vehicleACD;	// Ownship ACD index number, i.e. which aircraft type are we flying.
         public byte[] tacanInfo;    //TACAN info (new in BMS4)
         public float fuelFlow2;     // Ownship fuel flow2 (Lbs/Hour)
@@ -356,6 +356,12 @@ namespace F4SharedMem
 
         // VERSION 16
         public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+
+        // VERSION 18
+        public byte[] EWMUDisplayTextLine1; //EWMU display text, line #1 of 2
+        public byte[] EWMUDisplayTextLine2; //EWMU display text, line #2 of 2
+        public byte[] EWPIChaffFlareDisplayText; //EWPI chaff/flare window display text
+        public byte[] EWPIJammerDisplayText; //EWPI jammer status window display text
 
         public OptionSelectButtonLabel[] leftMFD;
         public OptionSelectButtonLabel[] rightMFD;

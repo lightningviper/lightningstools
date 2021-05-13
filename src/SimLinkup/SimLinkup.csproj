@@ -167,6 +167,8 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\TeensyEWMU\DXOutput.cs" />
+    <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUCommunicationProtocolHeaders.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />
@@ -174,8 +176,11 @@
     <Compile Include="HardwareSupport\TeensyRWR\CalibrationTestPattern1RWRRenderer.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPoint.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawPointExtensions.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\DrawPointInterpolationHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\SVGPathToVectorScopePointsListConverter.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\DrawingGroupExtensions.cs" />
+    <Compile Include="HardwareSupport\TeensyVectorDrawing\TeensyVectorDrawingHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\TeensyVectorDrawing\TeensyVectorDrawingHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModule.cs" />
@@ -365,10 +370,6 @@
     <Content Include="Content\Mapping\TeensyRWR\HardwareSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Mapping\TeensyRWR\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -450,6 +451,27 @@
     </Content>
     <Content Include="Content\Mapping\TeensyEWMU\TeensyEWMUHardwareSupportModule.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyEWMU.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyEWMUHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyRWRHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyEWSuite\TeensyRWR.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">

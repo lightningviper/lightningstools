@@ -50,6 +50,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BMSFont.cs" />
     <Compile Include="F4SimOutputs.cs" />
     <Compile Include="F4SimSupportModule.cs" />
     <Compile Include="IndicatedRateOfTurnCalculator.cs" />
