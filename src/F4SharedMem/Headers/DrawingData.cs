@@ -94,21 +94,25 @@ namespace F4SharedMem.Headers
             try
             {
                 var offset = 0;
+                if (rawDrawingData.Length < offset + 4) return result;
                 result.VersionNum = BitConverter.ToUInt32(rawDrawingData, offset);
                 offset += sizeof(uint);
 
+                if (rawDrawingData.Length < offset + 4) return result;
                 result.HUD_length = BitConverter.ToUInt32(rawDrawingData, offset);
                 offset += sizeof(uint);
                 if (offset + result.HUD_length + 1 > rawDrawingData.Length) return result;
                 result.HUD_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HUD_length);
                 offset += (int)result.HUD_length + 1;
 
+                if (rawDrawingData.Length < offset + 4) return result;
                 result.RWR_length = BitConverter.ToUInt32(rawDrawingData, offset);
                 offset += sizeof(uint);
                 if (offset + result.RWR_length + 1 > rawDrawingData.Length) return result;
                 result.RWR_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.RWR_length);
                 offset += (int)result.RWR_length + 1;
 
+                if (rawDrawingData.Length < offset + 4) return result;
                 result.HMS_length = BitConverter.ToUInt32(rawDrawingData, offset);
                 offset += sizeof(uint);
                 if (offset + result.HMS_length + 1 > rawDrawingData.Length) return result;
