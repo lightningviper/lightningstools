@@ -1,0 +1,56 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO TEENSY VECTOR DRAWING HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <SignalMapping>
+      <!-- F4 COCKPIT ART DIRECTORY OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_THEATER__COCKPIT_DIRECTORY</Id>
+      </Source>
+      <!-- TEENSY VECTOR DRAWING COCKPIT ART DIRECTORY INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>TeensyVectorDrawing__BMS_Cockpit_Art_Directory</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+    
+  <SignalMapping>
+      <!-- F4 RWR DRAWING VECTORS OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__DRAWING_COMMANDS</Id>
+      </Source>
+      <!-- TEENSY VECTOR DRAWING RWR VECTORS INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>TeensyVectorDrawing__RWR_Drawing_Commands</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+    
+    <SignalMapping>
+      <!-- F4 HUD DRAWING VECTORS OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_HUD__DRAWING_COMMANDS</Id>
+      </Source>
+      <!-- TEENSY VECTOR DRAWING HUD VECTORS INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>TeensyVectorDrawing__HUD_Drawing_Commands</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+    
+    <SignalMapping>
+      <!-- F4 HMS DRAWING VECTORS OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_HMS__DRAWING_COMMANDS</Id>
+      </Source>
+      <!-- TEENSY VECTOR DRAWING HMS VECTORS INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>TeensyVectorDrawing__HMS_Drawing_Commands</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

@@ -13,6 +13,7 @@ using log4net;
 using SimLinkup.PacketEncoding;
 using SimLinkup.HardwareSupport.TeensyRWR;
 using SerialPort = Common.IO.Ports.SerialPort;
+using static SimLinkup.HardwareSupport.TeensyVectorDrawing.TeensyVectorDrawingHardwareSupportModuleConfig;
 
 namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
 {
@@ -50,8 +51,10 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
         private readonly DigitalSignal[] _digitalInputSignals;
         private readonly TextSignal[] _textInputSignals;
 
-        private TextSignal _drawingCommandsInputSignal;
-        private TextSignal _cockpitArtDirectory;
+        private TextSignal _hudVectorDrawingCommandsInputSignal;
+        private TextSignal _rwrVectorDrawingCommandsInputSignal;
+        private TextSignal _hmsVectorDrawingCommandsInputSignal;
+        private TextSignal _cockpitArtDirectoryInputSignal;
 
         private AnalogSignal _numDrawPointsSentSignal;
         private AnalogSignal _bytesSent;
@@ -69,7 +72,7 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
         public override TextSignal[] TextInputs => _textInputSignals;
         public override TextSignal[] TextOutputs => null;
 
-        public override string FriendlyName => $"Teensy Vector Drawing module for BMS HUD/RWR/HMCS on {(_config !=null ? _config.COMPort : "UNKNOWN")}";
+        public override string FriendlyName => $"Teensy Vector Drawing module for BMS {_config?.DeviceType.ToString() ?? "RWR/HUD/HMS" } on {(_config !=null ? _config.COMPort : "UNKNOWN")}";
 
         public void Dispose()
         {
@@ -133,9 +136,9 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
                 var thisSignal = new TextSignal
                 {
                     Category = "Inputs from Simulation",
-                    CollectionName = "Vector Drawing Device",
-                    FriendlyName = "Drawing Commands",
-                    Id = "TeensyVectorDrawing__Drawing_Commands",
+                    CollectionName = "Vector Drawing Commands",
+                    FriendlyName = "HUD Drawing Commands",
+                    Id = "TeensyVectorDrawing__HUD_Drawing_Commands",
                     Index = 0,
                     PublisherObject = this,
                     Source = this,
@@ -146,7 +149,52 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
                     SubSourceAddress = null,
                     State = string.Empty
                 };
-                _drawingCommandsInputSignal = thisSignal;
+                _hudVectorDrawingCommandsInputSignal = thisSignal;
+                textSignalsToReturn.Add(thisSignal);
+            }
+
+
+            {
+                var thisSignal = new TextSignal
+                {
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Vector Drawing Commands",
+                    FriendlyName = "RWR Drawing Commands",
+                    Id = "TeensyVectorDrawing__RWR_Drawing_Commands",
+                    Index = 0,
+                    PublisherObject = this,
+                    Source = this,
+                    SourceFriendlyName = FriendlyName,
+                    SourceAddress = _config.COMPort,
+                    SubSource = null,
+                    SubSourceFriendlyName = null,
+                    SubSourceAddress = null,
+                    State = string.Empty
+                };
+                _rwrVectorDrawingCommandsInputSignal = thisSignal;
+                textSignalsToReturn.Add(thisSignal);
+            }
+
+
+
+            {
+                var thisSignal = new TextSignal
+                {
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Vector Drawing Commands",
+                    FriendlyName = "HMS Drawing Commands",
+                    Id = "TeensyVectorDrawing__HMS_Drawing_Commands",
+                    Index = 0,
+                    PublisherObject = this,
+                    Source = this,
+                    SourceFriendlyName = FriendlyName,
+                    SourceAddress = _config.COMPort,
+                    SubSource = null,
+                    SubSourceFriendlyName = null,
+                    SubSourceAddress = null,
+                    State = string.Empty
+                };
+                _hmsVectorDrawingCommandsInputSignal = thisSignal;
                 textSignalsToReturn.Add(thisSignal);
             }
 
@@ -154,7 +202,7 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
                 var thisSignal = new TextSignal
                 {
                     Category = "Inputs from Simulation",
-                    CollectionName = "Vector Drawing Device",
+                    CollectionName = "Simulation Data",
                     FriendlyName = "BMS Cockpit Art Directory",
                     Id = "TeensyVectorDrawing__BMS_Cockpit_Art_Directory",
                     Index = 0,
@@ -167,7 +215,7 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
                     SubSourceAddress = null,
                     State = string.Empty
                 };
-                _cockpitArtDirectory = thisSignal;
+                _cockpitArtDirectoryInputSignal = thisSignal;
                 textSignalsToReturn.Add(thisSignal);
             }
 
@@ -219,10 +267,25 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
         }
         private InstrumentState GetInstrumentState()
         {
-            var drawingCommands = _drawingCommandsInputSignal.State;
+            TextSignal vectorDrawingCommandsInputSignal;
+            switch (_config?.DeviceType ?? VectorDrawingDeviceType.RWR)
+            {
+                case VectorDrawingDeviceType.HUD:
+                    vectorDrawingCommandsInputSignal = _hudVectorDrawingCommandsInputSignal;
+                    break;
+                case VectorDrawingDeviceType.HMS:
+                    vectorDrawingCommandsInputSignal = _hmsVectorDrawingCommandsInputSignal;
+                    break;
+                case VectorDrawingDeviceType.RWR:
+                default:
+                    vectorDrawingCommandsInputSignal = _rwrVectorDrawingCommandsInputSignal;
+                    break;
+            }
+
+            var drawingCommands = vectorDrawingCommandsInputSignal.State;
             drawingCommands = !string.IsNullOrWhiteSpace(drawingCommands) ? drawingCommands : "";
 
-            var cockpitArtDirectory = _cockpitArtDirectory.State;
+            var cockpitArtDirectory = _cockpitArtDirectoryInputSignal.State;
             cockpitArtDirectory = !string.IsNullOrWhiteSpace(cockpitArtDirectory) ? cockpitArtDirectory : "";
 
             var instrumentState = new InstrumentState

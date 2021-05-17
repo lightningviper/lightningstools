@@ -84,6 +84,7 @@ namespace LightningGauges.Renderers.VectorDrawing
                         if (!command.TrimEnd().EndsWith(";")) continue;
                         try
                         {
+
                             if (command.StartsWith("F:"))
                             {
                                 var args = command.Replace("F:", "").TrimEnd(';').Split(',');
@@ -213,18 +214,20 @@ namespace LightningGauges.Renderers.VectorDrawing
             if (IsAnyOutOfRange(x1, y1, x2, y2)) return;
             dcx.DrawLine(_pen, new Point(x1, y1), new Point(x2, y2));
         }
+        
         private void DrawTri(float x1, float y1, float x2, float y2, float x3, float y3, DrawingContext dcx)
         {
             if (IsAnyOutOfRange(x1, y1, x2, y2, x3, y3)) return;
             var streamGeometry = new StreamGeometry();
             using (var geometryContext = streamGeometry.Open())
             {
-                geometryContext.BeginFigure(new System.Windows.Point(x1, y1), true, true);
-                var points = new PointCollection { new System.Windows.Point(x2,y2), new System.Windows.Point(x3,y3) };
+                geometryContext.BeginFigure(new Point(x1,y1), true, true);
+                var points = new PointCollection { new Point(x2, y2), new Point(x3, y3) };
                 geometryContext.PolyLineTo(points, true, true);
             }
             dcx.DrawGeometry(_brush, _pen, streamGeometry);
         }
+        
         private void DrawString(float xLeft, float yTop, string textString, byte invert, DrawingContext dcx)
         {
             if (IsAnyOutOfRange(xLeft, yTop)) return;

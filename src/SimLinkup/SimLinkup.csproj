@@ -474,6 +474,19 @@
     <Content Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\TeensyVectorDrawing\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyVectorDrawing\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyVectorDrawing\TeensyVectorDrawing.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\TeensyVectorDrawing\TeensyVectorDrawingHardwareSupportModule.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>

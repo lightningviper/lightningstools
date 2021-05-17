@@ -10,12 +10,14 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
         [XmlElement("COMPort")]
         public string COMPort { get; set; }
 
+        [XmlElement("DeviceType")]
+        public VectorDrawingDeviceType DeviceType { get; set; } = VectorDrawingDeviceType.RWR;
+
         [XmlElement("RotationDegrees")]
         public float RotationDegrees { get; set; }
 
         [XmlElement("TestPattern")]
         public int TestPattern { get; set; }
-
 
         [XmlArray("XAxisCalibrationData")]
         [XmlArrayItem(nameof(CalibrationPoint))]
@@ -31,6 +33,7 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
         [XmlElement("Scaling")]
         public ScalingConfig Scaling { get; set; } = new ScalingConfig { ScaleX = 1, ScaleY = 1 };
 
+        [Serializable]
         public class CenteringConfig
         {
             [XmlElement("OffsetX")]
@@ -40,6 +43,7 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
             public short OffsetY { get; set; }
         }
 
+        [Serializable]
         public class ScalingConfig
         {
             [XmlElement("ScaleX")]
@@ -47,6 +51,14 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
 
             [XmlElement("ScaleY")]
             public double ScaleY { get; set; }
+        }
+
+        [Serializable]
+        public enum VectorDrawingDeviceType
+        {
+            RWR = 0,
+            HUD = 1,
+            HMS = 2,
         }
         public static TeensyVectorDrawingHardwareSupportModuleConfig Load(string filePath)
         {
