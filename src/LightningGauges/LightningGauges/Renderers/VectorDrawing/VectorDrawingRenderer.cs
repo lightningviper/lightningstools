@@ -218,14 +218,15 @@ namespace LightningGauges.Renderers.VectorDrawing
         private void DrawTri(float x1, float y1, float x2, float y2, float x3, float y3, DrawingContext dcx)
         {
             if (IsAnyOutOfRange(x1, y1, x2, y2, x3, y3)) return;
-            var streamGeometry = new StreamGeometry();
-            using (var geometryContext = streamGeometry.Open())
-            {
-                geometryContext.BeginFigure(new Point(x1,y1), true, true);
-                var points = new PointCollection { new Point(x2, y2), new Point(x3, y3) };
-                geometryContext.PolyLineTo(points, true, true);
-            }
-            dcx.DrawGeometry(_brush, _pen, streamGeometry);
+            TriangleFillHelper.DrawTriangleFilledByLines(new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), (Point p1, Point p2) => { DrawLine((float)p1.X, (float)p1.Y, (float)p2.X, (float)p2.Y, dcx); }, yStep: 1.0);
+            //var streamGeometry = new StreamGeometry();
+            //using (var geometryContext = streamGeometry.Open())
+            //{
+            //    geometryContext.BeginFigure(new Point(x1,y1), true, true);
+            //    var points = new PointCollection { new Point(x2, y2), new Point(x3, y3) };
+            //    geometryContext.PolyLineTo(points, true, true);
+            //}
+            //dcx.DrawGeometry(_brush, _pen, streamGeometry);
         }
         
         private void DrawString(float xLeft, float yTop, string textString, byte invert, DrawingContext dcx)
@@ -330,7 +331,8 @@ namespace LightningGauges.Renderers.VectorDrawing
         private static readonly CultureInfo USCultureInfo = new CultureInfo("en-US");
         private float ParseFloat(string toParse)
         {
-            return float.Parse(toParse, USCultureInfo);
+            float.TryParse(toParse, NumberStyles.Float, USCultureInfo, out float toReturn);
+            return toReturn;
         }
 
     }

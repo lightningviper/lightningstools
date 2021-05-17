@@ -208,6 +208,7 @@
     <Compile Include="Renderers\F16\ISIS\ZenithNadirSymbolRenderer.cs" />
     <Compile Include="Renderers\F16\IVerticalVelocityIndicator.cs" />
     <Compile Include="Renderers\VectorDrawing\InstrumentState.cs" />
+    <Compile Include="Renderers\VectorDrawing\TriangleFillHelper.cs" />
     <Compile Include="Renderers\VectorDrawing\VectorDrawingRenderer.cs" />
     <Compile Include="Renderers\VectorDrawing\VectorStrokeFont.cs" />
     <Compile Include="ResourceUtil.cs" />

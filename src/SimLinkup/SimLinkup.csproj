@@ -171,6 +171,7 @@
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUCommunicationProtocolHeaders.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\TeensyRWR\BeamMovementSpeedOptimizationHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BezierCurveHelper.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\BMSRWRRenderer.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\CalibrationTestPattern1RWRRenderer.cs" />

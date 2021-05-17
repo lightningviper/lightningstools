@@ -351,6 +351,7 @@ namespace SimLinkup.HardwareSupport.TeensyVectorDrawing
                                         .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY)
                                         .ApplyCalibration(_config.XAxisCalibrationData, _config.YAxisCalibrationData)
                                         .ApplyClipping(VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
+                                        .ApplyBeamMovementSpeedOptimization()
                                       ;
 
                     var drawPointsAsBytes = drawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();
