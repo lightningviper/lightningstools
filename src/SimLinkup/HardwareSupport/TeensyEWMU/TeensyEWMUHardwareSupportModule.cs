@@ -395,7 +395,7 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
             if (_cmdsDispenseReadySignal.State) cmdsLightbits |= (byte)CMDSLightbits.DISPENSE_READY;
 
             string ewmuDisplayText = (_ewmuDisplayTextLine1Signal.State ?? "").PadRight(16) + (_ewmuDisplayTextLine2Signal.State ?? "").PadRight(16);
-            string cmdsDisplayText = (_ewmuDisplayTextLine1Signal.State ?? "").PadRight(16);
+            string cmdsDisplayText = (_cmdsDisplayTextSignal.State ?? "").PadRight(16);
             string ewpiDisplayText = (_ewpiChaffFlareDisplayTextSignal.State ?? "").PadRight(8) + (_ewpiJMRDisplayTextSignal.State ?? "").PadRight(8);
 
             byte[] packet = null;

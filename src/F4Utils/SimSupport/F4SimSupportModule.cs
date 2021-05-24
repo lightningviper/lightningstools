@@ -850,8 +850,10 @@ namespace F4Utils.SimSupport
                         var displayFlare = !cmdsIsOff && isFlying && flareCount > -1 && !float.IsNaN(flareCount);
                         var displayOtr1 = !cmdsIsOff && isFlying;
                         var displayOtr2 = !cmdsIsOff && isFlying;
-                        var otr1WindowString = (displayOtr1 ? (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Degr) == LightBits2.Degr ? "AUTO" : "    ") : "    ").PadLeft(4, ' ');
-                        var otr2WindowString = (displayOtr2 ? (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Degr) == LightBits2.Degr ? "DEGR" : "    ") : "    ").PadLeft(4, ' ');
+                        //                        var otr1WindowString = (displayOtr1 ? (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Degr) == LightBits2.Degr ? "AUTO" : "    ") : "    ").PadLeft(4, ' ');
+                        //                        var otr2WindowString = (displayOtr2 ? (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Degr) == LightBits2.Degr ? "DEGR" : "    ") : "    ").PadLeft(4, ' ');
+                        var otr1WindowString = "    ";
+                        var otr2WindowString = "    ";
                         var chaffWindowString = (displayChaff ? (chaffLow ? ("LO" + chaffCount.ToString("#0").PadLeft(4, ' ')) : chaffCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
                         var flareWindowString = (displayFlare ? (flareLow ? ("LO" + flareCount.ToString("#0").PadLeft(4, ' ')) : flareCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
                         cmdsString = (otr1WindowString + otr2WindowString + chaffWindowString + flareWindowString).PadLeft(16, ' ');
@@ -865,7 +867,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1:
-                    if (_lastFlightData.VersionNum < 118)
+                    if (_lastFlightData.VersionNum2 < 18)
                     {
                         var ewmuLine1String = string.Empty;
                         var chaffCount = _lastFlightData.ChaffCount;
@@ -895,7 +897,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_2:
-                    if (_lastFlightData.VersionNum < 118)
+                    if (_lastFlightData.VersionNum2 < 18)
                     {
                         var ewmuLine2String = string.Empty;
                         var chaffCount = _lastFlightData.ChaffCount;
@@ -905,7 +907,7 @@ namespace F4Utils.SimSupport
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayChaff = !cmdsIsOff && isFlying && chaffCount > -1 && !float.IsNaN(chaffCount);
                         var displayFlare = !cmdsIsOff && isFlying && flareCount > -1 && !float.IsNaN(flareCount);
-                        var displayDispenseReady = !cmdsIsOff && isFlying;
+                        var displayDispenseReady = !cmdsIsOff && isFlying && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Rdy) == LightBits2.Rdy);
                         
                         var chaffWindowString = (displayChaff ? "CHAF": "    ").PadLeft(4, ' ');
                         var flareWindowString = (displayFlare ? "FLAR":"    ").PadLeft(4, ' ');
@@ -921,7 +923,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.EWPI__CHAFFFLARE_DISPLAYTEXT:
-                    if (_lastFlightData.VersionNum < 118)
+                    if (_lastFlightData.VersionNum2 < 18)
                     {
                         var ewpiChaffFlareString = string.Empty;
                         var chaffCount = _lastFlightData.ChaffCount;
@@ -945,19 +947,24 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.EWPI__JMR_DISPLAYTEXT:
-                    if (_lastFlightData.VersionNum < 118)
+                    if (_lastFlightData.VersionNum2 < 18)
                     {
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
                         var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayJammerMode = !cmdsIsOff && isFlying;
-                        var displayJammerStatus = !cmdsIsOff && isFlying;
                         var jammerPower = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
+                        var displayJammerStatus = !cmdsIsOff && isFlying && displayJammerMode && jammerPower;
                         var jammerFail = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmFail) == LightBits2.EcmFail);
                         var onGround = _lastFlightData.IntellivibeData.IsOnGround;
                         var jammerStandby = jammerPower && (onGround || cmdsModePosition == CmdsModes.CmdsSTBY);
-                        var jammerModeString = (displayJammerMode ? jammerPower ? jammerStandby ? "STBY" : "OPR " : "OFF " : "    ").PadLeft(4, ' ');
+                        var jammerModeString = (displayJammerMode ? jammerPower ? jammerStandby ? "STBY" : "OPR " : "   OFF  " : "    ").PadLeft(4, ' ');
                         var jammerStatusString = (displayJammerStatus ? jammerFail ? "DEGR" : "RDY " : "    ").PadLeft(4, ' ');
+                        if (!jammerPower)
+                        {
+                            jammerStatusString = "";
+                        }
+                        ((TextSignal)output).State = ((jammerModeString ?? "") + (jammerStatusString ?? "")).PadRight(8);
                     }
                     else
                     {
