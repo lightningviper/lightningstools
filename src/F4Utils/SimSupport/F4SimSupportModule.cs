@@ -738,20 +738,35 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.TWP__MISSILE_LAUNCH:
+                    ((DigitalSignal)output).State = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch))
+                                                     || ((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch && DateTime.UtcNow.Millisecond % 500 < 250;
+                    break;
                 case F4SimOutputs.EWPI__ML:
-                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch))
+                    ((DigitalSignal) output).State =
+                        ((CmdsModes)_lastFlightData.cmdsMode == CmdsModes.CmdsOFF) ? false : 
+                                                    (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch))
                                                      || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__PRIORITY_MODE:
+                    ((DigitalSignal)output).State = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode))
+                                                    || ((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode && DateTime.UtcNow.Millisecond % 500 < 250;
+                    break;
                 case F4SimOutputs.EWPI__PRI:
-                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode))
+                    ((DigitalSignal) output).State = 
+                        ((CmdsModes)_lastFlightData.cmdsMode == CmdsModes.CmdsOFF) ? false :
+                                                     (((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode))
                                                      || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__UNKNOWN:
+                    ((DigitalSignal)output).State = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk))
+                                 || ((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk && DateTime.UtcNow.Millisecond % 500 < 250;
+                    break;
                 case F4SimOutputs.EWPI__UNK:
-                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk))
+                    ((DigitalSignal) output).State =
+                        ((CmdsModes)_lastFlightData.cmdsMode == CmdsModes.CmdsOFF) ? false :
+                                                    (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk))
                                                      || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
@@ -850,12 +865,10 @@ namespace F4Utils.SimSupport
                         var displayFlare = !cmdsIsOff && isFlying && flareCount > -1 && !float.IsNaN(flareCount);
                         var displayOtr1 = !cmdsIsOff && isFlying;
                         var displayOtr2 = !cmdsIsOff && isFlying;
-                        //                        var otr1WindowString = (displayOtr1 ? (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Degr) == LightBits2.Degr ? "AUTO" : "    ") : "    ").PadLeft(4, ' ');
-                        //                        var otr2WindowString = (displayOtr2 ? (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Degr) == LightBits2.Degr ? "DEGR" : "    ") : "    ").PadLeft(4, ' ');
                         var otr1WindowString = "    ";
                         var otr2WindowString = "    ";
-                        var chaffWindowString = (displayChaff ? (chaffLow ? ("LO" + chaffCount.ToString("#0").PadLeft(4, ' ')) : chaffCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
-                        var flareWindowString = (displayFlare ? (flareLow ? ("LO" + flareCount.ToString("#0").PadLeft(4, ' ')) : flareCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
+                        var chaffWindowString = (displayChaff ? (chaffLow ? (("LO" + (chaffCount.ToString("#0")).PadLeft(2, ' ')).PadLeft(4, ' ')) : chaffCount.ToString("##0").PadLeft(4, ' ')) : "    ").PadLeft(4, ' ');
+                        var flareWindowString = (displayFlare ? (flareLow ? (("LO" + (flareCount.ToString("#0")).PadLeft(2, ' ')).PadLeft(4, ' ')) : flareCount.ToString("##0").PadLeft(4, ' ')) : "    ").PadLeft(4, ' ');
                         cmdsString = (otr1WindowString + otr2WindowString + chaffWindowString + flareWindowString).PadLeft(16, ' ');
                         
                         ((TextSignal)output).State = (cmdsString ?? "").PadRight(16);
@@ -882,8 +895,10 @@ namespace F4Utils.SimSupport
                         var displayNoGo = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.NoGo) == LightBits2.NoGo;
                         var displayGo = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Go) == LightBits2.Go;
                         var displayDispenseReady = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Rdy) == LightBits2.Rdy;
-                        var chaffWindowString = (displayChaff ? (chaffLow ? ("LO" + chaffCount.ToString("#0").PadLeft(4, ' ')) : chaffCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
-                        var flareWindowString = (displayFlare ? (flareLow ? ("LO" + flareCount.ToString("#0").PadLeft(4, ' ')) : flareCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
+                        var chaffWindowString = (displayChaff ? (chaffLow ? ("L" + (chaffCount.ToString("#0").PadLeft(2, ' ')).PadLeft(3, ' ')): chaffCount.ToString("##0").PadLeft(3, ' ')) : "    ").PadRight(4, ' ');
+                        if (displayChaff && chaffCount < 1) chaffWindowString = "EMT ";
+                        var flareWindowString = (displayFlare ? (flareLow ? ("L" + (flareCount.ToString("#0").PadLeft(2, ' ')).PadLeft(3, ' ')) : flareCount.ToString("##0").PadLeft(3, ' ')) : "    ").PadRight(4, ' ');
+                        if (displayFlare && flareCount < 1) flareWindowString = "EMT ";
                         var noGoString = (displayNoGo ? "NOGO" : "    ").PadLeft(4, ' ');
                         var goString = (displayGo ? "  GO" : "    ").PadLeft(4, ' ');
                         ewmuLine1String = (chaffWindowString + flareWindowString + noGoString + goString).PadLeft(16, ' ');
@@ -935,8 +950,32 @@ namespace F4Utils.SimSupport
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayChaff = !cmdsIsOff && isFlying && chaffCount > -1 && !float.IsNaN(chaffCount);
                         var displayFlare = !cmdsIsOff && isFlying && flareCount > -1 && !float.IsNaN(flareCount);
-                        var chaffWindowString = (displayChaff ? (chaffLow ? ("LO" + chaffCount.ToString("#0").PadLeft(4, ' ')) : chaffCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
-                        var flareWindowString = (displayFlare ? (flareLow ? ("LO" + flareCount.ToString("#0").PadLeft(4, ' ')) : flareCount.ToString("###0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
+                        var displayCmdsMode = !cmdsIsOff && isFlying;
+                        string cmdsModeString = "";
+                        switch (cmdsModePosition)
+                        {
+                            case CmdsModes.CmdsSTBY:
+                                cmdsModeString = "X";
+                                break;
+                            case CmdsModes.CmdsMAN:
+                                cmdsModeString = "M";
+                                break;
+                            case CmdsModes.CmdsSEMI:
+                                cmdsModeString = "S";
+                                break;
+                            case CmdsModes.CmdsAUTO:
+                                cmdsModeString = "A";
+                                break;
+                            case CmdsModes.CmdsBYP:
+                                cmdsModeString = "B";
+                                break;
+                            default:
+                                cmdsModeString = " ";
+                                break;
+                        }
+                        var chaffWindowString = (displayChaff ? (chaffLow ? (("L" + (chaffCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3,' ')) : chaffCount.ToString("##0").PadLeft(3, ' ')) : "   ").PadLeft(3, ' ');
+                        chaffWindowString = (displayCmdsMode ? cmdsModeString : " ") + chaffWindowString;
+                        var flareWindowString = (displayFlare ? (flareLow ? (("L" + (flareCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3,' ')) : flareCount.ToString("##0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
                         ewpiChaffFlareString = (chaffWindowString + flareWindowString).PadLeft(8, ' ');
                         ((TextSignal)output).State = (ewpiChaffFlareString ?? "").PadRight(8);
                     }
@@ -953,17 +992,13 @@ namespace F4Utils.SimSupport
                         var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayJammerMode = !cmdsIsOff && isFlying;
-                        var jammerPower = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
-                        var displayJammerStatus = !cmdsIsOff && isFlying && displayJammerMode && jammerPower;
+                        var jammerRunning= (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
+                        var displayJammerStatus = !cmdsIsOff && isFlying;
                         var jammerFail = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmFail) == LightBits2.EcmFail);
                         var onGround = _lastFlightData.IntellivibeData.IsOnGround;
-                        var jammerStandby = jammerPower && (onGround || cmdsModePosition == CmdsModes.CmdsSTBY);
-                        var jammerModeString = (displayJammerMode ? jammerPower ? jammerStandby ? "STBY" : "OPR " : "   OFF  " : "    ").PadLeft(4, ' ');
+                        var jammerStandby = !jammerRunning || onGround || cmdsModePosition == CmdsModes.CmdsSTBY;
+                        var jammerModeString = (displayJammerMode ? jammerStandby ? "STBY" : "OPR " : "    ").PadLeft(4, ' ');
                         var jammerStatusString = (displayJammerStatus ? jammerFail ? "DEGR" : "RDY " : "    ").PadLeft(4, ' ');
-                        if (!jammerPower)
-                        {
-                            jammerStatusString = "";
-                        }
                         ((TextSignal)output).State = ((jammerModeString ?? "") + (jammerStatusString ?? "")).PadRight(8);
                     }
                     else
