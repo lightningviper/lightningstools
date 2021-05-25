@@ -7,12 +7,12 @@ uint16_t _EWPIBrightness = MAX_INTENSITY;
 /* -------------- BRIGHTNESS HANDLING ---------------------------------------- */
 void setupBrightnessPotInputs() {
   analogReadResolution(ANALOG_READ_RESOLUTION_BITS);
-  if (IS_EWMU || IS_CMDS) pinMode(EWMU_AND_CMDS_BRIGHTNESS_POT_PIN, INPUT);
+  if (IS_EWMU) pinMode(EWMU_BRIGHTNESS_POT_PIN, INPUT);
   if (IS_EWPI) pinMode(EWPI_BRIGHTNESS_POT_PIN, INPUT);
   updateBrightnessPotInputs();
 }
 void updateBrightnessPotInputs() {
-  if (IS_EWMU || IS_CMDS) readEWMUAndCMDSBrightness();
+  if (IS_EWMU) readEWMUBrightness();
   if (IS_EWPI) readEWPIBrightness();
 }
 uint16_t smoothAnalogRead(uint8_t inputPin, uint16_t previousValue, uint16_t maxDelta)
@@ -23,9 +23,9 @@ uint16_t smoothAnalogRead(uint8_t inputPin, uint16_t previousValue, uint16_t max
   if (toReturn < 0) toReturn = 0;
   return toReturn;
 }
-void readEWMUAndCMDSBrightness()
+void readEWMUBrightness()
 {
-  _EWMUAndCMDSBrightness = smoothAnalogRead(EWMU_AND_CMDS_BRIGHTNESS_POT_PIN, _EWMUAndCMDSBrightness, (float)MAX_INTENSITY * 0.05f);
+  _EWMUAndCMDSBrightness = smoothAnalogRead(EWMU_BRIGHTNESS_POT_PIN, _EWMUAndCMDSBrightness, (float)MAX_INTENSITY * 0.05f);
 }
 
 void readEWPIBrightness() 
