@@ -109,6 +109,9 @@ void SetJoystickAxis(uint8_t axisNum, uint16_t value)
 
 void updateCMDSJoystickOutputs() {
 #ifdef JOYSTICK_INTERFACE
+  Joystick.button(JETTISON_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_JETTISON ? !_JETTISON.read() : _JETTISON.read());
+  Joystick.button(JETTISON_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_JETTISON ? _JETTISON.read() : !_JETTISON.read());
+
   Joystick.button(MWS_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MWS ? !_MWS.read() : _MWS.read());
   Joystick.button(MWS_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MWS ? _MWS.read() : !_MWS.read());
   Joystick.button(JMR_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_JMR ? !_JMR.read() : _JMR.read());
@@ -143,6 +146,10 @@ void updateCMDSJoystickOutputs() {
 void updateEWMUJoystickOutputs() {
 #ifdef JOYSTICK_INTERFACE
   SetJoystickAxis (EWMU_BRIGHTNESS_DX_AXIS, (uint16_t)(((float)_EWMUAndCMDSBrightness / (float)MAX_INTENSITY) * JOYSTICK_AXIS_MAX_VAL));
+
+  Joystick.button(JETTISON_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_JETTISON ? !_JETTISON.read() : _JETTISON.read());
+  Joystick.button(JETTISON_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_JETTISON ? _JETTISON.read() : !_JETTISON.read());
+
   Joystick.button(MWS_MENU_DX_BUTTON, _invertBits & SwitchAndButtonIDs::EWMU_MWS_MENU ? !_MWS_MENU.read() : _MWS_MENU.read());
   Joystick.button(MWS_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MWS ? !_MWS.read() : _MWS.read());
   Joystick.button(MWS_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MWS ? _MWS.read() : !_MWS.read());
