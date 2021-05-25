@@ -4,7 +4,7 @@
   "name": "TeensyEWMU",
   "content": "",
   "created_at": "2021-01-04 18:06:34",
-  "updated_at": "2021-04-30 12:59:11",
+  "updated_at": "2021-05-24 19:48:48",
   "stick": "",
   "documents": [
     {
@@ -21,12 +21,12 @@
         "e8216f46e712481d8109fc063f185ab5": 1,
         "653629b8244941dfa0dfd9bcaf082d60": 1,
         "fa954bad4f62493f9e1888b3ead04cfe": 2,
-        "17f8844850ac45e197e99565ea71686d": 1,
         "b1496574be8a40fe9ec32586c21a9f3a": 1,
         "0a95f4026c6940c6b546a156d017ff29": 1,
         "505c53ca3d744d8fafb5270d684464ef": 1,
         "733f0881bfe640a89a227a03d293e6cd": 2,
-        "1fd8497dc4ca470294f409f89a4f386e": 1
+        "1fd8497dc4ca470294f409f89a4f386e": 1,
+        "a1fb796f898a4b2b89f6e56f8defe96a": 1
       },
       "BOM": [
         [
@@ -79,29 +79,15 @@
           }
         ],
         [
-          "Header-Female-2.54_1x2",
-          1,
-          "HDR-TH_2P-P2.54-V-F",
-          "H3",
-          {
-            "BOM_Supplier": "Digi-Key",
-            "BOM_Manufacturer": "Sullins Connector Solutions",
-            "BOM_Manufacturer Part": "PPTC021LFBN-RC",
-            "BOM_Supplier Part": "S7000-ND",
-            "puuid": "d40e752c66064d70b099a9ff622fb237",
-            "uuid": "17f8844850ac45e197e99565ea71686d"
-          }
-        ],
-        [
           "DC-37F Right-Angle 0.319\" (8.10mm) Backset",
           1,
           "DSUB-TH_DS1037-37FNAKT74-0CC",
           "DSUB1",
           {
-            "BOM_Manufacturer Part": "A-DF 37 A/KG-T4S",
+            "BOM_Manufacturer Part": "5747847-6",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "AE10944-ND",
-            "BOM_Manufacturer": "Assmann WSW Components",
+            "BOM_Supplier Part": "A32130-ND",
+            "BOM_Manufacturer": "TE Connectivity AMP Connectors",
             "puuid": "097923d0a94d4673a4ba968f9bf5133a",
             "uuid": "204bfe38dc254679902922285d170b69"
           }
@@ -126,10 +112,10 @@
           "HDR-IDC-2.54-2X13P_",
           "CN1",
           {
-            "BOM_Manufacturer": "On Shore Technology Inc.",
-            "BOM_Manufacturer Part": "ED10526-ND",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "SBH11-PBPC-D13-ST-BK",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "302-S261",
+            "BOM_Supplier Part": "S9173-ND",
             "puuid": "7effb19077a2464b8e3b0012bef6982c",
             "uuid": "669c1e24090c4bf48fd054ee2e3b85ab"
           }
@@ -138,7 +124,7 @@
           "Header-Female-2.54_1x5",
           2,
           "HDR-TH_5P-P2.54-V",
-          "H5,H4",
+          "H4,H5",
           {
             "BOM_Supplier": "Digi-Key",
             "BOM_Manufacturer": "Sullins Connector Solutions",
@@ -163,6 +149,20 @@
           }
         ],
         [
+          "Header-Female-2.54_1x2",
+          1,
+          "HDR-F-2.54_1X2",
+          "H3",
+          {
+            "BOM_Supplier Part": "S7000-ND",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer Part": "PPTC021LFBN-RC",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "puuid": "36b1306a115341f4b4d9407fb34974e0",
+            "uuid": "a1fb796f898a4b2b89f6e56f8defe96a"
+          }
+        ],
+        [
           "Molex 8981-4P",
           1,
           "MOLEX 8981-4P",
@@ -182,10 +182,10 @@
           "DS1037-25FNAKT74-0CC",
           "DSUB2",
           {
-            "BOM_Manufacturer Part": "A-DF 25 A/KG-T4S",
+            "BOM_Manufacturer Part": "5747846-6",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "AE10937-ND",
-            "BOM_Manufacturer": "Assmann WSW Components",
+            "BOM_Supplier Part": "A32128-ND",
+            "BOM_Manufacturer": "TE Connectivity AMP Connectors",
             "puuid": "ce98c702c3464e8d9eea096e5bedf9dc",
             "uuid": "e8216f46e712481d8109fc063f185ab5"
           }
@@ -194,12 +194,12 @@
           "Header-Female-2.54_1x24",
           2,
           "S7022-ND",
-          "H1,H2",
+          "H2,H1",
           {
             "BOM_Manufacturer": "Sullins Connector Solutions",
-            "BOM_Manufacturer Part": "PPTC241LFBN-RC",
+            "BOM_Manufacturer Part": "PPPC241LFBN-RC",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "S7022-ND",
+            "BOM_Supplier Part": "S7057-ND",
             "puuid": "0d274158f1ae49ee9ef7939145755a46",
             "uuid": "fa954bad4f62493f9e1888b3ead04cfe"
           }
@@ -211,8 +211,8 @@
           "Q1,Q11,Q7,Q12,Q5,Q13,Q3,Q9",
           {
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "497-2543-5-ND",
-            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Supplier Part": "2368-TIP122-ND",
+            "BOM_Manufacturer": "NTE Electronics, Inc",
             "BOM_Manufacturer Part": "TIP122",
             "puuid": "948e610cffd14df79f04c73832b1409b",
             "uuid": "2b1981519cb64eea8e26a6812f79efe2"
@@ -225,9 +225,9 @@
           "R14,R18,R15,R16,R17",
           {
             "BOM_Supplier": "Digi-Key",
-            "BOM_Manufacturer": "TE Connectivity Passive Product",
-            "BOM_Manufacturer Part": "CFR16J220R",
-            "BOM_Supplier Part": "CFR16J220R-ND",
+            "BOM_Manufacturer": "Yageo",
+            "BOM_Manufacturer Part": "CFR-25JB-52-220R",
+            "BOM_Supplier Part": "220QBK-ND",
             "puuid": "f6ffa34674dd47c09fdfebb09b99661e",
             "uuid": "3b7b42fb41f5197113e5c078d2fbd5d9"
           }
@@ -261,11 +261,11 @@
           }
         ]
       ],
-      "updateTime": 1619812059,
+      "updateTime": 1621910928,
       "createTime": 1609812533,
       "histories": [],
       "created_at": "2021-01-04 19:08:53",
-      "updated_at": "2021-04-30 12:47:39"
+      "updated_at": "2021-05-24 19:48:48"
     },
     {
       "uuid": "4bec47375480f4f20135454f21eab6c8",
@@ -331,29 +331,15 @@
           }
         ],
         [
-          "Header-Female-2.54_1x2",
-          1,
-          "HDR-TH_2P-P2.54-V-F",
-          "H3",
-          {
-            "BOM_Supplier": "Digi-Key",
-            "BOM_Manufacturer": "Sullins Connector Solutions",
-            "BOM_Manufacturer Part": "PPTC021LFBN-RC",
-            "BOM_Supplier Part": "S7000-ND",
-            "puuid": "d40e752c66064d70b099a9ff622fb237",
-            "uuid": "17f8844850ac45e197e99565ea71686d"
-          }
-        ],
-        [
           "DC-37F Right-Angle 0.319\" (8.10mm) Backset",
           1,
           "DSUB-TH_DS1037-37FNAKT74-0CC",
           "DSUB1",
           {
-            "BOM_Manufacturer Part": "A-DF 37 A/KG-T4S",
+            "BOM_Manufacturer Part": "5747847-6",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "AE10944-ND",
-            "BOM_Manufacturer": "Assmann WSW Components",
+            "BOM_Supplier Part": "A32130-ND",
+            "BOM_Manufacturer": "TE Connectivity AMP Connectors",
             "puuid": "097923d0a94d4673a4ba968f9bf5133a",
             "uuid": "204bfe38dc254679902922285d170b69"
           }
@@ -364,7 +350,7 @@
           "RAPC712X",
           "P2",
           {
-            "BOM_Manufacturer Part": "",
+            "BOM_Manufacturer Part": "RAPC712BKZ",
             "BOM_Supplier": "Digi-Key",
             "BOM_Supplier Part": "SC3839-ND",
             "BOM_Manufacturer": "Switchcraft Inc.",
@@ -378,19 +364,19 @@
           "HDR-IDC-2.54-2X13P_",
           "CN1",
           {
-            "BOM_Manufacturer": "On Shore Technology Inc.",
-            "BOM_Manufacturer Part": "ED10526-ND",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "BOM_Manufacturer Part": "SBH11-PBPC-D13-ST-BK",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "302-S261",
+            "BOM_Supplier Part": "S9173-ND",
             "puuid": "7effb19077a2464b8e3b0012bef6982c",
             "uuid": "669c1e24090c4bf48fd054ee2e3b85ab"
           }
         ],
         [
           "Header-Female-2.54_1x5",
-          1,
+          2,
           "HDR-TH_5P-P2.54-V",
-          "H5",
+          "H4,H5",
           {
             "BOM_Supplier": "Digi-Key",
             "BOM_Manufacturer": "Sullins Connector Solutions",
@@ -415,6 +401,20 @@
           }
         ],
         [
+          "Header-Female-2.54_1x2",
+          1,
+          "HDR-F-2.54_1X2",
+          "H3",
+          {
+            "BOM_Supplier Part": "S7000-ND",
+            "BOM_Supplier": "Digi-Key",
+            "BOM_Manufacturer Part": "PPTC021LFBN-RC",
+            "BOM_Manufacturer": "Sullins Connector Solutions",
+            "puuid": "36b1306a115341f4b4d9407fb34974e0",
+            "uuid": "a1fb796f898a4b2b89f6e56f8defe96a"
+          }
+        ],
+        [
           "Molex 8981-4P",
           1,
           "MOLEX 8981-4P",
@@ -429,29 +429,15 @@
           }
         ],
         [
-          "Header-Female-2.54_1x5_NO2PIN",
-          1,
-          "HDR-TH_5P-P2.54-V-NO2PIN",
-          "H4",
-          {
-            "BOM_Supplier": "Digi-Key",
-            "BOM_Manufacturer": "Sullins Connector Solutions",
-            "BOM_Manufacturer Part": "PPTC051LFBN-RC",
-            "BOM_Supplier Part": "S6103-ND",
-            "puuid": "576aec299159419a90f7759debb80570",
-            "uuid": "c79176cd09c74babb9e96553a38f7086"
-          }
-        ],
-        [
           "DB-25F Right-Angle 0.319\" (8.10mm)  Backset",
           1,
           "DS1037-25FNAKT74-0CC",
           "DSUB2",
           {
-            "BOM_Manufacturer Part": "A-DF 25 A/KG-T4S",
+            "BOM_Manufacturer Part": "5747846-6",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "AE10937-ND",
-            "BOM_Manufacturer": "Assmann WSW Components",
+            "BOM_Supplier Part": "A32128-ND",
+            "BOM_Manufacturer": "TE Connectivity AMP Connectors",
             "puuid": "ce98c702c3464e8d9eea096e5bedf9dc",
             "uuid": "e8216f46e712481d8109fc063f185ab5"
           }
@@ -463,9 +449,9 @@
           "H2,H1",
           {
             "BOM_Manufacturer": "Sullins Connector Solutions",
-            "BOM_Manufacturer Part": "PPTC241LFBN-RC",
+            "BOM_Manufacturer Part": "PPPC241LFBN-RC",
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "S7022-ND",
+            "BOM_Supplier Part": "S7057-ND",
             "puuid": "0d274158f1ae49ee9ef7939145755a46",
             "uuid": "fa954bad4f62493f9e1888b3ead04cfe"
           }
@@ -477,8 +463,8 @@
           "Q1,Q11,Q7,Q12,Q5,Q13,Q3,Q9",
           {
             "BOM_Supplier": "Digi-Key",
-            "BOM_Supplier Part": "497-2543-5-ND",
-            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Supplier Part": "2368-TIP122-ND",
+            "BOM_Manufacturer": "NTE Electronics, Inc",
             "BOM_Manufacturer Part": "TIP122",
             "puuid": "948e610cffd14df79f04c73832b1409b",
             "uuid": "2b1981519cb64eea8e26a6812f79efe2"
@@ -491,9 +477,9 @@
           "R14,R18,R15,R16,R17",
           {
             "BOM_Supplier": "Digi-Key",
-            "BOM_Manufacturer": "TE Connectivity Passive Product",
-            "BOM_Manufacturer Part": "CFR16J220R",
-            "BOM_Supplier Part": "CFR16J220R-ND",
+            "BOM_Manufacturer": "Yageo",
+            "BOM_Manufacturer Part": "CFR-25JB-52-220R",
+            "BOM_Supplier Part": "220QBK-ND",
             "puuid": "f6ffa34674dd47c09fdfebb09b99661e",
             "uuid": "3b7b42fb41f5197113e5c078d2fbd5d9"
           }
@@ -527,11 +513,11 @@
           }
         ]
       ],
-      "updateTime": 1619801661,
+      "updateTime": 1621910918,
       "createTime": 1609843255,
       "histories": [],
       "created_at": "2021-01-05 03:40:55",
-      "updated_at": "2021-04-30 09:54:21"
+      "updated_at": "2021-05-24 19:48:38"
     },
     {
       "uuid": "fe7e4f5d72a135492620995dd1336a63",
@@ -543,6 +529,7 @@
       "master": "",
       "thumb": "/images/thumb-default.png",
       "components": {
+        "36b1306a115341f4b4d9407fb34974e0": 1,
         "cc2234262bb8493f8f730652d7943dad": 2,
         "097923d0a94d4673a4ba968f9bf5133a": 1,
         "ce98c702c3464e8d9eea096e5bedf9dc": 1,
@@ -551,7 +538,6 @@
         "bea91c40fe564a3bb6945a3c03e6a1cc": 1,
         "cc7dba4ace474ffaac05c14a40cfedce": 1,
         "ad1f248061be47b5a4d2bc184e801e1e": 1,
-        "d40e752c66064d70b099a9ff622fb237": 1,
         "0d274158f1ae49ee9ef7939145755a46": 2,
         "948e610cffd14df79f04c73832b1409b": 13,
         "55155862a9564beba6710262e840d865": 1,
@@ -746,11 +732,11 @@
           }
         ]
       ],
-      "updateTime": 1619812751,
+      "updateTime": 1621909960,
       "createTime": 1619394532,
       "histories": [],
       "created_at": "2021-04-25 16:48:52",
-      "updated_at": "2021-04-30 12:59:11"
+      "updated_at": "2021-05-24 19:32:40"
     }
   ],
   "sort": [
@@ -760,5 +746,5 @@
   "title": "TeensyEWMU",
   "foldername": "TeensyEWMU",
   "schfilename": "TeensyEWMU.json",
-  "schfilemtime": 1619812059575
+  "schfilemtime": 1621910928958
 }
