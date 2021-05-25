@@ -3,11 +3,11 @@
 #define JOYSTICK_H
 
 #include "arduino.h"
-#include <EasyButton.h>
-#include <EasyButtonBase.h>
-#include <EasyButtonTouch.h>
-#include <EasyButtonVirtual.h>
-#include <Sequence.h>
+#include "src/libraries/EasyButton-2.0.0/EasyButton.h"
+#include "src/libraries/EasyButton-2.0.0/EasyButtonBase.h"
+#include "src/libraries/EasyButton-2.0.0/EasyButtonTouch.h"
+#include "src/libraries/EasyButton-2.0.0/EasyButtonVirtual.h"
+#include "src/libraries/EasyButton-2.0.0/Sequence.h"
 #include "pinAssignments.h"
 #include "joystickAssignments.h"
 #include "hostMessageProcessing.h"

@@ -3,7 +3,7 @@
 #define HOST_MESSAGE_PROCESSING_H
 
 #include "arduino.h"
-#include "PacketSerial-1.2.0/PacketSerial.h"
+#include "src/libraries/PacketSerial-1.2.0/PacketSerial.h"
 #include "characterDisplay.h"
 #include "lights.h"
 #include "joystickAssignments.h"
