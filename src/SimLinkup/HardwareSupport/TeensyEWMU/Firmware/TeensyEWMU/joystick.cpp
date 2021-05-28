@@ -2,6 +2,11 @@
 extern uint16_t _EWMUAndCMDSBrightness;
 extern uint16_t _EWPIBrightness;
 
+bool _CMDS_O1SwitchState;
+bool _CMDS_O2SwitchState;
+bool _CMDS_CHSwitchState;
+bool _CMDS_FLSwitchState;
+
 /*  --------    INPUT DEBOUNCING ----------------------*/
 EasyButton _O1(O1_PIN);
 EasyButton _O2(O2_PIN);
@@ -125,15 +130,22 @@ void updateCMDSJoystickOutputs() {
   Joystick.button(MODE_SEMI_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_SEMI ? !_MODE_SEMI.read() : _MODE_SEMI.read());
   Joystick.button(MODE_AUTO_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_AND_EWMU_MODE_AUTO ? !_MODE_AUTO.read() : _MODE_AUTO.read());
   Joystick.button(MODE_BYP_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_MODE_BYP ? !_MODE_BYP.read() : _MODE_BYP.read());;
-  
-  Joystick.button(O1_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_O1 ? !_O1.read() : _O1.read());
+
+  _CMDS_O1SwitchState = _invertBits & SwitchAndButtonIDs::CMDS_O1 ? !_O1.read() : _O1.read();
+  Joystick.button(O1_ON_DX_BUTTON, _CMDS_O1SwitchState);
   Joystick.button(O1_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_O1 ? _O1.read() : !_O1.read());
-  Joystick.button(O2_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_O2 ? !_O2.read() : _O2.read());
-  Joystick.button(O2_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_O2 ? _O2.read() : !_O2.read());
-  Joystick.button(CH_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_CH ? !_CH.read() : _CH.read());
-  Joystick.button(CH_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_CH ? _CH.read() : !_CH.read());
-  Joystick.button(FL_ON_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_FL ? !_FL.read() : _FL.read());
-  Joystick.button(FL_OFF_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_FL ? _FL.read() : !_FL.read());
+
+  _CMDS_O2SwitchState = _invertBits & SwitchAndButtonIDs::CMDS_O2 ? !_O2.read() : _O2.read();
+  Joystick.button(O2_ON_DX_BUTTON, _CMDS_O2SwitchState);
+  Joystick.button(O2_OFF_DX_BUTTON, !_CMDS_O1SwitchState);
+
+  _CMDS_CHSwitchState = _invertBits & SwitchAndButtonIDs::CMDS_CH ? !_CH.read() : _CH.read();
+  Joystick.button(CH_ON_DX_BUTTON, _CMDS_CHSwitchState);
+  Joystick.button(CH_OFF_DX_BUTTON, !_CMDS_CHSwitchState);
+
+  _CMDS_FLSwitchState = _invertBits & SwitchAndButtonIDs::CMDS_FL ? !_FL.read() : _FL.read(); 
+  Joystick.button(FL_ON_DX_BUTTON, _CMDS_FLSwitchState);
+  Joystick.button(FL_OFF_DX_BUTTON, !_CMDS_CHSwitchState);
 
   Joystick.button(PRGM_BIT_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_PRGM_BIT ? !_PRGM_BIT.read() : _PRGM_BIT.read());
   Joystick.button(PRGM_1_DX_BUTTON, _invertBits & SwitchAndButtonIDs::CMDS_PRGM_1 ? !_PRGM_1.read() : _PRGM_1.read());

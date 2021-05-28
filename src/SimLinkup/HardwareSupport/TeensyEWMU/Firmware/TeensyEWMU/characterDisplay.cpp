@@ -3,10 +3,16 @@
 /* ------------  CHARACTER DISPLAYS COMMON INITIALIZATION -------------------------- */
 extern uint16_t _EWMUAndCMDSBrightness;
 extern uint16_t _EWPIBrightness;
+extern bool _CMDS_O1SwitchState;
+extern bool _CMDS_O2SwitchState;
+extern bool _CMDS_CHSwitchState;
+extern bool _CMDS_FLSwitchState;
+
 bool _displayIsBlanked = false;
 char _CMDSChars[CMDS_NUM_CHARACTERS_TO_DISPLAY] = {'\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3'};
 char _EWMUChars[EWMU_NUM_CHARACTERS_TO_DISPLAY] = {'\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3'};
 char _EWPIChars[EWPI_NUM_CHARACTERS_TO_DISPLAY] = {'\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3'};
+uint8_t _CMDSConditionalBlankingBits;
 
 
 void setupCharacterDisplays()
@@ -70,7 +76,22 @@ void displayString(const char *chars, uint8_t numCharacters, uint8_t clockPin, u
         digitalWriteFast(clockPin, HIGH); //raise CLOCK pin
         conditionalDelayNanoseconds(DIGITAL_OUTPUT_PIN_RISE_TIME_NANOSECONDS); //wait for CLOCK pin to rise
 
-        digitalWriteFast(dataPin, bitRead((font[(byte)chars[thisChar]][column]), ((CHARACTER_DISPLAY_NUM_ROWS - 1) - row)) ? HIGH : LOW); //set DATA pin value
+        uint8_t thisDisplayChip = ((uint8_t)((thisChar) / 4));
+        bool blankAllCharactersOnThisDisplayChip = false;
+        if (IS_CMDS && _CMDSConditionalBlankingBits & CMDSConditionalDisplayBlankingBits::ENABLE_CONDITIONAL_BLANKING) 
+        {
+          switch (thisDisplayChip)
+          {
+            case 0: blankAllCharactersOnThisDisplayChip = _CMDS_O1SwitchState; break;
+            case 1: blankAllCharactersOnThisDisplayChip = _CMDS_O2SwitchState; break;
+            case 2: blankAllCharactersOnThisDisplayChip = _CMDS_CHSwitchState; break;
+            case 3: blankAllCharactersOnThisDisplayChip = _CMDS_FLSwitchState; break;
+          }
+        }
+
+        bool dataVal = blankAllCharactersOnThisDisplayChip ? LOW : bitRead((font[(byte)chars[thisChar]][column]), ((CHARACTER_DISPLAY_NUM_ROWS - 1) - row)) ? HIGH : LOW;
+        
+        digitalWriteFast(dataPin, dataVal); //set DATA pin value
         conditionalDelayNanoseconds(CHARACTER_DISPLAY_CLOCK_HIGH_HOLD_TIME_TIME_NANOSECONDS); //wait for CLOCK pin HIGH pulse width time
 
         digitalWriteFast(clockPin, LOW); //lower CLOCK pin

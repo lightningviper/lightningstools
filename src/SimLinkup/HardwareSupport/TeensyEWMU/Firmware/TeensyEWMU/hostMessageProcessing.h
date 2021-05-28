@@ -14,7 +14,8 @@ typedef enum TeensyEWMUPacketFields {
   EWPI_DISPLAY_STRING = 0x04,
   EWPI_LIGHTBITS = 0x08,
   CMDS_LIGHTBITS = 0x10,
-  INVERT_STATES = 0x20
+  CMDS_CONDITIONAL_BLANKING_BITS = 0x20,
+  INVERT_STATES = 0x40,
 } TeensyEWMUPacketFields;
 
 typedef enum EWPILightbits {
@@ -70,6 +71,12 @@ typedef enum SwitchAndButtonIDs {
   EWMU_NXT_DOWN=0x20000000UL,
   EWMU_RTN=0x40000000UL,
 } SwitchAndButtonIDs;
+
+typedef enum CMDSConditionalDisplayBlankingBits 
+{
+  DISABLE_CONDITIONAL_BLANKING = 0x00,
+  ENABLE_CONDITIONAL_BLANKING = 0x01,
+} CMDSConditionalDisplayBlankingBits;
 
 /* -------------- COMMUNICATIONS SETUP --------------- */
 const uint32_t BAUD_RATE = 115200;
