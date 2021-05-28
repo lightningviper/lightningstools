@@ -861,14 +861,16 @@ namespace F4Utils.SimSupport
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
                         var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
-                        var displayChaff = !cmdsIsOff && isFlying && chaffCount > -1 && !float.IsNaN(chaffCount);
-                        var displayFlare = !cmdsIsOff && isFlying && flareCount > -1 && !float.IsNaN(flareCount);
+                        var displayChaff = !cmdsIsOff && isFlying && chaffCount > -2 && !float.IsNaN(chaffCount);
+                        var displayFlare = !cmdsIsOff && isFlying && flareCount > -2 && !float.IsNaN(flareCount);
+                        if (chaffCount < 0) chaffCount = 0;
+                        if (flareCount < 0) flareCount = 0;
                         var displayOtr1 = !cmdsIsOff && isFlying;
                         var displayOtr2 = !cmdsIsOff && isFlying;
                         var otr1WindowString = "    ";
                         var otr2WindowString = "    ";
-                        var chaffWindowString = (displayChaff ? (chaffLow ? (("LO" + (chaffCount.ToString("#0")).PadLeft(2, ' ')).PadLeft(4, ' ')) : chaffCount.ToString("##0").PadLeft(4, ' ')) : "    ").PadLeft(4, ' ');
-                        var flareWindowString = (displayFlare ? (flareLow ? (("LO" + (flareCount.ToString("#0")).PadLeft(2, ' ')).PadLeft(4, ' ')) : flareCount.ToString("##0").PadLeft(4, ' ')) : "    ").PadLeft(4, ' ');
+                        var chaffWindowString = (displayChaff ? (chaffLow ? "Lo" + chaffCount.ToString("#0").PadLeft(2, ' ') : chaffCount.ToString("##0 ").PadLeft(4, ' ')) : "").PadLeft(4, ' ');
+                        var flareWindowString = (displayFlare ? (flareLow ? "Lo" + flareCount.ToString("#0").PadLeft(2, ' ') : flareCount.ToString("##0 ").PadLeft(4, ' ')) : "").PadLeft(4, ' ');
                         cmdsString = (otr1WindowString + otr2WindowString + chaffWindowString + flareWindowString).PadLeft(16, ' ');
                         
                         ((TextSignal)output).State = (cmdsString ?? "").PadRight(16);
@@ -890,8 +892,11 @@ namespace F4Utils.SimSupport
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
                         var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
-                        var displayChaff = !cmdsIsOff && isFlying && chaffCount > -1 && !float.IsNaN(chaffCount);
-                        var displayFlare = !cmdsIsOff && isFlying && flareCount > -1 && !float.IsNaN(flareCount);
+                        var displayChaff = !cmdsIsOff && isFlying && chaffCount > -2 && !float.IsNaN(chaffCount);
+                        var displayFlare = !cmdsIsOff && isFlying && flareCount > -2 && !float.IsNaN(flareCount);
+                        if (chaffCount < 0) chaffCount = 0;
+                        if (flareCount < 0) flareCount = 0;
+
                         var displayNoGo = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.NoGo) == LightBits2.NoGo;
                         var displayGo = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Go) == LightBits2.Go;
                         var displayDispenseReady = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Rdy) == LightBits2.Rdy;

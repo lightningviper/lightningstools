@@ -97,7 +97,7 @@
       </Source>
       <!-- TeensyEWMU CMDS DISPENSE RDY INPUT-->
       <Destination xsi:type="TextSignal">
-        <Id>TeensyEWMU__DISPENSE_RDY</Id>
+        <Id>TeensyEWMU__CMDS_DISPENSE_RDY</Id>
       </Destination>
       <MappingType>StraightThrough</MappingType>
     </SignalMapping>
