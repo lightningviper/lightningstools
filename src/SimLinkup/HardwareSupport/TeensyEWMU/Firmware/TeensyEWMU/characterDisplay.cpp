@@ -82,10 +82,10 @@ void displayString(const char *chars, uint8_t numCharacters, uint8_t clockPin, u
         {
           switch (thisDisplayChip)
           {
-            case 0: blankAllCharactersOnThisDisplayChip = _CMDS_O1SwitchState; break;
-            case 1: blankAllCharactersOnThisDisplayChip = _CMDS_O2SwitchState; break;
-            case 2: blankAllCharactersOnThisDisplayChip = _CMDS_CHSwitchState; break;
-            case 3: blankAllCharactersOnThisDisplayChip = _CMDS_FLSwitchState; break;
+            case 0: blankAllCharactersOnThisDisplayChip = !_CMDS_O1SwitchState; break;
+            case 1: blankAllCharactersOnThisDisplayChip = !_CMDS_O2SwitchState; break;
+            case 2: blankAllCharactersOnThisDisplayChip = !_CMDS_CHSwitchState; break;
+            case 3: blankAllCharactersOnThisDisplayChip = !_CMDS_FLSwitchState; break;
           }
         }
 
