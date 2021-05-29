@@ -890,7 +890,8 @@ namespace F4Utils.SimSupport
                         var chaffLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
                         var flareLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
-                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayChaff = !cmdsIsOff && isFlying && chaffCount > -2 && !float.IsNaN(chaffCount);
                         var displayFlare = !cmdsIsOff && isFlying && flareCount > -2 && !float.IsNaN(flareCount);
@@ -923,7 +924,8 @@ namespace F4Utils.SimSupport
                         var chaffCount = _lastFlightData.ChaffCount;
                         var flareCount = _lastFlightData.FlareCount;
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
-                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayChaff = !cmdsIsOff && isFlying && !float.IsNaN(chaffCount);
                         var displayFlare = !cmdsIsOff && isFlying && !float.IsNaN(flareCount);
@@ -954,7 +956,8 @@ namespace F4Utils.SimSupport
                         var chaffLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
                         var flareLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
-                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayChaff = !cmdsIsOff && isFlying && !float.IsNaN(chaffCount);
                         var displayFlare = !cmdsIsOff && isFlying && !float.IsNaN(flareCount);
@@ -997,16 +1000,17 @@ namespace F4Utils.SimSupport
                     if (_lastFlightData.VersionNum2 < 18)
                     {
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
-                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF ||!mainPower;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayJammerMode = !cmdsIsOff && isFlying;
-                        var jammerRunning= (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
+                        var jammerRunning= mainPower && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
                         var displayJammerStatus = !cmdsIsOff && isFlying;
                         var jammerFail = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmFail) == LightBits2.EcmFail);
                         var onGround = _lastFlightData.IntellivibeData.IsOnGround;
-                        var jammerStandby = !jammerRunning || onGround || cmdsModePosition == CmdsModes.CmdsSTBY;
+                        var jammerStandby = onGround || cmdsModePosition == CmdsModes.CmdsSTBY;
                         var jammerModeString = (displayJammerMode ? jammerStandby ? "STBY" : "OPR " : "    ").PadLeft(4, ' ');
-                        var jammerStatusString = (displayJammerStatus ? jammerFail ? "DEGR" : " RDY" : "    ").PadLeft(4, ' ');
+                        var jammerStatusString = (displayJammerStatus ? jammerFail ? "FAIL" : jammerRunning ? " TTG" : " RDY" : "    ").PadLeft(4, ' ');
                         ((TextSignal)output).State = ((jammerModeString ?? "") + (jammerStatusString ?? "")).PadRight(8);
                     }
                     else
