@@ -27,6 +27,14 @@ namespace F4Utils.SimSupport
         private readonly Dictionary<string, ISimOutput> _simOutputs = new Dictionary<string, ISimOutput>();
         private readonly Dictionary<string, SimCommand> _simCommands = new Dictionary<string, SimCommand>();
         private FlightData _lastFlightData;
+        private float _lastChaffCount;
+        private float _lastFlareCount;
+        private bool _lastChaffLow;
+        private bool _lastFlareLow;
+        private DateTime _chaffDispensingOverlayTimeout = DateTime.Now;
+        private DateTime _flareDispensingOverlayTimeout = DateTime.Now;
+        private DateTime _chaffLowOverlayTimeout = DateTime.Now;
+        private DateTime _flareLowOverlayTimeout = DateTime.Now;
         private Reader _smReader;
         private readonly IIndicatedRateOfTurnCalculator _rateOfTurnCalculator = new IndicatedRateOfTurnCalculator();
         private readonly MorseCode _morseCodeGenerator = new MorseCode();
@@ -884,15 +892,15 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1:
                     if (_lastFlightData.VersionNum2 < 18)
                     {
+                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var ewmuLine1String = string.Empty;
-                        var chaffCount = _lastFlightData.ChaffCount;
-                        var flareCount = _lastFlightData.FlareCount;
+                        var chaffCount = isFlying ? _lastFlightData.ChaffCount : 0;
+                        var flareCount = isFlying ? _lastFlightData.FlareCount : 0;
                         var chaffLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
                         var flareLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
                         var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
                         var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
-                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayChaff = !cmdsIsOff && isFlying && chaffCount > -2 && !float.IsNaN(chaffCount);
                         var displayFlare = !cmdsIsOff && isFlying && flareCount > -2 && !float.IsNaN(flareCount);
                         if (chaffCount < 0) chaffCount = 0;
@@ -908,12 +916,24 @@ namespace F4Utils.SimSupport
                         var noGoString = (displayNoGo ? "NOGO" : "    ").PadLeft(4, ' ');
                         var goString = (displayGo ? "  GO" : "    ").PadLeft(4, ' ');
                         ewmuLine1String = (chaffWindowString + flareWindowString + noGoString + goString).PadLeft(16, ' ');
+                        if (DateTime.Now < _chaffLowOverlayTimeout)
+                        {
+                            ewmuLine1String = "WARNING:" + (DateTime.Now.Millisecond < 500 ? "CHAF LOW" :"        ");
+                        }
+                        else if (DateTime.Now < _flareLowOverlayTimeout)
+                        {
+                            ewmuLine1String = "WARNING:" + (DateTime.Now.Millisecond < 500 ? "FLAR LOW" : "        ");
 
+                        }
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            ewmuLine1String = "                ";
+                        }
                         ((TextSignal)output).State = (ewmuLine1String ?? "").PadRight(16);
                     }
                     else
                     {
-                        ((TextSignal)output).State = Encoding.ASCII.GetString(_lastFlightData.EWMUDisplayTextLine1 != null ? _lastFlightData.EWMUDisplayTextLine1 : new byte[] { }).PadRight(16);
+                        ((TextSignal)output).State = (_lastFlightData.EWMULines !=null && _lastFlightData.EWMULines.Length >0 && _lastFlightData.EWMULines[0] != null ? _lastFlightData.EWMULines[0] : "").PadRight(16);
                     }
                     break;
 
@@ -935,32 +955,60 @@ namespace F4Utils.SimSupport
                         var flareWindowString = (displayFlare ? "FLAR":"    ").PadLeft(4, ' ');
                         var dispenseReadyString = (displayDispenseReady ? "DISP RDY": "        ").PadLeft(8, ' ');
                         ewmuLine2String = (chaffWindowString + flareWindowString + dispenseReadyString).PadLeft(16, ' ');
-
+                        if (DateTime.Now < _chaffLowOverlayTimeout || DateTime.Now < _flareLowOverlayTimeout)
+                        {
+                            ewmuLine2String = "                ";
+                        }
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            ewmuLine2String = "                ";
+                        }
                         ((TextSignal)output).State = (ewmuLine2String ?? "").PadRight(16);
                     }
                     else
                     {
-                        ((TextSignal)output).State = Encoding.ASCII.GetString(_lastFlightData.EWMUDisplayTextLine2 != null ? _lastFlightData.EWMUDisplayTextLine2 : new byte[] { }).PadRight(16);
+                        ((TextSignal)output).State = (_lastFlightData.EWMULines !=null && _lastFlightData.EWMULines.Length >1  && _lastFlightData.EWMULines[1] != null ? _lastFlightData.EWMULines[1] : "").PadRight(16);
                     }
                     break;
 
                 case F4SimOutputs.EWPI__CHAFFFLARE_DISPLAYTEXT:
                     if (_lastFlightData.VersionNum2 < 18)
                     {
+                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var ewpiChaffFlareString = string.Empty;
-                        var chaffCount = _lastFlightData.ChaffCount;
-                        var flareCount = _lastFlightData.FlareCount;
+                        var chaffCount = isFlying ? _lastFlightData.ChaffCount : 0;
+                        var flareCount = isFlying ? _lastFlightData.FlareCount : 0;
                         if (chaffCount < 0) chaffCount = 0;
                         if (flareCount < 0) flareCount = 0;
 
-                        var chaffLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
-                        var flareLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
+                        var chaffLow = isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
+                        if (chaffLow != _lastChaffLow && chaffCount >0)
+                        {
+                            _chaffLowOverlayTimeout = new DateTime(Math.Max(DateTime.Now.Ticks, _flareLowOverlayTimeout.Ticks)).AddSeconds(2);
+                        }
+                        var flareLow = isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
+                        if (flareLow != _lastFlareLow && flareCount > 0)
+                        {
+                            _flareLowOverlayTimeout = new DateTime(Math.Max(DateTime.Now.Ticks, _chaffLowOverlayTimeout.Ticks)).AddSeconds(2);
+                        }
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
                         var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var ecmLightOn = mainPower && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
                         var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
-                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayChaff = !cmdsIsOff && isFlying && !float.IsNaN(chaffCount);
                         var displayFlare = !cmdsIsOff && isFlying && !float.IsNaN(flareCount);
+                        var chaffDispensing = _lastChaffCount > chaffCount || DateTime.Now < _chaffDispensingOverlayTimeout;
+                        if (chaffDispensing)
+                        {
+                            if (_chaffDispensingOverlayTimeout == DateTime.MinValue) _chaffDispensingOverlayTimeout = DateTime.Now.AddMilliseconds(500);
+                        }
+                        else _chaffDispensingOverlayTimeout = DateTime.MinValue;
+                        var flareDispensing = _lastFlareCount > flareCount || DateTime.Now < _flareDispensingOverlayTimeout;
+                        if (flareDispensing)
+                        {
+                            if (_flareDispensingOverlayTimeout == DateTime.MinValue) _flareDispensingOverlayTimeout = DateTime.Now.AddMilliseconds(500);
+                        }
+                        else _flareDispensingOverlayTimeout = DateTime.MinValue;
                         var displayCmdsMode = !cmdsIsOff && isFlying;
                         string cmdsModeString = "";
                         switch (cmdsModePosition)
@@ -972,10 +1020,10 @@ namespace F4Utils.SimSupport
                                 cmdsModeString = "M";
                                 break;
                             case CmdsModes.CmdsSEMI:
-                                cmdsModeString = "S";
+                                cmdsModeString = ecmLightOn ? "S" : "C";
                                 break;
                             case CmdsModes.CmdsAUTO:
-                                cmdsModeString = "A";
+                                cmdsModeString = ecmLightOn ? "A" : "D";
                                 break;
                             case CmdsModes.CmdsBYP:
                                 cmdsModeString = "B";
@@ -985,15 +1033,39 @@ namespace F4Utils.SimSupport
                                 break;
                         }
                         var chaffWindowString = (displayChaff ? (chaffLow ? (("L" + (chaffCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3,' ')) : chaffCount.ToString("##0").PadLeft(3, ' ')) : "   ").PadLeft(3, ' ');
+                        if (DateTime.Now < _chaffLowOverlayTimeout)
+                        {
+                            chaffWindowString = DateTime.Now.Millisecond < 500 ? "   " : "LOW";
+                        }
+                        else if (displayChaff && chaffDispensing) chaffWindowString = " * ";
+                        else if (displayChaff && chaffCount < 1) chaffWindowString = "EMT";
                         chaffWindowString = (displayCmdsMode ? cmdsModeString : " ") + chaffWindowString;
+
                         var flareWindowString = (displayFlare ? (flareLow ? (("L" + (flareCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3,' ')) : flareCount.ToString("##0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
+                        if (DateTime.Now < _flareLowOverlayTimeout)
+                        {
+                            flareWindowString = DateTime.Now.Millisecond < 500 ? "    " : " LOW";
+                        }
+                        else if (displayFlare && flareDispensing) flareWindowString = "  * ";
+                        else if (displayFlare && flareCount < 1) flareWindowString = " EMT";
                         ewpiChaffFlareString = (chaffWindowString + flareWindowString).PadLeft(8, ' ');
+                        
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            ewpiChaffFlareString = "        ";
+                        }
+
                         ((TextSignal)output).State = (ewpiChaffFlareString ?? "").PadRight(8);
+                        _lastFlareCount = flareCount;
+                        _lastChaffCount = chaffCount;
+                        _lastChaffLow = chaffLow;
+                        _lastFlareLow = flareLow;
                     }
                     else
                     {
-                        ((TextSignal)output).State = Encoding.ASCII.GetString(_lastFlightData.EWPIChaffFlareDisplayText != null ? _lastFlightData.EWPIChaffFlareDisplayText : new byte[] { }).PadRight(8);
+                        ((TextSignal)output).State = (_lastFlightData.EWPILines !=null && _lastFlightData.EWPILines.Length >0 && _lastFlightData.EWPILines[0] != null ? _lastFlightData.EWPILines[0]: "").PadRight(8);
                     }
+
                     break;
 
                 case F4SimOutputs.EWPI__JMR_DISPLAYTEXT:
@@ -1004,18 +1076,24 @@ namespace F4Utils.SimSupport
                         var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF ||!mainPower;
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var displayJammerMode = !cmdsIsOff && isFlying;
-                        var jammerRunning= mainPower && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
+                        var ecmLightOn= mainPower && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
                         var displayJammerStatus = !cmdsIsOff && isFlying;
                         var jammerFail = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmFail) == LightBits2.EcmFail);
                         var onGround = _lastFlightData.IntellivibeData.IsOnGround;
                         var jammerStandby = onGround || cmdsModePosition == CmdsModes.CmdsSTBY;
-                        var jammerModeString = (displayJammerMode ? jammerStandby ? "STBY" : "OPR " : "    ").PadLeft(4, ' ');
-                        var jammerStatusString = (displayJammerStatus ? jammerFail ? "FAIL" : jammerRunning ? " TTG" : " RDY" : "    ").PadLeft(4, ' ');
+                        var jammerModeString = (displayJammerMode ? jammerStandby ? ecmLightOn ? "OPR " : "SBY " : "OPR " : "    ").PadLeft(4, ' ');
+                        var jammerStatusString = (displayJammerStatus ? jammerFail ? " ERR" : ecmLightOn ? " ECM" : " RDY" : "    ").PadLeft(4, ' ');
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            jammerModeString = "    ";
+                            jammerStatusString = "    ";
+                        }
+
                         ((TextSignal)output).State = ((jammerModeString ?? "") + (jammerStatusString ?? "")).PadRight(8);
                     }
                     else
                     {
-                        ((TextSignal)output).State = Encoding.ASCII.GetString(_lastFlightData.EWPIJammerDisplayText != null ? _lastFlightData.EWPIJammerDisplayText : new byte[] { }).PadRight(8);
+                        ((TextSignal)output).State = (_lastFlightData.EWPILines != null && _lastFlightData.EWPILines.Length > 1 && _lastFlightData.EWPILines[1] != null ? _lastFlightData.EWPILines[1] : "").PadRight(8);
                     }
                     break;
 

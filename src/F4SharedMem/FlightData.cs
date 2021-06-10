@@ -67,6 +67,14 @@ namespace F4SharedMem
                     {
                         PopulateCallsignLineOfText(data, currentField, thisFlightDataField);
                     }
+                    else if (currentFieldType == typeof(EWMU_LineOfText[]))
+                    {
+                        PopulateEWMULineOfText(data, currentField, thisFlightDataField);
+                    }
+                    else if (currentFieldType == typeof(EWPI_LineOfText[]))
+                    {
+                        PopulateEWPILineOfText(data, currentField, thisFlightDataField);
+                    }
                     else
                     {
                         var currentValue = (Array)currentField.GetValue(data);
@@ -119,6 +127,38 @@ namespace F4SharedMem
         private void PopulateCallsignLineOfText(object data, FieldInfo currentField, FieldInfo thisField)
         {
             var currentValue = (Callsign_LineOfText[])currentField.GetValue(data);
+            var valuesToAssign = new string[currentValue.Length];
+            for (var j = 0; j < currentValue.Length; j++)
+            {
+                var currentItem = currentValue[j];
+                var sb = new StringBuilder(currentItem.chars.Length);
+                foreach (var chr in currentItem.chars.Where(chr => chr != 0))
+                {
+                    sb.Append((char)chr);
+                }
+                valuesToAssign[j] = sb.ToString();
+            }
+            thisField.SetValue(this, valuesToAssign);
+        }
+        private void PopulateEWMULineOfText(object data, FieldInfo currentField, FieldInfo thisField)
+        {
+            var currentValue = (EWMU_LineOfText[])currentField.GetValue(data);
+            var valuesToAssign = new string[currentValue.Length];
+            for (var j = 0; j < currentValue.Length; j++)
+            {
+                var currentItem = currentValue[j];
+                var sb = new StringBuilder(currentItem.chars.Length);
+                foreach (var chr in currentItem.chars.Where(chr => chr != 0))
+                {
+                    sb.Append((char)chr);
+                }
+                valuesToAssign[j] = sb.ToString();
+            }
+            thisField.SetValue(this, valuesToAssign);
+        }
+        private void PopulateEWPILineOfText(object data, FieldInfo currentField, FieldInfo thisField)
+        {
+            var currentValue = (EWPI_LineOfText[])currentField.GetValue(data);
             var valuesToAssign = new string[currentValue.Length];
             for (var j = 0; j < currentValue.Length; j++)
             {
@@ -358,10 +398,8 @@ namespace F4SharedMem
         public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
 
         // VERSION 18
-        public byte[] EWMUDisplayTextLine1; //EWMU display text, line #1 of 2
-        public byte[] EWMUDisplayTextLine2; //EWMU display text, line #2 of 2
-        public byte[] EWPIChaffFlareDisplayText; //EWPI chaff/flare window display text
-        public byte[] EWPIJammerDisplayText; //EWPI jammer status window display text
+        public string[] EWMULines;  //16 usable chars
+        public string[] EWPILines;  //8 usable chars
 
         public OptionSelectButtonLabel[] leftMFD;
         public OptionSelectButtonLabel[] rightMFD;

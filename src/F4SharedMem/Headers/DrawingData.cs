@@ -94,7 +94,7 @@ namespace F4SharedMem.Headers
             try
             {
                 var offset = 0;
-                if (rawDrawingData.Length < offset + 4) return result;
+                if (rawDrawingData == null || rawDrawingData.Length < offset + 4) return result;
                 result.VersionNum = BitConverter.ToUInt32(rawDrawingData, offset);
                 offset += sizeof(uint);
 

@@ -25,13 +25,11 @@ namespace F4SharedMem.Headers
         // 15: added MiscBits, BettyBits, radar altitude, bingo fuel, cara alow, bullseye, BMS version information, string area size/time, drawing area size
         // 16: added turn rate
         // 17: added Flcs_Flcc, SolenoidStatus to MiscBits
+        // 18: added EWMULines, EWPILines; added EWMU and EWPI RTT areas
 
         public const int RWRINFO_SIZE = 512;
         public const int MAX_CALLSIGNS = 32;
         public const int CALLSIGN_LEN = 12;
-        public const int EWMU_DISPLAY_WIDTH_CHARS=16;
-        public const int EWPI_CHAFF_FLARE_DISPLAY_WIDTH_CHARS=8;
-        public const int EWPI_JMR_DISPLAY_WIDTH_CHARS = 8;
 
 
         // VERSION 1
@@ -128,14 +126,10 @@ namespace F4SharedMem.Headers
         float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
 
         //VERSION 18
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWMU_DISPLAY_WIDTH_CHARS)]
-        public byte[] EWMUDisplayTextLine1; //EWMU display text, line #1 of 2
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWMU_DISPLAY_WIDTH_CHARS)]
-        public byte[] EWMUDisplayTextLine2; //EWMU display text, line #2 of 2
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWPI_CHAFF_FLARE_DISPLAY_WIDTH_CHARS)]
-        public byte[] EWPIChaffFlareDisplayText; //EWPI chaff/flare window display text
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = EWPI_JMR_DISPLAY_WIDTH_CHARS)]
-        public byte[] EWPIJammerDisplayText; //EWPI jammer status window display text
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public EWMU_LineOfText[] EWMULines;  //16 usable chars
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public EWMU_LineOfText[] EWPILines;  //8 usable chars
 
     }
 
