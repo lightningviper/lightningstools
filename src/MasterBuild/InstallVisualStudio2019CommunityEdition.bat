@@ -5,7 +5,7 @@ SET MASTERBUILDDIR=%~dp0
 IF EXIST "%MASTERBUILDDIR%vs_community.exe" DEL "%MASTERBUILDDIR%vs_community.exe"
 IF ERRORLEVEL 1 GOTO END
 
-bitsadmin /transfer VisualStudio2019CommunityEdition /dynamic /download /priority HIGH "https://download.visualstudio.microsoft.com/download/pr/08ad1141-4528-456b-8319-2d1eb127bd85/f6577aed743a858a9a523a2c5c6bc53d/vs_community.exe" "%MASTERBUILDDIR%vs_community.exe" 
+bitsadmin /transfer VisualStudio2019CommunityEdition /dynamic /download /priority HIGH "https://download.visualstudio.microsoft.com/download/pr/5c44c598-f77e-4815-89ca-e7a1f87c579a/9e77a440580e677baea233033f38f9cf10a5084c915b684714bbbb19c67ee361/vs_Community.exe" "%MASTERBUILDDIR%vs_community.exe" 
 
 IF ERRORLEVEL 1 GOTO END
 
@@ -21,9 +21,3 @@ REM Delete Visual Studio reboot-required marker so we can proceed with installat
 IF EXIST "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\.\%InstanceId%\reboot.sem" DEL "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances\%InstanceId%\reboot.sem"
 
 :END
-
-
-
-
-
-
