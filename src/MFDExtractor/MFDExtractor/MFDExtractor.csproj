@@ -21,7 +21,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <SignManifests>false</SignManifests>
     <ManifestCertificateThumbprint>44A6713B6ABBD807429450D5F2031B0B25783482</ManifestCertificateThumbprint>
     <ManifestKeyFile>MFDExtractor_TemporaryKey.pfx</ManifestKeyFile>

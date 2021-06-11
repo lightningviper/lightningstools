@@ -27,38 +27,38 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2F12B284A591D0E383056F7502D450CB"
+        "MsmKey" = "8:_4C2DB566F3E4531328CD2D244A274266"
+        "OwnerKey" = "8:_B144D8E04AB844AEAED2379DE52B4265"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4CCA4755A6F13D6960CDE4CF3E06E2E3"
         "OwnerKey" = "8:_04046F4A56805361261100CBE24998A9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2F12B284A591D0E383056F7502D450CB"
+        "MsmKey" = "8:_4CCA4755A6F13D6960CDE4CF3E06E2E3"
         "OwnerKey" = "8:_B144D8E04AB844AEAED2379DE52B4265"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2F12B284A591D0E383056F7502D450CB"
+        "MsmKey" = "8:_4CCA4755A6F13D6960CDE4CF3E06E2E3"
         "OwnerKey" = "8:_7BFD5E633266A955C00223C883A99BC9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2F12B284A591D0E383056F7502D450CB"
+        "MsmKey" = "8:_4CCA4755A6F13D6960CDE4CF3E06E2E3"
         "OwnerKey" = "8:_F9027729969C4E12C85BE6E84E6B0C39"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2F12B284A591D0E383056F7502D450CB"
+        "MsmKey" = "8:_4CCA4755A6F13D6960CDE4CF3E06E2E3"
         "OwnerKey" = "8:_EBFB7D0B57905ADF859FE45AEE914D35"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_426B10EF431BC6098B9CE791137FBE43"
-        "OwnerKey" = "8:_B144D8E04AB844AEAED2379DE52B4265"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,13 +118,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_13A2F76FEE2A50060E0CCB250A929368"
+        "OwnerKey" = "8:_4C2DB566F3E4531328CD2D244A274266"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_426B10EF431BC6098B9CE791137FBE43"
+        "OwnerKey" = "8:_13A2F76FEE2A50060E0CCB250A929368"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -160,7 +160,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2F12B284A591D0E383056F7502D450CB"
+        "OwnerKey" = "8:_4CCA4755A6F13D6960CDE4CF3E06E2E3"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -190,10 +190,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.8"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    "Name" = "8:Microsoft .NET Framework 4.8 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.8"
                     }
                 }
             }
@@ -222,10 +222,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.8"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    "Name" = "8:Microsoft .NET Framework 4.8 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.8"
                     }
                 }
             }
@@ -250,9 +250,9 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.2"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.8"
                 "AllowLaterVersions" = "11:FALSE"
-                "InstallUrl" = "8:https://go.microsoft.com/fwlink/?LinkId=863262"
+                "InstallUrl" = "8:https://go.microsoft.com/fwlink/?LinkId=2085155"
                 }
             }
         }
@@ -293,7 +293,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:F4SharedMem, Version=4.34.0.0, Culture=neutral, PublicKeyToken=98c24c6603c8861c, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:F4SharedMem, Version=4.35.0.0, Culture=neutral, PublicKeyToken=98c24c6603c8861c, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_13A2F76FEE2A50060E0CCB250A929368"
@@ -320,20 +320,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2F12B284A591D0E383056F7502D450CB"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4C2DB566F3E4531328CD2D244A274266"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Costura, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2F12B284A591D0E383056F7502D450CB"
+                    "_4C2DB566F3E4531328CD2D244A274266"
                     {
-                    "Name" = "8:log4net.dll"
+                    "Name" = "8:Costura.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:log4net.dll"
+            "SourcePath" = "8:Costura.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_49DD1BB46E7949C98C286A12EFFADEAA"
@@ -351,20 +351,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_426B10EF431BC6098B9CE791137FBE43"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4CCA4755A6F13D6960CDE4CF3E06E2E3"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Costura, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_426B10EF431BC6098B9CE791137FBE43"
+                    "_4CCA4755A6F13D6960CDE4CF3E06E2E3"
                     {
-                    "Name" = "8:Costura.dll"
+                    "Name" = "8:log4net.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Costura.dll"
+            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_49DD1BB46E7949C98C286A12EFFADEAA"

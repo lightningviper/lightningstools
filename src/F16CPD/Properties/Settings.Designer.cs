@@ -12,7 +12,7 @@ namespace F16CPD.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -242,9 +242,9 @@ namespace F16CPD.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("RotateNoneFlipNone")]
-        public global::Common.Drawing.RotateFlipType Rotation {
+        public global::System.Drawing.RotateFlipType Rotation {
             get {
-                return ((global::Common.Drawing.RotateFlipType)(this["Rotation"]));
+                return ((global::System.Drawing.RotateFlipType)(this["Rotation"]));
             }
             set {
                 this["Rotation"] = value;

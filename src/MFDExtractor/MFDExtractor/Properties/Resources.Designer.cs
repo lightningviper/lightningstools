@@ -118,6 +118,25 @@ namespace MFDExtractor.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mfd3TestAlignmentImage {
+            get {
+                object obj = ResourceManager.GetObject("mfd3TestAlignmentImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mfd4TestAlignmentImage {
+            get {
+                object obj = ResourceManager.GetObject("mfd4TestAlignmentImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
