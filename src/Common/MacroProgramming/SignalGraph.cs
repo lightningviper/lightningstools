@@ -34,8 +34,9 @@ namespace Common.MacroProgramming
         private static readonly Font BigFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
         private static readonly Font MediumFont = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold);
         private static readonly Font SmallFont = new Font(FontFamily.GenericSansSerif, 8, FontStyle.Bold);
-        private static readonly Font SubcollectionNameFont = BigFont;
-        private static readonly Font FriendlyNameFont = MediumFont;
+        private static readonly Font XSmallFont = new Font(FontFamily.GenericSansSerif, 6, FontStyle.Bold);
+        private static readonly Font SubcollectionNameFont = MediumFont;
+        private static readonly Font FriendlyNameFont = SmallFont;
         private static readonly Font ValueFont = MediumFont;
         private static readonly Font MinValueFont = SmallFont;
         private static readonly Font MaxValueFont = SmallFont;
@@ -286,10 +287,11 @@ namespace Common.MacroProgramming
 
             graphics.Clip = originalClip;
             graphics.Transform = originalTransform;
-            graphics.DrawString(_signal.SubcollectionName, SubcollectionNameFont, SubcollectionNameBrush,
+            var headlineString = _signal.SubcollectionName ?? _signal.CollectionName ?? "";
+            graphics.DrawString(headlineString, SubcollectionNameFont, SubcollectionNameBrush,
                 new RectangleF(0, 0, width, topMarginHeight));
-            graphics.DrawString(_signal.FriendlyName, FriendlyNameFont, FriendlyNameBrush,
-                new RectangleF(0, topMarginHeight / 2, width, topMarginHeight));
+            graphics.DrawString(_signal.FriendlyName ?? "", FriendlyNameFont, FriendlyNameBrush,
+                new RectangleF(0, topMarginHeight -10, width, topMarginHeight));
             graphics.DrawString(rangeMaxValue, ScaleFont, ScaleFontBrush, new RectangleF(0, 0, width, topMarginHeight),
                 new StringFormat {Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far});
             graphics.DrawString(rangeMinValue, ScaleFont, ScaleFontBrush,
@@ -298,11 +300,13 @@ namespace Common.MacroProgramming
 
             if (_signal is TextSignal)
             {
+                var stringRectangle = new Rectangle(targetRectangle.Location.X, targetRectangle.Location.Y + (topMarginHeight *2),targetRectangle.Width, targetRectangle.Height - (topMarginHeight*2));
                 var stringToDisplay = (_signal as TextSignal).State;
+                if (stringToDisplay == null) stringToDisplay = "";
                 var stringFormat = new StringFormat();
                 stringFormat.LineAlignment = StringAlignment.Center;
                 stringFormat.Alignment = StringAlignment.Center;
-                graphics.DrawString(stringToDisplay, XBigFont, ValueBrush, targetRectangle, stringFormat);
+                graphics.DrawString(stringToDisplay, stringToDisplay.Length < 128 ? XBigFont : stringToDisplay.Length < 256 ? BigFont : stringToDisplay.Length < 512 ? MediumFont : stringToDisplay.Length < 1024 ? SmallFont : XSmallFont, ValueBrush, stringRectangle, stringFormat);
             }
         }
 
