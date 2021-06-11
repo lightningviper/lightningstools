@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Product xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" ProductCode=".NETFramework,Version=v4.8">
+  <!-- Defines list of files to be copied on build -->
+  <PackageFiles CopyAllPackageFiles="false">
+    <PackageFile Name="NDP48-x86-x64-AllOS-ENU.exe" HomeSite="DotNetFX48FullWebBootstrapper" PublicKey="3082010a0282010100a829fed410c8ff550a9e990003528fdcb0bff9abf851fe5c8c54c227ce4c2b96ebdb811ccb862b79ca757eb867832686bdd62f1c3ec758aa8f6f95fb5afca7c61bc1c3e84c174e223db75b565c7fd75af52dbabba609bf067cee98fe40f930b86bfe406f74b3b8d63849c9d087072f31dfb6bc4ea3d09eb7627b5670754f67bf05cca3aebe0092c21b50a1613b100001b186d029f340f50fd9a30f57ab6309a8dca96ae74743a7be15c43d27a4e8565288cf5999a10084369bd039d22a0d2fe604e2bf13968883a95137184189e2f9859d8e651a3d0364ccc5de50705df20b85a98fb145e877ff839d09bb72e0e6560895b92b83128931fce758721dbdf983230203010001"/>
+    <PackageFile Name="NDP48-Web.exe" HomeSite="DotNetFX48FullWebBootstrapper" CopyOnBuild="False" PublicKey="3082010a0282010100a829fed410c8ff550a9e990003528fdcb0bff9abf851fe5c8c54c227ce4c2b96ebdb811ccb862b79ca757eb867832686bdd62f1c3ec758aa8f6f95fb5afca7c61bc1c3e84c174e223db75b565c7fd75af52dbabba609bf067cee98fe40f930b86bfe406f74b3b8d63849c9d087072f31dfb6bc4ea3d09eb7627b5670754f67bf05cca3aebe0092c21b50a1613b100001b186d029f340f50fd9a30f57ab6309a8dca96ae74743a7be15c43d27a4e8565288cf5999a10084369bd039d22a0d2fe604e2bf13968883a95137184189e2f9859d8e651a3d0364ccc5de50705df20b85a98fb145e877ff839d09bb72e0e6560895b92b83128931fce758721dbdf983230203010001"/>
+  </PackageFiles>
+  <RelatedProducts>
+    <IncludesProduct Code=".NETFramework,Version=v4.7.2" />
+  </RelatedProducts>
+  <InstallChecks>
+    <RegistryCheck Property="DotNetFull_Release" Key="HKLM\Software\Microsoft\NET Framework Setup\NDP\v4\Full" Value="Release" />
+    <RegistryCheck Property="DotNetFull_OSIntegrated" Key="HKLM\SOFTWARE\Microsoft\NET Framework Setup\OS Integration" Value="v4" />
+  </InstallChecks>
+  <!-- Defines how to invoke the setup for .NET Framework redist -->
+  <Commands Reboot="Immediate">
+    <!--Command for downlevel and future Operating Systems where netfx is not integrated within OS.-->
+    <Command PackageFile="NDP48-x86-x64-AllOS-ENU.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper" EstimatedInstalledBytes="437362964" EstimatedInstallSeconds="600" EstimatedTempBytes="2095870765">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNetFull_Release" Compare="ValueGreaterThanOrEqualTo" Value="528049" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on less than Windows 7 RTM -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.1.0" String="InvalidPlatformWinNT" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+    <!--Command for downlevel and future Operating Systems where netfx is not integrated within OS.-->
+    <Command PackageFile="NDP48-Web.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper /lcid 1033" EstimatedInstalledBytes="437362964" EstimatedInstallSeconds="600" EstimatedTempBytes="468232836">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueNotEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNetFull_Release" Compare="ValueGreaterThanOrEqualTo" Value="528049" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on less than Windows 7 RTM -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.1.0" String="InvalidPlatformWinNT" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+    </Commands>
+</Product>
