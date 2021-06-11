@@ -888,6 +888,9 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.CMDS__MODE:
                     SetOutput((AnalogSignal) output, _lastFlightData.cmdsMode);
                     break;
+                case F4SimOutputs.EWMU__MODE:
+                    SetOutput((AnalogSignal)output, _lastFlightData.cmdsMode);
+                    break;
 
                 case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1:
                     if (_lastFlightData.VersionNum2 < 18)
@@ -2177,20 +2180,27 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "MISC", "ADV MODE STBY Light", F4SimOutputs.MISC__ADV_MODE_STBY, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "MISC", "Autopilot engaged flag", F4SimOutputs.MISC__AUTOPILOT_ENGAGED, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Chaff Count (# remaining)", F4SimOutputs.CMDS__CHAFF_COUNT, null, typeof(float), 0, 99));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Flare Count (# remaining)", F4SimOutputs.CMDS__FLARE_COUNT, null, typeof(float), 0, 99));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Chaff Count (# remaining)", F4SimOutputs.CMDS__CHAFF_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Chaff Low Flag", F4SimOutputs.CMDS__CHAFF_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Flare Count (# remaining)", F4SimOutputs.CMDS__FLARE_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Flare Low Flag", F4SimOutputs.CMDS__FLARE_LO, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "GO Flag", F4SimOutputs.CMDS__GO, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "NO GO Flag", F4SimOutputs.CMDS__NOGO, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "AUTO DEGR Flag", F4SimOutputs.CMDS__AUTO_DEGR, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "DISPENSE RDY Flag", F4SimOutputs.CMDS__DISPENSE_RDY, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "CHAFF LO Flag", F4SimOutputs.CMDS__CHAFF_LO, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "FLARE LO Flag", F4SimOutputs.CMDS__FLARE_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "MODE Switch Position (0=OFF, 1=STBY, 2=MAN, 3=SEMI, 4=AUTO, 5=BYP)", F4SimOutputs.CMDS__MODE, null, typeof(int), 0, 5));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Display Text", F4SimOutputs.CMDS__DISPLAYTEXT, null, typeof(string)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "MODE", F4SimOutputs.CMDS__MODE, null, typeof(int), 0, 5));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "EWMU Display Text Line 1", F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1, null, typeof(string)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "EWMU Display Text Line 2", F4SimOutputs.EWMU__DISPLAYTEXT_LINE_2, null, typeof(string)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "EWPI Chaff/Flare Status Window Display Text", F4SimOutputs.EWPI__CHAFFFLARE_DISPLAYTEXT, null, typeof(string)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "EWPI JMR Status Window Display Text", F4SimOutputs.EWPI__JMR_DISPLAYTEXT, null, typeof(string)));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Chaff Count (# remaining)", F4SimOutputs.EWMU__CHAFF_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Chaff Low Flag", F4SimOutputs.EWMU__CHAFF_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Flare Count (# remaining)", F4SimOutputs.EWMU__FLARE_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Flare Low Flag", F4SimOutputs.EWMU__FLARE_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "MODE Switch Position (0=OFF, 1=STBY, 2=MAN, 3=SEMI, 4=AUTO, 5=BYP)", F4SimOutputs.EWMU__MODE, null, typeof(int), 0, 5));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Display Text Line 1", F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Display Text Line 2", F4SimOutputs.EWMU__DISPLAYTEXT_LINE_2, null, typeof(string)));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "Chaff/Flare Status Window Display Text", F4SimOutputs.EWPI__CHAFFFLARE_DISPLAYTEXT, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "JMR Status Window Display Text", F4SimOutputs.EWPI__JMR_DISPLAYTEXT, null, typeof(string)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "PRI Indicator Flag", F4SimOutputs.EWPI__PRI, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "UNK Indicator Flag", F4SimOutputs.EWPI__UNK, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "ML Indicator Flag", F4SimOutputs.EWPI__ML, null, typeof(bool)));

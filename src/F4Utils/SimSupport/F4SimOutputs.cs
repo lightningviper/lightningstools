@@ -187,6 +187,12 @@
         CMDS__FLARE_LO,
         CMDS__DISPLAYTEXT,
         CMDS__MODE,
+
+        EWMU__CHAFF_COUNT,
+        EWMU__FLARE_COUNT,
+        EWMU__CHAFF_LO,
+        EWMU__FLARE_LO,
+        EWMU__MODE,
         EWMU__DISPLAYTEXT_LINE_1,
         EWMU__DISPLAYTEXT_LINE_2,
         EWPI__CHAFFFLARE_DISPLAYTEXT,

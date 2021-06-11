@@ -69,8 +69,8 @@ namespace Common.MacroProgramming
             var value = string.Empty;
             var rangeMinValue = string.Empty;
             var rangeMaxValue = string.Empty;
-            const int topMarginHeight = 40;
-            const int bottomMarginHeight = 20;
+            const int topMarginHeight = 60;
+            const int bottomMarginHeight = 40;
             var width = (float) targetRectangle.Width;
             var height = (float) targetRectangle.Height - topMarginHeight - bottomMarginHeight;
             graphics.SetClip(targetRectangle);
@@ -291,7 +291,7 @@ namespace Common.MacroProgramming
             graphics.DrawString(headlineString, SubcollectionNameFont, SubcollectionNameBrush,
                 new RectangleF(0, 0, width, topMarginHeight));
             graphics.DrawString(_signal.FriendlyName ?? "", FriendlyNameFont, FriendlyNameBrush,
-                new RectangleF(0, topMarginHeight -10, width, topMarginHeight));
+                new RectangleF(0, topMarginHeight/2, width, topMarginHeight));
             graphics.DrawString(rangeMaxValue, ScaleFont, ScaleFontBrush, new RectangleF(0, 0, width, topMarginHeight),
                 new StringFormat {Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far});
             graphics.DrawString(rangeMinValue, ScaleFont, ScaleFontBrush,
@@ -300,7 +300,7 @@ namespace Common.MacroProgramming
 
             if (_signal is TextSignal)
             {
-                var stringRectangle = new Rectangle(targetRectangle.Location.X, targetRectangle.Location.Y + (topMarginHeight *2),targetRectangle.Width, targetRectangle.Height - (topMarginHeight*2));
+                var stringRectangle = new Rectangle(targetRectangle.Location.X, targetRectangle.Location.Y + topMarginHeight,targetRectangle.Width, targetRectangle.Height - topMarginHeight);
                 var stringToDisplay = (_signal as TextSignal).State;
                 if (stringToDisplay == null) stringToDisplay = "";
                 var stringFormat = new StringFormat();

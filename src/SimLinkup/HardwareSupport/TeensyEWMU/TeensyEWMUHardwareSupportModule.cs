@@ -177,7 +177,7 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
                 {
                     Category = "Inputs from Simulation",
                     CollectionName = "Electronic Warfare Prime Panel",
-                    FriendlyName = "EWPI Chaff/Flare Display Text",
+                    FriendlyName = "EWPI Chaff/Flare Status Window Display Text",
                     Id = "TeensyEWMU__EWPI_Chaff_Flare_Display_Text",
                     Index = 0,
                     PublisherObject = this,
