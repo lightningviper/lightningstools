@@ -242,9 +242,9 @@ namespace F16CPD.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("RotateNoneFlipNone")]
-        public global::System.Drawing.RotateFlipType Rotation {
+        public global::Common.Drawing.RotateFlipType Rotation {
             get {
-                return ((global::System.Drawing.RotateFlipType)(this["Rotation"]));
+                return ((global::Common.Drawing.RotateFlipType)(this["Rotation"]));
             }
             set {
                 this["Rotation"] = value;
