@@ -1,7 +1,7 @@
 @ECHO OFF
 :start
 SET MASTERBUILDDIR=%~dp0
-IF NOT EXIST "%MASTERBUILDDIR%nuget.exe" bitsadmin /transfer Nuget /dynamic /download /priority HIGH https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe "%MASTERBUILDDIR%nuget.exe" 
+IF NOT EXIST "%MASTERBUILDDIR%nuget.exe" bitsadmin /transfer Nuget /dynamic /download /priority HIGH https://dist.nuget.org/win-x86-commandline/latest/nuget.exe "%MASTERBUILDDIR%nuget.exe" 
 SET EnableNuGetPackageRestore=true
 
 CALL %MASTERBUILDDIR%GetVsWhere.bat
