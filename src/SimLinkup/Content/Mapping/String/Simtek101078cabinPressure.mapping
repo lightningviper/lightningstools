@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO SIMTEK HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- CABIN PRESSURE ALTIMETER-->
+     <SignalMapping>
+      <!-- F4 CABIN PRESSURE ALTIMETER OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CABIN_PRESS__CABIN_PRESS_FEET_MSL</Id>
+      </Source>
+      <!-- SIMTEK CABIN PRESSURE ALTIMETER INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>101078_CabinAlt_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *************************************************************************************-->
+    <!-- MAPPINGS FROM SIMTEK HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *************************************************************************************-->
+    <!-- CABIN PRESSURE ALTIMETER   -->
+    <SignalMapping>
+      <!-- SIMTEK CABIN ALTIMETER INDICATOR HARDWARE SUPPORT MODULE CABIN PRESSURE ALTIMETER OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>101078_CabinAlt_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 16 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][16]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>

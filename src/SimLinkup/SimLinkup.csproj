@@ -148,11 +148,13 @@
     <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100207_110HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100295HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek10058201HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101078HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101079HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101088HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek10108902HardwareSupportModule.cs" />
@@ -486,6 +488,9 @@
     </Content>
     <Content Include="Content\Mapping\TeensyVectorDrawing\TeensyVectorDrawingHardwareSupportModule.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\String\Simtek101078cabinPressure.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">

@@ -18,10 +18,18 @@ namespace AnalogDevices.DeviceCommands
             //var devs = WinUsbDevice.AllDevices.ToArray();
             foreach (var device in devs)
             {
-                if (device == null || device.Vid != 0x0456 || (ushort)device.Pid != 0xB20F && (ushort)device.Pid != 0xB20E)
+                try
+                {
+                    if (device == null || device.Vid != 0x0456 || (ushort)device.Pid != 0xB20F && (ushort)device.Pid != 0xB20E)
+                    {
+                        continue;
+                    }
+                }
+                catch
                 {
                     continue;
                 }
+
                 if (!discoveredDevices.Contains(device.SymbolicName))
                 {
                     var newDevice = new DenseDacEvalBoard(device);
