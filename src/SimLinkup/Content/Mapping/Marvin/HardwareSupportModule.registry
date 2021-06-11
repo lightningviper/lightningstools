@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<HardwareSupportModuleRegistry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HardwareSupportModules>
+    <Module>SimLinkup.HardwareSupport.AnalogDevices.AnalogDevicesHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+    <!--<Module>SimLinkup.HardwareSupport.Phcc.PhccHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.DirectInput.DirectInputHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Astronautics.Astronautics12871HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101088HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <Module>SimLinkup.HardwareSupport.Simtek.Simtek100194HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek100285HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek10058201HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek10058102HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.AMI.AMI900158001HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.AMI.AMI9001584HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.AMI.AMI900157501HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek100335015HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek100295HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101091HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek100207HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek100216HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek100294HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101090HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Malwin.Malwin246102HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Malwin.Malwin19581HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101081HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101082HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101084HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek10108902HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Lilbern.Lilbern3239HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.AMI.AMI900278002HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Gould.GouldHS070D51341HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Simtek.Simtek101079HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Westin.Westin521993HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Henk.ADI.HenkF16ADISupportBoardHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+    <!--<Module>SimLinkup.HardwareSupport.Henk.SDI.HenkSDIHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>-->
+  </HardwareSupportModules>
+</HardwareSupportModuleRegistry>
