@@ -14,8 +14,8 @@ namespace AnalogDevices.DeviceCommands
         {
             var discoveredDevices = new List<string>();
             var toReturn = new List<IDenseDacEvalBoard>();
-            var devs = LibUsbDevice.AllDevices.ToArray();
-            //var devs = WinUsbDevice.AllDevices.ToArray();
+            //var devs = LibUsbDevice.AllDevices.ToArray();
+            var devs = WinUsbDevice.AllDevices.ToArray();
             foreach (var device in devs)
             {
                 try
