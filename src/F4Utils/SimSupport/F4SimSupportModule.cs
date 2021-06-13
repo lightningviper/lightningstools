@@ -1926,10 +1926,11 @@ namespace F4Utils.SimSupport
         private void CreateSimCommandsList()
         {
             _simCommands.Clear();
-            foreach (Callbacks callback in Enum.GetValues(typeof(Callbacks)))
+            var callbacks = Enum.GetValues(typeof(Callbacks));
+            foreach (Callbacks callback in callbacks)
             {
                 var category = EnumAttributeReader.GetAttribute<CategoryAttribute>(callback).Category;
-                if (string.Compare(category, "NOOP", StringComparison.OrdinalIgnoreCase) > -1) continue;
+                if (category.ToUpper() ==  "NOOP") continue;
 
                 var subCategory = EnumAttributeReader.GetAttribute<SubCategoryAttribute>(callback).SubCategory;
                 var description = EnumAttributeReader.GetAttribute<DescriptionAttribute>(callback).Description;
