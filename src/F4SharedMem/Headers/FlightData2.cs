@@ -129,7 +129,7 @@ namespace F4SharedMem.Headers
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public EWMU_LineOfText[] EWMULines;  //16 usable chars
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public EWMU_LineOfText[] EWPILines;  //8 usable chars
+        public EWPI_LineOfText[] EWPILines;  //8 usable chars
 
     }
 
