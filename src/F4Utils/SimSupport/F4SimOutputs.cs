@@ -371,6 +371,7 @@
         FLIGHT_CONTROL__RUN,
         FLIGHT_CONTROL__FAIL,
 
+        RWR__POWER_ON_FLAG,
         RWR__OBJECT_COUNT,
         RWR__SYMBOL_ID,
         RWR__BEARING_DEGREES,

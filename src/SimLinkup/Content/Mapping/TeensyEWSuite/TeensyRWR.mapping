@@ -5,7 +5,19 @@
     <!-- *********************************************************************-->
     <!-- MAPPINGS FROM F4 SIM VALUES TO TEENSYRWR HARDWARE SUPPORT MODULE INPUTS -->
     <!-- *********************************************************************-->
-
+    <!-- RWR POWER ON FLAG INPUT-->
+    <SignalMapping>
+      <!-- F4 RWR POWER ON FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_RWR__POWER_ON_FLAG</Id>
+      </Source>
+      <!-- TeensyRWR RWR POWER ON FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>TeensyRWR__RWR_Power_On_Flag</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+    
     <!-- RWR ADDITIONAL INFO INPUT-->
     <SignalMapping>
       <!-- F4 RWR ADDITIONAL INFO OUTPUT-->

@@ -1611,6 +1611,13 @@ namespace F4Utils.SimSupport
                     ((DigitalSignal) output).State = ((LightBits3) _lastFlightData.lightBits3 & LightBits3.FlcsBitFail) == LightBits3.FlcsBitFail;
                     break;
 
+                case F4SimOutputs.RWR__POWER_ON_FLAG:
+                    ((DigitalSignal)output).State =
+                        (((PowerBits)_lastFlightData.powerBits) & PowerBits.BusPowerNonEssential) == PowerBits.BusPowerNonEssential &&
+                        (((LightBits2)_lastFlightData.lightBits2) & LightBits2.AuxPwr) == LightBits2.AuxPwr &&
+                        (((HsiBits)_lastFlightData.hsiBits) & HsiBits.Flying) == HsiBits.Flying;
+                    break;
+
                 case F4SimOutputs.RWR__OBJECT_COUNT:
                     SetOutput((AnalogSignal) output, _lastFlightData.RwrObjectCount);
                     break;
@@ -2369,6 +2376,7 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "FLIGHT CONTROL", "FAIL Indicator Light", F4SimOutputs.FLIGHT_CONTROL__FAIL, null, typeof(bool)));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Object Count", F4SimOutputs.RWR__OBJECT_COUNT, null, typeof(int)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Power On Flag", F4SimOutputs.RWR__POWER_ON_FLAG, null, typeof(bool)));
             for (var i = 0; i < 64; i++)
             {
                 AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Symbol ID", F4SimOutputs.RWR__SYMBOL_ID, i, typeof(int), Int32.MinValue, Int32.MaxValue));

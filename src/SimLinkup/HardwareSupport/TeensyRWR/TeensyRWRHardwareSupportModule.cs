@@ -52,6 +52,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private readonly DigitalSignal[] _digitalInputSignals;
         private readonly TextSignal[] _textInputSignals;
 
+        private DigitalSignal _rwrPowerOnFlag;
         private readonly AnalogSignal[] _rwrObjectBearingInputSignals = new AnalogSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly AnalogSignal[] _rwrObjectLethalityInputSignals = new AnalogSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly DigitalSignal[] _rwrObjectMissileActivityFlagInputSignals = new DigitalSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
@@ -59,6 +60,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private readonly DigitalSignal[] _rwrObjectNewDetectionFlagInputSignals =new DigitalSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly DigitalSignal[] _rwrObjectSelectedFlagInputSignals =new DigitalSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly AnalogSignal[] _rwrObjectSymbolIDInputSignals = new AnalogSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
+
         private AnalogSignal _magneticHeadingDegreesInputSignal;
         private TextSignal _rwrInfoInputSignal;
         private AnalogSignal _rwrSymbolCountInputSignal;
@@ -453,6 +455,26 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             };
             analogSignalsToReturn.Add(_bytesSent);
 
+            {
+                var thisSignal = new DigitalSignal
+                {
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
+                    FriendlyName = $"RWR Power On Flag",
+                    Id = $"TeensyRWR__RWR_Power_On_Flag",
+                    Index = 0,
+                    PublisherObject = this,
+                    Source = this,
+                    SourceFriendlyName = FriendlyName,
+                    SourceAddress = _config.COMPort,
+                    SubSource = null,
+                    SubSourceFriendlyName = null,
+                    SubSourceAddress = null,
+                    State = false
+                };
+                _rwrPowerOnFlag = thisSignal;
+                digitalSignalsToReturn.Add(thisSignal);
+            }
 
             analogSignals = analogSignalsToReturn.ToArray();
             digitalSignals = digitalSignalsToReturn.ToArray();
@@ -464,6 +486,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             const float RADIANS_PER_DEGREE = 0.01745329252F;
             var instrumentState = new InstrumentState
             {
+                PowerOn = _rwrPowerOnFlag.State,
                 bearing = _rwrObjectBearingInputSignals.OrderBy(x => x.Index).Select(x => (float)(x.State * RADIANS_PER_DEGREE)).ToArray(),
                 ChaffCount = (float)_chaffCountInputSignal.State,
                 FlareCount = (float)_flareCountInputSignal.State,

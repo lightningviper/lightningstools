@@ -22,7 +22,10 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             if (_rwrRenderer != null)
             {
                 _rwrRenderer.InstrumentState = instrumentState;
-                _rwrRenderer.Render(drawingContext);
+                if (_rwrRenderer.InstrumentState.PowerOn)
+                {
+                    _rwrRenderer.Render(drawingContext);
+                }
             }
         }
         public void Render(Graphics destinationGraphics, Rectangle destinationRectangle, InstrumentState instrumentState, bool formatForVectorDisplay=false)
@@ -31,7 +34,14 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             if (_rwrRenderer != null)
             {
                 _rwrRenderer.InstrumentState = instrumentState;
-                _rwrRenderer.Render(destinationGraphics, destinationRectangle);
+                if (_rwrRenderer.InstrumentState.PowerOn)
+                {
+                    _rwrRenderer.Render(destinationGraphics, destinationRectangle);
+                }
+                else
+                {
+                    destinationGraphics.FillRectangle(System.Drawing.Brushes.Black, destinationRectangle);
+                }
             }
         }
         private void CreateRWRRenderer(byte[] rwrInfoArray, bool formatForVectorDisplay=false)
