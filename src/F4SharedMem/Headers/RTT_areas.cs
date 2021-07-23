@@ -13,9 +13,11 @@ namespace F4SharedMem.Headers
         RTT_MFDLEFT,
         RTT_MFDRIGHT,
         RTT_HMS,
-		RTT_EWMU,
+#if EWMU_AND_EWPI_PATCH_APPLIED
+        RTT_EWMU,
 		RTT_EWPI_CHAFF_FLARE,
 		RTT_EWPI_JAMMER_WINDOW,
+#endif
         RTT_noOfAreas
     };
 }

@@ -40,7 +40,11 @@ namespace F4Utils.SimSupport
         private readonly MorseCode _morseCodeGenerator = new MorseCode();
         private bool _disposed;
         private bool _markerBeaconMorseCodeState;
-
+#if EWMU_AND_EWPI_PATCH_APPLIED
+        private const int EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM = 18;
+#else
+        private const int EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM = Int32.MaxValue;
+#endif
         public Falcon4SimSupportModule()
         {
             _morseCodeGenerator.CharactersPerMinute = 53;
@@ -893,7 +897,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1:
-                    if (_lastFlightData.VersionNum2 < 18)
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
                     {
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var ewmuLine1String = string.Empty;
@@ -934,14 +938,16 @@ namespace F4Utils.SimSupport
                         }
                         ((TextSignal)output).State = (ewmuLine1String ?? "").PadRight(16);
                     }
+#if EWMU_AND_EWPI_PATCH_APPLIED
                     else
                     {
                         ((TextSignal)output).State = (_lastFlightData.EWMULines !=null && _lastFlightData.EWMULines.Length >0 && _lastFlightData.EWMULines[0] != null ? _lastFlightData.EWMULines[0] : "").PadRight(16);
                     }
+#endif
                     break;
 
                 case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_2:
-                    if (_lastFlightData.VersionNum2 < 18)
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
                     {
                         var ewmuLine2String = string.Empty;
                         var chaffCount = _lastFlightData.ChaffCount;
@@ -968,14 +974,15 @@ namespace F4Utils.SimSupport
                         }
                         ((TextSignal)output).State = (ewmuLine2String ?? "").PadRight(16);
                     }
+#if EWMU_AND_EWPI_PATCH_APPLIED
                     else
                     {
                         ((TextSignal)output).State = (_lastFlightData.EWMULines !=null && _lastFlightData.EWMULines.Length >1  && _lastFlightData.EWMULines[1] != null ? _lastFlightData.EWMULines[1] : "").PadRight(16);
                     }
+#endif
                     break;
-
                 case F4SimOutputs.EWPI__CHAFFFLARE_DISPLAYTEXT:
-                    if (_lastFlightData.VersionNum2 < 18)
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
                     {
                         var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
                         var ewpiChaffFlareString = string.Empty;
@@ -1064,15 +1071,16 @@ namespace F4Utils.SimSupport
                         _lastChaffLow = chaffLow;
                         _lastFlareLow = flareLow;
                     }
+#if EWMU_AND_EWPI_PATCH_APPLIED
                     else
                     {
                         ((TextSignal)output).State = (_lastFlightData.EWPILines !=null && _lastFlightData.EWPILines.Length >0 && _lastFlightData.EWPILines[0] != null ? _lastFlightData.EWPILines[0]: "").PadRight(8);
                     }
-
+#endif
                     break;
 
                 case F4SimOutputs.EWPI__JMR_DISPLAYTEXT:
-                    if (_lastFlightData.VersionNum2 < 18)
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
                     {
                         var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
                         var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
@@ -1094,10 +1102,12 @@ namespace F4Utils.SimSupport
 
                         ((TextSignal)output).State = ((jammerModeString ?? "") + (jammerStatusString ?? "")).PadRight(8);
                     }
+#if EWMU_AND_EWPI_PATCH_APPLIED
                     else
                     {
                         ((TextSignal)output).State = (_lastFlightData.EWPILines != null && _lastFlightData.EWPILines.Length > 1 && _lastFlightData.EWPILines[1] != null ? _lastFlightData.EWPILines[1] : "").PadRight(8);
                     }
+#endif
                     break;
 
                 case F4SimOutputs.ELEC__FLCS_PMG:

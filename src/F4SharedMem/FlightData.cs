@@ -67,6 +67,7 @@ namespace F4SharedMem
                     {
                         PopulateCallsignLineOfText(data, currentField, thisFlightDataField);
                     }
+#if EWMU_AND_EWPI_PATCH_APPLIED
                     else if (currentFieldType == typeof(EWMU_LineOfText[]))
                     {
                         PopulateEWMULineOfText(data, currentField, thisFlightDataField);
@@ -75,6 +76,7 @@ namespace F4SharedMem
                     {
                         PopulateEWPILineOfText(data, currentField, thisFlightDataField);
                     }
+#endif
                     else
                     {
                         var currentValue = (Array)currentField.GetValue(data);
@@ -140,6 +142,7 @@ namespace F4SharedMem
             }
             thisField.SetValue(this, valuesToAssign);
         }
+#if EWMU_AND_EWPI_PATCH_APPLIED
         private void PopulateEWMULineOfText(object data, FieldInfo currentField, FieldInfo thisField)
         {
             var currentValue = (EWMU_LineOfText[])currentField.GetValue(data);
@@ -172,7 +175,7 @@ namespace F4SharedMem
             }
             thisField.SetValue(this, valuesToAssign);
         }
-
+#endif
         private void PopulateOSBLabel(object data, FieldInfo currentField, FieldInfo thisField)
         {
             var currentValue = (OSBLabel[])currentField.GetValue(data);
@@ -397,10 +400,11 @@ namespace F4SharedMem
         // VERSION 16
         public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
 
-        // VERSION 18
+#if EWMU_AND_EWPI_PATCH_APPLIED
+        // VERSION 18?
         public string[] EWMULines;  //16 usable chars
         public string[] EWPILines;  //8 usable chars
-
+#endif
         public OptionSelectButtonLabel[] leftMFD;
         public OptionSelectButtonLabel[] rightMFD;
         public object ExtensionData;

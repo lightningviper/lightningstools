@@ -25,7 +25,7 @@ namespace F4SharedMem.Headers
         // 15: added MiscBits, BettyBits, radar altitude, bingo fuel, cara alow, bullseye, BMS version information, string area size/time, drawing area size
         // 16: added turn rate
         // 17: added Flcs_Flcc, SolenoidStatus to MiscBits
-        // 18: added EWMULines, EWPILines; added EWMU and EWPI RTT areas
+        // 18?: added EWMULines, EWPILines; added EWMU and EWPI RTT areas
 
         public const int RWRINFO_SIZE = 512;
         public const int MAX_CALLSIGNS = 32;
@@ -125,12 +125,13 @@ namespace F4SharedMem.Headers
         // VERSION 16
         float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
 
-        //VERSION 18
+#if EWMU_AND_EWPI_PATCH_APPLIED
+        //VERSION 18?
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public EWMU_LineOfText[] EWMULines;  //16 usable chars
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public EWPI_LineOfText[] EWPILines;  //8 usable chars
-
+#endif
     }
 
 }
