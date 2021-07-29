@@ -11,7 +11,7 @@ namespace Pdf2Img
         void Open(Stream stream);
         void Open(string path);
         void Close();
-        Image GetPage(int xDpi, int yDpi, int pageNumber);
+        Image GetPage(int dpi, int pageNumber);
     }
 
     public class PdfRasterizerProxy : IPdfRasterizer
@@ -43,9 +43,9 @@ namespace Pdf2Img
             _ghostscriptRasterizer.Open(path, _ghostscriptNativeDll.Value);
         }
 
-        public Image GetPage(int xDpi, int yDpi, int pageNumber)
+        public Image GetPage(int dpi, int pageNumber)
         {
-            return _ghostscriptRasterizer.GetPage(xDpi, yDpi, pageNumber);
+            return _ghostscriptRasterizer.GetPage(dpi, pageNumber);
         }
 
         public int PageCount => _ghostscriptRasterizer.PageCount;
