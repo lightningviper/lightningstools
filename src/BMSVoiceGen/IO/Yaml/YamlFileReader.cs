@@ -16,7 +16,7 @@ namespace BMSVoiceGen.IO.Yaml
             using (var input = new StreamReader(fs))
             {
                 var deserializer = new DeserializerBuilder()
-                    .WithNamingConvention(new HyphenatedNamingConvention())
+                    .WithNamingConvention(HyphenatedNamingConvention.Instance)
                     .Build();
                 return deserializer.Deserialize<T>(input);
             }
