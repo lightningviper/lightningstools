@@ -1,0 +1,16 @@
+@ECHO OFF
+SET MASTERBUILDDIR=%~dp0
+
+SET SOLUTION=""
+SET SOLUTION=%1
+IF "%SOLUTION%"=="" SET SOLUTION=%MASTERBUILDDIR%BuildAll.sln
+FOR %%S in (%SOLUTION%) DO SET SOLUTION_PATH=%%~dpS
+
+IF EXIST "%SOLUTION_PATH%\packages" (
+  ECHO Removing packages for solution: %SOLUTION%
+  RD /S /Q "%SOLUTION_PATH%\packages"
+)
+:END
+
+
+
