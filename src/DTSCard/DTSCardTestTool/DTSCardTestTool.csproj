@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A6208C70-ACE3-4997-82BA-D39CA7102DC0}</ProjectGuid>
+    <ProjectGuid>{A6208C70-ACE3-4997-82BA-D39CA7102DC1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DTSCardTestTool</RootNamespace>
@@ -126,7 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTSCard.vcxproj">
-      <Project>{827ecf0c-056e-4246-97a9-d1333bddd9cb}</Project>
+      <Project>{827ecf0c-056e-4246-97a9-d1333bddd9cc}</Project>
       <Name>DTSCard</Name>
     </ProjectReference>
   </ItemGroup>

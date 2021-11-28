@@ -724,18 +724,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9B874BA8AEEB0194DE1278256CD4499D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B4921FB3FC6956A2C6AD9011AEFD81FA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1403,6 +1391,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_59373667C03E3F3881C9DD8C343A6E53"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9B874BA8AEEB0194DE1278256CD4499D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B4921FB3FC6956A2C6AD9011AEFD81FA"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -5102,7 +5102,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DTS Card Test Tool"
         "ProductCode" = "8:{2660AB54-F702-42BD-B96E-5197D40E60C5}"
-        "PackageCode" = "8:{40859069-DEE2-4FC1-89E7-2A206A0F1BBE}"
+        "PackageCode" = "8:{3E6EF30F-F433-47AA-B080-EE733C9B2182}"
         "UpgradeCode" = "8:{E100ADEA-B05B-4740-A8BC-E03ECC187D53}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -5657,7 +5657,7 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{A6208C70-ACE3-4997-82BA-D39CA7102DC0}"
+            "OutputProjectGuid" = "8:{A6208C70-ACE3-4997-82BA-D39CA7102DC1}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

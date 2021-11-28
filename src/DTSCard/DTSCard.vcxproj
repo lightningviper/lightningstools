@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{827ECF0C-056E-4246-97A9-D1333BDDD9CB}</ProjectGuid>
+    <ProjectGuid>{827ECF0C-056E-4246-97A9-D1333BDDD9CC}</ProjectGuid>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>DTSCard</RootNamespace>
