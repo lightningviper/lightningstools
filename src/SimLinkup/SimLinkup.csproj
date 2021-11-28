@@ -145,6 +145,9 @@
     <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin19581HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\NiclasMorin\DTSCard\HydraulicPressureSynchroHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100207_110HardwareSupportModule.cs" />
@@ -226,6 +229,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Content\Mapping\NiclasMorinDTSCard\HydPressureA.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NiclasMorinDTSCard\DTSCardSerials.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Mapping\Nigel\AMI9001584fuelquantityindicator.mapping.disabled">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -437,6 +446,13 @@
     <Content Include="Content\Mapping\TeensyRWR\TeensyRWRHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Mapping\NiclasMorinDTSCard\HardwareSupportModule.registry">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NiclasMorinDTSCard\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Content\Mapping\Lightning\Simtek101081altimeter.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -733,6 +749,10 @@
     <ProjectReference Include="..\Common\Win32\Common.Win32.csproj">
       <Project>{188090e9-8b00-457b-85eb-f48bcdd94b0b}</Project>
       <Name>Common.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTSCard\DTSCard.vcxproj">
+      <Project>{827ecf0c-056e-4246-97a9-d1333bddd9cb}</Project>
+      <Name>DTSCard</Name>
     </ProjectReference>
     <ProjectReference Include="..\F4KeyFile\F4KeyFile.csproj">
       <Project>{eeed5595-6eb8-473d-b487-334b45d753a6}</Project>
