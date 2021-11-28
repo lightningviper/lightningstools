@@ -5224,7 +5224,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AE01B1ED3D2B4790881BF78831BF0241"
             {
-            "Name" = "8:DTSCard AD536xx Eval Board Test Tool"
+            "Name" = "8:DTSCard Test Tool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
