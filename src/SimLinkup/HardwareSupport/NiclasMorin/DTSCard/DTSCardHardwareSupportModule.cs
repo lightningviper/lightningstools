@@ -40,39 +40,46 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         public override void Synchronize()
         {
             base.Synchronize();
-            var angleToSet = GetAngleForInput(_inputSignalFromSim.State); 
+            var angleToSet = GetOutputAngleForLinearInputValue(_inputSignalFromSim.State); 
             if (angleToSet != _lastAngle)
             {
                 SafeSetAngle(angleToSet);
             }
             SafeUpdate();
         }
-        private double GetAngleForInput(double input)
+        private double GetOutputAngleForLinearInputValue(double inputValue)
         {
             var mappingTableLowSideEntry = _dtsCardDeviceConfig.CalibrationData
-                                                .Where(x => (x.Input <= input))
+                                                .Where(x => (x.Input <= inputValue))
                                                 .OrderBy(x => x.Input)
-                                                .FirstOrDefault();
+                                                .LastOrDefault();
 
             var mappingTableHighSideEntry = _dtsCardDeviceConfig.CalibrationData
-                                                .Where(x => (x.Input >= input))
+                                                .Where(x => (x.Input >= inputValue))
                                                 .OrderBy(x => x.Input)
                                                 .FirstOrDefault();
-            var inputRangeWidth = Math.Abs(
-                Math.Abs(mappingTableHighSideEntry.Input)
-                - Math.Abs(mappingTableLowSideEntry.Input)
-                );
+            if (mappingTableLowSideEntry.Input == mappingTableHighSideEntry.Input)
+            {
+                return mappingTableLowSideEntry.Output;
+            }
+            else
+            {
+                var inputRangeWidth = Math.Abs(
+                    Math.Abs(mappingTableHighSideEntry.Input)
+                    - Math.Abs(mappingTableLowSideEntry.Input)
+                    );
 
-            var inputAsPctOfInputRange = (input - mappingTableLowSideEntry.Input) / inputRangeWidth;
+                var inputAsPctOfInputRange = (inputValue - mappingTableLowSideEntry.Input) / inputRangeWidth;
 
-            var outputRangeWidth = Math.Abs(
-                Math.Abs(mappingTableHighSideEntry.Output)
-                - Math.Abs(mappingTableLowSideEntry.Output)
-                );
+                var outputRangeWidth = Math.Abs(
+                    Math.Abs(mappingTableHighSideEntry.Output)
+                    - Math.Abs(mappingTableLowSideEntry.Output)
+                    );
 
-            var output = mappingTableLowSideEntry.Output + (outputRangeWidth * inputAsPctOfInputRange);
+                var output = mappingTableLowSideEntry.Output + (outputRangeWidth * inputAsPctOfInputRange);
 
-            return output;
+                return output;
+            }
         }
         private void SafeUpdate()
         {
