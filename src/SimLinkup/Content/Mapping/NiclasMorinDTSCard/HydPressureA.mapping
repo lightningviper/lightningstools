@@ -3,7 +3,7 @@
   <SignalMappings>
 
     <!-- *********************************************************************-->
-    <!-- MAPPINGS FROM F4 SIM VALUES TO NICLAS MORIN DTS CARD HYDRAUIC PRESSURE HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO NICLAS MORIN DTS CARD HARDWARE SUPPORT MODULE INPUT -->
     <!-- *********************************************************************-->
     <!-- HYDRAULIC PRESSURE A-->
      <SignalMapping>
@@ -13,20 +13,7 @@
       </Source>
       <!--  HYDRAULIC PRESSURE A INPUT-->
       <Destination xsi:type="AnalogSignal">
-        <Id>Niclas_Morin_DTS_Card_Hydraulic_Pressure_A_From_Sim</Id>
-      </Destination>
-    </SignalMapping>
-
-
-    <!-- HYDRAULIC PRESSURE B-->
-    <SignalMapping>
-      <!-- F4 HYDRAULIC PRESSURE B OUTPUT -->
-      <Source xsi:type="AnalogSignal">
-        <Id>F4_HYD_PRESSURE_B__PSI</Id>
-      </Source>
-      <!--  HYDRAULIC PRESSURE B INPUT-->
-      <Destination xsi:type="AnalogSignal">
-        <Id>Niclas_Morin_DTS_Card_Hydraulic_Pressure_B_From_Sim</Id>
+        <Id>Niclas_Morin_DTS_Card["HYDA"]_Input_From_Sim</Id>
       </Destination>
     </SignalMapping>
   </SignalMappings>

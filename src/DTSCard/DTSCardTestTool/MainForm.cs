@@ -60,11 +60,13 @@ namespace DTSCardTestTool
             }
             _dtsCard = new DTSCardManaged();
             _dtsCard.SetSerial(txtSerial.Text);
+            gbSetAngle.Enabled = false;
             var result = _dtsCard.Init();
             if (result == (int)DTSCardOperationStatus.Success)
             {
                 ClearError(txtSerial);
-                SendAngleUpdate();
+                gbSetAngle.Enabled = true;
+                SetAngle();
             }
             else
             {
@@ -108,17 +110,26 @@ namespace DTSCardTestTool
         }
         private void nudAngle_ValueChanged(object sender, EventArgs e)
         {
-            SendAngleUpdate();
+            SetAngle();
         }
 
-        private void SendAngleUpdate()
+        private void SetAngle()
         {
             if (_dtsCard != null)
             {
-                _dtsCard.SetAngle((double)nudAngle.Value);
-                var result = _dtsCard.Update();
+                var result = _dtsCard.SetAngle((double)nudAngle.Value);
                 SetError(txtSerial, result);
+                UpdateAndWaitForCompletion();
             }
+        }
+        private void UpdateAndWaitForCompletion()
+        {
+            int result = -1;
+            do {
+                result = _dtsCard.Update();
+            }
+            while (result == (int)DTSCardOperationStatus.Timeout);
+            SetError(txtSerial, result);
         }
     }
 }

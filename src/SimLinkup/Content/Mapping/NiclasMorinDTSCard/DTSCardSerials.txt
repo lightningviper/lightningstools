@@ -1,3 +1,0 @@
-﻿//Assign your DTS card serials (identifiers) per the below table.  
-Hydraulic Pressure A:HYDA
-Hydraulic Pressure A:HYDB

@@ -5102,7 +5102,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DTS Card Test Tool"
         "ProductCode" = "8:{2660AB54-F702-42BD-B96E-5197D40E60C5}"
-        "PackageCode" = "8:{3E6EF30F-F433-47AA-B080-EE733C9B2182}"
+        "PackageCode" = "8:{653B4745-6F1B-4D69-873F-C99AFBAE0217}"
         "UpgradeCode" = "8:{E100ADEA-B05B-4740-A8BC-E03ECC187D53}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

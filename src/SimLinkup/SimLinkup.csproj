@@ -147,6 +147,8 @@
     <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\NiclasMorin\DTSCard\HydraulicPressureSynchroHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
@@ -230,9 +232,6 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Content\Mapping\NiclasMorinDTSCard\HydPressureA.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\NiclasMorinDTSCard\DTSCardSerials.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\AMI9001584fuelquantityindicator.mapping.disabled">
@@ -518,6 +517,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\TeensyRWR\TeensyRWR.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NiclasMorinDTSCard\DTSCardHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">
