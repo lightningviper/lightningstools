@@ -7,11 +7,11 @@
     <!-- *********************************************************************-->
     <!-- FUEL FLOW-->
      <SignalMapping>
-      <!-- F4 FUEL FLOW OUTPUT -->
+      <!-- F4 FUEL FLOW OUTPUT FROM SIM-->
       <Source xsi:type="AnalogSignal">
         <Id>F4_FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR</Id>
       </Source>
-      <!--  FUEL FLOW SYNCHRO CARD INPUT-->
+      <!--  FUEL FLOW SYNCHRO CARD INPUT FROM SIM-->
       <Destination xsi:type="AnalogSignal">
         <Id>Niclas_Morin_DTS_Card["A1111"]_Input_From_Sim</Id>
       </Destination>
