@@ -13,7 +13,7 @@
       </Source>
       <!--  HYDRAULIC PRESSURE A SYNCHRO CARD ANGLE INPUT-->
       <Destination xsi:type="AnalogSignal">
-        <Id>Niclas_Morin_DTS_Card["HYD A"]_Input_From_Sim</Id>
+        <Id>Niclas_Morin_DTS_Card["A0000"]_Input_From_Sim</Id>
       </Destination>
     </SignalMapping>
   </SignalMappings>

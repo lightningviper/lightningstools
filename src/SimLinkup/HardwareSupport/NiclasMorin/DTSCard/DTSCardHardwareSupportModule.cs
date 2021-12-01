@@ -58,9 +58,10 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
                                                 .Where(x => (x.Input >= inputValue))
                                                 .OrderBy(x => x.Input)
                                                 .FirstOrDefault();
+
             if (mappingTableLowSideEntry.Input == mappingTableHighSideEntry.Input)
             {
-                return mappingTableLowSideEntry.Output;
+                return mappingTableLowSideEntry.Output % 360;
             }
             else
             {
@@ -72,11 +73,11 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
                 var inputAsPctOfInputRange = (inputValue - mappingTableLowSideEntry.Input) / inputRangeWidth;
 
                 var outputRangeWidth = Math.Abs(
-                    Math.Abs(mappingTableHighSideEntry.Output)
-                    - Math.Abs(mappingTableLowSideEntry.Output)
+                    Math.Abs(mappingTableHighSideEntry.Output % 360)
+                    - Math.Abs(mappingTableLowSideEntry.Output % 360)
                     );
-
-                var output = mappingTableLowSideEntry.Output + (outputRangeWidth * inputAsPctOfInputRange);
+                
+                var output = ((mappingTableLowSideEntry.Output % 360) + (outputRangeWidth * inputAsPctOfInputRange)) % 360;
 
                 return output;
             }
@@ -96,6 +97,13 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         {
             try
             {
+                if (_dtsCardDeviceConfig.DeadZone != null 
+                    && (angle > _dtsCardDeviceConfig.DeadZone.FromDegrees 
+                    && angle < _dtsCardDeviceConfig.DeadZone.ToDegrees))
+                {
+                    return;
+                }
+
                 _angleOutputSignal.State = angle;
                 var result = _dtsCardManaged.SetAngle(angle);
                 _lastAngle = angle;
@@ -134,8 +142,6 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         {
             _dtsCardManaged.SetSerial(_dtsCardDeviceConfig?.Serial);
             SafeInit();
-            SafeSetAngle(0);
-            SafeUpdate();
         }
         private void SafeInit()
         {

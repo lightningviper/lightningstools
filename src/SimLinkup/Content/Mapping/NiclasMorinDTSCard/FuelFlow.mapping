@@ -13,7 +13,7 @@
       </Source>
       <!--  FUEL FLOW SYNCHRO CARD INPUT-->
       <Destination xsi:type="AnalogSignal">
-        <Id>Niclas_Morin_DTS_Card["FUEL FLOW"]_Input_From_Sim</Id>
+        <Id>Niclas_Morin_DTS_Card["A1111"]_Input_From_Sim</Id>
       </Destination>
     </SignalMapping>
   </SignalMappings>

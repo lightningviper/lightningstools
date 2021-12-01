@@ -27,9 +27,17 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
     public class DeviceConfig
     {
         public string Serial { get; set; }
+        public DeadZone DeadZone { get; set; }
         [XmlArray("CalibrationData")]
         [XmlArrayItem(nameof(CalibrationPoint))]
         public CalibrationPoint[] CalibrationData { get; set; }
 
+    }
+
+    [Serializable]
+    public class DeadZone
+    {
+        public double FromDegrees { get; set; } = 0;
+        public double ToDegrees { get; set; } = 0;
     }
 }

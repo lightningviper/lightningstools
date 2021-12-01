@@ -522,6 +522,9 @@
     <Content Include="Content\Mapping\NiclasMorinDTSCard\DTSCardHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\NiclasMorinDTSCard\FuelFlow.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>

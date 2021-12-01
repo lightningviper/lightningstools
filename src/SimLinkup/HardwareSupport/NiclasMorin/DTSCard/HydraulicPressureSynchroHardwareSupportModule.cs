@@ -60,15 +60,21 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         }
         private void InitializeDigitalToSynchroCards()
         {
-            _hydA_DTSCard.SetSerial("HYDA");
-            _hydA_DTSCard.Init();
-            _hydA_DTSCard.SetAngle(0);
-            _hydA_DTSCard.Update();
+            try
+            {
+                _hydA_DTSCard.SetSerial("A1111");
+                _hydA_DTSCard.Init();
+                UpdateHydAOutputValues();
+            }
+            catch { }
 
-            _hydB_DTSCard.SetSerial("HYDB");
-            _hydB_DTSCard.Init();
-            _hydB_DTSCard.SetAngle(0);
-            _hydB_DTSCard.Update();
+            try
+            {
+                _hydB_DTSCard.SetSerial("HYDB");
+                _hydB_DTSCard.Init();
+                UpdateHydBOutputValues();
+            }
+            catch { }
         }
         public override void Render(Graphics g, Rectangle destinationRectangle)
         {
@@ -240,7 +246,7 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
             var hydAAngle = hydPressureAInput < 0
                     ? 0
                     : (hydPressureAInput > 5000
-                        ? 320.0000 
+                        ? 360.0000 
                         : (hydPressureAInput / 5000) * 360.0000);
 
             if (hydAAngle < 0)
@@ -251,8 +257,13 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
             {
                 hydAAngle = 360;
             }
-            _hydA_DTSCard.SetAngle(hydAAngle);
-            _hydA_DTSCard.Update();
+            
+            try
+            {
+                _hydA_DTSCard.SetAngle(hydAAngle);
+                _hydA_DTSCard.Update();
+            }
+            catch { }
         }
         private void UpdateHydBOutputValues()
         {
@@ -272,8 +283,12 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
             {
                 hydBAngle = 360;
             }
-            _hydB_DTSCard.SetAngle(hydBAngle);
-            _hydB_DTSCard.Update();
+            try
+            {
+                _hydB_DTSCard.SetAngle(hydBAngle);
+                _hydB_DTSCard.Update();
+            }
+            catch { }
 
         }
     }
