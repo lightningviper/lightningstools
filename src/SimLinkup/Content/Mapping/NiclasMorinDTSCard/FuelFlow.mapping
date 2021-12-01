@@ -5,15 +5,15 @@
     <!-- *********************************************************************-->
     <!-- MAPPINGS FROM F4 SIM VALUES TO NICLAS MORIN DTS CARD HARDWARE SUPPORT MODULE INPUT -->
     <!-- *********************************************************************-->
-    <!-- HYDRAULIC PRESSURE A-->
+    <!-- FUEL FLOW-->
      <SignalMapping>
-      <!-- F4 HYDRAULIC PRESSURE A OUTPUT -->
+      <!-- F4 FUEL FLOW OUTPUT -->
       <Source xsi:type="AnalogSignal">
-        <Id>F4_HYD_PRESSURE_A__PSI</Id>
+        <Id>F4_FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR</Id>
       </Source>
-      <!--  HYDRAULIC PRESSURE A SYNCHRO CARD ANGLE INPUT-->
+      <!--  FUEL FLOW SYNCHRO CARD INPUT-->
       <Destination xsi:type="AnalogSignal">
-        <Id>Niclas_Morin_DTS_Card["HYD A"]_Input_From_Sim</Id>
+        <Id>Niclas_Morin_DTS_Card["FUEL FLOW"]_Input_From_Sim</Id>
       </Destination>
     </SignalMapping>
   </SignalMappings>
