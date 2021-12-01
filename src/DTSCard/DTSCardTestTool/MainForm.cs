@@ -110,6 +110,14 @@ namespace DTSCardTestTool
         }
         private void nudAngle_ValueChanged(object sender, EventArgs e)
         {
+            if (nudAngle.Value >= 360)
+            {
+                nudAngle.Value -= 360;
+            }
+            else if (nudAngle.Value < 0)
+            {
+                nudAngle.Value = 360 - Math.Abs(nudAngle.Value);
+            }
             SetAngle();
         }
 

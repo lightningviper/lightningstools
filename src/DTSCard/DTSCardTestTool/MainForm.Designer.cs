@@ -53,9 +53,8 @@
             this.mainPanel.Controls.Add(this.gbSetAngle);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainPanel.Margin = new System.Windows.Forms.Padding(6);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(889, 319);
+            this.mainPanel.Size = new System.Drawing.Size(444, 166);
             this.mainPanel.TabIndex = 1;
             // 
             // gbSetSerialNum
@@ -63,9 +62,11 @@
             this.gbSetSerialNum.Controls.Add(this.lblSerial);
             this.gbSetSerialNum.Controls.Add(this.btnSetSerial);
             this.gbSetSerialNum.Controls.Add(this.txtSerial);
-            this.gbSetSerialNum.Location = new System.Drawing.Point(36, 32);
+            this.gbSetSerialNum.Location = new System.Drawing.Point(18, 17);
+            this.gbSetSerialNum.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbSetSerialNum.Name = "gbSetSerialNum";
-            this.gbSetSerialNum.Size = new System.Drawing.Size(821, 104);
+            this.gbSetSerialNum.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbSetSerialNum.Size = new System.Drawing.Size(410, 54);
             this.gbSetSerialNum.TabIndex = 12;
             this.gbSetSerialNum.TabStop = false;
             this.gbSetSerialNum.Text = "Digital to Synchro Card";
@@ -73,17 +74,19 @@
             // lblSerial
             // 
             this.lblSerial.AutoSize = true;
-            this.lblSerial.Location = new System.Drawing.Point(17, 45);
+            this.lblSerial.Location = new System.Drawing.Point(8, 23);
+            this.lblSerial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSerial.Name = "lblSerial";
-            this.lblSerial.Size = new System.Drawing.Size(91, 25);
+            this.lblSerial.Size = new System.Drawing.Size(46, 13);
             this.lblSerial.TabIndex = 2;
             this.lblSerial.Text = "Serial #:";
             // 
             // btnSetSerial
             // 
-            this.btnSetSerial.Location = new System.Drawing.Point(479, 37);
+            this.btnSetSerial.Location = new System.Drawing.Point(240, 19);
+            this.btnSetSerial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSetSerial.Name = "btnSetSerial";
-            this.btnSetSerial.Size = new System.Drawing.Size(326, 41);
+            this.btnSetSerial.Size = new System.Drawing.Size(163, 21);
             this.btnSetSerial.TabIndex = 0;
             this.btnSetSerial.Text = "Set &Serial and Initialize";
             this.btnSetSerial.UseVisualStyleBackColor = true;
@@ -91,10 +94,11 @@
             // 
             // txtSerial
             // 
-            this.txtSerial.Location = new System.Drawing.Point(108, 39);
+            this.txtSerial.Location = new System.Drawing.Point(54, 20);
+            this.txtSerial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSerial.MaxLength = 8;
             this.txtSerial.Name = "txtSerial";
-            this.txtSerial.Size = new System.Drawing.Size(355, 31);
+            this.txtSerial.Size = new System.Drawing.Size(180, 20);
             this.txtSerial.TabIndex = 1;
             // 
             // gbSetAngle
@@ -102,9 +106,11 @@
             this.gbSetAngle.Controls.Add(this.nudAngle);
             this.gbSetAngle.Controls.Add(this.lblAngle);
             this.gbSetAngle.Enabled = false;
-            this.gbSetAngle.Location = new System.Drawing.Point(36, 172);
+            this.gbSetAngle.Location = new System.Drawing.Point(18, 89);
+            this.gbSetAngle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbSetAngle.Name = "gbSetAngle";
-            this.gbSetAngle.Size = new System.Drawing.Size(624, 104);
+            this.gbSetAngle.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbSetAngle.Size = new System.Drawing.Size(312, 54);
             this.gbSetAngle.TabIndex = 11;
             this.gbSetAngle.TabStop = false;
             this.gbSetAngle.Text = "Set Angle";
@@ -112,23 +118,35 @@
             // nudAngle
             // 
             this.nudAngle.DecimalPlaces = 2;
-            this.nudAngle.Location = new System.Drawing.Point(118, 45);
+            this.nudAngle.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudAngle.Location = new System.Drawing.Point(59, 23);
+            this.nudAngle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudAngle.Maximum = new decimal(new int[] {
-            360,
+            361,
             0,
             0,
             0});
+            this.nudAngle.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.nudAngle.Name = "nudAngle";
-            this.nudAngle.Size = new System.Drawing.Size(120, 31);
+            this.nudAngle.Size = new System.Drawing.Size(60, 20);
             this.nudAngle.TabIndex = 13;
             this.nudAngle.ValueChanged += new System.EventHandler(this.nudAngle_ValueChanged);
             // 
             // lblAngle
             // 
             this.lblAngle.AutoSize = true;
-            this.lblAngle.Location = new System.Drawing.Point(39, 47);
+            this.lblAngle.Location = new System.Drawing.Point(20, 24);
+            this.lblAngle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAngle.Name = "lblAngle";
-            this.lblAngle.Size = new System.Drawing.Size(73, 25);
+            this.lblAngle.Size = new System.Drawing.Size(37, 13);
             this.lblAngle.TabIndex = 10;
             this.lblAngle.Text = "Angle:";
             // 
@@ -138,12 +156,11 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 319);
+            this.ClientSize = new System.Drawing.Size(444, 166);
             this.Controls.Add(this.mainPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "MainForm";
             this.Text = "DTS Card Test Tool";
             this.Load += new System.EventHandler(this.MainForm_Load);
