@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Common.HardwareSupport;
 using Common.MacroProgramming;
+using DTSCard;
 using log4net;
 namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
 {
@@ -16,6 +17,7 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         private double _lastAngle = double.MinValue;
         private global::DTSCard.DTSCardManaged _dtsCardManaged = new global::DTSCard.DTSCardManaged();
         private DeviceConfig _dtsCardDeviceConfig = null;
+        private DateTime _lastUpdateTime = DateTime.MinValue;
         private DTSCardHardwareSupportModule(DeviceConfig deviceConfig)
         {
             _dtsCardDeviceConfig = deviceConfig;
@@ -41,7 +43,7 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         {
             base.Synchronize();
             var angleToSet = GetOutputAngleForLinearInputValue(_inputSignalFromSim.State); 
-            if (angleToSet != _lastAngle)
+            if (angleToSet != _lastAngle || DateTime.Now.Subtract(_lastUpdateTime).TotalMilliseconds > 1000)
             {
                 SafeSetAngle(angleToSet);
             }
@@ -84,9 +86,11 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         }
         private void SafeUpdate()
         {
+            if (_dtsCardManaged == null) return;
             try
             {
                 _dtsCardManaged.Update();
+                _lastUpdateTime = DateTime.Now;
             }
             catch (Exception e)
             {
@@ -105,7 +109,7 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
                 }
 
                 _angleOutputSignal.State = angle;
-                var result = _dtsCardManaged.SetAngle(angle);
+                var result = _dtsCardManaged?.SetAngle(angle);
                 _lastAngle = angle;
             }
             catch (Exception e)
@@ -147,10 +151,17 @@ namespace SimLinkup.HardwareSupport.NiclasMorin.DTSCard
         {
             try
             {
-                _dtsCardManaged.Init();
+                var result = _dtsCardManaged.Init();
+                if (result != (int)DTSCardOperationStatus.Success)
+                {
+                    Log.Error($"Could not initialize DTS card with serial:{ _dtsCardDeviceConfig.Serial}");
+                    _dtsCardManaged = null;
+                }
+
             }
             catch (Exception e)
             {
+                _dtsCardManaged = null;
                 Log.Error(e.Message, e);
             }
         }
