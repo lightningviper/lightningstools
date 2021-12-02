@@ -149,7 +149,6 @@
     <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModuleConfig.cs" />
-    <Compile Include="HardwareSupport\NiclasMorin\DTSCard\HydraulicPressureSynchroHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100207_110HardwareSupportModule.cs" />
@@ -453,9 +452,9 @@
     <Content Include="Content\Mapping\NiclasMorinDTSCard\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\Mapping\Lightning\Simtek101081altimeter.mapping">
+    <Content Include="Content\Mapping\Lightning\Simtek101081altimeter.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Content\Mapping\TeensyEWMU\HardwareSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

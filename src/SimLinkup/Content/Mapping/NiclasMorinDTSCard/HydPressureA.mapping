@@ -7,11 +7,11 @@
     <!-- *********************************************************************-->
     <!-- HYDRAULIC PRESSURE A-->
      <SignalMapping>
-      <!-- F4 HYDRAULIC PRESSURE A OUTPUT -->
+      <!-- F4 HYDRAULIC PRESSURE A OUTPUT FROM SIM-->
       <Source xsi:type="AnalogSignal">
         <Id>F4_HYD_PRESSURE_A__PSI</Id>
       </Source>
-      <!--  HYDRAULIC PRESSURE A SYNCHRO CARD ANGLE INPUT-->
+      <!--  HYDRAULIC PRESSURE A SYNCHRO CARD INPUT FROM SIM-->
       <Destination xsi:type="AnalogSignal">
         <Id>Niclas_Morin_DTS_Card["A0000"]_Input_From_Sim</Id>
       </Destination>
