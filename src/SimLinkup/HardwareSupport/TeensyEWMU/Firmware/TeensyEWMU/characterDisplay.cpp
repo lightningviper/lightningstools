@@ -12,6 +12,7 @@ bool _displayIsBlanked = false;
 char _CMDSChars[CMDS_NUM_CHARACTERS_TO_DISPLAY] = {'\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3'};
 char _EWMUChars[EWMU_NUM_CHARACTERS_TO_DISPLAY] = {'\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3'};
 char _EWPIChars[EWPI_NUM_CHARACTERS_TO_DISPLAY] = {'\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3','\3'};
+
 uint8_t _CMDSConditionalBlankingBits;
 
 
@@ -73,8 +74,10 @@ void displayString(const char *chars, uint8_t numCharacters, uint8_t clockPin, u
     {
       for (uint8_t row = 0; row < CHARACTER_DISPLAY_NUM_ROWS; row++)
       {
+        noInterrupts();
+        
         digitalWriteFast(clockPin, HIGH); //raise CLOCK pin
-        conditionalDelayNanoseconds(DIGITAL_OUTPUT_PIN_RISE_TIME_NANOSECONDS); //wait for CLOCK pin to rise
+        conditionalDelayNanoseconds(CHARACTER_DISPLAY_CLOCK_LOW_TO_HIGH_TRANSITION_TIME_NANOSECONDS); //wait for CLOCK pin to rise
 
         uint8_t thisDisplayChip = ((uint8_t)((thisChar) / 4));
         bool blankAllCharactersOnThisDisplayChip = false;
@@ -90,21 +93,34 @@ void displayString(const char *chars, uint8_t numCharacters, uint8_t clockPin, u
         }
 
         bool dataVal = blankAllCharactersOnThisDisplayChip ? LOW : bitRead((font[(byte)chars[thisChar]][column]), ((CHARACTER_DISPLAY_NUM_ROWS - 1) - row)) ? HIGH : LOW;
-        
         digitalWriteFast(dataPin, dataVal); //set DATA pin value
+        if (dataVal) {
+          conditionalDelayNanoseconds(DIGITAL_OUTPUT_PIN_RISE_TIME_NANOSECONDS); //wait for DATA pin to rise
+        }
+        else {
+          conditionalDelayNanoseconds(DIGITAL_OUTPUT_PIN_FALL_TIME_NANOSECONDS); //wait for DATAL pin to fallll
+        }
+
         conditionalDelayNanoseconds(CHARACTER_DISPLAY_CLOCK_HIGH_HOLD_TIME_TIME_NANOSECONDS); //wait for CLOCK pin HIGH pulse width time
+
 
         digitalWriteFast(clockPin, LOW); //lower CLOCK pin
         conditionalDelayNanoseconds(CHARACTER_DISPLAY_CLOCK_HIGH_TO_LOW_TRANSITION_TIME_NANOSECONDS); //wait for CLOCK pin to fall
         conditionalDelayNanoseconds(CHARACTER_DISPLAY_CLOCK_LOW_HOLD_TIME_TIME_NANOSECONDS); //wait for CLOCK pin LOW pulse width time
+
+        interrupts();
       }
     }
+
+    
     float displayIntensityPctToSet = displayIntensityPct(brightness);
-    if (displayIntensityPctToSet > 0)
-    {
-      unblankDisplay(blankingPin);
-      strobeCharacterDisplayColumn(CHARACTER_DISPLAYS_COLUMN_DRIVER_PINS[column], displayIntensityPctToSet);
-    }
+    
+    noInterrupts();
+    unblankDisplay(blankingPin);
+    strobeCharacterDisplayColumn(CHARACTER_DISPLAYS_COLUMN_DRIVER_PINS[column], displayIntensityPctToSet);
+    interrupts();
+
+    
   }
   blankDisplay(blankingPin);
 }
@@ -114,12 +130,12 @@ void displayString(const char *chars, uint8_t numCharacters, uint8_t clockPin, u
 /* -------------- COLUMN STROBING ---------------------------------------- */
 void turnCharacterDisplayColumnOff(uint8_t columnPin) {
   digitalWriteFast(columnPin, LOW);
-  conditionalDelayMicroseconds(DIGITAL_OUTPUT_PIN_FALL_TIME_NANOSECONDS);
+  conditionalDelayNanoseconds(DIGITAL_OUTPUT_PIN_FALL_TIME_NANOSECONDS);
 }
 
 void turnCharacterDisplayColumnOn(uint8_t columnPin) {
   digitalWriteFast(columnPin, HIGH);
-  conditionalDelayMicroseconds(DIGITAL_OUTPUT_PIN_RISE_TIME_NANOSECONDS);
+  conditionalDelayNanoseconds(DIGITAL_OUTPUT_PIN_RISE_TIME_NANOSECONDS);
 }
 
 void strobeCharacterDisplayColumn(uint8_t columnPin, float displayIntensityPct)
