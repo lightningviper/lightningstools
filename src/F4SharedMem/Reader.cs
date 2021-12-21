@@ -335,10 +335,11 @@ namespace F4SharedMem
 
             if (!_hStringSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
-                var rawStringData = GetRawStringData(toReturn.StringAreaSize);
+                var stringAreaDataSize = GetStringAreaDataSize();
+                var rawStringData = GetRawStringData(stringAreaDataSize + (sizeof(uint) * 3));
                 toReturn.StringData = StringData.GetStringData(rawStringData);
             }
-
+            
             if (!_hDrawingSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
             {
                 var rawDrawingData = GetRawDrawingData(toReturn.DrawingAreaSize);
@@ -346,6 +347,28 @@ namespace F4SharedMem
             }
 
             return toReturn;
+        }
+        private uint GetStringAreaDataSize()
+        {
+            if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                ConnectToFalcon();
+            }
+            if (_hPrimarySharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero))
+            {
+                return 0;
+            }
+            if (_hStringSharedMemoryAreaFileMappingObject.Equals(IntPtr.Zero) || _lpStringSharedMemoryAreaBaseAddress.Equals(IntPtr.Zero))
+            {
+                return 0;
+            }
+            var data = new byte[sizeof(uint) * 3];
+            Marshal.Copy(_lpStringSharedMemoryAreaBaseAddress, data, 0, sizeof(uint) * 3);
+            int offset = 0;
+            offset += sizeof(uint);
+            offset += sizeof(uint);
+            var dataSize = BitConverter.ToUInt32(data, offset);
+            return dataSize;
         }
 
         private void ConnectToFalcon()
