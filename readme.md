@@ -62,7 +62,7 @@ The above command will clone the repository to a local folder, `\lightningstools
   
 The following prerequisites will be installed:  
 - Git for Windows
-- Visual Studio 2019 Community Edition  
+- Visual Studio 2022 Community Edition  
 - Visual Studio Installer Project Add-In  
 - .NET Framework 4.8 (required by all projects)  
 - Command-line Build tools

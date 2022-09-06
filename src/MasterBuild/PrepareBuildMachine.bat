@@ -7,8 +7,8 @@ CALL %MASTERBUILDDIR%InstallGitForWindows.bat
 REM Clone Git repository
 CALL %MASTERBUILDDIR%Clone.bat
 
-REM Install Visual Studio 2019 Community Edition
-CALL %MASTERBUILDDIR%InstallVisualStudio2019CommunityEdition.bat
+REM Install Visual Studio 2022 Community Edition
+CALL %MASTERBUILDDIR%InstallVisualStudio2022CommunityEdition.bat
 
 REM Install Windows 10 SDK
 CALL %MASTERBUILDDIR%InstallWindowsSDK.bat
