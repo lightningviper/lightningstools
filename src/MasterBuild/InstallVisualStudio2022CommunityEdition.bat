@@ -10,7 +10,7 @@ bitsadmin /transfer VisualStudio2022CommunityEdition /dynamic /download /priorit
 IF ERRORLEVEL 1 GOTO END
 
 ECHO Installing Visual Studio 2022 Community Edition...
-"%MASTERBUILDDIR%VisualStudioSetup.exe" --in "%MASTERBUILDDIR%VisualStudio2022CommunityEdition-ResponseFile.json"
+"%MASTERBUILDDIR%VisualStudioSetup.exe" --in "%MASTERBUILDDIR%VisualStudio2022CommunityEdition-ResponseFile.json" --wait
 
 CALL %MASTERBUILDDIR%GetVSWhere.bat
 for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -products * -requires Microsoft.Component.MSBuild -property instanceId`) do (
