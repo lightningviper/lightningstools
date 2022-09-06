@@ -16,6 +16,8 @@ SET SOLUTION=""
 SET SOLUTION=%1
 IF "%SOLUTION%"=="" SET SOLUTION=%MASTERBUILDDIR%BuildAll.sln
 
+CALL "%MASTERBUILDDIR%AddNugetDotOrgSource.bat"
+
 ECHO Restoring packages for solution: %SOLUTION%
 "%MASTERBUILDDIR%nuget.exe" restore "%SOLUTION%" -NoCache -NonInteractive -MsbuildPath "%InstallDir%\MSBuild\Current\Bin"
 
