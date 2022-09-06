@@ -1,3 +1,4 @@
+#pragma warning disable 67
 using Henkie.Common;
 using System;
 using System.Globalization;
