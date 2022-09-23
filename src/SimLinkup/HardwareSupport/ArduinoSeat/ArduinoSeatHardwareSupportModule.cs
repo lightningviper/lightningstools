@@ -1026,13 +1026,13 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
             if (!_isExitGame.State && !_isFrozen.State && !_isPaused.State && !_endOfFlight.State && _in3D.State)
             {
                 if (_gunIsFiring.State)
-                    SetMotorOutputs(_gunIsFiring.Id, _gunIsFiring.State ? 1 : 0, ref motorBits, ref motorSpeeds);
+                    SetMotorOutputs(_gunIsFiring.Id, _gunIsFiring.State ? 1 : 0, true, ref motorBits, ref motorSpeeds);
 
                 if (_bumpIntensity.State > 0)
-                    SetMotorOutputs(_bumpIntensity.Id, _bumpIntensity.State, ref motorBits, ref motorSpeeds);
+                    SetMotorOutputs(_bumpIntensity.Id, _bumpIntensity.State, false, ref motorBits, ref motorSpeeds);
 
                 if (_nozzle1Position.State > 0)
-                    SetMotorOutputs(_nozzle1Position.Id, _nozzle1Position.State, ref motorBits, ref motorSpeeds);
+                    SetMotorOutputs(_nozzle1Position.Id, _nozzle1Position.State, false, ref motorBits, ref motorSpeeds);
             }
 
             byte[] packet = null;
@@ -1065,7 +1065,7 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
             _lastPacketSentTime = DateTime.Now;
         }
 
-        private void SetMotorOutputs(string id, double value, ref byte motorbits, ref byte[] motorSpeed)
+        private void SetMotorOutputs(string id, double value, bool isDigital, ref byte motorbits, ref byte[] motorSpeed)
         {
             var output = _config.SeatOutputs.Where(c => c.ID == id).FirstOrDefault();
             if (output != null)
@@ -1073,7 +1073,7 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
                 if (output.MOTOR_1)
                 {
                     motorbits |= _config.MotorByte1;
-                    var speed = CalcMotorSpeed(output, value, output.MOTOR_1_SPEED);
+                    var speed = CalcMotorSpeed(output, value, isDigital, output.MOTOR_1_SPEED);
                     if (speed > motorSpeed[0])
                         motorSpeed[0] = speed;
                 }
@@ -1081,32 +1081,32 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
                 if (output.MOTOR_2)
                 {
                     motorbits |= _config.MotorByte2;
-                    var speed = CalcMotorSpeed(output, value, output.MOTOR_2_SPEED);
+                    var speed = CalcMotorSpeed(output, value, isDigital, output.MOTOR_2_SPEED);
                     if (speed > motorSpeed[1])
                         motorSpeed[1] = speed;
                 }
                 if (output.MOTOR_3)
                 {
                     motorbits |= _config.MotorByte3;
-                    var speed = CalcMotorSpeed(output, value, output.MOTOR_3_SPEED);
+                    var speed = CalcMotorSpeed(output, value, isDigital, output.MOTOR_3_SPEED);
                     if (speed > motorSpeed[2])
                         motorSpeed[2] = speed;
                 }
                 if (output.MOTOR_4)
                 {
                     motorbits |= _config.MotorByte4;
-                    var speed = CalcMotorSpeed(output, value, output.MOTOR_4_SPEED);
+                    var speed = CalcMotorSpeed(output, value, isDigital, output.MOTOR_4_SPEED);
                     if (speed > motorSpeed[3])
                         motorSpeed[3] = speed;
                 }
             }
         }
 
-        private byte CalcMotorSpeed(SeatOutput output, double simValue, byte maxMotorSpeed)
+        private byte CalcMotorSpeed(SeatOutput output, double simValue, bool isDigital, byte maxMotorSpeed)
         {
             byte motorSpeed = 0;
 
-            if (simValue >= output.MIN && simValue <= output.MAX)
+            if (isDigital || simValue >= output.MIN && simValue <= output.MAX)
             {
                 switch (output.TYPE)
                 {

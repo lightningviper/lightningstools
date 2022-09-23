@@ -534,12 +534,12 @@
     <Content Include="Content\Mapping\ArduinoSeat\ArduinoSeatHardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Content\Mapping\ArduinoSeat\HardwareSupportModule.registry">
+    <Content Include="Content\Mapping\ArduinoSeat\HardwareSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Content\Mapping\ArduinoSeat\SimSupportModule.registry">
+    </Content>
+    <Content Include="Content\Mapping\ArduinoSeat\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
