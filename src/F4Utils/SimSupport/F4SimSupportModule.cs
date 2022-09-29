@@ -2315,6 +2315,7 @@ namespace F4Utils.SimSupport
             }
 
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "AA Missile Fired", F4SimOutputs.SIM__AA_MISSILE_FIRED,0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "AG Missile Fired", F4SimOutputs.SIM__AG_MISSILE_FIRED, 0, typeof(int), 0, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Bomb Dropped", F4SimOutputs.SIM__BOMB_DROPPED, 0, typeof(int), 0, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Flare Dropped", F4SimOutputs.SIM__FLARE_DROPPED, 0,typeof(int), 0, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Chaff Dropped", F4SimOutputs.SIM__CHAFF_DROPPED,0, typeof(int), 0, int.MaxValue));
