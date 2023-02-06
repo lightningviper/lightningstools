@@ -128,6 +128,10 @@
     <Compile Include="HardwareSupport\AMI\AMI9002780-02HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\ArduinoSeat\ArduinoSeatCommunicationProtocolHeaders.cs" />
+    <Compile Include="HardwareSupport\ArduinoSeat\ArduinoSeatHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\ArduinoSeat\ArduinoSeatHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\ArduinoSeat\SeatOutput.cs" />
     <Compile Include="HardwareSupport\Astronautics\Astronautics12871HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\DirectInput\DirectInputHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModule.cs" />
@@ -522,6 +526,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\NiclasMorinDTSCard\FuelFlow.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\ArduinoSeat\ArduinoSeat.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\ArduinoSeat\ArduinoSeatHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\ArduinoSeat\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\ArduinoSeat\SimSupportModule.registry">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">
