@@ -74,13 +74,17 @@
     <Compile Include="Headers\DED_PFL_LineOfText.cs" />
     <Compile Include="FlightData.cs" />
     <Compile Include="Headers\DrawingData.cs" />
+    <Compile Include="Headers\EcmBits.cs" />
+    <Compile Include="Headers\EcmOperStates.cs" />
     <Compile Include="Headers\EWMU_LineOfText.cs" />
     <Compile Include="Headers\EWPI_LineOfText.cs" />
     <Compile Include="Headers\FlightData2.cs" />
+    <Compile Include="Headers\FloodConsole.cs" />
     <Compile Include="Headers\FlyStates.cs" />
     <Compile Include="Headers\HsiBits.cs" />
     <Compile Include="Headers\InstrLight.cs" />
     <Compile Include="Headers\IntellivibeData.cs" />
+    <Compile Include="Headers\JammingStates.cs" />
     <Compile Include="Headers\LightBits.cs" />
     <Compile Include="Headers\LightBits2.cs" />
     <Compile Include="Headers\LightBits3.cs" />

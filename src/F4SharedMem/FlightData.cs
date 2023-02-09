@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace F4SharedMem
@@ -399,6 +400,19 @@ namespace F4SharedMem
 
         // VERSION 16
         public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+
+        // VERSION 18
+        public FloodConsole floodConsole;   // (unsigned char) current floodconsole brightness setting, see FloodConsole enum for details
+
+        // VERSION 19
+        public float magDeviationSystem;    // current mag deviation of the system
+        public float magDeviationReal;      // current mag deviation of the system
+
+        public uint[] ecmBits; // see EcmBits enum for details - Note: these are currently not combinable bits, but mutually exclusive states!
+
+        public EcmOperStates ecmOper;                  // (unsigned char) see enum EcmOperStates for details
+
+        public JammingStates[] RWRjammingStatus; // (unsigned) char see enum JammingStates for details
 
 #if EWMU_AND_EWPI_PATCH_APPLIED
         // VERSION 18?
