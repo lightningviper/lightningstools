@@ -19,6 +19,8 @@ namespace F4SharedMem.Headers
         Elec_Fault = 0x80,	// defined in LightBits3 - non-resetting fault
         OXY_BROW = 0x100,	// defined in LightBits  - monitor fault during Obogs
         EPUOn = 0x200,	// defined in LightBits3 - abnormal EPU operation
+
+        //working
         JFSOn_Slow = 0x400,	// defined in LightBits3 - slow blinking: non-critical failure
         JFSOn_Fast = 0x800, // defined in LightBits3 - fast blinking: critical failure
 

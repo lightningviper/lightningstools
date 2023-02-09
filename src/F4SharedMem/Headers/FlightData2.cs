@@ -30,9 +30,9 @@ namespace F4SharedMem.Headers
         // 19: added ECM_M1-5, ECM oper + blinkbit, magnetic deviation, RWR jamming status
 
         public const int RWRINFO_SIZE = 512;
-        public const int MAX_CALLSIGNS = 32;
         public const int CALLSIGN_LEN = 12;
-
+        public const int MAX_CALLSIGNS = 32;
+        public const int MAX_ECM_PROGRAMS = 5;
 
         // VERSION 1
         public float nozzlePos2;   // Ownship engine nozzle2 percent open (0-100)
@@ -134,12 +134,12 @@ namespace F4SharedMem.Headers
         public float magDeviationSystem;    // current mag deviation of the system
         public float magDeviationReal;      // current mag deviation of the system
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 5)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_ECM_PROGRAMS)]
         public uint[] ecmBits; // see EcmBits enum for details - Note: these are currently not combinable bits, but mutually exclusive states!
 
         public EcmOperStates ecmOper;                  // (unsigned char) see enum EcmOperStates for details
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public JammingStates[] RWRjammingStatus; // (unsigned) char see enum JammingStates for details
 
 #if EWMU_AND_EWPI_PATCH_APPLIED

@@ -46,7 +46,6 @@ namespace F4SharedMem.Headers
         CabinPress = 0x20000000,
 
         AutoPilotOn = 0x40000000,  // TRUE if is AP on.  NB: This is not a lamp bit!
-        //TFR_STBY = 0x80000000,  // MISC panel; lower half of split face TFR lamp
         TFR_STBY = 0x80000000,  // MISC panel; lower half of split face TFR lamp
 
         // Used with the MAL/IND light code to light up "everything"

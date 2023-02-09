@@ -11,6 +11,8 @@ namespace F4SharedMem
     [Serializable]
     public sealed class FlightData
     {
+        public const int MAX_RWR_OBJECTS = 40;
+
         [Serializable]
         public struct OptionSelectButtonLabel
         {

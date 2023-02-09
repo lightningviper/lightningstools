@@ -3,7 +3,6 @@
 namespace F4SharedMem.Headers
 {
     [Serializable]
-    // JammingStates
     public enum JammingStates : byte
     {
         JAMMED_NO = 0,

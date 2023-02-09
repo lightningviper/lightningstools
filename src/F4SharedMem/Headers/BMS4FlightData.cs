@@ -120,19 +120,19 @@ namespace F4SharedMem.Headers
 
         //RWR
         public int RwrObjectCount;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public int[] RWRsymbol;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public float[] bearing;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] missileActivity;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] missileLaunch;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] selected;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public float[] lethality;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] newDetection;
 
         //fuel values

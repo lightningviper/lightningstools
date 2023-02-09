@@ -3,7 +3,7 @@
 namespace F4SharedMem.Headers
 {
     [Serializable]
-    // EcmOperStates
+    [Flags]
     public enum EcmOperStates : byte
     {
         ECM_OPER_NO_LIT = 0,
