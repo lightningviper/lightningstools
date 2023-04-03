@@ -3,6 +3,7 @@
 SET MASTERBUILDDIR=%~dp0
 IF NOT EXIST "%MASTERBUILDDIR%nuget.exe" bitsadmin /transfer Nuget /dynamic /download /priority HIGH https://dist.nuget.org/win-x86-commandline/latest/nuget.exe "%MASTERBUILDDIR%nuget.exe" 
 SET EnableNuGetPackageRestore=true
+SET NUGET_RESTORE_MSBUILD_ARGS=/p:RestoreUseSkipNonexistentTargets="false"
 
 CALL %MASTERBUILDDIR%GetVsWhere.bat
 for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (
