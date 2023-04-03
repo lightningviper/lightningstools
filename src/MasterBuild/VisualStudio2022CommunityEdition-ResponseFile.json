@@ -29,7 +29,8 @@
     "Microsoft.VisualStudio.Component.VC.Llvm.Clang",
     "Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset",
     "Microsoft.VisualStudio.Component.VC.Modules.x86.x64",
-    "Microsoft.VisualStudio.ComponentGroup.VC.Tools.142.x86.x64"
+    "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+    "Microsoft.Component.VC.Runtime.UCRTSDK"
   ]
 }
 
