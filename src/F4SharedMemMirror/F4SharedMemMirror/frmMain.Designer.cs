@@ -242,7 +242,7 @@
             // 
             this.nfyTrayIcon.ContextMenuStrip = this.mnuNfyMenu;
             this.nfyTrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("nfyTrayIcon.Icon")));
-            this.nfyTrayIcon.Text = "Falcon BMS 4.35 Shared Memory Mirror";
+            this.nfyTrayIcon.Text = "Falcon BMS Shared Memory Mirror";
             this.nfyTrayIcon.DoubleClick += new System.EventHandler(this.nfyTrayIcon_DoubleClick);
             // 
             // mnuNfyMenu
@@ -380,7 +380,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.Text = "Falcon BMS 4.35 Shared Memory Mirror";
+            this.Text = "Falcon BMS Shared Memory Mirror";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
