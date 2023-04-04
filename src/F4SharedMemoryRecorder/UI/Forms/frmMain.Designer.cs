@@ -205,7 +205,7 @@ namespace F4SharedMemoryRecorder.UI.Forms
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.Text = "Falcon BMS 4.35 Shared Memory Recorder";
+            this.Text = "Falcon BMS 4.37 Shared Memory Recorder";
             this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
