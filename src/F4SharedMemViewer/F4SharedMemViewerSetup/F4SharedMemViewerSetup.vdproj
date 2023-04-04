@@ -57,12 +57,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_12BE19DDB6A5B79EB8EA98B64EA62269"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_15395F4582405DA35F7057D589171A20"
         "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
         "MsmSig" = "8:_UNDEFINED"
@@ -171,6 +165,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_35F6E393EB26F9A606B6B86903373806"
+        "OwnerKey" = "8:_687324794751A9F0D4A83336B0EA4CDE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_35F6E393EB26F9A606B6B86903373806"
+        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_36EEA5AAA3D176FBF9155D4FD57FCF6B"
         "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
         "MsmSig" = "8:_UNDEFINED"
@@ -273,12 +279,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5623F020C540EBA1DCEA21B38E1FFFC2"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_56A27D15144690C7C112CA44589C2031"
         "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
         "MsmSig" = "8:_UNDEFINED"
@@ -351,6 +351,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_687324794751A9F0D4A83336B0EA4CDE"
+        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6A700F1809132A84954AAF20E6FD9CB7"
         "OwnerKey" = "8:_D0C23DFF8EBDFE26850E5E890C8FD87C"
         "MsmSig" = "8:_UNDEFINED"
@@ -370,18 +376,6 @@
         "Entry"
         {
         "MsmKey" = "8:_6E60AD0D4B10687933966FC123440624"
-        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6F089C6B28E5AE40FF74C561F93D7193"
-        "OwnerKey" = "8:_5623F020C540EBA1DCEA21B38E1FFFC2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6F089C6B28E5AE40FF74C561F93D7193"
         "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -418,6 +412,12 @@
         "Entry"
         {
         "MsmKey" = "8:_820C4B1BA91A01A7AEF387BA70846E14"
+        "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8476A5D05A76A4590C6FDB3A4A838682"
         "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -737,12 +737,6 @@
         {
         "MsmKey" = "8:_F7365D2A2AED062BE0A22FBFD29D9CB1"
         "OwnerKey" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6F089C6B28E5AE40FF74C561F93D7193"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1408,7 +1402,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_12BE19DDB6A5B79EB8EA98B64EA62269"
+        "OwnerKey" = "8:_8476A5D05A76A4590C6FDB3A4A838682"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1426,7 +1420,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5623F020C540EBA1DCEA21B38E1FFFC2"
+        "OwnerKey" = "8:_687324794751A9F0D4A83336B0EA4CDE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_35F6E393EB26F9A606B6B86903373806"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1724,37 +1724,6 @@
                     }
                 }
             "SourcePath" = "8:System.Diagnostics.Process.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_12BE19DDB6A5B79EB8EA98B64EA62269"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:F4SharedMem, Version=4.35.0.0, Culture=neutral, PublicKeyToken=98c24c6603c8861c, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_12BE19DDB6A5B79EB8EA98B64EA62269"
-                    {
-                    "Name" = "8:F4SharedMem.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:F4SharedMem.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
@@ -2299,6 +2268,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_35F6E393EB26F9A606B6B86903373806"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_35F6E393EB26F9A606B6B86903373806"
+                    {
+                    "Name" = "8:log4net.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:log4net.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_36EEA5AAA3D176FBF9155D4FD57FCF6B"
             {
             "AssemblyRegister" = "3:1"
@@ -2764,37 +2764,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5623F020C540EBA1DCEA21B38E1FFFC2"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=abd82ffe41e2ab64, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_5623F020C540EBA1DCEA21B38E1FFFC2"
-                    {
-                    "Name" = "8:Common.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Common.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_56A27D15144690C7C112CA44589C2031"
             {
             "AssemblyRegister" = "3:1"
@@ -3167,6 +3136,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_687324794751A9F0D4A83336B0EA4CDE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=abd82ffe41e2ab64, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_687324794751A9F0D4A83336B0EA4CDE"
+                    {
+                    "Name" = "8:Common.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Common.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6A700F1809132A84954AAF20E6FD9CB7"
             {
             "AssemblyRegister" = "3:1"
@@ -3243,37 +3243,6 @@
                     }
                 }
             "SourcePath" = "8:System.Threading.Thread.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6F089C6B28E5AE40FF74C561F93D7193"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_6F089C6B28E5AE40FF74C561F93D7193"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
@@ -3460,6 +3429,37 @@
                     }
                 }
             "SourcePath" = "8:Costura.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8476A5D05A76A4590C6FDB3A4A838682"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:F4SharedMem, Version=4.35.0.0, Culture=neutral, PublicKeyToken=98c24c6603c8861c, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_8476A5D05A76A4590C6FDB3A4A838682"
+                    {
+                    "Name" = "8:F4SharedMem.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:F4SharedMem.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"
@@ -5175,24 +5175,24 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Falcon BMS 4.34 Shared Memory Viewer"
+        "ProductName" = "8:Falcon BMS Shared Memory Viewer"
         "ProductCode" = "8:{BF8654ED-75B6-403E-BF5C-E90523198FE6}"
-        "PackageCode" = "8:{14516F1A-DF5E-4368-830E-D4300817D6DB}"
+        "PackageCode" = "8:{4D57E628-4833-45FE-9155-00D0142FC533}"
         "UpgradeCode" = "8:{427D1B6E-B7B4-4153-909E-CF6AF4F75583}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:4.34"
+        "ProductVersion" = "8:4.37"
         "Manufacturer" = "8:lightning"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/lightningviper/lightningstools"
-        "Title" = "8:Falcon BMS 4.34 Shared Memory Viewer Setup"
-        "Subject" = "8:Falcon BMS 4.34 Shared Memory Viewer"
+        "Title" = "8:Falcon BMS Shared Memory Viewer Setup"
+        "Subject" = "8:Falcon BMS Shared Memory Viewer"
         "ARPCONTACT" = "8:lightning"
-        "Keywords" = "8:Falcon BMS 4.34 Shared Memory Viewer"
-        "ARPCOMMENTS" = "8:Falcon BMS 4.34 Shared Memory Viewer"
+        "Keywords" = "8:Falcon BMS Shared Memory Viewer"
+        "ARPCOMMENTS" = "8:Falcon BMS Shared Memory Viewer"
         "ARPURLINFOABOUT" = "8:https://github.com/lightningviper/lightningstools"
         "ARPPRODUCTICON" = "8:_3D9F1F1CFB134283AB569835F4FC35D0"
         "ARPIconIndex" = "3:32512"
@@ -5712,7 +5712,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3D9F1F1CFB134283AB569835F4FC35D0"
             {
-            "SourcePath" = "8:..\\obj\\x86\\Release\\F4SharedMemViewer.exe"
+            "SourcePath" = "8:..\\obj\\x86\\Debug\\F4SharedMemViewer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9011B04D358242AEBA9F18D63DEA4317"

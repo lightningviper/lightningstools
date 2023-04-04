@@ -8208,7 +8208,7 @@
             this.MinimumSize = new System.Drawing.Size(21, 413);
             this.Name = "SharedMemoryViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Falcon BMS 4.35 Shared Memory Viewer";
+            this.Text = "Falcon BMS 4.37 Shared Memory Viewer";
             this.tabControl1.ResumeLayout(false);
             this.tabFDBits.ResumeLayout(false);
             this.tabFDBits.PerformLayout();
