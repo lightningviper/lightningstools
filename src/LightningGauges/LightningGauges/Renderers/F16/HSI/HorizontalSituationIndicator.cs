@@ -38,7 +38,7 @@ namespace LightningGauges.Renderers.F16.HSI
         private const string HSI_OFF_FLAG_IMAGE_FILENAME = "adioff.bmp";
         private const string HSI_OFF_FLAG_MASK_FILENAME = "adiflags_mask.bmp";
 
-        private const string HSI_RANGE_FONT_FILENAME = "font1.bmp";
+        private const string HSI_RANGE_FONT_FILENAME = "Font1.bmp";
 
         private static readonly string IMAGES_FOLDER_NAME =  "images";
 
