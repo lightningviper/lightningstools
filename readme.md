@@ -18,16 +18,19 @@ Desktop application providing a semi-realistic simulation of the Raytheon F-16 C
 Desktop application for viewing Falcon .key files.  Demonstrates the use of the `F4KeyFile` library.
 
 #### [Falcon BMS Shared Memory Mirror](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Mirror/for%20Falcon%20BMS%204.37/F4SharedMemMirror_for_Falcon_BMS_4_37__x86.zip)
-Desktop client-server application that mirrors the contents of Falcon's shared memory areas to one or more remote networked PCs.
+Desktop client-server application that mirrors the contents of Falcon BMS shared memory areas to one or more remote networked PCs.
 
 #### [Falcon BMS Shared Memory Recorder](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Recorder/for%20Falcon%20BMS%204.37/Shared_Memory_Recorder_for_Falcon_BMS_4_37__x86.zip)
-Desktop application that enables recording and playback of Falcon shared memory data.
+Desktop application that enables recording and playback of Falcon BMS shared memory data.
+
+#### [Falcon BMS Shared Memory Recorder](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Recorder/for%20Falcon%20BMS%204.37/Shared_Memory_Recorder_for_Falcon_BMS_4_37__x86.zip)
+Console (command-line) application for writing synthetic data from XML files to Falcon BMS shared memory areas.
 
 #### [Falcon BMS Shared Memory Viewer](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Shared%20Memory%20Viewer/for%20Falcon%20BMS%204.37/Shared_Memory_Viewer_for_Falcon_BMS_4_37__x86.zip)
-Desktop application that displays the contents of Falcon's shared memory areas.
+Desktop application that displays the contents of Falcon BMS shared memory areas.
 
 #### [Falcon BMS Textures Shared Memory Tester](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20BMS%20Textures%20Shared%20Memory%20Tester/Version%200.1.4.0/Falcon_BMS_Textures_Shared_Memory_Tester_v0_1_4_0__x86.zip)
-Desktop application for displaying the contents of Falcon BMS' "Textures Shared Memory" area.   Demonstrates the use of the `F4TexSharedMem` library.
+Desktop application for displaying the contents of Falcon BMS "Textures Shared Memory" area.   Demonstrates the use of the `F4TexSharedMem` library.
 
 #### [MFDExtractor](https://github.com/lightningviper/lightningstools/raw/master/releases/End%20User%20Applications/Falcon%20MFD%20Extractor/Version%200.6.4.0/Falcon_MFD_Extractor_v0_6_4_0__x86.zip)
 End user client/server application that allows extracting various flight instruments from Falcon.    
@@ -151,19 +154,22 @@ Desktop application for viewing the contents of Falcon resource files.  Original
 C# class library for reading values from Falcon BMS shared memory area. 
 
 [F4SharedMemMirror](https://github.com/lightningviper/lightningstools/tree/master/src/F4SharedMemMirror/)  
-Desktop client-server application that mirrors the contents of Falcon's shared memory areas to one or more remote networked PCs.
+Desktop client-server application that mirrors the contents of Falcon BMS shared memory areas to one or more remote networked PCs.
 
 [F4SharedMemViewer](https://github.com/lightningviper/lightningstools/tree/master/src/F4SharedMemViewer/)  
-Desktop application that displays the contents of Falcon's shared memory areas.
+Desktop application that displays the contents of Falcon BMS shared memory areas.
 
 [F4SharedMemoryRecorder](https://github.com/lightningviper/lightningstools/tree/master/src/F4SharedMemoryRecorder/)  
-Minimum-viable concept demonstrator showing ability to record and playback a stream of Falcon shared memory data.   Useful for certain software testing scenarios requiring repeatability that would otherwise be difficult to obtain.
+Minimum-viable concept demonstrator showing ability to record and playback a stream of Falcon BMS shared memory data.   Useful for certain software testing scenarios requiring repeatability that would otherwise be difficult to obtain.
+
+[F4SharedMemTester](https://github.com/lightningviper/lightningstools/tree/master/src/F4SharedMemTester/)
+Console (command-line) application for writing synthetic data from XML files to Falcon BMS shared memory areas.
 
 [F4TexSharedMem](https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMem/)  
-C# class library for reading images from Falcon BMS' "textures shared memory" area.  
+C# class library for reading images from Falcon BMS "textures shared memory" area.  
 
 [F4TexSharedMemTester](https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMemTester/)  
-Desktop application for displaying the contents of Falcon BMS' "Textures Shared Memory" area.   Demonstrates the use of the [F4TexSharedMem](https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMem/) library.
+Desktop application for displaying the contents of Falcon BMS "Textures Shared Memory" area.   Demonstrates the use of the [F4TexSharedMem](https://github.com/lightningviper/lightningstools/tree/master/src/F4TexSharedMem/) library.
 
 [F4Utils](https://github.com/lightningviper/lightningstools/tree/master/src/F4Utils/)  
 C# class libraries which provide support for detecting Falcon operating characteristics,  interacting with the simulation programmatically, and reading from and writing to various low-level Falcon file formats.  
