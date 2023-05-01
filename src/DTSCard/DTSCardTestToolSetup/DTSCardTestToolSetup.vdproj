@@ -195,12 +195,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3DC52F1BF5BDF456A25C9E2BB95E3AD1"
-        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3F439591580AFE16C2D133FA7CC9BB4C"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
@@ -261,12 +255,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_53B3A2FE7EC7E84BD26642786B25218C"
-        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5444EDBE7E46EE09F2D9B95C94F0CFBE"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
@@ -298,7 +286,7 @@
         "Entry"
         {
         "MsmKey" = "8:_59373667C03E3F3881C9DD8C343A6E53"
-        "OwnerKey" = "8:_3DC52F1BF5BDF456A25C9E2BB95E3AD1"
+        "OwnerKey" = "8:_F9B062169551BDB0054D4253E36ED37B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -442,7 +430,7 @@
         "Entry"
         {
         "MsmKey" = "8:_9B874BA8AEEB0194DE1278256CD4499D"
-        "OwnerKey" = "8:_3DC52F1BF5BDF456A25C9E2BB95E3AD1"
+        "OwnerKey" = "8:_F9B062169551BDB0054D4253E36ED37B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -537,12 +525,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B4921FB3FC6956A2C6AD9011AEFD81FA"
-        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B57E3E6D608D0E610A0830ACCA41B5BE"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
@@ -586,6 +568,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C46C37810F57D91E3A30E11CDA17EC59"
+        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D317370896E9D8C41B1E9B34084EA8BE"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -705,7 +693,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EEB30F3FF4599CAB4847E44CB59742F5"
+        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F38A3E5B5EA0DFCDEB89AB48FC44A7AD"
+        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F9B062169551BDB0054D4253E36ED37B"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -725,6 +725,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EEB30F3FF4599CAB4847E44CB59742F5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1384,7 +1390,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_53B3A2FE7EC7E84BD26642786B25218C"
+        "OwnerKey" = "8:_D317370896E9D8C41B1E9B34084EA8BE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1397,12 +1403,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9B874BA8AEEB0194DE1278256CD4499D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B4921FB3FC6956A2C6AD9011AEFD81FA"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1468,6 +1468,11 @@
                     {
                     "Name" = "8:Microsoft .NET Framework 4.8 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.8"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.14.0.x86"
+                    {
+                    "Name" = "8:Visual C++ \"14\" Runtime Libraries (x86)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.14.0.x86"
                     }
                 }
             }
@@ -2399,37 +2404,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3DC52F1BF5BDF456A25C9E2BB95E3AD1"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Costura, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_3DC52F1BF5BDF456A25C9E2BB95E3AD1"
-                    {
-                    "Name" = "8:Costura.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Costura.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3F439591580AFE16C2D133FA7CC9BB4C"
             {
             "AssemblyRegister" = "3:1"
@@ -2723,37 +2697,6 @@
                     }
                 }
             "SourcePath" = "8:System.Net.Sockets.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_53B3A2FE7EC7E84BD26642786B25218C"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_53B3A2FE7EC7E84BD26642786B25218C"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
@@ -4135,37 +4078,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B4921FB3FC6956A2C6AD9011AEFD81FA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DTSCard, Version=0.1.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_B4921FB3FC6956A2C6AD9011AEFD81FA"
-                    {
-                    "Name" = "8:DTSCard.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DTSCard.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B57E3E6D608D0E610A0830ACCA41B5BE"
             {
             "AssemblyRegister" = "3:1"
@@ -4366,6 +4278,37 @@
                     }
                 }
             "SourcePath" = "8:System.Runtime.InteropServices.WindowsRuntime.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D317370896E9D8C41B1E9B34084EA8BE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D317370896E9D8C41B1E9B34084EA8BE"
+                    {
+                    "Name" = "8:log4net.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
@@ -4972,6 +4915,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EEB30F3FF4599CAB4847E44CB59742F5"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DTSCard, Version=0.1.0.0, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_EEB30F3FF4599CAB4847E44CB59742F5"
+                    {
+                    "Name" = "8:DTSCard.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DTSCard.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F38A3E5B5EA0DFCDEB89AB48FC44A7AD"
             {
             "AssemblyRegister" = "3:1"
@@ -4986,6 +4960,37 @@
                     }
                 }
             "SourcePath" = "8:System.ComponentModel.TypeConverter.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9B062169551BDB0054D4253E36ED37B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Costura, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F9B062169551BDB0054D4253E36ED37B"
+                    {
+                    "Name" = "8:Costura.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Costura.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
@@ -5102,7 +5107,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DTS Card Test Tool"
         "ProductCode" = "8:{2660AB54-F702-42BD-B96E-5197D40E60C5}"
-        "PackageCode" = "8:{653B4745-6F1B-4D69-873F-C99AFBAE0217}"
+        "PackageCode" = "8:{730DAF71-BF04-4C3B-804B-B09D0406388D}"
         "UpgradeCode" = "8:{E100ADEA-B05B-4740-A8BC-E03ECC187D53}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -5637,7 +5642,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FD7BA57EE8974A149396A549141CBE40"
             {
-            "SourcePath" = "8:..\\DTSCardTestTool\\obj\\x86\\Debug\\DTSCardTestTool.exe"
+            "SourcePath" = "8:..\\DTSCardTestTool\\obj\\x86\\Release\\DTSCardTestTool.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"

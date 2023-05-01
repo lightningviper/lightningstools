@@ -63,12 +63,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_11D711D7B55A707917B93A9487D90BC1"
-        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_13C3DD7D3AB72D3BA1241B62835C5E86"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
@@ -310,7 +304,7 @@
         "Entry"
         {
         "MsmKey" = "8:_59373667C03E3F3881C9DD8C343A6E53"
-        "OwnerKey" = "8:_676044D6B30879F6593AEB0466ACF478"
+        "OwnerKey" = "8:_F9B062169551BDB0054D4253E36ED37B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -358,12 +352,6 @@
         "Entry"
         {
         "MsmKey" = "8:_670FEE032BADD1F3CFAFE3D585B396EF"
-        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_676044D6B30879F6593AEB0466ACF478"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -460,7 +448,7 @@
         "Entry"
         {
         "MsmKey" = "8:_9B874BA8AEEB0194DE1278256CD4499D"
-        "OwnerKey" = "8:_676044D6B30879F6593AEB0466ACF478"
+        "OwnerKey" = "8:_F9B062169551BDB0054D4253E36ED37B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -615,6 +603,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D317370896E9D8C41B1E9B34084EA8BE"
+        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D3929985C36029CCE9F2B5793150EFE9"
         "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
@@ -737,6 +731,12 @@
         {
         "MsmKey" = "8:_F4C75036721E48E0A029337443A90E13"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F9B062169551BDB0054D4253E36ED37B"
+        "OwnerKey" = "8:_FD7BA57EE8974A149396A549141CBE40"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1414,7 +1414,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_11D711D7B55A707917B93A9487D90BC1"
+        "OwnerKey" = "8:_D317370896E9D8C41B1E9B34084EA8BE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1742,37 +1742,6 @@
                     }
                 }
             "SourcePath" = "8:System.Reflection.Emit.Lightweight.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_11D711D7B55A707917B93A9487D90BC1"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_11D711D7B55A707917B93A9487D90BC1"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
@@ -3278,37 +3247,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_676044D6B30879F6593AEB0466ACF478"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Costura, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_676044D6B30879F6593AEB0466ACF478"
-                    {
-                    "Name" = "8:Costura.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Costura.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6771396F128BDD5C49DC7A8D2C2092F1"
             {
             "AssemblyRegister" = "3:1"
@@ -4487,6 +4425,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D317370896E9D8C41B1E9B34084EA8BE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D317370896E9D8C41B1E9B34084EA8BE"
+                    {
+                    "Name" = "8:log4net.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:log4net.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D3929985C36029CCE9F2B5793150EFE9"
             {
             "AssemblyRegister" = "3:1"
@@ -5125,6 +5094,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9B062169551BDB0054D4253E36ED37B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Costura, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F9B062169551BDB0054D4253E36ED37B"
+                    {
+                    "Name" = "8:Costura.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Costura.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2C3DE7660B5F4B46855F1FE05120BE69"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FF6F00057EE33707AA972400D45350F3"
