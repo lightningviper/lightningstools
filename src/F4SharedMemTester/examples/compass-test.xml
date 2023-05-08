@@ -6,18 +6,25 @@
 	  />
     
     <FlightData2 VersionNum="19" BMSVersionMajor="4" BMSVersionMinor="37" BMSVersionMicro="1" BMSBuildNumber="451"
-			turnRate="3.00"
 			powerBits="BusPowerBattery,BusPowerEmergency,BusPowerEssential,BusPowerNonEssential,MainGenerator,StandbyGenerator"
 	  />
     
 	  <IntellivibeData In3D="true" />
 	</Moment>
 
-	<Moment t="00:01:00:000">
-    <FlightData yaw="180.00" />
+	<Moment t="00:00:30:000">
+    <FlightData yaw="3.14159265" />
 	</Moment>
 
-	<Moment t="00:02:00:000">
-	 <FlightData yaw = "359.99" />
+	<Moment t="00:01:00:000">
+	 <FlightData yaw = "6.28318531" />
+  </Moment>
+
+  <Moment t="00:01:30:000">
+    <FlightData yaw = "3.14159265" />
+  </Moment>
+
+  <Moment t="00:02:00:000">
+    <FlightData yaw = "0.00" />
   </Moment>
 </Timeline>
