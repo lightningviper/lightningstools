@@ -5,9 +5,9 @@ namespace F4SharedMemTester
 {
     internal class IntellivibeDataXmlDeserializer
     {
-        public static IntellivibeData Deserialize(XmlElement intellivibeDataXmlElement)
+        public static IntellivibeData Deserialize(XmlElement intellivibeDataXmlElement, IntellivibeData? originalData = null)
         {
-            IntellivibeData intellivibeDataStruct = new IntellivibeData();
+            IntellivibeData intellivibeDataStruct = originalData.HasValue ? Common.Serialization.Util.DeepClone(originalData.Value): new IntellivibeData();
             if (intellivibeDataXmlElement == null) return intellivibeDataStruct;
             byte.TryParse(intellivibeDataXmlElement.GetAttribute("AAMissileFired"), out intellivibeDataStruct.AAMissileFired);
             byte.TryParse(intellivibeDataXmlElement.GetAttribute("AGMissileFired"), out intellivibeDataStruct.AGMissileFired);

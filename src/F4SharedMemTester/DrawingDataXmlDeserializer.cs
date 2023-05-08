@@ -5,9 +5,9 @@ namespace F4SharedMemTester
 {
     internal class DrawingDataXmlDeserializer
     {
-        public static DrawingData Deserialize(XmlElement drawingDataXmlElement)
+        public static DrawingData Deserialize(XmlElement drawingDataXmlElement, DrawingData originalData = null)
         {
-            DrawingData drawingDataStruct = new DrawingData();
+            DrawingData drawingDataStruct = originalData !=null ? Common.Serialization.Util.DeepClone(originalData) : new DrawingData();
             if (drawingDataXmlElement == null) return drawingDataStruct;
             uint.TryParse(drawingDataXmlElement.GetAttribute("VersionNum"), out drawingDataStruct.VersionNum);
             uint.TryParse(drawingDataXmlElement.GetAttribute("HUD_length"), out drawingDataStruct.HUD_length);

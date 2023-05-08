@@ -8,9 +8,9 @@ namespace F4SharedMemTester
 {
     internal class StringDataXmlDeserializer
     {
-        public static StringData Deserialize(XmlElement stringDataXmlElement)
+        public static StringData Deserialize(XmlElement stringDataXmlElement, StringData originalData = null)
         {
-            StringData stringDataStruct = new StringData();
+            StringData stringDataStruct = originalData !=null ? Common.Serialization.Util.DeepClone(originalData) : new StringData();
             if (stringDataXmlElement == null) return stringDataStruct;
             uint.TryParse(stringDataXmlElement.GetAttribute("VersionNum"), out stringDataStruct.VersionNum);
             uint.TryParse(stringDataXmlElement.GetAttribute("NoOfStrings"), out stringDataStruct.NoOfStrings);

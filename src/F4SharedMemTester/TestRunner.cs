@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using static F4SharedMemTester.TestFile;
 
 namespace F4SharedMemTester
 {
@@ -11,7 +12,7 @@ namespace F4SharedMemTester
 
         public static void LoadAndExecute(string inputFileSpec)
         {
-            var testFile = TestFile.Load(inputFileSpec);
+            var testFile = Load(inputFileSpec);
             using (var testRunner = new TestRunner())
             {
                 testRunner.Execute(testFile);
@@ -21,44 +22,55 @@ namespace F4SharedMemTester
         {
             var testStartTime = DateTime.Now;
 
-            var moments = testFile.Moments.OrderBy(x => x.StartTime).ToList();
-            foreach (var moment in moments)
+            var moments = testFile.Moments.OrderBy(x => x.StartTime).Where(x=>x.StartTime.HasValue).ToList();
+            if (moments.Count == 0) return;
+
+            WriteMomentToSharedMemory(moments[0]);
+            Moment previousMoment = moments[0];
+
+            for (var i = 1; i< moments.Count; i++)
             {
-                if (moment.StartTime.HasValue)
+                var nextMoment = moments[i];
+                var elapsedTime = DateTime.Now.Subtract(testStartTime);
+                while (elapsedTime < nextMoment.StartTime.Value)
                 {
-                    var elapsedTime = DateTime.Now.Subtract(testStartTime);
-                    while (elapsedTime < moment.StartTime.Value)
-                    {
-                        Thread.Sleep(1);
-                    }
+                    var interpolatedMoment = InterpolationHelper.Interpolate(previousMoment, nextMoment, elapsedTime);
+                    WriteMomentToSharedMemory(interpolatedMoment);
+                    Thread.Sleep(1);
+                    elapsedTime = DateTime.Now.Subtract(testStartTime);
                 }
-                if (moment.FlightData.HasValue)
-                {
-                    _sharedMemWriter.WritePrimaryFlightData(moment.FlightData.Value.Serialize());
-                }
-                if (moment.FlightData2.HasValue)
-                {
-                    _sharedMemWriter.WriteFlightData2(moment.FlightData2.Value.Serialize());
-                }
-                if (moment.OSBData.HasValue)
-                {
-                    _sharedMemWriter.WriteOSBData(moment.OSBData.Value.Serialize());
-                }
-                if (moment.DrawingData != null)
-                {
-                    _sharedMemWriter.WriteDrawingData(moment.DrawingData.Serialize());
-                }
-                if (moment.IntellivibeData.HasValue)
-                {
-                    _sharedMemWriter.WriteIntellivibeData(moment.IntellivibeData.Value.Serialize());
-                }
-                if (moment.StringData != null)
-                {
-                    _sharedMemWriter.WriteStringData(moment.StringData.Serialize());
-                }
+                WriteMomentToSharedMemory(nextMoment);
+                previousMoment = nextMoment;
+            }
+            
+        }
+        private void WriteMomentToSharedMemory(Moment moment)
+        {
+            if (moment.FlightData.HasValue)
+            {
+                _sharedMemWriter.WritePrimaryFlightData(moment.FlightData.Value.Serialize());
+            }
+            if (moment.FlightData2.HasValue)
+            {
+                _sharedMemWriter.WriteFlightData2(moment.FlightData2.Value.Serialize());
+            }
+            if (moment.OSBData.HasValue)
+            {
+                _sharedMemWriter.WriteOSBData(moment.OSBData.Value.Serialize());
+            }
+            if (moment.DrawingData != null)
+            {
+                _sharedMemWriter.WriteDrawingData(moment.DrawingData.Serialize());
+            }
+            if (moment.IntellivibeData.HasValue)
+            {
+                _sharedMemWriter.WriteIntellivibeData(moment.IntellivibeData.Value.Serialize());
+            }
+            if (moment.StringData != null)
+            {
+                _sharedMemWriter.WriteStringData(moment.StringData.Serialize());
             }
         }
-
         protected virtual void Dispose(bool disposing)
         {
             if (!_isDisposed)

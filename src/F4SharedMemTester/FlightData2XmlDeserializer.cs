@@ -9,9 +9,9 @@ namespace F4SharedMemTester
 {
     internal class FlightData2XmlDeserializer
     {
-        public static FlightData2 Deserialize(XmlElement flightData2XmlElement)
+        public static FlightData2 Deserialize(XmlElement flightData2XmlElement, FlightData2? originalData = null)
         {
-            FlightData2 flightData2Struct = CreateNewEmptyFlightData2Struct();
+            FlightData2 flightData2Struct = originalData.HasValue ? Common.Serialization.Util.DeepClone(originalData.Value): CreateNewEmptyFlightData2Struct();
             if (flightData2XmlElement == null) return flightData2Struct;
 
             for (var i = 0; i < flightData2XmlElement.Attributes.Count; i++)

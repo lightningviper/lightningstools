@@ -8,9 +8,9 @@ namespace F4SharedMemTester
 {
     internal class OsbDataXmlDeserializer
     {
-        public static OSBData Deserialize(XmlElement osbDataXmlElement)
+        public static OSBData Deserialize(XmlElement osbDataXmlElement, OSBData? originalData = null)
         {
-            OSBData osbDataStruct = CreateNewEmptyOsbDataStruct();
+            OSBData osbDataStruct = originalData.HasValue ? Common.Serialization.Util.DeepClone(originalData.Value): CreateNewEmptyOsbDataStruct();
             if (osbDataXmlElement == null) return osbDataStruct;
 
             var leftMfdXmlElements = osbDataXmlElement.SelectNodes("leftMFD");

@@ -87,6 +87,7 @@
     <Compile Include="DrawingDataXmlDeserializer.cs" />
     <Compile Include="FlightData2XmlDeserializer.cs" />
     <Compile Include="IntellivibeDataXmlDeserializer.cs" />
+    <Compile Include="InterpolationHelper.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="OsbDataXmlDeserializer.cs" />
     <Compile Include="Program.cs" />
@@ -128,6 +129,9 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="examples\compass-test.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="examples\example.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
