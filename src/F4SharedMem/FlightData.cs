@@ -416,6 +416,17 @@ namespace F4SharedMem
 
         public JammingStates[] RWRjammingStatus; // (unsigned) char see enum JammingStates for details
 
+        // VERSION 20
+        public int radio2_preset;       // Radio 2 channel preset (if present).
+        public int radio2_frequency;    // Radio 2 channel frequency (if present).
+
+        // IFF transponder currently active (as seen from outside) codes, negative for OFF or n/a
+        public char iffTransponderActiveCode1;  // mode 1
+        public short iffTransponderActiveCode2;  // mode 2
+        public short iffTransponderActiveCode3A; // mode 3A
+        public short iffTransponderActiveCodeC;  // mode C
+        public short iffTransponderActiveCode4;  // mode 4; assumes the correct codeword
+
 #if EWMU_AND_EWPI_PATCH_APPLIED
         // VERSION 18?
         public string[] EWMULines;  //16 usable chars

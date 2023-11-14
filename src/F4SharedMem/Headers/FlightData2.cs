@@ -142,6 +142,17 @@ namespace F4SharedMem.Headers
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public JammingStates[] RWRjammingStatus; // (unsigned) char see enum JammingStates for details
 
+        // VERSION 20
+        int radio2_preset;       // Radio 2 channel preset (if present).
+        int radio2_frequency;    // Radio 2 channel frequency (if present).
+
+        // IFF transponder currently active (as seen from outside) codes, negative for OFF or n/a
+        char iffTransponderActiveCode1;  // mode 1
+        short iffTransponderActiveCode2;  // mode 2
+        short iffTransponderActiveCode3A; // mode 3A
+        short iffTransponderActiveCodeC;  // mode C
+        short iffTransponderActiveCode4;  // mode 4; assumes the correct codeword
+
 #if EWMU_AND_EWPI_PATCH_APPLIED
         //VERSION 18?
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
