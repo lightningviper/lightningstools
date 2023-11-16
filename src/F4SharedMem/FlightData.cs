@@ -185,35 +185,48 @@ namespace F4SharedMem
             var valuesToAssign = new OptionSelectButtonLabel[currentValue.Length];
             for (var j = 0; j < currentValue.Length; j++)
             {
+                var tmpLine1 = "";
+                var tmpLine2 = "";
+
                 var currentItem = currentValue[j];
                 var label = new OptionSelectButtonLabel();
                 var lineBuilder = new StringBuilder(currentItem.Line1.Length);
+                if (currentItem.Line1[0] != 0)
+                {
+                    foreach (var chr in currentItem.Line1)
+                    {
+                        if (chr == 0)
+                        {
+                            lineBuilder.Append(" ");
+                        }
+                        else
+                        {
+                            lineBuilder.Append((char)chr);
+                        }
+                    }
+                    tmpLine1 = lineBuilder.ToString().Split(' ')[0].Trim();
+                }
 
-                foreach (var chr in currentItem.Line1)
-                {
-                    if (chr == 0)
-                    {
-                        lineBuilder.Append(" ");
-                    }
-                    else
-                    {
-                        lineBuilder.Append((char)chr);
-                    }
-                }
-                label.Line1 = lineBuilder.ToString();
+                label.Line1 = tmpLine1;
+
                 lineBuilder = new StringBuilder(currentItem.Line2.Length);
-                foreach (var chr in currentItem.Line2)
+                if (currentItem.Line2[0] != 0)
                 {
-                    if (chr == 0)
+                    foreach (var chr in currentItem.Line2)
                     {
-                        lineBuilder.Append(" ");
+                        if (chr == 0)
+                        {
+                            lineBuilder.Append(" ");
+                        }
+                        else
+                        {
+                            lineBuilder.Append((char)chr);
+                        }
                     }
-                    else
-                    {
-                        lineBuilder.Append((char)chr);
-                    }
+                    tmpLine2 = lineBuilder.ToString().Split(' ')[0].Trim();
                 }
-                label.Line2 = lineBuilder.ToString();
+
+                label.Line2 = tmpLine2;
                 label.Inverted = currentItem.Inverted;
                 valuesToAssign[j] = label;
             }
