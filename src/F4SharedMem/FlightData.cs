@@ -332,7 +332,7 @@ namespace F4SharedMem
         public float total;
 
         public int VersionNum;    //Version of Mem area
-        public int VersionNum2;     // Version of Mem area
+        public int VersionNum2;    //Version of Mem area
         public float headX;        // Head X offset from design eye (feet)
         public float headY;        // Head Y offset from design eye (feet)
         public float headZ;        // Head Z offset from design eye (feet)
