@@ -191,40 +191,34 @@ namespace F4SharedMem
                 var currentItem = currentValue[j];
                 var label = new OptionSelectButtonLabel();
                 var lineBuilder = new StringBuilder(currentItem.Line1.Length);
-                if (currentItem.Line1[0] != 0)
+                foreach (var chr in currentItem.Line1)
                 {
-                    foreach (var chr in currentItem.Line1)
+                    if (chr == 0)
                     {
-                        if (chr == 0)
-                        {
-                            lineBuilder.Append(" ");
-                        }
-                        else
-                        {
-                            lineBuilder.Append((char)chr);
-                        }
+                        break;
                     }
-                    tmpLine1 = lineBuilder.ToString().Split(' ')[0].Trim();
+                    else
+                    {
+                        lineBuilder.Append((char)chr);
+                    }
                 }
+                tmpLine1 = lineBuilder.ToString().Trim();
 
                 label.Line1 = tmpLine1;
 
                 lineBuilder = new StringBuilder(currentItem.Line2.Length);
-                if (currentItem.Line2[0] != 0)
+                foreach (var chr in currentItem.Line2)
                 {
-                    foreach (var chr in currentItem.Line2)
+                    if (chr == 0)
                     {
-                        if (chr == 0)
-                        {
-                            lineBuilder.Append(" ");
-                        }
-                        else
-                        {
-                            lineBuilder.Append((char)chr);
-                        }
+                        break;
                     }
-                    tmpLine2 = lineBuilder.ToString().Split(' ')[0].Trim();
+                    else
+                    {
+                        lineBuilder.Append((char)chr);
+                    }
                 }
+                tmpLine2 = lineBuilder.ToString().Trim();
 
                 label.Line2 = tmpLine2;
                 label.Inverted = currentItem.Inverted;
@@ -434,7 +428,7 @@ namespace F4SharedMem
         public int radio2_frequency;    // Radio 2 channel frequency (if present).
 
         // IFF transponder currently active (as seen from outside) codes, negative for OFF or n/a
-        public char iffTransponderActiveCode1;  // mode 1
+        public sbyte iffTransponderActiveCode1;  // mode 1
         public short iffTransponderActiveCode2;  // mode 2
         public short iffTransponderActiveCode3A; // mode 3A
         public short iffTransponderActiveCodeC;  // mode C

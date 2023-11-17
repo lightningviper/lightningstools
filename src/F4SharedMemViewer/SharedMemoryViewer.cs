@@ -583,27 +583,27 @@ namespace F4SharedMemViewer
             txtMagDeviationSystem.Text = _lastFlightData.magDeviationSystem.FormatDecimal(decimalPlaces: 2);
             txtMagDeviationReal.Text = _lastFlightData.magDeviationReal.FormatDecimal(decimalPlaces: 2);
 
-            txtECMBits0.Text =  _lastFlightData.ecmOper == EcmOperStates.ECM_OPER_NO_LIT ? "(invalid)" :
+            txtECMBits0.Text =  
                 string.Format("({0}) {1}",
                 _lastFlightData.ecmBits[0].ToString(),
                 ((EcmBits)_lastFlightData.ecmBits[0]).ToString());
 
-            txtECMBits1.Text = _lastFlightData.ecmOper == EcmOperStates.ECM_OPER_NO_LIT ? "(invalid)" : 
+            txtECMBits1.Text = 
                 string.Format("({0}) {1}",
                 _lastFlightData.ecmBits[1].ToString(),
                 ((EcmBits)_lastFlightData.ecmBits[1]).ToString());
 
-            txtECMBits2.Text = _lastFlightData.ecmOper == EcmOperStates.ECM_OPER_NO_LIT ? "(invalid)" : 
+            txtECMBits2.Text = 
                 string.Format("({0}) {1}",
                 _lastFlightData.ecmBits[2].ToString(),
                 ((EcmBits)_lastFlightData.ecmBits[2]).ToString());
 
-            txtECMBits3.Text = _lastFlightData.ecmOper == EcmOperStates.ECM_OPER_NO_LIT ? "(invalid)" : 
+            txtECMBits3.Text = 
                 string.Format("({0}) {1}",
                 _lastFlightData.ecmBits[3].ToString(),
                 ((EcmBits)_lastFlightData.ecmBits[3]).ToString());
 
-            txtECMBits4.Text = _lastFlightData.ecmOper == EcmOperStates.ECM_OPER_NO_LIT ? "(invalid)" : 
+            txtECMBits4.Text = 
                 string.Format("({0}) {1}",
                 _lastFlightData.ecmBits[4].ToString(),
                 ((EcmBits)_lastFlightData.ecmBits[4]).ToString());
