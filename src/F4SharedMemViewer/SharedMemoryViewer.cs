@@ -615,7 +615,14 @@ namespace F4SharedMemViewer
             chkLB_ECM_Opr.Checked = _lastFlightData.ecmOper != EcmOperStates.ECM_OPER_NO_LIT;
             chkBB_ECM_Opr.Checked = (((BlinkBits)_lastFlightData.blinkBits) & BlinkBits.ECM_Oper) == BlinkBits.ECM_Oper;
 
+            txtRadio2Preset.Text = _lastFlightData.radio2_preset.ToString();
+            txtRadio2Frequency.Text = _lastFlightData?.radio2_frequency.ToString();
 
+            txtIFFTransponderActiveCode1.Text = ((int)_lastFlightData.iffTransponderActiveCode1).ToString();
+            txtIFFTransponderActiveCode2.Text = _lastFlightData.iffTransponderActiveCode2.ToString();
+            txtIFFTransponderActiveCode3A.Text = _lastFlightData.iffTransponderActiveCode3A.ToString();
+            txtIFFTransponderActiveCodeC.Text = _lastFlightData.iffTransponderActiveCodeC.ToString();
+            txtIFFTransponderActiveCode4.Text = _lastFlightData.iffTransponderActiveCode4.ToString();
         }
 
         private void BindFD2RWRInfoToFormElements()

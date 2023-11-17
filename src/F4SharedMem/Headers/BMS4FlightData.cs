@@ -141,6 +141,7 @@ namespace F4SharedMem.Headers
         public float total;
 
         public int VersionNum;    // Version of FlightData mem area
+        public int VersionNum2;     // Version of Mem area
 
         // New values added here for header file compatibility but not implemented
         // in this version of the code at present.
