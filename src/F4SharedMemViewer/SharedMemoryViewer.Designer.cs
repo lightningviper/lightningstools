@@ -403,24 +403,6 @@
             this.chkBB_JFSOn_Slow = new System.Windows.Forms.CheckBox();
             this.chkBB_JFSOn_Fast = new System.Windows.Forms.CheckBox();
             this.tabFD2Vars = new System.Windows.Forms.TabPage();
-            this.lblECMOper = new System.Windows.Forms.Label();
-            this.txtECMOper = new System.Windows.Forms.TextBox();
-            this.lblECMBits4 = new System.Windows.Forms.Label();
-            this.txtECMBits4 = new System.Windows.Forms.TextBox();
-            this.lblECMBits3 = new System.Windows.Forms.Label();
-            this.txtECMBits3 = new System.Windows.Forms.TextBox();
-            this.lblECMBits2 = new System.Windows.Forms.Label();
-            this.txtECMBits2 = new System.Windows.Forms.TextBox();
-            this.lblECMBits1 = new System.Windows.Forms.Label();
-            this.txtECMBits1 = new System.Windows.Forms.TextBox();
-            this.lblECMBits0 = new System.Windows.Forms.Label();
-            this.txtECMBits0 = new System.Windows.Forms.TextBox();
-            this.txtMagDeviationReal = new System.Windows.Forms.TextBox();
-            this.lblMagDeviationReal = new System.Windows.Forms.Label();
-            this.txtMagDeviationSystem = new System.Windows.Forms.TextBox();
-            this.lblMagDeviationSystem = new System.Windows.Forms.Label();
-            this.txtFloodConsole = new System.Windows.Forms.TextBox();
-            this.lblFloodConsole = new System.Windows.Forms.Label();
             this.lblDrawingAreaSize = new System.Windows.Forms.Label();
             this.txtDrawingAreaSize = new System.Windows.Forms.TextBox();
             this.lblBMSVersion = new System.Windows.Forms.Label();
@@ -627,14 +609,6 @@
             this.lblStringsVersionNum = new System.Windows.Forms.Label();
             this.txtStringsVersionNum = new System.Windows.Forms.TextBox();
             this.tabRawBits = new System.Windows.Forms.TabPage();
-            this.lblMiscBitsHex = new System.Windows.Forms.Label();
-            this.txtMiscBitsHex = new System.Windows.Forms.TextBox();
-            this.lblBettyBitsHex = new System.Windows.Forms.Label();
-            this.txtBettyBitsHex = new System.Windows.Forms.TextBox();
-            this.lblBettyBitsUint = new System.Windows.Forms.Label();
-            this.txtBettyBitsUint = new System.Windows.Forms.TextBox();
-            this.lblMiscBitsUint = new System.Windows.Forms.Label();
-            this.txtMiscBitsUint = new System.Windows.Forms.TextBox();
             this.lblBlinkBitsHex = new System.Windows.Forms.Label();
             this.txtBlinkBitsHex = new System.Windows.Forms.TextBox();
             this.lblPowerBitsHex = new System.Windows.Forms.Label();
@@ -667,20 +641,32 @@
             this.lblFlightData = new System.Windows.Forms.Label();
             this.lblLightBitsUint = new System.Windows.Forms.Label();
             this.txtLightBitsUint = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtIFFTransponderActiveCode4 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtIFFTransponderActiveCodeC = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtIFFTransponderActiveCode3A = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtIFFTransponderActiveCode2 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtIFFTransponderActiveCode1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtRadio2Frequency = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtRadio2Preset = new System.Windows.Forms.TextBox();
+            this.txtFloodConsole = new System.Windows.Forms.TextBox();
+            this.lblFloodConsole = new System.Windows.Forms.Label();
+            this.txtMagDeviationSystem = new System.Windows.Forms.TextBox();
+            this.lblMagDeviationSystem = new System.Windows.Forms.Label();
+            this.txtMagDeviationReal = new System.Windows.Forms.TextBox();
+            this.lblMagDeviationReal = new System.Windows.Forms.Label();
+            this.lblECMBits0 = new System.Windows.Forms.Label();
+            this.txtECMBits0 = new System.Windows.Forms.TextBox();
+            this.lblECMBits1 = new System.Windows.Forms.Label();
+            this.txtECMBits1 = new System.Windows.Forms.TextBox();
+            this.lblECMBits2 = new System.Windows.Forms.Label();
+            this.txtECMBits2 = new System.Windows.Forms.TextBox();
+            this.lblECMBits3 = new System.Windows.Forms.Label();
+            this.txtECMBits3 = new System.Windows.Forms.TextBox();
+            this.lblECMBits4 = new System.Windows.Forms.Label();
+            this.txtECMBits4 = new System.Windows.Forms.TextBox();
+            this.lblECMOper = new System.Windows.Forms.Label();
+            this.txtECMOper = new System.Windows.Forms.TextBox();
+            this.lblMiscBitsUint = new System.Windows.Forms.Label();
+            this.txtMiscBitsUint = new System.Windows.Forms.TextBox();
+            this.lblBettyBitsUint = new System.Windows.Forms.Label();
+            this.txtBettyBitsUint = new System.Windows.Forms.TextBox();
+            this.lblBettyBitsHex = new System.Windows.Forms.Label();
+            this.txtBettyBitsHex = new System.Windows.Forms.TextBox();
+            this.lblMiscBitsHex = new System.Windows.Forms.Label();
+            this.txtMiscBitsHex = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabFDBits.SuspendLayout();
             this.tabFDVars.SuspendLayout();
@@ -4872,20 +4858,6 @@
             // 
             // tabFD2Vars
             // 
-            this.tabFD2Vars.Controls.Add(this.label8);
-            this.tabFD2Vars.Controls.Add(this.txtRadio2Frequency);
-            this.tabFD2Vars.Controls.Add(this.label7);
-            this.tabFD2Vars.Controls.Add(this.txtRadio2Preset);
-            this.tabFD2Vars.Controls.Add(this.label13);
-            this.tabFD2Vars.Controls.Add(this.txtIFFTransponderActiveCode4);
-            this.tabFD2Vars.Controls.Add(this.label10);
-            this.tabFD2Vars.Controls.Add(this.txtIFFTransponderActiveCodeC);
-            this.tabFD2Vars.Controls.Add(this.label11);
-            this.tabFD2Vars.Controls.Add(this.txtIFFTransponderActiveCode3A);
-            this.tabFD2Vars.Controls.Add(this.label12);
-            this.tabFD2Vars.Controls.Add(this.txtIFFTransponderActiveCode2);
-            this.tabFD2Vars.Controls.Add(this.label9);
-            this.tabFD2Vars.Controls.Add(this.txtIFFTransponderActiveCode1);
             this.tabFD2Vars.Controls.Add(this.lblECMOper);
             this.tabFD2Vars.Controls.Add(this.txtECMOper);
             this.tabFD2Vars.Controls.Add(this.lblECMBits4);
@@ -4998,195 +4970,6 @@
             this.tabFD2Vars.TabIndex = 4;
             this.tabFD2Vars.Text = "FD2 Vars";
             this.tabFD2Vars.UseVisualStyleBackColor = true;
-            // 
-            // lblECMOper
-            // 
-            this.lblECMOper.AutoSize = true;
-            this.lblECMOper.Enabled = false;
-            this.lblECMOper.Location = new System.Drawing.Point(544, 274);
-            this.lblECMOper.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblECMOper.Name = "lblECMOper";
-            this.lblECMOper.Size = new System.Drawing.Size(50, 13);
-            this.lblECMOper.TabIndex = 180;
-            this.lblECMOper.Text = "ecmOper";
-            this.lblECMOper.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtECMOper
-            // 
-            this.txtECMOper.Enabled = false;
-            this.txtECMOper.Location = new System.Drawing.Point(603, 273);
-            this.txtECMOper.Margin = new System.Windows.Forms.Padding(2);
-            this.txtECMOper.Name = "txtECMOper";
-            this.txtECMOper.Size = new System.Drawing.Size(173, 20);
-            this.txtECMOper.TabIndex = 179;
-            // 
-            // lblECMBits4
-            // 
-            this.lblECMBits4.AutoSize = true;
-            this.lblECMBits4.Enabled = false;
-            this.lblECMBits4.Location = new System.Drawing.Point(544, 254);
-            this.lblECMBits4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblECMBits4.Name = "lblECMBits4";
-            this.lblECMBits4.Size = new System.Drawing.Size(55, 13);
-            this.lblECMBits4.TabIndex = 176;
-            this.lblECMBits4.Text = "ecmbits[4]";
-            this.lblECMBits4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtECMBits4
-            // 
-            this.txtECMBits4.Enabled = false;
-            this.txtECMBits4.Location = new System.Drawing.Point(603, 253);
-            this.txtECMBits4.Margin = new System.Windows.Forms.Padding(2);
-            this.txtECMBits4.Name = "txtECMBits4";
-            this.txtECMBits4.Size = new System.Drawing.Size(173, 20);
-            this.txtECMBits4.TabIndex = 175;
-            // 
-            // lblECMBits3
-            // 
-            this.lblECMBits3.AutoSize = true;
-            this.lblECMBits3.Enabled = false;
-            this.lblECMBits3.Location = new System.Drawing.Point(544, 234);
-            this.lblECMBits3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblECMBits3.Name = "lblECMBits3";
-            this.lblECMBits3.Size = new System.Drawing.Size(55, 13);
-            this.lblECMBits3.TabIndex = 174;
-            this.lblECMBits3.Text = "ecmbits[3]";
-            this.lblECMBits3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtECMBits3
-            // 
-            this.txtECMBits3.Enabled = false;
-            this.txtECMBits3.Location = new System.Drawing.Point(603, 233);
-            this.txtECMBits3.Margin = new System.Windows.Forms.Padding(2);
-            this.txtECMBits3.Name = "txtECMBits3";
-            this.txtECMBits3.Size = new System.Drawing.Size(173, 20);
-            this.txtECMBits3.TabIndex = 173;
-            // 
-            // lblECMBits2
-            // 
-            this.lblECMBits2.AutoSize = true;
-            this.lblECMBits2.Enabled = false;
-            this.lblECMBits2.Location = new System.Drawing.Point(544, 214);
-            this.lblECMBits2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblECMBits2.Name = "lblECMBits2";
-            this.lblECMBits2.Size = new System.Drawing.Size(55, 13);
-            this.lblECMBits2.TabIndex = 172;
-            this.lblECMBits2.Text = "ecmbits[2]";
-            this.lblECMBits2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtECMBits2
-            // 
-            this.txtECMBits2.Enabled = false;
-            this.txtECMBits2.Location = new System.Drawing.Point(603, 213);
-            this.txtECMBits2.Margin = new System.Windows.Forms.Padding(2);
-            this.txtECMBits2.Name = "txtECMBits2";
-            this.txtECMBits2.Size = new System.Drawing.Size(173, 20);
-            this.txtECMBits2.TabIndex = 171;
-            // 
-            // lblECMBits1
-            // 
-            this.lblECMBits1.AutoSize = true;
-            this.lblECMBits1.Enabled = false;
-            this.lblECMBits1.Location = new System.Drawing.Point(544, 194);
-            this.lblECMBits1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblECMBits1.Name = "lblECMBits1";
-            this.lblECMBits1.Size = new System.Drawing.Size(55, 13);
-            this.lblECMBits1.TabIndex = 170;
-            this.lblECMBits1.Text = "ecmbits[1]";
-            this.lblECMBits1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtECMBits1
-            // 
-            this.txtECMBits1.Enabled = false;
-            this.txtECMBits1.Location = new System.Drawing.Point(603, 193);
-            this.txtECMBits1.Margin = new System.Windows.Forms.Padding(2);
-            this.txtECMBits1.Name = "txtECMBits1";
-            this.txtECMBits1.Size = new System.Drawing.Size(173, 20);
-            this.txtECMBits1.TabIndex = 169;
-            // 
-            // lblECMBits0
-            // 
-            this.lblECMBits0.AutoSize = true;
-            this.lblECMBits0.Enabled = false;
-            this.lblECMBits0.Location = new System.Drawing.Point(544, 174);
-            this.lblECMBits0.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblECMBits0.Name = "lblECMBits0";
-            this.lblECMBits0.Size = new System.Drawing.Size(55, 13);
-            this.lblECMBits0.TabIndex = 168;
-            this.lblECMBits0.Text = "ecmbits[0]";
-            this.lblECMBits0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtECMBits0
-            // 
-            this.txtECMBits0.Enabled = false;
-            this.txtECMBits0.Location = new System.Drawing.Point(603, 173);
-            this.txtECMBits0.Margin = new System.Windows.Forms.Padding(2);
-            this.txtECMBits0.Name = "txtECMBits0";
-            this.txtECMBits0.Size = new System.Drawing.Size(173, 20);
-            this.txtECMBits0.TabIndex = 167;
-            // 
-            // txtMagDeviationReal
-            // 
-            this.txtMagDeviationReal.Enabled = false;
-            this.txtMagDeviationReal.Location = new System.Drawing.Point(127, 325);
-            this.txtMagDeviationReal.Margin = new System.Windows.Forms.Padding(2);
-            this.txtMagDeviationReal.Name = "txtMagDeviationReal";
-            this.txtMagDeviationReal.Size = new System.Drawing.Size(106, 20);
-            this.txtMagDeviationReal.TabIndex = 166;
-            // 
-            // lblMagDeviationReal
-            // 
-            this.lblMagDeviationReal.AutoSize = true;
-            this.lblMagDeviationReal.Enabled = false;
-            this.lblMagDeviationReal.Location = new System.Drawing.Point(30, 328);
-            this.lblMagDeviationReal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMagDeviationReal.Name = "lblMagDeviationReal";
-            this.lblMagDeviationReal.Size = new System.Drawing.Size(94, 13);
-            this.lblMagDeviationReal.TabIndex = 165;
-            this.lblMagDeviationReal.Text = "magDeviationReal";
-            this.lblMagDeviationReal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtMagDeviationSystem
-            // 
-            this.txtMagDeviationSystem.Enabled = false;
-            this.txtMagDeviationSystem.Location = new System.Drawing.Point(127, 305);
-            this.txtMagDeviationSystem.Margin = new System.Windows.Forms.Padding(2);
-            this.txtMagDeviationSystem.Name = "txtMagDeviationSystem";
-            this.txtMagDeviationSystem.Size = new System.Drawing.Size(106, 20);
-            this.txtMagDeviationSystem.TabIndex = 164;
-            // 
-            // lblMagDeviationSystem
-            // 
-            this.lblMagDeviationSystem.AutoSize = true;
-            this.lblMagDeviationSystem.Enabled = false;
-            this.lblMagDeviationSystem.Location = new System.Drawing.Point(20, 308);
-            this.lblMagDeviationSystem.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMagDeviationSystem.Name = "lblMagDeviationSystem";
-            this.lblMagDeviationSystem.Size = new System.Drawing.Size(106, 13);
-            this.lblMagDeviationSystem.TabIndex = 163;
-            this.lblMagDeviationSystem.Text = "magDeviationSystem";
-            this.lblMagDeviationSystem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtFloodConsole
-            // 
-            this.txtFloodConsole.Enabled = false;
-            this.txtFloodConsole.Location = new System.Drawing.Point(372, 325);
-            this.txtFloodConsole.Margin = new System.Windows.Forms.Padding(2);
-            this.txtFloodConsole.Name = "txtFloodConsole";
-            this.txtFloodConsole.Size = new System.Drawing.Size(106, 20);
-            this.txtFloodConsole.TabIndex = 162;
-            // 
-            // lblFloodConsole
-            // 
-            this.lblFloodConsole.AutoSize = true;
-            this.lblFloodConsole.Enabled = false;
-            this.lblFloodConsole.Location = new System.Drawing.Point(302, 328);
-            this.lblFloodConsole.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblFloodConsole.Name = "lblFloodConsole";
-            this.lblFloodConsole.Size = new System.Drawing.Size(68, 13);
-            this.lblFloodConsole.TabIndex = 161;
-            this.lblFloodConsole.Text = "floodConsole";
-            this.lblFloodConsole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblDrawingAreaSize
             // 
@@ -5338,7 +5121,7 @@
             // txtBullseyeY
             // 
             this.txtBullseyeY.Enabled = false;
-            this.txtBullseyeY.Location = new System.Drawing.Point(127, 385);
+            this.txtBullseyeY.Location = new System.Drawing.Point(127, 363);
             this.txtBullseyeY.Margin = new System.Windows.Forms.Padding(2);
             this.txtBullseyeY.Name = "txtBullseyeY";
             this.txtBullseyeY.Size = new System.Drawing.Size(106, 20);
@@ -5348,7 +5131,7 @@
             // 
             this.lblBullseyeY.AutoSize = true;
             this.lblBullseyeY.Enabled = false;
-            this.lblBullseyeY.Location = new System.Drawing.Point(71, 385);
+            this.lblBullseyeY.Location = new System.Drawing.Point(71, 363);
             this.lblBullseyeY.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBullseyeY.Name = "lblBullseyeY";
             this.lblBullseyeY.Size = new System.Drawing.Size(52, 13);
@@ -5359,7 +5142,7 @@
             // txtBullseyeX
             // 
             this.txtBullseyeX.Enabled = false;
-            this.txtBullseyeX.Location = new System.Drawing.Point(127, 365);
+            this.txtBullseyeX.Location = new System.Drawing.Point(127, 344);
             this.txtBullseyeX.Margin = new System.Windows.Forms.Padding(2);
             this.txtBullseyeX.Name = "txtBullseyeX";
             this.txtBullseyeX.Size = new System.Drawing.Size(106, 20);
@@ -5369,7 +5152,7 @@
             // 
             this.lblBullseyeX.AutoSize = true;
             this.lblBullseyeX.Enabled = false;
-            this.lblBullseyeX.Location = new System.Drawing.Point(71, 365);
+            this.lblBullseyeX.Location = new System.Drawing.Point(71, 344);
             this.lblBullseyeX.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBullseyeX.Name = "lblBullseyeX";
             this.lblBullseyeX.Size = new System.Drawing.Size(52, 13);
@@ -5380,7 +5163,7 @@
             // txtBingoFuel
             // 
             this.txtBingoFuel.Enabled = false;
-            this.txtBingoFuel.Location = new System.Drawing.Point(127, 345);
+            this.txtBingoFuel.Location = new System.Drawing.Point(127, 324);
             this.txtBingoFuel.Margin = new System.Windows.Forms.Padding(2);
             this.txtBingoFuel.Name = "txtBingoFuel";
             this.txtBingoFuel.Size = new System.Drawing.Size(106, 20);
@@ -5390,7 +5173,7 @@
             // 
             this.lblBingoFuel.AutoSize = true;
             this.lblBingoFuel.Enabled = false;
-            this.lblBingoFuel.Location = new System.Drawing.Point(70, 345);
+            this.lblBingoFuel.Location = new System.Drawing.Point(70, 324);
             this.lblBingoFuel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBingoFuel.Name = "lblBingoFuel";
             this.lblBingoFuel.Size = new System.Drawing.Size(53, 13);
@@ -5402,7 +5185,7 @@
             // 
             this.lblIFF_BackupModeDigits.AutoSize = true;
             this.lblIFF_BackupModeDigits.Enabled = false;
-            this.lblIFF_BackupModeDigits.Location = new System.Drawing.Point(250, 388);
+            this.lblIFF_BackupModeDigits.Location = new System.Drawing.Point(5, 305);
             this.lblIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblIFF_BackupModeDigits.Name = "lblIFF_BackupModeDigits";
             this.lblIFF_BackupModeDigits.Size = new System.Drawing.Size(118, 13);
@@ -5413,7 +5196,7 @@
             // txtIFF_BackupModeDigits
             // 
             this.txtIFF_BackupModeDigits.Enabled = false;
-            this.txtIFF_BackupModeDigits.Location = new System.Drawing.Point(372, 387);
+            this.txtIFF_BackupModeDigits.Location = new System.Drawing.Point(127, 304);
             this.txtIFF_BackupModeDigits.Margin = new System.Windows.Forms.Padding(2);
             this.txtIFF_BackupModeDigits.Name = "txtIFF_BackupModeDigits";
             this.txtIFF_BackupModeDigits.Size = new System.Drawing.Size(106, 20);
@@ -7800,90 +7583,6 @@
             this.tabRawBits.Text = "Raw Bits";
             this.tabRawBits.UseVisualStyleBackColor = true;
             // 
-            // lblMiscBitsHex
-            // 
-            this.lblMiscBitsHex.AutoSize = true;
-            this.lblMiscBitsHex.Enabled = false;
-            this.lblMiscBitsHex.Location = new System.Drawing.Point(252, 222);
-            this.lblMiscBitsHex.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMiscBitsHex.Name = "lblMiscBitsHex";
-            this.lblMiscBitsHex.Size = new System.Drawing.Size(45, 13);
-            this.lblMiscBitsHex.TabIndex = 149;
-            this.lblMiscBitsHex.Text = "miscBits";
-            this.lblMiscBitsHex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtMiscBitsHex
-            // 
-            this.txtMiscBitsHex.Enabled = false;
-            this.txtMiscBitsHex.Location = new System.Drawing.Point(302, 221);
-            this.txtMiscBitsHex.Margin = new System.Windows.Forms.Padding(2);
-            this.txtMiscBitsHex.Name = "txtMiscBitsHex";
-            this.txtMiscBitsHex.Size = new System.Drawing.Size(106, 20);
-            this.txtMiscBitsHex.TabIndex = 148;
-            // 
-            // lblBettyBitsHex
-            // 
-            this.lblBettyBitsHex.AutoSize = true;
-            this.lblBettyBitsHex.Enabled = false;
-            this.lblBettyBitsHex.Location = new System.Drawing.Point(252, 242);
-            this.lblBettyBitsHex.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblBettyBitsHex.Name = "lblBettyBitsHex";
-            this.lblBettyBitsHex.Size = new System.Drawing.Size(47, 13);
-            this.lblBettyBitsHex.TabIndex = 147;
-            this.lblBettyBitsHex.Text = "bettyBits";
-            this.lblBettyBitsHex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBettyBitsHex
-            // 
-            this.txtBettyBitsHex.Enabled = false;
-            this.txtBettyBitsHex.Location = new System.Drawing.Point(302, 241);
-            this.txtBettyBitsHex.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBettyBitsHex.Name = "txtBettyBitsHex";
-            this.txtBettyBitsHex.Size = new System.Drawing.Size(106, 20);
-            this.txtBettyBitsHex.TabIndex = 146;
-            // 
-            // lblBettyBitsUint
-            // 
-            this.lblBettyBitsUint.AutoSize = true;
-            this.lblBettyBitsUint.Enabled = false;
-            this.lblBettyBitsUint.Location = new System.Drawing.Point(252, 113);
-            this.lblBettyBitsUint.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblBettyBitsUint.Name = "lblBettyBitsUint";
-            this.lblBettyBitsUint.Size = new System.Drawing.Size(47, 13);
-            this.lblBettyBitsUint.TabIndex = 145;
-            this.lblBettyBitsUint.Text = "bettyBits";
-            this.lblBettyBitsUint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBettyBitsUint
-            // 
-            this.txtBettyBitsUint.Enabled = false;
-            this.txtBettyBitsUint.Location = new System.Drawing.Point(302, 112);
-            this.txtBettyBitsUint.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBettyBitsUint.Name = "txtBettyBitsUint";
-            this.txtBettyBitsUint.Size = new System.Drawing.Size(106, 20);
-            this.txtBettyBitsUint.TabIndex = 144;
-            // 
-            // lblMiscBitsUint
-            // 
-            this.lblMiscBitsUint.AutoSize = true;
-            this.lblMiscBitsUint.Enabled = false;
-            this.lblMiscBitsUint.Location = new System.Drawing.Point(252, 93);
-            this.lblMiscBitsUint.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMiscBitsUint.Name = "lblMiscBitsUint";
-            this.lblMiscBitsUint.Size = new System.Drawing.Size(45, 13);
-            this.lblMiscBitsUint.TabIndex = 143;
-            this.lblMiscBitsUint.Text = "miscBits";
-            this.lblMiscBitsUint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtMiscBitsUint
-            // 
-            this.txtMiscBitsUint.Enabled = false;
-            this.txtMiscBitsUint.Location = new System.Drawing.Point(302, 92);
-            this.txtMiscBitsUint.Margin = new System.Windows.Forms.Padding(2);
-            this.txtMiscBitsUint.Name = "txtMiscBitsUint";
-            this.txtMiscBitsUint.Size = new System.Drawing.Size(106, 20);
-            this.txtMiscBitsUint.TabIndex = 142;
-            // 
             // lblBlinkBitsHex
             // 
             this.lblBlinkBitsHex.AutoSize = true;
@@ -8222,152 +7921,278 @@
             this.txtLightBitsUint.Size = new System.Drawing.Size(106, 20);
             this.txtLightBitsUint.TabIndex = 110;
             // 
-            // label13
+            // txtFloodConsole
             // 
-            this.label13.AutoSize = true;
-            this.label13.Enabled = false;
-            this.label13.Location = new System.Drawing.Point(534, 361);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 13);
-            this.label13.TabIndex = 204;
-            this.label13.Text = "IFF_Code_4";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtFloodConsole.Enabled = false;
+            this.txtFloodConsole.Location = new System.Drawing.Point(372, 325);
+            this.txtFloodConsole.Margin = new System.Windows.Forms.Padding(2);
+            this.txtFloodConsole.Name = "txtFloodConsole";
+            this.txtFloodConsole.Size = new System.Drawing.Size(106, 20);
+            this.txtFloodConsole.TabIndex = 162;
             // 
-            // txtIFFTransponderActiveCode4
+            // lblFloodConsole
             // 
-            this.txtIFFTransponderActiveCode4.Enabled = false;
-            this.txtIFFTransponderActiveCode4.Location = new System.Drawing.Point(603, 358);
-            this.txtIFFTransponderActiveCode4.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIFFTransponderActiveCode4.Name = "txtIFFTransponderActiveCode4";
-            this.txtIFFTransponderActiveCode4.Size = new System.Drawing.Size(173, 20);
-            this.txtIFFTransponderActiveCode4.TabIndex = 203;
+            this.lblFloodConsole.AutoSize = true;
+            this.lblFloodConsole.Enabled = false;
+            this.lblFloodConsole.Location = new System.Drawing.Point(302, 328);
+            this.lblFloodConsole.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFloodConsole.Name = "lblFloodConsole";
+            this.lblFloodConsole.Size = new System.Drawing.Size(68, 13);
+            this.lblFloodConsole.TabIndex = 161;
+            this.lblFloodConsole.Text = "floodConsole";
+            this.lblFloodConsole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label10
+            // txtMagDeviationSystem
             // 
-            this.label10.AutoSize = true;
-            this.label10.Enabled = false;
-            this.label10.Location = new System.Drawing.Point(533, 383);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(66, 13);
-            this.label10.TabIndex = 202;
-            this.label10.Text = "IFF_Code_C";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtMagDeviationSystem.Enabled = false;
+            this.txtMagDeviationSystem.Location = new System.Drawing.Point(372, 345);
+            this.txtMagDeviationSystem.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMagDeviationSystem.Name = "txtMagDeviationSystem";
+            this.txtMagDeviationSystem.Size = new System.Drawing.Size(106, 20);
+            this.txtMagDeviationSystem.TabIndex = 164;
             // 
-            // txtIFFTransponderActiveCodeC
+            // lblMagDeviationSystem
             // 
-            this.txtIFFTransponderActiveCodeC.Enabled = false;
-            this.txtIFFTransponderActiveCodeC.Location = new System.Drawing.Point(603, 380);
-            this.txtIFFTransponderActiveCodeC.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIFFTransponderActiveCodeC.Name = "txtIFFTransponderActiveCodeC";
-            this.txtIFFTransponderActiveCodeC.Size = new System.Drawing.Size(173, 20);
-            this.txtIFFTransponderActiveCodeC.TabIndex = 201;
+            this.lblMagDeviationSystem.AutoSize = true;
+            this.lblMagDeviationSystem.Enabled = false;
+            this.lblMagDeviationSystem.Location = new System.Drawing.Point(265, 348);
+            this.lblMagDeviationSystem.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMagDeviationSystem.Name = "lblMagDeviationSystem";
+            this.lblMagDeviationSystem.Size = new System.Drawing.Size(106, 13);
+            this.lblMagDeviationSystem.TabIndex = 163;
+            this.lblMagDeviationSystem.Text = "magDeviationSystem";
+            this.lblMagDeviationSystem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label11
+            // txtMagDeviationReal
             // 
-            this.label11.AutoSize = true;
-            this.label11.Enabled = false;
-            this.label11.Location = new System.Drawing.Point(527, 339);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 13);
-            this.label11.TabIndex = 200;
-            this.label11.Text = "IFF_Code_3A";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtMagDeviationReal.Enabled = false;
+            this.txtMagDeviationReal.Location = new System.Drawing.Point(372, 365);
+            this.txtMagDeviationReal.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMagDeviationReal.Name = "txtMagDeviationReal";
+            this.txtMagDeviationReal.Size = new System.Drawing.Size(106, 20);
+            this.txtMagDeviationReal.TabIndex = 166;
             // 
-            // txtIFFTransponderActiveCode3A
+            // lblMagDeviationReal
             // 
-            this.txtIFFTransponderActiveCode3A.Enabled = false;
-            this.txtIFFTransponderActiveCode3A.Location = new System.Drawing.Point(603, 336);
-            this.txtIFFTransponderActiveCode3A.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIFFTransponderActiveCode3A.Name = "txtIFFTransponderActiveCode3A";
-            this.txtIFFTransponderActiveCode3A.Size = new System.Drawing.Size(173, 20);
-            this.txtIFFTransponderActiveCode3A.TabIndex = 199;
+            this.lblMagDeviationReal.AutoSize = true;
+            this.lblMagDeviationReal.Enabled = false;
+            this.lblMagDeviationReal.Location = new System.Drawing.Point(275, 368);
+            this.lblMagDeviationReal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMagDeviationReal.Name = "lblMagDeviationReal";
+            this.lblMagDeviationReal.Size = new System.Drawing.Size(94, 13);
+            this.lblMagDeviationReal.TabIndex = 165;
+            this.lblMagDeviationReal.Text = "magDeviationReal";
+            this.lblMagDeviationReal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label12
+            // lblECMBits0
             // 
-            this.label12.AutoSize = true;
-            this.label12.Enabled = false;
-            this.label12.Location = new System.Drawing.Point(534, 318);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 13);
-            this.label12.TabIndex = 198;
-            this.label12.Text = "IFF_Code_2";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblECMBits0.AutoSize = true;
+            this.lblECMBits0.Enabled = false;
+            this.lblECMBits0.Location = new System.Drawing.Point(544, 174);
+            this.lblECMBits0.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblECMBits0.Name = "lblECMBits0";
+            this.lblECMBits0.Size = new System.Drawing.Size(55, 13);
+            this.lblECMBits0.TabIndex = 168;
+            this.lblECMBits0.Text = "ecmbits[0]";
+            this.lblECMBits0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtIFFTransponderActiveCode2
+            // txtECMBits0
             // 
-            this.txtIFFTransponderActiveCode2.Enabled = false;
-            this.txtIFFTransponderActiveCode2.Location = new System.Drawing.Point(603, 315);
-            this.txtIFFTransponderActiveCode2.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIFFTransponderActiveCode2.Name = "txtIFFTransponderActiveCode2";
-            this.txtIFFTransponderActiveCode2.Size = new System.Drawing.Size(173, 20);
-            this.txtIFFTransponderActiveCode2.TabIndex = 197;
+            this.txtECMBits0.Enabled = false;
+            this.txtECMBits0.Location = new System.Drawing.Point(603, 173);
+            this.txtECMBits0.Margin = new System.Windows.Forms.Padding(2);
+            this.txtECMBits0.Name = "txtECMBits0";
+            this.txtECMBits0.Size = new System.Drawing.Size(173, 20);
+            this.txtECMBits0.TabIndex = 167;
             // 
-            // label9
+            // lblECMBits1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Enabled = false;
-            this.label9.Location = new System.Drawing.Point(534, 297);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 13);
-            this.label9.TabIndex = 196;
-            this.label9.Text = "IFF_Code_1";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblECMBits1.AutoSize = true;
+            this.lblECMBits1.Enabled = false;
+            this.lblECMBits1.Location = new System.Drawing.Point(544, 194);
+            this.lblECMBits1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblECMBits1.Name = "lblECMBits1";
+            this.lblECMBits1.Size = new System.Drawing.Size(55, 13);
+            this.lblECMBits1.TabIndex = 170;
+            this.lblECMBits1.Text = "ecmbits[1]";
+            this.lblECMBits1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtIFFTransponderActiveCode1
+            // txtECMBits1
             // 
-            this.txtIFFTransponderActiveCode1.Enabled = false;
-            this.txtIFFTransponderActiveCode1.Location = new System.Drawing.Point(603, 294);
-            this.txtIFFTransponderActiveCode1.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIFFTransponderActiveCode1.Name = "txtIFFTransponderActiveCode1";
-            this.txtIFFTransponderActiveCode1.Size = new System.Drawing.Size(173, 20);
-            this.txtIFFTransponderActiveCode1.TabIndex = 195;
+            this.txtECMBits1.Enabled = false;
+            this.txtECMBits1.Location = new System.Drawing.Point(603, 193);
+            this.txtECMBits1.Margin = new System.Windows.Forms.Padding(2);
+            this.txtECMBits1.Name = "txtECMBits1";
+            this.txtECMBits1.Size = new System.Drawing.Size(173, 20);
+            this.txtECMBits1.TabIndex = 169;
             // 
-            // label8
+            // lblECMBits2
             // 
-            this.label8.AutoSize = true;
-            this.label8.Enabled = false;
-            this.label8.Location = new System.Drawing.Point(279, 369);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 13);
-            this.label8.TabIndex = 208;
-            this.label8.Text = "radio2_frequency";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblECMBits2.AutoSize = true;
+            this.lblECMBits2.Enabled = false;
+            this.lblECMBits2.Location = new System.Drawing.Point(544, 214);
+            this.lblECMBits2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblECMBits2.Name = "lblECMBits2";
+            this.lblECMBits2.Size = new System.Drawing.Size(55, 13);
+            this.lblECMBits2.TabIndex = 172;
+            this.lblECMBits2.Text = "ecmbits[2]";
+            this.lblECMBits2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtRadio2Frequency
+            // txtECMBits2
             // 
-            this.txtRadio2Frequency.Enabled = false;
-            this.txtRadio2Frequency.Location = new System.Drawing.Point(372, 366);
-            this.txtRadio2Frequency.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRadio2Frequency.Name = "txtRadio2Frequency";
-            this.txtRadio2Frequency.Size = new System.Drawing.Size(106, 20);
-            this.txtRadio2Frequency.TabIndex = 207;
+            this.txtECMBits2.Enabled = false;
+            this.txtECMBits2.Location = new System.Drawing.Point(603, 213);
+            this.txtECMBits2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtECMBits2.Name = "txtECMBits2";
+            this.txtECMBits2.Size = new System.Drawing.Size(173, 20);
+            this.txtECMBits2.TabIndex = 171;
             // 
-            // label7
+            // lblECMBits3
             // 
-            this.label7.AutoSize = true;
-            this.label7.Enabled = false;
-            this.label7.Location = new System.Drawing.Point(297, 348);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 13);
-            this.label7.TabIndex = 206;
-            this.label7.Text = "radio2_preset";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblECMBits3.AutoSize = true;
+            this.lblECMBits3.Enabled = false;
+            this.lblECMBits3.Location = new System.Drawing.Point(544, 234);
+            this.lblECMBits3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblECMBits3.Name = "lblECMBits3";
+            this.lblECMBits3.Size = new System.Drawing.Size(55, 13);
+            this.lblECMBits3.TabIndex = 174;
+            this.lblECMBits3.Text = "ecmbits[3]";
+            this.lblECMBits3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtRadio2Preset
+            // txtECMBits3
             // 
-            this.txtRadio2Preset.Enabled = false;
-            this.txtRadio2Preset.Location = new System.Drawing.Point(372, 345);
-            this.txtRadio2Preset.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRadio2Preset.Name = "txtRadio2Preset";
-            this.txtRadio2Preset.Size = new System.Drawing.Size(106, 20);
-            this.txtRadio2Preset.TabIndex = 205;
+            this.txtECMBits3.Enabled = false;
+            this.txtECMBits3.Location = new System.Drawing.Point(603, 233);
+            this.txtECMBits3.Margin = new System.Windows.Forms.Padding(2);
+            this.txtECMBits3.Name = "txtECMBits3";
+            this.txtECMBits3.Size = new System.Drawing.Size(173, 20);
+            this.txtECMBits3.TabIndex = 173;
+            // 
+            // lblECMBits4
+            // 
+            this.lblECMBits4.AutoSize = true;
+            this.lblECMBits4.Enabled = false;
+            this.lblECMBits4.Location = new System.Drawing.Point(544, 254);
+            this.lblECMBits4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblECMBits4.Name = "lblECMBits4";
+            this.lblECMBits4.Size = new System.Drawing.Size(55, 13);
+            this.lblECMBits4.TabIndex = 176;
+            this.lblECMBits4.Text = "ecmbits[4]";
+            this.lblECMBits4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtECMBits4
+            // 
+            this.txtECMBits4.Enabled = false;
+            this.txtECMBits4.Location = new System.Drawing.Point(603, 253);
+            this.txtECMBits4.Margin = new System.Windows.Forms.Padding(2);
+            this.txtECMBits4.Name = "txtECMBits4";
+            this.txtECMBits4.Size = new System.Drawing.Size(173, 20);
+            this.txtECMBits4.TabIndex = 175;
+            // 
+            // lblECMOper
+            // 
+            this.lblECMOper.AutoSize = true;
+            this.lblECMOper.Enabled = false;
+            this.lblECMOper.Location = new System.Drawing.Point(544, 274);
+            this.lblECMOper.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblECMOper.Name = "lblECMOper";
+            this.lblECMOper.Size = new System.Drawing.Size(50, 13);
+            this.lblECMOper.TabIndex = 180;
+            this.lblECMOper.Text = "ecmOper";
+            this.lblECMOper.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtECMOper
+            // 
+            this.txtECMOper.Enabled = false;
+            this.txtECMOper.Location = new System.Drawing.Point(603, 273);
+            this.txtECMOper.Margin = new System.Windows.Forms.Padding(2);
+            this.txtECMOper.Name = "txtECMOper";
+            this.txtECMOper.Size = new System.Drawing.Size(173, 20);
+            this.txtECMOper.TabIndex = 179;
+            // 
+            // lblMiscBitsUint
+            // 
+            this.lblMiscBitsUint.AutoSize = true;
+            this.lblMiscBitsUint.Enabled = false;
+            this.lblMiscBitsUint.Location = new System.Drawing.Point(252, 93);
+            this.lblMiscBitsUint.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMiscBitsUint.Name = "lblMiscBitsUint";
+            this.lblMiscBitsUint.Size = new System.Drawing.Size(45, 13);
+            this.lblMiscBitsUint.TabIndex = 143;
+            this.lblMiscBitsUint.Text = "miscBits";
+            this.lblMiscBitsUint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtMiscBitsUint
+            // 
+            this.txtMiscBitsUint.Enabled = false;
+            this.txtMiscBitsUint.Location = new System.Drawing.Point(302, 92);
+            this.txtMiscBitsUint.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMiscBitsUint.Name = "txtMiscBitsUint";
+            this.txtMiscBitsUint.Size = new System.Drawing.Size(106, 20);
+            this.txtMiscBitsUint.TabIndex = 142;
+            // 
+            // lblBettyBitsUint
+            // 
+            this.lblBettyBitsUint.AutoSize = true;
+            this.lblBettyBitsUint.Enabled = false;
+            this.lblBettyBitsUint.Location = new System.Drawing.Point(252, 113);
+            this.lblBettyBitsUint.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBettyBitsUint.Name = "lblBettyBitsUint";
+            this.lblBettyBitsUint.Size = new System.Drawing.Size(47, 13);
+            this.lblBettyBitsUint.TabIndex = 145;
+            this.lblBettyBitsUint.Text = "bettyBits";
+            this.lblBettyBitsUint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBettyBitsUint
+            // 
+            this.txtBettyBitsUint.Enabled = false;
+            this.txtBettyBitsUint.Location = new System.Drawing.Point(302, 112);
+            this.txtBettyBitsUint.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBettyBitsUint.Name = "txtBettyBitsUint";
+            this.txtBettyBitsUint.Size = new System.Drawing.Size(106, 20);
+            this.txtBettyBitsUint.TabIndex = 144;
+            // 
+            // lblBettyBitsHex
+            // 
+            this.lblBettyBitsHex.AutoSize = true;
+            this.lblBettyBitsHex.Enabled = false;
+            this.lblBettyBitsHex.Location = new System.Drawing.Point(252, 242);
+            this.lblBettyBitsHex.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBettyBitsHex.Name = "lblBettyBitsHex";
+            this.lblBettyBitsHex.Size = new System.Drawing.Size(47, 13);
+            this.lblBettyBitsHex.TabIndex = 147;
+            this.lblBettyBitsHex.Text = "bettyBits";
+            this.lblBettyBitsHex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBettyBitsHex
+            // 
+            this.txtBettyBitsHex.Enabled = false;
+            this.txtBettyBitsHex.Location = new System.Drawing.Point(302, 241);
+            this.txtBettyBitsHex.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBettyBitsHex.Name = "txtBettyBitsHex";
+            this.txtBettyBitsHex.Size = new System.Drawing.Size(106, 20);
+            this.txtBettyBitsHex.TabIndex = 146;
+            // 
+            // lblMiscBitsHex
+            // 
+            this.lblMiscBitsHex.AutoSize = true;
+            this.lblMiscBitsHex.Enabled = false;
+            this.lblMiscBitsHex.Location = new System.Drawing.Point(252, 222);
+            this.lblMiscBitsHex.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMiscBitsHex.Name = "lblMiscBitsHex";
+            this.lblMiscBitsHex.Size = new System.Drawing.Size(45, 13);
+            this.lblMiscBitsHex.TabIndex = 149;
+            this.lblMiscBitsHex.Text = "miscBits";
+            this.lblMiscBitsHex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtMiscBitsHex
+            // 
+            this.txtMiscBitsHex.Enabled = false;
+            this.txtMiscBitsHex.Location = new System.Drawing.Point(302, 221);
+            this.txtMiscBitsHex.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMiscBitsHex.Name = "txtMiscBitsHex";
+            this.txtMiscBitsHex.Size = new System.Drawing.Size(106, 20);
+            this.txtMiscBitsHex.TabIndex = 148;
             // 
             // SharedMemoryViewer
             // 
@@ -9014,19 +8839,5 @@
         private System.Windows.Forms.TextBox txtBettyBitsUint;
         private System.Windows.Forms.Label lblMiscBitsUint;
         private System.Windows.Forms.TextBox txtMiscBitsUint;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtRadio2Frequency;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtRadio2Preset;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtIFFTransponderActiveCode4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtIFFTransponderActiveCodeC;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtIFFTransponderActiveCode3A;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtIFFTransponderActiveCode2;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtIFFTransponderActiveCode1;
     }
 }
