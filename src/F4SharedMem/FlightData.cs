@@ -185,35 +185,48 @@ namespace F4SharedMem
             var valuesToAssign = new OptionSelectButtonLabel[currentValue.Length];
             for (var j = 0; j < currentValue.Length; j++)
             {
+                var tmpLine1 = "";
+                var tmpLine2 = "";
+
                 var currentItem = currentValue[j];
                 var label = new OptionSelectButtonLabel();
                 var lineBuilder = new StringBuilder(currentItem.Line1.Length);
+                if (currentItem.Line1[0] != 0)
+                {
+                    foreach (var chr in currentItem.Line1)
+                    {
+                        if (chr == 0)
+                        {
+                            lineBuilder.Append(" ");
+                        }
+                        else
+                        {
+                            lineBuilder.Append((char)chr);
+                        }
+                    }
+                    tmpLine1 = lineBuilder.ToString().Split(' ')[0].Trim();
+                }
 
-                foreach (var chr in currentItem.Line1)
-                {
-                    if (chr == 0)
-                    {
-                        lineBuilder.Append(" ");
-                    }
-                    else
-                    {
-                        lineBuilder.Append((char)chr);
-                    }
-                }
-                label.Line1 = lineBuilder.ToString();
+                label.Line1 = tmpLine1;
+
                 lineBuilder = new StringBuilder(currentItem.Line2.Length);
-                foreach (var chr in currentItem.Line2)
+                if (currentItem.Line2[0] != 0)
                 {
-                    if (chr == 0)
+                    foreach (var chr in currentItem.Line2)
                     {
-                        lineBuilder.Append(" ");
+                        if (chr == 0)
+                        {
+                            lineBuilder.Append(" ");
+                        }
+                        else
+                        {
+                            lineBuilder.Append((char)chr);
+                        }
                     }
-                    else
-                    {
-                        lineBuilder.Append((char)chr);
-                    }
+                    tmpLine2 = lineBuilder.ToString().Split(' ')[0].Trim();
                 }
-                label.Line2 = lineBuilder.ToString();
+
+                label.Line2 = tmpLine2;
                 label.Inverted = currentItem.Inverted;
                 valuesToAssign[j] = label;
             }
@@ -332,7 +345,7 @@ namespace F4SharedMem
         public float total;
 
         public int VersionNum;    //Version of Mem area
-        public int VersionNum2;     // Version of Mem area
+        public int VersionNum2;    //Version of Mem area
         public float headX;        // Head X offset from design eye (feet)
         public float headY;        // Head Y offset from design eye (feet)
         public float headZ;        // Head Z offset from design eye (feet)
@@ -415,6 +428,17 @@ namespace F4SharedMem
         public EcmOperStates ecmOper;                  // (unsigned char) see enum EcmOperStates for details
 
         public JammingStates[] RWRjammingStatus; // (unsigned) char see enum JammingStates for details
+
+        // VERSION 20
+        public int radio2_preset;       // Radio 2 channel preset (if present).
+        public int radio2_frequency;    // Radio 2 channel frequency (if present).
+
+        // IFF transponder currently active (as seen from outside) codes, negative for OFF or n/a
+        public char iffTransponderActiveCode1;  // mode 1
+        public short iffTransponderActiveCode2;  // mode 2
+        public short iffTransponderActiveCode3A; // mode 3A
+        public short iffTransponderActiveCodeC;  // mode C
+        public short iffTransponderActiveCode4;  // mode 4; assumes the correct codeword
 
 #if EWMU_AND_EWPI_PATCH_APPLIED
         // VERSION 18?
