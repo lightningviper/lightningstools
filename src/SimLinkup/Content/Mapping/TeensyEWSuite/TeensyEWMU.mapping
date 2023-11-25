@@ -55,11 +55,11 @@
     </SignalMapping>
 
     <SignalMapping>
-      <!-- F4 EWPI JMR WINDOW DISPLAY TEXT STRING OUTPUT-->
+      <!-- F4 EWPI CMDS DISPLAY TEXT STRING OUTPUT-->
       <Source xsi:type="TextSignal">
         <Id>F4_CMDS__DISPLAYTEXT</Id>
       </Source>
-      <!-- TeensyEWMU JMR WINDOW DISPLAY TEXT STRING INPUT-->
+      <!-- TeensyEWMU CMDS DISPLAY TEXT STRING INPUT-->
       <Destination xsi:type="TextSignal">
         <Id>TeensyEWMU__CMDS_Display_Text</Id>
       </Destination>
