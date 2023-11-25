@@ -11,7 +11,10 @@
 #define IS_EWMU_AND_EWPI_DAISY_CHAINED false //set to TRUE if you are daisy-chaining the EWMU outputs to the EWPI inputs together
 
 #define DISPLAY_TEST_PATTERN_AT_STARTUP false //set to TRUE to turn all pixels on on all displays and light all lamps/LEDs at startup until a command is received from the PC host
+
+#ifndef JOYSTICK_INTERFACE //comment out to not process joystick button returns
 #define JOYSTICK_INTERFACE //comment out to not process joystick button returns
+#endif                     //comment out to not process joystick button returns
 /* -------------------------------------------------- */
 
 #endif
