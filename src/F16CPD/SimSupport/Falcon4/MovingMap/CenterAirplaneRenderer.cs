@@ -18,7 +18,7 @@ namespace F16CPD.SimSupport.Falcon4.MovingMap
         {
             if (_mapAirplaneBitmap == null)
             {
-                _mapAirplaneBitmap = (Bitmap) Resources.F16Symbol.Clone();
+                _mapAirplaneBitmap = new Bitmap((System.Drawing.Image) Resources.F16Symbol.Clone());
                 _mapAirplaneBitmap.MakeTransparent(Color.FromArgb(255, 0, 255));
                 _mapAirplaneBitmap =
                     (Bitmap)
