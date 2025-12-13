@@ -198,58 +198,25 @@ namespace SimLinkup.HardwareSupport.Lilbern
                  * that to an angle, and then back to the corresponding SIN/COS +/-10V output signal pair.
                  */
                 var rpmInput = _rpmInputSignal.State;
-                double rpmOutputValueInLinearVoltageTerms = 0;
                 if (_rpmSinOutputSignal != null && _rpmCosOutputSignal != null)
                 {
-                    if (rpmInput < 20)
+                    var degrees = 0.00;
+                    var sixtyRpmDegrees = 90;
+                    var oneHundredTenRpmDegrees = 330;
+                    if (rpmInput < 60)
                     {
-                        rpmOutputValueInLinearVoltageTerms = Math.Max(-10, -10.0 + rpmInput / 20.0 * 1.89);
+                        degrees = (rpmInput / 60.00) * sixtyRpmDegrees;
                     }
-                    else if (rpmInput >= 20 && rpmInput < 40)
+                    else
                     {
-                        rpmOutputValueInLinearVoltageTerms = -8.11 + (rpmInput - 10) / 20.0 * 1.88;
-                    }
-                    else if (rpmInput >= 40 && rpmInput < 60)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = -6.23 + (rpmInput - 40) / 20.0 * 1.89;
-                    }
-                    else if (rpmInput >= 60 && rpmInput < 70)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = -4.35 + (rpmInput - 60) / 10.0 * 2.86;
-                    }
-                    else if (rpmInput >= 70 && rpmInput < 76)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = -1.48 + (rpmInput - 70) / 6.0 * 1.48;
-                    }
-                    else if (rpmInput >= 76 && rpmInput < 80)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = 0.00 + (rpmInput - 76) / 4.0 * 1.39;
-                    }
-                    else if (rpmInput >= 80 && rpmInput < 90)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = 1.39 + (rpmInput - 80) / 10.0 * 2.87;
-                    }
-                    else if (rpmInput >= 90 && rpmInput < 100)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = 4.26 + (rpmInput - 90) / 10.0 * 2.87;
-                    }
-                    else if (rpmInput >= 100)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = 7.13 + (rpmInput - 100) / 10.0 * 2.87;
+                        degrees =
+                            (rpmInput - 60.00) //how far past 60 degrees are we
+                                /  //as a fraction of
+                            (110 - 60) //the width of the range in RPM from 60-110 RPM on the dial face
+                            * (oneHundredTenRpmDegrees - sixtyRpmDegrees) //times the distance in degrees represented by that span
+                            + sixtyRpmDegrees; // plus the offset for the sixty-RPM mark in degrees
                     }
 
-                    if (rpmOutputValueInLinearVoltageTerms < -10)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = -10;
-                    }
-                    else if (rpmOutputValueInLinearVoltageTerms > 10)
-                    {
-                        rpmOutputValueInLinearVoltageTerms = 10;
-                    }
-
-
-                    var percentOfScale = (rpmOutputValueInLinearVoltageTerms + 10.00) / 20.00;
-                    var degrees = percentOfScale * 360.00;
                     var sinRaw = Math.Sin(degrees * Constants.RADIANS_PER_DEGREE);
                     var cosRaw = Math.Cos(degrees * Constants.RADIANS_PER_DEGREE);
                     var sinVoltage = sinRaw * 10.00;

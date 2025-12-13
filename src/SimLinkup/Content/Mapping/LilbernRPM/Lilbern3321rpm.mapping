@@ -31,8 +31,10 @@
       <Destination xsi:type="AnalogSignal">
         <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][0]</Id>
       </Destination>
+	</SignalMapping>
 
-      <!-- LILBERN RPM INDICATOR HARDWARE SUPPORT MODULE RPM OUTPUT (COS)-->
+	<SignalMapping>
+		<!-- LILBERN RPM INDICATOR HARDWARE SUPPORT MODULE RPM OUTPUT (COS)-->
       <Source xsi:type="AnalogSignal">
         <Id>3321_RPM_COS_To_Instrument</Id>
       </Source>
