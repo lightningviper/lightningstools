@@ -1,0 +1,36 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO AMI HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- CABIN PRESSURE ALTITUDE IN FEET -->
+    <SignalMapping>
+      <!-- F4 CABIN PRESSURE ALTIMETER ALTITUDE IN FEET MSL OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CABIN_PRESS__CABIN_PRESS_FEET_MSL</Id>
+      </Source>
+      <!-- AMI CABIN PRESSURE ALTIMETER ALTITUDE IN FEET MSL INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>9000262001_Cabin_Pressure_Altitude_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM AMI HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- CABIN PRESSURE ALTITUDE -->
+    <SignalMapping>
+      <!-- AMI CABIN PRESSURE ALTIMETER HARDWARE SUPPORT MODULE ALTITUDE OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>9000262001_Cabin_Pressure_Altitude_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 0 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][0]</Id>
+      </Destination>
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

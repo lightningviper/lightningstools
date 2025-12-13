@@ -123,6 +123,7 @@
       <DependentUpon>SignalsView.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI9000262001HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\AMI\AMI900158001HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\AMI\AMI9001584HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\AMI\AMI9002780-02HardwareSupportModule.cs" />
@@ -554,6 +555,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Lilbern3321rpm.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\AMI\AMI90002620-01CabinPressureAltimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\AMI\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\AMI\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\AMI\AnalogDevicesHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AMI90002620-01CabinPressureAltimeter.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">
