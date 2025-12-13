@@ -175,14 +175,13 @@ namespace SimLinkup.HardwareSupport.AMI
             {
                 var cabinPressureAltitudeInput = _cabinPressureAltitudeInputSignal.State;
 
-
                 var degrees = cabinPressureAltitudeInput < 0.0000
                     ? 0.0000
                     : (cabinPressureAltitudeInput >= 0 && cabinPressureAltitudeInput <= 50000.0000
                         ? cabinPressureAltitudeInput / 50000.0000 * 300.0000
                         : 300.0);
 
-                var cabinPressureAltitudeOutputValue = ((degrees / 360.00) * 20.00) - 10.00;
+                var cabinPressureAltitudeOutputValue = ((degrees / 300.00) * 20.00) - 10.00;
 
                 if (_cabinPressureAltitudeOutputSignal != null)
                 {
