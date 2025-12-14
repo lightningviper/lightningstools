@@ -102,7 +102,7 @@ namespace SimLinkup.HardwareSupport.Malwin
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = -10.00, //volts
+                State = 0, //volts
                 IsSine = true,
                 IsVoltage = true,
                 MinValue = -10,
@@ -123,7 +123,7 @@ namespace SimLinkup.HardwareSupport.Malwin
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = -10.00, //volts
+                State = 10.00, //volts
                 IsCosine = true,
                 IsVoltage = true,
                 MinValue = -10,
@@ -196,6 +196,7 @@ namespace SimLinkup.HardwareSupport.Malwin
             {
                 var ftitInput = _ftitInputSignal.State;
                 double ftitOutputDegrees = 0;
+                ftitInput = 1150;
                 if (ftitInput < 0.00)
                 {
                     ftitInput = 0;
