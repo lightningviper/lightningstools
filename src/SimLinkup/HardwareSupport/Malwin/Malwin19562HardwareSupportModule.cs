@@ -224,7 +224,7 @@ namespace SimLinkup.HardwareSupport.Malwin
                         ftitOutputDegrees = (20.00 * ((ftitInput - 1000.00) / 100.00)) + 280; // 20 degrees of angle per 100 Degrees C, starting at 280 degrees of angle
                     }
 
-                    var ftitOutputSinVoltage = ftitOutputDegrees * Math.Sin(ftitOutputDegrees * Constants.RADIANS_PER_DEGREE);
+                    var ftitOutputSinVoltage = Math.Sin(ftitOutputDegrees * Constants.RADIANS_PER_DEGREE);
                     if (ftitOutputSinVoltage < -10)
                     {
                         ftitOutputSinVoltage = -10;
@@ -235,7 +235,7 @@ namespace SimLinkup.HardwareSupport.Malwin
                     }
                     _ftitSinOutputSignal.State = ftitOutputSinVoltage;
 
-                    var ftitOutputCosVoltage = ftitOutputDegrees * Math.Cos(ftitOutputDegrees * Constants.RADIANS_PER_DEGREE);
+                    var ftitOutputCosVoltage = Math.Cos(ftitOutputDegrees * Constants.RADIANS_PER_DEGREE);
                     if (ftitOutputCosVoltage < -10)
                     {
                         ftitOutputCosVoltage = -10;
