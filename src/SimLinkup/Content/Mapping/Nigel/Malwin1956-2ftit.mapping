@@ -1,0 +1,48 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO MALWIN HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- FTIT-->
+     <SignalMapping>
+      <!-- F4 FTIT OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_FTIT1__FTIT_TEMP_DEG_CELCIUS</Id>
+      </Source>
+      <!-- MALWIN FTIT INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>19562_FTIT_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM MALWIN HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- FTIT INDICATOR  -->
+    <SignalMapping>
+      <!-- MALWIN FTIT INDICATOR HARDWARE SUPPORT MODULE FTIT OUTPUT (SIN) -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19562_FTIT_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 0 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][2]</Id>
+      </Destination>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- MALWIN FTIT INDICATOR HARDWARE SUPPORT MODULE FTIT OUTPUT (COS) -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19562_FTIT_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 0 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][3]</Id>
+      </Destination>
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>

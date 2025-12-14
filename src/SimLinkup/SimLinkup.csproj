@@ -149,6 +149,7 @@
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Lilbern\Lilbern3321HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin19562HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin19581HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModuleConfig.cs" />
@@ -570,6 +571,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\AMI90002620-01CabinPressureAltimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Malwin\Malwin1956-2ftit.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Malwin\AnalogDevicesHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Malwin\HardwareSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Malwin\SimSupportModule.registry">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin1956-2ftit.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">
