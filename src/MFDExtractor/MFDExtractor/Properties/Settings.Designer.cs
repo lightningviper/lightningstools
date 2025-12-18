@@ -6010,5 +6010,17 @@ namespace MFDExtractor.Properties {
                 this["PollingDelay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPwEngine {
+            get {
+                return ((bool)(this["IsPwEngine"]));
+            }
+            set {
+                this["IsPwEngine"] = value;
+            }
+        }
     }
 }
