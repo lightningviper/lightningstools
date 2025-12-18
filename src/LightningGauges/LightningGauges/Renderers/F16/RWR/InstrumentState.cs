@@ -19,6 +19,7 @@ namespace LightningGauges.Renderers.F16.RWR
         public byte[] RwrInfo { get; set; } = Array.Empty<byte>();
         public float ChaffCount { get; set; } = 0.0f;
         public float FlareCount { get; set; } = 0.0f;
+        public bool PowerOn { get; set; }
     }
 
 }

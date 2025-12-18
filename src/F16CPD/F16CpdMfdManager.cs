@@ -891,7 +891,7 @@ namespace F16CPD
                     using (var rasterizer = new Pdf2Img.PdfRasterizerProxy())
                     {
                         rasterizer.Open(_currentChecklistFile.FullName);
-                        _lastRenderedChecklistPdfPage = new Bitmap(rasterizer.GetPage(150, 150, _currentChecklistPageNum));
+                        _lastRenderedChecklistPdfPage = new Bitmap(rasterizer.GetPage(150, _currentChecklistPageNum));
                     }
                     _lastRenderedChecklistPageNum = _currentChecklistPageNum;
                     _lastRenderedChecklistFile = _currentChecklistFile;
@@ -969,7 +969,7 @@ namespace F16CPD
                     using (var rasterizer = new Pdf2Img.PdfRasterizerProxy())
                     {
                         rasterizer.Open(_currentChartFile.FullName);
-                        _lastRenderedChartPdfPage = new Bitmap(rasterizer.GetPage(150, 150, _currentChartPageNum));
+                        _lastRenderedChartPdfPage = new Bitmap(rasterizer.GetPage(150, _currentChartPageNum));
                     }
 
                     _lastRenderedChartPageNum = _currentChartPageNum;

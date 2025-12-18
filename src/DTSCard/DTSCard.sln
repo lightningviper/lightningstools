@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DTSCard", "DTSCard.vcxproj", "{827ECF0C-056E-4246-97A9-D1333BDDD9CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTSCardTestTool", "DTSCardTestTool\DTSCardTestTool.csproj", "{A6208C70-ACE3-4997-82BA-D39CA7102DC1}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DTSCardTestToolSetup", "DTSCardTestToolSetup\DTSCardTestToolSetup.vdproj", "{7ED67CE4-4DA3-436D-8EE8-C26AB1EE27EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CC}.Debug|x86.ActiveCfg = Debug|Win32
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CC}.Debug|x86.Build.0 = Debug|Win32
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CC}.Release|x86.ActiveCfg = Release|Win32
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CC}.Release|x86.Build.0 = Release|Win32
+		{A6208C70-ACE3-4997-82BA-D39CA7102DC1}.Debug|x86.ActiveCfg = Debug|x86
+		{A6208C70-ACE3-4997-82BA-D39CA7102DC1}.Debug|x86.Build.0 = Debug|x86
+		{A6208C70-ACE3-4997-82BA-D39CA7102DC1}.Release|x86.ActiveCfg = Release|x86
+		{A6208C70-ACE3-4997-82BA-D39CA7102DC1}.Release|x86.Build.0 = Release|x86
+		{7ED67CE4-4DA3-436D-8EE8-C26AB1EE27EC}.Debug|x86.ActiveCfg = Debug
+		{7ED67CE4-4DA3-436D-8EE8-C26AB1EE27EC}.Release|x86.ActiveCfg = Release
+		{7ED67CE4-4DA3-436D-8EE8-C26AB1EE27EC}.Release|x86.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A173F16-9220-4467-B232-C82FEB81F27E}
+	EndGlobalSection
+EndGlobal

@@ -14,14 +14,22 @@ namespace AnalogDevices.DeviceCommands
         {
             var discoveredDevices = new List<string>();
             var toReturn = new List<IDenseDacEvalBoard>();
-            var devs = LibUsbDevice.AllDevices.ToArray();
-            //var devs = WinUsbDevice.AllDevices.ToArray();
+            //var devs = LibUsbDevice.AllDevices.ToArray();
+            var devs = WinUsbDevice.AllDevices.ToArray();
             foreach (var device in devs)
             {
-                if (device == null || device.Vid != 0x0456 || (ushort)device.Pid != 0xB20F && (ushort)device.Pid != 0xB20E)
+                try
+                {
+                    if (device == null || device.Vid != 0x0456 || (ushort)device.Pid != 0xB20F && (ushort)device.Pid != 0xB20E)
+                    {
+                        continue;
+                    }
+                }
+                catch
                 {
                     continue;
                 }
+
                 if (!discoveredDevices.Contains(device.SymbolicName))
                 {
                     var newDevice = new DenseDacEvalBoard(device);

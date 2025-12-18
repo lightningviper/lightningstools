@@ -27,12 +27,24 @@ namespace F4Utils.SimSupport
         private readonly Dictionary<string, ISimOutput> _simOutputs = new Dictionary<string, ISimOutput>();
         private readonly Dictionary<string, SimCommand> _simCommands = new Dictionary<string, SimCommand>();
         private FlightData _lastFlightData;
+        private float _lastChaffCount;
+        private float _lastFlareCount;
+        private bool _lastChaffLow;
+        private bool _lastFlareLow;
+        private DateTime _chaffDispensingOverlayTimeout = DateTime.Now;
+        private DateTime _flareDispensingOverlayTimeout = DateTime.Now;
+        private DateTime _chaffLowOverlayTimeout = DateTime.Now;
+        private DateTime _flareLowOverlayTimeout = DateTime.Now;
         private Reader _smReader;
         private readonly IIndicatedRateOfTurnCalculator _rateOfTurnCalculator = new IndicatedRateOfTurnCalculator();
         private readonly MorseCode _morseCodeGenerator = new MorseCode();
         private bool _disposed;
         private bool _markerBeaconMorseCodeState;
-
+#if EWMU_AND_EWPI_PATCH_APPLIED
+        private const int EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM = 18;
+#else
+        private const int EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM = Int32.MaxValue;
+#endif
         public Falcon4SimSupportModule()
         {
             _morseCodeGenerator.CharactersPerMinute = 53;
@@ -592,7 +604,7 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.RIGHT_EYEBROW_LIGHTS__OXY_LOW:
-                    ((DigitalSignal) output).State = ((LightBits) _lastFlightData.lightBits & LightBits.OXY_BROW) == LightBits.OXY_BROW
+                    ((DigitalSignal) output).State = (((LightBits) _lastFlightData.lightBits & LightBits.OXY_BROW) == LightBits.OXY_BROW && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.OXY_BROW) == BlinkBits.OXY_BROW))
                                                      || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.OXY_BROW) == BlinkBits.OXY_BROW && DateTime.UtcNow.Millisecond % 500 < 250;
 
                     break;
@@ -611,8 +623,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__ELEC_SYS:
-                    ((DigitalSignal) output).State = ((LightBits3) _lastFlightData.lightBits3 & LightBits3.Elec_Fault) == LightBits3.Elec_Fault
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Elec_Fault) == BlinkBits.Elec_Fault && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits3) _lastFlightData.lightBits3 & LightBits3.Elec_Fault) == LightBits3.Elec_Fault && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Elec_Fault) == BlinkBits.Elec_Fault))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Elec_Fault) == BlinkBits.Elec_Fault && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__ENGINE_FAULT:
@@ -689,8 +701,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__PROBE_HEAT:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.PROBEHEAT) == LightBits2.PROBEHEAT
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PROBEHEAT) == BlinkBits.PROBEHEAT && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.PROBEHEAT) == LightBits2.PROBEHEAT && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PROBEHEAT) == BlinkBits.PROBEHEAT))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PROBEHEAT) == BlinkBits.PROBEHEAT && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.CAUTION_PANEL__FUEL_LOW:
@@ -738,22 +750,36 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.TWP__MISSILE_LAUNCH:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal)output).State = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch))
+                                                     || ((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch && DateTime.UtcNow.Millisecond % 500 < 250;
+                    break;
+                case F4SimOutputs.EWPI__ML:
+                    ((DigitalSignal) output).State =
+                        ((CmdsModes)_lastFlightData.cmdsMode == CmdsModes.CmdsOFF) ? false : 
+                                                    (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Launch) == LightBits2.Launch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Launch) == BlinkBits.Launch && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__PRIORITY_MODE:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode
-                                                     || ((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode
-                                                     && ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode
-                                                     && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal)output).State = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode))
+                                                    || ((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode && DateTime.UtcNow.Millisecond % 500 < 250;
+                    break;
+                case F4SimOutputs.EWPI__PRI:
+                    ((DigitalSignal) output).State = 
+                        ((CmdsModes)_lastFlightData.cmdsMode == CmdsModes.CmdsOFF) ? false :
+                                                     (((LightBits2) _lastFlightData.lightBits2 & LightBits2.PriMode) == LightBits2.PriMode && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.PriMode) == BlinkBits.PriMode && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__UNKNOWN:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk
-                                                     || ((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk
-                                                     && ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk
-                                                     && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal)output).State = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk))
+                                 || ((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk && DateTime.UtcNow.Millisecond % 500 < 250;
+                    break;
+                case F4SimOutputs.EWPI__UNK:
+                    ((DigitalSignal) output).State =
+                        ((CmdsModes)_lastFlightData.cmdsMode == CmdsModes.CmdsOFF) ? false :
+                                                    (((LightBits2) _lastFlightData.lightBits2 & LightBits2.Unk) == LightBits2.Unk && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.Unk) == BlinkBits.Unk && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWP__NAVAL:
@@ -769,8 +795,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.TWA__SEARCH:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.AuxSrch) == LightBits2.AuxSrch
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.AuxSrch) == BlinkBits.AuxSrch && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.AuxSrch) == LightBits2.AuxSrch && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.AuxSrch) == BlinkBits.AuxSrch))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.AuxSrch) == BlinkBits.AuxSrch && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.TWA__ACTIVITY_POWER:
@@ -837,8 +863,251 @@ namespace F4Utils.SimSupport
                     ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
                     break;
 
+                case F4SimOutputs.CMDS__DISPLAYTEXT:
+                    {
+                        var cmdsString = string.Empty;
+                        var chaffCount = _lastFlightData.ChaffCount;
+                        var flareCount = _lastFlightData.FlareCount;
+                        var chaffLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
+                        var flareLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
+                        var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF;
+                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
+                        var displayChaff = !cmdsIsOff && isFlying && !float.IsNaN(chaffCount);
+                        var displayFlare = !cmdsIsOff && isFlying && !float.IsNaN(flareCount);
+                        if (chaffCount < 0) chaffCount = 0;
+                        if (flareCount < 0) flareCount = 0;
+                        var displayOtr1 = !cmdsIsOff && isFlying;
+                        var displayOtr2 = !cmdsIsOff && isFlying;
+                        var otr1WindowString = "    ";
+                        var otr2WindowString = "    ";
+                        var chaffWindowString = (displayChaff ? (chaffLow ? "Lo" + chaffCount.ToString("#0").PadLeft(2, ' ') : chaffCount.ToString("##0 ").PadLeft(4, ' ')) : "").PadLeft(4, ' ');
+                        var flareWindowString = (displayFlare ? (flareLow ? "Lo" + flareCount.ToString("#0").PadLeft(2, ' ') : flareCount.ToString("##0 ").PadLeft(4, ' ')) : "").PadLeft(4, ' ');
+                        cmdsString = (otr1WindowString + otr2WindowString + chaffWindowString + flareWindowString).PadLeft(16, ' ');
+                        
+                        ((TextSignal)output).State = (cmdsString ?? "").PadRight(16);
+                    }
+                    break;
+
                 case F4SimOutputs.CMDS__MODE:
                     SetOutput((AnalogSignal) output, _lastFlightData.cmdsMode);
+                    break;
+                case F4SimOutputs.EWMU__MODE:
+                    SetOutput((AnalogSignal)output, _lastFlightData.cmdsMode);
+                    break;
+
+                case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1:
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
+                    {
+                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
+                        var ewmuLine1String = string.Empty;
+                        var chaffCount = isFlying ? _lastFlightData.ChaffCount : 0;
+                        var flareCount = isFlying ? _lastFlightData.FlareCount : 0;
+                        var chaffLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
+                        var flareLow = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
+                        var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
+                        var displayChaff = !cmdsIsOff && isFlying && chaffCount > -2 && !float.IsNaN(chaffCount);
+                        var displayFlare = !cmdsIsOff && isFlying && flareCount > -2 && !float.IsNaN(flareCount);
+                        if (chaffCount < 0) chaffCount = 0;
+                        if (flareCount < 0) flareCount = 0;
+
+                        var displayNoGo = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.NoGo) == LightBits2.NoGo;
+                        var displayGo = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Go) == LightBits2.Go;
+                        var displayDispenseReady = !cmdsIsOff && isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.Rdy) == LightBits2.Rdy;
+                        var chaffWindowString = (displayChaff ? (chaffLow ? (("L" + (chaffCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3, ' ')): chaffCount.ToString("##0").PadLeft(3, ' ')) : "").PadRight(4, ' ');
+                        if (displayChaff && chaffCount < 1) chaffWindowString = "EMT ";
+                        var flareWindowString = (displayFlare ? (flareLow ? (("L" + (flareCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3, ' ')) : flareCount.ToString("##0").PadLeft(3, ' ')) : "").PadRight(4, ' ');
+                        if (displayFlare && flareCount < 1) flareWindowString = "EMT ";
+                        var noGoString = (displayNoGo ? "NOGO" : "    ").PadLeft(4, ' ');
+                        var goString = (displayGo ? "  GO" : "    ").PadLeft(4, ' ');
+                        ewmuLine1String = (chaffWindowString + flareWindowString + noGoString + goString).PadLeft(16, ' ');
+                        if (DateTime.Now < _chaffLowOverlayTimeout)
+                        {
+                            ewmuLine1String = "WARNING:" + (DateTime.Now.Millisecond < 500 ? "CHAF LOW" :"        ");
+                        }
+                        else if (DateTime.Now < _flareLowOverlayTimeout)
+                        {
+                            ewmuLine1String = "WARNING:" + (DateTime.Now.Millisecond < 500 ? "FLAR LOW" : "        ");
+
+                        }
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            ewmuLine1String = "                ";
+                        }
+                        ((TextSignal)output).State = (ewmuLine1String ?? "").PadRight(16);
+                    }
+#if EWMU_AND_EWPI_PATCH_APPLIED
+                    else
+                    {
+                        ((TextSignal)output).State = (_lastFlightData.EWMULines !=null && _lastFlightData.EWMULines.Length >0 && _lastFlightData.EWMULines[0] != null ? _lastFlightData.EWMULines[0] : "").PadRight(16);
+                    }
+#endif
+                    break;
+
+                case F4SimOutputs.EWMU__DISPLAYTEXT_LINE_2:
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
+                    {
+                        var ewmuLine2String = string.Empty;
+                        var chaffCount = _lastFlightData.ChaffCount;
+                        var flareCount = _lastFlightData.FlareCount;
+                        var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
+                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
+                        var displayChaff = !cmdsIsOff && isFlying && !float.IsNaN(chaffCount);
+                        var displayFlare = !cmdsIsOff && isFlying && !float.IsNaN(flareCount);
+                        var displayDispenseReady = !cmdsIsOff && isFlying && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.Rdy) == LightBits2.Rdy);
+                        
+                        var chaffWindowString = (displayChaff ? "CHAF": "    ").PadLeft(4, ' ');
+                        var flareWindowString = (displayFlare ? "FLAR":"    ").PadLeft(4, ' ');
+                        var dispenseReadyString = (displayDispenseReady ? "DISP RDY": "        ").PadLeft(8, ' ');
+                        ewmuLine2String = (chaffWindowString + flareWindowString + dispenseReadyString).PadLeft(16, ' ');
+                        if (DateTime.Now < _chaffLowOverlayTimeout || DateTime.Now < _flareLowOverlayTimeout)
+                        {
+                            ewmuLine2String = "                ";
+                        }
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            ewmuLine2String = "                ";
+                        }
+                        ((TextSignal)output).State = (ewmuLine2String ?? "").PadRight(16);
+                    }
+#if EWMU_AND_EWPI_PATCH_APPLIED
+                    else
+                    {
+                        ((TextSignal)output).State = (_lastFlightData.EWMULines !=null && _lastFlightData.EWMULines.Length >1  && _lastFlightData.EWMULines[1] != null ? _lastFlightData.EWMULines[1] : "").PadRight(16);
+                    }
+#endif
+                    break;
+                case F4SimOutputs.EWPI__CHAFFFLARE_DISPLAYTEXT:
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
+                    {
+                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
+                        var ewpiChaffFlareString = string.Empty;
+                        var chaffCount = isFlying ? _lastFlightData.ChaffCount : 0;
+                        var flareCount = isFlying ? _lastFlightData.FlareCount : 0;
+                        if (chaffCount < 0) chaffCount = 0;
+                        if (flareCount < 0) flareCount = 0;
+
+                        var chaffLow = isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
+                        if (chaffLow != _lastChaffLow && chaffCount >0)
+                        {
+                            _chaffLowOverlayTimeout = new DateTime(Math.Max(DateTime.Now.Ticks, _flareLowOverlayTimeout.Ticks)).AddSeconds(2);
+                        }
+                        var flareLow = isFlying && ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
+                        if (flareLow != _lastFlareLow && flareCount > 0)
+                        {
+                            _flareLowOverlayTimeout = new DateTime(Math.Max(DateTime.Now.Ticks, _chaffLowOverlayTimeout.Ticks)).AddSeconds(2);
+                        }
+                        var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var ecmLightOn = mainPower && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF || !mainPower;
+                        var displayChaff = !cmdsIsOff && isFlying && !float.IsNaN(chaffCount);
+                        var displayFlare = !cmdsIsOff && isFlying && !float.IsNaN(flareCount);
+                        var chaffDispensing = _lastChaffCount > chaffCount || DateTime.Now < _chaffDispensingOverlayTimeout;
+                        if (chaffDispensing)
+                        {
+                            if (_chaffDispensingOverlayTimeout == DateTime.MinValue) _chaffDispensingOverlayTimeout = DateTime.Now.AddMilliseconds(500);
+                        }
+                        else _chaffDispensingOverlayTimeout = DateTime.MinValue;
+                        var flareDispensing = _lastFlareCount > flareCount || DateTime.Now < _flareDispensingOverlayTimeout;
+                        if (flareDispensing)
+                        {
+                            if (_flareDispensingOverlayTimeout == DateTime.MinValue) _flareDispensingOverlayTimeout = DateTime.Now.AddMilliseconds(500);
+                        }
+                        else _flareDispensingOverlayTimeout = DateTime.MinValue;
+                        var displayCmdsMode = !cmdsIsOff && isFlying;
+                        string cmdsModeString = "";
+                        switch (cmdsModePosition)
+                        {
+                            case CmdsModes.CmdsSTBY:
+                                cmdsModeString = "X";
+                                break;
+                            case CmdsModes.CmdsMAN:
+                                cmdsModeString = "M";
+                                break;
+                            case CmdsModes.CmdsSEMI:
+                                cmdsModeString = ecmLightOn ? "S" : "C";
+                                break;
+                            case CmdsModes.CmdsAUTO:
+                                cmdsModeString = ecmLightOn ? "A" : "D";
+                                break;
+                            case CmdsModes.CmdsBYP:
+                                cmdsModeString = "B";
+                                break;
+                            default:
+                                cmdsModeString = " ";
+                                break;
+                        }
+                        var chaffWindowString = (displayChaff ? (chaffLow ? (("L" + (chaffCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3,' ')) : chaffCount.ToString("##0").PadLeft(3, ' ')) : "   ").PadLeft(3, ' ');
+                        if (DateTime.Now < _chaffLowOverlayTimeout)
+                        {
+                            chaffWindowString = DateTime.Now.Millisecond < 500 ? "   " : "LOW";
+                        }
+                        else if (displayChaff && chaffDispensing) chaffWindowString = " * ";
+                        else if (displayChaff && chaffCount < 1) chaffWindowString = "EMT";
+                        chaffWindowString = (displayCmdsMode ? cmdsModeString : " ") + chaffWindowString;
+
+                        var flareWindowString = (displayFlare ? (flareLow ? (("L" + (flareCount.ToString("#0").PadLeft(2, ' '))).PadLeft(3,' ')) : flareCount.ToString("##0").PadLeft(3, ' ')) : "    ").PadLeft(4, ' ');
+                        if (DateTime.Now < _flareLowOverlayTimeout)
+                        {
+                            flareWindowString = DateTime.Now.Millisecond < 500 ? "    " : " LOW";
+                        }
+                        else if (displayFlare && flareDispensing) flareWindowString = "  * ";
+                        else if (displayFlare && flareCount < 1) flareWindowString = " EMT";
+                        ewpiChaffFlareString = (chaffWindowString + flareWindowString).PadLeft(8, ' ');
+                        
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            ewpiChaffFlareString = "        ";
+                        }
+
+                        ((TextSignal)output).State = (ewpiChaffFlareString ?? "").PadRight(8);
+                        _lastFlareCount = flareCount;
+                        _lastChaffCount = chaffCount;
+                        _lastChaffLow = chaffLow;
+                        _lastFlareLow = flareLow;
+                    }
+#if EWMU_AND_EWPI_PATCH_APPLIED
+                    else
+                    {
+                        ((TextSignal)output).State = (_lastFlightData.EWPILines !=null && _lastFlightData.EWPILines.Length >0 && _lastFlightData.EWPILines[0] != null ? _lastFlightData.EWPILines[0]: "").PadRight(8);
+                    }
+#endif
+                    break;
+
+                case F4SimOutputs.EWPI__JMR_DISPLAYTEXT:
+                    if (_lastFlightData.VersionNum2 < EWMU_AND_EWPI_PATCH_FLIGHTDATA2_VERSION_NUM)
+                    {
+                        var cmdsModePosition = (CmdsModes)_lastFlightData.cmdsMode;
+                        var mainPower = _lastFlightData.MainPower == (int)TriStateSwitchStates.Up;
+                        var cmdsIsOff = cmdsModePosition == CmdsModes.CmdsOFF ||!mainPower;
+                        var isFlying = _lastFlightData.IntellivibeData.In3D && (((HsiBits)_lastFlightData.hsiBits & HsiBits.Flying) == HsiBits.Flying);
+                        var displayJammerMode = !cmdsIsOff && isFlying;
+                        var ecmLightOn= mainPower && (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmPwr) == LightBits2.EcmPwr);
+                        var displayJammerStatus = !cmdsIsOff && isFlying;
+                        var jammerFail = (((LightBits2)_lastFlightData.lightBits2 & LightBits2.EcmFail) == LightBits2.EcmFail);
+                        var onGround = _lastFlightData.IntellivibeData.IsOnGround;
+                        var jammerStandby = onGround || cmdsModePosition == CmdsModes.CmdsSTBY;
+                        var jammerModeString = (displayJammerMode ? jammerStandby ? ecmLightOn ? "OPR " : "SBY " : "OPR " : "    ").PadLeft(4, ' ');
+                        var jammerStatusString = (displayJammerStatus ? jammerFail ? " ERR" : ecmLightOn ? " ECM" : " RDY" : "    ").PadLeft(4, ' ');
+                        if (!isFlying || cmdsModePosition == CmdsModes.CmdsOFF)
+                        {
+                            jammerModeString = "    ";
+                            jammerStatusString = "    ";
+                        }
+
+                        ((TextSignal)output).State = ((jammerModeString ?? "") + (jammerStatusString ?? "")).PadRight(8);
+                    }
+#if EWMU_AND_EWPI_PATCH_APPLIED
+                    else
+                    {
+                        ((TextSignal)output).State = (_lastFlightData.EWPILines != null && _lastFlightData.EWPILines.Length > 1 && _lastFlightData.EWPILines[1] != null ? _lastFlightData.EWPILines[1] : "").PadRight(8);
+                    }
+#endif
                     break;
 
                 case F4SimOutputs.ELEC__FLCS_PMG:
@@ -886,8 +1155,8 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.EPU__RUN:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.EPUOn) == LightBits2.EPUOn
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.EPUOn) == BlinkBits.EPUOn && DateTime.UtcNow.Millisecond % 250 < 125;
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.EPUOn) == LightBits2.EPUOn && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.EPUOn) == BlinkBits.EPUOn))
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.EPUOn) == BlinkBits.EPUOn && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.AVTR__AVTR:
@@ -895,14 +1164,14 @@ namespace F4Utils.SimSupport
                     break;
 
                 case F4SimOutputs.JFS__RUN:
-                    ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.JFSOn) == LightBits2.JFSOn
+                    ((DigitalSignal) output).State = (((LightBits2) _lastFlightData.lightBits2 & LightBits2.JFSOn) == LightBits2.JFSOn && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.JFSOn_Slow) == BlinkBits.JFSOn_Slow) && !(((BlinkBits)_lastFlightData.blinkBits & BlinkBits.JFSOn_Fast) == BlinkBits.JFSOn_Fast))
                                                      || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.JFSOn_Slow) == BlinkBits.JFSOn_Slow && DateTime.UtcNow.Millisecond % 1000 < 500
-                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.JFSOn_Fast) == BlinkBits.JFSOn_Fast && DateTime.UtcNow.Millisecond % 250 < 125;
+                                                     || ((BlinkBits) _lastFlightData.blinkBits & BlinkBits.JFSOn_Fast) == BlinkBits.JFSOn_Fast && DateTime.UtcNow.Millisecond % 500 < 250;
                     break;
 
                 case F4SimOutputs.MARKER_BEACON__MRK_BCN_LIGHT:
-                    if (((HsiBits) _lastFlightData.hsiBits & HsiBits.OuterMarker) == HsiBits.OuterMarker) { _morseCodeGenerator.PlainText = "T"; }
-                    else if (((HsiBits) _lastFlightData.hsiBits & HsiBits.MiddleMarker) == HsiBits.MiddleMarker) _morseCodeGenerator.PlainText = "A";
+                    if (((HsiBits)_lastFlightData.hsiBits & HsiBits.OuterMarker) == HsiBits.OuterMarker) { _morseCodeGenerator.PlainText = "T"; }
+                    else if (((HsiBits)_lastFlightData.hsiBits & HsiBits.MiddleMarker) == HsiBits.MiddleMarker) { _morseCodeGenerator.PlainText = "A"; }
 
                     ((DigitalSignal) output).State =
                         (((BlinkBits) _lastFlightData.blinkBits & BlinkBits.OuterMarker) == BlinkBits.OuterMarker
@@ -1352,6 +1621,13 @@ namespace F4Utils.SimSupport
                     ((DigitalSignal) output).State = ((LightBits3) _lastFlightData.lightBits3 & LightBits3.FlcsBitFail) == LightBits3.FlcsBitFail;
                     break;
 
+                case F4SimOutputs.RWR__POWER_ON_FLAG:
+                    ((DigitalSignal)output).State =
+                        (((PowerBits)_lastFlightData.powerBits) & PowerBits.BusPowerNonEssential) == PowerBits.BusPowerNonEssential &&
+                        (((LightBits2)_lastFlightData.lightBits2) & LightBits2.AuxPwr) == LightBits2.AuxPwr &&
+                        (((HsiBits)_lastFlightData.hsiBits) & HsiBits.Flying) == HsiBits.Flying;
+                    break;
+
                 case F4SimOutputs.RWR__OBJECT_COUNT:
                     SetOutput((AnalogSignal) output, _lastFlightData.RwrObjectCount);
                     break;
@@ -1667,10 +1943,11 @@ namespace F4Utils.SimSupport
         private void CreateSimCommandsList()
         {
             _simCommands.Clear();
-            foreach (Callbacks callback in Enum.GetValues(typeof(Callbacks)))
+            var callbacks = Enum.GetValues(typeof(Callbacks));
+            foreach (Callbacks callback in callbacks)
             {
                 var category = EnumAttributeReader.GetAttribute<CategoryAttribute>(callback).Category;
-                if (string.Compare(category, "NOOP", StringComparison.OrdinalIgnoreCase) > -1) continue;
+                if (category.ToUpper() ==  "NOOP") continue;
 
                 var subCategory = EnumAttributeReader.GetAttribute<SubCategoryAttribute>(callback).SubCategory;
                 var description = EnumAttributeReader.GetAttribute<DescriptionAttribute>(callback).Description;
@@ -1921,15 +2198,30 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "MISC", "ADV MODE STBY Light", F4SimOutputs.MISC__ADV_MODE_STBY, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "MISC", "Autopilot engaged flag", F4SimOutputs.MISC__AUTOPILOT_ENGAGED, null, typeof(bool)));
 
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Chaff Count (# remaining)", F4SimOutputs.CMDS__CHAFF_COUNT, null, typeof(float), 0, 99));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Flare Count (# remaining)", F4SimOutputs.CMDS__FLARE_COUNT, null, typeof(float), 0, 99));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Chaff Count (# remaining)", F4SimOutputs.CMDS__CHAFF_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Chaff Low Flag", F4SimOutputs.CMDS__CHAFF_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Flare Count (# remaining)", F4SimOutputs.CMDS__FLARE_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Flare Low Flag", F4SimOutputs.CMDS__FLARE_LO, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "GO Flag", F4SimOutputs.CMDS__GO, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "NO GO Flag", F4SimOutputs.CMDS__NOGO, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "AUTO DEGR Flag", F4SimOutputs.CMDS__AUTO_DEGR, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "DISPENSE RDY Flag", F4SimOutputs.CMDS__DISPENSE_RDY, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "CHAFF LO Flag", F4SimOutputs.CMDS__CHAFF_LO, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "FLARE LO Flag", F4SimOutputs.CMDS__FLARE_LO, null, typeof(bool)));
-            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "MODE", F4SimOutputs.CMDS__MODE, null, typeof(int), 0, 5));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "MODE Switch Position (0=OFF, 1=STBY, 2=MAN, 3=SEMI, 4=AUTO, 5=BYP)", F4SimOutputs.CMDS__MODE, null, typeof(int), 0, 5));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "CMDS", "Display Text", F4SimOutputs.CMDS__DISPLAYTEXT, null, typeof(string)));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Chaff Count (# remaining)", F4SimOutputs.EWMU__CHAFF_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Chaff Low Flag", F4SimOutputs.EWMU__CHAFF_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Flare Count (# remaining)", F4SimOutputs.EWMU__FLARE_COUNT, null, typeof(float), 0, 999));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Flare Low Flag", F4SimOutputs.EWMU__FLARE_LO, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "MODE Switch Position (0=OFF, 1=STBY, 2=MAN, 3=SEMI, 4=AUTO, 5=BYP)", F4SimOutputs.EWMU__MODE, null, typeof(int), 0, 5));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Display Text Line 1", F4SimOutputs.EWMU__DISPLAYTEXT_LINE_1, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWMU", "Display Text Line 2", F4SimOutputs.EWMU__DISPLAYTEXT_LINE_2, null, typeof(string)));
+
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "Chaff/Flare Status Window Display Text", F4SimOutputs.EWPI__CHAFFFLARE_DISPLAYTEXT, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "JMR Status Window Display Text", F4SimOutputs.EWPI__JMR_DISPLAYTEXT, null, typeof(string)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "PRI Indicator Flag", F4SimOutputs.EWPI__PRI, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "UNK Indicator Flag", F4SimOutputs.EWPI__UNK, null, typeof(bool)));
+            AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "EWPI", "ML Indicator Flag", F4SimOutputs.EWPI__ML, null, typeof(bool)));
 
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "FLCS PMG Indicator Light", F4SimOutputs.ELEC__FLCS_PMG, null, typeof(bool)));
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "ELEC", "MAIN GEN Indicator Light", F4SimOutputs.ELEC__MAIN_GEN, null, typeof(bool)));
@@ -2023,6 +2315,7 @@ namespace F4Utils.SimSupport
             }
 
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "AA Missile Fired", F4SimOutputs.SIM__AA_MISSILE_FIRED,0, typeof(int), 0, int.MaxValue));
+            AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "AG Missile Fired", F4SimOutputs.SIM__AG_MISSILE_FIRED, 0, typeof(int), 0, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Bomb Dropped", F4SimOutputs.SIM__BOMB_DROPPED, 0, typeof(int), 0, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Flare Dropped", F4SimOutputs.SIM__FLARE_DROPPED, 0,typeof(int), 0, int.MaxValue));
             AddF4SimOutput(CreateNewF4SimOutput("Simulation", "IntelliVibe Data", "Chaff Dropped", F4SimOutputs.SIM__CHAFF_DROPPED,0, typeof(int), 0, int.MaxValue));
@@ -2094,6 +2387,7 @@ namespace F4Utils.SimSupport
             AddF4SimOutput(CreateNewF4SimOutput("Panels and Lights", "FLIGHT CONTROL", "FAIL Indicator Light", F4SimOutputs.FLIGHT_CONTROL__FAIL, null, typeof(bool)));
 
             AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Object Count", F4SimOutputs.RWR__OBJECT_COUNT, null, typeof(int)));
+            AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", "Power On Flag", F4SimOutputs.RWR__POWER_ON_FLAG, null, typeof(bool)));
             for (var i = 0; i < 64; i++)
             {
                 AddF4SimOutput(CreateNewF4SimOutput("Instruments, Displays and Gauges", "RWR", $"Threat #{(i + 1).ToString().PadLeft(2, '0')} Symbol ID", F4SimOutputs.RWR__SYMBOL_ID, i, typeof(int), Int32.MinValue, Int32.MaxValue));

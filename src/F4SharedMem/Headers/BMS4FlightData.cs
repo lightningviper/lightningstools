@@ -120,19 +120,19 @@ namespace F4SharedMem.Headers
 
         //RWR
         public int RwrObjectCount;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public int[] RWRsymbol;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public float[] bearing;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] missileActivity;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] missileLaunch;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] selected;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public float[] lethality;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 40)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
         public uint[] newDetection;
 
         //fuel values
@@ -141,6 +141,7 @@ namespace F4SharedMem.Headers
         public float total;
 
         public int VersionNum;    // Version of FlightData mem area
+        public int VersionNum2;     // Version of Mem area
 
         // New values added here for header file compatibility but not implemented
         // in this version of the code at present.

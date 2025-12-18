@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29025.244
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimLinkup", "SimLinkup.csproj", "{B928D6CB-9199-4679-8EF6-A489F167D400}"
 EndProject
@@ -92,6 +92,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henkie.HSI", "..\Henkie\Henkie.HSI\Henkie.HSI.csproj", "{B1BC2014-526E-4EE0-B77A-95988DF30B39}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SimLinkupSetup", "SimLinkupSetup\SimLinkupSetup.vdproj", "{BB6E3696-CEAE-4ACD-A3EB-E7E8C595A48C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DTSCard", "DTSCard", "{68742AD1-C331-4002-ABFA-C411A7CF9461}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DTSCard", "..\DTSCard\DTSCard.vcxproj", "{827ECF0C-056E-4246-97A9-D1333BDDD9CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -254,6 +258,10 @@ Global
 		{BB6E3696-CEAE-4ACD-A3EB-E7E8C595A48C}.Debug|x86.ActiveCfg = Debug
 		{BB6E3696-CEAE-4ACD-A3EB-E7E8C595A48C}.Release|x86.ActiveCfg = Release
 		{BB6E3696-CEAE-4ACD-A3EB-E7E8C595A48C}.Release|x86.Build.0 = Release
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CB}.Debug|x86.ActiveCfg = Debug|Win32
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CB}.Debug|x86.Build.0 = Debug|Win32
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CB}.Release|x86.ActiveCfg = Release|Win32
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -290,6 +298,7 @@ Global
 		{B8254151-27D0-4471-A3B5-DF84BDD24B77} = {69F6B7FC-1460-45FF-B698-061B24DC1590}
 		{B1BC2014-526E-4EE0-B77A-95988DF30B39} = {69F6B7FC-1460-45FF-B698-061B24DC1590}
 		{BB6E3696-CEAE-4ACD-A3EB-E7E8C595A48C} = {40459742-DCE1-42E5-B62A-7FE09B96695B}
+		{827ECF0C-056E-4246-97A9-D1333BDDD9CB} = {68742AD1-C331-4002-ABFA-C411A7CF9461}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2CA56F-FB3C-4176-89D1-C05DC8248ACB}

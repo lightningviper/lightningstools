@@ -352,8 +352,11 @@ namespace MFDExtractor
                 SetFlightData(currentFlightData);
                 if (_terrainDB == null && State.NetworkMode != NetworkMode.Client)
                 {
-                    string bmsBaseDir = currentFlightData.StringData.data.Where(x => (x.strId == (uint)StringIdentifier.BmsBasedir)).First().value;
-                    _terrainDB = _terrainDBFactory.Create(bmsBaseDir, false);
+                    if (currentFlightData != null && currentFlightData.StringData != null && currentFlightData.StringData.data != null)
+                    {
+                        string bmsBaseDir = currentFlightData.StringData.data.Where(x => (x.strId == (uint)StringIdentifier.BmsBasedir)).First().value;
+                        _terrainDB = _terrainDBFactory.Create(bmsBaseDir, false);
+                    }
                 }
 
                 _flightDataUpdater.UpdateRendererStatesFromFlightData(_instruments, currentFlightData, _terrainDB,

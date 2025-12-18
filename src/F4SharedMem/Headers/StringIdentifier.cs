@@ -2,6 +2,12 @@
 
 namespace F4SharedMem.Headers
 {
+    // changelog:
+    // 1: initial BMS 4.34 version
+    // 2: added 3dbuttons.dat/3dckpit.dat file paths
+    // 3: added NavPoints
+    // 4: added ThrTerrdatadir
+
     [Serializable]
     public enum StringIdentifier : uint
     {
@@ -63,8 +69,10 @@ namespace F4SharedMem.Headers
                                  //     <range>        float
                                  //     <declutter>    int            0 = false, 1 = true
 
-        // FIXED LAST ENTRY
+        // VERSION 4
+        ThrTerrdatadir,
 
+        // FIXED LAST ENTRY
         StringIdentifier_DIM     // (number of identifiers; add new IDs only *above* this one)
     };
 }

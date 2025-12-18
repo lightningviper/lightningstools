@@ -343,6 +343,7 @@ namespace F4SharedMemViewer
                 row.Cells[4].Value = _lastFlightData.selected[i];
                 row.Cells[5].Value = _lastFlightData.lethality[i].FormatDecimal(decimalPlaces: 2);
                 row.Cells[6].Value = _lastFlightData.newDetection[i];
+                row.Cells[7].Value = $"({ (int)_lastFlightData.RWRjammingStatus[i]}) { _lastFlightData.RWRjammingStatus[i].ToString().Replace("JAMMED_", "")}";
             }
             gvRWR.CurrentCell = null;
             gvRWR.ResumeLayout();
@@ -575,6 +576,53 @@ namespace F4SharedMemViewer
             txtBullseyeY.Text = _lastFlightData.bullseyeY.FormatDecimal(decimalPlaces: 2);
             txtTurnRate.Text = _lastFlightData.turnRate.FormatDecimal(decimalPlaces: 2);
 
+            txtFloodConsole.Text = string.Format("({0}) {1}",
+                ((int)_lastFlightData.floodConsole).ToString(),
+                _lastFlightData.floodConsole.ToString().Replace("FLOOD_CONSOLE_", ""));
+
+            txtMagDeviationSystem.Text = _lastFlightData.magDeviationSystem.FormatDecimal(decimalPlaces: 2);
+            txtMagDeviationReal.Text = _lastFlightData.magDeviationReal.FormatDecimal(decimalPlaces: 2);
+
+            txtECMBits0.Text =  
+                string.Format("({0}) {1}",
+                _lastFlightData.ecmBits[0].ToString(),
+                ((EcmBits)_lastFlightData.ecmBits[0]).ToString());
+
+            txtECMBits1.Text = 
+                string.Format("({0}) {1}",
+                _lastFlightData.ecmBits[1].ToString(),
+                ((EcmBits)_lastFlightData.ecmBits[1]).ToString());
+
+            txtECMBits2.Text = 
+                string.Format("({0}) {1}",
+                _lastFlightData.ecmBits[2].ToString(),
+                ((EcmBits)_lastFlightData.ecmBits[2]).ToString());
+
+            txtECMBits3.Text = 
+                string.Format("({0}) {1}",
+                _lastFlightData.ecmBits[3].ToString(),
+                ((EcmBits)_lastFlightData.ecmBits[3]).ToString());
+
+            txtECMBits4.Text = 
+                string.Format("({0}) {1}",
+                _lastFlightData.ecmBits[4].ToString(),
+                ((EcmBits)_lastFlightData.ecmBits[4]).ToString());
+
+            txtECMOper.Text = string.Format("({0}) {1}",
+                ((int)_lastFlightData.ecmOper).ToString(),
+                (_lastFlightData.ecmOper).ToString());
+
+            chkLB_ECM_Opr.Checked = _lastFlightData.ecmOper != EcmOperStates.ECM_OPER_NO_LIT;
+            chkBB_ECM_Opr.Checked = (((BlinkBits)_lastFlightData.blinkBits) & BlinkBits.ECM_Oper) == BlinkBits.ECM_Oper;
+
+            txtRadio2Preset.Text = _lastFlightData.radio2_preset.ToString();
+            txtRadio2Frequency.Text = _lastFlightData?.radio2_frequency.ToString();
+
+            txtIFFTransponderActiveCode1.Text = ((int)_lastFlightData.iffTransponderActiveCode1).ToString();
+            txtIFFTransponderActiveCode2.Text = _lastFlightData.iffTransponderActiveCode2.ToString();
+            txtIFFTransponderActiveCode3A.Text = _lastFlightData.iffTransponderActiveCode3A.ToString();
+            txtIFFTransponderActiveCodeC.Text = _lastFlightData.iffTransponderActiveCodeC.ToString();
+            txtIFFTransponderActiveCode4.Text = _lastFlightData.iffTransponderActiveCode4.ToString();
         }
 
         private void BindFD2RWRInfoToFormElements()
@@ -816,6 +864,8 @@ namespace F4SharedMemViewer
             txtAltBitsUint.Text = ((uint)_lastFlightData.altBits).ToString();
             txtPowerBitsUint.Text = ((uint)_lastFlightData.powerBits).ToString();
             txtBlinkBitsUint.Text = ((uint)_lastFlightData.blinkBits).ToString();
+            txtMiscBitsUint.Text = ((uint)_lastFlightData.miscBits).ToString();
+            txtBettyBitsUint.Text = ((uint)_lastFlightData.bettyBits).ToString();
 
             txtLightBitsHex.Text = "0x" + _lastFlightData.lightBits.ToString("X").PadLeft(8,'0');
             txtLightBits2Hex.Text = "0x" + _lastFlightData.lightBits2.ToString("X").PadLeft(8, '0');
@@ -824,6 +874,8 @@ namespace F4SharedMemViewer
             txtAltBitsHex.Text = "0x" + _lastFlightData.altBits.ToString("X").PadLeft(8, '0');
             txtPowerBitsHex.Text = "0x" + _lastFlightData.powerBits.ToString("X").PadLeft(8, '0');
             txtBlinkBitsHex.Text = "0x" + _lastFlightData.blinkBits.ToString("X").PadLeft(8, '0');
+            txtMiscBitsHex.Text = "0x" + _lastFlightData.miscBits.ToString("X").PadLeft(8, '0');
+            txtBettyBitsHex.Text = "0x" + _lastFlightData.bettyBits.ToString("X").PadLeft(8, '0');
         }
         private uint _lastStringAreaTime;
         private void BindStringsVarsToFormElements()

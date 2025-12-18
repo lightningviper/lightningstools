@@ -10,6 +10,7 @@ for /f "usebackq tokens=*" %%i in (`%MASTERBUILDDIR%vswhere.exe -all -latest -pr
   set InstanceId=%%i
 )
 
+CALL %MASTERBUILDDIR%InstallBootstrappers.bat  >NUL 2>NUL
 CALL %MASTERBUILDDIR%Replace.bat "[InstanceId]" "%InstanceId%" "%MASTERBUILDDIR%EnableCommandLineInstallerBuilds.reg.template" > "%MASTERBUILDDIR%EnableCommandLineInstallerBuilds.reg" 2>NUL
 REG IMPORT "%MASTERBUILDDIR%EnableCommandLineInstallerBuilds.reg" >NUL 2>NUL
 DEL "%MASTERBUILDDIR%EnableCommandLineInstallerBuilds.reg" >NUL 2>NUL

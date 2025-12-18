@@ -1,0 +1,36 @@
+{
+  "productId": "Microsoft.VisualStudio.Product.Community",
+  "channelId": "VisualStudio.17.Release",
+  "channelUri": "https://aka.ms/vs/17/release/channel",
+  "passive": true,
+  "norestart": true,
+  "add": [ 
+    "Microsoft.VisualStudio.Workload.CoreEditor",
+    "Microsoft.VisualStudio.Workload.ManagedDesktop",
+    "Microsoft.VisualStudio.Workload.NativeDesktop",
+    "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+    "Microsoft.Component.ClickOnce",
+    "Microsoft.Net.Component.4.8.TargetingPack",
+    "Microsoft.Net.ComponentGroup.4.8.DeveloperTools",
+    "Microsoft.VisualStudio.Component.Debugger.JustInTime",
+    "Microsoft.VisualStudio.Component.DiagnosticTools",
+    "Microsoft.VisualStudio.Component.IntelliCode",
+    "Microsoft.VisualStudio.Component.NuGet",
+    "Microsoft.Net.Component.4.8.1.SDK",
+    "Microsoft.Net.Component.4.8.1.TargetingPack",
+    "Microsoft.Net.ComponentGroup.4.8.1.DeveloperTools",
+    "Microsoft.VisualStudio.Component.NuGet.BuildTools",
+    "Microsoft.VisualStudio.Component.VC.14.29.16.11.MFC", 
+    "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64",     
+    "Microsoft.VisualStudio.ComponentGroup.VC.Tools.142.x86.x64", 
+    "Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Llvm.Clang",
+    "Microsoft.VisualStudio.Component.VC.ATLMFC", 
+    "Microsoft.VisualStudio.Component.VC.CLI.Support",
+    "Microsoft.VisualStudio.Component.VC.Llvm.Clang",
+    "Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset",
+    "Microsoft.VisualStudio.Component.VC.Modules.x86.x64",
+    "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+    "Microsoft.Component.VC.Runtime.UCRTSDK"
+  ]
+}
+

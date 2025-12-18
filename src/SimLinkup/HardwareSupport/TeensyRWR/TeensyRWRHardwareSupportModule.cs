@@ -52,6 +52,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private readonly DigitalSignal[] _digitalInputSignals;
         private readonly TextSignal[] _textInputSignals;
 
+        private DigitalSignal _rwrPowerOnFlag;
         private readonly AnalogSignal[] _rwrObjectBearingInputSignals = new AnalogSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly AnalogSignal[] _rwrObjectLethalityInputSignals = new AnalogSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly DigitalSignal[] _rwrObjectMissileActivityFlagInputSignals = new DigitalSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
@@ -59,6 +60,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         private readonly DigitalSignal[] _rwrObjectNewDetectionFlagInputSignals =new DigitalSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly DigitalSignal[] _rwrObjectSelectedFlagInputSignals =new DigitalSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
         private readonly AnalogSignal[] _rwrObjectSymbolIDInputSignals = new AnalogSignal[MAX_RWR_SYMBOLS_AS_INPUTS];
+
         private AnalogSignal _magneticHeadingDegreesInputSignal;
         private TextSignal _rwrInfoInputSignal;
         private AnalogSignal _rwrSymbolCountInputSignal;
@@ -81,7 +83,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override TextSignal[] TextInputs => _textInputSignals;
         public override TextSignal[] TextOutputs => null;
 
-        public override string FriendlyName => $"Teensy RWR module for IP-1310/ALR Azimuth Indicator (RWR) on {_config.COMPort}";
+        public override string FriendlyName => $"Teensy RWR module for IP-1310/ALR Azimuth Indicator (RWR) on {(_config !=null ? _config.COMPort : "UNKNOWN")}";
 
         public void Dispose()
         {
@@ -119,15 +121,15 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
         public override void Render(Graphics g, Rectangle destinationRectangle)
         {
             var instrumentState = GetInstrumentState();
-            if (_config.TestPattern != 0)
+            switch (_config.TestPattern)
             {
-                new CalibrationTestPattern1RWRRenderer(destinationRectangle.Width, destinationRectangle.Height).Render(g, destinationRectangle);
+                case 1:
+                    new CalibrationTestPattern1RWRRenderer(destinationRectangle.Width *2, destinationRectangle.Height *2).Render(g, destinationRectangle);
+                    break;
+                default:
+                    _uiRenderer.Render(g, destinationRectangle, instrumentState, USE_VECTOR_FONT);
+                    break;
             }
-            else
-            {
-                _uiRenderer.Render(g, destinationRectangle, instrumentState, USE_VECTOR_FONT);
-            }
-
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -453,6 +455,26 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             };
             analogSignalsToReturn.Add(_bytesSent);
 
+            {
+                var thisSignal = new DigitalSignal
+                {
+                    Category = "Inputs from Simulation",
+                    CollectionName = "Radar Warning Receiver",
+                    FriendlyName = $"RWR Power On Flag",
+                    Id = $"TeensyRWR__RWR_Power_On_Flag",
+                    Index = 0,
+                    PublisherObject = this,
+                    Source = this,
+                    SourceFriendlyName = FriendlyName,
+                    SourceAddress = _config.COMPort,
+                    SubSource = null,
+                    SubSourceFriendlyName = null,
+                    SubSourceAddress = null,
+                    State = false
+                };
+                _rwrPowerOnFlag = thisSignal;
+                digitalSignalsToReturn.Add(thisSignal);
+            }
 
             analogSignals = analogSignalsToReturn.ToArray();
             digitalSignals = digitalSignalsToReturn.ToArray();
@@ -464,6 +486,7 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             const float RADIANS_PER_DEGREE = 0.01745329252F;
             var instrumentState = new InstrumentState
             {
+                PowerOn = _rwrPowerOnFlag.State,
                 bearing = _rwrObjectBearingInputSignals.OrderBy(x => x.Index).Select(x => (float)(x.State * RADIANS_PER_DEGREE)).ToArray(),
                 ChaffCount = (float)_chaffCountInputSignal.State,
                 FlareCount = (float)_flareCountInputSignal.State,
@@ -482,14 +505,19 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
 
         private void UpdateOutputs()
         {
-            if (DateTime.Now.Subtract(_lastCommandListSentTime).TotalMilliseconds < (1000 / MAX_UPDATE_FREQUENCY_HZ))
+            var millisSinceLastCommand = DateTime.Now.Subtract(_lastCommandListSentTime).TotalMilliseconds;
+            if (millisSinceLastCommand < (1000 / MAX_UPDATE_FREQUENCY_HZ))
             {
                 return;
+            }
+            else if (millisSinceLastCommand > 5000)
+            {
+                _lastCommandList = string.Empty;
             }
             var connected = EnsureSerialPortConnected();
             if (!connected) return;
             var commandList = GenerateDrawingCommands();
-            if (_lastCommandList != null && commandList == _lastCommandList && _config.TestPattern !=0) return;
+            if (_lastCommandList != null && commandList == _lastCommandList && _config.TestPattern ==0) return;
             SendDrawingCommands(commandList);
             _lastCommandList = commandList;
             _lastCommandListSentTime = DateTime.Now;
@@ -501,13 +529,14 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
             var instrumentState = GetInstrumentState();
             var drawingGroup = new DrawingGroup();
             var drawingContext = drawingGroup.Append();
-            if (_config.TestPattern != 0)
+            switch (_config.TestPattern)
             {
-                new CalibrationTestPattern1RWRRenderer(VIEWBOX_WIDTH, VIEWBOX_HEIGHT).Render(drawingContext);
-            }
-            else
-            {
-                _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
+                case 1:
+                    new CalibrationTestPattern1RWRRenderer(VIEWBOX_WIDTH, VIEWBOX_HEIGHT).Render(drawingContext);
+                    break;
+                default:
+                    _drawingCommandRenderer.Render(drawingContext, instrumentState, USE_VECTOR_FONT);
+                    break;
             }
             drawingContext.Close();
             return PathGeometry.CreateFromGeometry(drawingGroup.GetGeometry()).ToString();
@@ -522,12 +551,13 @@ namespace SimLinkup.HardwareSupport.TeensyRWR
                     if (_serialPort == null || !_serialPort.IsOpen || svgPathString == null) return;
                     var drawPoints = new SVGPathToVectorScopePointsListConverter(bezierCurveInterpolationSteps: BEZIER_CURVE_INTERPOLATION_STEPS)
                                         .ConvertToDrawPoints(svgPathString)
-                                        .ApplyCentering(_config.Centering)
+                                        .ApplyCentering(_config.Centering.OffsetX, _config.Centering.OffsetY)
                                         .ApplyInversion(VIEWBOX_WIDTH, VIEWBOX_HEIGHT, invertX: false, invertY: true)
                                         .ApplyRotation(VIEWBOX_WIDTH / 2.0, VIEWBOX_HEIGHT / 2.0, _config.RotationDegrees)
-                                        .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY, VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
+                                        .ApplyScaling(_config.Scaling.ScaleX, _config.Scaling.ScaleY)
                                         .ApplyCalibration(_config.XAxisCalibrationData, _config.YAxisCalibrationData)
                                         .ApplyClipping(VIEWBOX_WIDTH, VIEWBOX_HEIGHT)
+                                        .ApplyBeamMovementSpeedOptimization()
                                       ;
 
                     var drawPointsAsBytes = drawPoints.Select(x=>(byte[])x).SelectMany(x => x).ToArray();

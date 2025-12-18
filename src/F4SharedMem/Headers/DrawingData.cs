@@ -91,27 +91,34 @@ namespace F4SharedMem.Headers
         public static DrawingData GetDrawingData(byte[] rawDrawingData)
         {
             var result = new DrawingData();
-            var offset = 0;
-            result.VersionNum = BitConverter.ToUInt32(rawDrawingData, offset);
-            offset += sizeof(uint);
+            try
+            {
+                var offset = 0;
+                if (rawDrawingData == null || rawDrawingData.Length < offset + 4) return result;
+                result.VersionNum = BitConverter.ToUInt32(rawDrawingData, offset);
+                offset += sizeof(uint);
 
-            result.HUD_length = BitConverter.ToUInt32(rawDrawingData, offset);
-            offset += sizeof(uint);
-            if (offset + result.HUD_length + 1> rawDrawingData.Length) return result;
-            result.HUD_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HUD_length);
-            offset += (int)result.HUD_length +1;
+                if (rawDrawingData.Length < offset + 4) return result;
+                result.HUD_length = BitConverter.ToUInt32(rawDrawingData, offset);
+                offset += sizeof(uint);
+                if (offset + result.HUD_length + 1 > rawDrawingData.Length) return result;
+                result.HUD_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HUD_length);
+                offset += (int)result.HUD_length + 1;
 
-            result.RWR_length = BitConverter.ToUInt32(rawDrawingData, offset);
-            offset += sizeof(uint);
-            if (offset + result.RWR_length + 1 > rawDrawingData.Length) return result;
-            result.RWR_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.RWR_length);
-            offset += (int)result.RWR_length + 1;
+                if (rawDrawingData.Length < offset + 4) return result;
+                result.RWR_length = BitConverter.ToUInt32(rawDrawingData, offset);
+                offset += sizeof(uint);
+                if (offset + result.RWR_length + 1 > rawDrawingData.Length) return result;
+                result.RWR_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.RWR_length);
+                offset += (int)result.RWR_length + 1;
 
-            result.HMS_length = BitConverter.ToUInt32(rawDrawingData, offset);
-            offset += sizeof(uint);
-            if (offset + result.HMS_length + 1 > rawDrawingData.Length) return result;
-            result.HMS_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HMS_length);
-
+                if (rawDrawingData.Length < offset + 4) return result;
+                result.HMS_length = BitConverter.ToUInt32(rawDrawingData, offset);
+                offset += sizeof(uint);
+                if (offset + result.HMS_length + 1 > rawDrawingData.Length) return result;
+                result.HMS_commands = Encoding.Default.GetString(rawDrawingData, offset, (int)result.HMS_length);
+            }
+            catch { }
             return result;
         }
     }

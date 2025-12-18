@@ -5,6 +5,7 @@ using System.Windows.Media;
 using Common.SimSupport;
 using System.Windows.Media.Imaging;
 using System.IO;
+using LightningGauges.Renderers.VectorDrawing;
 
 namespace LightningGauges.Renderers.F16.RWR
 {
@@ -285,7 +286,7 @@ namespace LightningGauges.Renderers.F16.RWR
 
             double width = VectorStrokeFont.GetStringWidth(text, (big ? BigFontVectorScale : SmallFontVectorScale));
             double height =VectorStrokeFont.GetStringHeight(text, (big ? BigFontVectorScale : SmallFontVectorScale));
-            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - (width / 2.0), y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - (width / 2.0), y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale, big ? BigFontVectorScale : SmallFontVectorScale);
         }
         protected void DrawTextCenter(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
@@ -355,7 +356,7 @@ namespace LightningGauges.Renderers.F16.RWR
 
             double width = VectorStrokeFont.GetStringWidth(text, big ? BigFontVectorScale : SmallFontVectorScale);
             double height = VectorStrokeFont.GetStringHeight(text, big ? BigFontVectorScale : SmallFontVectorScale);
-            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - (width / 2.0), y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - (width / 2.0), y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale, big ? BigFontVectorScale : SmallFontVectorScale);
         }
         protected void DrawTextLeft(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
@@ -425,7 +426,7 @@ namespace LightningGauges.Renderers.F16.RWR
 
             double width = VectorStrokeFont.GetStringWidth(text, big ? BigFontVectorScale : SmallFontVectorScale);
             double height = VectorStrokeFont.GetStringHeight(text, big ? BigFontVectorScale : SmallFontVectorScale);
-            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x, y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x, y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale, big ? BigFontVectorScale : SmallFontVectorScale);
         }
         protected void DrawTextRight(DrawingContext drawingContext, string text, double x, double y, bool big)
         {
@@ -497,7 +498,7 @@ namespace LightningGauges.Renderers.F16.RWR
             double width = VectorStrokeFont.GetStringWidth(text, big ? BigFontVectorScale : SmallFontVectorScale);
             double height = VectorStrokeFont.GetStringHeight(text, big ? BigFontVectorScale : SmallFontVectorScale);
 
-            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - width, y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale);
+            VectorStrokeFont.DrawText(drawingContext, pen, text, new Point(x - width, y - (height / 2.0) + vOffset), big ? BigFontVectorScale : SmallFontVectorScale, big ? BigFontVectorScale : SmallFontVectorScale);
         }
     }
 }

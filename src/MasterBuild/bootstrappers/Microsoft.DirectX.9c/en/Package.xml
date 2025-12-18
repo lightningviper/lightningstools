@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package Name="DisplayName" Culture="Culture" xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper">
+ <Strings>
+ <String Name="Culture">en</String>
+ <String Name="DisplayName">Microsoft DirectX 9c Runtime</String>
+ <String Name="GeneralFailure">An unexpected exit code was returned from the installer. The installation failed.</String>
+ <String Name="DirectXDownloadUrl">http://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe</String>
+ </Strings>
+</Package>

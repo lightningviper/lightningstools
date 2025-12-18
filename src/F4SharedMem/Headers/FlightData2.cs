@@ -25,11 +25,15 @@ namespace F4SharedMem.Headers
         // 15: added MiscBits, BettyBits, radar altitude, bingo fuel, cara alow, bullseye, BMS version information, string area size/time, drawing area size
         // 16: added turn rate
         // 17: added Flcs_Flcc, SolenoidStatus to MiscBits
+        // 18?: added EWMULines, EWPILines; added EWMU and EWPI RTT areas
+        // 18: added floodconsole brightness
+        // 19: added ECM_M1-5, ECM oper + blinkbit, magnetic deviation, RWR jamming status
+        // 20: added radio2_present and radio2_frequency, effective IFF transponder codes
 
         public const int RWRINFO_SIZE = 512;
-        public const int MAX_CALLSIGNS = 32;
         public const int CALLSIGN_LEN = 12;
-
+        public const int MAX_CALLSIGNS = 32;
+        public const int MAX_ECM_PROGRAMS = 5;
 
         // VERSION 1
         public float nozzlePos2;   // Ownship engine nozzle2 percent open (0-100)
@@ -57,7 +61,7 @@ namespace F4SharedMem.Headers
         public float cabinAlt;		// Ownship cabin altitude
         public float hydPressureA;	// Ownship Hydraulic Pressure A
         public float hydPressureB;	// Ownship Hydraulic Pressure B
-        public int currentTime;	// Current time in seconds (max 60 * 60 * 24)
+        public uint currentTime;	// Current time in seconds (max 60 * 60 * 24)
         public short vehicleACD;	// Ownship ACD index number, i.e. which aircraft type are we flying.
         public int VersionNum2;		// Version of FlightData2 mem area
 
@@ -122,8 +126,41 @@ namespace F4SharedMem.Headers
         public uint DrawingAreaSize;// the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
 
         // VERSION 16
-        float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+        public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
 
+        // VERSION 18
+        public FloodConsole floodConsole;   // (unsigned char) current floodconsole brightness setting, see FloodConsole enum for details
+
+        // VERSION 19
+        public float magDeviationSystem;    // current mag deviation of the system
+        public float magDeviationReal;      // current mag deviation of the system
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_ECM_PROGRAMS)]
+        public uint[] ecmBits; // see EcmBits enum for details - Note: these are currently not combinable bits, but mutually exclusive states!
+
+        public EcmOperStates ecmOper;                  // (unsigned char) see enum EcmOperStates for details
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = FlightData.MAX_RWR_OBJECTS)]
+        public JammingStates[] RWRjammingStatus; // (unsigned) char see enum JammingStates for details
+
+        // VERSION 20
+        int radio2_preset;       // Radio 2 channel preset (if present).
+        int radio2_frequency;    // Radio 2 channel frequency (if present).
+
+        // IFF transponder currently active (as seen from outside) codes, negative for OFF or n/a
+        sbyte iffTransponderActiveCode1;  // mode 1
+        short iffTransponderActiveCode2;  // mode 2
+        short iffTransponderActiveCode3A; // mode 3A
+        short iffTransponderActiveCodeC;  // mode C
+        short iffTransponderActiveCode4;  // mode 4; assumes the correct codeword
+
+#if EWMU_AND_EWPI_PATCH_APPLIED
+        //VERSION 18?
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public EWMU_LineOfText[] EWMULines;  //16 usable chars
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public EWPI_LineOfText[] EWPILines;  //8 usable chars
+#endif
     }
 
 }

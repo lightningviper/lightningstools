@@ -1,0 +1,335 @@
+<Timeline>
+  <Moment t="00:00:00:000">
+
+  <!-- *************************************************************************************************************** -->
+   <FlightData
+    VersionNum = "118"
+    x = "2381707.00" 
+    y = "1562629.88"
+    z = "-10005.82"
+    xDot = "-659.36"
+    yDot = "290.72"
+    zDot = "-2.10"
+    alpha = "2.44"
+    beta = "0.21"
+    gamma = "0.00"
+    pitch = "0.05"
+    roll = "0.00"
+    yaw = "2.76"
+    mach = "0.68"
+    kias = "384.44"
+    vt = "741.16"
+    gs = "1.00"
+    windOffset = "-0.04"
+    trimPitch = "0.00"
+    trimRoll = "0.00"
+    trimYaw = "0.00"
+    nozzlePos = "0.55"
+    rpm = "76.70"
+    ftit = "5.78"
+    oilPressure = "36.39"
+    internalFuel = "7161.58"
+    externalFuel = "0.00"
+    fuelFlow = "868.00"
+    fwd = "30840.03"
+    aft = "26765.35"
+    total = "6900.00"
+    epuFuel = "100.00"
+    speedBrake = "0.00"
+    ChaffCount = "60.00"
+    FlareCount = "30.00"
+    gearPos = "0.00"
+    NoseGearPos = "0.00"
+    LeftGearPos = "0.00"
+    RightGearPos = "0.00"
+    MainPower = "Up"
+    UFCTChan = "106"
+    AUXTChan = "106"
+    AdiIlsHorPos = "-0.17"
+    AdiIlsVerPos = "-0.03"
+    courseState = "7"
+    headingState = "7"
+    totalStates = "-1051534634"
+    courseDeviation = "-13.18"
+    desiredCourse = "0.00"
+    distanceToBeacon = "0.97"
+    bearingToBeacon = "13.18"
+    currentHeading = "158.13"
+    desiredHeading = "0.00"
+    deviationLimit = "10.00"
+    halfDeviationLimit = "5.00"
+    localizerCourse = "0.00"
+    airbaseX = "0.00"
+    airbaseY = "0.00"
+    totalValues = "0.00"
+
+    lightBits = "MasterCaution,TF,OXY_BROW,EQUIP_HOT,ONGROUND,ENG_FIRE,CONFIG,HYD,Flcs_ABCD,FLCS,CAN,T_L_CFG,AOAAbove,AOAOn,AOABelow,RefuelRDY,RefuelAR,RefuelDSC,FltControlSys,LEFlaps,EngineFault,Overheat,FuelLow,Avionics,RadarAlt,IFF,ECM,Hook,NWSFail,CabinPress,AutoPilotOn,TFR_STBY"
+    lightBits2 = "HandOff,Launch,PriMode,Naval,Unk,TgtSep,Go,NoGo,Degr,Rdy,ChaffLo,FlareLo,AuxSrch,AuxAct,AuxLow,AuxPwr,EcmPwr,EcmFail,FwdFuelLow,AftFuelLow,EPUOn,JFSOn,SEC,OXY_LOW,PROBEHEAT,SEAT_ARM,BUC,FUEL_OIL_HOT,ANTI_SKID,TFR_ENGAGED,GEARHANDLE,ENGINE"
+    lightBits3 = "FlcsPmg,MainGen,StbyGen,EpuGen,EpuPmg,ToFlcs,FlcsRly,BatFail,Hydrazine,Air,Elec_Fault,Lef_Fault,OnGround,FlcsBitRun,FlcsBitFail,DbuWarn,NoseGearDown,LeftGearDown,RightGearDown,ParkBrakeOn,Power_Off,cadc,SpeedBrake,SysTest,MCAnnounced,MLGWOW,NLGWOW,ATF_Not_Engaged,Inlet_Icing"
+    hsiBits = "ToTrue,IlsWarning,CourseWarning,Init,TotalFlags,ADI_OFF,ADI_AUX,ADI_GS,ADI_LOC,HSI_OFF,BUP_ADI_OFF,VVI,AOA,AVTR,OuterMarker,MiddleMarker,FromTrue,Flying"
+
+    RwrObjectCount = "0"
+    RWRSymbol      = "[0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   ]"
+    bearing        = "[0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]"
+    missileActivity= "[0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   ]"
+    missileLaunch  = "[0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   ]"
+    selected       = "[0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   ]"
+    lethality      = "[0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   ]"
+    newDetection   = "[0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   , 0   ]"
+
+
+
+    DEDLines = "[
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']
+    ]"
+
+    Invert = "[
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+    ]"
+
+    PFLLines ="[
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+	  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']
+    ]"
+
+
+    PFLInvert = "[
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+	  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+    ]"
+
+    /><!--end FlightData -->
+  <!-- *************************************************************************************************************** -->
+
+  <!-- *************************************************************************************************************** -->
+    <FlightData2 
+      VersionNum = "19"
+      nozzlePos2 = "0.55"
+      rpm2 = "70.00"
+      ftit2 = "0.00"
+      oilPressure2 = "0.00"
+      hydPressureA = "3000.00"
+      hydPressureB = "3000.00"
+      fuelFlow2 = "0.00"
+      lefPos = "1.36"
+      tefPos = "0.00"
+      latitude = "040.3650"
+      longitude = "128.6154"
+      RALT = "-999999.88"
+      StringAreaSize = "1696"
+      StringAreaTime = "64347552"
+      iffBackupMode1Digit1 = "0"
+      iffBackupMode1Digit2 = "0"
+      iffBackupMode3ADigit1 = "1"
+      iffBackupMode3ADigit2 = "2"
+      bingoFuel = "1500.00"
+      bullseyeX = "1523550.75"
+      bullseyeY = "1280832.25"
+      navMode = "NAV"
+      cmdsMode = "CmdsMAN"
+      AAUZ = "-9769.59"
+      altCalReading = "3063"
+      cabinAlt = "2090.61"
+      BupUhfPreset = "6"
+      BupUhfFreq = "225000"
+      currentTime = "10801"
+      vehicleACD = "61"
+      vtolPos = "0.00"
+      bumpIntensity = "0.0000"
+      instrLight = "OFF"
+      caraAlow = "300.00"
+      BMSVersionMajor = "4"
+      BMSVersionMinor = "37"
+      BMSVersionMicro = "1"
+      BMSBuildNumber = "451"
+      DrawingAreaSize = "19"
+      turnRate = "0.00"
+      floodConsole = "OFF"
+      magDeviationSystem = "0.00"
+      magDeviationReal = "0.00"
+      RTT_size = "[1200, 1200]"
+      RTT_area = "[0,0,560,560,  562,0,962,140,  562,142,962,282,  964,0,1200,236,  750,750,1200,1200,  750,290,1200,740,  0,628,572,1200]"
+      ecmBits = "[0,0,0,0,0]"
+      ecmOper = "ECM_OPER_NO_LIT"
+      rwrInfo = "&lt;type&gt;1&lt;onpwr&gt;&lt;cslst&gt;0000000000000000000000000000000000000000"
+
+      pilotsOnline = "12"
+      pilotsCallsign = "[
+         'callsign0001', 'callsign0002', 'callsign0003', 'callsign0004', 'callsign0005', 'callsign0006', 
+         'callsign0007', 'callsign0008', 'callsign0009', 'callsign0010', 'callsign0011', 'callsign0012',
+         'callsign0013', 'callsign0014', 'callsign0015', 'callsign0016', 'callsign0017', 'callsign0018',
+         'callsign0019', 'callsign0020', 'callsign0021', 'callsign0022', 'callsign0023', 'callsign0024',
+         'callsign0025', 'callsign0026', 'callsign0027', 'callsign0028', 'callsign0029', 'callsign0030',
+         'callsign0031', 'callsign0032'
+      ]"
+      pilotsStatus = "[
+        'IN_UI',   'IN_UI',   'LOADING', 'WAITING', 'FLYING',  'DEAD',
+        'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 
+        'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 
+        'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 
+        'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 
+        'UNKNOWN', 'UNKNOWN'
+      ]"
+
+      altBits = "CalType,PneuFlag"
+      powerBits = "BusPowerBattery,BusPowerEmergency,BusPowerEssential,BusPowerNonEssential,MainGenerator,StandbyGenerator,JetFuelStarter"
+      binkBits = "OuterMarker,MiddleMarker,PROBEHEAT,AuxSrch,Launch,PriMode,Unk,Elec_Fault,OXY_BROW,EPUOn,JFSOn_Slow,JFSOn_Fast"
+      miscBits = "RALT_Valid,Flcs_Flcc_A,Flcs_Flcc_B,Flcs_Flcc_C,Flcs_Flcc_D,SolenoidStatus,ECM_M1,ECM_M2,ECM_M3,ECM_M4,ECM_M5"
+      bettyBits = "Betty_Allwords,Betty_Pullup,Betty_Altitude,Betty_Warning,Betty_Jammer,Betty_Counter,Betty_ChaffFlare,Betty_ChaffFlare_Low,Betty_ChaffFlare_Out,Betty_Lock,Betty_Caution,Betty_Bingo,Betty_Data,Betty_IFF,Betty_Lowspeed,Betty_Beeps,Betty_AOA,Betty_MaxG"
+
+    /><!--end FlightData2 -->
+  <!-- *************************************************************************************************************** -->
+
+
+  <!-- *************************************************************************************************************** -->
+    <OSBData>
+      <leftMFD>
+        <OSBLabel Line1="['C', 'R', 'M', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['R', 'W', 'S', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['N', 'O', 'R', 'M', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['O', 'V', 'R', 'D', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['C', 'N', 'T', 'L', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['A', 'S', 'G', 'N', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="['1', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="['2', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="['3', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="['4', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['D', 'C', 'L', 'T', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['T', 'E', 'S', 'T', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['F', 'L', 'C', 'S', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['F', 'C', 'R', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="true"/>
+        <OSBLabel Line1="['S', 'W', 'A', 'P', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['4', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="['B', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['A', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="['6', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+      </leftMFD>
+      <rightMFD>
+        <OSBLabel Line1="['A', 'A', 'M', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['I', 'N', 'V', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['C', 'N', 'T', 'L', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['1', ' ', '1', '2', '0', 'C', '5']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['S', '-', 'J', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['T', 'G', 'P', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['H', 'S', 'D', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['S', 'M', 'S', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="true"/>
+        <OSBLabel Line1="['S', 'W', 'A', 'P', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['M', 'E', 'D', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="['S', 'L', 'A', 'V', 'E', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+        <OSBLabel Line1="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Line2="[' ', ' ', ' ', ' ', ' ', ' ', ' ']" Inverted="false"/>
+      </rightMFD>
+    </OSBData>
+  <!-- *************************************************************************************************************** -->
+
+  <!-- *************************************************************************************************************** -->
+    <StringData VersionNum="4" NoOfStrings="40" dataSize="1684">
+       <data>
+          <StringStruct strId="BmsExe" strLength="41" strData="C:\Falcon BMS 4.37\Bin\x64\Falcon BMS.exe"/>
+          <StringStruct strId="KeyFile" strLength="45" strData="C:\Falcon BMS 4.37\User\Config\BMS - Auto.key"/>
+          <StringStruct strId="BmsBasedir" strLength="18" strData="C:\Falcon BMS 4.37"/>
+          <StringStruct strId="BmsBinDirectory" strLength="26" strData="C:\Falcon BMS 4.37\Bin\x64"/>
+          <StringStruct strId="BmsDataDirectory" strLength="23" strData="C:\Falcon BMS 4.37\Data"/>
+          <StringStruct strId="BmsUIArtDirectory" strLength="23" strData="C:\Falcon BMS 4.37\Data"/>
+          <StringStruct strId="BmsUserDirectory" strLength="23" strData="C:\Falcon BMS 4.37\User"/>
+          <StringStruct strId="BmsAcmiDirectory" strLength="28" strData="C:\Falcon BMS 4.37\User\Acmi"/>
+          <StringStruct strId="BmsBriefingsDirectory" strLength="33" strData="C:\Falcon BMS 4.37\User\Briefings"/>
+          <StringStruct strId="BmsConfigDirectory" strLength="30" strData="C:\Falcon BMS 4.37\User\Config"/>
+          <StringStruct strId="BmsLogsDirectory" strLength="28" strData="C:\Falcon BMS 4.37\User\Logs"/>
+          <StringStruct strId="BmsPatchDirectory" strLength="31" strData="C:\Falcon BMS 4.37\User\Patches"/>
+          <StringStruct strId="BmsPictureDirectory" strLength="32" strData="C:\Falcon BMS 4.37\User\Pictures"/>
+          <StringStruct strId="ThrName" strLength="9" strData="Korea KTO"/>
+          <StringStruct strId="ThrCampaigndir" strLength="32" strData="C:\Falcon BMS 4.37\Data\Campaign"/>
+          <StringStruct strId="ThrTerraindir" strLength="38" strData="C:\Falcon BMS 4.37\Data\Terrdata\korea"/>
+          <StringStruct strId="ThrArtdir" strLength="27" strData="C:\Falcon BMS 4.37\Data\Art"/>
+          <StringStruct strId="ThrMoviedir" strLength="23" strData="C:\Falcon BMS 4.37\Data"/>
+          <StringStruct strId="ThrUisounddir" strLength="23" strData="C:\Falcon BMS 4.37\Data"/>
+          <StringStruct strId="ThrObjectdir" strLength="40" strData="C:\Falcon BMS 4.37\Data\Terrdata\objects"/>
+          <StringStruct strId="Thr3ddatadir" strLength="40" strData="C:\Falcon BMS 4.37\Data\Terrdata\objects"/>
+          <StringStruct strId="ThrMisctexdir" strLength="40" strData="C:\Falcon BMS 4.37\Data\Terrdata\misctex"/>
+          <StringStruct strId="ThrSounddir" strLength="30" strData="C:\Falcon BMS 4.37\Data\Sounds"/>
+          <StringStruct strId="ThrTacrefdir" strLength="32" strData="C:\Falcon BMS 4.37\Data\TerrData"/>
+          <StringStruct strId="ThrSplashdir" strLength="34" strData="C:\Falcon BMS 4.37\Data\Art\splash"/>
+          <StringStruct strId="ThrCockpitdir" strLength="35" strData="C:\Falcon BMS 4.37\Data\Art\ckptart"/>
+          <StringStruct strId="ThrSimdatadir" strLength="27" strData="C:\Falcon BMS 4.37\Data\Sim"/>
+          <StringStruct strId="ThrSubtitlesdir" strLength="30" strData="C:\Falcon BMS 4.37\Data\Sounds"/>
+          <StringStruct strId="ThrTacrefpicsdir" strLength="36" strData="C:\Falcon BMS 4.37\Data\Art\TacRData"/>
+          <StringStruct strId="AcName" strLength="14" strData="F-16C-52 ROKAF"/>
+          <StringStruct strId="AcNCTR" strLength="3" strData="F16"/>
+          <StringStruct strId="ButtonsFile" strLength="64" strData="C:\Falcon BMS 4.37\Data\Art\ckptart\F-16C-52 ROKAF\3dbuttons.dat"/>
+          <StringStruct strId="CockpitFile" strLength="62" strData="C:\Falcon BMS 4.37\Data\Art\ckptart\F-16C-52 ROKAF\3dckpit.dat"/>
+          <StringStruct strId="NavPoint" strLength="47" strData="NP:1,WP,2.384185E6,1.562402E6,-1E4,-4.497725E3;"/>
+	  <StringStruct strId="NavPoint" strLength="49" strData="NP:2,WP,2.3829055E6,1.5629105E6,-1E4,-4.372505E3;"/>
+	  <StringStruct strId="NavPoint" strLength="45" strData="NP:3,WP,2.2713862E6,1.6744298E6,-1E4,-4.47E2;"/>
+	  <StringStruct strId="NavPoint" strLength="44" strData="NP:4,WP,2.1729868E6,1.6219501E6,-1E4,-3.2E1;"/>
+	  <StringStruct strId="NavPoint" strLength="46" strData="NP:5,WP,2.5173848E6,1.8941885E6,-1E4,-3.991E3;"/>
+	  <StringStruct strId="NavPoint" strLength="41" strData="NP:25,CB,1.5235508E6,1.2808322E6,0E0,0E0;"/>
+	  <StringStruct strId="ThrTerrdatadir" strLength="32" strData="C:\Falcon BMS 4.37\Data\TerrData"/>
+       </data>
+    </StringData>
+  <!-- *************************************************************************************************************** -->
+
+  <!-- *************************************************************************************************************** -->
+    <IntellivibeData
+       AAMissileFired="0"
+       AGMissileFired="0"
+       BombDropped="0"
+       FlareDropped="0"
+       ChaffDropped="0"
+       BulletsFired="0"
+       CollisionCounter="0"
+       Gforce="1.00"
+       lastdamage="0"
+       damageforce="0.00"
+       whendamage="0"
+       eyex="2381693.25"
+       eyey="1562635.38"
+       eyez="-10009.80"
+       IsFiringGun="false"
+       IsEndFlight="false"
+       IsEjecting="false"
+       In3D="true"
+       IsPaused="false"
+       IsFrozen="false"
+       IsOverG="false"
+       IsOnGround="false"
+       IsExitGame="false"
+    /><!--end IntellivibeData-->
+  <!-- *************************************************************************************************************** -->
+
+  <!-- *************************************************************************************************************** -->
+    <DrawingData
+        VersionNum="4"
+        HUD_length="0"
+        HUD_commands=""
+        RWR_length="0"
+        RWR_commands=""
+        HMS_length="0"
+        HMS_commands=""
+    /><!--end DrawingData-->
+  <!-- *************************************************************************************************************** -->
+
+  </Moment>
+</Timeline>

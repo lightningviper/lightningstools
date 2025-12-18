@@ -1,0 +1,477 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SignalMappings>
+
+		<!-- *********************************************************************-->
+		<!-- MAPPINGS FROM F4 SIM VALUES TO ArduinoSeat HARDWARE SUPPORT MODULE INPUTS -->
+		<!-- *********************************************************************-->
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_FIRING_GUN OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_FIRING_GUN[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_FIRING_GUN INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_FIRING_GUN</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_END_FLIGHT OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_END_FLIGHT[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_END_FLIGHT INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_END_FLIGHT</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_EJECTING OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_EJECTING[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_EJECTING INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_EJECTING</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IN_3D OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IN_3D[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IN_3D INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IN_3D</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_PAUSED OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_PAUSED[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_PAUSED INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_PAUSED</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_FROZEN OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_FROZEN[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_FROZEN INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_FROZEN</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_OVER_G OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_OVER_G[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_OVER_G INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_OVER_G</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_ON_GROUND OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_ON_GROUND[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_ON_GROUND INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_ON_GROUND</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__IS_EXIT_GAME OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__IS_EXIT_GAME[0]</Id>
+			</Source>
+			<!-- ArduinoSeat IS_EXIT_GAME INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__IS_EXIT_GAME</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__AA_MISSILE_FIRED OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__AA_MISSILE_FIRED[0]</Id>
+			</Source>
+			<!-- ArduinoSeat AA_MISSILE_FIRED INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__AA_MISSILE_FIRED</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__AG_MISSILE_FIRED OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__AG_MISSILE_FIRED[0]</Id>
+			</Source>
+			<!-- ArduinoSeat AG_MISSILE_FIRED INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__AG_MISSILE_FIRED</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__BOMB_DROPPED OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__BOMB_DROPPED[0]</Id>
+			</Source>
+			<!-- ArduinoSeat BOMB_DROPPED INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__BOMB_DROPPED</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__FLARE_DROPPED OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__FLARE_DROPPED[0]</Id>
+			</Source>
+			<!-- ArduinoSeat FLARE_DROPPED INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__FLARE_DROPPED</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__CHAFF_DROPPED OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__CHAFF_DROPPED[0]</Id>
+			</Source>
+			<!-- ArduinoSeat CHAFF_DROPPED INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__CHAFF_DROPPED</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__BULLETS_FIRED OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__BULLETS_FIRED[0]</Id>
+			</Source>
+			<!-- ArduinoSeat BULLETS_FIRED INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__BULLETS_FIRED</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__COLLISION_COUNTER OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__COLLISION_COUNTER[0]</Id>
+			</Source>
+			<!-- ArduinoSeat COLLISION_COUNTER INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__COLLISION_COUNTER</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__GFORCE OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__GFORCE[0]</Id>
+			</Source>
+			<!-- ArduinoSeat GFORCE INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__GFORCE</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__LAST_DAMAGE-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__LAST_DAMAGE[0]</Id>
+			</Source>
+			<!-- ArduinoSeat LAST_DAMAGE INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__LAST_DAMAGE</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__DAMAGE_FORCE OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__DAMAGE_FORCE[0]</Id>
+			</Source>
+			<!-- ArduinoSeat DAMAGE_FORCE INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__DAMAGE_FORCE</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__WHEN_DAMAGE OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__WHEN_DAMAGE[0]</Id>
+			</Source>
+			<!-- ArduinoSeat WHEN_DAMAGE INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__WHEN_DAMAGE</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SIM__BUMP_INTENSITY OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SIM__BUMP_INTENSITY</Id>
+			</Source>
+			<!-- ArduinoSeat BUMP_INTENSITY INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__BUMP_INTENSITY</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 NOZ_POS1__NOZZLE_PERCENT_OPEN OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_NOZ_POS1__NOZZLE_PERCENT_OPEN</Id>
+			</Source>
+			<!-- ArduinoSeat NOZ_POS1__NOZZLE_PERCENT_OPEN INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__NOZ_POS1__NOZZLE_PERCENT_OPEN</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 NOZ_POS2__NOZZLE_PERCENT_OPEN OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_NOZ_POS2__NOZZLE_PERCENT_OPEN</Id>
+			</Source>
+			<!-- ArduinoSeat NOZ_POS2__NOZZLE_PERCENT_OPEN INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__NOZ_POS2__NOZZLE_PERCENT_OPEN</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 RPM1__RPM_PERCENT OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_RPM1__RPM_PERCENT</Id>
+			</Source>
+			<!-- ArduinoSeat RPM1__RPM_PERCENT INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__RPM1__RPM_PERCENT</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 RPM2__RPM_PERCENT OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_RPM2__RPM_PERCENT</Id>
+			</Source>
+			<!-- ArduinoSeat RPM2__RPM_PERCENT INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__RPM2__RPM_PERCENT</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR</Id>
+			</Source>
+			<!-- ArduinoSeat FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR</Id>
+			</Source>
+			<!-- ArduinoSeat FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__FUEL_FLOW2__FUEL_FLOW_POUNDS_PER_HOUR</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 SPEED_BRAKE__POSITION OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_SPEED_BRAKE__POSITION</Id>
+			</Source>
+			<!-- ArduinoSeat SPEED_BRAKE__POSITION INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__SPEED_BRAKE__POSITION</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 FLIGHT_DYNAMICS__CLIMBDIVE_ANGLE_DEGREES OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_FLIGHT_DYNAMICS__CLIMBDIVE_ANGLE_DEGREES</Id>
+			</Source>
+			<!-- ArduinoSeat FLIGHT_DYNAMICS__CLIMBDIVE_ANGLE_DEGREES INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__FLIGHT_DYNAMICS__CLIMBDIVE_ANGLE_DEGREES</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 FLIGHT_DYNAMICS__SIDESLIP_ANGLE_DEGREES OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_FLIGHT_DYNAMICS__SIDESLIP_ANGLE_DEGREES</Id>
+			</Source>
+			<!-- ArduinoSeat FLIGHT_DYNAMICS__SIDESLIP_ANGLE_DEGREES INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__FLIGHT_DYNAMICS__SIDESLIP_ANGLE_DEGREES</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 MAP__GROUND_SPEED_KNOTS OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_MAP__GROUND_SPEED_KNOTS</Id>
+			</Source>
+			<!-- ArduinoSeat MAP__GROUND_SPEED_KNOTS INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__MAP__GROUND_SPEED_KNOTS</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 AIRSPEED_MACH_INDICATOR__TRUE_AIRSPEED_KNOTS OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_AIRSPEED_MACH_INDICATOR__TRUE_AIRSPEED_KNOTS</Id>
+			</Source>
+			<!-- ArduinoSeat AIRSPEED_MACH_INDICATOR__TRUE_AIRSPEED_KNOTS INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__AIRSPEED_MACH_INDICATOR__TRUE_AIRSPEED_KNOTS</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 VVI__VERTICAL_VELOCITY_FPM OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_VVI__VERTICAL_VELOCITY_FPM</Id>
+			</Source>
+			<!-- ArduinoSeat VVI__VERTICAL_VELOCITY_FPM INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__VVI__VERTICAL_VELOCITY_FPM</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 AIRCRAFT__LEADING_EDGE_FLAPS_POSITION OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_AIRCRAFT__LEADING_EDGE_FLAPS_POSITION</Id>
+			</Source>
+			<!-- ArduinoSeat AIRCRAFT__LEADING_EDGE_FLAPS_POSITION INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__AIRCRAFT__LEADING_EDGE_FLAPS_POSITION</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 AIRCRAFT__TRAILING_EDGE_FLAPS_POSITION OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_AIRCRAFT__TRAILING_EDGE_FLAPS_POSITION</Id>
+			</Source>
+			<!-- ArduinoSeat AIRCRAFT__TRAILING_EDGE_FLAPS_POSITION INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__AIRCRAFT__TRAILING_EDGE_FLAPS_POSITION</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 GEAR_PANEL__GEAR_POSITION OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_GEAR_PANEL__GEAR_POSITION</Id>
+			</Source>
+			<!-- ArduinoSeat GEAR_PANEL__GEAR_POSITION INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__GEAR_PANEL__GEAR_POSITION</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 GEAR_PANEL__NOSE_GEAR_POSITION OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_GEAR_PANEL__NOSE_GEAR_POSITION</Id>
+			</Source>
+			<!-- ArduinoSeat GEAR_PANEL__NOSE_GEAR_POSITION INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__GEAR_PANEL__NOSE_GEAR_POSITION</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 GEAR_PANEL__LEFT_GEAR_POSITION OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_GEAR_PANEL__LEFT_GEAR_POSITION</Id>
+			</Source>
+			<!-- ArduinoSeat GEAR_PANEL__LEFT_GEAR_POSITION INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__GEAR_PANEL__LEFT_GEAR_POSITION</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+
+		<SignalMapping>
+			<!-- F4 GEAR_PANEL__RIGHT_GEAR_POSITION OUTPUT-->
+			<Source xsi:type="TextSignal">
+				<Id>F4_GEAR_PANEL__RIGHT_GEAR_POSITION</Id>
+			</Source>
+			<!-- ArduinoSeat GEAR_PANEL__RIGHT_GEAR_POSITION INPUT-->
+			<Destination xsi:type="TextSignal">
+				<Id>ArduinoSeat__GEAR_PANEL__RIGHT_GEAR_POSITION</Id>
+			</Destination>
+			<MappingType>StraightThrough</MappingType>
+		</SignalMapping>
+	</SignalMappings>
+</MappingProfile>

@@ -361,43 +361,43 @@ namespace SimLinkup.HardwareSupport.Simtek
 
             if (pitchInputDegrees >= 0 && pitchInputDegrees < 10)
             {
-                pitchOutputRefAngleDegrees = pitchInputDegrees / 10 * 21.176;
+                pitchOutputRefAngleDegrees = (pitchInputDegrees / 10) * 21.176;
             }
             else if (pitchInputDegrees >= 10 && pitchInputDegrees < 20)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees - 10) / 10 * 21.177;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees - 10) / 10) * 21.177) + 21.176;
             }
             else if (pitchInputDegrees >= 20 && pitchInputDegrees < 30)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees - 20) / 10 * 21.176;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees - 20) / 10) * 21.176) + 42.353;
             }
             else if (pitchInputDegrees >= 30 && pitchInputDegrees < 60)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees - 30) / 30 * 63.53;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees - 30) / 30) * 63.53) + 63.526;
             }
             else if (pitchInputDegrees >= 60 && pitchInputDegrees <= 90)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees - 60) / 30 * 67.76;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees - 60) / 30) * 67.76) + 127.059;
             }
             else if (pitchInputDegrees <= -60 && pitchInputDegrees >= -90)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees - -60) / 30 * 38.122;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees - -90) / 30) * 38.122) + 194.819;
             }
             else if (pitchInputDegrees <= -30 && pitchInputDegrees >= -60)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees + 60) / 30 * 63.53;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees + 60) / 30) * 63.53) + 232.941;
             }
             else if (pitchInputDegrees <= -20 && pitchInputDegrees >= -30)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees + 30) / 10 * 21.176;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees + 30) / 10) * 21.176) + 296.471;
             }
             else if (pitchInputDegrees <= -10 && pitchInputDegrees >= -20)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees + 20) / 10 * 21.177;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees + 20) / 10) * 21.177) + 317.647;
             }
             else if (pitchInputDegrees <= 0 && pitchInputDegrees >= -10)
             {
-                pitchOutputRefAngleDegrees = (pitchInputDegrees + 10) / 10 * 21.176;
+                pitchOutputRefAngleDegrees = (((pitchInputDegrees + 10) / 10) * 21.176) + 338.824;
             }
 
 

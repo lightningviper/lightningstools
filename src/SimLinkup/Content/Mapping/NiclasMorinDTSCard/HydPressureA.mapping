@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO NICLAS MORIN DTS CARD HARDWARE SUPPORT MODULE INPUT -->
+    <!-- *********************************************************************-->
+    <!-- HYDRAULIC PRESSURE A-->
+     <SignalMapping>
+      <!-- F4 HYDRAULIC PRESSURE A OUTPUT FROM SIM-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_HYD_PRESSURE_A__PSI</Id>
+      </Source>
+      <!--  HYDRAULIC PRESSURE A SYNCHRO CARD INPUT FROM SIM-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Niclas_Morin_DTS_Card["A0000"]_Input_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

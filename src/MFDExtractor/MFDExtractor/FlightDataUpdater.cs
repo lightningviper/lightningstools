@@ -192,26 +192,29 @@ namespace MFDExtractor
                 ((IISIS)instruments[InstrumentType.ISIS].Renderer).InstrumentState.OffFlag = true;
                 updateEHSIBrightnessLabelVisibility();
             }
-            var left = flightData.RTT_area[(int)RTT_areas.RTT_MFDLEFT * 4];
-            var top = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 1];
-            var right = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 2];
-            var bottom = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 3];
-            var lmfdSourceRect = new Rectangle(left, top, right - left, bottom - top);                
-            _flightDataAdapterSet.LMFD.Adapt(instruments[InstrumentType.LMFD], texSharedmemReader, lmfdSourceRect, InstrumentType.LMFD);
+            if (flightData.RTT_area != null)
+            {
+                var left = flightData.RTT_area[(int)RTT_areas.RTT_MFDLEFT * 4];
+                var top = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 1];
+                var right = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 2];
+                var bottom = flightData.RTT_area[((int)RTT_areas.RTT_MFDLEFT * 4) + 3];
+                var lmfdSourceRect = new Rectangle(left, top, right - left, bottom - top);
+                _flightDataAdapterSet.LMFD.Adapt(instruments[InstrumentType.LMFD], texSharedmemReader, lmfdSourceRect, InstrumentType.LMFD);
 
-            left = flightData.RTT_area[(int)RTT_areas.RTT_MFDRIGHT * 4];
-            top = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 1];
-            right = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 2];
-            bottom = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 3];
-            var rmfdSourceRect = new Rectangle(left, top, right - left, bottom - top);
-            _flightDataAdapterSet.RMFD.Adapt(instruments[InstrumentType.RMFD], texSharedmemReader, rmfdSourceRect, InstrumentType.RMFD);
+                left = flightData.RTT_area[(int)RTT_areas.RTT_MFDRIGHT * 4];
+                top = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 1];
+                right = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 2];
+                bottom = flightData.RTT_area[((int)RTT_areas.RTT_MFDRIGHT * 4) + 3];
+                var rmfdSourceRect = new Rectangle(left, top, right - left, bottom - top);
+                _flightDataAdapterSet.RMFD.Adapt(instruments[InstrumentType.RMFD], texSharedmemReader, rmfdSourceRect, InstrumentType.RMFD);
 
-            left = flightData.RTT_area[(int)RTT_areas.RTT_HUD * 4];
-            top = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 1];
-            right = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 2];
-            bottom = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 3];
-            var hudSourceRect = new Rectangle(left, top, right - left, bottom - top);
-            _flightDataAdapterSet.HUD.Adapt(instruments[InstrumentType.HUD], texSharedmemReader, hudSourceRect, InstrumentType.HUD);
+                left = flightData.RTT_area[(int)RTT_areas.RTT_HUD * 4];
+                top = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 1];
+                right = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 2];
+                bottom = flightData.RTT_area[((int)RTT_areas.RTT_HUD * 4) + 3];
+                var hudSourceRect = new Rectangle(left, top, right - left, bottom - top);
+                _flightDataAdapterSet.HUD.Adapt(instruments[InstrumentType.HUD], texSharedmemReader, hudSourceRect, InstrumentType.HUD);
+            }
 		}
 
         private static void SetISISPitchAndRoll(IISIS isis, FlightData flightData)

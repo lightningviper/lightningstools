@@ -430,171 +430,59 @@ namespace SimLinkup.HardwareSupport.Simtek
         {
             if (_machInputSignal == null) return;
             var machInput = _machInputSignal.State;
-            double machOutputValue = 0;
+            double machReferenceVoltage = 0;
             if (_machOutputSignal == null) return;
-            if (machInput < 0)
+
+            var airspeedVoltage = _airspeedOutputSignal?.State ?? 0.0000;
+            var absoluteAirspeedNeedleAngle = (airspeedVoltage + 10.0) / (20.0000 / 340.0000);
+
+            if (machInput <= 0)
             {
-                machOutputValue = -10;
+                machReferenceVoltage = -10;
             }
-            else if (machInput >= 0 && machInput < 0.50)
+            else if (machInput > 0 && machInput <= 0.50)
             {
-                machOutputValue = -10.0 + machInput / 0.50 * 2.44;
+                machReferenceVoltage = -10.0 + ((machInput / 0.50) * 3.44);
             }
-            else if (machInput >= 0.50 && machInput < 0.55)
+            else if (machInput > 0.50 && machInput <= 1.00)
             {
-                machOutputValue = -7.56 + (machInput - 0.55) / 0.05 * 1.00;
+                machReferenceVoltage = ((machInput - 1) / 0.50) * 7.56;
             }
-            else if (machInput >= 0.55 && machInput < 0.60)
+            else if (machInput > 1.00 && machInput <= 1.50)
             {
-                machOutputValue = -6.56 + (machInput - 0.55) / 0.05 * 0.91;
+                machReferenceVoltage = 4.69 - ((1.50 - machInput) / 0.50) * 4.69;
             }
-            else if (machInput >= 0.60 && machInput < 0.65)
+            else if (machInput > 1.50 && machInput <= 2.00)
             {
-                machOutputValue = -5.65 + (machInput - 0.60) / 0.05 * 0.84;
+                machReferenceVoltage = 8.05 - (2 - machInput) / 0.50 * 3.36;
             }
-            else if (machInput >= 0.65 && machInput < 0.70)
+            else if (machInput > 2.00 && machInput <= 2.50)
             {
-                machOutputValue = -4.81 + (machInput - 0.65) / 0.05 * 0.80;
+                machReferenceVoltage = 10 - (2.50 - machInput) / 0.50 * 1.95;
             }
-            else if (machInput >= 0.70 && machInput < 0.75)
+            else
             {
-                machOutputValue = -4.01 + (machInput - 0.70) / 0.05 * 0.77;
-            }
-            else if (machInput >= 0.75 && machInput < 0.80)
-            {
-                machOutputValue = -3.24 + (machInput - 0.75) / 0.05 * 0.72;
-            }
-            else if (machInput >= 0.80 && machInput < 0.85)
-            {
-                machOutputValue = -2.52 + (machInput - 0.80) / 0.05 * 0.69;
-            }
-            else if (machInput >= 0.85 && machInput < 0.90)
-            {
-                machOutputValue = -1.83 + (machInput - 0.85) / 0.05 * 0.65;
-            }
-            else if (machInput >= 0.90 && machInput < 0.95)
-            {
-                machOutputValue = -1.18 + (machInput - 0.90) / 0.05 * 0.61;
-            }
-            else if (machInput >= 0.95 && machInput < 1.00)
-            {
-                machOutputValue = -0.57 + (machInput - 0.95) / 0.05 * 0.57;
-            }
-            else if (machInput >= 1.00 && machInput < 1.05)
-            {
-                machOutputValue = 0.00 + (machInput - 1.00) / 0.05 * 0.53;
-            }
-            else if (machInput >= 1.05 && machInput < 1.10)
-            {
-                machOutputValue = 0.53 + (machInput - 1.05) / 0.05 * 0.54;
-            }
-            else if (machInput >= 1.10 && machInput < 1.15)
-            {
-                machOutputValue = 1.07 + (machInput - 1.10) / 0.05 * 0.49;
-            }
-            else if (machInput >= 1.15 && machInput < 1.20)
-            {
-                machOutputValue = 1.56 + (machInput - 1.15) / 0.05 * 0.5;
-            }
-            else if (machInput >= 1.20 && machInput < 1.25)
-            {
-                machOutputValue = 2.06 + (machInput - 1.20) / 0.05 * 0.46;
-            }
-            else if (machInput >= 1.25 && machInput < 1.30)
-            {
-                machOutputValue = 2.52 + (machInput - 1.25) / 0.05 * 0.46;
-            }
-            else if (machInput >= 1.30 && machInput < 1.35)
-            {
-                machOutputValue = 2.98 + (machInput - 1.30) / 0.05 * 0.45;
-            }
-            else if (machInput >= 1.35 && machInput < 1.40)
-            {
-                machOutputValue = 3.43 + (machInput - 1.35) / 0.05 * 0.42;
-            }
-            else if (machInput >= 1.40 && machInput < 1.45)
-            {
-                machOutputValue = 3.85 + (machInput - 1.40) / 0.05 * 0.42;
-            }
-            else if (machInput >= 1.45 && machInput < 1.50)
-            {
-                machOutputValue = 4.27 + (machInput - 1.45) / 0.05 * 0.42;
-            }
-            else if (machInput >= 1.50 && machInput < 1.55)
-            {
-                machOutputValue = 4.69 + (machInput - 1.50) / 0.05 * 0.39;
-            }
-            else if (machInput >= 1.55 && machInput < 1.60)
-            {
-                machOutputValue = 5.08 + (machInput - 1.55) / 0.05 * 0.38;
-            }
-            else if (machInput >= 1.60 && machInput < 1.65)
-            {
-                machOutputValue = 5.46 + (machInput - 1.60) / 0.05 * 0.38;
-            }
-            else if (machInput >= 1.65 && machInput < 1.70)
-            {
-                machOutputValue = 5.84 + (machInput - 1.65) / 0.05 * 0.34;
-            }
-            else if (machInput >= 1.70 && machInput < 1.75)
-            {
-                machOutputValue = 6.18 + (machInput - 1.70) / 0.05 * 0.35;
-            }
-            else if (machInput >= 1.75 && machInput < 1.80)
-            {
-                machOutputValue = 6.53 + (machInput - 1.75) / 0.05 * 0.34;
-            }
-            else if (machInput >= 1.80 && machInput < 1.85)
-            {
-                machOutputValue = 6.87 + (machInput - 1.80) / 0.05 * 0.30;
-            }
-            else if (machInput >= 1.85 && machInput < 1.90)
-            {
-                machOutputValue = 7.17 + (machInput - 1.85) / 0.05 * 0.31;
-            }
-            else if (machInput >= 1.90 && machInput < 1.95)
-            {
-                machOutputValue = 7.48 + (machInput - 1.90) / 0.05 * 0.31;
-            }
-            else if (machInput >= 1.95 && machInput < 2.00)
-            {
-                machOutputValue = 7.79 + (machInput - 1.95) / 0.05 * 0.26;
-            }
-            else if (machInput >= 2.00 && machInput < 2.05)
-            {
-                machOutputValue = 8.05 + (machInput - 2.00) / 0.05 * 0.27;
-            }
-            else if (machInput >= 2.05 && machInput < 2.10)
-            {
-                machOutputValue = 8.32 + (machInput - 2.05) / 0.05 * 0.27;
-            }
-            else if (machInput >= 2.10 && machInput < 2.15)
-            {
-                machOutputValue = 8.59 + (machInput - 2.10) / 0.05 * 0.26;
-            }
-            else if (machInput >= 2.15 && machInput < 2.20)
-            {
-                machOutputValue = 8.85 + (machInput - 2.15) / 0.05 * 0.23;
-            }
-            else if (machInput >= 2.20 && machInput < 2.40)
-            {
-                machOutputValue = 9.08 + (machInput - 2.20) / 0.20 * 0.92;
-            }
-            else if (machInput >= 2.4)
-            {
-                machOutputValue = 10;
+                machReferenceVoltage = 10;
             }
 
-            if (machOutputValue < -10)
+            const int machOneReferenceAngle = 131;
+            var machReferenceAngle = machReferenceVoltage / (20.0000 / 262.0000) + machOneReferenceAngle;
+            var machAngleOffsetFromMach1RefAngle = machReferenceAngle - machOneReferenceAngle;
+
+            var airspeedNeedleAngleDifferenceFrom260 = absoluteAirspeedNeedleAngle - 170.0000f;
+            var howFarToMoveMachWheel = airspeedNeedleAngleDifferenceFrom260 - machAngleOffsetFromMach1RefAngle;
+            var machOutputVoltage = -howFarToMoveMachWheel * (20.0000 / 262.0000);
+
+            if (machOutputVoltage < -10)
             {
-                machOutputValue = -10;
+                machOutputVoltage = -10;
             }
-            else if (machOutputValue > 10)
+            else if (machOutputVoltage > 10)
             {
-                machOutputValue = 10;
+                machOutputVoltage = 10;
             }
 
-            _machOutputSignal.State = machOutputValue;
+            _machOutputSignal.State = machOutputVoltage;
         }
     }
 }

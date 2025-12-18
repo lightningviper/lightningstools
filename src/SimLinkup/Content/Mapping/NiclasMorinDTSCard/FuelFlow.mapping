@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO NICLAS MORIN DTS CARD HARDWARE SUPPORT MODULE INPUT -->
+    <!-- *********************************************************************-->
+    <!-- FUEL FLOW-->
+     <SignalMapping>
+      <!-- F4 FUEL FLOW OUTPUT FROM SIM-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR</Id>
+      </Source>
+      <!--  FUEL FLOW SYNCHRO CARD INPUT FROM SIM-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>Niclas_Morin_DTS_Card["A1111"]_Input_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

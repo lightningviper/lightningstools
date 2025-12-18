@@ -1,0 +1,143 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO TEENSYEWMU HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+
+    <SignalMapping>
+      <!-- F4 EWMU DISPLAY TEXT LINE 1 STRING OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWMU__DISPLAYTEXT_LINE_1</Id>
+      </Source>
+      <!-- TeensyEWMU DISPLAY TEXT LINE 1 STRING INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__Display_Text_Line1</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 EWMU DISPLAY TEXT LINE 2 STRING OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWMU__DISPLAYTEXT_LINE_2</Id>
+      </Source>
+      <!-- TeensyEWMU DISPLAY TEXT LINE 2 STRING INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__Display_Text_Line2</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 EWPI CHAFF/FLARE WINDOW DISPLAY TEXT STRING OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWPI__CHAFFFLARE_DISPLAYTEXT</Id>
+      </Source>
+      <!-- TeensyEWMU CHAFF/FLARE WINDOW DISPLAY TEXT STRING INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__EWPI_Chaff_Flare_Display_Text</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 EWPI JMR WINDOW DISPLAY TEXT STRING OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWPI__JMR_DISPLAYTEXT</Id>
+      </Source>
+      <!-- TeensyEWMU JMR WINDOW DISPLAY TEXT STRING INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__EWPI_JMR_Display_Text</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 EWPI CMDS DISPLAY TEXT STRING OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_CMDS__DISPLAYTEXT</Id>
+      </Source>
+      <!-- TeensyEWMU CMDS DISPLAY TEXT STRING INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__CMDS_Display_Text</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 CMDS NOGO ANNUNCIATOR OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_CMDS__NOGO</Id>
+      </Source>
+      <!-- TeensyEWMU NOGO ANNUNCIATOR INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__CMDS_NOGO</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 CMDS GO ANNUNCIATOR OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_CMDS__GO</Id>
+      </Source>
+      <!-- TeensyEWMU GO ANNUNCIATOR INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__CMDS_GO</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 CMDS DISPENSE RDY ANNUNCIATOR OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_CMDS__DISPENSE_RDY</Id>
+      </Source>
+      <!-- TeensyEWMU CMDS DISPENSE RDY INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__CMDS_DISPENSE_RDY</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 EWPI PRI INDICATOR OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWPI__PRI</Id>
+      </Source>
+      <!-- TeensyEWMU EWPI PRI FLAG INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__EWPI_PRI</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 EWPI UNK INDICATOR OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWPI__UNK</Id>
+      </Source>
+      <!-- TeensyEWMU EWPI UNK FLAG INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__EWPI_UNK</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- F4 EWPI ML INDICATOR OUTPUT-->
+      <Source xsi:type="TextSignal">
+        <Id>F4_EWPI__ML</Id>
+      </Source>
+      <!-- TeensyEWMU EWPI ML FLAG INPUT-->
+      <Destination xsi:type="TextSignal">
+        <Id>TeensyEWMU__EWPI_ML</Id>
+      </Destination>
+      <MappingType>StraightThrough</MappingType>
+    </SignalMapping>
+
+  </SignalMappings>
+
+</MappingProfile>
