@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- ************************************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO HENKIE F-16 FUEL FLOW INDICATOR HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- ************************************************************************************-->
+    <!-- FUEL FLOW IN POUNDS PER HOUR -->
+    <SignalMapping>
+      <!-- F4 FUEL FLOW IN POUNDS PER HOUR OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_FUEL_FLOW1__FUEL_FLOW_POUNDS_PER_HOUR</Id>
+      </Source>
+
+      <!-- HENKIE F-16 FUEL FLOW INDICATOR FUEL FLOW IN POUNDS PER HOUR INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>HenkieF16FuelFlow_FuelFlow_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

@@ -615,6 +615,13 @@
     <Content Include="Content\Mapping\Nigel\Malwin2018-1standbyCompass.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\Nigel\HenkieF16FlowIndicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HenkieF16FuelFlowIndicator.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -636,7 +643,7 @@
     <Content Include="Content\Mapping\NigelOther\Simtek101084standbyADI.mapping.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\NigelOther\Simtek101088nozzlePositionIndicator.mapping">
+    <Content Include="Content\Mapping\Nigel\AMI9003379-02nozzlePositionIndicator.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="FodyWeavers.xml">
