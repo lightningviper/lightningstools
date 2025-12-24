@@ -27,9 +27,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>19581_Hydraulic_Pressure_A_SIN_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 9 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 4 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][9]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][4]</Id>
       </Destination>
       
     </SignalMapping>
@@ -39,9 +39,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>19581_Hydraulic_Pressure_A_COS_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 8 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 5 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][8]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][5]</Id>
       </Destination>
       
     </SignalMapping>

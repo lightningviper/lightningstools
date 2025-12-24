@@ -1,0 +1,262 @@
+﻿<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM F4 SIM VALUES TO ASTRONAUTICS ADI HARDWARE SUPPORT MODULE INPUTS -->
+    <!-- *********************************************************************-->
+    <!-- PITCH DEGREES -->
+    <SignalMapping>
+      <!-- F4 ADI PITCH DEGREES OUTPUT-->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ADI__PITCH_DEGREES</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI PITCH DEGREES INPUT-->
+      <Destination xsi:type="AnalogSignal">
+        <Id>12871_Pitch_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- ROLL DEGREES -->
+    <SignalMapping>
+      <!-- F4 ADI ROLL DEGREES OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ADI__ROLL_DEGREES</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI ROLL DEGREES INPUT -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>12871_Roll_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    <!-- HORIZONTAL COMMAND BAR  -->
+    <SignalMapping>
+      <!-- F4 HORIZONTAL COMMAND BAR OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ADI__ILS_HORIZONTAL_BAR_POSITION</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI HORIZONTAL COMMAND BAR INPUT -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>12871_Horizontal_Command_Bar_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- VERTICAL COMMAND BAR  -->
+    <SignalMapping>
+      <!-- F4 VERTICAL COMMAND BAR OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ADI__ILS_VERTICAL_BAR_POSITION</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI VERTICAL COMMAND BAR INPUT -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>12871_Vertical_Command_Bar_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- SHOW COMMAND BARS  -->
+    <SignalMapping>
+      <!-- F4 SHOW COMMAND BARS OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_ADI__ILS_SHOW_COMMAND_BARS</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI SHOW COMMAND BARS INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>12871_Show_Command_Bars_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- AUX FLAG  -->
+    <SignalMapping>
+      <!-- F4 AUX FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_ADI__AUX_FLAG</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI AUX FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>12871_AUX_Flag_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+    
+    <!-- GS FLAG  -->
+    <SignalMapping>
+      <!-- F4 GS FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_ADI__GS_FLAG</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI GS FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>12871_GS_Flag_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- LOC FLAG  -->
+    <SignalMapping>
+      <!-- F4 LOC FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_ADI__LOC_FLAG</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI LOC FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>12871_LOC_Flag_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- OFF FLAG  -->
+    <SignalMapping>
+      <!-- F4 OFF FLAG OUTPUT-->
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_ADI__OFF_FLAG</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI OFF FLAG INPUT-->
+      <Destination xsi:type="DigitalSignal">
+        <Id>12871_OFF_Flag_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- RATE OF TURN INDICATOR  -->
+    <SignalMapping>
+      <!-- F4 RATE OF TURN OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ADI__RATE_OF_TURN_INDICATOR_POSITION</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI RATE OF TURN INPUT -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>12871_Rate_Of_Turn_Indicator_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- INCLINOMETER  -->
+    <SignalMapping>
+      <!-- F4 INCLINOMETER OUTPUT -->
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_ADI__INCLINOMETER_POSITION</Id>
+      </Source>
+      <!-- ASTRONAUTICS ADI INCLINOMETER INPUT -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>12871_Inclinometer_From_Sim</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    <!-- *********************************************************************--><!--
+    --><!-- MAPPINGS FROM ASTRONAUTICS HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS --><!--
+    --><!-- *********************************************************************--><!--
+    --><!-- ROLL (SIN ) --><!--
+    <SignalMapping>
+      --><!-- ASTRONAUTICS ADI HARDWARE SUPPORT MODULE ROLL (SIN) OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Roll_SIN_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 7 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][7]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    --><!-- ROLL (COS) --><!--
+    <SignalMapping>
+      --><!-- ASTRONAUTICS ADI HARDWARE SUPPORT MODULE ROLL (COS) OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Roll_COS_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 8 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][8]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    --><!-- PITCH (SIN) --><!--
+    <SignalMapping>
+      --><!-- ASTRONAUTICS ADI HARDWARE SUPPORT MODULE PITCH (SIN) OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Pitch_SIN_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 9 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][9]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    --><!-- PITCH (COS) --><!--
+    <SignalMapping>
+      --><!-- ASTRONAUTICS ADI HARDWARE SUPPORT MODULE PITCH (COS) OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Pitch_COS_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 10 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][10]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+
+    --><!-- INCLINOMETER --><!--
+    <SignalMapping>
+      --><!-- AMI 9002870-02 PRIMARY ADI HARDWARE SUPPORT MODULE INCLINOMETER OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Inclinometer_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 11 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][11]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    --><!-- VERTICAL COMMAND BAR --><!--
+    <SignalMapping>
+      --><!-- AMI 9002870-02 PRIMARY ADI HARDWARE SUPPORT MODULE VERTICAL COMMAND BAR OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Vertical_Command_Bar_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 12 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][12]</Id>
+      </Destination>
+      
+    </SignalMapping>
+    
+    --><!-- HORIZONTAL COMMAND BAR --><!--
+    <SignalMapping>
+      --><!-- AMI 9002870-02 PRIMARY ADI HARDWARE SUPPORT MODULE HORIZONTAL COMMAND BAR OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Horizontal_Command_Bar_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 13 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][13]</Id>
+      </Destination>
+      
+    </SignalMapping>
+
+    --><!-- RATE OF TURN --><!--
+    <SignalMapping>
+      --><!-- AMI 9002870-02 PRIMARY ADI HARDWARE SUPPORT MODULE RATE OF TURN OUTPUT --><!--
+      <Source xsi:type="AnalogSignal">
+        <Id>12871_Rate_Of_Turn_To_Instrument</Id>
+      </Source>
+      --><!-- ANALOG DEVICES DAC OUTPUT 14 --><!--
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][14]</Id>
+      </Destination>
+      
+    </SignalMapping>-->
+
+  </SignalMappings>
+</MappingProfile>

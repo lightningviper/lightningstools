@@ -8,11 +8,11 @@
     <!-- OFF FLAG -->
     <SignalMapping>
       <!-- F4 STANDBY ADI OFF FLAG OUTPUT-->
-      <Source xsi:type="DigitalSignal">
+      <Source xsi:type="AnalogSignal">
         <Id>F4_STBY_ADI__OFF_FLAG</Id>
       </Source>
       <!-- SIMTEK STANDBY ADI OFF FLAG INPUT-->
-      <Destination xsi:type="DigitalSignal">
+      <Destination xsi:type="AnalogSignal">
         <Id>10033501_OFF_Flag_From_Sim</Id>
       </Destination>
       
@@ -56,9 +56,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>10033501_Roll_SIN_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 31 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 8 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][31]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][8]</Id>
       </Destination>
       
     </SignalMapping>
@@ -69,9 +69,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>10033501_Roll_COS_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 32 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 9 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][32]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][9]</Id>
       </Destination>
       
     </SignalMapping>
@@ -83,9 +83,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>10033501_Pitch_SIN_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 33 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 11 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][33]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][11]</Id>
       </Destination>
       
     </SignalMapping>
@@ -96,9 +96,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>10033501_Pitch_COS_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 34 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 10 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][34]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][10]</Id>
       </Destination>
       
     </SignalMapping>

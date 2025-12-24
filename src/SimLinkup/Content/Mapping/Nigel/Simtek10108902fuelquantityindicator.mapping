@@ -54,9 +54,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>10108902_AL_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 36 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 12 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][36]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][12]</Id>
       </Destination>
       
     </SignalMapping>
@@ -67,9 +67,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>10108902_FR_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 37 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 13 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][37]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][13]</Id>
       </Destination>
       
     </SignalMapping>
@@ -80,9 +80,9 @@
       <Source xsi:type="AnalogSignal">
         <Id>10108902_Counter_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 38 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 14 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][38]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][14]</Id>
       </Destination>
       
     </SignalMapping>

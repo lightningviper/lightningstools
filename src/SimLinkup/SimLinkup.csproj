@@ -240,12 +240,6 @@
     <Content Include="Content\Mapping\NiclasMorinDTSCard\HydPressureA.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\Nigel\AMI9001584fuelquantityindicator.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\AMI900157501angleofattack.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Mapping\String\AMI9001584fuelquantityindicator.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -588,6 +582,66 @@
     <Content Include="Content\Mapping\Nigel\Malwin1956-2ftit.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Content\Mapping\Malwin\Simtek100181altimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Content\Mapping\NigelOther\AMI900157501angleofattack.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\AMI900158001horizontalsituationindicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\AMI9001584fuelquantityindicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\AMI900278002primaryADI.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Astronautics128710primaryADI.mapping.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\GouldHS070D51341standbyCompass.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Lilbern3239FuelFlowIndicator.mapping.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Malwin246102CabinPressureAltimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek100207rpm.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek100216ftit.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin2018-1standbyCompass.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Content\Mapping\NigelOther\Simtek100285altimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek100294fuelquantityindicator.mapping.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek100295fuelflowindicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek101079standbyCompass.mapping.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek101082machmeter.mapping.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek101084standbyADI.mapping.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\NigelOther\Simtek101088nozzlePositionIndicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
@@ -601,27 +655,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\Mapping\Nigel\AMI900158001horizontalsituationindicator.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\AMI900278002primaryADI.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Astronautics128710primaryADI.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Mapping\Nigel\AnalogDevicesHardwareSupportModule.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\GouldHS070D51341standbyCompass.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\henksdi.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Lilbern3239FuelFlowIndicator.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Malwin19581hydraulicPressureA.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -629,29 +668,7 @@
     <Content Include="Content\Mapping\Nigel\Malwin19581hydraulicPressureB.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Mapping\Nigel\Malwin246102CabinPressureAltimeter.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Mapping\Nigel\Simtek100194machmeter.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek100207rpm.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek100216ftit.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek100285altimeter.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek100294fuelquantityindicator.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek100295fuelflowindicator.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Simtek10033501standbyADI.mapping">
@@ -661,15 +678,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Simtek10058201angleofattack.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek101082machmeter.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek101084standbyADI.mapping.disabled">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek101088nozzlePositionIndicator.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\Simtek10108902fuelquantityindicator.mapping">
@@ -685,9 +693,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Mapping\Nigel\HenkF16ADISupportBoard.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Mapping\Nigel\Simtek101079standbyCompass.mapping.disabled">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
