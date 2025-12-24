@@ -582,9 +582,6 @@
     <Content Include="Content\Mapping\Nigel\Malwin1956-2ftit.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\Mapping\Malwin\Simtek100181altimeter.mapping">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="Content\Mapping\NigelOther\AMI900157501angleofattack.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
