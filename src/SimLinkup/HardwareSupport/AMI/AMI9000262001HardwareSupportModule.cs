@@ -107,7 +107,7 @@ namespace SimLinkup.HardwareSupport.AMI
                 Source = this,
                 SourceFriendlyName = FriendlyName,
                 SourceAddress = null,
-                State = 0.00, //volts;
+                State = -10.00, //volts;
                 IsVoltage = true,
                 MinValue = -10,
                 MaxValue = 10

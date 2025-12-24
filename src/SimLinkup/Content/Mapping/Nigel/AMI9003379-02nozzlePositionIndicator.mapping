@@ -29,7 +29,7 @@
       </Source>
       <!-- ANALOG DEVICES DAC OUTPUT 19 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][19]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][4]</Id>
       </Destination>
       
     </SignalMapping>
@@ -41,7 +41,7 @@
       </Source>
       <!-- ANALOG DEVICES DAC OUTPUT 4 -->
       <Destination xsi:type="AnalogSignal">
-        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][4]</Id>
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][5]</Id>
       </Destination>
       
     </SignalMapping>
