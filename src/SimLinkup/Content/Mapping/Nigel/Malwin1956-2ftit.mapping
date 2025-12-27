@@ -27,7 +27,7 @@
       <Source xsi:type="AnalogSignal">
         <Id>19562_FTIT_SIN_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 0 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 2 -->
       <Destination xsi:type="AnalogSignal">
         <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][2]</Id>
       </Destination>
@@ -38,7 +38,7 @@
       <Source xsi:type="AnalogSignal">
         <Id>19562_FTIT_COS_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 0 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 3 -->
       <Destination xsi:type="AnalogSignal">
         <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][3]</Id>
       </Destination>
