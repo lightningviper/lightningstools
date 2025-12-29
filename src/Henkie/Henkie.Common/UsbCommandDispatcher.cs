@@ -19,9 +19,9 @@ namespace Henkie.Common
         {
             if (SerialPortConnection != null)
             {
-                SerialPortConnection.Write(new[] { subaddress }, 0, 1);
                 if (data != null)
                 {
+                    SerialPortConnection.Write(new[] { subaddress }, 0, 1);
                     SerialPortConnection.Write(new[] { data.Value }, 0, 1);
                 }
             }

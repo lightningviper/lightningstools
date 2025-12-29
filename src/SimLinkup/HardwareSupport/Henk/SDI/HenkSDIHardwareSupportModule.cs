@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -599,6 +600,8 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             }
         }
 
+        private ConcurrentDictionary<SDIDriver.OutputChannels, byte> _lastOutputSignalValuesForPwmOutputChannels = new ConcurrentDictionary<SDIDriver.OutputChannels, byte>();
+
         private void OutputSignalForPWMOutputChannel_SignalChanged(object sender, AnalogSignalChangedEventArgs args)
         {
             if (_sdiDevice == null) return;
@@ -607,7 +610,13 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             var outputChannel = OutputChannel(channelNumber);
             try
             {
-                _sdiDevice.SetOutputChannelValue(outputChannel, (byte) (args.CurrentState * byte.MaxValue));
+                var newValue = (byte)(args.CurrentState * byte.MaxValue);
+                var hasLastValue  = _lastOutputSignalValuesForPwmOutputChannels.TryGetValue(outputChannel, out var lastValue);
+                if (!hasLastValue || lastValue != newValue)
+                {
+                    _sdiDevice.SetOutputChannelValue(outputChannel, newValue);
+                    _lastOutputSignalValuesForPwmOutputChannels[outputChannel] = newValue;
+                } 
             }
             catch (Exception e)
             {
@@ -628,11 +637,25 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             }
         }
 
+        private int? lastRequestedPosition;
         private void MoveIndicatorToPositionFine(int requestedPosition)
         {
             if (_sdiDevice == null) return;
+            if (requestedPosition == (lastRequestedPosition ?? Int32.MinValue))
+            {
+                return;
+            }
             try
             {
+                if (DeviceFunction == "PITCH" && requestedPosition < 140)
+                {
+                    requestedPosition = 140;
+                }
+                if (DeviceFunction == "PITCH" && requestedPosition >700)
+                {
+                    requestedPosition = 700;
+                }
+
                 if (requestedPosition >= 0 && requestedPosition <= 255)
                 {
                     _sdiDevice.MoveIndicatorFine(Quadrant.One, (byte) requestedPosition);
@@ -649,6 +672,8 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
                 {
                     _sdiDevice.MoveIndicatorFine(Quadrant.Four, (byte) (requestedPosition - 768));
                 }
+
+                lastRequestedPosition = requestedPosition;
             }
             catch (Exception e)
             {

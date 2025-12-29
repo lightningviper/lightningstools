@@ -88,7 +88,7 @@ namespace Henkie.SDI
                     SendCommand(CommandSubaddress.SSYNQ4, position);
                     break;
                 default:
-                    throw new ArgumentException("Uknown quadrant.", nameof(quadrant));
+                    throw new ArgumentException("Unknown quadrant.", nameof(quadrant));
             }
         }
         public void MoveIndicatorCoarse(byte position)
