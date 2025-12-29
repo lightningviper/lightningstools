@@ -37,5 +37,6 @@
     <Module>SimLinkup.HardwareSupport.AMI.AMI9000262001HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Henk.FuelFlow.HenkieF16FuelFlowIndicatorHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Malwin.Malwin19562HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+	<Module>SimLinkup.HardwareSupport.Malwin.Malwin19563HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
   </HardwareSupportModules>
 </HardwareSupportModuleRegistry>

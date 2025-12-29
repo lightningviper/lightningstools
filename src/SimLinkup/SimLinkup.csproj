@@ -150,6 +150,7 @@
     <Compile Include="HardwareSupport\Lilbern\Lilbern3321HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin19562HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin19563HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin19581HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModuleConfig.cs" />
@@ -620,6 +621,12 @@
     </Content>
     <Content Include="Content\Mapping\Nigel\HenkieF16FuelFlowIndicator.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Malwin\Malwin1956-3lox.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin1956-3lox.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping">

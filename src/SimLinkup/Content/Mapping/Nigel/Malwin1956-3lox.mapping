@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+    <!-- *********************************************************************-->
+    <!-- MAPPINGS FROM MALWIN HARDWARE SUPPORT MODULE OUTPUTS TO ANALOG DEVICES  DAC CHANNELS -->
+    <!-- *********************************************************************-->
+    <!-- LOX INDICATOR  -->
+    <SignalMapping>
+      <!-- MALWIN LOX INDICATOR HARDWARE SUPPORT MODULE LOX OUTPUT (SIN) -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19563_LOX_SIN_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 2 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][2]</Id>
+      </Destination>
+    </SignalMapping>
+
+    <SignalMapping>
+      <!-- MALWIN LOX INDICATOR HARDWARE SUPPORT MODULE LOX OUTPUT (COS) -->
+      <Source xsi:type="AnalogSignal">
+        <Id>19563_LOX_COS_To_Instrument</Id>
+      </Source>
+      <!-- ANALOG DEVICES DAC OUTPUT 3 -->
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][3]</Id>
+      </Destination>
+    </SignalMapping>
+
+  </SignalMappings>
+</MappingProfile>

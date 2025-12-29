@@ -42,7 +42,7 @@
       <Source xsi:type="AnalogSignal">
         <Id>100194_Airspeed_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 0 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 13 -->
       <Destination xsi:type="AnalogSignal">
         <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][13]</Id>
       </Destination>
@@ -55,7 +55,7 @@
       <Source xsi:type="AnalogSignal">
         <Id>100194_Mach_To_Instrument</Id>
       </Source>
-      <!-- ANALOG DEVICES DAC OUTPUT 1 -->
+      <!-- ANALOG DEVICES DAC OUTPUT 14 -->
       <Destination xsi:type="AnalogSignal">
         <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[0][14]</Id>
       </Destination>

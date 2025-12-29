@@ -3,5 +3,6 @@
   <HardwareSupportModules>
     <Module>SimLinkup.HardwareSupport.AnalogDevices.AnalogDevicesHardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
     <Module>SimLinkup.HardwareSupport.Malwin.Malwin19562HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
+	<Module>SimLinkup.HardwareSupport.Malwin.Malwin19563HardwareSupportModule, SimLinkup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Module>
   </HardwareSupportModules>
 </HardwareSupportModuleRegistry>
