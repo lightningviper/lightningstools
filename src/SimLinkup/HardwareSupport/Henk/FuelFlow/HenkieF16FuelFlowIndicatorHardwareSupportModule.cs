@@ -521,20 +521,30 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
         }
         private ushort CalibratedPosition(double fuelFlow)
         {
-            if (_calibrationData == null) return (ushort)((fuelFlow /80000.0)*4095.0);
+            ushort toReturn = 0;
+            if (_calibrationData == null)
+            {
+                toReturn = (ushort)((fuelFlow / 80000.0) * 4095.0);
+            }
+            else
+            {
 
-            var lowerPoint = _calibrationData.OrderBy(x => x.Input).LastOrDefault(x => x.Input <= fuelFlow) ??
-                             new CalibrationPoint(0, 0);
-            var upperPoint =
-                _calibrationData
-                    .OrderBy(x => x.Input)
-                    .FirstOrDefault(x => x != lowerPoint && x.Input >= lowerPoint.Input) ?? new CalibrationPoint(80000, 4095);
-            var inputRange = Math.Abs(upperPoint.Input - lowerPoint.Input);
-            var outputRange = Math.Abs(upperPoint.Output - lowerPoint.Output);
-            var inputPct = inputRange != 0
-                ? (fuelFlow - lowerPoint.Input) / inputRange
-                : 1.00;
-            return (ushort)((inputPct * outputRange) + lowerPoint.Output);
+                var lowerPoint = _calibrationData.OrderBy(x => x.Input).LastOrDefault(x => x.Input <= fuelFlow) ??
+                                 new CalibrationPoint(0, 0);
+                var upperPoint =
+                    _calibrationData
+                        .OrderBy(x => x.Input)
+                        .FirstOrDefault(x => x != lowerPoint && x.Input >= lowerPoint.Input) ?? new CalibrationPoint(80000, 4095);
+                var inputRange = Math.Abs(upperPoint.Input - lowerPoint.Input);
+                var outputRange = Math.Abs(upperPoint.Output - lowerPoint.Output);
+                var inputPct = inputRange != 0
+                    ? (fuelFlow - lowerPoint.Input) / inputRange
+                    : 1.00;
+                toReturn = (ushort)((inputPct * outputRange) + lowerPoint.Output);
+            }
+            if (toReturn < 0) toReturn = 0;
+            if (toReturn > 4095) toReturn = 4095;
+            return toReturn;
 
         }
         private void UpdateFuelFlowOutputValues()
