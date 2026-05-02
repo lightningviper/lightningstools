@@ -34,6 +34,20 @@ namespace SimLinkup.HardwareSupport.Simtek
         private GaugeChannelConfig _rollCosChannel;
         private GaugeChannelConfig _offFlagChannel;
 
+        // Caged-rest behaviour. Picked once at construction time when the
+        // editor enabled it on the SIN channel; nulled out when disabled.
+        // While the OFF flag input is TRUE, the HSM drives sin/cos × peak
+        // V to the picked rest angle instead of evaluating the transform
+        // — modelling a real standby ADI's gimbal-locked random rest
+        // position when the gyro is at rest. See GaugeChannelConfig
+        // CagedRestEnabled / CagedRestRangeMin/MaxDegrees for the schema.
+        // Static Random shared across HSM instances so two ADIs in the
+        // same profile get independent rests instead of all picking the
+        // same seed.
+        private static readonly Random _cagedRestRandom = new Random();
+        private double? _pitchCagedRestAngleDegrees;
+        private double? _rollCagedRestAngleDegrees;
+
         private ConfigFileReloadWatcher _configWatcher;
 
         private bool _isDisposed;
@@ -75,6 +89,14 @@ namespace SimLinkup.HardwareSupport.Simtek
                 "101084_Roll_SIN_To_Instrument",
                 "101084_Roll_COS_To_Instrument",
                 out _rollTransform, out _rollSinChannel, out _rollCosChannel);
+            // Caged-rest random angles. Picked from the SIN channel of each
+            // resolver pair — that's where the editor writes the cage
+            // settings (the COS channel only carries trim). Defaults
+            // ±20° pitch, ±40° roll match the editor's defaults so a
+            // user who enables the feature without supplying a range gets
+            // sensible behaviour.
+            _pitchCagedRestAngleDegrees = PickCagedRestAngle(_pitchSinChannel, defaultRangeDegrees: 20.0);
+            _rollCagedRestAngleDegrees  = PickCagedRestAngle(_rollSinChannel,  defaultRangeDegrees: 40.0);
             _offFlagChannel = config != null
                 ? config.FindChannel("101084_OFF_Flag_To_Instrument")
                 : null;
@@ -134,6 +156,36 @@ namespace SimLinkup.HardwareSupport.Simtek
             transform = t;
             sinCh = s;
             cosCh = c;
+        }
+
+        // Pick a random caged-rest angle for one resolver pair, OR null
+        // when the editor hasn't opted in. Picked once at construction
+        // time; the same angle is used for as long as the OFF flag input
+        // remains TRUE this session. Re-resolved on every config reload
+        // (a hot-reload that toggles enabled / changes the range gives a
+        // new random rest), but NOT re-rolled while enabled stays true
+        // through the same reload.
+        //
+        // defaultRangeDegrees: the symmetric ±range used when CagedRest
+        // is enabled but Min/Max aren't both supplied. Pitch defaults
+        // to ±20°, roll defaults to ±40° per the editor's defaults.
+        private static double? PickCagedRestAngle(GaugeChannelConfig sinChannel, double defaultRangeDegrees)
+        {
+            if (sinChannel == null) return null;
+            if (!sinChannel.CagedRestEnabled.GetValueOrDefault(false)) return null;
+            var min = sinChannel.CagedRestRangeMinDegrees ?? -defaultRangeDegrees;
+            var max = sinChannel.CagedRestRangeMaxDegrees ??  defaultRangeDegrees;
+            if (max < min)
+            {
+                // Defensive: degenerate range means the editor wrote
+                // something nonsensical. Fall back to the default
+                // symmetric range rather than throw / NaN at runtime.
+                min = -defaultRangeDegrees;
+                max =  defaultRangeDegrees;
+            }
+            // Min == Max: caller wants a fixed (non-random) rest angle.
+            if (max == min) return min;
+            return min + _cagedRestRandom.NextDouble() * (max - min);
         }
 
         // Same shape as ResolveResolverPair but for the piecewise_resolver
@@ -471,6 +523,14 @@ namespace SimLinkup.HardwareSupport.Simtek
         private void offFlag_InputSignalChanged(object sender, DigitalSignalChangedEventArgs args)
         {
             UpdateOFFFlagOutputValue();
+            // When caged-rest is enabled, the OFF flag transition gates
+            // pitch/roll output between the rest-angle path and the
+            // configured transform path — so we have to re-evaluate
+            // both whenever the flag toggles. No-op when caged-rest is
+            // disabled (the rest-angle branch in UpdatePitchOutputValues /
+            // UpdateRollOutputValues falls through immediately).
+            if (_pitchCagedRestAngleDegrees.HasValue) UpdatePitchOutputValues();
+            if (_rollCagedRestAngleDegrees.HasValue)  UpdateRollOutputValues();
         }
 
         private void pitch_InputSignalChanged(object sender, AnalogSignalChangedEventArgs args)
@@ -552,6 +612,34 @@ namespace SimLinkup.HardwareSupport.Simtek
         {
             if (_pitchInputSignal == null) return;
             var pitchInputDegrees = _pitchInputSignal.State;
+
+            // Caged-rest override: when the editor enabled CagedRest on
+            // the pitch SIN channel AND the OFF flag input is currently
+            // visible (gauge is caged / spinning down), drive sin/cos to
+            // the random rest angle picked at construction time. Skips
+            // the transform entirely for as long as the OFF flag stays
+            // TRUE; falls through to the normal transform when the OFF
+            // flag goes FALSE (gauge spun up + uncaged).
+            if (_pitchCagedRestAngleDegrees.HasValue
+                && _offFlagInputSignal != null
+                && _offFlagInputSignal.State
+                && _pitchSinOutputSignal != null
+                && _pitchCosOutputSignal != null)
+            {
+                var peakVolts = (_pitchTransform != null && _pitchTransform.PeakVolts.HasValue)
+                    ? _pitchTransform.PeakVolts.Value
+                    : 10.0;
+                var rad = _pitchCagedRestAngleDegrees.Value * Constants.RADIANS_PER_DEGREE;
+                var sin = peakVolts * Math.Sin(rad);
+                var cos = peakVolts * Math.Cos(rad);
+                _pitchSinOutputSignal.State = _pitchSinChannel != null
+                    ? _pitchSinChannel.ApplyTrim(sin, _pitchSinOutputSignal.MinValue, _pitchSinOutputSignal.MaxValue)
+                    : Clamp10(sin);
+                _pitchCosOutputSignal.State = _pitchCosChannel != null
+                    ? _pitchCosChannel.ApplyTrim(cos, _pitchCosOutputSignal.MinValue, _pitchCosOutputSignal.MaxValue)
+                    : Clamp10(cos);
+                return;
+            }
 
             // Editor-authored override: when a piecewise_resolver config is
             // set, evaluate via the generic helper and per-channel trim.
@@ -650,6 +738,29 @@ namespace SimLinkup.HardwareSupport.Simtek
             if (_rollInputSignal == null) return;
             var rollInputDegrees = _rollInputSignal.State;
 
+            // Caged-rest override (see UpdatePitchOutputValues for the
+            // contract; same pattern, roll-specific defaults).
+            if (_rollCagedRestAngleDegrees.HasValue
+                && _offFlagInputSignal != null
+                && _offFlagInputSignal.State
+                && _rollSinOutputSignal != null
+                && _rollCosOutputSignal != null)
+            {
+                var peakVolts = (_rollTransform != null && _rollTransform.PeakVolts.HasValue)
+                    ? _rollTransform.PeakVolts.Value
+                    : 10.0;
+                var rad = _rollCagedRestAngleDegrees.Value * Constants.RADIANS_PER_DEGREE;
+                var sin = peakVolts * Math.Sin(rad);
+                var cos = peakVolts * Math.Cos(rad);
+                _rollSinOutputSignal.State = _rollSinChannel != null
+                    ? _rollSinChannel.ApplyTrim(sin, _rollSinOutputSignal.MinValue, _rollSinOutputSignal.MaxValue)
+                    : Clamp10(sin);
+                _rollCosOutputSignal.State = _rollCosChannel != null
+                    ? _rollCosChannel.ApplyTrim(cos, _rollCosOutputSignal.MinValue, _rollCosOutputSignal.MaxValue)
+                    : Clamp10(cos);
+                return;
+            }
+
             // Editor-authored override: when a piecewise_resolver config is
             // set, evaluate via the generic helper and per-channel trim.
             // Falls through to the hardcoded sin/cos blocks below when no
@@ -698,6 +809,17 @@ namespace SimLinkup.HardwareSupport.Simtek
             }
 
             _rollCosOutputSignal.State = rollCosOutputValue;
+        }
+
+        // Final-resort clamp for the caged-rest path when the editor
+        // hasn't supplied a SIN/COS GaugeChannelConfig with ApplyTrim.
+        // The rest of the class uses inline ±10 V clamps; this is the
+        // same logic factored out for the cage block.
+        private static double Clamp10(double v)
+        {
+            if (v < -10) return -10;
+            if (v > 10) return 10;
+            return v;
         }
     }
 }
