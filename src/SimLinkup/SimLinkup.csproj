@@ -95,6 +95,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PoKeysDevice_DLL">
+      <HintPath>HardwareSupport\PoKeys\lib\PoKeysDevice_DLL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>$(SolutionDir)\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
@@ -161,6 +165,8 @@
     <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\PoKeys\PoKeysHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\PoKeys\PoKeysHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100207_110HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModule.cs" />
