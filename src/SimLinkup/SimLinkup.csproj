@@ -182,6 +182,16 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105859HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105859HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105860HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105860HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105862HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105862HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105866HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105866HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105868HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105868HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\DXOutput.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUCommunicationProtocolHeaders.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />
