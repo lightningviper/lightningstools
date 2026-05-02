@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Calibration\ConfigFileReloadWatcher.cs" />
+    <Compile Include="Calibration\GaugeCalibrationConfig.cs" />
     <Compile Include="CompositeControl.cs" />
     <Compile Include="HardwareSupportModuleBase.cs" />
     <Compile Include="HardwareSupportModuleRegistry.cs" />
