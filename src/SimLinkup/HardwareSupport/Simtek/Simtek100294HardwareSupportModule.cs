@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
-using System.IO;
 using log4net;
 
 namespace SimLinkup.HardwareSupport.Simtek
@@ -13,8 +14,9 @@ namespace SimLinkup.HardwareSupport.Simtek
     //Simtek 10-0294 F-16 Simulated Fuel Quantity Indicator
     public class Simtek100294HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
-        private readonly ILog _log = LogManager.GetLogger(typeof(Simtek100294HardwareSupportModule));
+        private static readonly ILog _log = LogManager.GetLogger(typeof(Simtek100294HardwareSupportModule));
         private readonly IFuelQuantityIndicator _renderer = new FuelQuantityIndicator();
+
         private AnalogSignal _aftLeftFuelInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _aftLeftFuelInputSignalChangedEventHandler;
         private AnalogSignal _aftLeftOutputSignal;
@@ -22,19 +24,103 @@ namespace SimLinkup.HardwareSupport.Simtek
         private AnalogSignal _foreRightFuelInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _foreRightFuelInputSignalChangedEventHandler;
         private AnalogSignal _foreRightOutputSignal;
-        private const uint DEFAULT_MAX_POUNDS_TOTAL_FUEL = 9900;
-        private uint _maxPoundsTotalFuel = DEFAULT_MAX_POUNDS_TOTAL_FUEL;
         private bool _isDisposed;
         private AnalogSignal _totalFuelInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _totalFuelInputSignalChangedEventHandler;
 
-        private Simtek100294HardwareSupportModule()
+        // Editor-authored calibration. Each output channel can be overridden
+        // independently — when an override is present, that channel uses
+        // EvaluatePiecewise + ApplyTrim. When absent, the legacy linear math
+        // below runs for that channel using _maxPoundsTotalFuel as the
+        // counter denominator.
+        private Simtek100294HardwareSupportModuleConfig _config;
+        private GaugeChannelConfig _counterChannel;
+        private GaugeChannelConfig _aftLeftChannel;
+        private GaugeChannelConfig _foreRightChannel;
+
+        private ConfigFileReloadWatcher _configWatcher;
+
+        // Legacy linear-rescale denominator for the counter output. Loaded
+        // from the bare <MaxPoundsTotalFuel> field for back-compat. Only
+        // consulted when the counter has no piecewise override.
+        private const uint DEFAULT_MAX_POUNDS_TOTAL_FUEL = 9900;
+        private uint _maxPoundsTotalFuel = DEFAULT_MAX_POUNDS_TOTAL_FUEL;
+
+        public Simtek100294HardwareSupportModule(Simtek100294HardwareSupportModuleConfig config)
         {
-            LoadConfig();
+            _config = config;
+            ApplyLegacyFields(config);
+            ResolveAllChannels(config);
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        private void ApplyLegacyFields(Simtek100294HardwareSupportModuleConfig config)
+        {
+            if (config == null) return;
+            if (config.MaxPoundsTotalFuel.HasValue) _maxPoundsTotalFuel = config.MaxPoundsTotalFuel.Value;
+        }
+
+        private void ResolveAllChannels(GaugeCalibrationConfig config)
+        {
+            _counterChannel  = ResolvePiecewiseChannel(config, "100294_Counter_To_Instrument");
+            _aftLeftChannel  = ResolvePiecewiseChannel(config, "100294_AL_To_Instrument");
+            _foreRightChannel = ResolvePiecewiseChannel(config, "100294_FR_To_Instrument");
+        }
+
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = Simtek100294HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                ApplyLegacyFields(reloaded);
+                ResolveAllChannels(reloaded);
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
         }
 
         public override AnalogSignal[] AnalogInputs => new[]
@@ -62,12 +148,23 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule>
+            Simtek100294HardwareSupportModuleConfig hsmConfig = null;
+            try
             {
-                new Simtek100294HardwareSupportModule()
-            };
-
-            return toReturn.ToArray();
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "Simtek100294HardwareSupportModule.config");
+                hsmConfig = Simtek100294HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new Simtek100294HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -84,20 +181,7 @@ namespace SimLinkup.HardwareSupport.Simtek
             _foreRightFuelInputSignalChangedEventHandler = null;
             _aftLeftFuelInputSignalChangedEventHandler = null;
         }
-        private void LoadConfig()
-        {
-            try
-            {
-                var hsmConfigFilePath = Path.Combine(Util.CurrentMappingProfileDirectory, "Simtek100294HardwareSupportModule.config");
-                var hsmConfig = Simtek100294HardwareSupportModuleConfig.Load(hsmConfigFilePath);
-                _maxPoundsTotalFuel = hsmConfig.MaxPoundsTotalFuel.HasValue ? hsmConfig.MaxPoundsTotalFuel.Value : DEFAULT_MAX_POUNDS_TOTAL_FUEL;
-            }
-            catch (Exception e)
-            {
-                _log.Error(e.Message, e);
-            }
-        }
-    
+
         private AnalogSignal CreateAftLeftFuelInputSignal()
         {
             var thisSignal = new AnalogSignal
@@ -250,6 +334,11 @@ namespace SimLinkup.HardwareSupport.Simtek
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -312,17 +401,53 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         private void UpdateOutputValues()
         {
+            // F/R pointer: piecewise override or legacy linear.
             if (_foreRightOutputSignal != null)
             {
-                _foreRightOutputSignal.State = _foreRightFuelInputSignal.State / 100.00 / 42.00 * 20.00 - 10.00;
+                if (_foreRightChannel != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(
+                        _foreRightFuelInputSignal.State,
+                        _foreRightChannel.Transform.Breakpoints);
+                    _foreRightOutputSignal.State = _foreRightChannel.ApplyTrim(v, _foreRightOutputSignal.MinValue, _foreRightOutputSignal.MaxValue);
+                }
+                else
+                {
+                    _foreRightOutputSignal.State = _foreRightFuelInputSignal.State / 100.00 / 42.00 * 20.00 - 10.00;
+                }
             }
+
+            // A/L pointer: piecewise override or legacy linear.
             if (_aftLeftOutputSignal != null)
             {
-                _aftLeftOutputSignal.State = _aftLeftFuelInputSignal.State / 100.00 / 42.00 * 20.00 - 10.00;
+                if (_aftLeftChannel != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(
+                        _aftLeftFuelInputSignal.State,
+                        _aftLeftChannel.Transform.Breakpoints);
+                    _aftLeftOutputSignal.State = _aftLeftChannel.ApplyTrim(v, _aftLeftOutputSignal.MinValue, _aftLeftOutputSignal.MaxValue);
+                }
+                else
+                {
+                    _aftLeftOutputSignal.State = _aftLeftFuelInputSignal.State / 100.00 / 42.00 * 20.00 - 10.00;
+                }
             }
+
+            // Counter: piecewise override or legacy linear (with the bare
+            // MaxPoundsTotalFuel as denominator).
             if (_counterOutputSignal != null)
             {
-                _counterOutputSignal.State = (_totalFuelInputSignal.State / _maxPoundsTotalFuel) * 20.00 - 10.00;
+                if (_counterChannel != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(
+                        _totalFuelInputSignal.State,
+                        _counterChannel.Transform.Breakpoints);
+                    _counterOutputSignal.State = _counterChannel.ApplyTrim(v, _counterOutputSignal.MinValue, _counterOutputSignal.MaxValue);
+                }
+                else
+                {
+                    _counterOutputSignal.State = (_totalFuelInputSignal.State / _maxPoundsTotalFuel) * 20.00 - 10.00;
+                }
             }
         }
     }

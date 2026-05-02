@@ -1,17 +1,33 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.Simtek
 {
-    //Simtek 10-0582-01 F-16 AOA Indicator
+    //Simtek 10-0582-01 F-16 AOA Indicator (piecewise: -5..40° → -6.37..+10 V; +13° = 0 V)
     public class Simtek10058201HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(Simtek10058201HardwareSupportModule));
         private readonly IAngleOfAttackIndicator _renderer = new AngleOfAttackIndicator();
+
+        // Editor-authored calibration. Default ships the 3 spec-sheet
+        // calibration test points (-5° lower stop, +13° on-speed, +40°
+        // upper stop) so users can verify their hardware against the
+        // manufacturer's checkpoints. The digital POWER-OFF input still
+        // overrides to -10 V regardless of the AoA value when it's true
+        // — that's gauge mechanism, not user-calibratable, so it stays in
+        // the override branch below before evaluating the table.
+        private Simtek10058201HardwareSupportModuleConfig _config;
+        private GaugeChannelConfig _aoaCalibration;
+
+        private ConfigFileReloadWatcher _configWatcher;
 
         private AnalogSignal _aoaInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _aoaInputSignalChangedEventHandler;
@@ -22,12 +38,67 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         private bool _isDisposed;
 
-        private Simtek10058201HardwareSupportModule()
+        public Simtek10058201HardwareSupportModule(Simtek10058201HardwareSupportModuleConfig config)
         {
+            _config = config;
+            _aoaCalibration = ResolvePiecewiseChannel(config, "10058201_AOA_To_Instrument");
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        // Same helper as the other piecewise gauges.
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = Simtek10058201HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                _aoaCalibration = ResolvePiecewiseChannel(reloaded, "10058201_AOA_To_Instrument");
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
         }
 
         public override AnalogSignal[] AnalogInputs => new[] {_aoaInputSignal};
@@ -54,12 +125,23 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule>
+            Simtek10058201HardwareSupportModuleConfig hsmConfig = null;
+            try
             {
-                new Simtek10058201HardwareSupportModule()
-            };
-
-            return toReturn.ToArray();
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "Simtek10058201HardwareSupportModule.config");
+                hsmConfig = Simtek10058201HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new Simtek10058201HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -181,6 +263,11 @@ namespace SimLinkup.HardwareSupport.Simtek
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -233,6 +320,28 @@ namespace SimLinkup.HardwareSupport.Simtek
                 var aoaInput = _aoaInputSignal.State;
 
                 if (_aoaOutputSignal == null) return;
+
+                // Editor-authored override: when a .config file declared a
+                // piecewise table for this channel, evaluate via the
+                // generic helper and per-channel trim. Power-off override
+                // is checked first regardless of the config — it's gauge
+                // mechanism, not a calibratable property. Falls through
+                // to the hardcoded formula below when no config is present.
+                if (_aoaCalibration != null)
+                {
+                    double v;
+                    if (aoaPowerOff)
+                    {
+                        v = -10;
+                    }
+                    else
+                    {
+                        v = GaugeTransform.EvaluatePiecewise(aoaInput, _aoaCalibration.Transform.Breakpoints);
+                    }
+                    _aoaOutputSignal.State = _aoaCalibration.ApplyTrim(v, _aoaOutputSignal.MinValue, _aoaOutputSignal.MaxValue);
+                    return;
+                }
+
                 var aoaOutputValue = aoaPowerOff
                     ? -10
                     : (aoaInput < -5

@@ -1,17 +1,48 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.Simtek
 {
     //Simtek 10-0194 F-16 Mach/Airspeed Indicator
     public class Simtek100194HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(Simtek100194HardwareSupportModule));
         private readonly IAirspeedIndicator _renderer = new AirspeedIndicator();
+
+        // Editor-authored calibration. Both channel overrides may be null
+        // independently — UpdateAirspeedOutputValues uses the airspeed
+        // breakpoint table when present; UpdateMachOutputValues applies the
+        // Mach trim when present. Missing/malformed file = full hardcoded
+        // behaviour preserved. Pattern matches ArduinoSeatHardwareSupportModule:
+        // load + inject in GetInstances, store the whole config object, watch
+        // the file for hot reload.
+        //
+        // Not `readonly` because the hot-reload handler reassigns these on
+        // file change. Reads are atomic reference assignments — Update-
+        // OutputValues sees either the old or new pointer, never a torn
+        // value, so no locking is needed.
+        //
+        // _airspeedCalibration overrides the 43-knot piecewise table.
+        // _machCalibration carries a piecewise table for the MACH REFERENCE
+        // VOLTAGE (the value that feeds the cross-coupling math), plus the
+        // usual ZeroTrim/Gain that apply to the final cross-coupled output.
+        // The cross-coupled angle math itself (gauge geometry: 262°/V scale,
+        // Mach 1.0 = 131° reference) stays hardcoded — that's not user-
+        // editable hardware.
+        private Simtek100194HardwareSupportModuleConfig _config;
+        private GaugeChannelConfig _airspeedCalibration;
+        private GaugeChannelConfig _machCalibration;
+
+        // Hot-reload plumbing. Same shape as ArduinoSeatHardwareSupportModule.
+        private ConfigFileReloadWatcher _configWatcher;
 
         private AnalogSignal _airspeedInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _airspeedInputSignalChangedEventHandler;
@@ -22,12 +53,89 @@ namespace SimLinkup.HardwareSupport.Simtek
         private AnalogSignal.AnalogSignalChangedEventHandler _machInputSignalChangedEventHandler;
         private AnalogSignal _machOutputSignal;
 
-        private Simtek100194HardwareSupportModule()
+        // Public ctor takes the (optionally-null) config. Null = no editor
+        // override; the existing hardcoded transforms handle everything.
+        public Simtek100194HardwareSupportModule(Simtek100194HardwareSupportModuleConfig config)
         {
+            _config = config;
+            _airspeedCalibration = ResolvePiecewiseChannel(config, "100194_Airspeed_To_Instrument");
+            // Mach: piecewise reference-voltage table + ZeroTrim/GainTrim.
+            // We store the channel record regardless of its Transform shape
+            // (a malformed file should still apply the trim fields and let
+            // the hardcoded reference-voltage table run). UpdateMachOutputValues
+            // checks the Transform shape before honouring the breakpoints.
+            _machCalibration = config != null ? config.FindChannel("100194_Mach_To_Instrument") : null;
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        // Set up a ConfigFileReloadWatcher on the config file so editor
+        // saves take effect within ~5 s on the running SimLinkup. Skipped
+        // when no config was loaded (nothing to watch). The shared helper
+        // handles the unreliable bits — silent watcher orphaning under
+        // antivirus / OneDrive / SMB filter drivers, internal buffer
+        // overflow, mtime dedup — so this HSM just supplies the reload
+        // callback. See Common.HardwareSupport.Calibration.ConfigFileReloadWatcher.
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        // Reload the config and re-resolve both channel pointers. Wrapped in
+        // a try/catch so a partial-write race (the watcher can fire mid-save)
+        // doesn't escape into the runtime — we just log and wait for the
+        // next change event with a complete file.
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = Simtek100194HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                _airspeedCalibration = ResolvePiecewiseChannel(reloaded, "100194_Airspeed_To_Instrument");
+                _machCalibration = reloaded.FindChannel("100194_Mach_To_Instrument");
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateAirspeedOutputValues();
+                UpdateMachOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
+        }
+
+        // Same helper as Simtek100207: only return the channel when it carries
+        // a usable piecewise table; null otherwise.
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
         }
 
         public override AnalogSignal[] AnalogInputs => new[] {_machInputSignal, _airspeedInputSignal};
@@ -51,13 +159,30 @@ namespace SimLinkup.HardwareSupport.Simtek
             Dispose(false);
         }
 
+        // Match the ArduinoSeat pattern: build path, deserialize, inject the
+        // possibly-null config. Missing/malformed file = null = hardcoded
+        // behaviour preserved.
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule>
+            Simtek100194HardwareSupportModuleConfig hsmConfig = null;
+            try
             {
-                new Simtek100194HardwareSupportModule()
-            };
-            return toReturn.ToArray();
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "Simtek100194HardwareSupportModule.config");
+                hsmConfig = Simtek100194HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    // Stash the path on the config so the instance's
+                    // ConfigFileReloadWatcher knows which file to watch.
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new Simtek100194HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -188,6 +313,11 @@ namespace SimLinkup.HardwareSupport.Simtek
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -239,6 +369,18 @@ namespace SimLinkup.HardwareSupport.Simtek
             var airspeedInput = _airspeedInputSignal.State;
             double airspeedOutputValue = 0;
             if (_airspeedOutputSignal == null) return;
+
+            // Editor-authored override: when a .config file declared a
+            // piecewise table for this channel, use the generic evaluator and
+            // per-channel trim. Falls through to the hardcoded if/else below
+            // when no config is present.
+            if (_airspeedCalibration != null)
+            {
+                var v = GaugeTransform.EvaluatePiecewise(airspeedInput, _airspeedCalibration.Transform.Breakpoints);
+                _airspeedOutputSignal.State = _airspeedCalibration.ApplyTrim(v, _airspeedOutputSignal.MinValue, _airspeedOutputSignal.MaxValue);
+                return;
+            }
+
             if (airspeedInput < 0)
             {
                 airspeedOutputValue = -10;
@@ -585,6 +727,23 @@ namespace SimLinkup.HardwareSupport.Simtek
             {
                 machReferenceVoltage = 10;
             }
+
+            // Editor-authored override: when the Mach config carries a
+            // piecewise table (kind="piecewise" with a CoupledTo pointer
+            // back to the airspeed channel), evaluate it on the Mach input
+            // to get the reference voltage. This replaces the hardcoded
+            // if/else above. The cross-coupling math below runs unchanged
+            // — only the reference value is data-driven now.
+            if (_machCalibration != null
+                && _machCalibration.Transform != null
+                && _machCalibration.Transform.Kind == "piecewise"
+                && _machCalibration.Transform.Breakpoints != null
+                && _machCalibration.Transform.Breakpoints.Length >= 2)
+            {
+                machReferenceVoltage = GaugeTransform.EvaluatePiecewise(
+                    machInput, _machCalibration.Transform.Breakpoints);
+            }
+
             const int machOneReferenceAngle = 131;
             var machReferenceAngle = machReferenceVoltage / (20.0000 / 262.0000) + machOneReferenceAngle;
             var machAngleOffsetFromMach1RefAngle = machReferenceAngle - machOneReferenceAngle;
@@ -600,6 +759,14 @@ namespace SimLinkup.HardwareSupport.Simtek
             else if (machOutputVoltage > 10)
             {
                 machOutputVoltage = 10;
+            }
+
+            // Editor-authored Mach trim: apply ZeroTrim/Gain on top of the
+            // cross-coupled computation. ApplyTrim re-clamps to ±10 V so the
+            // explicit clamp above is preserved for the no-config case.
+            if (_machCalibration != null)
+            {
+                machOutputVoltage = _machCalibration.ApplyTrim(machOutputVoltage, _machOutputSignal.MinValue, _machOutputSignal.MaxValue);
             }
 
             _machOutputSignal.State = machOutputVoltage;
