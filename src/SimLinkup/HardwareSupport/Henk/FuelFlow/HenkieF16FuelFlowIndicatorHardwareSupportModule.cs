@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
 using System.IO;
@@ -31,15 +32,36 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
 
 
         private CalibrationPoint[] _calibrationData;
-        private HenkieF16FuelFlowIndicatorHardwareSupportModule (DeviceConfig deviceConfig)
+
+        // Paths stashed at construction so the FileSystemWatchers (started
+        // below) can reload calibration when either file changes.
+        // _legacyConfigPath: HenkieF16FuelFlowIndicator.config (always present
+        // when this HSM instantiates — that's where stator angles + DIG_OUTs
+        // come from).
+        // _unifiedConfigPath: HenkieF16FuelFlowHardwareSupportModule.config
+        // (may not exist yet — the editor creates it the first time the user
+        // saves a calibration. The watcher uses Path+Filter so it fires even
+        // for file CREATE events).
+        private string _legacyConfigPath;
+        private string _unifiedConfigPath;
+        private ConfigFileReloadWatcher _legacyConfigWatcher;
+        private ConfigFileReloadWatcher _unifiedConfigWatcher;
+
+        private HenkieF16FuelFlowIndicatorHardwareSupportModule (
+            DeviceConfig deviceConfig,
+            string legacyConfigPath,
+            string unifiedConfigPath)
         {
             _deviceConfig = deviceConfig;
+            _legacyConfigPath = legacyConfigPath;
+            _unifiedConfigPath = unifiedConfigPath;
             if (_deviceConfig != null)
             {
                 ConfigureDevice();
                 CreateInputSignals();
                 CreateOutputSignals();
                 RegisterForEvents();
+                StartConfigWatchers();
             }
 
         }
@@ -96,13 +118,27 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
 
             try
             {
-                var hsmConfigFilePath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkieF16FuelFlowIndicator.config");
-                var hsmConfig = HenkieF16FuelFlowIndicatorHardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                var legacyPath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkieF16FuelFlowIndicator.config");
+                var unifiedPath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkieF16FuelFlowHardwareSupportModule.config");
+                var hsmConfig = HenkieF16FuelFlowIndicatorHardwareSupportModuleConfig.Load(legacyPath);
+
+                // Try the unified-schema calibration file (authored by the
+                // SimLinkup Profile Editor). When present, its breakpoints
+                // override the legacy <CalibrationData> block. See
+                // HenkieF16FuelFlowHardwareSupportModuleConfig.cs for the
+                // rationale and round-trip contract.
+                var unifiedCalibration = TryLoadUnifiedCalibration(unifiedPath);
+
                 if (hsmConfig != null)
                 {
                     foreach (var deviceConfiguration in hsmConfig.Devices)
                     {
-                        var hsmInstance = new HenkieF16FuelFlowIndicatorHardwareSupportModule(deviceConfiguration);
+                        if (unifiedCalibration != null)
+                        {
+                            deviceConfiguration.CalibrationData = unifiedCalibration;
+                        }
+                        var hsmInstance = new HenkieF16FuelFlowIndicatorHardwareSupportModule(
+                            deviceConfiguration, legacyPath, unifiedPath);
                         toReturn.Add(hsmInstance);
                     }
                 }
@@ -113,6 +149,109 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
             }
 
             return toReturn.ToArray();
+        }
+
+        // Load + map the unified-schema calibration file's breakpoints onto
+        // the existing Henkie.Common.CalibrationPoint shape. Returns null
+        // when the file is absent, malformed, or doesn't contain the
+        // expected channel — in any of those cases the caller falls back
+        // to whatever's already on `deviceConfiguration.CalibrationData`
+        // (typically the legacy <CalibrationData> block).
+        private static CalibrationPoint[] TryLoadUnifiedCalibration(string unifiedPath)
+        {
+            try
+            {
+                if (!File.Exists(unifiedPath)) return null;
+                var unifiedConfig = GaugeCalibrationConfig.Load<HenkieF16FuelFlowHardwareSupportModuleConfig>(unifiedPath);
+                if (unifiedConfig == null) return null;
+                // Synthetic channel id agreed with the editor
+                // (src/js/gauges/henkie-fuelflow.js). The id is a round-trip
+                // handle — not a real HSM port — so the editor and SimLinkup
+                // can name the calibration table without inventing extra
+                // signals on the gauge.
+                var ch = unifiedConfig.FindChannel("HenkieF16FuelFlow_FuelFlow_To_Indicator");
+                var bps = ch?.Transform?.Breakpoints;
+                if (bps == null || bps.Length < 2) return null;
+                // Editor writes <Point input="..." output="..."/> — both are
+                // raw doubles, no volts/DAC conversion needed.
+                var result = new CalibrationPoint[bps.Length];
+                for (var i = 0; i < bps.Length; i++)
+                {
+                    result[i] = new CalibrationPoint(bps[i].Input, bps[i].Output);
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Failed to load unified-schema calibration; falling back to legacy <CalibrationData>: " + e.Message);
+                return null;
+            }
+        }
+
+        // Watch both calibration files. Either changing triggers a reload of
+        // just the calibration table — we never re-touch device identity or
+        // stator angles at runtime (those would require disconnecting and
+        // re-programming the hardware, which is the wrong thing to do
+        // mid-flight). The watcher mirrors the pattern used by every other
+        // HSM the editor authored a config for (Lilbern, AMI, Astronautics,
+        // Simtek, …).
+        // Hot-reload setup. Two ConfigFileReloadWatchers — one per
+        // config file. Both invoke ReloadCalibration on change; the
+        // helper's internal mtime dedup keeps duplicate events from
+        // firing the reload twice. Unlike the per-watcher patterns
+        // we used to have, the helper handles file-not-yet-existing
+        // (it will fire Created when the editor first writes the
+        // unified file) and self-heals from Windows watcher orphan
+        // scenarios via periodic resubscribe.
+        private void StartConfigWatchers()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(_legacyConfigPath))
+                {
+                    _legacyConfigWatcher = new ConfigFileReloadWatcher(_legacyConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+            try
+            {
+                if (!string.IsNullOrEmpty(_unifiedConfigPath))
+                {
+                    _unifiedConfigWatcher = new ConfigFileReloadWatcher(_unifiedConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+        }
+
+        // Re-evaluate calibration without touching the live device connection.
+        // Preference: unified file if present (editor's source of truth);
+        // legacy file's <CalibrationData> otherwise.
+        private void ReloadCalibration()
+        {
+            CalibrationPoint[] next = null;
+            try
+            {
+                next = TryLoadUnifiedCalibration(_unifiedConfigPath);
+                if (next == null && !string.IsNullOrEmpty(_legacyConfigPath) && File.Exists(_legacyConfigPath))
+                {
+                    var legacy = HenkieF16FuelFlowIndicatorHardwareSupportModuleConfig.Load(_legacyConfigPath);
+                    var dev = legacy?.Devices?.FirstOrDefault(d =>
+                        d != null && string.Equals(d.Address, _deviceConfig?.Address, StringComparison.OrdinalIgnoreCase));
+                    if (dev?.CalibrationData != null && dev.CalibrationData.Length >= 2)
+                    {
+                        next = dev.CalibrationData;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Calibration reload failed; keeping previous table: " + e.Message);
+                return;
+            }
+            if (next != null && next.Length >= 2)
+            {
+                _calibrationData = next;
+            }
         }
 
         private static int ChannelNumber(OutputChannels outputChannel)
@@ -462,6 +601,16 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
                     UnregisterForEvents();
                     Common.Util.DisposeObject(_fuelFlowDeviceInterface);
                     Common.Util.DisposeObject(_renderer);
+                    if (_legacyConfigWatcher != null)
+                    {
+                        try { _legacyConfigWatcher.Dispose(); } catch { }
+                        _legacyConfigWatcher = null;
+                    }
+                    if (_unifiedConfigWatcher != null)
+                    {
+                        try { _unifiedConfigWatcher.Dispose(); } catch { }
+                        _unifiedConfigWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
