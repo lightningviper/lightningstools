@@ -360,15 +360,25 @@ namespace Common.HardwareSupport.Calibration
         {
             if (breakpoints == null || breakpoints.Length < 2)
             {
-                // Defensive: malformed config falls back to 0 V. Caller should
+                // Defensive: malformed config falls back to 0. Caller should
                 // detect this via a separate "config valid?" check before
-                // routing to this helper, but if they don't, 0 V is the
-                // safest neutral output.
+                // routing to this helper, but if they don't, 0 is the
+                // safest neutral output for both volts-based gauges
+                // (= 0 V) and DAC-count gauges (= rest position).
                 return 0;
             }
-            if (input <= breakpoints[0].Input) return Clamp(breakpoints[0].Volts);
+            // No clamping here — the per-channel safe envelope lives on the
+            // output signal's MinValue/MaxValue and is enforced by ApplyTrim
+            // at the HSM boundary. Earlier versions of this helper hardcoded
+            // a ±10 V clamp; that was Simtek-specific (Simteks drive AD
+            // channels at ±10 V) and silently broke any gauge whose output
+            // range wasn't ±10 V — Henk F-16 ADI Support Board's pitch
+            // channel runs 140..700 (DAC counts), well outside ±10. Letting
+            // the math run and clamping at the per-channel boundary is the
+            // correct, gauge-agnostic shape.
+            if (input <= breakpoints[0].Input) return breakpoints[0].Volts;
             var last = breakpoints[breakpoints.Length - 1];
-            if (input >= last.Input) return Clamp(last.Volts);
+            if (input >= last.Input) return last.Volts;
             for (var i = 1; i < breakpoints.Length; i++)
             {
                 var hi = breakpoints[i];
@@ -376,26 +386,12 @@ namespace Common.HardwareSupport.Calibration
                 {
                     var lo = breakpoints[i - 1];
                     var span = hi.Input - lo.Input;
-                    if (span <= 0) return Clamp(lo.Volts);  // degenerate; pick the lower
+                    if (span <= 0) return lo.Volts;  // degenerate; pick the lower
                     var t = (input - lo.Input) / span;
-                    return Clamp(lo.Volts + t * (hi.Volts - lo.Volts));
+                    return lo.Volts + t * (hi.Volts - lo.Volts);
                 }
             }
-            return Clamp(last.Volts);
-        }
-
-        // Linear range: maps inputMin → -10 V, inputMax → +10 V, with hard
-        // clamps outside the range. Defensive against degenerate ranges
-        // (inputMin >= inputMax — returns 0 V neutral). Used by linear-pattern
-        // gauges (EPU fuel, fuel quantity, cabin altimeter, etc.).
-        public static double EvaluateLinear(double input, double inputMin, double inputMax)
-        {
-            var span = inputMax - inputMin;
-            if (span <= 0) return 0;
-            if (input <= inputMin) return -10;
-            if (input >= inputMax) return  10;
-            var t = (input - inputMin) / span;
-            return Clamp(-10 + t * 20);
+            return last.Volts;
         }
 
         // Resolver pair: maps `input` linearly to an angle in
@@ -441,8 +437,10 @@ namespace Common.HardwareSupport.Calibration
             // with `using System;` in scope (because Common.HardwareSupport.
             // Calibration is in the same parent namespace tree).
             var rad = angleDeg * System.Math.PI / 180.0;
-            var sin = Clamp(peakVolts * System.Math.Sin(rad));
-            var cos = Clamp(peakVolts * System.Math.Cos(rad));
+            // No clamping here — see EvaluatePiecewise comment. ApplyTrim
+            // at the HSM boundary owns the per-channel safe envelope.
+            var sin = peakVolts * System.Math.Sin(rad);
+            var cos = peakVolts * System.Math.Cos(rad);
             return new double[] { sin, cos };
         }
 
@@ -463,8 +461,10 @@ namespace Common.HardwareSupport.Calibration
             var revolutions = input / unitsPerRevolution;
             var angleDeg = revolutions * 360.0;
             var rad = angleDeg * System.Math.PI / 180.0;
-            var sin = Clamp(peakVolts * System.Math.Sin(rad));
-            var cos = Clamp(peakVolts * System.Math.Cos(rad));
+            // No clamping here — see EvaluatePiecewise comment. ApplyTrim
+            // at the HSM boundary owns the per-channel safe envelope.
+            var sin = peakVolts * System.Math.Sin(rad);
+            var cos = peakVolts * System.Math.Cos(rad);
             return new double[] { sin, cos };
         }
 
@@ -523,16 +523,11 @@ namespace Common.HardwareSupport.Calibration
                 }
             }
             var rad = (angleDeg % 360.0) * System.Math.PI / 180.0;
-            var sin = Clamp(peakVolts * System.Math.Sin(rad));
-            var cos = Clamp(peakVolts * System.Math.Cos(rad));
+            // No clamping here — see EvaluatePiecewise comment. ApplyTrim
+            // at the HSM boundary owns the per-channel safe envelope.
+            var sin = peakVolts * System.Math.Sin(rad);
+            var cos = peakVolts * System.Math.Cos(rad);
             return new double[] { sin, cos };
-        }
-
-        private static double Clamp(double v)
-        {
-            if (v < -10) return -10;
-            if (v >  10) return  10;
-            return v;
         }
     }
 }
