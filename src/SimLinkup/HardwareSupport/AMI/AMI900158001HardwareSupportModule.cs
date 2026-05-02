@@ -1,17 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using Common.Math;
 using LightningGauges.Renderers.F16.HSI;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.AMI
 {
     //AMI 9001580-01 HSI
     public class AMI900158001HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(AMI900158001HardwareSupportModule));
         private readonly IHorizontalSituationIndicator _renderer = new HorizontalSituationIndicator();
         private AnalogSignal _bearingCOSOutputSignal;
         private AnalogSignal _bearingInputSignal;
@@ -65,12 +69,215 @@ namespace SimLinkup.HardwareSupport.AMI
         private DigitalSignal.SignalChangedEventHandler _toFlagInputSignalChangedEventHandler;
         private DigitalSignal _toFlagOutputSignal;
 
-        private AMI900158001HardwareSupportModule()
+        // Editor-authored calibration. Each output channel can be overridden
+        // independently — when an override is present, the channel uses
+        // EvaluatePiecewise/EvaluatePiecewiseResolver/EvaluateMultiTurnResolver
+        // + ApplyTrim. The two cross-coupled channels (bearing, heading)
+        // are deliberately NOT directly editable — their pointer geometry
+        // is computed from compass + their respective inputs, so the user
+        // calibrates them by tuning compass.
+        private AMI900158001HardwareSupportModuleConfig _config;
+        private GaugeTransformConfig _compassTransform;
+        private GaugeChannelConfig _compassSinChannel;
+        private GaugeChannelConfig _compassCosChannel;
+        private GaugeTransformConfig _courseTransform;
+        private GaugeChannelConfig _courseSinChannel;
+        private GaugeChannelConfig _courseCosChannel;
+        private GaugeChannelConfig _courseDeviationChannel;
+        private GaugeTransformConfig _dmeX100Transform;
+        private GaugeChannelConfig _dmeX100SinChannel;
+        private GaugeChannelConfig _dmeX100CosChannel;
+        private GaugeTransformConfig _dmeX10Transform;
+        private GaugeChannelConfig _dmeX10SinChannel;
+        private GaugeChannelConfig _dmeX10CosChannel;
+        private GaugeTransformConfig _dmeX1Transform;
+        private GaugeChannelConfig _dmeX1SinChannel;
+        private GaugeChannelConfig _dmeX1CosChannel;
+        private GaugeChannelConfig _offFlagChannel;
+        private GaugeChannelConfig _fromFlagChannel;
+        private GaugeChannelConfig _toFlagChannel;
+        private GaugeChannelConfig _deviationFlagChannel;
+        private GaugeChannelConfig _dmeShutterChannel;
+
+        private ConfigFileReloadWatcher _configWatcher;
+
+        public AMI900158001HardwareSupportModule(AMI900158001HardwareSupportModuleConfig config)
         {
+            _config = config;
+            ResolveAllChannels(config);
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        private void ResolveAllChannels(GaugeCalibrationConfig config)
+        {
+            ResolvePiecewiseResolverPair(config,
+                "900158001_Compass_SIN_To_Instrument",
+                "900158001_Compass_COS_To_Instrument",
+                out _compassTransform, out _compassSinChannel, out _compassCosChannel);
+            ResolvePiecewiseResolverPair(config,
+                "900158001_Course_SIN_To_Instrument",
+                "900158001_Course_COS_To_Instrument",
+                out _courseTransform, out _courseSinChannel, out _courseCosChannel);
+            _courseDeviationChannel = ResolvePiecewiseChannel(config, "900158001_Course_Deviation_To_Instrument");
+            ResolveMultiResolverPair(config,
+                "900158001_DME_x100_SIN_To_Instrument",
+                "900158001_DME_x100_COS_To_Instrument",
+                out _dmeX100Transform, out _dmeX100SinChannel, out _dmeX100CosChannel);
+            ResolveMultiResolverPair(config,
+                "900158001_DME_x10_SIN_To_Instrument",
+                "900158001_DME_x10_COS_To_Instrument",
+                out _dmeX10Transform, out _dmeX10SinChannel, out _dmeX10CosChannel);
+            ResolveMultiResolverPair(config,
+                "900158001_DME_x1_SIN_To_Instrument",
+                "900158001_DME_x1_COS_To_Instrument",
+                out _dmeX1Transform, out _dmeX1SinChannel, out _dmeX1CosChannel);
+            _offFlagChannel       = ResolveDigitalInvertChannel(config, "900158001_OFF_Flag_To_Instrument");
+            _fromFlagChannel      = ResolveDigitalInvertChannel(config, "900158001_FROM_Flag_To_Instrument");
+            _toFlagChannel        = ResolveDigitalInvertChannel(config, "900158001_TO_Flag_To_Instrument");
+            _deviationFlagChannel = ResolveDigitalInvertChannel(config, "900158001_Deviation_Flag_To_Instrument");
+            _dmeShutterChannel    = ResolveDigitalInvertChannel(config, "900158001_DME_Shutter_To_Instrument");
+        }
+
+        private static void ResolvePiecewiseResolverPair(
+            GaugeCalibrationConfig config,
+            string sinChannelId,
+            string cosChannelId,
+            out GaugeTransformConfig transform,
+            out GaugeChannelConfig sinCh,
+            out GaugeChannelConfig cosCh)
+        {
+            transform = null;
+            sinCh = null;
+            cosCh = null;
+            if (config == null) return;
+            var s = config.FindChannel(sinChannelId);
+            var c = config.FindChannel(cosChannelId);
+            if (s == null || c == null) return;
+            var t = s.Transform;
+            if (t == null
+                || t.Kind != "piecewise_resolver"
+                || t.Breakpoints == null
+                || t.Breakpoints.Length < 2
+                || !t.PeakVolts.HasValue)
+            {
+                return;
+            }
+            transform = t;
+            sinCh = s;
+            cosCh = c;
+        }
+
+        private static void ResolveMultiResolverPair(
+            GaugeCalibrationConfig config,
+            string sinChannelId,
+            string cosChannelId,
+            out GaugeTransformConfig transform,
+            out GaugeChannelConfig sinCh,
+            out GaugeChannelConfig cosCh)
+        {
+            transform = null;
+            sinCh = null;
+            cosCh = null;
+            if (config == null) return;
+            var s = config.FindChannel(sinChannelId);
+            var c = config.FindChannel(cosChannelId);
+            if (s == null || c == null) return;
+            var t = s.Transform;
+            if (t == null
+                || t.Kind != "multi_resolver"
+                || !t.UnitsPerRevolution.HasValue
+                || t.UnitsPerRevolution.Value == 0
+                || !t.PeakVolts.HasValue)
+            {
+                return;
+            }
+            transform = t;
+            sinCh = s;
+            cosCh = c;
+        }
+
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private static GaugeChannelConfig ResolveDigitalInvertChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "digital_invert"
+                && ch.Invert.HasValue)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = AMI900158001HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                ResolveAllChannels(reloaded);
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateBearingOutputValue();
+                UpdateCompassOutputValue();
+                UpdateCourseDeviationOutputValue();
+                UpdateCourseOutputValue();
+                UpdateDeviationFlagOutputValue();
+                UpdateDMEOutputValue();
+                UpdateDMEShutterOutputValue();
+                UpdateFromFlagOutputValue();
+                UpdateHeadingOutputValue();
+                UpdateOffFlagOutputValue();
+                UpdateToFlagOutputValue();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
+        }
+
+        private static bool ApplyDigitalInvert(GaugeChannelConfig ch, bool input)
+        {
+            return ch.Invert.Value ? !input : input;
         }
 
         public override AnalogSignal[] AnalogInputs => new[]
@@ -100,7 +307,7 @@ namespace SimLinkup.HardwareSupport.AMI
         };
 
         public override string FriendlyName =>
-            "AMI P/N 900150-01 - Indicator - Simulated Horizontal Situation Indicator";
+            "AMI P/N 9001580-01 - Indicator - Simulated Horizontal Situation Indicator";
 
         public void Dispose()
         {
@@ -115,8 +322,23 @@ namespace SimLinkup.HardwareSupport.AMI
 
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule> {new AMI900158001HardwareSupportModule()};
-            return toReturn.ToArray();
+            AMI900158001HardwareSupportModuleConfig hsmConfig = null;
+            try
+            {
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "AMI900158001HardwareSupportModule.config");
+                hsmConfig = AMI900158001HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new AMI900158001HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -858,6 +1080,11 @@ namespace SimLinkup.HardwareSupport.AMI
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -1102,6 +1329,18 @@ namespace SimLinkup.HardwareSupport.AMI
                 return;
             }
             var compassDegrees = _compassInputSignal.State;
+
+            // Editor override: piecewise_resolver pair.
+            if (_compassTransform != null && _compassSinChannel != null && _compassCosChannel != null)
+            {
+                var t = _compassTransform;
+                var sinCos = GaugeTransform.EvaluatePiecewiseResolver(
+                    compassDegrees, t.Breakpoints, t.PeakVolts.Value);
+                _compassSINOutputSignal.State = _compassSinChannel.ApplyTrim(sinCos[0], _compassSINOutputSignal.MinValue, _compassSINOutputSignal.MaxValue);
+                _compassCOSOutputSignal.State = _compassCosChannel.ApplyTrim(sinCos[1], _compassCOSOutputSignal.MinValue, _compassCOSOutputSignal.MaxValue);
+                return;
+            }
+
             var compassSINOutputValue = 10.0000 * Math.Sin(compassDegrees * Constants.RADIANS_PER_DEGREE);
             if (compassSINOutputValue < -10)
             {
@@ -1135,6 +1374,18 @@ namespace SimLinkup.HardwareSupport.AMI
                 return;
             }
             var courseDeviationDegrees = _courseDeviationInputSignal.State;
+
+            // Editor override: piecewise channel. Note this consumes the
+            // RAW deviation degrees (not normalized to limit) — the user's
+            // breakpoint table defines the input → output mapping directly,
+            // so the user encodes whatever limit they want into the table.
+            if (_courseDeviationChannel != null)
+            {
+                var v = GaugeTransform.EvaluatePiecewise(courseDeviationDegrees, _courseDeviationChannel.Transform.Breakpoints);
+                _courseDeviationOutputSignal.State = _courseDeviationChannel.ApplyTrim(v, _courseDeviationOutputSignal.MinValue, _courseDeviationOutputSignal.MaxValue);
+                return;
+            }
+
             var courseDeviationLimitDegrees = _courseDeviationLimitInputSignal.State;
             if (courseDeviationLimitDegrees == 0 || double.IsInfinity(courseDeviationLimitDegrees) ||
                 double.IsNaN(courseDeviationLimitDegrees))
@@ -1160,6 +1411,18 @@ namespace SimLinkup.HardwareSupport.AMI
             if (_courseInputSignal != null && _courseSINOutputSignal != null && _courseCOSOutputSignal != null)
             {
                 var desiredCourseDegrees = _courseInputSignal.State;
+
+                // Editor override: piecewise_resolver pair.
+                if (_courseTransform != null && _courseSinChannel != null && _courseCosChannel != null)
+                {
+                    var t = _courseTransform;
+                    var sinCos = GaugeTransform.EvaluatePiecewiseResolver(
+                        desiredCourseDegrees, t.Breakpoints, t.PeakVolts.Value);
+                    _courseSINOutputSignal.State = _courseSinChannel.ApplyTrim(sinCos[0], _courseSINOutputSignal.MinValue, _courseSINOutputSignal.MaxValue);
+                    _courseCOSOutputSignal.State = _courseCosChannel.ApplyTrim(sinCos[1], _courseCOSOutputSignal.MinValue, _courseCOSOutputSignal.MaxValue);
+                    return;
+                }
+
                 var courseSINOutputValue = 10.0000 * Math.Sin(desiredCourseDegrees * Constants.RADIANS_PER_DEGREE);
                 if (courseSINOutputValue < -10)
                 {
@@ -1186,10 +1449,9 @@ namespace SimLinkup.HardwareSupport.AMI
 
         private void UpdateDeviationFlagOutputValue()
         {
-            if (_deviationFlagInputSignal != null && _deviationFlagOutputSignal != null)
-            {
-                _deviationFlagOutputSignal.State = _deviationFlagInputSignal.State;
-            }
+            if (_deviationFlagInputSignal == null || _deviationFlagOutputSignal == null) return;
+            if (_deviationFlagChannel != null) { _deviationFlagOutputSignal.State = ApplyDigitalInvert(_deviationFlagChannel, _deviationFlagInputSignal.State); return; }
+            _deviationFlagOutputSignal.State = _deviationFlagInputSignal.State;
         }
 
         private void UpdateDMEOutputValue()
@@ -1214,6 +1476,26 @@ namespace SimLinkup.HardwareSupport.AMI
             var DMEx100 = byte.Parse(distanceToBeaconString.Substring(0, 1));
             var DMEx10 = byte.Parse(distanceToBeaconString.Substring(1, 1));
             var DMEx1 = byte.Parse(distanceToBeaconString.Substring(2, 1));
+
+            // Editor overrides: each digit drum is an independent multi_resolver.
+            // When all three pairs have overrides we route through them; when
+            // any pair doesn't, the legacy hardcoded math runs for ALL three
+            // (preserves the original all-or-nothing behavior).
+            if (_dmeX100Transform != null && _dmeX100SinChannel != null && _dmeX100CosChannel != null
+                && _dmeX10Transform != null && _dmeX10SinChannel != null && _dmeX10CosChannel != null
+                && _dmeX1Transform != null && _dmeX1SinChannel != null && _dmeX1CosChannel != null)
+            {
+                var sc100 = GaugeTransform.EvaluateMultiTurnResolver(DMEx100, _dmeX100Transform.UnitsPerRevolution.Value, _dmeX100Transform.PeakVolts.Value);
+                var sc10  = GaugeTransform.EvaluateMultiTurnResolver(DMEx10,  _dmeX10Transform.UnitsPerRevolution.Value,  _dmeX10Transform.PeakVolts.Value);
+                var sc1   = GaugeTransform.EvaluateMultiTurnResolver(DMEx1,   _dmeX1Transform.UnitsPerRevolution.Value,   _dmeX1Transform.PeakVolts.Value);
+                _DMEx100SINOutputSignal.State = _dmeX100SinChannel.ApplyTrim(sc100[0], _DMEx100SINOutputSignal.MinValue, _DMEx100SINOutputSignal.MaxValue);
+                _DMEx100COSOutputSignal.State = _dmeX100CosChannel.ApplyTrim(sc100[1], _DMEx100COSOutputSignal.MinValue, _DMEx100COSOutputSignal.MaxValue);
+                _DMEx10SINOutputSignal.State  = _dmeX10SinChannel.ApplyTrim(sc10[0], _DMEx10SINOutputSignal.MinValue, _DMEx10SINOutputSignal.MaxValue);
+                _DMEx10COSOutputSignal.State  = _dmeX10CosChannel.ApplyTrim(sc10[1], _DMEx10COSOutputSignal.MinValue, _DMEx10COSOutputSignal.MaxValue);
+                _DMEx1SINOutputSignal.State   = _dmeX1SinChannel.ApplyTrim(sc1[0], _DMEx1SINOutputSignal.MinValue, _DMEx1SINOutputSignal.MaxValue);
+                _DMEx1COSOutputSignal.State   = _dmeX1CosChannel.ApplyTrim(sc1[1], _DMEx1COSOutputSignal.MinValue, _DMEx1COSOutputSignal.MaxValue);
+                return;
+            }
 
             var DMEx100SINOutputValue = 10.0000 * Math.Sin(DMEx100 / 10.0000 * 360.0000 * Constants.RADIANS_PER_DEGREE);
             if (DMEx100SINOutputValue < -10)
@@ -1286,18 +1568,16 @@ namespace SimLinkup.HardwareSupport.AMI
 
         private void UpdateDMEShutterOutputValue()
         {
-            if (_dmeShutterInputSignal != null && _dmeShutterOutputSignal != null)
-            {
-                _dmeShutterOutputSignal.State = _dmeShutterInputSignal.State;
-            }
+            if (_dmeShutterInputSignal == null || _dmeShutterOutputSignal == null) return;
+            if (_dmeShutterChannel != null) { _dmeShutterOutputSignal.State = ApplyDigitalInvert(_dmeShutterChannel, _dmeShutterInputSignal.State); return; }
+            _dmeShutterOutputSignal.State = _dmeShutterInputSignal.State;
         }
 
         private void UpdateFromFlagOutputValue()
         {
-            if (_fromFlagInputSignal != null && _fromFlagOutputSignal != null)
-            {
-                _fromFlagOutputSignal.State = _fromFlagInputSignal.State;
-            }
+            if (_fromFlagInputSignal == null || _fromFlagOutputSignal == null) return;
+            if (_fromFlagChannel != null) { _fromFlagOutputSignal.State = ApplyDigitalInvert(_fromFlagChannel, _fromFlagInputSignal.State); return; }
+            _fromFlagOutputSignal.State = _fromFlagInputSignal.State;
         }
 
         private void UpdateHeadingOutputValue()
@@ -1337,18 +1617,16 @@ namespace SimLinkup.HardwareSupport.AMI
 
         private void UpdateOffFlagOutputValue()
         {
-            if (_offFlagInputSignal != null && _offFlagOutputSignal != null)
-            {
-                _offFlagOutputSignal.State = _offFlagInputSignal.State;
-            }
+            if (_offFlagInputSignal == null || _offFlagOutputSignal == null) return;
+            if (_offFlagChannel != null) { _offFlagOutputSignal.State = ApplyDigitalInvert(_offFlagChannel, _offFlagInputSignal.State); return; }
+            _offFlagOutputSignal.State = _offFlagInputSignal.State;
         }
 
         private void UpdateToFlagOutputValue()
         {
-            if (_toFlagInputSignal != null && _toFlagOutputSignal != null)
-            {
-                _toFlagOutputSignal.State = _toFlagInputSignal.State;
-            }
+            if (_toFlagInputSignal == null || _toFlagOutputSignal == null) return;
+            if (_toFlagChannel != null) { _toFlagOutputSignal.State = ApplyDigitalInvert(_toFlagChannel, _toFlagInputSignal.State); return; }
+            _toFlagOutputSignal.State = _toFlagInputSignal.State;
         }
     }
 }

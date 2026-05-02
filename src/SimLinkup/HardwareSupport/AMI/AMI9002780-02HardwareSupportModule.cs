@@ -1,24 +1,27 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using Common.Math;
 using LightningGauges.Renderers.F16;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.AMI
 {
     //AMI 9002780-02 Primary ADI
     public class AMI900278002HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(AMI900278002HardwareSupportModule));
         private const float GLIDESLOPE_DEVIATION_LIMIT_DEGREES = 1.0F;
         private const float LOCALIZER_DEVIATION_LIMIT_DEGREES = 5.0F;
 
         private readonly IADI _renderer = new ADI();
         private DigitalSignal _auxFlagInputSignal;
         private DigitalSignal.SignalChangedEventHandler _auxFlagInputSignalChangedEventHandler;
-
         private DigitalSignal _auxFlagOutputSignal;
         private DigitalSignal _gsFlagInputSignal;
         private DigitalSignal.SignalChangedEventHandler _gsFlagInputSignalChangedEventHandler;
@@ -26,7 +29,6 @@ namespace SimLinkup.HardwareSupport.AMI
         private AnalogSignal _horizontalCommandBarInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _horizontalCommandBarInputSignalChangedEventHandler;
         private AnalogSignal _horizontalCommandBarOutputSignal;
-
         private bool _isDisposed;
         private DigitalSignal _locFlagInputSignal;
         private DigitalSignal.SignalChangedEventHandler _locFlagInputSignalChangedEventHandler;
@@ -34,10 +36,8 @@ namespace SimLinkup.HardwareSupport.AMI
         private DigitalSignal _offFlagInputSignal;
         private DigitalSignal.SignalChangedEventHandler _offFlagInputSignalChangedEventHandler;
         private DigitalSignal _offFlagOutputSignal;
-
         private AnalogSignal _pitchInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _pitchInputSignalChangedEventHandler;
-
         private AnalogSignal _pitchOutputSignal;
         private AnalogSignal _rateOfTurnInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _rateOfTurnInputSignalChangedEventHandler;
@@ -46,18 +46,153 @@ namespace SimLinkup.HardwareSupport.AMI
         private AnalogSignal _rollInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _rollInputSignalChangedEventHandler;
         private AnalogSignal _rollSinOutputSignal;
-
         private DigitalSignal _showCommandBarsInputSignal;
         private AnalogSignal _verticalCommandBarInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _verticalCommandBarInputSignalChangedEventHandler;
         private AnalogSignal _verticalCommandBarOutputSignal;
 
-        private AMI900278002HardwareSupportModule()
+        private AMI900278002HardwareSupportModuleConfig _config;
+        private GaugeChannelConfig _pitchChannel;
+        private GaugeTransformConfig _rollTransform;
+        private GaugeChannelConfig _rollSinChannel;
+        private GaugeChannelConfig _rollCosChannel;
+        private GaugeChannelConfig _offFlagChannel;
+        private GaugeChannelConfig _gsFlagChannel;
+        private GaugeChannelConfig _locFlagChannel;
+        private GaugeChannelConfig _auxFlagChannel;
+        private GaugeChannelConfig _horizontalCommandBarChannel;
+        private GaugeChannelConfig _verticalCommandBarChannel;
+        private GaugeChannelConfig _rateOfTurnChannel;
+
+        private ConfigFileReloadWatcher _configWatcher;
+
+        public AMI900278002HardwareSupportModule(AMI900278002HardwareSupportModuleConfig config)
         {
+            _config = config;
+            ResolveAllChannels(config);
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        private void ResolveAllChannels(GaugeCalibrationConfig config)
+        {
+            _pitchChannel = ResolvePiecewiseChannel(config, "900278002_Pitch_To_Instrument");
+            ResolvePiecewiseResolverPair(config,
+                "900278002_Roll_SIN_To_Instrument",
+                "900278002_Roll_COS_To_Instrument",
+                out _rollTransform, out _rollSinChannel, out _rollCosChannel);
+            _offFlagChannel = ResolveDigitalInvertChannel(config, "900278002_OFF_Flag_To_Instrument");
+            _gsFlagChannel  = ResolveDigitalInvertChannel(config, "900278002_GS_Flag_To_Instrument");
+            _locFlagChannel = ResolveDigitalInvertChannel(config, "900278002_LOC_Flag_To_Instrument");
+            _auxFlagChannel = ResolveDigitalInvertChannel(config, "900278002_AUX_Flag_To_Instrument");
+            _horizontalCommandBarChannel = ResolvePiecewiseChannel(config, "900278002_Horizontal_Command_Bar_To_Instrument");
+            _verticalCommandBarChannel   = ResolvePiecewiseChannel(config, "900278002_Vertical_Command_Bar_To_Instrument");
+            _rateOfTurnChannel = ResolvePiecewiseChannel(config, "900278002_Rate_Of_Turn_To_Instrument");
+        }
+
+        private static void ResolvePiecewiseResolverPair(
+            GaugeCalibrationConfig config,
+            string sinChannelId,
+            string cosChannelId,
+            out GaugeTransformConfig transform,
+            out GaugeChannelConfig sinCh,
+            out GaugeChannelConfig cosCh)
+        {
+            transform = null;
+            sinCh = null;
+            cosCh = null;
+            if (config == null) return;
+            var s = config.FindChannel(sinChannelId);
+            var c = config.FindChannel(cosChannelId);
+            if (s == null || c == null) return;
+            var t = s.Transform;
+            if (t == null
+                || t.Kind != "piecewise_resolver"
+                || t.Breakpoints == null
+                || t.Breakpoints.Length < 2
+                || !t.PeakVolts.HasValue)
+            {
+                return;
+            }
+            transform = t;
+            sinCh = s;
+            cosCh = c;
+        }
+
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private static GaugeChannelConfig ResolveDigitalInvertChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "digital_invert"
+                && ch.Invert.HasValue)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = AMI900278002HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                ResolveAllChannels(reloaded);
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateAuxFlagOutputValue();
+                UpdateGSFlagOutputValue();
+                UpdateLOCFlagOutputValue();
+                UpdateOFFFlagOutputValue();
+                UpdateHorizontalCommandBarOutputValues();
+                UpdatePitchOutputValues();
+                UpdateRateOfTurnOutputValues();
+                UpdateRollOutputValues();
+                UpdateVerticalCommandBarOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
         }
 
         public override AnalogSignal[] AnalogInputs => new[]
@@ -96,11 +231,23 @@ namespace SimLinkup.HardwareSupport.AMI
 
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule>
+            AMI900278002HardwareSupportModuleConfig hsmConfig = null;
+            try
             {
-                new AMI900278002HardwareSupportModule()
-            };
-            return toReturn.ToArray();
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "AMI900278002HardwareSupportModule.config");
+                hsmConfig = AMI900278002HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new AMI900278002HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -248,16 +395,11 @@ namespace SimLinkup.HardwareSupport.AMI
 
         private void CreateInputEventHandlers()
         {
-            _pitchInputSignalChangedEventHandler =
-                pitch_InputSignalChanged;
-            _rollInputSignalChangedEventHandler =
-                roll_InputSignalChanged;
-            _horizontalCommandBarInputSignalChangedEventHandler =
-                horizontalCommandBar_InputSignalChanged;
-            _verticalCommandBarInputSignalChangedEventHandler =
-                verticalCommandBar_InputSignalChanged;
-            _rateOfTurnInputSignalChangedEventHandler =
-                rateOfTurn_InputSignalChanged;
+            _pitchInputSignalChangedEventHandler = pitch_InputSignalChanged;
+            _rollInputSignalChangedEventHandler = roll_InputSignalChanged;
+            _horizontalCommandBarInputSignalChangedEventHandler = horizontalCommandBar_InputSignalChanged;
+            _verticalCommandBarInputSignalChangedEventHandler = verticalCommandBar_InputSignalChanged;
+            _rateOfTurnInputSignalChangedEventHandler = rateOfTurn_InputSignalChanged;
             _auxFlagInputSignalChangedEventHandler = auxFlag_InputSignalChanged;
             _gsFlagInputSignalChangedEventHandler = gsFlag_InputSignalChanged;
             _locFlagInputSignalChangedEventHandler = locFlag_InputSignalChanged;
@@ -577,6 +719,11 @@ namespace SimLinkup.HardwareSupport.AMI
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -614,42 +761,20 @@ namespace SimLinkup.HardwareSupport.AMI
 
         private void RegisterForInputEvents()
         {
-            if (_auxFlagInputSignal != null)
-            {
-                _auxFlagInputSignal.SignalChanged += _auxFlagInputSignalChangedEventHandler;
-            }
-            if (_gsFlagInputSignal != null)
-            {
-                _gsFlagInputSignal.SignalChanged += _gsFlagInputSignalChangedEventHandler;
-            }
-            if (_locFlagInputSignal != null)
-            {
-                _locFlagInputSignal.SignalChanged += _locFlagInputSignalChangedEventHandler;
-            }
-            if (_offFlagInputSignal != null)
-            {
-                _offFlagInputSignal.SignalChanged += _offFlagInputSignalChangedEventHandler;
-            }
-            if (_pitchInputSignal != null)
-            {
-                _pitchInputSignal.SignalChanged += _pitchInputSignalChangedEventHandler;
-            }
-            if (_rollInputSignal != null)
-            {
-                _rollInputSignal.SignalChanged += _rollInputSignalChangedEventHandler;
-            }
-            if (_horizontalCommandBarInputSignal != null)
-            {
-                _horizontalCommandBarInputSignal.SignalChanged += _horizontalCommandBarInputSignalChangedEventHandler;
-            }
-            if (_verticalCommandBarInputSignal != null)
-            {
-                _verticalCommandBarInputSignal.SignalChanged += _verticalCommandBarInputSignalChangedEventHandler;
-            }
-            if (_rateOfTurnInputSignal != null)
-            {
-                _rateOfTurnInputSignal.SignalChanged += _rateOfTurnInputSignalChangedEventHandler;
-            }
+            // NOTE: original C# never registered _showCommandBarsInputSignal —
+            // changes to that flag don't trigger a re-render. Preserved to
+            // avoid behavior drift; users who need bars to hide/show
+            // dynamically can update one of the bar inputs to force an
+            // update.
+            if (_auxFlagInputSignal != null) { _auxFlagInputSignal.SignalChanged += _auxFlagInputSignalChangedEventHandler; }
+            if (_gsFlagInputSignal != null) { _gsFlagInputSignal.SignalChanged += _gsFlagInputSignalChangedEventHandler; }
+            if (_locFlagInputSignal != null) { _locFlagInputSignal.SignalChanged += _locFlagInputSignalChangedEventHandler; }
+            if (_offFlagInputSignal != null) { _offFlagInputSignal.SignalChanged += _offFlagInputSignalChangedEventHandler; }
+            if (_pitchInputSignal != null) { _pitchInputSignal.SignalChanged += _pitchInputSignalChangedEventHandler; }
+            if (_rollInputSignal != null) { _rollInputSignal.SignalChanged += _rollInputSignalChangedEventHandler; }
+            if (_horizontalCommandBarInputSignal != null) { _horizontalCommandBarInputSignal.SignalChanged += _horizontalCommandBarInputSignalChangedEventHandler; }
+            if (_verticalCommandBarInputSignal != null) { _verticalCommandBarInputSignal.SignalChanged += _verticalCommandBarInputSignalChangedEventHandler; }
+            if (_rateOfTurnInputSignal != null) { _rateOfTurnInputSignal.SignalChanged += _rateOfTurnInputSignalChangedEventHandler; }
         }
 
         private void roll_InputSignalChanged(object sender, AnalogSignalChangedEventArgs args)
@@ -657,259 +782,202 @@ namespace SimLinkup.HardwareSupport.AMI
             UpdateRollOutputValues();
         }
 
+        private void verticalCommandBar_InputSignalChanged(object sender, AnalogSignalChangedEventArgs args)
+        {
+            UpdateVerticalCommandBarOutputValues();
+        }
+
         private void UnregisterForInputEvents()
         {
-            if (_auxFlagInputSignal != null)
-            {
-                try
-                {
-                    _auxFlagInputSignal.SignalChanged -= _auxFlagInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_gsFlagInputSignal != null)
-            {
-                try
-                {
-                    _gsFlagInputSignal.SignalChanged -= _gsFlagInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_locFlagInputSignal != null)
-            {
-                try
-                {
-                    _locFlagInputSignal.SignalChanged -= _locFlagInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_offFlagInputSignal != null)
-            {
-                try
-                {
-                    _offFlagInputSignal.SignalChanged -= _offFlagInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_pitchInputSignalChangedEventHandler != null && _pitchInputSignal != null)
-            {
-                try
-                {
-                    _pitchInputSignal.SignalChanged -= _pitchInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_rollInputSignalChangedEventHandler != null && _rollInputSignal != null)
-            {
-                try
-                {
-                    _rollInputSignal.SignalChanged -= _rollInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_horizontalCommandBarInputSignalChangedEventHandler != null && _horizontalCommandBarInputSignal != null)
-            {
-                try
-                {
-                    _horizontalCommandBarInputSignal.SignalChanged -=
-                        _horizontalCommandBarInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_verticalCommandBarInputSignalChangedEventHandler != null && _verticalCommandBarInputSignal != null)
-            {
-                try
-                {
-                    _verticalCommandBarInputSignal.SignalChanged -= _verticalCommandBarInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
-            if (_rateOfTurnInputSignalChangedEventHandler != null && _rateOfTurnInputSignal != null)
-            {
-                try
-                {
-                    _rateOfTurnInputSignal.SignalChanged -= _rateOfTurnInputSignalChangedEventHandler;
-                }
-                catch (RemotingException)
-                {
-                }
-            }
+            try { if (_auxFlagInputSignal != null) _auxFlagInputSignal.SignalChanged -= _auxFlagInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_gsFlagInputSignal != null) _gsFlagInputSignal.SignalChanged -= _gsFlagInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_locFlagInputSignal != null) _locFlagInputSignal.SignalChanged -= _locFlagInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_offFlagInputSignal != null) _offFlagInputSignal.SignalChanged -= _offFlagInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_pitchInputSignal != null) _pitchInputSignal.SignalChanged -= _pitchInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_rollInputSignal != null) _rollInputSignal.SignalChanged -= _rollInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_horizontalCommandBarInputSignal != null) _horizontalCommandBarInputSignal.SignalChanged -= _horizontalCommandBarInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_verticalCommandBarInputSignal != null) _verticalCommandBarInputSignal.SignalChanged -= _verticalCommandBarInputSignalChangedEventHandler; } catch (RemotingException) { }
+            try { if (_rateOfTurnInputSignal != null) _rateOfTurnInputSignal.SignalChanged -= _rateOfTurnInputSignalChangedEventHandler; } catch (RemotingException) { }
+        }
+
+        private static bool ApplyDigitalInvert(GaugeChannelConfig ch, bool input)
+        {
+            return ch.Invert.Value ? !input : input;
         }
 
         private void UpdateAuxFlagOutputValue()
         {
+            if (_auxFlagOutputSignal == null) return;
+            if (_auxFlagChannel != null) { _auxFlagOutputSignal.State = ApplyDigitalInvert(_auxFlagChannel, _auxFlagInputSignal.State); return; }
             _auxFlagOutputSignal.State = !_auxFlagInputSignal.State;
         }
 
         private void UpdateGSFlagOutputValue()
         {
+            if (_gsFlagOutputSignal == null) return;
+            if (_gsFlagChannel != null) { _gsFlagOutputSignal.State = ApplyDigitalInvert(_gsFlagChannel, _gsFlagInputSignal.State); return; }
             _gsFlagOutputSignal.State = !_gsFlagInputSignal.State;
-        }
-
-        private void UpdateHorizontalCommandBarOutputValues()
-        {
-            if (_horizontalCommandBarInputSignal != null)
-            {
-                var percentDeflection = _horizontalCommandBarInputSignal.State;
-
-                var outputValue = _showCommandBarsInputSignal.State ? 4 * percentDeflection : 10;
-
-                if (_horizontalCommandBarOutputSignal != null)
-                {
-                    if (outputValue < -10)
-                    {
-                        outputValue = -10;
-                    }
-                    else if (outputValue > 10)
-                    {
-                        outputValue = 10;
-                    }
-
-                    _horizontalCommandBarOutputSignal.State = outputValue;
-                }
-            }
         }
 
         private void UpdateLOCFlagOutputValue()
         {
+            if (_locFlagOutputSignal == null) return;
+            if (_locFlagChannel != null) { _locFlagOutputSignal.State = ApplyDigitalInvert(_locFlagChannel, _locFlagInputSignal.State); return; }
             _locFlagOutputSignal.State = !_locFlagInputSignal.State;
         }
 
         private void UpdateOFFFlagOutputValue()
         {
+            if (_offFlagOutputSignal == null) return;
+            if (_offFlagChannel != null) { _offFlagOutputSignal.State = ApplyDigitalInvert(_offFlagChannel, _offFlagInputSignal.State); return; }
             _offFlagOutputSignal.State = !_offFlagInputSignal.State;
+        }
+
+        private void UpdateHorizontalCommandBarOutputValues()
+        {
+            if (_horizontalCommandBarInputSignal == null) return;
+            if (_horizontalCommandBarOutputSignal == null) return;
+
+            // Show/hide gating preserved verbatim.
+            if (!_showCommandBarsInputSignal.State)
+            {
+                _horizontalCommandBarOutputSignal.State = 10;
+                return;
+            }
+
+            var percentDeflection = _horizontalCommandBarInputSignal.State;
+
+            if (_horizontalCommandBarChannel != null)
+            {
+                var v = GaugeTransform.EvaluatePiecewise(percentDeflection, _horizontalCommandBarChannel.Transform.Breakpoints);
+                _horizontalCommandBarOutputSignal.State = _horizontalCommandBarChannel.ApplyTrim(v, _horizontalCommandBarOutputSignal.MinValue, _horizontalCommandBarOutputSignal.MaxValue);
+                return;
+            }
+
+            // Hardcoded fallback — input × 4.
+            var outputValue = 4 * percentDeflection;
+            if (outputValue < -10) outputValue = -10;
+            else if (outputValue > 10) outputValue = 10;
+            _horizontalCommandBarOutputSignal.State = outputValue;
         }
 
         private void UpdatePitchOutputValues()
         {
-            if (_pitchInputSignal != null)
+            if (_pitchInputSignal == null) return;
+            if (_pitchOutputSignal == null) return;
+            var pitchInputDegrees = _pitchInputSignal.State;
+
+            if (_pitchChannel != null)
             {
-                var pitchInputDegrees = _pitchInputSignal.State;
-
-                var pitchOutputValue = 10.0000 * (pitchInputDegrees / 90.0);
-
-                if (_pitchOutputSignal != null)
-                {
-                    if (pitchOutputValue < -10)
-                    {
-                        pitchOutputValue = -10;
-                    }
-                    else if (pitchOutputValue > 10)
-                    {
-                        pitchOutputValue = 10;
-                    }
-
-                    _pitchOutputSignal.State = pitchOutputValue;
-                }
+                var v = GaugeTransform.EvaluatePiecewise(pitchInputDegrees, _pitchChannel.Transform.Breakpoints);
+                _pitchOutputSignal.State = _pitchChannel.ApplyTrim(v, _pitchOutputSignal.MinValue, _pitchOutputSignal.MaxValue);
+                return;
             }
+
+            // Hardcoded fallback — linear ±90° → ±10 V.
+            var pitchOutputValue = 10.0000 * (pitchInputDegrees / 90.0);
+            if (pitchOutputValue < -10) pitchOutputValue = -10;
+            else if (pitchOutputValue > 10) pitchOutputValue = 10;
+            _pitchOutputSignal.State = pitchOutputValue;
         }
 
         private void UpdateRateOfTurnOutputValues()
         {
-            if (_rateOfTurnInputSignal != null)
+            if (_rateOfTurnInputSignal == null) return;
+            if (_rateOfTurnOutputSignal == null) return;
+            var percentDeflection = _rateOfTurnInputSignal.State;
+
+            if (_rateOfTurnChannel != null)
             {
-                var percentDeflection = _rateOfTurnInputSignal.State;
-
-                var outputValue = 10.0000 * percentDeflection;
-
-                if (_rateOfTurnOutputSignal == null) return;
-                if (outputValue < -10)
-                {
-                    outputValue = -10;
-                }
-                else if (outputValue > 10)
-                {
-                    outputValue = 0;
-                }
-
-                _rateOfTurnOutputSignal.State = outputValue;
+                var v = GaugeTransform.EvaluatePiecewise(percentDeflection, _rateOfTurnChannel.Transform.Breakpoints);
+                _rateOfTurnOutputSignal.State = _rateOfTurnChannel.ApplyTrim(v, _rateOfTurnOutputSignal.MinValue, _rateOfTurnOutputSignal.MaxValue);
+                return;
             }
+
+            // Hardcoded fallback — preserves original `else if (out > 10) out = 0`
+            // behavior verbatim.
+            var outputValue = 10.0000 * percentDeflection;
+            if (outputValue < -10)
+            {
+                outputValue = -10;
+            }
+            else if (outputValue > 10)
+            {
+                outputValue = 0;
+            }
+            _rateOfTurnOutputSignal.State = outputValue;
         }
 
         private void UpdateRollOutputValues()
         {
-            if (_rollInputSignal != null)
+            if (_rollInputSignal == null) return;
+
+            // Editor override: piecewise_resolver pair. Override path uses the
+            // user's input (no -15° hack); per-channel ZeroTrim is the
+            // editor-supported way to compensate for the gauge's natural
+            // zero offset.
+            if (_rollTransform != null
+                && _rollSinChannel != null
+                && _rollCosChannel != null
+                && _rollSinOutputSignal != null
+                && _rollCosOutputSignal != null)
             {
-                var rollInputDegrees = _rollInputSignal.State - 15;
-                //HACK: compensating for lack of ability to calibrate devices in software right now, so hard-coding this offset for Dave R. instrument
+                var t = _rollTransform;
+                var sinCos = GaugeTransform.EvaluatePiecewiseResolver(
+                    _rollInputSignal.State, t.Breakpoints, t.PeakVolts.Value);
+                _rollSinOutputSignal.State = _rollSinChannel.ApplyTrim(sinCos[0], _rollSinOutputSignal.MinValue, _rollSinOutputSignal.MaxValue);
+                _rollCosOutputSignal.State = _rollCosChannel.ApplyTrim(sinCos[1], _rollCosOutputSignal.MinValue, _rollCosOutputSignal.MaxValue);
+                return;
+            }
 
+            // Hardcoded fallback — preserves the -15° offset for Dave R.
+            var rollInputDegrees = _rollInputSignal.State - 15;
+            //HACK: compensating for lack of ability to calibrate devices in software right now, so hard-coding this offset for Dave R. instrument
 
-                var rollSinOutputValue = 10.0000 * Math.Sin(rollInputDegrees * Constants.RADIANS_PER_DEGREE);
-                var rollCosOutputValue = 10.0000 * Math.Cos(rollInputDegrees * Constants.RADIANS_PER_DEGREE);
+            var rollSinOutputValue = 10.0000 * Math.Sin(rollInputDegrees * Constants.RADIANS_PER_DEGREE);
+            var rollCosOutputValue = 10.0000 * Math.Cos(rollInputDegrees * Constants.RADIANS_PER_DEGREE);
 
-                if (_rollSinOutputSignal != null)
-                {
-                    if (rollSinOutputValue < -10)
-                    {
-                        rollSinOutputValue = -10;
-                    }
-                    else if (rollSinOutputValue > 10)
-                    {
-                        rollSinOutputValue = 10;
-                    }
+            if (_rollSinOutputSignal != null)
+            {
+                if (rollSinOutputValue < -10) rollSinOutputValue = -10;
+                else if (rollSinOutputValue > 10) rollSinOutputValue = 10;
+                _rollSinOutputSignal.State = rollSinOutputValue;
+            }
 
-                    _rollSinOutputSignal.State = rollSinOutputValue;
-                }
-
-                if (_rollCosOutputSignal != null)
-                {
-                    if (rollCosOutputValue < -10)
-                    {
-                        rollCosOutputValue = -10;
-                    }
-                    else if (rollCosOutputValue > 10)
-                    {
-                        rollCosOutputValue = 10;
-                    }
-
-                    _rollCosOutputSignal.State = rollCosOutputValue;
-                }
+            if (_rollCosOutputSignal != null)
+            {
+                if (rollCosOutputValue < -10) rollCosOutputValue = -10;
+                else if (rollCosOutputValue > 10) rollCosOutputValue = 10;
+                _rollCosOutputSignal.State = rollCosOutputValue;
             }
         }
 
         private void UpdateVerticalCommandBarOutputValues()
         {
-            if (_verticalCommandBarInputSignal != null)
+            if (_verticalCommandBarInputSignal == null) return;
+            if (_verticalCommandBarOutputSignal == null) return;
+
+            // Show/hide gating preserved verbatim.
+            if (!_showCommandBarsInputSignal.State)
             {
-                var percentDeflection = _verticalCommandBarInputSignal.State;
-
-                var outputValue = _showCommandBarsInputSignal.State ? 4 * percentDeflection : 10;
-
-                if (_verticalCommandBarOutputSignal != null)
-                {
-                    if (outputValue < -10)
-                    {
-                        outputValue = -10;
-                    }
-                    else if (outputValue > 10)
-                    {
-                        outputValue = 10;
-                    }
-
-                    _verticalCommandBarOutputSignal.State = outputValue;
-                }
+                _verticalCommandBarOutputSignal.State = 10;
+                return;
             }
-        }
 
-        private void verticalCommandBar_InputSignalChanged(object sender, AnalogSignalChangedEventArgs args)
-        {
-            UpdateVerticalCommandBarOutputValues();
+            var percentDeflection = _verticalCommandBarInputSignal.State;
+
+            if (_verticalCommandBarChannel != null)
+            {
+                var v = GaugeTransform.EvaluatePiecewise(percentDeflection, _verticalCommandBarChannel.Transform.Breakpoints);
+                _verticalCommandBarOutputSignal.State = _verticalCommandBarChannel.ApplyTrim(v, _verticalCommandBarOutputSignal.MinValue, _verticalCommandBarOutputSignal.MaxValue);
+                return;
+            }
+
+            // Hardcoded fallback — input × 4.
+            var outputValue = 4 * percentDeflection;
+            if (outputValue < -10) outputValue = -10;
+            else if (outputValue > 10) outputValue = 10;
+            _verticalCommandBarOutputSignal.State = outputValue;
         }
     }
 }
