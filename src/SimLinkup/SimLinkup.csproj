@@ -182,6 +182,8 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\SimtekJDLADI01HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\SimtekJDLADI01HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\DXOutput.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUCommunicationProtocolHeaders.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />
