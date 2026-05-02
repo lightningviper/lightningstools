@@ -53,6 +53,7 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
     {
         Manual,
         Off,
+        Slight,
         Rumble,
         Medium,
         Hard

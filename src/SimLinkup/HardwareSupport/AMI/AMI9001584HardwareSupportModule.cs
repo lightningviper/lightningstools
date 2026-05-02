@@ -1,17 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.AMI
 {
     //AMI 9001584 F-16 Simulated Fuel Quantity Indicator
     public class AMI9001584HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(AMI9001584HardwareSupportModule));
         private readonly IFuelQuantityIndicator _renderer = new FuelQuantityIndicator();
+
         private AnalogSignal _aftLeftFuelInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _aftLeftFuelInputSignalChangedEventHandler;
         private AnalogSignal _aftLeftOutputSignal;
@@ -19,18 +24,84 @@ namespace SimLinkup.HardwareSupport.AMI
         private AnalogSignal _foreRightFuelInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _foreRightFuelInputSignalChangedEventHandler;
         private AnalogSignal _foreRightOutputSignal;
-
         private bool _isDisposed;
         private AnalogSignal _totalFuelInputSignal;
         private AnalogSignal.AnalogSignalChangedEventHandler _totalFuelInputSignalChangedEventHandler;
 
-        private AMI9001584HardwareSupportModule()
+        private AMI9001584HardwareSupportModuleConfig _config;
+        private GaugeChannelConfig _counterChannel;
+        private GaugeChannelConfig _aftLeftChannel;
+        private GaugeChannelConfig _foreRightChannel;
+        private ConfigFileReloadWatcher _configWatcher;
+
+        public AMI9001584HardwareSupportModule(AMI9001584HardwareSupportModuleConfig config)
         {
+            _config = config;
+            ResolveAllChannels(config);
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
             UpdateOutputValues();
+        }
+
+        private void ResolveAllChannels(GaugeCalibrationConfig config)
+        {
+            _counterChannel  = ResolvePiecewiseChannel(config, "9001584_Counter_To_Instrument");
+            _aftLeftChannel  = ResolvePiecewiseChannel(config, "9001584_AL_To_Instrument");
+            _foreRightChannel = ResolvePiecewiseChannel(config, "9001584_FR_To_Instrument");
+        }
+
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = AMI9001584HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                ResolveAllChannels(reloaded);
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
         }
 
         public override AnalogSignal[] AnalogInputs => new[]
@@ -58,11 +129,23 @@ namespace SimLinkup.HardwareSupport.AMI
 
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule>
+            AMI9001584HardwareSupportModuleConfig hsmConfig = null;
+            try
             {
-                new AMI9001584HardwareSupportModule()
-            };
-            return toReturn.ToArray();
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "AMI9001584HardwareSupportModule.config");
+                hsmConfig = AMI9001584HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new AMI9001584HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -231,6 +314,11 @@ namespace SimLinkup.HardwareSupport.AMI
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -269,8 +357,6 @@ namespace SimLinkup.HardwareSupport.AMI
                 {
                 }
             }
-
-
             if (_aftLeftFuelInputSignalChangedEventHandler != null && _aftLeftFuelInputSignal != null)
             {
                 try
@@ -295,21 +381,53 @@ namespace SimLinkup.HardwareSupport.AMI
 
         private void UpdateOutputValues()
         {
-            //NOTE: these values are correct for Nigel's modification to the AMI 9001584 to replace the 1-turn pot with a 3-turn pot for the needles to widen the range of indicated values
+            // F/R pointer: piecewise override or legacy linear (3-turn pot, ±7 V).
             if (_foreRightOutputSignal != null)
             {
-                _foreRightOutputSignal.State = _foreRightFuelInputSignal.State / 100.00 / 42.00 * 14.00 -
-                                               7.00; //zero indicated at -7.00V; 4200 lbs indicated at +7V
+                if (_foreRightChannel != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(
+                        _foreRightFuelInputSignal.State,
+                        _foreRightChannel.Transform.Breakpoints);
+                    _foreRightOutputSignal.State = _foreRightChannel.ApplyTrim(v, _foreRightOutputSignal.MinValue, _foreRightOutputSignal.MaxValue);
+                }
+                else
+                {
+                    //NOTE: these values are correct for Nigel's modification to the AMI 9001584 to replace the 1-turn pot with a 3-turn pot for the needles to widen the range of indicated values
+                    _foreRightOutputSignal.State = _foreRightFuelInputSignal.State / 100.00 / 42.00 * 14.00 - 7.00;
+                }
             }
+
+            // A/L pointer: piecewise override or legacy linear.
             if (_aftLeftOutputSignal != null)
             {
-                _aftLeftOutputSignal.State =
-                    _aftLeftFuelInputSignal.State / 100.00 / 42.00 * 14.00 -
-                    7.00; //zero indicated at -7.00V; 4200 lbs indicated at +7V
+                if (_aftLeftChannel != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(
+                        _aftLeftFuelInputSignal.State,
+                        _aftLeftChannel.Transform.Breakpoints);
+                    _aftLeftOutputSignal.State = _aftLeftChannel.ApplyTrim(v, _aftLeftOutputSignal.MinValue, _aftLeftOutputSignal.MaxValue);
+                }
+                else
+                {
+                    _aftLeftOutputSignal.State = _aftLeftFuelInputSignal.State / 100.00 / 42.00 * 14.00 - 7.00;
+                }
             }
+
+            // Counter: piecewise override or hardcoded linear (18000 max).
             if (_counterOutputSignal != null)
             {
-                _counterOutputSignal.State = _totalFuelInputSignal.State / 18000 * 20.00 - 10.00;
+                if (_counterChannel != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(
+                        _totalFuelInputSignal.State,
+                        _counterChannel.Transform.Breakpoints);
+                    _counterOutputSignal.State = _counterChannel.ApplyTrim(v, _counterOutputSignal.MinValue, _counterOutputSignal.MaxValue);
+                }
+                else
+                {
+                    _counterOutputSignal.State = _totalFuelInputSignal.State / 18000 * 20.00 - 10.00;
+                }
             }
         }
     }

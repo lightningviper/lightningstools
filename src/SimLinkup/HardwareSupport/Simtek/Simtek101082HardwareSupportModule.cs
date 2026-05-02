@@ -1,16 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.Simtek
 {
-    //Simtek 10-1082 F-16 Mach/Airspeed Indicator
+    //Simtek 10-1082 F-16 Mach/Airspeed Indicator (v2)
     public class Simtek101082HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(Simtek101082HardwareSupportModule));
         private readonly IAirspeedIndicator _renderer = new AirspeedIndicator();
 
         private AnalogSignal _airspeedInputSignal;
@@ -21,12 +25,87 @@ namespace SimLinkup.HardwareSupport.Simtek
         private AnalogSignal.AnalogSignalChangedEventHandler _machInputSignalChangedEventHandler;
         private AnalogSignal _machOutputSignal;
 
-        private Simtek101082HardwareSupportModule()
+        // Editor-authored calibration. Two override surfaces:
+        //   - airspeed (piecewise): _airspeedChannel
+        //   - mach (piecewise reference voltage + cross-coupling math):
+        //         _machChannel — the channel's piecewise table is the
+        //         reference voltage lookup; the cross-coupling math against
+        //         the airspeed output voltage stays hardcoded below.
+        // Either may be null independently — Update*OutputValues falls
+        // through to the hardcoded path for any unconfigured channel.
+        private Simtek101082HardwareSupportModuleConfig _config;
+        private GaugeChannelConfig _airspeedChannel;
+        private GaugeChannelConfig _machChannel;
+
+        private ConfigFileReloadWatcher _configWatcher;
+
+        public Simtek101082HardwareSupportModule(Simtek101082HardwareSupportModuleConfig config)
         {
+            _config = config;
+            ResolveAllChannels(config);
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        private void ResolveAllChannels(GaugeCalibrationConfig config)
+        {
+            _airspeedChannel = ResolvePiecewiseChannel(config, "101082_Airspeed_To_Instrument");
+            _machChannel     = ResolvePiecewiseChannel(config, "101082_Mach_To_Instrument");
+        }
+
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = Simtek101082HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                ResolveAllChannels(reloaded);
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateAirspeedOutputValues();
+                UpdateMachOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
         }
 
         public override AnalogSignal[] AnalogInputs => new[] {_machInputSignal, _airspeedInputSignal};
@@ -52,12 +131,23 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule>
+            Simtek101082HardwareSupportModuleConfig hsmConfig = null;
+            try
             {
-                new Simtek101082HardwareSupportModule()
-            };
-
-            return toReturn.ToArray();
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "Simtek101082HardwareSupportModule.config");
+                hsmConfig = Simtek101082HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new Simtek101082HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -76,6 +166,9 @@ namespace SimLinkup.HardwareSupport.Simtek
         private void airspeed_InputSignalChanged(object sender, AnalogSignalChangedEventArgs args)
         {
             UpdateAirspeedOutputValues();
+            // Mach output depends on the airspeed output, so re-derive it
+            // whenever airspeed changes too.
+            UpdateMachOutputValues();
         }
 
         private AnalogSignal CreateAirspeedInputSignal()
@@ -185,6 +278,11 @@ namespace SimLinkup.HardwareSupport.Simtek
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -234,9 +332,20 @@ namespace SimLinkup.HardwareSupport.Simtek
         private void UpdateAirspeedOutputValues()
         {
             if (_airspeedInputSignal == null) return;
-            var airspeedInput = _airspeedInputSignal.State;
-            double airspeedOutputValue = 0;
             if (_airspeedOutputSignal == null) return;
+            var airspeedInput = _airspeedInputSignal.State;
+
+            // Editor-authored override: when a piecewise config is set,
+            // evaluate via the generic helper + per-channel trim.
+            if (_airspeedChannel != null)
+            {
+                var v = GaugeTransform.EvaluatePiecewise(airspeedInput, _airspeedChannel.Transform.Breakpoints);
+                _airspeedOutputSignal.State = _airspeedChannel.ApplyTrim(v, _airspeedOutputSignal.MinValue, _airspeedOutputSignal.MaxValue);
+                return;
+            }
+
+            // Hardcoded fallback (the spec table encoded as 43 segments).
+            double airspeedOutputValue = 0;
             if (airspeedInput < 0)
             {
                 airspeedOutputValue = -10;
@@ -429,14 +538,19 @@ namespace SimLinkup.HardwareSupport.Simtek
         private void UpdateMachOutputValues()
         {
             if (_machInputSignal == null) return;
-            var machInput = _machInputSignal.State;
-            double machReferenceVoltage = 0;
             if (_machOutputSignal == null) return;
+            var machInput = _machInputSignal.State;
 
-            var airspeedVoltage = _airspeedOutputSignal?.State ?? 0.0000;
-            var absoluteAirspeedNeedleAngle = (airspeedVoltage + 10.0) / (20.0000 / 340.0000);
-
-            if (machInput <= 0)
+            // Step 1: derive the Mach reference voltage. Editor override
+            // pulls it from the piecewise table; otherwise the hardcoded
+            // 5-segment fallback runs.
+            double machReferenceVoltage;
+            if (_machChannel != null)
+            {
+                var v = GaugeTransform.EvaluatePiecewise(machInput, _machChannel.Transform.Breakpoints);
+                machReferenceVoltage = _machChannel.ApplyTrim(v, _machOutputSignal.MinValue, _machOutputSignal.MaxValue);
+            }
+            else if (machInput <= 0)
             {
                 machReferenceVoltage = -10;
             }
@@ -465,11 +579,20 @@ namespace SimLinkup.HardwareSupport.Simtek
                 machReferenceVoltage = 10;
             }
 
+            // Step 2: cross-coupling math. Gauge geometry constants stay
+            // hardcoded — they describe the instrument's mechanical layout
+            // (Mach 1 sits at 131° on the dial; the angular range is 262°).
+            // The Mach pointer is positioned RELATIVE to the airspeed
+            // needle so Mach 1 aligns with the airspeed needle's current
+            // angle minus the airspeed-at-260-knots reference (170°).
+            var airspeedVoltage = _airspeedOutputSignal != null ? _airspeedOutputSignal.State : 0.0;
+            var absoluteAirspeedNeedleAngle = (airspeedVoltage + 10.0) / (20.0000 / 340.0000);
+
             const int machOneReferenceAngle = 131;
             var machReferenceAngle = machReferenceVoltage / (20.0000 / 262.0000) + machOneReferenceAngle;
             var machAngleOffsetFromMach1RefAngle = machReferenceAngle - machOneReferenceAngle;
 
-            var airspeedNeedleAngleDifferenceFrom260 = absoluteAirspeedNeedleAngle - 170.0000f;
+            var airspeedNeedleAngleDifferenceFrom260 = absoluteAirspeedNeedleAngle - 170.0000;
             var howFarToMoveMachWheel = airspeedNeedleAngleDifferenceFrom260 - machAngleOffsetFromMach1RefAngle;
             var machOutputVoltage = -howFarToMoveMachWheel * (20.0000 / 262.0000);
 

@@ -1,18 +1,34 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using Common.Math;
 using LightningGauges.Renderers.F16;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.Simtek
 {
-    //Simtek 10-1088 F-16 NOZZLE POSITION IND
+    //Simtek 10-1088 F-16 NOZZLE POSITION IND (resolver pair: 0..100% → 0..225°)
     public class Simtek101088HardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(Simtek101088HardwareSupportModule));
         private readonly INozzlePositionIndicator _renderer = new NozzlePositionIndicator();
+
+        // Editor-authored calibration. Same hot-reload contract as the
+        // piecewise/linear gauges. Resolver-specific: we resolve a
+        // (transform, sinTrim, cosTrim) triple — the transform parameters
+        // come from the SIN channel record (where the editor writes them);
+        // sin and cos trim are per-channel.
+        private Simtek101088HardwareSupportModuleConfig _config;
+        private GaugeTransformConfig _resolverTransform;
+        private GaugeChannelConfig _sinChannel;
+        private GaugeChannelConfig _cosChannel;
+
+        private ConfigFileReloadWatcher _configWatcher;
 
         private bool _isDisposed;
         private AnalogSignal _nozzlePositionCOSOutputSignal;
@@ -20,12 +36,91 @@ namespace SimLinkup.HardwareSupport.Simtek
         private AnalogSignal.AnalogSignalChangedEventHandler _nozzlePositionInputSignalChangedEventHandler;
         private AnalogSignal _nozzlePositionSINOutputSignal;
 
-        private Simtek101088HardwareSupportModule()
+        public Simtek101088HardwareSupportModule(Simtek101088HardwareSupportModuleConfig config)
         {
+            _config = config;
+            ResolvePiecewiseResolverPair(config,
+                "101088_Nozzle_Position_SIN_To_Instrument",
+                "101088_Nozzle_Position_COS_To_Instrument",
+                out _resolverTransform, out _sinChannel, out _cosChannel);
             CreateInputSignals();
             CreateOutputSignals();
             CreateInputEventHandlers();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        // Piecewise-resolver-pair resolver: pulls the SIN channel (which
+        // carries the shared transform body — breakpoint table + PeakVolts)
+        // and the COS channel (which just carries its own per-channel
+        // trim). Returns null transform when the config doesn't carry a
+        // usable record; HSM falls back to the hardcoded path in that case.
+        private static void ResolvePiecewiseResolverPair(
+            GaugeCalibrationConfig config,
+            string sinChannelId,
+            string cosChannelId,
+            out GaugeTransformConfig transform,
+            out GaugeChannelConfig sinCh,
+            out GaugeChannelConfig cosCh)
+        {
+            transform = null;
+            sinCh = null;
+            cosCh = null;
+            if (config == null) return;
+            var s = config.FindChannel(sinChannelId);
+            var c = config.FindChannel(cosChannelId);
+            if (s == null || c == null) return;
+            var t = s.Transform;
+            if (t == null
+                || t.Kind != "piecewise_resolver"
+                || t.Breakpoints == null
+                || t.Breakpoints.Length < 2
+                || !t.PeakVolts.HasValue)
+            {
+                return;
+            }
+            transform = t;
+            sinCh = s;
+            cosCh = c;
+        }
+
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = Simtek101088HardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                ResolvePiecewiseResolverPair(reloaded,
+                    "101088_Nozzle_Position_SIN_To_Instrument",
+                    "101088_Nozzle_Position_COS_To_Instrument",
+                    out _resolverTransform, out _sinChannel, out _cosChannel);
+                // Re-evaluate every output with the cached input values so the
+                // user sees the new calibration immediately. Without this,
+                // SimLinkup's event-driven update loop won't fire until the
+                // simulator next pushes a new input value.
+                UpdateOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
         }
 
         public override AnalogSignal[] AnalogInputs => new[] {_nozzlePositionInputSignal};
@@ -52,12 +147,23 @@ namespace SimLinkup.HardwareSupport.Simtek
 
         public static IHardwareSupportModule[] GetInstances()
         {
-            var toReturn = new List<IHardwareSupportModule>
+            Simtek101088HardwareSupportModuleConfig hsmConfig = null;
+            try
             {
-                new Simtek101088HardwareSupportModule()
-            };
-
-            return toReturn.ToArray();
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "Simtek101088HardwareSupportModule.config");
+                hsmConfig = Simtek101088HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new Simtek101088HardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -159,6 +265,11 @@ namespace SimLinkup.HardwareSupport.Simtek
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -193,6 +304,25 @@ namespace SimLinkup.HardwareSupport.Simtek
         {
             if (_nozzlePositionInputSignal == null) return;
             var nozzlePositionInput = _nozzlePositionInputSignal.State;
+
+            // Editor-authored override: when a .config file declared a
+            // resolver transform for this gauge, evaluate via the generic
+            // helper and per-channel trim (sin and cos calibrate
+            // independently). Falls through to the hardcoded sin/cos blocks
+            // below when no config is present.
+            if (_resolverTransform != null
+                && _sinChannel != null
+                && _cosChannel != null
+                && _nozzlePositionSINOutputSignal != null
+                && _nozzlePositionCOSOutputSignal != null)
+            {
+                var t = _resolverTransform;
+                var sinCos = GaugeTransform.EvaluatePiecewiseResolver(
+                    nozzlePositionInput, t.Breakpoints, t.PeakVolts.Value);
+                _nozzlePositionSINOutputSignal.State = _sinChannel.ApplyTrim(sinCos[0], _nozzlePositionSINOutputSignal.MinValue, _nozzlePositionSINOutputSignal.MaxValue);
+                _nozzlePositionCOSOutputSignal.State = _cosChannel.ApplyTrim(sinCos[1], _nozzlePositionCOSOutputSignal.MinValue, _nozzlePositionCOSOutputSignal.MaxValue);
+                return;
+            }
 
             if (_nozzlePositionSINOutputSignal != null)
             {

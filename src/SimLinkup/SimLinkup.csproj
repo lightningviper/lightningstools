@@ -95,6 +95,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PoKeysDevice_DLL">
+      <HintPath>HardwareSupport\PoKeys\lib\PoKeysDevice_DLL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>$(SolutionDir)\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
@@ -124,9 +128,13 @@
     </EmbeddedResource>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HardwareSupport\AMI\AMI9000262001HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI9000262001HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\AMI\AMI900158001HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI900158001HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\AMI\AMI9001584HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI9001584HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\AMI\AMI9002780-02HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\AMI\AMI9002780-02HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\AnalogDevices\AnalogDevicesHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\ArduinoSeat\ArduinoSeatCommunicationProtocolHeaders.cs" />
@@ -134,8 +142,10 @@
     <Compile Include="HardwareSupport\ArduinoSeat\ArduinoSeatHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\ArduinoSeat\SeatOutput.cs" />
     <Compile Include="HardwareSupport\Astronautics\Astronautics12871HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Astronautics\Astronautics12871HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\DirectInput\DirectInputHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModuleConfig.cs" />
@@ -150,17 +160,25 @@
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Lilbern\Lilbern3321HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Lilbern\Lilbern3321HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Lilbern\Lilbern3239HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin19562HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin19562HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin19563HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin19563HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin19581HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin19581HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Malwin\Malwin246102HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\MDI\DataEntryDisplayPilotFaultListHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\PoKeys\PoKeysHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\PoKeys\PoKeysHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100207_110HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModule.cs" />
@@ -184,6 +202,33 @@
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\SimtekJDLADI01HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\SimtekJDLADI01HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100194HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100207HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100207_110HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100216HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100295HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek100335015HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek10058102HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek10058201HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101078HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101079HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101081HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101082HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101084HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101088HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek10108902HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105859HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105859HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105860HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105860HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105862HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105862HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105866HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105866HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105868HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105868HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\DXOutput.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUCommunicationProtocolHeaders.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />
@@ -202,6 +247,7 @@
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\TeensyRWR\TeensyRWRHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Westin\Westin521993HardwareSupportModuleConfig.cs" />
     <Compile Include="PacketEncoding\COBS.cs" />
     <Compile Include="Runtime\Runtime.cs" />
     <Compile Include="Runtime\SimSupportModuleLoader.cs" />
