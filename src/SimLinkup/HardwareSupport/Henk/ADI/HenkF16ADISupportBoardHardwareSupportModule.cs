@@ -1,17 +1,36 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
+using log4net;
 
 namespace SimLinkup.HardwareSupport.Henk.ADI
 {
     //Henk F-16 ADI Support Board for ARU-50/A Primary ADI
     public class HenkF16ADISupportBoardHardwareSupportModule : HardwareSupportModuleBase, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(HenkF16ADISupportBoardHardwareSupportModule));
+
         private const float GLIDESLOPE_DEVIATION_LIMIT_DEGREES = 1.0F;
         private const float LOCALIZER_DEVIATION_LIMIT_DEGREES = 5.0F;
+
+        // Editor-authored calibration state. _config carries the loaded
+        // unified-schema file; the per-channel pointers below are non-null
+        // when the corresponding channel has a usable piecewise breakpoint
+        // table. Each Update*OutputValues consults its pointer and falls
+        // back to the hardcoded math when null. See
+        // HenkF16ADISupportBoardHardwareSupportModuleConfig for the schema.
+        private HenkF16ADISupportBoardHardwareSupportModuleConfig _config;
+        private GaugeChannelConfig _pitchCalibration;
+        private GaugeChannelConfig _rollCalibration;
+        private GaugeChannelConfig _horizontalCommandBarCalibration;
+        private GaugeChannelConfig _verticalCommandBarCalibration;
+        private GaugeChannelConfig _rateOfTurnCalibration;
+        private ConfigFileReloadWatcher _configWatcher;
 
         private readonly IADI _renderer = new LightningGauges.Renderers.F16.ADI();
         private DigitalSignal _auxFlagInputSignal;
@@ -61,13 +80,99 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         private AnalogSignal.AnalogSignalChangedEventHandler _verticalCommandBarInputSignalChangedEventHandler;
         private AnalogSignal _verticalCommandBarOutputSignal;
 
-        private HenkF16ADISupportBoardHardwareSupportModule()
+        // Public ctor takes the (optionally-null) config. Null = no editor
+        // override; the existing hardcoded math handles everything.
+        public HenkF16ADISupportBoardHardwareSupportModule(HenkF16ADISupportBoardHardwareSupportModuleConfig config)
         {
+            _config = config;
+            ResolveAllChannels(config);
             CreateInputSignals();
             CreateInputEventHandlers();
             CreateOutputSignals();
             SetInitialOutputValues();
             RegisterForInputEvents();
+            StartConfigWatcher();
+        }
+
+        // Resolve all five channel pointers in one pass. Each may end up
+        // null (no config / channel absent / channel not piecewise) — the
+        // per-update branches handle null individually with a fallback to
+        // the hardcoded math.
+        private void ResolveAllChannels(GaugeCalibrationConfig config)
+        {
+            _pitchCalibration                = ResolvePiecewiseChannel(config, "HenkF16ADISupportBoard_Pitch_To_SDI");
+            _rollCalibration                 = ResolvePiecewiseChannel(config, "HenkF16ADISupportBoard_Roll_To_SDI");
+            _horizontalCommandBarCalibration = ResolvePiecewiseChannel(config, "HenkF16ADISupportBoard_Horizontal_GS_Bar_To_SDI");
+            _verticalCommandBarCalibration   = ResolvePiecewiseChannel(config, "HenkF16ADISupportBoard_Vertical_GS_Bar_To_SDI");
+            _rateOfTurnCalibration           = ResolvePiecewiseChannel(config, "HenkF16ADISupportBoard_Rate_Of_Turn_To_SDI");
+        }
+
+        // Pull the named channel out of the config IFF it carries a usable
+        // piecewise breakpoint table. Returns null otherwise so the caller's
+        // null-check covers both "no config file" and "config present but
+        // doesn't override this channel" with the same code path.
+        private static GaugeChannelConfig ResolvePiecewiseChannel(GaugeCalibrationConfig config, string channelId)
+        {
+            if (config == null) return null;
+            var ch = config.FindChannel(channelId);
+            if (ch != null
+                && ch.Transform != null
+                && ch.Transform.Kind == "piecewise"
+                && ch.Transform.Breakpoints != null
+                && ch.Transform.Breakpoints.Length >= 2)
+            {
+                return ch;
+            }
+            return null;
+        }
+
+        // Set up a ConfigFileReloadWatcher on the config file so editor
+        // saves take effect within a few seconds on the running SimLinkup.
+        // Skipped when no config was loaded (nothing to watch). The shared
+        // helper handles the unreliable bits — silent watcher orphaning
+        // under antivirus / OneDrive / SMB filter drivers, internal buffer
+        // overflow, mtime dedup — so this HSM just supplies the reload
+        // callback.
+        private void StartConfigWatcher()
+        {
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
+            {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        // Reload the config and re-resolve channel pointers. Wrapped in a
+        // try/catch so a partial-write race (the watcher can fire mid-save)
+        // doesn't escape into the runtime — we just log and wait for the
+        // next change event with a complete file. Re-fires every Update*
+        // method at the end so the user sees the new calibration
+        // immediately, instead of waiting for the next sim tick.
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
+                var reloaded = GaugeCalibrationConfig.Load<HenkF16ADISupportBoardHardwareSupportModuleConfig>(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+                ResolveAllChannels(reloaded);
+                UpdatePitchOutputValues();
+                UpdateRollOutputValues();
+                UpdateHorizontalGSBarOutputValues();
+                UpdateVerticalGSBarOutputValues();
+                UpdateRateOfTurnOutputValues();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
         }
 
         public override AnalogSignal[] AnalogInputs => new[]
@@ -110,9 +215,30 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             Dispose(false);
         }
 
+        // Try to load the optional editor-authored config file alongside
+        // the registry. Missing or malformed file → null config → HSM
+        // falls back to its hardcoded math (= pre-config behaviour).
         public static IHardwareSupportModule[] GetInstances()
         {
-            return new IHardwareSupportModule[] {new HenkF16ADISupportBoardHardwareSupportModule()};
+            HenkF16ADISupportBoardHardwareSupportModuleConfig hsmConfig = null;
+            try
+            {
+                var hsmConfigFilePath = Path.Combine(
+                    Util.CurrentMappingProfileDirectory,
+                    "HenkF16ADISupportBoardHardwareSupportModule.config");
+                hsmConfig = GaugeCalibrationConfig.Load<HenkF16ADISupportBoardHardwareSupportModuleConfig>(hsmConfigFilePath);
+                if (hsmConfig != null)
+                {
+                    // Stash the path on the config so the instance's
+                    // ConfigFileReloadWatcher knows which file to watch.
+                    hsmConfig.FilePath = hsmConfigFilePath;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+            return new IHardwareSupportModule[] { new HenkF16ADISupportBoardHardwareSupportModule(hsmConfig) };
         }
 
         public override void Render(Graphics g, Rectangle destinationRectangle)
@@ -671,6 +797,11 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
                     UnregisterForInputEvents();
                     AbandonInputEventHandlers();
                     Common.Util.DisposeObject(_renderer);
+                    if (_configWatcher != null)
+                    {
+                        try { _configWatcher.Dispose(); } catch { }
+                        _configWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
@@ -968,9 +1099,26 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         {
             if (_horizontalCommandBarInputSignal != null && _horizontalCommandBarOutputSignal != null)
             {
-                _horizontalCommandBarOutputSignal.State = _commandBarsVisibleInputSignal.State
-                    ? 0.5 + 0.5 * _horizontalCommandBarInputSignal.State
-                    : 1.0f;
+                // Hidden state when the visibility flag is low. Editor-
+                // authored HiddenOutput overrides the hardcoded 1.0 (the
+                // value that physically pushes the bar off-screen on
+                // bench-stock ADIs; some installations need a different
+                // park position).
+                if (!_commandBarsVisibleInputSignal.State)
+                {
+                    var hidden = _horizontalCommandBarCalibration?.HiddenOutput ?? 1.0;
+                    _horizontalCommandBarOutputSignal.State = _horizontalCommandBarCalibration != null
+                        ? _horizontalCommandBarCalibration.ApplyTrim(hidden, _horizontalCommandBarOutputSignal.MinValue, _horizontalCommandBarOutputSignal.MaxValue)
+                        : hidden;
+                    return;
+                }
+                if (_horizontalCommandBarCalibration != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(_horizontalCommandBarInputSignal.State, _horizontalCommandBarCalibration.Transform.Breakpoints);
+                    _horizontalCommandBarOutputSignal.State = _horizontalCommandBarCalibration.ApplyTrim(v, _horizontalCommandBarOutputSignal.MinValue, _horizontalCommandBarOutputSignal.MaxValue);
+                    return;
+                }
+                _horizontalCommandBarOutputSignal.State = 0.5 + 0.5 * _horizontalCommandBarInputSignal.State;
             }
         }
 
@@ -994,6 +1142,13 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         {
             if (_pitchInputSignal != null && _pitchOutputSignal != null)
             {
+                // Editor override: piecewise breakpoint table (input°, output DAC counts).
+                if (_pitchCalibration != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(_pitchInputSignal.CorrelatedState, _pitchCalibration.Transform.Breakpoints);
+                    _pitchOutputSignal.State = _pitchCalibration.ApplyTrim(v, _pitchOutputSignal.MinValue, _pitchOutputSignal.MaxValue);
+                    return;
+                }
                 _pitchOutputSignal.State = 424 + _pitchInputSignal.CorrelatedState / 90.000 * 255.000;
             }
         }
@@ -1010,6 +1165,13 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         {
             if (_rateOfTurnInputSignal != null && _rateOfTurnOutputSignal != null)
             {
+                // Editor override: piecewise breakpoint table (input -1..+1, output 0..1).
+                if (_rateOfTurnCalibration != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(_rateOfTurnInputSignal.State, _rateOfTurnCalibration.Transform.Breakpoints);
+                    _rateOfTurnOutputSignal.State = _rateOfTurnCalibration.ApplyTrim(v, _rateOfTurnOutputSignal.MinValue, _rateOfTurnOutputSignal.MaxValue);
+                    return;
+                }
                 _rateOfTurnOutputSignal.State = (_rateOfTurnInputSignal.State + 1.000) / 2.000;
             }
         }
@@ -1018,6 +1180,13 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         {
             if (_rollInputSignal != null && _rollOutputSignal != null)
             {
+                // Editor override: piecewise breakpoint table (input°, output DAC counts).
+                if (_rollCalibration != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(_rollInputSignal.CorrelatedState, _rollCalibration.Transform.Breakpoints);
+                    _rollOutputSignal.State = _rollCalibration.ApplyTrim(v, _rollOutputSignal.MinValue, _rollOutputSignal.MaxValue);
+                    return;
+                }
                 _rollOutputSignal.State = 512.000 + _rollInputSignal.CorrelatedState / 180.000 * 512.000;
             }
         }
@@ -1026,9 +1195,23 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         {
             if (_verticalCommandBarInputSignal != null && _verticalCommandBarOutputSignal != null)
             {
-                _verticalCommandBarOutputSignal.State = _commandBarsVisibleInputSignal.State
-                    ? 1.00 - (0.5 + 0.5 * _verticalCommandBarInputSignal.State)
-                    : 0.0f;
+                // Hidden state when the visibility flag is low. Editor-
+                // authored HiddenOutput overrides the hardcoded 0.0.
+                if (!_commandBarsVisibleInputSignal.State)
+                {
+                    var hidden = _verticalCommandBarCalibration?.HiddenOutput ?? 0.0;
+                    _verticalCommandBarOutputSignal.State = _verticalCommandBarCalibration != null
+                        ? _verticalCommandBarCalibration.ApplyTrim(hidden, _verticalCommandBarOutputSignal.MinValue, _verticalCommandBarOutputSignal.MaxValue)
+                        : hidden;
+                    return;
+                }
+                if (_verticalCommandBarCalibration != null)
+                {
+                    var v = GaugeTransform.EvaluatePiecewise(_verticalCommandBarInputSignal.State, _verticalCommandBarCalibration.Transform.Breakpoints);
+                    _verticalCommandBarOutputSignal.State = _verticalCommandBarCalibration.ApplyTrim(v, _verticalCommandBarOutputSignal.MinValue, _verticalCommandBarOutputSignal.MaxValue);
+                    return;
+                }
+                _verticalCommandBarOutputSignal.State = 1.00 - (0.5 + 0.5 * _verticalCommandBarInputSignal.State);
             }
         }
 

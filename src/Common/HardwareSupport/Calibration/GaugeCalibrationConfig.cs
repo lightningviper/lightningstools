@@ -207,6 +207,23 @@ namespace Common.HardwareSupport.Calibration
         [XmlElement("CagedRestRangeMaxDegrees")]
         public double? CagedRestRangeMaxDegrees { get; set; }
 
+        // Output value driven by the HSM when this channel's "visible"
+        // gate is FALSE. Today only used by gauges with a digital
+        // visibility flag inhibiting an analog channel — Henk F-16 ADI
+        // Support Board's two command bars are the canonical example
+        // (when commandBarsVisible is low, the bar parks at a fixed
+        // off-screen position). Nullable: absent means "no hidden
+        // behaviour" and the channel is driven from its transform
+        // unconditionally.
+        //
+        // The HSM is the source of truth for which channels honour
+        // this — opt-in per channel in the HSM's Update*OutputValues
+        // method. The schema field is generic so any future
+        // flag-gated analog channel can use it without re-revving
+        // the file format.
+        [XmlElement("HiddenOutput")]
+        public double? HiddenOutput { get; set; }
+
         // Apply ZeroTrim + GainTrim to a computed voltage, then clamp to
         // [outputMin, outputMax] — the gauge's real hardware safe envelope
         // (e.g. Westin EPU is 0.1..2.0 V, not the universal ±10 V). Callers

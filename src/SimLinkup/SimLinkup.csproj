@@ -147,6 +147,7 @@
     <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Gould\GouldHS070D51341HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowHardwareSupportModuleConfig.cs" />
