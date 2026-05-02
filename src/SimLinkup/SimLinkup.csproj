@@ -95,6 +95,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PoKeysDevice_DLL">
+      <HintPath>HardwareSupport\PoKeys\lib\PoKeysDevice_DLL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>$(SolutionDir)\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
@@ -161,6 +165,8 @@
     <Compile Include="HardwareSupport\NiclasMorin\DTSCard\DTSCardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Phcc\PhccHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\PoKeys\PoKeysHardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\PoKeys\PoKeysHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100207_110HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100285HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek100294HardwareSupportModule.cs" />
@@ -199,6 +205,16 @@
     <Compile Include="HardwareSupport\Simtek\Simtek10108902HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101090HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Simtek\Simtek101091HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105859HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105859HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105860HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105860HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105862HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105862HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105866HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105866HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105868HardwareSupportModule.cs" />
+    <Compile Include="HardwareSupport\Simtek\Simtek105868HardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\DXOutput.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUCommunicationProtocolHeaders.cs" />
     <Compile Include="HardwareSupport\TeensyEWMU\TeensyEWMUHardwareSupportModule.cs" />

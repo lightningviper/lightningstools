@@ -1,4 +1,5 @@
 ﻿using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.IO.Ports;
 using Common.MacroProgramming;
 using log4net;
@@ -89,29 +90,56 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
 
         private AnalogSignal _bytesSentSignal;
 
-        private FileSystemWatcher _configFileWatcher;
+        // Watcher fires ReloadConfig on a background thread when the
+        // editor saves the config file. ConfigFileReloadWatcher handles
+        // the unreliable bits (silent watcher orphaning under AV /
+        // OneDrive / SMB filter drivers, mtime dedup, internal buffer
+        // overflow). _configChanged is held true for the duration of
+        // the swap so UpdateOutputs (which serialises a packet over the
+        // serial port) skips one frame instead of writing a half-loaded
+        // config — single-step pointer reassignments would be safe but
+        // a packet built mid-swap could mix old and new field bytes.
+        private ConfigFileReloadWatcher _configWatcher;
         private bool _configChanged = false;
-        private DateTime _lastConfigModified = DateTime.MinValue;
 
         public ArduinoSeatHardwareSupportModule(ArduinoSeatHardwareSupportModuleConfig config)
         {
             _config = config;
             CreateSignals(out _analogSignals, out _digitalSignals);
-
-            _configFileWatcher = new FileSystemWatcher(Path.GetDirectoryName(_config.FilePath), Path.GetFileName(_config.FilePath));
-            _configFileWatcher.Changed += _config_Changed;
-            _configFileWatcher.EnableRaisingEvents = true;
+            StartConfigWatcher();
         }
 
-        private void _config_Changed(object sender, FileSystemEventArgs e)
+        private void StartConfigWatcher()
         {
-            if (_lastConfigModified != File.GetLastWriteTime(_config.FilePath))
+            if (_config == null || string.IsNullOrEmpty(_config.FilePath)) return;
+            try
             {
+                _configWatcher = new ConfigFileReloadWatcher(_config.FilePath, ReloadConfig);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message, e);
+            }
+        }
+
+        private void ReloadConfig()
+        {
+            try
+            {
+                var configFile = _config != null ? _config.FilePath : null;
+                if (string.IsNullOrEmpty(configFile)) return;
                 _configChanged = true;
-                var configfile = _config.FilePath;
-                _config = ArduinoSeatHardwareSupportModuleConfig.Load(configfile);
-                _config.FilePath = configfile;
-                _lastConfigModified = File.GetLastWriteTime(_config.FilePath);
+                var reloaded = ArduinoSeatHardwareSupportModuleConfig.Load(configFile);
+                if (reloaded == null) return;
+                reloaded.FilePath = configFile;
+                _config = reloaded;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+            }
+            finally
+            {
                 _configChanged = false;
             }
         }
@@ -1025,14 +1053,22 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
 
             if (!_isExitGame.State && !_isFrozen.State && !_isPaused.State && !_endOfFlight.State && _in3D.State)
             {
-                if (_gunIsFiring.State)
-                    SetMotorOutputs(_gunIsFiring.Id, _gunIsFiring.State ? 1 : 0, true, ref motorBits, ref motorSpeeds);
-
-                if (_bumpIntensity.State > 0)
-                    SetMotorOutputs(_bumpIntensity.Id, _bumpIntensity.State, false, ref motorBits, ref motorSpeeds);
-
-                if (_nozzle1Position.State > 0)
-                    SetMotorOutputs(_nozzle1Position.Id, _nozzle1Position.State, false, ref motorBits, ref motorSpeeds);
+                // Walk every digital input — any signal currently asserted may
+                // drive its configured motors. CalcMotorSpeed handles the per-
+                // output FORCE/TYPE/MIN/MAX gating, so we don't pre-filter.
+                foreach (var sig in _digitalSignals)
+                {
+                    if (sig.State)
+                        SetMotorOutputs(sig.Id, 1, true, ref motorBits, ref motorSpeeds);
+                }
+                // Walk every analog input — CalcMotorSpeed clamps via MIN/MAX
+                // so a zero-state signal whose MIN is 0 still drives correctly.
+                // Skip the publishing-only signals that aren't sim inputs.
+                foreach (var sig in _analogSignals)
+                {
+                    if (sig == _bytesSentSignal) continue;
+                    SetMotorOutputs(sig.Id, sig.State, false, ref motorBits, ref motorSpeeds);
+                }
             }
 
             byte[] packet = null;
@@ -1106,19 +1142,32 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
         {
             byte motorSpeed = 0;
 
+            // Off means "this output never drives a motor", regardless of
+            // pulse type. Without this short-circuit the Progressive and
+            // CenterPeak branches would compute non-zero speeds even when
+            // the user explicitly set FORCE=Off; only the Fixed branch
+            // honoured Off via its inner switch.
+            if (output.FORCE == MotorForce.Off) return 0;
+
             if (isDigital || simValue >= output.MIN && simValue <= output.MAX)
             {
                 switch (output.TYPE)
                 {
                     case PulseType.Fixed:
                         if (output.FORCE == MotorForce.Manual)
-                            motorSpeed = output.MOTOR_1_SPEED;
+                            // Use the per-motor speed the caller passed in
+                            // (output.MOTOR_<N>_SPEED) so motors 2–4 don't all
+                                // collapse onto motor 1's configured value.
+                            motorSpeed = maxMotorSpeed;
                         else
                         {
                             switch (output.FORCE)
                             {
                                 case MotorForce.Off:
                                     motorSpeed = 0;
+                                    break;
+                                case MotorForce.Slight:
+                                    motorSpeed = _config.ForceSlight;
                                     break;
                                 case MotorForce.Rumble:
                                     motorSpeed = _config.ForceRumble;
@@ -1144,6 +1193,12 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
                         break;
                     case PulseType.CenterPeak:
                         {
+                            // Symmetric tent: ramp 0→max as simValue goes from
+                            // MIN to midpoint, then ramp max→0 from midpoint
+                            // to MAX. The previous else-branch used a
+                            // hyperbolic decay (totalDelta / (simValue-MIN))
+                            // that bottoms out at 0.5*max at simValue==MAX
+                            // instead of returning to 0.
                             var totalDelta = (output.MAX - output.MIN) / 2;
                             if (totalDelta > 0)
                             {
@@ -1154,7 +1209,7 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
                                 }
                                 else
                                 {
-                                    double calculatedSpeed = (totalDelta / (simValue - output.MIN)) * maxMotorSpeed;
+                                    double calculatedSpeed = ((output.MAX - simValue) / totalDelta) * maxMotorSpeed;
                                     motorSpeed = (byte)calculatedSpeed;
                                 }
                             }
@@ -1279,6 +1334,11 @@ namespace SimLinkup.HardwareSupport.ArduinoSeat
                 catch (Exception e)
                 {
                     _log.Error(e.Message, e);
+                }
+                if (_configWatcher != null)
+                {
+                    try { _configWatcher.Dispose(); } catch { }
+                    _configWatcher = null;
                 }
             }
             _isDisposed = true;

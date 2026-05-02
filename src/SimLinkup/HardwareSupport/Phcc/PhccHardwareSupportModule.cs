@@ -78,11 +78,35 @@ namespace SimLinkup.HardwareSupport.Phcc
                 var hsmConfigFilePath = Path.Combine(Util.CurrentMappingProfileDirectory,
                     "PhccHardwareSupportModule.config");
                 var hsmConfig = PhccHardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                if (hsmConfig == null)
+                {
+                    _log.Warn("PHCC: " + hsmConfigFilePath + " is missing or unparseable; no PHCC HSM instances created.");
+                    return toReturn.ToArray();
+                }
                 var phccDeviceManagerConfigFilePath = hsmConfig.PhccDeviceManagerConfigFilePath;
-                var phccConfigManager = LoadConfiguration(phccDeviceManagerConfigFilePath) ?? LoadConfiguration(Path.Combine(Util.CurrentMappingProfileDirectory, phccDeviceManagerConfigFilePath));
+                if (string.IsNullOrEmpty(phccDeviceManagerConfigFilePath))
+                {
+                    _log.Warn("PHCC: PhccHardwareSupportModule.config does not specify PhccDeviceManagerConfigFilePath; no PHCC HSM instances created.");
+                    return toReturn.ToArray();
+                }
+                var phccConfigManager = LoadConfiguration(phccDeviceManagerConfigFilePath)
+                    ?? LoadConfiguration(Path.Combine(Util.CurrentMappingProfileDirectory, phccDeviceManagerConfigFilePath));
+                // Both LoadConfiguration calls can return null when the
+                // pointed-at PHCC device-manager config (typically
+                // phcc.config) is missing or fails to parse. Guard the
+                // foreach so we don't dereference a null and pollute the
+                // log with a confusing NullReferenceException.
+                if (phccConfigManager == null)
+                {
+                    _log.Warn("PHCC: device-manager config '" + phccDeviceManagerConfigFilePath +
+                              "' could not be loaded (looked in absolute and profile-relative paths); no PHCC HSM instances created.");
+                    return toReturn.ToArray();
+                }
+                if (phccConfigManager.Motherboards == null) return toReturn.ToArray();
 
                 foreach (var m in phccConfigManager.Motherboards)
                 {
+                    if (m == null) continue;
                     IHardwareSupportModule thisHsm = new PhccHardwareSupportModule(m);
                     toReturn.Add(thisHsm);
                 }
