@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16.HSI;
 using Henkie.HSI.Board2;
@@ -51,9 +52,21 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
 
         private CalibrationPoint[] _courseDeviationIndicatorCalibrationData;
 
-        private HenkF16HSIBoard2HardwareSupportModule(DeviceConfig hsiBoard2DeviceConfig)
+        // Editor-authored calibration plumbing — see Board 1's matching
+        // fields for the contract. Board 2's unified file owns just the
+        // single course-deviation-indicator breakpoint table; everything
+        // else (identity, stator offsets, hysteresis thresholds,
+        // DIG_OUTs) stays in the legacy file.
+        private string _legacyConfigPath;
+        private string _unifiedConfigPath;
+        private ConfigFileReloadWatcher _legacyConfigWatcher;
+        private ConfigFileReloadWatcher _unifiedConfigWatcher;
+
+        private HenkF16HSIBoard2HardwareSupportModule(DeviceConfig hsiBoard2DeviceConfig, string legacyConfigPath, string unifiedConfigPath)
         {
             _hsiBoard2DeviceConfig = hsiBoard2DeviceConfig;
+            _legacyConfigPath = legacyConfigPath;
+            _unifiedConfigPath = unifiedConfigPath;
             if (_hsiBoard2DeviceConfig != null)
             {
                 ConfigureDevice();
@@ -61,6 +74,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 CreateOutputSignals();
                 RegisterForEvents();
                 SetInitialState();
+                StartConfigWatchers();
             }
         }
 
@@ -118,13 +132,26 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
 
             try
             {
-                var hsmConfigFilePath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkF16HSIBoard2HardwareSupportModule.config");
-                var hsmConfig = HenkieF16HSIBoard2HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                var legacyPath  = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkF16HSIBoard2HardwareSupportModule.config");
+                var unifiedPath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkF16HSIBoard2Calibration.config");
+                var hsmConfig = HenkieF16HSIBoard2HardwareSupportModuleConfig.Load(legacyPath);
+
+                // Try the unified-schema calibration file (authored by the
+                // SimLinkup Profile Editor). When present, its single
+                // breakpoint table overrides the legacy file's
+                // <CourseDeviationIndicatorCalibrationData> block. See
+                // HenkF16HSIBoard2CalibrationConfig.cs for the rationale.
+                var unifiedCalibration = TryLoadUnifiedCalibration(unifiedPath);
+
                 if (hsmConfig != null)
                 {
                     foreach (var deviceConfiguration in hsmConfig.Devices)
                     {
-                        var hsmInstance = new HenkF16HSIBoard2HardwareSupportModule(deviceConfiguration);
+                        if (unifiedCalibration != null)
+                        {
+                            deviceConfiguration.CourseDeviationIndicatorCalibrationData = unifiedCalibration;
+                        }
+                        var hsmInstance = new HenkF16HSIBoard2HardwareSupportModule(deviceConfiguration, legacyPath, unifiedPath);
                         toReturn.Add(hsmInstance);
                     }
                 }
@@ -135,6 +162,93 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             }
 
             return toReturn.ToArray();
+        }
+
+        // Load + map the unified-schema calibration file's course-deviation
+        // breakpoints onto Henkie.Common.CalibrationPoint. Returns null when
+        // the file is absent, malformed, or doesn't contain the expected
+        // channel — caller falls back to the legacy <CourseDeviation
+        // IndicatorCalibrationData> block.
+        private static CalibrationPoint[] TryLoadUnifiedCalibration(string unifiedPath)
+        {
+            try
+            {
+                if (!File.Exists(unifiedPath)) return null;
+                var unified = GaugeCalibrationConfig.Load<HenkF16HSIBoard2CalibrationConfig>(unifiedPath);
+                if (unified == null) return null;
+                var ch = unified.FindChannel("Henk_F16_HSI_Board2_Course_Deviation_Indicator_Position_To_Instrument");
+                var bps = ch?.Transform?.Breakpoints;
+                if (bps == null || bps.Length < 2) return null;
+                var result = new CalibrationPoint[bps.Length];
+                for (var i = 0; i < bps.Length; i++)
+                {
+                    result[i] = new CalibrationPoint(bps[i].Input, bps[i].Output);
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Failed to load unified-schema calibration; falling back to legacy <CourseDeviationIndicatorCalibrationData>: " + e.Message);
+                return null;
+            }
+        }
+
+        // Watch both calibration files. Either changing triggers a reload
+        // of just the calibration table — same pattern as Board 1 / FuelFlow.
+        private void StartConfigWatchers()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(_legacyConfigPath))
+                {
+                    _legacyConfigWatcher = new ConfigFileReloadWatcher(_legacyConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+            try
+            {
+                if (!string.IsNullOrEmpty(_unifiedConfigPath))
+                {
+                    _unifiedConfigWatcher = new ConfigFileReloadWatcher(_unifiedConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+        }
+
+        // Re-evaluate the course-deviation calibration without touching the
+        // live device connection. Preference: unified file's value when
+        // present (editor's source of truth); otherwise the legacy file's
+        // <CourseDeviationIndicatorCalibrationData> block.
+        private void ReloadCalibration()
+        {
+            CalibrationPoint[] next = null;
+            try
+            {
+                next = TryLoadUnifiedCalibration(_unifiedConfigPath);
+                if (next == null && !string.IsNullOrEmpty(_legacyConfigPath) && File.Exists(_legacyConfigPath))
+                {
+                    var legacy = HenkieF16HSIBoard2HardwareSupportModuleConfig.Load(_legacyConfigPath);
+                    var dev = legacy?.Devices?.FirstOrDefault(d =>
+                        d != null && string.Equals(d.Address, _hsiBoard2DeviceConfig?.Address, StringComparison.OrdinalIgnoreCase));
+                    if (dev?.CourseDeviationIndicatorCalibrationData != null
+                        && dev.CourseDeviationIndicatorCalibrationData.Length >= 2)
+                    {
+                        next = dev.CourseDeviationIndicatorCalibrationData;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Calibration reload failed; keeping previous table: " + e.Message);
+                return;
+            }
+            if (next != null && next.Length >= 2)
+            {
+                _courseDeviationIndicatorCalibrationData = next;
+                // Re-fire the course-deviation update with the cached input
+                // values so the user sees new calibration immediately.
+                CourseDeviationOrCourseDeviationLimitInputSignalsChanged();
+            }
         }
 
         private List<DigitalSignal> CreateOutputSignalsForDigitalOutputChannels()
@@ -987,6 +1101,16 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 {
                     UnregisterForEvents();
                     Common.Util.DisposeObject(_renderer);
+                    if (_legacyConfigWatcher != null)
+                    {
+                        try { _legacyConfigWatcher.Dispose(); } catch { }
+                        _legacyConfigWatcher = null;
+                    }
+                    if (_unifiedConfigWatcher != null)
+                    {
+                        try { _unifiedConfigWatcher.Dispose(); } catch { }
+                        _unifiedConfigWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;

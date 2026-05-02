@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16.HSI;
 using Henkie.HSI.Board1;
@@ -57,15 +58,32 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
         private CalibrationPoint[] _rangeTensDigitCalibrationData;
         private CalibrationPoint[] _rangeHundredsDigitCalibrationData;
 
-        private HenkF16HSIBoard1HardwareSupportModule(DeviceConfig hsiBoard1DeviceConfig)
+        // Editor-authored calibration plumbing. Both files are watched —
+        // the legacy file (HenkF16HSIBoard1HardwareSupportModule.config)
+        // continues to own identity / stator offsets / DIG_OUTs; the
+        // unified file (HenkF16HSIBoard1Calibration.config) carries
+        // editor-authored breakpoint tables that, when present, override
+        // the per-channel CalibrationData arrays on the legacy device
+        // config. Hot-reload on either file re-runs ReloadCalibration
+        // without touching the live device connection. See
+        // HenkF16HSIBoard1CalibrationConfig.cs for the contract.
+        private string _legacyConfigPath;
+        private string _unifiedConfigPath;
+        private ConfigFileReloadWatcher _legacyConfigWatcher;
+        private ConfigFileReloadWatcher _unifiedConfigWatcher;
+
+        private HenkF16HSIBoard1HardwareSupportModule(DeviceConfig hsiBoard1DeviceConfig, string legacyConfigPath, string unifiedConfigPath)
         {
             _hsiBoard1DeviceConfig = hsiBoard1DeviceConfig;
+            _legacyConfigPath = legacyConfigPath;
+            _unifiedConfigPath = unifiedConfigPath;
             if (_hsiBoard1DeviceConfig != null)
             {
                 ConfigureDevice();
                 CreateInputSignals();
                 CreateOutputSignals();
                 RegisterForEvents();
+                StartConfigWatchers();
             }
         }
 
@@ -119,13 +137,26 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
 
             try
             {
-                var hsmConfigFilePath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkF16HSIBoard1HardwareSupportModule.config");
-                var hsmConfig = HenkieF16HSIBoard1HardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                var legacyPath  = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkF16HSIBoard1HardwareSupportModule.config");
+                var unifiedPath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkF16HSIBoard1Calibration.config");
+                var hsmConfig = HenkieF16HSIBoard1HardwareSupportModuleConfig.Load(legacyPath);
+
+                // Try the unified-schema calibration file (authored by the
+                // SimLinkup Profile Editor). When present, its per-channel
+                // breakpoint tables override the legacy file's
+                // <*CalibrationData> blocks. See
+                // HenkF16HSIBoard1CalibrationConfig.cs for the rationale.
+                var unifiedOverrides = TryLoadUnifiedOverrides(unifiedPath);
+
                 if (hsmConfig != null)
                 {
                     foreach (var deviceConfiguration in hsmConfig.Devices)
                     {
-                        var hsmInstance = new HenkF16HSIBoard1HardwareSupportModule(deviceConfiguration);
+                        if (unifiedOverrides != null)
+                        {
+                            ApplyUnifiedOverrides(deviceConfiguration, unifiedOverrides);
+                        }
+                        var hsmInstance = new HenkF16HSIBoard1HardwareSupportModule(deviceConfiguration, legacyPath, unifiedPath);
                         toReturn.Add(hsmInstance);
                     }
                 }
@@ -136,6 +167,159 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
             }
 
             return toReturn.ToArray();
+        }
+
+        // Per-channel override bag returned by TryLoadUnifiedOverrides.
+        // Each entry is null when the unified file doesn't supply that
+        // channel, or a CalibrationPoint[] otherwise. Bundling the five
+        // channels into a single struct lets ApplyUnifiedOverrides /
+        // ReloadCalibration each touch the legacy device-config in one
+        // place rather than five.
+        private class UnifiedOverrides
+        {
+            public CalibrationPoint[] Heading;
+            public CalibrationPoint[] Bearing;
+            public CalibrationPoint[] RangeOnesDigit;
+            public CalibrationPoint[] RangeTensDigit;
+            public CalibrationPoint[] RangeHundredsDigit;
+        }
+
+        private static UnifiedOverrides TryLoadUnifiedOverrides(string unifiedPath)
+        {
+            try
+            {
+                if (!File.Exists(unifiedPath)) return null;
+                var unified = GaugeCalibrationConfig.Load<HenkF16HSIBoard1CalibrationConfig>(unifiedPath);
+                if (unified == null) return null;
+                var result = new UnifiedOverrides
+                {
+                    Heading            = ExtractChannelBreakpoints(unified, "Henk_F16_HSI_Board1_Magnetic_Heading_To_Instrument"),
+                    Bearing            = ExtractChannelBreakpoints(unified, "Henk_F16_HSI_Board1_Bearing_To_Instrument"),
+                    RangeOnesDigit     = ExtractChannelBreakpoints(unified, "Henk_F16_HSI_Board1_Range_x1_To_Instrument"),
+                    RangeTensDigit     = ExtractChannelBreakpoints(unified, "Henk_F16_HSI_Board1_Range_x10_To_Instrument"),
+                    RangeHundredsDigit = ExtractChannelBreakpoints(unified, "Henk_F16_HSI_Board1_Range_x100_To_Instrument"),
+                };
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Failed to load unified-schema calibration; falling back to legacy <*CalibrationData> blocks: " + e.Message);
+                return null;
+            }
+        }
+
+        private static CalibrationPoint[] ExtractChannelBreakpoints(GaugeCalibrationConfig config, string channelId)
+        {
+            var ch = config.FindChannel(channelId);
+            var bps = ch?.Transform?.Breakpoints;
+            if (bps == null || bps.Length < 2) return null;
+            // Editor writes <Point input=".." output=".."/> — both raw doubles.
+            var result = new CalibrationPoint[bps.Length];
+            for (var i = 0; i < bps.Length; i++)
+            {
+                result[i] = new CalibrationPoint(bps[i].Input, bps[i].Output);
+            }
+            return result;
+        }
+
+        // Apply non-null overrides onto the legacy device config in place.
+        // Null entries leave the legacy field untouched (so users can
+        // partially override — calibrate just heading from the editor and
+        // leave the range digits' existing legacy tables intact).
+        private static void ApplyUnifiedOverrides(DeviceConfig device, UnifiedOverrides overrides)
+        {
+            if (device == null || overrides == null) return;
+            if (overrides.Heading            != null) device.HeadingCalibrationData            = overrides.Heading;
+            if (overrides.Bearing            != null) device.BearingCalibrationData            = overrides.Bearing;
+            if (overrides.RangeOnesDigit     != null) device.RangeOnesDigitCalibrationData     = overrides.RangeOnesDigit;
+            if (overrides.RangeTensDigit     != null) device.RangeTensDigitCalibrationData     = overrides.RangeTensDigit;
+            if (overrides.RangeHundredsDigit != null) device.RangeHundredsDigitCalibrationData = overrides.RangeHundredsDigit;
+        }
+
+        // Watch both calibration files. Either changing triggers a reload
+        // of just the calibration tables — we never re-touch device identity
+        // / stator offsets / DIG_OUTs at runtime (those would require
+        // disconnecting and re-programming the hardware mid-flight). Same
+        // pattern as HenkieF16FuelFlowIndicatorHardwareSupportModule.
+        private void StartConfigWatchers()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(_legacyConfigPath))
+                {
+                    _legacyConfigWatcher = new ConfigFileReloadWatcher(_legacyConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+            try
+            {
+                if (!string.IsNullOrEmpty(_unifiedConfigPath))
+                {
+                    _unifiedConfigWatcher = new ConfigFileReloadWatcher(_unifiedConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+        }
+
+        // Re-evaluate the five calibration tables without touching the live
+        // device connection. Preference per channel: unified file's value
+        // when present (editor's source of truth); otherwise the legacy
+        // file's matching <*CalibrationData> block; otherwise the C#
+        // fallback math (= input range scaled linearly into 0..1023).
+        private void ReloadCalibration()
+        {
+            try
+            {
+                var unified = TryLoadUnifiedOverrides(_unifiedConfigPath);
+                CalibrationPoint[] heading            = unified?.Heading;
+                CalibrationPoint[] bearing            = unified?.Bearing;
+                CalibrationPoint[] rangeOnesDigit     = unified?.RangeOnesDigit;
+                CalibrationPoint[] rangeTensDigit     = unified?.RangeTensDigit;
+                CalibrationPoint[] rangeHundredsDigit = unified?.RangeHundredsDigit;
+
+                // For any channel the unified file didn't override, fall
+                // back to whatever the legacy file currently says (it may
+                // have been hand-edited since startup).
+                if ((heading == null || bearing == null || rangeOnesDigit == null
+                        || rangeTensDigit == null || rangeHundredsDigit == null)
+                    && !string.IsNullOrEmpty(_legacyConfigPath)
+                    && File.Exists(_legacyConfigPath))
+                {
+                    var legacy = HenkieF16HSIBoard1HardwareSupportModuleConfig.Load(_legacyConfigPath);
+                    var dev = legacy?.Devices?.FirstOrDefault(d =>
+                        d != null && string.Equals(d.Address, _hsiBoard1DeviceConfig?.Address, StringComparison.OrdinalIgnoreCase));
+                    if (dev != null)
+                    {
+                        if (heading            == null) heading            = dev.HeadingCalibrationData;
+                        if (bearing            == null) bearing            = dev.BearingCalibrationData;
+                        if (rangeOnesDigit     == null) rangeOnesDigit     = dev.RangeOnesDigitCalibrationData;
+                        if (rangeTensDigit     == null) rangeTensDigit     = dev.RangeTensDigitCalibrationData;
+                        if (rangeHundredsDigit == null) rangeHundredsDigit = dev.RangeHundredsDigitCalibrationData;
+                    }
+                }
+
+                // Atomic per-field replacement — the Calibrated*Value
+                // helpers read these fields directly, so partial updates
+                // are safe; the worst case is the next gauge tick using
+                // a mix of old + new which is no worse than the prior
+                // tick using all-old.
+                _headingCalibrationData            = heading            ?? _headingCalibrationData;
+                _bearingCalibrationData            = bearing            ?? _bearingCalibrationData;
+                _rangeOnesDigitCalibrationData     = rangeOnesDigit     ?? _rangeOnesDigitCalibrationData;
+                _rangeTensDigitCalibrationData     = rangeTensDigit     ?? _rangeTensDigitCalibrationData;
+                _rangeHundredsDigitCalibrationData = rangeHundredsDigit ?? _rangeHundredsDigitCalibrationData;
+
+                // Re-fire every Update*OutputValue with the cached input
+                // values so the user sees new calibration immediately,
+                // without waiting for the next sim tick.
+                UpdateMagneticHeadingOutputValue();
+                UpdateBearingOutputValue();
+                UpdateRangeOutputValue();
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Calibration reload failed; keeping previous tables: " + e.Message);
+            }
         }
 
         private List<DigitalSignal> CreateOutputSignalsForDigitalOutputChannels()
@@ -1298,6 +1482,16 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board1
                 {
                     UnregisterForEvents();
                     Common.Util.DisposeObject(_renderer);
+                    if (_legacyConfigWatcher != null)
+                    {
+                        try { _legacyConfigWatcher.Dispose(); } catch { }
+                        _legacyConfigWatcher = null;
+                    }
+                    if (_unifiedConfigWatcher != null)
+                    {
+                        try { _unifiedConfigWatcher.Dispose(); } catch { }
+                        _unifiedConfigWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
