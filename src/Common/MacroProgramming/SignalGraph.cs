@@ -61,8 +61,17 @@ namespace Common.MacroProgramming
             //graphics.CompositingQuality = CompositingQuality.HighQuality;
             //graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             //graphics.SmoothingMode = SmoothingMode.HighQuality;
-            var originalClip = graphics.Clip;
-            var originalTransform = graphics.Transform;
+            // Graphics.Clip and Graphics.Transform GETTERS allocate
+            // fresh native GDI+ resources (HRGN and a managed Matrix
+            // wrapping a native GdipMatrix). Without disposing them
+            // every paint leaks two GDI+ handles. With Draw firing
+            // every ~30 ms via SignalsView's repaint timer, the
+            // process accumulates GDI+ handles fast — the same
+            // pattern is true for every `new StringFormat(...)`
+            // below. Wrap them in using-blocks.
+            using (var originalClip = graphics.Clip)
+            using (var originalTransform = graphics.Transform)
+            {
 
             var drawTime = DateTime.UtcNow;
             CaptureNewSample();
@@ -253,36 +262,42 @@ namespace Common.MacroProgramming
                 graphics.DrawLine(ZeroLinePen, new PointF(0, zeroHeight), new PointF(width, zeroHeight));
 
                 var valueTextSize = graphics.MeasureString(value, ValueFont);
-                var valueFormat = new StringFormat
+                using (var valueFormat = new StringFormat
                 {
                     Alignment = StringAlignment.Far,
                     LineAlignment = StringAlignment.Center
-                };
-                var valueRectangle = new RectangleF(0, System.Math.Max(y2 - valueTextSize.Height, 0), width,
-                    valueTextSize.Height);
-                graphics.DrawString(value, ValueFont, ValueBrush, valueRectangle, valueFormat);
+                })
+                {
+                    var valueRectangle = new RectangleF(0, System.Math.Max(y2 - valueTextSize.Height, 0), width,
+                        valueTextSize.Height);
+                    graphics.DrawString(value, ValueFont, ValueBrush, valueRectangle, valueFormat);
+                }
 
                 var minValueTextSize = graphics.MeasureString(minValString, MinValueFont);
-                var minValueFormat = new StringFormat
+                using (var minValueFormat = new StringFormat
                 {
                     Alignment = StringAlignment.Near,
                     LineAlignment = StringAlignment.Center
-                };
-                var minValueRectangle = new RectangleF(0, System.Math.Min(maxY2 + 2, height), width,
-                    minValueTextSize.Height);
-                graphics.DrawString($"Min:{minValString}", MinValueFont, MinValueBrush, minValueRectangle,
-                    minValueFormat);
+                })
+                {
+                    var minValueRectangle = new RectangleF(0, System.Math.Min(maxY2 + 2, height), width,
+                        minValueTextSize.Height);
+                    graphics.DrawString($"Min:{minValString}", MinValueFont, MinValueBrush, minValueRectangle,
+                        minValueFormat);
+                }
 
                 var maxValueTextSize = graphics.MeasureString(maxValString, MaxValueFont);
-                var maxValueFormat = new StringFormat
+                using (var maxValueFormat = new StringFormat
                 {
                     Alignment = StringAlignment.Center,
                     LineAlignment = StringAlignment.Center
-                };
-                var maxValueRectangle = new RectangleF(0, System.Math.Max(minY2 - maxValueTextSize.Height, 0), width,
-                    maxValueTextSize.Height);
-                graphics.DrawString($"Max:{maxValString}", MaxValueFont, MaxValueBrush, maxValueRectangle,
-                    maxValueFormat);
+                })
+                {
+                    var maxValueRectangle = new RectangleF(0, System.Math.Max(minY2 - maxValueTextSize.Height, 0), width,
+                        maxValueTextSize.Height);
+                    graphics.DrawString($"Max:{maxValString}", MaxValueFont, MaxValueBrush, maxValueRectangle,
+                        maxValueFormat);
+                }
             }
 
             graphics.Clip = originalClip;
@@ -292,22 +307,30 @@ namespace Common.MacroProgramming
                 new RectangleF(0, 0, width, topMarginHeight));
             graphics.DrawString(_signal.FriendlyName ?? "", FriendlyNameFont, FriendlyNameBrush,
                 new RectangleF(0, topMarginHeight/2, width, topMarginHeight));
-            graphics.DrawString(rangeMaxValue, ScaleFont, ScaleFontBrush, new RectangleF(0, 0, width, topMarginHeight),
-                new StringFormat {Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far});
-            graphics.DrawString(rangeMinValue, ScaleFont, ScaleFontBrush,
-                new RectangleF(0, targetRectangle.Height - bottomMarginHeight, width, bottomMarginHeight),
-                new StringFormat {Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far});
+            // Same StringFormat used for both range labels — alloc
+            // once and dispose once instead of leaking two per paint.
+            using (var rangeFormat = new StringFormat {Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far})
+            {
+                graphics.DrawString(rangeMaxValue, ScaleFont, ScaleFontBrush, new RectangleF(0, 0, width, topMarginHeight),
+                    rangeFormat);
+                graphics.DrawString(rangeMinValue, ScaleFont, ScaleFontBrush,
+                    new RectangleF(0, targetRectangle.Height - bottomMarginHeight, width, bottomMarginHeight),
+                    rangeFormat);
+            }
 
             if (_signal is TextSignal)
             {
                 var stringRectangle = new Rectangle(targetRectangle.Location.X, targetRectangle.Location.Y + topMarginHeight,targetRectangle.Width, targetRectangle.Height - topMarginHeight);
                 var stringToDisplay = (_signal as TextSignal).State;
                 if (stringToDisplay == null) stringToDisplay = "";
-                var stringFormat = new StringFormat();
-                stringFormat.LineAlignment = StringAlignment.Center;
-                stringFormat.Alignment = StringAlignment.Center;
-                graphics.DrawString(stringToDisplay, stringToDisplay.Length < 128 ? XBigFont : stringToDisplay.Length < 256 ? BigFont : stringToDisplay.Length < 512 ? MediumFont : stringToDisplay.Length < 1024 ? SmallFont : XSmallFont, ValueBrush, stringRectangle, stringFormat);
+                using (var stringFormat = new StringFormat())
+                {
+                    stringFormat.LineAlignment = StringAlignment.Center;
+                    stringFormat.Alignment = StringAlignment.Center;
+                    graphics.DrawString(stringToDisplay, stringToDisplay.Length < 128 ? XBigFont : stringToDisplay.Length < 256 ? BigFont : stringToDisplay.Length < 512 ? MediumFont : stringToDisplay.Length < 1024 ? SmallFont : XSmallFont, ValueBrush, stringRectangle, stringFormat);
+                }
             }
+            } // close using(originalClip / originalTransform)
         }
 
         private void AnalogSignalChanged(object sender, AnalogSignalChangedEventArgs args)
