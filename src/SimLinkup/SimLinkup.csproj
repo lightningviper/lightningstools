@@ -150,6 +150,7 @@
     <Compile Include="HardwareSupport\Henk\ADI\HenkF16ADISupportBoardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterHardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Henk\Altimeter\HenkieF16AltimeterUnifiedHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowIndicatorHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\FuelFlow\HenkieF16FuelFlowIndicatorHardwareSupportModule.cs" />

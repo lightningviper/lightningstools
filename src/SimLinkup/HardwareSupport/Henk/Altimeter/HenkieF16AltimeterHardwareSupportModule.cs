@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Remoting;
 using Common.HardwareSupport;
+using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
 using LightningGauges.Renderers.F16;
 using System.IO;
@@ -38,15 +39,34 @@ namespace SimLinkup.HardwareSupport.Henk.Altimeter
         private double _maxBaroPressure = DEFAULT_MAX_BARO_PRESSURE;
         private double _differenceInIndicatedAltitudeFromMinBaroToMaxBaroInFeet = DEFAULT_DIFFERENCE_IN_INDICATED_ALTITUDE_FROM_MIN_BARO_TO_MAX_BARO_IN_FEET;
         private CalibrationPoint[] _calibrationData;
-        private HenkieF16AltimeterHardwareSupportModule(DeviceConfig deviceConfig)
+
+        // Editor-authored calibration plumbing — same split-file contract
+        // as HenkieF16FuelFlow / HenkF16HSIBoard1 / HenkF16HSIBoard2:
+        // the legacy file (HenkieF16Altimeter.config) continues to own
+        // identity, stator base angles, DIG_OUT initial values, and the
+        // baro-compensation triangle (Min/Max BaroPressureInHg +
+        // IndicatedAltitudeDifference); the unified file
+        // (HenkieF16AltimeterHardwareSupportModule.config) carries the
+        // editor-authored breakpoint table that, when present, overrides
+        // the legacy file's <CalibrationData> block. See
+        // HenkieF16AltimeterUnifiedHardwareSupportModuleConfig.cs.
+        private string _legacyConfigPath;
+        private string _unifiedConfigPath;
+        private ConfigFileReloadWatcher _legacyConfigWatcher;
+        private ConfigFileReloadWatcher _unifiedConfigWatcher;
+
+        private HenkieF16AltimeterHardwareSupportModule(DeviceConfig deviceConfig, string legacyConfigPath, string unifiedConfigPath)
         {
             _deviceConfig = deviceConfig;
+            _legacyConfigPath = legacyConfigPath;
+            _unifiedConfigPath = unifiedConfigPath;
             if (_deviceConfig != null)
             {
                 ConfigureDevice();
                 CreateInputSignals();
                 CreateOutputSignals();
                 RegisterForEvents();
+                StartConfigWatchers();
             }
 
         }
@@ -102,13 +122,27 @@ namespace SimLinkup.HardwareSupport.Henk.Altimeter
 
             try
             {
-                var hsmConfigFilePath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkieF16Altimeter.config");
-                var hsmConfig = HenkieF16AltimeterHardwareSupportModuleConfig.Load(hsmConfigFilePath);
+                var legacyPath  = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkieF16Altimeter.config");
+                var unifiedPath = Path.Combine(Util.CurrentMappingProfileDirectory, "HenkieF16AltimeterHardwareSupportModule.config");
+                var hsmConfig = HenkieF16AltimeterHardwareSupportModuleConfig.Load(legacyPath);
+
+                // Try the unified-schema calibration file (authored by the
+                // SimLinkup Profile Editor). When present, its single
+                // breakpoint table overrides the legacy file's
+                // <CalibrationData> block. See
+                // HenkieF16AltimeterUnifiedHardwareSupportModuleConfig.cs
+                // for the rationale.
+                var unifiedCalibration = TryLoadUnifiedCalibration(unifiedPath);
+
                 if (hsmConfig != null)
                 {
                     foreach (var deviceConfiguration in hsmConfig.Devices)
                     {
-                        var hsmInstance = new HenkieF16AltimeterHardwareSupportModule(deviceConfiguration);
+                        if (unifiedCalibration != null)
+                        {
+                            deviceConfiguration.CalibrationData = unifiedCalibration;
+                        }
+                        var hsmInstance = new HenkieF16AltimeterHardwareSupportModule(deviceConfiguration, legacyPath, unifiedPath);
                         toReturn.Add(hsmInstance);
                     }
                 }
@@ -119,6 +153,94 @@ namespace SimLinkup.HardwareSupport.Henk.Altimeter
             }
 
             return toReturn.ToArray();
+        }
+
+        // Load + map the unified-schema calibration file's breakpoints onto
+        // Henkie.Common.CalibrationPoint. Returns null when the file is
+        // absent, malformed, or doesn't contain the expected channel — caller
+        // falls back to whatever's already on deviceConfiguration.CalibrationData
+        // (typically the legacy <CalibrationData> block).
+        private static CalibrationPoint[] TryLoadUnifiedCalibration(string unifiedPath)
+        {
+            try
+            {
+                if (!File.Exists(unifiedPath)) return null;
+                var unified = GaugeCalibrationConfig.Load<HenkieF16AltimeterUnifiedHardwareSupportModuleConfig>(unifiedPath);
+                if (unified == null) return null;
+                var ch = unified.FindChannel("HenkieF16Altimeter_Indicator_Position_To_Instrument");
+                var bps = ch?.Transform?.Breakpoints;
+                if (bps == null || bps.Length < 2) return null;
+                var result = new CalibrationPoint[bps.Length];
+                for (var i = 0; i < bps.Length; i++)
+                {
+                    result[i] = new CalibrationPoint(bps[i].Input, bps[i].Output);
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Failed to load unified-schema calibration; falling back to legacy <CalibrationData>: " + e.Message);
+                return null;
+            }
+        }
+
+        // Watch both calibration files. Either changing triggers a reload
+        // of just the calibration table — same pattern as Board 1/Board 2/
+        // FuelFlow. Stator base angles, baro-compensation triangle, and
+        // device identity stay untouched at runtime.
+        private void StartConfigWatchers()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(_legacyConfigPath))
+                {
+                    _legacyConfigWatcher = new ConfigFileReloadWatcher(_legacyConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+            try
+            {
+                if (!string.IsNullOrEmpty(_unifiedConfigPath))
+                {
+                    _unifiedConfigWatcher = new ConfigFileReloadWatcher(_unifiedConfigPath, ReloadCalibration);
+                }
+            }
+            catch (Exception e) { Log.Error(e.Message, e); }
+        }
+
+        // Re-evaluate the calibration table without touching the live
+        // device connection. Preference: unified file when present
+        // (editor's source of truth); otherwise the legacy file's
+        // <CalibrationData> block.
+        private void ReloadCalibration()
+        {
+            CalibrationPoint[] next = null;
+            try
+            {
+                next = TryLoadUnifiedCalibration(_unifiedConfigPath);
+                if (next == null && !string.IsNullOrEmpty(_legacyConfigPath) && File.Exists(_legacyConfigPath))
+                {
+                    var legacy = HenkieF16AltimeterHardwareSupportModuleConfig.Load(_legacyConfigPath);
+                    var dev = legacy?.Devices?.FirstOrDefault(d =>
+                        d != null && string.Equals(d.Address, _deviceConfig?.Address, StringComparison.OrdinalIgnoreCase));
+                    if (dev?.CalibrationData != null && dev.CalibrationData.Length >= 2)
+                    {
+                        next = dev.CalibrationData;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Warn("Calibration reload failed; keeping previous table: " + e.Message);
+                return;
+            }
+            if (next != null && next.Length >= 2)
+            {
+                _calibrationData = next;
+                // Re-fire the altitude update with the cached input values so
+                // the user sees new calibration immediately.
+                UpdateAltitudeOutputValues();
+            }
         }
 
         private static int ChannelNumber(OutputChannels outputChannel)
@@ -491,6 +613,16 @@ namespace SimLinkup.HardwareSupport.Henk.Altimeter
                     UnregisterForEvents();
                     Common.Util.DisposeObject(_altimeterDeviceInterface);
                     Common.Util.DisposeObject(_renderer);
+                    if (_legacyConfigWatcher != null)
+                    {
+                        try { _legacyConfigWatcher.Dispose(); } catch { }
+                        _legacyConfigWatcher = null;
+                    }
+                    if (_unifiedConfigWatcher != null)
+                    {
+                        try { _unifiedConfigWatcher.Dispose(); } catch { }
+                        _unifiedConfigWatcher = null;
+                    }
                 }
             }
             _isDisposed = true;
