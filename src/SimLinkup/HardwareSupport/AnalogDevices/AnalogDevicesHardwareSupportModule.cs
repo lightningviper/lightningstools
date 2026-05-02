@@ -14,6 +14,16 @@ namespace SimLinkup.HardwareSupport.AnalogDevices
     {
         private static readonly ILog _log = LogManager.GetLogger(typeof(AnalogDevicesHardwareSupportModule));
         private readonly List<Task> _pendingTasks = new List<Task>();
+        // _pendingTasks is mutated from arbitrary signal-change threads
+        // (DAC_OutputSignalChanged is wired to AnalogSignal.SignalChanged
+        // and SimLinkup raises SignalChanged on whatever thread last
+        // wrote the signal's State) AND from the runtime loop thread
+        // (Synchronize calls ToArray + Clear every ~2 ms).
+        // Concurrent List<T>.Add and List<T>.Clear leave the internal
+        // _items[] and _size out of sync, leaving dead Task references
+        // in slots Clear didn't actually wipe. Lock everywhere we
+        // touch the list.
+        private readonly object _pendingTasksLock = new object();
 
         private AnalogSignal[] _analogOutputSignals;
         private a.IDenseDacEvalBoard _device;
@@ -98,17 +108,24 @@ namespace SimLinkup.HardwareSupport.AnalogDevices
 
         public override void Synchronize()
         {
+            // Snapshot + clear under the lock so Add can't race the
+            // ToArray/Clear pair and end up with dead references in
+            // _items[]. Wait outside the lock — Task.WaitAll can take
+            // a long time and we don't want to block signal-change
+            // threads on it.
+            Task[] snapshot;
+            lock (_pendingTasksLock)
+            {
+                snapshot = _pendingTasks.ToArray();
+                _pendingTasks.Clear();
+            }
             try
             {
-                Task.WaitAll(_pendingTasks.ToArray());
+                Task.WaitAll(snapshot);
             }
             catch (Exception e)
             {
                 _log.Error(e.Message, e);
-            }
-            finally
-            {
-                _pendingTasks.Clear();
             }
         }
 
@@ -193,7 +210,10 @@ namespace SimLinkup.HardwareSupport.AnalogDevices
         {
             var task =
                 Task.Run(() => SetDACChannelOutputValue((AnalogSignal) sender, a.DacChannelDataSource.DataValueA));
-            _pendingTasks.Add(task);
+            lock (_pendingTasksLock)
+            {
+                _pendingTasks.Add(task);
+            }
         }
 
         private void Dispose(bool disposing)
