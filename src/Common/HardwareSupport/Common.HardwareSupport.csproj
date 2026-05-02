@@ -39,6 +39,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Calibration\ConfigFileReloadWatcher.cs" />
     <Compile Include="CompositeControl.cs" />
     <Compile Include="HardwareSupportModuleBase.cs" />
     <Compile Include="HardwareSupportModuleRegistry.cs" />
