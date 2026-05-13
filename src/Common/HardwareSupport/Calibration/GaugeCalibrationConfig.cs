@@ -393,9 +393,9 @@ namespace Common.HardwareSupport.Calibration
             // channel runs 140..700 (DAC counts), well outside ±10. Letting
             // the math run and clamping at the per-channel boundary is the
             // correct, gauge-agnostic shape.
-            if (input <= breakpoints[0].Input) return breakpoints[0].Volts;
+            if (input <= breakpoints[0].Input) return BpValue(breakpoints[0]);
             var last = breakpoints[breakpoints.Length - 1];
-            if (input >= last.Input) return last.Volts;
+            if (input >= last.Input) return BpValue(last);
             for (var i = 1; i < breakpoints.Length; i++)
             {
                 var hi = breakpoints[i];
@@ -403,12 +403,28 @@ namespace Common.HardwareSupport.Calibration
                 {
                     var lo = breakpoints[i - 1];
                     var span = hi.Input - lo.Input;
-                    if (span <= 0) return lo.Volts;  // degenerate; pick the lower
+                    if (span <= 0) return BpValue(lo);  // degenerate; pick the lower
                     var t = (input - lo.Input) / span;
-                    return lo.Volts + t * (hi.Volts - lo.Volts);
+                    return BpValue(lo) + t * (BpValue(hi) - BpValue(lo));
                 }
             }
-            return last.Volts;
+            return BpValue(last);
+        }
+
+        // Pick the right output attribute off a breakpoint. Volts-based gauges
+        // (every Simtek + Lilbern + Westin + AMI + Astronautics today) author
+        // their breakpoints as <Point input=".." volts=".."/>, so Volts carries
+        // the value and Output deserializes to its default of 0. DAC-counts
+        // gauges (Henk F-16 ADI Support Board pitch/roll/command bars/RoT)
+        // author as <Point input=".." output=".."/>, so Output carries the
+        // value and Volts is 0. Prefer Output when present, fall back to Volts.
+        // Edge case where both happen to be 0 (a legitimate zero-volts knot in
+        // a Simtek table) collapses cleanly: both interpretations give 0.
+        // Without this dispatch, EvaluatePiecewise silently returned 0 for
+        // every DAC-counts breakpoint, parking the gauge at its MinValue rail.
+        private static double BpValue(GaugeBreakpoint bp)
+        {
+            return bp.Output != 0 ? bp.Output : bp.Volts;
         }
 
         // Resolver pair: maps `input` linearly to an angle in
