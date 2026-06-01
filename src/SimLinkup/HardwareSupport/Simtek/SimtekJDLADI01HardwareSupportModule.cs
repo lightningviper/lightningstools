@@ -753,14 +753,16 @@ namespace SimLinkup.HardwareSupport.Simtek
                 State = 0.00, //volts;
                 IsVoltage = true,
                 IsSine = true,
-                // NOTE: original C# declared MinValue/MaxValue as ±1 (not ±10)
-                // here, while the matching ROLL COS signal declares ±10. The
-                // ApplyTrim helper now clamps overrides to whichever bounds
-                // are declared, so preserving the original ±1 keeps existing
-                // behavior consistent. If a spec sheet later confirms this
-                // was a typo, change to ±10.
-                MinValue = -1,
-                MaxValue = 1
+                // ±10 V to match the matching ROLL COS signal. The original
+                // C# declared ±1 here, which clipped EvaluatePiecewiseResolver's
+                // sin output (which can swing the full ±peakVolts) and produced
+                // an imbalanced sin/cos pair — symptom on the bench was the
+                // roll synchro "skipping" past intermediate angles, hunting
+                // toward whichever (sin, cos) vector the clipped pair pointed
+                // at instead of the smooth interpolated angle. Fixed for
+                // brand-new gauges out of the box.
+                MinValue = -10,
+                MaxValue = 10
             };
             return thisSignal;
         }
