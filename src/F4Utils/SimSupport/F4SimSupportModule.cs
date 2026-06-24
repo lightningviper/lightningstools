@@ -834,10 +834,17 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.CMDS__CHAFF_COUNT:
                     SetOutput((AnalogSignal) output, _lastFlightData.ChaffCount);
                     break;
+                case F4SimOutputs.EWMU__CHAFF_COUNT:
+                    SetOutput((AnalogSignal)output, _lastFlightData.ChaffCount);
+                    break;
 
                 case F4SimOutputs.CMDS__FLARE_COUNT:
                     SetOutput((AnalogSignal) output, _lastFlightData.FlareCount);
                     break;
+                case F4SimOutputs.EWMU__FLARE_COUNT:
+                    SetOutput((AnalogSignal)output, _lastFlightData.FlareCount);
+                    break;
+
 
                 case F4SimOutputs.CMDS__GO:
                     ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.Go) == LightBits2.Go;
@@ -858,9 +865,15 @@ namespace F4Utils.SimSupport
                 case F4SimOutputs.CMDS__CHAFF_LO:
                     ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
                     break;
+                case F4SimOutputs.EWMU__CHAFF_LO:
+                    ((DigitalSignal)output).State = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.ChaffLo) == LightBits2.ChaffLo;
+                    break;
 
                 case F4SimOutputs.CMDS__FLARE_LO:
                     ((DigitalSignal) output).State = ((LightBits2) _lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
+                    break;
+                case F4SimOutputs.EWMU__FLARE_LO:
+                    ((DigitalSignal)output).State = ((LightBits2)_lastFlightData.lightBits2 & LightBits2.FlareLo) == LightBits2.FlareLo;
                     break;
 
                 case F4SimOutputs.CMDS__DISPLAYTEXT:
