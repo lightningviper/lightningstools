@@ -251,6 +251,17 @@ namespace SimLinkup.HardwareSupport.Henk.FuelFlow
             if (next != null && next.Length >= 2)
             {
                 _calibrationData = next;
+                // Re-evaluate the current fuel-flow input with the new
+                // calibration table so the physical needle moves to the
+                // freshly-calibrated position immediately. Without this
+                // the gauge sat at whatever position was written before
+                // the reload, waiting for the next input-signal change
+                // (which won't come while BMS is closed during
+                // bench calibration). Mirrors the pattern used by
+                // Simtek100335015HardwareSupportModule.ReloadConfig,
+                // Simtek101084HardwareSupportModule.ReloadConfig, and
+                // HenkF16ADISupportBoardHardwareSupportModule.ReloadConfig.
+                UpdateFuelFlowOutputValues();
             }
         }
 
