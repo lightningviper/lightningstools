@@ -14,7 +14,7 @@ namespace MFDExtractor.FlightDataAdapters
     {
         public void Adapt(ICompass compass, FlightData flightData)
         {
-            compass.InstrumentState.MagneticHeadingDegrees = (360 + (flightData.yaw / Constants.RADIANS_PER_DEGREE)) % 360;
+            compass.InstrumentState.MagneticHeadingDegrees = flightData.currentHeading;
         }
     }
 }

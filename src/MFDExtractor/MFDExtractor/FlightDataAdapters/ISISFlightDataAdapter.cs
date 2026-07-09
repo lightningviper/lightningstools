@@ -26,7 +26,7 @@ namespace MFDExtractor.FlightDataAdapters
             isis.InstrumentState.RadarAltitudeAGL = -flightData.RALT;
             isis.InstrumentState.RadarAltitudeValid = (flightData.miscBits & (uint)MiscBits.RALT_Valid) == (uint)MiscBits.RALT_Valid;
 			isis.InstrumentState.MachNumber = flightData.mach;
-            isis.InstrumentState.MagneticHeadingDegrees = (360 +(flightData.yaw/Common.Math.Constants.RADIANS_PER_DEGREE))%360;
+            isis.InstrumentState.MagneticHeadingDegrees = flightData.currentHeading;
             isis.InstrumentState.NeverExceedSpeedKnots = 850;
             isis.InstrumentState.PitchDegrees = ((flightData.pitch/Common.Math.Constants.RADIANS_PER_DEGREE));
             isis.InstrumentState.RollDegrees = ((flightData.roll/Common.Math.Constants.RADIANS_PER_DEGREE));
