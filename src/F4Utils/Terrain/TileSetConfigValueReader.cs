@@ -17,8 +17,8 @@ namespace F4Utils.Terrain
             get
             {
                 var configLines = new List<string>();
-                var configFolder = Path.Combine(_bmsBaseDir, @"\Config");
-                var bmsConfigFile = Path.Combine(configFolder, "Falcon BMS.config");
+                var configFolder = Path.Combine(_bmsBaseDir, "User/Config");
+                var bmsConfigFile = Path.Combine(configFolder, "Falcon BMS.cfg");
                 using (var sr = new StreamReader(bmsConfigFile))
                 {
                     while (!sr.EndOfStream)

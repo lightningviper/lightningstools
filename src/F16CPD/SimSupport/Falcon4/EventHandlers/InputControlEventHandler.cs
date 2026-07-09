@@ -39,6 +39,7 @@ namespace F16CPD.SimSupport.Falcon4.EventHandlers
             ISetExtFuelSwitchTransWingFirstEventHandler setExtFuelSwitchTransWingFirstEventHandler=null
             )
         {
+            falconCallbackSender = falconCallbackSender ?? new FalconCallbackSender(mfdManager);
             _optionSelectButtonPressHandler = optionSelectButtonPressHandler ?? new OptionSelectButtonPressHandler(mfdManager, falconCallbackSender);
             _setHsiModeTcnEventHandler = setHsiModeTcnEventHandler ?? new SetHsiModeTcnEventHandler(falconCallbackSender);
             _setHsiModePlsNavEventHandler = setHsiModePlsNavEventHandler ?? new SetHsiModePlsNavEventHandler(falconCallbackSender);

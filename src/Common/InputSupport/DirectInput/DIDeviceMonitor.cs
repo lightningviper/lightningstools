@@ -203,11 +203,19 @@ namespace Common.InputSupport.DirectInput
                         }
                     }
                 }
-                catch (ThreadAbortException)
+                catch (ThreadAbortException exception)
                 {
+                    Log.Error(exception.ToString());
                     Thread.ResetAbort();
                 }
-                catch (ThreadInterruptedException) {}
+                catch (ThreadInterruptedException exception)
+                {
+                    Log.Error(exception.ToString());
+                }
+                catch (Exception exception)
+                {
+                    Log.Error(exception.ToString());
+                }
             }
         }
 
@@ -368,8 +376,9 @@ namespace Common.InputSupport.DirectInput
                         Prepared = true;
                     }
                 }
-                catch 
+                catch(Exception exception)
                 {
+                    Log.Error(exception.ToString());
                     Prepared = false;
                 }
                 finally
@@ -446,8 +455,9 @@ namespace Common.InputSupport.DirectInput
                         StateChanged?.Invoke(this, new DIStateChangedEventArgs(_prevState, _state));
                     }
                 }
-                catch 
+                catch(Exception exception)
                 {
+                    Log.Error(exception.ToString());
                     Dispose();
                     Prepared = false;
                 }
