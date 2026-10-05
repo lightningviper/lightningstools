@@ -65,6 +65,8 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         private byte _hsiBoard2DeviceAddress;
 
         private CalibrationPoint[] _courseDeviationIndicatorCalibrationData;
+        private CalibrationPoint[] _headingDatumCalibrationData;
+        private CalibrationPoint[] _desiredCourseCalibrationData;
 
         // Editor-authored calibration plumbing — see Board 1's matching
         // fields for the contract. Board 2's unified file owns just the
@@ -364,6 +366,8 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         {
             if (_hsiBoard2DeviceInterface == null) return;
             _courseDeviationIndicatorCalibrationData = _hsiBoard2DeviceConfig?.CourseDeviationIndicatorCalibrationData;
+            _desiredCourseCalibrationData = _hsiBoard2DeviceConfig.DesiredCourseCalibrationData;
+            _headingDatumCalibrationData = _hsiBoard2DeviceConfig.HeadingDatumCalibrationData;
         }
 
         private void ConfigureDeviceConnection()
@@ -1271,6 +1275,31 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             }
         }
 
+        private short GetCalibratedHeadingDatumDegrees(short headingDatumRaw)
+        {
+            if (_headingDatumCalibrationData == null)
+            {
+                return headingDatumRaw;
+            }
+
+            var lowerPoint = _headingDatumCalibrationData.OrderBy(x => x.Input).LastOrDefault(x => x.Input <= headingDatumRaw) ??
+                             new CalibrationPoint(-1023, -1023);
+            var upperPoint =
+                _headingDatumCalibrationData
+                    .OrderBy(x => x.Input)
+                    .FirstOrDefault(x => x != lowerPoint && x.Input >= lowerPoint.Input) ?? new CalibrationPoint(1023, 1023);
+            var inputRange = Math.Abs(upperPoint.Input - lowerPoint.Input);
+            var outputRange = Math.Abs(upperPoint.Output - lowerPoint.Output);
+            var inputPct = inputRange != 0
+                ? (headingDatumRaw - lowerPoint.Input) / inputRange
+                : 1.00;
+            var toReturn = (short)((inputPct * outputRange) + lowerPoint.Output);
+            if (toReturn < -1023) toReturn = -1023;
+            if (toReturn > 1023) toReturn = 1023;
+            return toReturn;
+        }
+
+
         private ushort CalibratedCourseDeviationIndicatorPositionValue(double courseDeviationDegrees, double courseDeviationLimitDegrees)
         {
             if (double.IsNaN(courseDeviationDegrees) || double.IsInfinity(courseDeviationDegrees)) courseDeviationDegrees = 0;
@@ -1335,9 +1364,10 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 _lastHeadingAndCourseInputRefreshTime = DateTime.UtcNow;
                 var headingState = _hsiBoard2DeviceInterface.RequestHeadingInfoUpdate();
                 var headingDatumRaw = headingState.HeadingDatumRaw;
-                var headingDatumDegrees = headingDatumRaw * 360.000d / 4096.000d;
-                var desiredHeadingDegrees = _hsiHeadingBugProcessor.Process(magneticHeadingDegrees, headingDatumDegrees);
-                _headingDatumDegreesOutputSignal.State = headingDatumDegrees;
+                var calibratedHeadingDatumDegrees = GetCalibratedHeadingDatumDegrees(headingDatumRaw);
+                //var headingDatumDegrees = calibratedHeadingDatumDegrees * 360.000d / 4096.000d;
+                var desiredHeadingDegrees = _hsiHeadingBugProcessor.Process(magneticHeadingDegrees, calibratedHeadingDatumDegrees);
+                _headingDatumDegreesOutputSignal.State = calibratedHeadingDatumDegrees;
                 _desiredHeadingDegreesOutputSignal.State = Math.Floor(desiredHeadingDegrees);
                 _desiredHeadingPercentageOutputSignal.State = desiredHeadingDegrees / 360.00f;
                 _headingDatumRawOutputSignal.State = headingDatumRaw;

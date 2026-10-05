@@ -43,6 +43,14 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         [XmlArray("CourseDeviationIndicatorCalibrationData")]
         [XmlArrayItem(nameof(CalibrationPoint))]
         public CalibrationPoint[] CourseDeviationIndicatorCalibrationData { get; set; } = Array.Empty<CalibrationPoint>();
+
+        [XmlArray("HeadingDatumCalibrationData")]
+        [XmlArrayItem(nameof(CalibrationPoint))]
+        public CalibrationPoint[] HeadingDatumCalibrationData { get; set; } = Array.Empty<CalibrationPoint>();
+
+        [XmlArray("DesiredCourseCalibrationData")]
+        [XmlArrayItem(nameof(CalibrationPoint))]
+        public CalibrationPoint[] DesiredCourseCalibrationData { get; set; } = Array.Empty<CalibrationPoint>();
     }
 
     [Serializable]

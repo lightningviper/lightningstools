@@ -861,7 +861,6 @@
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="HardwareSupport\Henk\HSI\CRS and HDG knob readback spec.txt" />
     <Content Include="SimLinkup.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
