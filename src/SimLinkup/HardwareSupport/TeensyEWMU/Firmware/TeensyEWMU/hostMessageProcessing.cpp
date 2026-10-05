@@ -6,6 +6,7 @@ extern char _CMDSChars[CMDS_NUM_CHARACTERS_TO_DISPLAY];
 extern char _EWMUChars[EWMU_NUM_CHARACTERS_TO_DISPLAY];
 extern char _EWPIChars[EWPI_NUM_CHARACTERS_TO_DISPLAY];
 extern uint32_t _invertBits;
+extern uint16_t _userAxisValues[NUM_USER_AXES];
 extern uint8_t _CMDSConditionalBlankingBits;
 
 PacketSerial_<COBS, 0, RECEIVE_BUFFER_SIZE> _packetSerial;
@@ -69,6 +70,12 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
       memset(&_CMDSConditionalBlankingBits, 0, sizeof(_CMDSConditionalBlankingBits));
       memcpy(&_CMDSConditionalBlankingBits, buffer + bufferOffset, sizeof(_CMDSConditionalBlankingBits));
       bufferOffset += sizeof(_CMDSConditionalBlankingBits);      
+    }
+    else if (fieldType & TeensyEWMUPacketFields::USER_AXIS_VALUES)
+    {
+        memset(&_userAxisValues, 0, sizeof(uint16_t) * NUM_USER_AXES);
+        memcpy(&_userAxisValues, buffer + bufferOffset, sizeof(uint16_t) * NUM_USER_AXES);
+        bufferOffset += sizeof(uint16_t) * NUM_USER_AXES;
     }
   }
 }

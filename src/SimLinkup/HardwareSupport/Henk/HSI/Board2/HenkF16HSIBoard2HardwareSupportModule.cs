@@ -13,6 +13,10 @@ using Henkie.Common;
 using System.Globalization;
 using log4net;
 using p = Phcc;
+using SimLinkup.HardwareSupport.Henk.HSI.HeadingBug;
+using Common.Statistics;
+using Common.Collections;
+using System.Threading.Tasks;
 
 namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
 {
@@ -22,6 +26,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(HenkF16HSIBoard2HardwareSupportModule));
         private readonly IHorizontalSituationIndicator _renderer = new HorizontalSituationIndicator();
+        private readonly IHsiHeadingBugProcessor _hsiHeadingBugProcessor = new HsiHeadingBugProcessor();
         private bool _isDisposed;
 
         //INPUT SIGNALS
@@ -29,7 +34,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         private AnalogSignal _bearingInputSignal;
         private AnalogSignal _rangeInputSignal;
         private DigitalSignal _rangeInvalidFlagInputSignal;
-        private AnalogSignal _courseInputSignal;
+        private AnalogSignal _desiredCourseFromSimInputSignal;
         private AnalogSignal _courseDeviationInputSignal;
         private AnalogSignal _courseDeviationLimitInputSignal;
         private DigitalSignal _deviationInvalidFlagInputSignal;
@@ -37,12 +42,21 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         private DigitalSignal _toFlagInputSignal;
         private DigitalSignal _fromFlagInputSignal;
         private DigitalSignal _offFlagInputSignal;
+        private DigitalSignal _autopilotEngagedFlagInputSignal;
 
         //OUTPUT SIGNALS
         private AnalogSignal _courseDeviationIndicatorOutputSignal;
         private DigitalSignal _deviationInvalidFlagOutputSignal;
         private AnalogSignal _toFromFlagsOutputSignal;
-        private AnalogSignal _courseArrowPositionOutputSignal;
+        private AnalogSignal _desiredHeadingDegreesOutputSignal;
+        private AnalogSignal _headingDatumDegreesOutputSignal;
+        private AnalogSignal _headingDatumRawOutputSignal;
+        private AnalogSignal _desiredHeadingPercentageOutputSignal;
+        private AnalogSignal _desiredCourseDegreesOutputSignal;
+        private AnalogSignal _desiredCourseRawOutputSignal;
+        private AnalogSignal _desiredCoursePercentageOutputSignal;
+
+
         private List<DigitalSignal> _digitalOutputs = new List<DigitalSignal>();
 
         //DEVICE CONFIG
@@ -82,7 +96,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         {
             _magneticHeadingInputSignal,
             _desiredHeadingFromSimInputSignal,
-            _courseInputSignal,
+            _desiredCourseFromSimInputSignal,
             _courseDeviationInputSignal,
             _courseDeviationLimitInputSignal,
             _bearingInputSignal,
@@ -93,7 +107,13 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         {
             _courseDeviationIndicatorOutputSignal,
             _toFromFlagsOutputSignal,
-            _courseArrowPositionOutputSignal
+            _desiredHeadingDegreesOutputSignal,
+            _desiredHeadingPercentageOutputSignal,
+            _headingDatumRawOutputSignal,
+            _headingDatumDegreesOutputSignal,
+            _desiredCourseDegreesOutputSignal,
+            _desiredCoursePercentageOutputSignal, 
+            _desiredCourseRawOutputSignal
         };
 
         public override DigitalSignal[] DigitalInputs => new[]
@@ -102,7 +122,8 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             _deviationInvalidFlagInputSignal, 
             _rangeInvalidFlagInputSignal, 
             _toFlagInputSignal,
-            _fromFlagInputSignal
+            _fromFlagInputSignal,
+            _autopilotEngagedFlagInputSignal
         };
 
         private static OutputChannels[] DigitalOutputChannels => new[]
@@ -284,6 +305,8 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             ConfigureCalibration();
             ConfigureUsbMessagingOptions();
             ConfigureCourseAndHeadingValueHysteresisThresholds();
+            ConfigureCourseValueConvertOption();
+            ConfigureHeadingValueConvertOption();
             ConfigureCourse45DegreeSinCosCrossoverValue();
         }
 
@@ -303,9 +326,17 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         private void ConfigureUsbMessagingOptions()
         {
             if (_hsiBoard2DeviceInterface == null) return;
+            _hsiBoard2DeviceInterface.SetUsbMessageTimeInterval(25);
             _hsiBoard2DeviceInterface.SetUsbMessagingOption(UsbMessagingOption.SendOnlyOnRequest);
         }
-
+        private void ConfigureCourseValueConvertOption()
+        {
+            _hsiBoard2DeviceInterface.SetCourseValueConvertOption(CourseValueConvertOption.Raw);
+        }
+        private void ConfigureHeadingValueConvertOption()
+        {
+            _hsiBoard2DeviceInterface.SetHeadingValueConvertToDegreesOption(convertToDegrees: false);
+        }
         private void ConfigureStatorOffsets()
         {
             if (_hsiBoard2DeviceInterface == null || _hsiBoard2DeviceConfig?.StatorOffsetsConfig == null) return;
@@ -480,13 +511,14 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         private void SetInitialState()
         {
             SetDeviationInvalidFlagVisibility(isVisible: false);
+            _hsiHeadingBugProcessor.Reset();
         }
         public override void Render(Graphics g, Rectangle destinationRectangle)
         {
             _renderer.InstrumentState.BearingToBeaconDegrees = (float)_bearingInputSignal.CorrelatedState;
             _renderer.InstrumentState.CourseDeviationDegrees = (float)_courseDeviationInputSignal.State;
             _renderer.InstrumentState.CourseDeviationLimitDegrees = (float)_courseDeviationLimitInputSignal.State;
-            _renderer.InstrumentState.DesiredCourseDegrees = (int)_courseInputSignal.CorrelatedState;
+            _renderer.InstrumentState.DesiredCourseDegrees = (int)_desiredCourseFromSimInputSignal.CorrelatedState;
             _renderer.InstrumentState.DesiredHeadingDegrees = (int)_desiredHeadingFromSimInputSignal.CorrelatedState;
             _renderer.InstrumentState.DeviationInvalidFlag = _deviationInvalidFlagInputSignal.State;
             _renderer.InstrumentState.DistanceToBeaconNauticalMiles = (float)_rangeInputSignal.State;
@@ -507,11 +539,12 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             _fromFlagInputSignal = CreateFromFlagInputSignal();
             _magneticHeadingInputSignal = CreateMagneticHeadingInputSignal();
             _desiredHeadingFromSimInputSignal = CreateDesiredHeadingFromSimInputSignal();
-            _courseInputSignal = CreateCourseInputSignal();
+            _desiredCourseFromSimInputSignal = CreateDesiredCourseFromSimInputSignal();
             _bearingInputSignal = CreateBearingInputSignal();
             _rangeInputSignal = CreateRangeInputSignal();
             _courseDeviationInputSignal = CreateCourseDeviationInputSignal();
             _courseDeviationLimitInputSignal = CreateCourseDeviationLimitInputSignal();
+            _autopilotEngagedFlagInputSignal = CreateAutopilotEngagedFlagInputSignal();
         }
 
         private AnalogSignal CreateMagneticHeadingInputSignal()
@@ -576,7 +609,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             return thisSignal;
         }
 
-        private AnalogSignal CreateCourseInputSignal()
+        private AnalogSignal CreateDesiredCourseFromSimInputSignal()
         {
             var thisSignal = new AnalogSignal
             {
@@ -632,6 +665,22 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 IsAngle = true,
                 MinValue = 0,
                 MaxValue = 10
+            };
+            return thisSignal;
+        }
+        private DigitalSignal CreateAutopilotEngagedFlagInputSignal()
+        {
+            var thisSignal = new DigitalSignal
+            {
+                Category = "Inputs",
+                CollectionName = "Digital Inputs",
+                FriendlyName = "Autopilot Engaged Flag (from sim)",
+                Id = $"Henk_F16_HSI_Board2__Autopilot_Engaged_Flag_From_Sim",
+                Index = 0,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                State = false
             };
             return thisSignal;
         }
@@ -747,7 +796,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
                 FriendlyName = "Course Deviation Indicator Position (0-1023)",
-                Id = $"Henk_F16_HSI_Board2[{"0x" + _hsiBoard2DeviceAddress.ToString("X").PadLeft(2, '0')}]__Course_Deviation_Indicator_Position_To_Instrument",
+                Id = $"Henk_F16_HSI_Board2__Course_Deviation_Indicator_Position_To_Instrument",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
@@ -760,15 +809,14 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             };
             return thisSignal;
         }
-
-        private AnalogSignal CreateCourseArrowPositionOutputSignal()
+        private AnalogSignal CreateHeadingDatumDegreesOutputSignal()
         {
             var thisSignal = new AnalogSignal
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Course Arrow Position (0-1023)",
-                Id = $"Henk_F16_HSI_Board2[{"0x" + _hsiBoard2DeviceAddress.ToString("X").PadLeft(2, '0')}]__Course_Arrow_Position_To_Instrument",
+                FriendlyName = "Heading Datum Degrees (-90 to +90)",
+                Id = $"Henk_F16_HSI_Board2__Heading_Datum_Degrees_From_Instrument",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
@@ -776,8 +824,77 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 State = 0,
                 IsVoltage = false,
                 IsSine = false,
+                IsAngle = true,
+                MinValue = -90,
+                MaxValue = 90
+            };
+            return thisSignal;
+
+        }
+        private AnalogSignal CreateDesiredHeadingDegreesOutputSignal()
+        {
+            var thisSignal = new AnalogSignal
+            {
+                Category = "Outputs",
+                CollectionName = "Analog Outputs",
+                FriendlyName = "Desired Heading Degrees (0-360)",
+                Id = $"Henk_F16_HSI_Board2__Desired_Heading_Degrees_From_Instrument",
+                Index = 0,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                State = 0,
+                IsVoltage = false,
+                IsSine = false,
+                IsAngle = true,
                 MinValue = 0,
-                MaxValue = 1023
+                MaxValue = 360,
+                Precision = 0
+            };
+            return thisSignal;
+        }
+
+        private AnalogSignal CreateDesiredHeadingPercentageOutputSignal()
+        {
+            var thisSignal = new AnalogSignal
+            {
+                Category = "Outputs",
+                CollectionName = "Analog Outputs",
+                FriendlyName = "Desired Heading Percentage (0.0-1.0)",
+                Id = $"Henk_F16_HSI_Board2__Desired_Heading_Percentage_From_Instrument",
+                Index = 0,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                State = 0,
+                IsVoltage = false,
+                IsSine = false,
+                IsAngle = false,
+                IsPercentage = true,
+                MinValue = 0,
+                MaxValue = 1
+            };
+            return thisSignal;
+        }
+        private AnalogSignal CreateHeadingDatumRawOutputSignal()
+        {
+            var thisSignal = new AnalogSignal
+            {
+                Category = "Outputs",
+                CollectionName = "Analog Outputs",
+                FriendlyName = "Heading Datum Raw (-1023 to 1023)",
+                Id = $"Henk_F16_HSI_Board2__Heading_Datum_From_Instrument",
+                Index = 0,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                State = 0,
+                IsVoltage = false,
+                IsSine = false,
+                IsAngle = false,
+                MinValue = -1023,
+                MaxValue = 1023,
+                Precision = 0
             };
             return thisSignal;
         }
@@ -789,7 +906,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 Category = "Outputs",
                 CollectionName = "Digital Outputs",
                 FriendlyName = "Deviation Invalid Flag (0 = visible, 1 = not visible)",
-                Id = $"Henk_F16_HSI_Board2[{"0x" + _hsiBoard2DeviceAddress.ToString("X").PadLeft(2, '0')}]__Deviation_Invalid_Flag_To_Instrument",
+                Id = $"Henk_F16_HSI_Board2__Deviation_Invalid_Flag_To_Instrument",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
@@ -806,7 +923,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
                 FriendlyName = "TO/FROM Indication (0 = none, 1 = TO, 2 = FROM)",
-                Id = $"Henk_F16_HSI_Board2[{"0x" + _hsiBoard2DeviceAddress.ToString("X").PadLeft(2, '0')}]__TO_FROM_Indication_To_Instrument",
+                Id = $"Henk_F16_HSI_Board2__TO_FROM_Indication_To_Instrument",
                 Index = 0,
                 Source = this,
                 SourceFriendlyName = FriendlyName,
@@ -820,12 +937,88 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             return thisSignal;
         }
 
+        private AnalogSignal CreateDesiredCourseRawOutputSignal()
+        {
+            var thisSignal = new AnalogSignal
+            {
+                Category = "Outputs",
+                CollectionName = "Analog Outputs",
+                FriendlyName = "Desired Course Raw (0 to 4095)",
+                Id = $"Henk_F16_HSI_Board2__Desired_Course_Raw_From_Instrument",
+                Index = 0,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                State = 0,
+                IsVoltage = false,
+                IsSine = false,
+                IsAngle = false,
+                MinValue = 0,
+                MaxValue = 4095,
+                Precision = 0
+            };
+            return thisSignal;
+        }
+
+        private AnalogSignal CreateDesiredCourseDegreesOutputSignal()
+        {
+            var thisSignal = new AnalogSignal
+            {
+                Category = "Outputs",
+                CollectionName = "Analog Outputs",
+                FriendlyName = "Desired Course Degrees (0 to 360)",
+                Id = $"Henk_F16_HSI_Board2__Desired_Course_Degrees_From_Instrument",
+                Index = 0,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                State = 0,
+                IsVoltage = false,
+                IsSine = false,
+                IsAngle = true,
+                MinValue = 0,
+                MaxValue = 360,
+                Precision = 0
+            };
+            return thisSignal;
+        }
+
+        private AnalogSignal CreateDesiredCoursePercentageOutputSignal()
+        {
+            var thisSignal = new AnalogSignal
+            {
+                Category = "Outputs",
+                CollectionName = "Analog Outputs",
+                FriendlyName = "Desired Course Percentage (0.0 to 1.0)",
+                Id = $"Henk_F16_HSI_Board2__Desired_Course_Percentage_From_Instrument",
+                Index = 0,
+                Source = this,
+                SourceFriendlyName = FriendlyName,
+                SourceAddress = null,
+                State = 0,
+                IsVoltage = false,
+                IsSine = false,
+                IsAngle = true,
+                MinValue = 0.0f,
+                MaxValue = 1.0f
+            };
+            return thisSignal;
+        }
+
         private void CreateOutputSignals()
         {
             _courseDeviationIndicatorOutputSignal = CreateCourseDeviationIndicatorPositionOutputSignal();
             _deviationInvalidFlagOutputSignal = CreateDeviationInvalidFlagOutputSignal();
             _toFromFlagsOutputSignal = CreateToFromFlagsOutputSignal();
-            _courseArrowPositionOutputSignal = CreateCourseArrowPositionOutputSignal();
+            _headingDatumDegreesOutputSignal = CreateHeadingDatumDegreesOutputSignal();
+            _desiredHeadingDegreesOutputSignal = CreateDesiredHeadingDegreesOutputSignal();
+            _desiredHeadingPercentageOutputSignal = CreateDesiredHeadingPercentageOutputSignal();
+            _headingDatumRawOutputSignal = CreateHeadingDatumRawOutputSignal();
+
+            _desiredCourseDegreesOutputSignal = CreateDesiredCourseDegreesOutputSignal();
+            _desiredCourseRawOutputSignal = CreateDesiredCourseRawOutputSignal();
+            _desiredCoursePercentageOutputSignal = CreateDesiredCoursePercentageOutputSignal();
+
             _digitalOutputs = CreateOutputSignalsForDigitalOutputChannels();
             _digitalOutputs.Add(_deviationInvalidFlagOutputSignal);
         }
@@ -867,7 +1060,10 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             {
                 _toFromFlagsOutputSignal.SignalChanged += ToFromFlagsOutputSignal_SignalChanged;
             }
-
+            if (_autopilotEngagedFlagInputSignal != null)
+            {
+                _autopilotEngagedFlagInputSignal.SignalChanged += AutopilotEngagedFlagInputSignal_SignalChanged;
+            }
             foreach (var digitalSignal in _digitalOutputs)
             {
                 digitalSignal.SignalChanged += OutputSignalForDigitalOutputChannel_SignalChanged;
@@ -940,6 +1136,14 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 try
                 {
                     _toFromFlagsOutputSignal.SignalChanged -= ToFromFlagsOutputSignal_SignalChanged;
+                }
+                catch (RemotingException) { }
+            }
+            if (_autopilotEngagedFlagInputSignal != null)
+            {
+                try
+                {
+                    _autopilotEngagedFlagInputSignal.SignalChanged -= AutopilotEngagedFlagInputSignal_SignalChanged;
                 }
                 catch (RemotingException) { }
             }
@@ -1018,6 +1222,11 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             ToFromFlagInputSignalsChanged();
         }
 
+        private void AutopilotEngagedFlagInputSignal_SignalChanged(object sender, DigitalSignalChangedEventArgs args)
+        {
+            _hsiHeadingBugProcessor.Reset();
+        }
+
         private void ToFlagInputSignal_SignalChanged(object sender, DigitalSignalChangedEventArgs args)
         {
             ToFromFlagInputSignalsChanged();
@@ -1085,6 +1294,81 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 ? (courseDeviationPct - lowerPoint.Input) / inputRange
                 : 1.00;
             return (ushort)((inputPct * outputRange) + lowerPoint.Output);
+        }
+
+        private DateTime _lastHeadingAndCourseInputRefreshTime = DateTime.MinValue;
+        private const float HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ  = 5.0f;
+        public override void Synchronize()
+        {
+            base.Synchronize();
+            UpdateHeadingAndCourseInputsInBackground();
+        }
+        private const int NUM_CRS_RAW_SAMPLES_TO_STORE = 5;
+        private const double MAX_SAMPLE_SPREAD = 80;
+        private ConcurrentRollingBuffer<Int16> _lastCourseDataRawSamples = new ConcurrentRollingBuffer<Int16>(NUM_CRS_RAW_SAMPLES_TO_STORE);
+
+        private object _courseAndHeadingBackgroundRefreshLock = new object();
+        private void UpdateHeadingAndCourseInputsInBackground()
+        {
+            if ((DateTime.UtcNow - _lastHeadingAndCourseInputRefreshTime) > TimeSpan.FromMilliseconds(1000.00f / HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ))
+            {
+                _ = Task.Run(() =>
+                {
+                    try
+                    {
+                        lock (_courseAndHeadingBackgroundRefreshLock)
+                        {
+                            UpdateHeadingAndCourseInputsSynchronously();
+                        }
+                    }
+                    catch { }
+                });
+            }
+        }
+
+        private void UpdateHeadingAndCourseInputsSynchronously()
+        {
+            var magneticHeadingDegrees = GetMagneticHeadingDegrees();
+            try
+            {
+                //HDG updates
+                _lastHeadingAndCourseInputRefreshTime = DateTime.UtcNow;
+                var headingState = _hsiBoard2DeviceInterface.RequestHeadingInfoUpdate();
+                var headingDatumRaw = headingState.HeadingDatumRaw;
+                var headingDatumDegrees = headingDatumRaw * 360.000d / 4096.000d;
+                var desiredHeadingDegrees = _hsiHeadingBugProcessor.Process(magneticHeadingDegrees, headingDatumDegrees);
+                _headingDatumDegreesOutputSignal.State = headingDatumDegrees;
+                _desiredHeadingDegreesOutputSignal.State = Math.Floor(desiredHeadingDegrees);
+                _desiredHeadingPercentageOutputSignal.State = desiredHeadingDegrees / 360.00f;
+                _headingDatumRawOutputSignal.State = headingDatumRaw;
+
+                //CRS updates
+                var courseState = _hsiBoard2DeviceInterface.RequestCourseInfoUpdate();
+                _lastCourseDataRawSamples.Add(courseState.CourseKnobRaw);
+
+                var minSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Min() : 0;
+                var maxSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Max() : 0;
+                var sampleSpread = Math.Abs(maxSampleValueInHistory - minSampleValueInHistory);
+                if (sampleSpread <= MAX_SAMPLE_SPREAD || true)
+                {
+                    _desiredCourseRawOutputSignal.State = courseState.CourseKnobRaw;
+                    _desiredCoursePercentageOutputSignal.State = 1.00 - (courseState.CourseKnobRaw / 4095.00f);
+                    _desiredCourseDegreesOutputSignal.State = (360.00f - Math.Floor((courseState.CourseKnobRaw / 4095.00f) * 360.00f)) % 360.00f;
+                }
+            }
+            catch { }
+        }
+        private double GetMagneticHeadingDegrees()
+        {
+            if (_magneticHeadingInputSignal == null)
+            {
+                return 0;
+            }
+
+            return double.IsInfinity(_magneticHeadingInputSignal.CorrelatedState) || double.IsNaN(_magneticHeadingInputSignal.CorrelatedState)
+                ? 0
+                : _magneticHeadingInputSignal.CorrelatedState % 360.00;
+
         }
 
         public void Dispose()

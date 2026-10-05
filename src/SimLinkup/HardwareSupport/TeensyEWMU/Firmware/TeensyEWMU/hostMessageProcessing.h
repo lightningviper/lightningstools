@@ -6,6 +6,7 @@
 #include "src/libraries/PacketSerial-1.2.0/PacketSerial.h"
 #include "characterDisplay.h"
 #include "lights.h"
+#include "joystick.h"
 #include "joystickAssignments.h"
  
 typedef enum TeensyEWMUPacketFields {
@@ -16,6 +17,7 @@ typedef enum TeensyEWMUPacketFields {
   CMDS_LIGHTBITS = 0x10,
   CMDS_CONDITIONAL_BLANKING_BITS = 0x20,
   INVERT_STATES = 0x40,
+  USER_AXIS_VALUES = 0x80
 } TeensyEWMUPacketFields;
 
 typedef enum EWPILightbits {

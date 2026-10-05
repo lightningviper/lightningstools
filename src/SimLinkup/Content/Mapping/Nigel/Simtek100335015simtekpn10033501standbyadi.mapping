@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_STBY_ADI__PITCH_DEGREES</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>10033501_Pitch_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_STBY_ADI__ROLL_DEGREES</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>10033501_Roll_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="DigitalSignal">
+        <Id>F4_STBY_ADI__OFF_FLAG</Id>
+      </Source>
+      <Destination xsi:type="DigitalSignal">
+        <Id>10033501_OFF_Flag_From_Sim</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Pitch_SIN_To_Instrument</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][11]</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Pitch_COS_To_Instrument</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][10]</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Roll_SIN_To_Instrument</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][8]</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>10033501_Roll_COS_To_Instrument</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>AnalogDevices_AD536x/537x__DAC_OUTPUT[1][9]</Id>
+      </Destination>
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>

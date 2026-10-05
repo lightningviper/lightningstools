@@ -64,7 +64,7 @@ namespace Henkie.HSI.Board2
         /// </summary>
         CONVERT_COURSE_VALUE_TO_DEGREES = 10,
         /// <summary>
-        ///   Heading value hysteresis threshold (0x00 to 0x7F)
+        ///   Course value hysteresis threshold (0x00 to 0x7F)
         /// </summary>
         COURSE_VALUE_HYSTERISIS_THRESHOLD = 11,
 

@@ -16,6 +16,8 @@
 /* -------------- JOYSTICK CONFIGURATION --------------- */
 const bool SEND_DX_JOYSTICK_REPORTS = true;
 const uint8_t NUM_JOYSTICK_AXES = 8;
+const uint8_t NUM_SYSTEM_AXES = 2;
+const uint8_t NUM_USER_AXES = 4;
 const uint32_t DX_JOYSTICK_REPORTING_FREQUENCY_MILLIS = 100;
 const float JOYSTICK_AXIS_MAX_VAL = 1023.0f;
 /* -------------------------------------------------- */

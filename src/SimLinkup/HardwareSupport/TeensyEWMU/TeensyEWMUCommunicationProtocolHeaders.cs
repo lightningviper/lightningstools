@@ -70,5 +70,7 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
             EWMU_NXT_DOWN = 0x20000000,
             EWMU_RTN = 0x40000000
         };
+
+        internal const byte NUM_USER_AXES = 4;
     }
 }

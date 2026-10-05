@@ -45,6 +45,8 @@ EasyButton _EWPI_MD(MD_BUTTON_PIN);
 /* ----------------------------------------------------*/
 
 uint32_t _invertBits = 0;
+uint16_t _userAxisValues[NUM_USER_AXES] = { 0,0,0,0 };
+
 elapsedMillis _timeSinceLastJoystickUpdate = 0;
 uint8_t DX_Button_Assignments[NUM_LOGICAL_SWITCHES_AND_BUTTONS];
 
@@ -93,6 +95,9 @@ void updateJoystickOutputs()
   if (IS_EWMU) updateEWMUJoystickOutputs();
   if (IS_EWPI) updateEWPIJoystickOutputs();
 
+  for (uint8_t i = 0; i < NUM_USER_AXES; i++) {
+      SetJoystickAxis(i + NUM_SYSTEM_AXES, _userAxisValues[i]);
+  }
   Joystick.send_now();
 #endif
 }

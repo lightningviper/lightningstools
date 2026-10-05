@@ -54,6 +54,7 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
         private DigitalSignal _ewpiUNKSignal;
         private DigitalSignal _ewpiMLSignal;
         private AnalogSignal _bytesSentSignal;
+        private readonly AnalogSignal[] _userAxisValues = new AnalogSignal[TeensyEWMUCommunicationProtocolHeaders.NUM_USER_AXES];
 		private TeensyEWMUCommunicationProtocolHeaders.InvertBits _invertBits;
 
         private TeensyEWMUHardwareSupportModule(TeensyEWMUHardwareSupportModuleConfig config)
@@ -370,6 +371,29 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
             };
             analogSignalsToReturn.Add(_bytesSentSignal);
 
+            for (var i = 0; i< _userAxisValues.Length; i++)
+            {
+                _userAxisValues[i] = new AnalogSignal
+                {
+                    Category = "Virtual Joystick User Axes",
+                    CollectionName = "Outputs",
+                    FriendlyName = $"User Axis #{i}",
+                    Id = $"TeensyEWMU__User_Axis[{i}]",
+                    Index = i,
+                    PublisherObject = this,
+                    Source = this,
+                    SourceFriendlyName = FriendlyName,
+                    SourceAddress = null,
+                    SubSource = null,
+                    SubSourceFriendlyName = null,
+                    SubSourceAddress = null,
+                    IsPercentage = true,
+                    State = 0.0,
+                    MinValue = 0,
+                    MaxValue = 1
+                };
+                analogSignalsToReturn.Add(_userAxisValues[i]);
+            }
             analogSignals = analogSignalsToReturn.ToArray();
             textSignals = textSignalsToReturn.ToArray();
             digitalSignals = digitalSignalsToReturn.ToArray();
@@ -424,6 +448,14 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
 
                     stream.WriteByte((byte)TeensyEWMUPacketFields.CMDS_CONDITIONAL_BLANKING_BITS);
                     writer.Write((byte)CMDSConditionalDisplayBlankingBits.ENABLE_CONDITIONAL_BLANKING);
+
+                    stream.WriteByte((byte)TeensyEWMUPacketFields.USER_AXIS_VALUES);
+                    for (var i = 0; i< _userAxisValues.Length; i++)
+                    {
+                        var thisAxisState = Convert.ToUInt16(_userAxisValues[i].State * 1023.0);
+                        var buffer =BitConverter.GetBytes(thisAxisState);
+                        stream.Write(buffer, 0, buffer.Length);
+                    }
 
                     writer.Flush();
                     stream.Flush();
@@ -553,13 +585,14 @@ namespace SimLinkup.HardwareSupport.TeensyEWMU
         [Flags]
         private enum TeensyEWMUPacketFields:byte
         {
-            EWMU_DISPLAY_STRING       = 0x01,
-            CMDS_DISPLAY_STRING       = 0x02,
-            EWPI_DISPLAY_STRING       = 0x04,
-            EWPI_LIGHTBITS            = 0x08,
-            CMDS_LIGHTBITS            = 0x10,
+            EWMU_DISPLAY_STRING            = 0x01,
+            CMDS_DISPLAY_STRING            = 0x02,
+            EWPI_DISPLAY_STRING            = 0x04,
+            EWPI_LIGHTBITS                 = 0x08,
+            CMDS_LIGHTBITS                 = 0x10,
             CMDS_CONDITIONAL_BLANKING_BITS = 0x20,
-            INVERT_STATES = 0x40,
+            INVERT_STATES                  = 0x40,
+            USER_AXIS_VALUES               = 0x80
         };
 
         [Flags]

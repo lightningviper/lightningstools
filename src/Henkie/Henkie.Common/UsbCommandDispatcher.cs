@@ -70,7 +70,10 @@ namespace Henkie.Common
             }
             else
             {
-                SendCommandInternal(subaddress, data, usePseudoCOBS);
+                lock (_lockObj)
+                {
+                    SendCommandInternal(subaddress, data, usePseudoCOBS);
+                }
             }
         }
         
@@ -80,7 +83,10 @@ namespace Henkie.Common
             nextCommand = GetNextCommandFromQueue();
             if (nextCommand != null)
             {
-                SendCommandInternal(nextCommand.Value.Subaddress, nextCommand.Value.Data, nextCommand.Value.UsePseudoCobs);
+                lock (_lockObj)
+                {
+                    SendCommandInternal(nextCommand.Value.Subaddress, nextCommand.Value.Data, nextCommand.Value.UsePseudoCobs);
+                }
             }
         }
 
@@ -140,19 +146,19 @@ namespace Henkie.Common
         {
             if (SerialPortConnection != null)
             {
-                if (data != null)
+                lock (_lockObj)
                 {
                     if (!usePseudoCOBS)
                     {
-                        SerialPortConnection.Write(new[] { subaddress, data.Value }, 0, 2);
+                        SerialPortConnection.Write(new[] { subaddress, data ?? 0x00 }, 0, 2);
                         //Console.WriteLine($"Writing command with subAddress:{subaddress} with value byte:{data.Value} to {SerialPortConnection.COMPort}");
                     }
                     else
                     {
-                        var checksum = (byte)((subaddress + data.Value) & 0x00FF);
+                        var checksum = (byte)((subaddress + (data ?? 0x00)) & 0x00FF);
                         var delimiter = (byte)0xFF;
-                        SerialPortConnection.Write(new[] { subaddress, data.Value, checksum, delimiter }, 0, 4);
-                        //Console.WriteLine($"{DateTime.Now.ToString("O")}: Writing command with subAddress:{subaddress} with value byte:{data.Value}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
+                        SerialPortConnection.Write(new[] { subaddress, data ?? 0x00, checksum, delimiter }, 0, 4);
+                        //Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
                         //Console.WriteLine($"{DateTime.Now.ToString("O")}: Writing {(subaddress <4 ? "BEARING " :subaddress >=4 && subaddress <=7 ? "HEADING " : null) } command with subAddress:{subaddress} with value byte:{data.Value}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
                     }
                 }
@@ -167,16 +173,23 @@ namespace Henkie.Common
             }
             if (SerialPortConnection != null)
             {
-                if (bytesToRead > 0)
+                lock (_lockObj)
                 {
-                    SerialPortConnection.DiscardInputBuffer();
-                }
-                SendCommand(subaddress, data, usePsuedoCOBS);
-                if (bytesToRead > 0)
-                {
-                    var readBuffer = new byte[bytesToRead];
-                    SerialPortConnection.Read(readBuffer, 0, bytesToRead);
-                    return readBuffer;
+                    if (bytesToRead > 0)
+                    {
+                        SerialPortConnection.DiscardInputBuffer();
+                    }
+                    SendCommandInternal(subaddress, data, usePsuedoCOBS);
+                    if (bytesToRead > 0)
+                    {
+                        var readBuffer = new byte[bytesToRead];
+                        SerialPortConnection.Read(readBuffer, 0, bytesToRead);
+                        //Console.WriteLine("Bytes read:");
+                        //for (var i = 0; i < readBuffer.Length; i++) {
+                        //    Console.WriteLine($"[{i}]:{readBuffer[i]:x}");
+                        //}
+                        return readBuffer;
+                    }
                 }
             }
             return null;

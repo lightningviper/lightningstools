@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ConcurrentRollingBuffer.cs" />
     <Compile Include="Collections\SerializableDictionary.cs">
       <SubType>Code</SubType>
     </Compile>

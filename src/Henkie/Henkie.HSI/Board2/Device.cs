@@ -112,18 +112,32 @@ namespace Henkie.HSI.Board2
 
         public HeadingAndCourseState RequestHeadingInfoUpdate()
         {
-            var headingAndCourseDataPacketBytes = SendQuery(CommandSubaddress.REQUEST_HEADING_INFO_UPDATE, null, 8);
+            var headingAndCourseDataPacketBytes = SendQuery(CommandSubaddress.REQUEST_HEADING_INFO_UPDATE, null, 10);
             return ParseHeadingAndCourseInfoUpdatePacket(headingAndCourseDataPacketBytes);
         }
 
         private HeadingAndCourseState ParseHeadingAndCourseInfoUpdatePacket(byte[] headingAndCourseDataPacketBytes)
         {
+            var headingDatumValue = ReadInt16BigEndian(headingAndCourseDataPacketBytes, 2);
+            if (headingDatumValue < -1023) headingDatumValue = 1023;
+            if (headingDatumValue > 1023) headingDatumValue = 1023;
 
-            return new HeadingAndCourseState()
+            var desiredCourseValue = ReadInt16BigEndian(headingAndCourseDataPacketBytes, 4);
+            if (desiredCourseValue < 0) desiredCourseValue = 0;
+            if (desiredCourseValue > 4095) desiredCourseValue = 4095;
+            var toReturn = new HeadingAndCourseState()
             {
-                CourseKnobSettingValueRaw = BitConverter.ToInt16(headingAndCourseDataPacketBytes, 2),
-                HeadingKnobSettingValueRaw = BitConverter.ToInt16(headingAndCourseDataPacketBytes, 4)
+                HeadingDatumRaw = headingDatumValue,
+                CourseKnobRaw = desiredCourseValue
             };
+            return toReturn;
+        }
+        private static short ReadInt16BigEndian(byte[] buffer, int offset)
+        {
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (offset < 0 || offset > buffer.Length - 2) throw new ArgumentOutOfRangeException(nameof(offset));
+
+            return (short)((buffer[offset] << 8) | buffer[offset + 1]);
         }
 
         public void SetHeadingValueConvertToDegreesOption(bool convertToDegrees)
@@ -142,7 +156,7 @@ namespace Henkie.HSI.Board2
 
         public HeadingAndCourseState RequestCourseInfoUpdate()
         {
-            var headingAndCourseDataPacketBytes = SendQuery(CommandSubaddress.REQUEST_COURSE_INFO_UPDATE, null, 8);
+            var headingAndCourseDataPacketBytes = SendQuery(CommandSubaddress.REQUEST_COURSE_INFO_UPDATE, null, 10);
             return ParseHeadingAndCourseInfoUpdatePacket(headingAndCourseDataPacketBytes);
         }
 

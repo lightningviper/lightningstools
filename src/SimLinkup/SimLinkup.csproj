@@ -160,6 +160,7 @@
     <Compile Include="HardwareSupport\Henk\HSI\Board2\HenkF16HSIBoard2CalibrationConfig.cs" />
     <Compile Include="HardwareSupport\Henk\HSI\Board2\HenkF16HSIBoard2HardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\HSI\Board2\HenkF16HSIBoard2HardwareSupportModuleConfig.cs" />
+    <Compile Include="HardwareSupport\Henk\HSI\HeadingBug\HeadingBugProcessor.cs" />
     <Compile Include="HardwareSupport\Henk\QuadSinCos\HenkieQuadSinCosBoardHardwareSupportModuleConfig.cs" />
     <Compile Include="HardwareSupport\Henk\QuadSinCos\HenkieQuadSinCosBoardHardwareSupportModule.cs" />
     <Compile Include="HardwareSupport\Henk\SDI\HenkSDIHardwareSupportModule.cs" />
@@ -704,9 +705,66 @@
     <Content Include="Content\Mapping\Nigel\HenkF16HSIBoard2HardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping">
+    <Content Include="Content\Mapping\Nigel\AMI9000262001HardwareSupportModule.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AMI900158001HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AMI9001584HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\AMI900278002HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Astronautics12871HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\GouldHS070D51341HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HenkF16ADISupportBoardHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HenkF16HSIBoard1Calibration.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HenkF16HSIBoard2Calibration.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HenkieF16AltimeterHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\HenkieF16FuelFlowHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Lilbern3239HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Lilbern3321HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin19562HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin19563HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin19581HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Malwin246102HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\OtherMappings.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\PhccHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100181altimeter.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Mapping\NigelOther\Simtek100285altimeter.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -728,9 +786,82 @@
     <Content Include="Content\Mapping\Nigel\AMI9003379-02nozzlePositionIndicator.mapping">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100194HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100207HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100216HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100295HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100335015HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek100335015simtekpn10033501standbyadi.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10058102HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10058201HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10067202HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101079HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101081HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101082HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101084HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101088HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101088simtekpn101088nozzlepositionindicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek10108902HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101090HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101091HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek101091simtekpn101091engineoilpressureindicator.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek105859HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek105862HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Simtek105868HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\TeensyEWMUHardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Mapping\Nigel\Westin521993HardwareSupportModule.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="HardwareSupport\Henk\HSI\CRS and HDG knob readback spec.txt" />
     <Content Include="SimLinkup.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

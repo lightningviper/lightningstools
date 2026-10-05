@@ -2,7 +2,7 @@
 {
     public class HeadingAndCourseState
     {
-        public short HeadingKnobSettingValueRaw { get; set; }
-        public short CourseKnobSettingValueRaw { get; set; }
+        public short HeadingDatumRaw { get; set; }
+        public short CourseKnobRaw { get; set; }
     }
 }

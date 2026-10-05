@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<MappingProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SignalMappings>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWMU__DISPLAYTEXT_LINE_1</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__Display_Text_Line1</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWMU__DISPLAYTEXT_LINE_2</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__Display_Text_Line2</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__CHAFFFLARE_DISPLAYTEXT</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_Chaff_Flare_Display_Text</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__JMR_DISPLAYTEXT</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_JMR_Display_Text</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__DISPLAYTEXT</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_Display_Text</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__NOGO</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_NOGO</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__GO</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_GO</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__DISPENSE_RDY</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_DISPENSE_RDY</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__PRI</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_PRI</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__UNK</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_UNK</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__ML</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_ML</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWMU__DISPLAYTEXT_LINE_1</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__Display_Text_Line1</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWMU__DISPLAYTEXT_LINE_2</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__Display_Text_Line2</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__CHAFFFLARE_DISPLAYTEXT</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_Chaff_Flare_Display_Text</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__JMR_DISPLAYTEXT</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_JMR_Display_Text</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__DISPLAYTEXT</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_Display_Text</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__NOGO</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_NOGO</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__GO</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_GO</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_CMDS__DISPENSE_RDY</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__CMDS_DISPENSE_RDY</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__PRI</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_PRI</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__UNK</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_UNK</Id>
+      </Destination>
+    </SignalMapping>
+    <SignalMapping>
+      <Source xsi:type="AnalogSignal">
+        <Id>F4_EWPI__ML</Id>
+      </Source>
+      <Destination xsi:type="AnalogSignal">
+        <Id>TeensyEWMU__EWPI_ML</Id>
+      </Destination>
+    </SignalMapping>
+  </SignalMappings>
+</MappingProfile>
