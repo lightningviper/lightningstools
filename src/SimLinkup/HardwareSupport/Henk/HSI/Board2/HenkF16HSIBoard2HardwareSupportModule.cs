@@ -819,7 +819,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Heading Datum Degrees (-90 to +90)",
+                FriendlyName = "Heading Datum Degrees (-90.0 to +90.0)",
                 Id = $"Henk_F16_HSI_Board2__Heading_Datum_Degrees_From_Instrument",
                 Index = 0,
                 Source = this,
@@ -830,7 +830,8 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 IsSine = false,
                 IsAngle = true,
                 MinValue = -90,
-                MaxValue = 90
+                MaxValue = 90, 
+                Precision = 1
             };
             return thisSignal;
 
@@ -841,7 +842,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             {
                 Category = "Outputs",
                 CollectionName = "Analog Outputs",
-                FriendlyName = "Desired Heading Degrees (0-360)",
+                FriendlyName = "Desired Heading Degrees (0.0-360.0)",
                 Id = $"Henk_F16_HSI_Board2__Desired_Heading_Degrees_From_Instrument",
                 Index = 0,
                 Source = this,
@@ -853,7 +854,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 IsAngle = true,
                 MinValue = 0,
                 MaxValue = 360,
-                Precision = 0
+                Precision = 1
             };
             return thisSignal;
         }
@@ -1275,7 +1276,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             }
         }
 
-        private short GetCalibratedHeadingDatumDegrees(short headingDatumRaw)
+        private double GetCalibratedHeadingDatumDegrees(short headingDatumRaw)
         {
             if (_headingDatumCalibrationData == null)
             {
@@ -1293,7 +1294,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             var inputPct = inputRange != 0
                 ? (headingDatumRaw - lowerPoint.Input) / inputRange
                 : 1.00;
-            var toReturn = (short)((inputPct * outputRange) + lowerPoint.Output);
+            var toReturn = ((inputPct * outputRange) + lowerPoint.Output);
             if (toReturn < -1023) toReturn = -1023;
             if (toReturn > 1023) toReturn = 1023;
             return toReturn;
@@ -1326,7 +1327,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         }
 
         private DateTime _lastHeadingAndCourseInputRefreshTime = DateTime.MinValue;
-        private const float HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ  = 5.0f;
+        private const float HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ  = 20.0f;
         public override void Synchronize()
         {
             base.Synchronize();
@@ -1368,7 +1369,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                 //var headingDatumDegrees = calibratedHeadingDatumDegrees * 360.000d / 4096.000d;
                 var desiredHeadingDegrees = _hsiHeadingBugProcessor.Process(magneticHeadingDegrees, calibratedHeadingDatumDegrees);
                 _headingDatumDegreesOutputSignal.State = calibratedHeadingDatumDegrees;
-                _desiredHeadingDegreesOutputSignal.State = Math.Floor(desiredHeadingDegrees);
+                _desiredHeadingDegreesOutputSignal.State = desiredHeadingDegrees;
                 _desiredHeadingPercentageOutputSignal.State = desiredHeadingDegrees / 360.00f;
                 _headingDatumRawOutputSignal.State = headingDatumRaw;
 
