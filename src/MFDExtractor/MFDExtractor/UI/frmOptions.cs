@@ -265,6 +265,7 @@ namespace MFDExtractor.UI
                 chkOIL1.Checked = settings.EnableOIL1Output;
                 chkOIL2.Checked = settings.EnableOIL2Output;
                 chkRPM1.Checked = settings.EnableRPM1Output;
+                chkRPMPW.Checked = settings.IsPwEngine;
                 chkRPM2.Checked = settings.EnableRPM2Output;
                 chkEPU.Checked = settings.EnableEPUFuelOutput;
                 chkFuelFlow.Checked = settings.EnableFuelFlowOutput;
@@ -1804,6 +1805,10 @@ namespace MFDExtractor.UI
             RecoverInstrument("HUD");
         }
 
-
+        private void chkRPMPW_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.IsPwEngine = chkRPMPW.Checked;
+            BringToFront();
+        }
     }
 }

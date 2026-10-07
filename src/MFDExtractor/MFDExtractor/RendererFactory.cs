@@ -25,13 +25,15 @@ namespace MFDExtractor
 	    private readonly IFuelQualityIndicatorRendererFactory _fuelQualityIndicatorRendererFactory;
 	    private readonly IISISRendererFactory _isisRendererFactory;
 	    private readonly IVVIRendererFactory _vviRendererFactory;
+        private readonly ITachometerRendererFactory _tachometerRendererFactory;
         public RendererFactory(
 			IAzimuthIndicatorRendererFactory azimuthIndicatorFactory = null, 
             IRWRRendererFactory rwrRendererFactory=null,
 			IFuelQualityIndicatorRendererFactory fuelQualityIndicatorRendererFactory=null, 
 			IAltimeterRendererFactory altimeterRendererFactory=null, 
 			IISISRendererFactory isisRendererFactory=null, 
-			IVVIRendererFactory vviRendererFactory=null
+			IVVIRendererFactory vviRendererFactory=null,
+            ITachometerRendererFactory tachometerRendererFactory=null
         )
         {
 			_azimuthIndicatorFactory = azimuthIndicatorFactory ?? new AzimuthIndicatorRendererFactory();
@@ -40,6 +42,7 @@ namespace MFDExtractor
 			_fuelQualityIndicatorRendererFactory = fuelQualityIndicatorRendererFactory ?? new FuelQualityIndicatorRendererFactory();
 	        _isisRendererFactory = isisRendererFactory ?? new ISISRendererFactory();
 			_vviRendererFactory = vviRendererFactory ?? new VVIRendererFactory();
+            _tachometerRendererFactory = tachometerRendererFactory ?? new TachometerRendererFactory();
         }
 
         public IInstrumentRenderer CreateRenderer(InstrumentType instrumentType)
@@ -174,12 +177,13 @@ namespace MFDExtractor
 
         private ITachometer CreateRPM2Renderer()
         {
-            return new Tachometer {Options = {IsSecondary = true}};
+            return new Tachometer { Options = { IsSecondary = true } };
         }
 
         private ITachometer CreateRPM1Renderer()
         {
-            return new Tachometer {Options = {IsSecondary = false}};
+            return _tachometerRendererFactory.Create();
+            
         }
 
         private ISpeedbrakeIndicator CreateSpeedbrakeRenderer()

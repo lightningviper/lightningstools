@@ -224,6 +224,7 @@
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
+    <EmbeddedResource Include="images\rpm100.bmp" />
     <Content Include="ISISDigits.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
