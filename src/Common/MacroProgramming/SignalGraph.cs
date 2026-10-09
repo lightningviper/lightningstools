@@ -24,8 +24,8 @@ namespace Common.MacroProgramming
         private static readonly Color AreaUnderTheCurveColor = Color.FromArgb(241, 246, 250);
         private static readonly Brush AreaUnderTheCurveBrush = new SolidBrush(AreaUnderTheCurveColor);
         private static readonly Brush ValueBrush = Brushes.Black;
-        private static readonly Brush MinValueBrush = Brushes.LightPink;
-        private static readonly Brush MaxValueBrush = Brushes.LightPink;
+        private static readonly Brush MinValueBrush = Brushes.DarkRed;
+        private static readonly Brush MaxValueBrush = Brushes.DarkRed;
         private static readonly Brush ScaleFontBrush = Brushes.LightGray;
         private static readonly Brush FriendlyNameBrush = Brushes.Black;
         private static readonly Brush SubcollectionNameBrush = Brushes.Black;
