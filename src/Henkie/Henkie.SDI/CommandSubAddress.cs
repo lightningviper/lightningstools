@@ -107,30 +107,37 @@ namespace Henkie.SDI
         /// <summary>
         ///   Set value of user-defined digital/PWM output 1
         /// </summary>
+        [CommandGroup("PWM1")]
         DIG_PWM_1 = 15,
         /// <summary>
         ///   Set value of user-defined digital/PWM output 2
         /// </summary>
+        [CommandGroup("PWM2")]
         DIG_PWM_2 = 16,
         /// <summary>
         ///   Set value of user-defined digital/PWM output 3
         /// </summary>
+        [CommandGroup("PWM3")]
         DIG_PWM_3 = 17,
         /// <summary>
         ///   Set value of user-defined digital/PWM output 4
         /// </summary>
+        [CommandGroup("PWM4")]
         DIG_PWM_4 = 18,
         /// <summary>
         ///   Set value of user-defined digital/PWM output 5
         /// </summary>
+        [CommandGroup("PWM5")]
         DIG_PWM_5 = 19,
         /// <summary>
         ///   Set value of user-defined digital/PWM output 6
         /// </summary>
+        [CommandGroup("PWM6")]
         DIG_PWM_6 = 20,
         /// <summary>
         ///   Set value of user-defined digital/PWM output 7
         /// </summary>
+        [CommandGroup("PWM7")]
         DIG_PWM_7 = 21,
 
         /// <summary>

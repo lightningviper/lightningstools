@@ -45,5 +45,20 @@ namespace Common.Threading
             }
             toWait?.Clear();
         }
+        public static void SetMinAndMaxThreadPoolThreads(int minWorkerThreadsToConfigure, int maxWorkerThreadsToConfigure, int minIoThreadsToConfigure, int maxIoThreadsToConfigure)
+        {
+            ThreadPool.SetMaxThreads(maxWorkerThreadsToConfigure, maxIoThreadsToConfigure);
+            ThreadPool.GetMaxThreads(out int maxWorkerThreads, out int maxIOThreads);
+
+            int targetMinWorker = System.Math.Min(minWorkerThreadsToConfigure, maxWorkerThreads);
+            int targetMinIO = System.Math.Min(minIoThreadsToConfigure, maxIOThreads);
+            ThreadPool.SetMinThreads(targetMinWorker, targetMinIO);
+
+            ThreadPool.GetMinThreads(out int minWorkerThreads, out int minIOThreads);
+
+            // Print results
+            Console.WriteLine($"[Max Limits] Worker Threads: {maxWorkerThreads:N0} | I/O Threads: {maxIOThreads:N0}");
+            Console.WriteLine($"[Min Limits] Worker Threads: {minWorkerThreads:N0} | I/O Threads: {minIOThreads:N0}");
+        }
     }
 }
