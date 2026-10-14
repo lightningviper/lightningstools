@@ -11,17 +11,21 @@ namespace Henkie.Common
 
         private bool _isDisposed = false;
         private ISerialPortConnection SerialPortConnection { get; set; }
-        private readonly Queue<UsbCommand> _commandQueue = new Queue<UsbCommand>();
+        private readonly Queue<UsbCommandOrQuery> _commandAndQueryQueue = new Queue<UsbCommandOrQuery>();
         private System.Timers.Timer _commandSendingTimer;
         private readonly bool _useCommandSendingTimer = true;
-        private object _lockObj = new object();
-        private int _minimumCommandSendingIntervalMilliseconds = 20;
+        private object _commandAndQueryQueueLockObj = new object();
+        private int _minimumCommandSendingIntervalMilliseconds = 50;
 
-        private struct UsbCommand
+        private struct UsbCommandOrQuery
         {
             public byte Subaddress { get; set; }
             public byte? Data { get; set; }
             public bool UsePseudoCobs { get; set; }
+
+            public int? BytesToRead { get; set; }
+
+            public Action<byte[]> Callback { get; set; }
         }
 
         private Type CommandSubaddresses { get; set; } = null;
@@ -60,70 +64,80 @@ namespace Henkie.Common
         }
         public void SendCommand(byte subaddress, byte? data = null, bool usePseudoCOBS = false)
         {
-            if (_useCommandSendingTimer)
+            SendCommandOrQueryInternal(subaddress: subaddress, data: data, usePseudoCOBS: usePseudoCOBS);
+        }
+        public void SendQuery(byte subaddress, byte? data = null, int bytesToRead = 0, bool sendChecksumAndDelimiter = false, Action<byte[]> callback = null, bool invokeSynchronously = false)
+        {
+            SendCommandOrQueryInternal(subaddress: subaddress, data: data, bytesToRead: bytesToRead, usePseudoCOBS: sendChecksumAndDelimiter, callback: callback, invokeSynchronously: invokeSynchronously);
+        }
+
+        private void SendCommandOrQueryInternal(byte subaddress, byte? data = null, int? bytesToRead = null, bool usePseudoCOBS = false, Action<byte[]> callback = null, bool invokeSynchronously = false)
+        {
+            if (_useCommandSendingTimer && !invokeSynchronously)
             {
-                var usbCommand = new UsbCommand() { Subaddress = subaddress, Data = data, UsePseudoCobs = usePseudoCOBS };
-                lock (_lockObj)
+                var usbCommand = new UsbCommandOrQuery() { Subaddress = subaddress, Data = data, UsePseudoCobs = usePseudoCOBS, BytesToRead = bytesToRead, Callback = callback };
+                lock (_commandAndQueryQueueLockObj)
                 {
-                    _commandQueue.Enqueue(usbCommand);
+                    _commandAndQueryQueue.Enqueue(usbCommand);
                 }
             }
             else
             {
-                lock (_lockObj)
-                {
-                    SendCommandInternal(subaddress, data, usePseudoCOBS);
-                }
+                SendCommandOrQuerySynchronously(subaddress: subaddress, data: data, bytesToRead: bytesToRead, usePseudoCOBS: usePseudoCOBS, callback: callback);
             }
         }
-        
+
         private void CommandSendingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            UsbCommand? nextCommand = null;
-            nextCommand = GetNextCommandFromQueue();
-            if (nextCommand != null)
+            UsbCommandOrQuery? nextCommandOrQuery = null;
+            nextCommandOrQuery = GetNextCommandOrQueryFromQueue();
+            if (nextCommandOrQuery != null)
             {
-                lock (_lockObj)
+                try
                 {
-                    SendCommandInternal(nextCommand.Value.Subaddress, nextCommand.Value.Data, nextCommand.Value.UsePseudoCobs);
+                    SendCommandOrQuerySynchronously(subaddress: nextCommandOrQuery.Value.Subaddress, data: nextCommandOrQuery.Value.Data, bytesToRead: nextCommandOrQuery.Value.BytesToRead, usePseudoCOBS: nextCommandOrQuery.Value.UsePseudoCobs, callback: nextCommandOrQuery.Value.Callback);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception in command sending:{ex}");
                 }
             }
         }
 
-        private UsbCommand? GetNextCommandFromQueue()
+        private UsbCommandOrQuery? GetNextCommandOrQueryFromQueue()
         {
-            lock (_lockObj)
+            lock (_commandAndQueryQueueLockObj)
             {
-                UsbCommand? laterCommand = null;
-                var nextCommand =  _commandQueue.Count > 0 ? _commandQueue.Dequeue() : (UsbCommand?)null;
-                if (nextCommand != null)
+                UsbCommandOrQuery? laterCommandOrQuery = null;
+                var nextCommandOrQuery =  _commandAndQueryQueue.Count > 0 ? _commandAndQueryQueue.Dequeue() : (UsbCommandOrQuery?)null;
+                if (nextCommandOrQuery != null)
                 {
                     do
                     {
-                        laterCommand = null;
-                        laterCommand = LaterQueuedCommandInSameCommandGroupAs(nextCommand.Value);
-                        if (laterCommand != null)
+                        laterCommandOrQuery = null;
+                        laterCommandOrQuery = LaterQueuedCommandInSameCommandGroupAs(nextCommandOrQuery.Value);
+                        if (laterCommandOrQuery != null)
                         {
-                            nextCommand = laterCommand;
-                            _commandQueue.Dequeue();
+                            nextCommandOrQuery = laterCommandOrQuery;
+                            _commandAndQueryQueue.Dequeue();
                         }
                     }
-                    while (laterCommand != null);
+                    while (laterCommandOrQuery != null);
                 }
-                return nextCommand;
+                return nextCommandOrQuery;
             }
         }
 
-        private UsbCommand? LaterQueuedCommandInSameCommandGroupAs(UsbCommand commandToEvaluate)
+        private UsbCommandOrQuery? LaterQueuedCommandInSameCommandGroupAs(UsbCommandOrQuery commandOrQueryToEvaluate)
         {
-            lock (_lockObj)
+            lock (_commandAndQueryQueueLockObj)
             {
-                if (_commandQueue.Count == 0 || CommandSubaddresses == null) return null;
+                if (_commandAndQueryQueue.Count == 0 || CommandSubaddresses == null) return null;
 
-                var commandGroup = GetCommandGroup(commandToEvaluate.Subaddress);
+                var commandGroup = GetCommandGroup(commandOrQueryToEvaluate.Subaddress);
                 if (commandGroup == null) return null;
 
-                var commands = _commandQueue.ToList();
+                var commands = _commandAndQueryQueue.ToList();
                 foreach (var command in commands)
                 {
                     var thisItemCommandGroup = GetCommandGroup(command.Subaddress);
@@ -142,57 +156,45 @@ namespace Henkie.Common
             return commandGroupAttribute.CommandGroupName;
         }
         
-        private void SendCommandInternal(byte subaddress, byte? data=null, bool usePseudoCOBS = false)
+        private void SendCommandOrQuerySynchronously(byte subaddress, byte? data=null, int? bytesToRead = null, bool usePseudoCOBS = false, Action<byte[]> callback = null)
         {
             if (SerialPortConnection != null)
             {
-                lock (_lockObj)
-                {
+                    if (bytesToRead.HasValue && bytesToRead.Value > 0)
+                    {
+                        SerialPortConnection.DiscardInputBuffer();
+                    }
+
                     if (!usePseudoCOBS)
                     {
+                        if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
+                        {
+                            Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00} to {SerialPortConnection.COMPort}");
+                        }
                         SerialPortConnection.Write(new[] { subaddress, data ?? 0x00 }, 0, 2);
-                        //Console.WriteLine($"Writing command with subAddress:{subaddress} with value byte:{data.Value} to {SerialPortConnection.COMPort}");
                     }
                     else
                     {
                         var checksum = (byte)((subaddress + (data ?? 0x00)) & 0x00FF);
                         var delimiter = (byte)0xFF;
+                        if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
+                        {
+                            Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
+                        }
                         SerialPortConnection.Write(new[] { subaddress, data ?? 0x00, checksum, delimiter }, 0, 4);
-                        //Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
-                        //Console.WriteLine($"{DateTime.Now.ToString("O")}: Writing {(subaddress <4 ? "BEARING " :subaddress >=4 && subaddress <=7 ? "HEADING " : null) } command with subAddress:{subaddress} with value byte:{data.Value}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
                     }
-                }
-            }
-        }
-        
-        public byte[] SendQuery(byte subaddress, byte? data = null, int bytesToRead = 0, bool usePsuedoCOBS = false)
-        {
-            if (bytesToRead <0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(bytesToRead));
-            }
-            if (SerialPortConnection != null)
-            {
-                lock (_lockObj)
-                {
-                    if (bytesToRead > 0)
+
+                    if (bytesToRead.HasValue && bytesToRead.Value > 0)
                     {
-                        SerialPortConnection.DiscardInputBuffer();
-                    }
-                    SendCommandInternal(subaddress, data, usePsuedoCOBS);
-                    if (bytesToRead > 0)
-                    {
-                        var readBuffer = new byte[bytesToRead];
-                        SerialPortConnection.Read(readBuffer, 0, bytesToRead);
+                        var readBuffer = new byte[bytesToRead.Value];
+                        SerialPortConnection.Read(readBuffer, 0, bytesToRead.Value);
                         //Console.WriteLine("Bytes read:");
                         //for (var i = 0; i < readBuffer.Length; i++) {
                         //    Console.WriteLine($"[{i}]:{readBuffer[i]:x}");
                         //}
-                        return readBuffer;
+                        callback(readBuffer);
                     }
-                }
             }
-            return null;
         }
         
         public void Dispose()
@@ -215,5 +217,6 @@ namespace Henkie.Common
             }
             _isDisposed = true;
         }
+
     }
 }

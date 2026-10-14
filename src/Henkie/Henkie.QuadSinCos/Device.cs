@@ -363,7 +363,13 @@ namespace Henkie.QuadSinCos
 
        public byte[] SendQuery(CommandSubaddress subaddress, byte? data = null, int bytesToRead = 0)
         {
-            return _commandDispatcher.SendQuery((byte)subaddress, data, bytesToRead);
+            _commandDispatcher.SendQuery(subaddress: (byte)subaddress, data: data, bytesToRead: bytesToRead, callback: SetLastQueryResults, invokeSynchronously:true);
+            return _lastQueryResults;
+        }
+        private byte[] _lastQueryResults;
+        private void SetLastQueryResults(byte[] lastQueryResults)
+        {
+            _lastQueryResults = lastQueryResults;
         }
         #endregion
 

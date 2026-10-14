@@ -209,7 +209,13 @@ namespace SimLinkup.Runtime
             _keepRunning = true;
             IsRunning = true;
             while (_keepRunning)
-                ExecuteOneLoopIteration();
+            {
+                try
+                {
+                    ExecuteOneLoopIteration();
+                }
+                catch { }
+            }
             IsRunning = false;
         }
 
@@ -225,12 +231,32 @@ namespace SimLinkup.Runtime
 
         private void Synchronize()
         {
-            ScriptingContext.HardwareSupportModules?.ToList().ForEach(hsm => hsm.Synchronize());
+            ScriptingContext.HardwareSupportModules?.ToList().ForEach
+            (
+                hsm =>
+                {
+                    try
+                    {
+                        hsm.Synchronize();
+                    }
+                    catch { }
+                }
+            );
         }
 
         private void UpdateSimSignals()
         {
-            ScriptingContext.SimSupportModules?.ToList().ForEach(ssm => ssm.Update());
+            ScriptingContext.SimSupportModules?.ToList().ForEach
+            (
+                ssm =>
+                {
+                    try
+                    {
+                        ssm.Update();
+                    }
+                    catch { }
+                }
+            );
         }
     }
 }

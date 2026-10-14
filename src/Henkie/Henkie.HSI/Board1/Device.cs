@@ -343,8 +343,10 @@ namespace Henkie.HSI.Board1
 
         public string Identify()
         {
+            var lastQueryResults = SendQuery(subaddress: CommandSubaddress.IDENTIFY, data: 0x00, bytesToRead: 17, invokeSynchronously: true);
+
             return ConnectionType == ConnectionType.USB
-                ? Encoding.ASCII.GetString(SendQuery(CommandSubaddress.IDENTIFY, 0x00, 17), 0, 17)
+                ? Encoding.ASCII.GetString(lastQueryResults, 0, 17)
                 : null;
         }
 
@@ -375,11 +377,29 @@ namespace Henkie.HSI.Board1
             if (data == 0xFF) data = 0xFE;
             _commandDispatcher.SendCommand((byte)subaddress, data, sendChecksumAndDelimiter: ConnectionType == ConnectionType.USB);
         }
-        public byte[] SendQuery(CommandSubaddress subaddress, byte? data = null, int bytesToRead = 0)
+
+        public byte[] SendQuery(CommandSubaddress subaddress, byte? data = null, int bytesToRead = 0, Action<byte[]> callback = null, bool invokeSynchronously = false)
         {
             if (data == 0xFF) data = 0xFE;
-            return _commandDispatcher.SendQuery((byte)subaddress, data, bytesToRead, sendChecksumAndDelimiter: ConnectionType == ConnectionType.USB);
+            _commandDispatcher.SendQuery(subaddress: (byte)subaddress, data: data, bytesToRead: bytesToRead, callback: callback ?? SetLastQueryResults, sendChecksumAndDelimiter: ConnectionType == ConnectionType.USB, invokeSynchronously: invokeSynchronously);
+            if (invokeSynchronously)
+            {
+                return _lastQueryResults;
+            }
+            else
+            {
+                return null;
+            }
         }
+
+        private byte[] _lastQueryResults;
+        private void SetLastQueryResults(byte[] lastQueryResults)
+        {
+            _lastQueryResults = lastQueryResults;
+        }
+
+
+
         #endregion
 
 

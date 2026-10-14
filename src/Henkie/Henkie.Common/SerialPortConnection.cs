@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Reflection;
 using System.Threading;
 using log4net;
 
@@ -41,7 +42,15 @@ namespace Henkie.Common
             EnsurePortIsReady();
             lock (_serialPortLock)
             {
-                _serialPort.DiscardInBuffer();
+                try
+                {
+                    _serialPort.DiscardInBuffer();
+                }
+                catch
+                {
+                    Console.WriteLine("Serial port " + _serialPort.PortName + " timed out, disconnecting and reconnecting");
+                    ClosePort();
+                }
             }
         }
 
@@ -88,7 +97,15 @@ namespace Henkie.Common
                         throw new TimeoutException();
                     }
                 }
-                _serialPort.Read(buffer, index, count);
+                try
+                {
+                    _serialPort.Read(buffer, index, count);
+                }
+                catch
+                {
+                    Console.WriteLine("Serial port " + _serialPort.PortName + " timed out, disconnecting and reconnecting");
+                    ClosePort();
+                }
             }
         }
 

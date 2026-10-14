@@ -1350,7 +1350,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         }
 
         private DateTime _lastHeadingAndCourseInputRefreshTime = DateTime.MinValue;
-        private const float HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ  = 20.0f;
+        private const float HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ  = 5.0f;
         public override void Synchronize()
         {
             base.Synchronize();
@@ -1371,7 +1371,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
                     {
                         lock (_courseAndHeadingBackgroundRefreshLock)
                         {
-                            UpdateHeadingAndCourseInputsSynchronously();
+                            RequestHeadingAndCourseInputUpdates();
                         }
                     }
                     catch { }
@@ -1379,41 +1379,50 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             }
         }
 
-        private void UpdateHeadingAndCourseInputsSynchronously()
+        private void RequestHeadingAndCourseInputUpdates()
         {
-            var magneticHeadingDegrees = GetMagneticHeadingDegrees();
             try
             {
-                //HDG updates
-                _lastHeadingAndCourseInputRefreshTime = DateTime.UtcNow;
-                var headingState = _hsiBoard2DeviceInterface.RequestHeadingInfoUpdate();
-                var headingDatumRaw = headingState.HeadingDatumRaw;
-                var calibratedHeadingDatumDegrees = GetCalibratedHeadingDatumDegrees(headingDatumRaw);
-                var desiredHeadingDegrees = _hsiHeadingBugProcessor.Process(magneticHeadingDegrees, calibratedHeadingDatumDegrees);
-                _headingDatumDegreesOutputSignal.State = calibratedHeadingDatumDegrees;
-                _desiredHeadingDegreesOutputSignal.State = desiredHeadingDegrees;
-                _desiredHeadingPercentageOutputSignal.State = desiredHeadingDegrees / 360.0000f;
-                _headingDatumRawOutputSignal.State = headingDatumRaw;
-
-                //CRS updates
-                var courseState = _hsiBoard2DeviceInterface.RequestCourseInfoUpdate();
-                _lastCourseDataRawSamples.Add(courseState.CourseKnobRaw);
-
-                var minSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Min() : 0;
-                var maxSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Max() : 0;
-                var sampleSpread = Math.Abs(maxSampleValueInHistory - minSampleValueInHistory);
-                //if (sampleSpread <= MAX_SAMPLE_SPREAD)
-                //{
-                    _desiredCourseRawOutputSignal.State = courseState.CourseKnobRaw;
-                    var calibratedCourseKnobInputDegrees = GetCalibratedDesiredCourseDegrees(courseState.CourseKnobRaw);
-                    _desiredCourseRawOutputSignal.CorrelatedState = calibratedCourseKnobInputDegrees;
-                    _desiredCoursePercentageOutputSignal.State = calibratedCourseKnobInputDegrees / 360.0000d;
-                    _desiredCourseDegreesOutputSignal.State = calibratedCourseKnobInputDegrees;
-                    _desiredCourseDegreesOutputSignal.CorrelatedState = courseState.CourseKnobRaw;
-                //}
+                _hsiBoard2DeviceInterface.RequestHeadingInfoUpdate(UpdateHeadingInputs);
+                _hsiBoard2DeviceInterface.RequestCourseInfoUpdate(UpdateCourseInputs);
             }
             catch { }
         }
+
+        private void UpdateHeadingInputs(HeadingAndCourseState headingState)
+        {
+            //HDG updates
+            _lastHeadingAndCourseInputRefreshTime = DateTime.UtcNow;
+            var magneticHeadingDegrees = GetMagneticHeadingDegrees();
+
+            var headingDatumRaw = headingState.HeadingDatumRaw;
+            var calibratedHeadingDatumDegrees = GetCalibratedHeadingDatumDegrees(headingDatumRaw);
+            var desiredHeadingDegrees = _hsiHeadingBugProcessor.Process(magneticHeadingDegrees, calibratedHeadingDatumDegrees);
+            _headingDatumDegreesOutputSignal.State = calibratedHeadingDatumDegrees;
+            _desiredHeadingDegreesOutputSignal.State = desiredHeadingDegrees;
+            _desiredHeadingPercentageOutputSignal.State = desiredHeadingDegrees / 360.0000f;
+            _headingDatumRawOutputSignal.State = headingDatumRaw;
+        }
+
+        private void UpdateCourseInputs(HeadingAndCourseState courseState)
+        {
+            //CRS updates
+            _lastCourseDataRawSamples.Add(courseState.CourseKnobRaw);
+
+            var minSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Min() : 0;
+            var maxSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Max() : 0;
+            var sampleSpread = Math.Abs(maxSampleValueInHistory - minSampleValueInHistory);
+            //if (sampleSpread <= MAX_SAMPLE_SPREAD)
+            //{
+            _desiredCourseRawOutputSignal.State = courseState.CourseKnobRaw;
+            var calibratedCourseKnobInputDegrees = GetCalibratedDesiredCourseDegrees(courseState.CourseKnobRaw);
+            _desiredCourseRawOutputSignal.CorrelatedState = calibratedCourseKnobInputDegrees;
+            _desiredCoursePercentageOutputSignal.State = calibratedCourseKnobInputDegrees / 360.0000d;
+            _desiredCourseDegreesOutputSignal.State = calibratedCourseKnobInputDegrees;
+            _desiredCourseDegreesOutputSignal.CorrelatedState = courseState.CourseKnobRaw;
+            //}
+        }
+
         private double GetMagneticHeadingDegrees()
         {
             if (_magneticHeadingInputSignal == null)

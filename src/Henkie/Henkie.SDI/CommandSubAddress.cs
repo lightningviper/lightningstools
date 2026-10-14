@@ -143,6 +143,7 @@ namespace Henkie.SDI
         /// <summary>
         ///   Set duty cycle of on-board OpAmp buffered PWM output
         /// </summary>
+        [CommandGroup("OBPWM")]
         ONBOARD_PWM = 22,
 
         /// <summary>

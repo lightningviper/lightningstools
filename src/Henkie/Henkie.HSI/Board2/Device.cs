@@ -110,10 +110,9 @@ namespace Henkie.HSI.Board2
             SendCommand(CommandSubaddress.TO_FROM_INDICATION, (byte)toFromFlagsState);
         }
 
-        public HeadingAndCourseState RequestHeadingInfoUpdate()
+        public void RequestHeadingInfoUpdate(Action<HeadingAndCourseState> callback)
         {
-            var headingAndCourseDataPacketBytes = SendQuery(CommandSubaddress.REQUEST_HEADING_INFO_UPDATE, null, 10);
-            return ParseHeadingAndCourseInfoUpdatePacket(headingAndCourseDataPacketBytes);
+            SendQuery(subaddress:CommandSubaddress.REQUEST_HEADING_INFO_UPDATE, data:null, bytesToRead: 10, callback:(lastQueryResults)=>callback(ParseHeadingAndCourseInfoUpdatePacket(lastQueryResults)));
         }
 
         private HeadingAndCourseState ParseHeadingAndCourseInfoUpdatePacket(byte[] headingAndCourseDataPacketBytes)
@@ -154,10 +153,9 @@ namespace Henkie.HSI.Board2
             SendCommand(CommandSubaddress.HEADING_VALUE_HYSTERESIS_THRESHOLD, hysteresisThreshold);
         }
 
-        public HeadingAndCourseState RequestCourseInfoUpdate()
+        public void RequestCourseInfoUpdate(Action<HeadingAndCourseState> callback)
         {
-            var headingAndCourseDataPacketBytes = SendQuery(CommandSubaddress.REQUEST_COURSE_INFO_UPDATE, null, 10);
-            return ParseHeadingAndCourseInfoUpdatePacket(headingAndCourseDataPacketBytes);
+            SendQuery(subaddress: CommandSubaddress.REQUEST_COURSE_INFO_UPDATE, data: null, bytesToRead: 10, callback: (lastQueryResults) => callback(ParseHeadingAndCourseInfoUpdatePacket(lastQueryResults)));
         }
 
         public void SetCourseValueConvertOption(CourseValueConvertOption courseValueConvertOption)
@@ -283,8 +281,9 @@ namespace Henkie.HSI.Board2
 
         public string Identify()
         {
+            var lastQueryResults = SendQuery(subaddress: CommandSubaddress.IDENTIFY, data: 0x00, bytesToRead: 17, invokeSynchronously: true);
             return ConnectionType == ConnectionType.USB
-                ? Encoding.ASCII.GetString(SendQuery(CommandSubaddress.IDENTIFY, 0x00, 17), 0, 17)
+                ? Encoding.ASCII.GetString(lastQueryResults, 0, 17)
                 : null;
         }
 
@@ -315,11 +314,26 @@ namespace Henkie.HSI.Board2
             if (data == 0xFF) data = 0xFE;
             _commandDispatcher.SendCommand((byte)subaddress, data, sendChecksumAndDelimiter: ConnectionType == ConnectionType.USB);
         }
-        public byte[] SendQuery(CommandSubaddress subaddress, byte? data = null, int bytesToRead = 0)
+        public byte[] SendQuery(CommandSubaddress subaddress, byte? data = null, int bytesToRead = 0, Action<byte[]> callback = null, bool invokeSynchronously = false)
         {
             if (data == 0xFF) data = 0xFE;
-            return _commandDispatcher.SendQuery((byte)subaddress, data, bytesToRead, sendChecksumAndDelimiter: ConnectionType == ConnectionType.USB);
+            _commandDispatcher.SendQuery(subaddress: (byte)subaddress, data: data, bytesToRead: bytesToRead, callback: callback ?? SetLastQueryResults , sendChecksumAndDelimiter: ConnectionType == ConnectionType.USB, invokeSynchronously: invokeSynchronously);
+            if (invokeSynchronously)
+            {
+                return _lastQueryResults;
+            }
+            else
+            {
+                return null;
+            }
         }
+
+        private byte[] _lastQueryResults;
+        private void SetLastQueryResults(byte[] lastQueryResults)
+        {
+            _lastQueryResults = lastQueryResults;
+        }
+
         #endregion
 
 

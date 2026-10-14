@@ -1138,17 +1138,22 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             }
         }
 
+        private DateTime _lastPitchUpdate = DateTime.MinValue;
+        private const double PITCH_MAX_UPDATE_RATE_HZ = 50.00d;
+
         private void UpdatePitchOutputValues()
         {
-            if (_pitchInputSignal != null && _pitchOutputSignal != null)
+            if (_pitchInputSignal != null && _pitchOutputSignal != null && _lastPitchUpdate.AddMilliseconds((int)(1000.000 / PITCH_MAX_UPDATE_RATE_HZ)) <= DateTime.Now)
             {
                 // Editor override: piecewise breakpoint table (input°, output DAC counts).
                 if (_pitchCalibration != null)
                 {
                     var v = GaugeTransform.EvaluatePiecewise(_pitchInputSignal.CorrelatedState, _pitchCalibration.Transform.Breakpoints);
                     _pitchOutputSignal.State = _pitchCalibration.ApplyTrim(v, _pitchOutputSignal.MinValue, _pitchOutputSignal.MaxValue);
+                    _lastPitchUpdate = DateTime.Now;
                     return;
                 }
+                _lastPitchUpdate = DateTime.Now;
                 _pitchOutputSignal.State = 424 + _pitchInputSignal.CorrelatedState / 90.000 * 255.000;
             }
         }
@@ -1160,33 +1165,41 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
                 _rateOfTurnAndFlagsPowerOnOffOutputSignal.State = _rateOfTurnAndFlagsPowerOnOffInputSignal.State;
             }
         }
-
+        private DateTime _lastRateOfTurnUpdate = DateTime.MinValue;
+        private const double RATE_OF_TURN_MAX_UPDATE_RATE_HZ = 50.00d;
         private void UpdateRateOfTurnOutputValues()
         {
-            if (_rateOfTurnInputSignal != null && _rateOfTurnOutputSignal != null)
+            if (_rateOfTurnInputSignal != null && _rateOfTurnOutputSignal != null && _lastRateOfTurnUpdate.AddMilliseconds((int)(1000.000/RATE_OF_TURN_MAX_UPDATE_RATE_HZ)) <= DateTime.Now)
             {
                 // Editor override: piecewise breakpoint table (input -1..+1, output 0..1).
                 if (_rateOfTurnCalibration != null)
                 {
                     var v = GaugeTransform.EvaluatePiecewise(_rateOfTurnInputSignal.State, _rateOfTurnCalibration.Transform.Breakpoints);
+                    _lastRateOfTurnUpdate = DateTime.Now;
                     _rateOfTurnOutputSignal.State = _rateOfTurnCalibration.ApplyTrim(v, _rateOfTurnOutputSignal.MinValue, _rateOfTurnOutputSignal.MaxValue);
                     return;
                 }
+                _lastRateOfTurnUpdate = DateTime.Now;
                 _rateOfTurnOutputSignal.State = (_rateOfTurnInputSignal.State + 1.000) / 2.000;
             }
         }
 
+        private DateTime _lastRollUpdate = DateTime.MinValue;
+        private const double ROLL_MAX_UPDATE_RATE_HZ = 50.00d;
+
         private void UpdateRollOutputValues()
         {
-            if (_rollInputSignal != null && _rollOutputSignal != null)
+            if (_rollInputSignal != null && _rollOutputSignal != null && _lastRollUpdate.AddMilliseconds((int)(1000.000 / ROLL_MAX_UPDATE_RATE_HZ)) <= DateTime.Now)
             {
                 // Editor override: piecewise breakpoint table (input°, output DAC counts).
                 if (_rollCalibration != null)
                 {
                     var v = GaugeTransform.EvaluatePiecewise(_rollInputSignal.CorrelatedState, _rollCalibration.Transform.Breakpoints);
+                    _lastRollUpdate = DateTime.Now;
                     _rollOutputSignal.State = _rollCalibration.ApplyTrim(v, _rollOutputSignal.MinValue, _rollOutputSignal.MaxValue);
                     return;
                 }
+                _lastRollUpdate = DateTime.Now;
                 _rollOutputSignal.State = 512.000 + _rollInputSignal.CorrelatedState / 180.000 * 512.000;
             }
         }

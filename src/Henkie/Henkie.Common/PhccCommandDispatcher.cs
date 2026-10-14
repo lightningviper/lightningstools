@@ -12,8 +12,8 @@ namespace Henkie.Common
             _phccDevice = phccDevice;
             _address = address;
         }
-        public byte[] SendQuery(byte subaddress, byte? data = null, int bytesToRead=0, bool usePsuedoCOBS = false)
-        {
+        public void SendQuery(byte subaddress, byte? data = null, int bytesToRead = 0, bool sendChecksumAndDelimiter = false, Action<byte[]> callback = null, bool invokeSynchronously = false)
+        { 
             throw new InvalidOperationException();
         }
 

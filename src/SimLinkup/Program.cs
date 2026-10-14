@@ -55,7 +55,7 @@ namespace SimLinkup
             }
             catch { }
 
-            Common.Threading.Util.SetMinAndMaxThreadPoolThreads(minIoThreadsToConfigure: 32767, maxIoThreadsToConfigure: 32767, minWorkerThreadsToConfigure: 32767, maxWorkerThreadsToConfigure: 32767);
+            //Common.Threading.Util.SetMinAndMaxThreadPoolThreads(minIoThreadsToConfigure: 32767, maxIoThreadsToConfigure: 32767, minWorkerThreadsToConfigure: 32767, maxWorkerThreadsToConfigure: 32767);
 
 
             Application.ThreadException += UIThreadException;
