@@ -167,24 +167,32 @@ namespace Henkie.Common
 
                     if (!usePseudoCOBS)
                     {
-                        if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
-                        {
-                            Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00} to {SerialPortConnection.COMPort}");
-                        }
+                        //if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
+                        //{
+                        //    Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00} to {SerialPortConnection.COMPort}");
+                        //}
                         SerialPortConnection.Write(new[] { subaddress, data ?? 0x00 }, 0, 2);
-                    }
-                    else
+                        //if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
+                        //{
+                        //    Console.WriteLine($"{DateTime.Now:O}: Wrote command with subAddress:{subaddress} with value byte:{data ?? 0x00} to {SerialPortConnection.COMPort}");
+                        //}
+                }
+                else
                     {
                         var checksum = (byte)((subaddress + (data ?? 0x00)) & 0x00FF);
                         var delimiter = (byte)0xFF;
-                        if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
-                        {
-                            Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
-                        }
+                        //if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
+                        //{
+                        //    Console.WriteLine($"{DateTime.Now:O}: Writing command with subAddress:{subaddress} with value byte:{data ?? 0x00}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
+                        //}
                         SerialPortConnection.Write(new[] { subaddress, data ?? 0x00, checksum, delimiter }, 0, 4);
-                    }
+                        //if (SerialPortConnection.COMPort == "COM2" || SerialPortConnection.COMPort == "COM3")
+                        //{
+                        //    Console.WriteLine($"{DateTime.Now:O}: Wrote command with subAddress:{subaddress} with value byte:{data ?? 0x00}, checksum:{checksum}, delimiter:{delimiter} to {SerialPortConnection.COMPort}");
+                        //}
+                }
 
-                    if (bytesToRead.HasValue && bytesToRead.Value > 0)
+                if (bytesToRead.HasValue && bytesToRead.Value > 0)
                     {
                         var readBuffer = new byte[bytesToRead.Value];
                         SerialPortConnection.Read(readBuffer, 0, bytesToRead.Value);

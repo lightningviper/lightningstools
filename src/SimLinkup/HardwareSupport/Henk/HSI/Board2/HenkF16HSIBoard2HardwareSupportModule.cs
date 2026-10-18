@@ -1350,7 +1350,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         }
 
         private DateTime _lastHeadingAndCourseInputRefreshTime = DateTime.MinValue;
-        private const float HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ  = 5.0f;
+        private const float HEADING_AND_COURSE_INPUT_REFRESH_RATE_HZ  = 20.0f;
         public override void Synchronize()
         {
             base.Synchronize();
