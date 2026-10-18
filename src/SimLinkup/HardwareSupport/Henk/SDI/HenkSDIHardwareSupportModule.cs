@@ -135,12 +135,32 @@ namespace SimLinkup.HardwareSupport.Henk.SDI
             MoveIndicatorToPositionCoarse(initialIndicatorPosition);
         }
 
+        private void ConfigureDefaultPowerEnableOutputsAndADIFlagVisibility()
+        {
+            if (_sdiDevice == null) return;
+            if (DeviceFunction == "PITCH")
+            {
+                _sdiDevice.SetOutputChannelValue(SDIDriver.OutputChannels.DIG_PWM_2, 0x01); //enable glide slope
+                _sdiDevice.SetOutputChannelValue(SDIDriver.OutputChannels.DIG_PWM_1, 0x01); //enable roll and pitch
+
+            }
+            else if (DeviceFunction == "ROLL")
+            {
+                _sdiDevice.SetOutputChannelValue(SDIDriver.OutputChannels.DIG_PWM_2, 0x01); //enable flags and RoT
+                _sdiDevice.SetOutputChannelValue(SDIDriver.OutputChannels.DIG_PWM_1, 0x01); //hide GS flag
+                _sdiDevice.SetOutputChannelValue(SDIDriver.OutputChannels.DIG_PWM_3, 0x01); //hide LOC flag
+                _sdiDevice.SetOutputChannelValue(SDIDriver.OutputChannels.DIG_PWM_4, 0x01); //hide AUX flag
+
+            }
+        }
+
         private void ConfigureDevice()
         {
             ConfigureDeviceConnection();
             //ConfigureStatorBaseAngles();
             ConfigureDiagnosticLEDBehavior();
             ConfigureOutputChannels();
+            ConfigureDefaultPowerEnableOutputsAndADIFlagVisibility();
             ConfigureDefaultIndicatorPosition();
             ConfigureMovementLimits();
             ConfigurePowerDown();
