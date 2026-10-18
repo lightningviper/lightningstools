@@ -1,0 +1,37 @@
+﻿<Timeline>
+	<Moment t="00:00:00:000">
+		<FlightData VersionNum="118"
+				   yaw="0.00"
+				   courseDeviation = "0.00"
+				   desiredCourse = "0.00"
+				   distanceToBeacon = "0.00"
+				   bearingToBeacon = "180.00"
+				   deviationLimit = "5.00"
+				   halfDeviationLimit = "2.50"
+				   localizerCourse = "0.00"
+				   pitch = "0.00"
+				   roll = "-6.283185307179586476925286766559"
+				   hsiBits = "ToTrue,IlsWarning,CourseWarning,Flying"
+	      />
+
+		<FlightData2 VersionNum="19" BMSVersionMajor="4" BMSVersionMinor="37" BMSVersionMicro="1" BMSBuildNumber="451"
+			    powerBits="BusPowerBattery,BusPowerEmergency,BusPowerEssential,BusPowerNonEssential,MainGenerator,StandbyGenerator"
+	      />
+
+		<IntellivibeData In3D="true" />
+	</Moment>
+
+	<Moment t="00:10:00:000">
+		<FlightData
+			roll = "0"
+        />
+	</Moment>
+
+	<Moment t="00:20:00:000">
+		<FlightData
+			roll = "6.283185307179586476925286766559"
+        />
+	</Moment>
+
+
+</Timeline>

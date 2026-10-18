@@ -129,6 +129,9 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="examples\adi-roll.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="examples\hsi-test.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

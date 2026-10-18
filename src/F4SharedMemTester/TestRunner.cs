@@ -15,7 +15,10 @@ namespace F4SharedMemTester
             var testFile = Load(inputFileSpec);
             using (var testRunner = new TestRunner())
             {
-                testRunner.Execute(testFile);
+                while (true)
+                {
+                    testRunner.Execute(testFile);
+                }
             }
         }
         public void Execute(TestFile testFile)
