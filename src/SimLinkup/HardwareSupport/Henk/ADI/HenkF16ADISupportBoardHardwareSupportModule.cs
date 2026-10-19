@@ -1139,7 +1139,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         }
 
         private DateTime _lastPitchUpdate = DateTime.MinValue;
-        private const double PITCH_MAX_UPDATE_RATE_HZ = 50.00d;
+        private const double PITCH_MAX_UPDATE_RATE_HZ = 100.00d;
 
         private void UpdatePitchOutputValues()
         {
@@ -1166,7 +1166,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
             }
         }
         private DateTime _lastRateOfTurnUpdate = DateTime.MinValue;
-        private const double RATE_OF_TURN_MAX_UPDATE_RATE_HZ = 50.00d;
+        private const double RATE_OF_TURN_MAX_UPDATE_RATE_HZ = 5.00d;
         private void UpdateRateOfTurnOutputValues()
         {
             if (_rateOfTurnInputSignal != null && _rateOfTurnOutputSignal != null && _lastRateOfTurnUpdate.AddMilliseconds((int)(1000.000/RATE_OF_TURN_MAX_UPDATE_RATE_HZ)) <= DateTime.Now)
@@ -1185,7 +1185,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         }
 
         private DateTime _lastRollUpdate = DateTime.MinValue;
-        private const double ROLL_MAX_UPDATE_RATE_HZ = 50.00d;
+        private const double ROLL_MAX_UPDATE_RATE_HZ = 100.00d;
 
         private void UpdateRollOutputValues()
         {

@@ -1357,8 +1357,7 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
             UpdateHeadingAndCourseInputsInBackground();
         }
         private const int NUM_CRS_RAW_SAMPLES_TO_STORE = 5;
-        private const double MAX_SAMPLE_SPREAD = 80;
-        private ConcurrentRollingBuffer<Int16> _lastCourseDataRawSamples = new ConcurrentRollingBuffer<Int16>(NUM_CRS_RAW_SAMPLES_TO_STORE);
+        private readonly ConcurrentRollingBuffer<UInt16> _lastCourseDataRawSamples = new ConcurrentRollingBuffer<UInt16>(NUM_CRS_RAW_SAMPLES_TO_STORE);
 
         private object _courseAndHeadingBackgroundRefreshLock = new object();
         private void UpdateHeadingAndCourseInputsInBackground()
@@ -1408,21 +1407,20 @@ namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
         {
             //CRS updates
             _lastCourseDataRawSamples.Add(courseState.CourseKnobRaw);
-
-            var minSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Min() : 0;
-            var maxSampleValueInHistory = _lastCourseDataRawSamples.Count() > 0 ? _lastCourseDataRawSamples.Max() : 0;
-            var sampleSpread = Math.Abs(maxSampleValueInHistory - minSampleValueInHistory);
-            //if (sampleSpread <= MAX_SAMPLE_SPREAD)
-            //{
+            var filteredAvgOfSamples = MedianValue(_lastCourseDataRawSamples);
+            
             _desiredCourseRawOutputSignal.State = courseState.CourseKnobRaw;
-            var calibratedCourseKnobInputDegrees = GetCalibratedDesiredCourseDegrees(courseState.CourseKnobRaw);
+            //var calibratedCourseKnobInputDegrees = GetCalibratedDesiredCourseDegrees(courseState.CourseKnobRaw);
+            var calibratedCourseKnobInputDegrees = GetCalibratedDesiredCourseDegrees(Convert.ToInt16(filteredAvgOfSamples));
             _desiredCourseRawOutputSignal.CorrelatedState = calibratedCourseKnobInputDegrees;
             _desiredCoursePercentageOutputSignal.State = calibratedCourseKnobInputDegrees / 360.0000d;
             _desiredCourseDegreesOutputSignal.State = calibratedCourseKnobInputDegrees;
             _desiredCourseDegreesOutputSignal.CorrelatedState = courseState.CourseKnobRaw;
-            //}
         }
-
+        public static double MedianValue(ConcurrentRollingBuffer<ushort> samples)
+        {
+            return samples.OrderBy(x => x).ElementAt(samples.Count() / 2);
+        }
         private double GetMagneticHeadingDegrees()
         {
             if (_magneticHeadingInputSignal == null)

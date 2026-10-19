@@ -121,7 +121,7 @@ namespace Henkie.HSI.Board2
             if (headingDatumValue < -1023) headingDatumValue = 1023;
             if (headingDatumValue > 1023) headingDatumValue = 1023;
 
-            var desiredCourseValue = ReadInt16BigEndian(headingAndCourseDataPacketBytes, 4);
+            var desiredCourseValue = ReadUInt16BigEndian(headingAndCourseDataPacketBytes, 4);
             if (desiredCourseValue < 0) desiredCourseValue = 0;
             if (desiredCourseValue > 4095) desiredCourseValue = 4095;
             var toReturn = new HeadingAndCourseState()
@@ -137,6 +137,14 @@ namespace Henkie.HSI.Board2
             if (offset < 0 || offset > buffer.Length - 2) throw new ArgumentOutOfRangeException(nameof(offset));
 
             return (short)((buffer[offset] << 8) | buffer[offset + 1]);
+        }
+
+        private static ushort ReadUInt16BigEndian(byte[] buffer, int offset)
+        {
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (offset < 0 || offset > buffer.Length - 2) throw new ArgumentOutOfRangeException(nameof(offset));
+
+            return (ushort)((buffer[offset] << 8) | buffer[offset + 1]);
         }
 
         public void SetHeadingValueConvertToDegreesOption(bool convertToDegrees)
