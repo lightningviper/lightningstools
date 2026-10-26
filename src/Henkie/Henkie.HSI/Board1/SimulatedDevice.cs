@@ -13,7 +13,7 @@ namespace Henkie.HSI.Board1
 
         public SimulatedDevice(string comPort)
         {
-            _serialPortConnection = new SerialPortConnection(comPort);
+            _serialPortConnection = new SerialPortConnection(comPort, openPort: true);
             _serialPortConnection.DataReceived += SerialPortConnection_DataReceived;
         }
 
@@ -28,6 +28,7 @@ namespace Henkie.HSI.Board1
                     _serialPortConnection.Read(_buffer, 0, numBytes);
                     _dataStream.Write(_buffer, 0, numBytes);
                     _dataStream.Flush();
+                    _dataStream.Seek(-numBytes, SeekOrigin.Current);
                 }
                 if (_dataStream.Length >= 4 + _dataStream.Position)
                 {
@@ -36,6 +37,9 @@ namespace Henkie.HSI.Board1
                     var checksum = (byte)_dataStream.ReadByte();
                     var delimeter = (byte)_dataStream.ReadByte();
                     HandleCommandOrQuery((CommandSubaddress)subaddress, data);
+                }
+                if (_dataStream.Position == _dataStream.Length)
+                {
                     _dataStream.SetLength(0);
                     _dataStream.Position = 0;
                 }

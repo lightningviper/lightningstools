@@ -14,9 +14,13 @@ namespace Henkie.Common
         private SerialPort _serialPort;
         private readonly ILog _log = LogManager.GetLogger(typeof(SerialPortConnection));
         private SerialPortConnection(){}
-        public SerialPortConnection(string COMPort) :this()
+        public SerialPortConnection(string COMPort, bool openPort = false) :this()
         {
             _COMPort = COMPort;
+            if (openPort)
+            {
+                EnsurePortIsReady();
+            }
         }
 
         public event EventHandler<DeviceDataReceivedEventArgs> DataReceived;
