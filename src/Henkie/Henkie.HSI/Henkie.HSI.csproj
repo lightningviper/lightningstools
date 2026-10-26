@@ -84,6 +84,7 @@
     <Compile Include="Board2\Device.cs" />
     <Compile Include="Board2\HeadingAndCourseState.cs" />
     <Compile Include="Board2\OutputChannels.cs" />
+    <Compile Include="Board2\SimulatedDevice.cs" />
     <Compile Include="Board2\ToFromFlagsState.cs" />
     <Compile Include="Board2\UsbMessagingOption.cs" />
     <Compile Include="GlobalSuppressions.cs" />

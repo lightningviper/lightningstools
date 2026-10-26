@@ -13,6 +13,6 @@ namespace Henkie.Common
     [ComVisible(true)]
     public sealed class DeviceDataReceivedEventArgs : EventArgs
     {
-        public byte[] Data { get; set; }
+        public SerialPortDataReceivedEventType EventType { get; set; }
     }
 }

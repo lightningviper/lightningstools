@@ -76,6 +76,7 @@
     <Compile Include="Polarity.cs" />
     <Compile Include="Quadrant.cs" />
     <Compile Include="SerialPortConnection.cs" />
+    <Compile Include="SerialPortDataReceivedEventType.cs" />
     <Compile Include="StatorSignals.cs" />
     <Compile Include="UsbCommandDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

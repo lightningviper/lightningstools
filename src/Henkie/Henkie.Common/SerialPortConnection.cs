@@ -6,7 +6,7 @@ using log4net;
 
 namespace Henkie.Common
 {
-    internal class SerialPortConnection:ISerialPortConnection
+    public class SerialPortConnection:ISerialPortConnection
     {
         private readonly object _serialPortLock = new object();
         private bool _isDisposed;
@@ -132,8 +132,8 @@ namespace Henkie.Common
                     ReadTimeout = 500,
                     WriteTimeout = 1000
                 };
-                _serialPort.DataReceived += _serialPort_DataReceived;
-                _serialPort.ErrorReceived += _serialPort_ErrorReceived;
+                _serialPort.DataReceived += SerialPort_DataReceived;
+                _serialPort.ErrorReceived += SerialPort_ErrorReceived;
                 _serialPort.Open();
                 GC.SuppressFinalize(_serialPort.BaseStream);
             }
@@ -149,7 +149,7 @@ namespace Henkie.Common
                 }
             }
         }
-        private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             lock (_serialPortLock)
             {
@@ -166,7 +166,7 @@ namespace Henkie.Common
         }
         private void OnSerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            DataReceived?.Invoke(this, new DeviceDataReceivedEventArgs() { });
+            DataReceived?.Invoke(this, new DeviceDataReceivedEventArgs() { EventType = e.EventType == SerialData.Eof ? SerialPortDataReceivedEventType.Eof : SerialPortDataReceivedEventType.Chars });
         }
         private void ClosePort()
         {
@@ -174,8 +174,8 @@ namespace Henkie.Common
             {
                 if (_serialPort == null) return;
                 try {
-                    _serialPort.DataReceived -= _serialPort_DataReceived;
-                    _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
+                    _serialPort.DataReceived -= SerialPort_DataReceived;
+                    _serialPort.ErrorReceived -= SerialPort_ErrorReceived;
                 }
                 catch (Exception ex)
                 {
@@ -214,7 +214,7 @@ namespace Henkie.Common
                 Thread.Sleep(500);
             }
         }
-       private static void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e) { }
+       private static void SerialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e) { }
 
         ~SerialPortConnection()
         {
