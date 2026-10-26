@@ -79,6 +79,7 @@
     <Compile Include="Board1\CommandSubaddress.cs" />
     <Compile Include="Board1\RangeDigitStatorCoils.cs" />
     <Compile Include="Board1\RangeUpdateMode.cs" />
+    <Compile Include="Board1\SimulatedDevice.cs" />
     <Compile Include="Board2\CommandSubaddress.cs" />
     <Compile Include="Board2\CourseValueConvertOption.cs" />
     <Compile Include="Board2\Device.cs" />
