@@ -10,8 +10,8 @@ namespace Henkie.HSI.Board2
         private readonly Stream _dataStream = new MemoryStream();
         private readonly byte[] _buffer = new byte[1024];
         private readonly ISerialPortConnection _serialPortConnection = null;
-        private double _desiredCourse = 0;
-        private double _desiredHeading = 0;
+        private double _desiredCourseDegrees = 0;
+        private double _headingDatumDegrees = 0;
 
         public SimulatedDevice(string comPort)
         {
@@ -167,22 +167,25 @@ namespace Henkie.HSI.Board2
         }
         private void SendCourseAndHeadingUpdatePacket()
         {
-            var headerBytes = BitConverter.GetBytes(0x7777);
+            var headerBytes = BitConverter.GetBytes((ushort)0x7777);
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(headerBytes);
             }
             _serialPortConnection.Write(headerBytes, 0, headerBytes.Length);
 
-            var desiredHeadingAsInt16 = Convert.ToInt16((_desiredHeading / 360.0000d) * 4096.0000d);
-            var desiredHeadingBytes = BitConverter.GetBytes(desiredHeadingAsInt16);
+            var headingDatumAsInt16 = Convert.ToInt16((_headingDatumDegrees / 90.0000d) * 1023);
+            if (headingDatumAsInt16 < -1023) headingDatumAsInt16 = -1023;
+            if (headingDatumAsInt16 > 1023) headingDatumAsInt16 = 1023;
+
+            var headingDatumBytes = BitConverter.GetBytes(headingDatumAsInt16);
             if (BitConverter.IsLittleEndian)
             {
-                Array.Reverse(desiredHeadingBytes);
+                Array.Reverse(headingDatumBytes);
             }
-            _serialPortConnection.Write(desiredHeadingBytes, 0, desiredHeadingBytes.Length);
+            _serialPortConnection.Write(headingDatumBytes, 0, headingDatumBytes.Length);
 
-            var desiredCourseAsInt16 = Convert.ToInt16(_desiredCourse / 360.0000d * 4096.0000d);
+            var desiredCourseAsInt16 = Convert.ToInt16(_desiredCourseDegrees / 360.0000d * 4096.0000d);
             var desiredCourseBytes = BitConverter.GetBytes(desiredCourseAsInt16);
             if (BitConverter.IsLittleEndian)
             {
@@ -190,7 +193,15 @@ namespace Henkie.HSI.Board2
             }
             _serialPortConnection.Write(desiredCourseBytes, 0, desiredCourseBytes.Length);
 
-            var footerBytes = BitConverter.GetBytes(0x0D0A);
+            var checksumAsInt16 = Convert.ToInt16(headingDatumAsInt16 + desiredCourseAsInt16);
+            var checkSumBytes = BitConverter.GetBytes(checksumAsInt16);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(checkSumBytes);
+            }
+            _serialPortConnection.Write(checkSumBytes, 0, checkSumBytes.Length);
+
+            var footerBytes = BitConverter.GetBytes((ushort)0xFFFF);
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(footerBytes);
@@ -222,13 +233,13 @@ namespace Henkie.HSI.Board2
         public byte CourseSynchroExciterStatorCoilOffsetLSB { get; private set; } = 0x00;
         public byte CourseSynchroExciterStatorCoilOffsetMSB { get; private set; } = 0x00;
 
-        public void SetDesiredCourse(double desiredCourse)
+        public void SetDesiredCourse(double desiredCourseDegrees)
         {
-            _desiredCourse = desiredCourse % 360.0000d;
+            _desiredCourseDegrees = desiredCourseDegrees % 360.0000d;
         }
-        public void SetDesiredHeading(double desiredHeading)
+        public void SetHeadingDatum(double headingDatumDegrees)
         {
-            _desiredHeading = desiredHeading % 360.0000d;
+            _headingDatumDegrees = headingDatumDegrees % 360.0000d;
         }
     }
 }

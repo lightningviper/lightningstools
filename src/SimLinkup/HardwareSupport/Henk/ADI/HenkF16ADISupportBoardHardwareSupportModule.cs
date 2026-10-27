@@ -1139,7 +1139,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         }
 
         private DateTime _lastPitchUpdate = DateTime.MinValue;
-        private const double PITCH_MAX_UPDATE_RATE_HZ = 100.00d;
+        private const double PITCH_MAX_UPDATE_RATE_HZ = 10.00d;
 
         private void UpdatePitchOutputValues()
         {
@@ -1185,7 +1185,7 @@ namespace SimLinkup.HardwareSupport.Henk.ADI
         }
 
         private DateTime _lastRollUpdate = DateTime.MinValue;
-        private const double ROLL_MAX_UPDATE_RATE_HZ = 100.00d;
+        private const double ROLL_MAX_UPDATE_RATE_HZ = 10.00d;
 
         private void UpdateRollOutputValues()
         {

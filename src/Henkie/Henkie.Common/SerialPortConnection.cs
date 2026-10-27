@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO.Ports;
-using System.Reflection;
 using System.Threading;
 using log4net;
 
@@ -19,7 +18,10 @@ namespace Henkie.Common
             _COMPort = COMPort;
             if (openPort)
             {
-                EnsurePortIsReady();
+                lock (_serialPortLock)
+                {
+                    EnsurePortIsReady();
+                }
             }
         }
 
@@ -41,31 +43,43 @@ namespace Henkie.Common
             }
         }
 
-        public void DiscardInputBuffer()
+        public bool DiscardInputBuffer()
         {
-            EnsurePortIsReady();
             lock (_serialPortLock)
             {
                 try
                 {
-                    _serialPort.DiscardInBuffer();
+                    EnsurePortIsReady();
+                    _serialPort?.DiscardInBuffer();
+                    return true;
                 }
                 catch
                 {
                     Console.WriteLine("Serial port " + _serialPort.PortName + " timed out, disconnecting and reconnecting");
                     ClosePort();
                 }
+                return false;
             }
         }
-
-        public void Write(byte[] buffer, int index, int count)
+        public bool WriteThenRead(byte[] writeBuffer, int writeBufferIndex, int bytesToWrite, byte[] readBuffer, int readBufferIndex, int bytesToRead)
         {
-            EnsurePortIsReady();
+            lock (_serialPortLock)
+            {
+                var success = Write(writeBuffer, writeBufferIndex, bytesToWrite);
+                if (!success) return false; 
+                return Read(readBuffer, readBufferIndex, bytesToRead);
+            }
+        }
+        public bool Write(byte[] buffer, int index, int count)
+        {
             lock (_serialPortLock)
             {
                 try
                 {
+                    EnsurePortIsReady();
                     _serialPort.Write(buffer, index, count);
+                    _serialPort.BaseStream.Flush();
+                    return true;
                 }
                 catch
                 {
@@ -73,6 +87,7 @@ namespace Henkie.Common
                     ClosePort();
                 }
             }
+            return false;
         }
         public int BytesAvailable
         {
@@ -85,25 +100,29 @@ namespace Henkie.Common
             }
         }
 
-        public void Read(byte[] buffer, int index, int count)
+        public bool Read(byte[] buffer, int index, int count)
         {
             lock (_serialPortLock)
             {
-                EnsurePortIsReady();
-                var timeout = _serialPort.ReadTimeout;
-                var startTime = DateTime.UtcNow;
-                var bytesAvailable = 0;
-                while (bytesAvailable < count)
-                {
-                    bytesAvailable = BytesAvailable;
-                    if (DateTime.UtcNow > startTime.AddMilliseconds(timeout) && timeout != Timeout.Infinite)
-                    {
-                        throw new TimeoutException();
-                    }
-                }
                 try
                 {
+                    EnsurePortIsReady();
+                    var timeout = _serialPort.ReadTimeout;
+                    var startTime = DateTime.UtcNow;
+                    var bytesAvailable = 0;
+
+                    while (bytesAvailable < count)
+                    {
+                        bytesAvailable = BytesAvailable;
+                        if (DateTime.UtcNow > startTime.AddMilliseconds(timeout) && timeout != Timeout.Infinite)
+                        {
+                            throw new TimeoutException();
+                        }
+                        Thread.Sleep(0);
+                    }
+
                     _serialPort.Read(buffer, index, count);
+                    return true;
                 }
                 catch
                 {
@@ -111,6 +130,7 @@ namespace Henkie.Common
                     ClosePort();
                 }
             }
+            return false;
         }
 
         public void Dispose()
@@ -133,8 +153,10 @@ namespace Henkie.Common
                     Handshake = Handshake.None,
                     ReceivedBytesThreshold = 1,
                     RtsEnable = true,
-                    ReadTimeout = 500,
-                    WriteTimeout = 1000
+                    ReadTimeout = 1000,
+                    WriteTimeout = 1000,
+                    ReadBufferSize = 64 * 1024,
+                    WriteBufferSize = 64 * 1024
                 };
                 _serialPort.DataReceived += SerialPort_DataReceived;
                 _serialPort.ErrorReceived += SerialPort_ErrorReceived;
@@ -155,17 +177,14 @@ namespace Henkie.Common
         }
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            lock (_serialPortLock)
+            try
             {
-                try
-                {
-                    OnSerialPortDataReceived(sender, e);
-                }
-                catch (Exception ex)
-                {
-                    _log.Error(ex.Message, ex);
-                    throw;
-                }
+                OnSerialPortDataReceived(sender, e);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
+                throw;
             }
         }
         private void OnSerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
