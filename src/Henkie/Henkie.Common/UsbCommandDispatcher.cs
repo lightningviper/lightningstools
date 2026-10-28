@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
 
 namespace Henkie.Common
 {
@@ -14,8 +12,8 @@ namespace Henkie.Common
         private readonly Queue<UsbCommandOrQuery> _commandAndQueryQueue = new Queue<UsbCommandOrQuery>();
         private System.Timers.Timer _commandSendingTimer;
         private readonly bool _useCommandSendingTimer = true;
-        private object _commandAndQueryQueueLockObj = new object();
-        private int _minimumCommandSendingIntervalMilliseconds = 50;
+        private readonly object _commandAndQueryQueueLockObj = new object();
+        private readonly int _minimumCommandSendingIntervalMilliseconds = 50;
 
         private struct UsbCommandOrQuery
         {
@@ -89,8 +87,7 @@ namespace Henkie.Common
 
         private void CommandSendingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            UsbCommandOrQuery? nextCommandOrQuery = null;
-            nextCommandOrQuery = GetNextCommandOrQueryFromQueue();
+            UsbCommandOrQuery? nextCommandOrQuery = GetNextCommandOrQueryFromQueue();
             if (nextCommandOrQuery != null)
             {
                 try
@@ -168,18 +165,18 @@ namespace Henkie.Common
                 if (bytesToRead.HasValue && bytesToRead.Value > 0)
                 {
                     var readBuffer = new byte[bytesToRead.Value];
-                    bool success;
+                    int bytesRead;
                     if (!usePseudoCOBS)
                     {
-                        success = SerialPortConnection.WriteThenRead(new[] { subaddress, data ?? 0x00 }, 0, 2, readBuffer, 0, bytesToRead.Value);
+                        bytesRead = SerialPortConnection.WriteThenRead(new[] { subaddress, data ?? 0x00 }, 0, 2, readBuffer, 0, bytesToRead.Value);
                     }
                     else
                     {
                         var checksum = (byte)((subaddress + (data ?? 0x00)) & 0x00FF);
                         var delimiter = (byte)0xFF;
-                        success = SerialPortConnection.WriteThenRead(new[] { subaddress, data ?? 0x00, checksum, delimiter }, 0, 4, readBuffer, 0, bytesToRead.Value);
+                        bytesRead = SerialPortConnection.WriteThenRead(new[] { subaddress, data ?? 0x00, checksum, delimiter }, 0, 4, readBuffer, 0, bytesToRead.Value);
                     }
-                    if (success)
+                    if (bytesRead >= bytesToRead)
                     {
                         callback(readBuffer);
                     }
@@ -220,6 +217,5 @@ namespace Henkie.Common
             }
             _isDisposed = true;
         }
-
     }
 }

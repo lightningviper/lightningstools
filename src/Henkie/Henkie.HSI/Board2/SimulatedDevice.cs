@@ -1,14 +1,11 @@
 ﻿using Henkie.Common;
 using System;
-using System.IO;
 using System.Text;
 
 namespace Henkie.HSI.Board2
 {
     public class SimulatedDevice
     {
-        private readonly Stream _dataStream = new MemoryStream();
-        private readonly byte[] _buffer = new byte[1024];
         private readonly ISerialPortConnection _serialPortConnection = null;
         private double _desiredCourseDegrees = 0;
         private double _headingDatumDegrees = 0;
@@ -16,37 +13,25 @@ namespace Henkie.HSI.Board2
         public SimulatedDevice(string comPort)
         {
             _serialPortConnection = new SerialPortConnection(comPort, openPort: true);
-            _serialPortConnection.DataReceived += SerialPortConnection_DataReceived;
         }
 
-        private void SerialPortConnection_DataReceived(object sender, DeviceDataReceivedEventArgs e)
+        public void ProcessIncomingData()
         {
-            if (_serialPortConnection != null && e.EventType == SerialPortDataReceivedEventType.Chars)
+            while (_serialPortConnection.BytesAvailable >= 4)
             {
-                while (_serialPortConnection.BytesAvailable > 0)
+                var buffer = new byte[4];
+                var bytesRead = _serialPortConnection.Read(buffer, 0, buffer.Length);
+                if (bytesRead >= 4)
                 {
-                    Array.Clear(_buffer, 0, _buffer.Length);
-                    var numBytes = _serialPortConnection.BytesAvailable <= _buffer.Length ? _serialPortConnection.BytesAvailable : _buffer.Length;
-                    _serialPortConnection.Read(_buffer, 0, numBytes);
-                    _dataStream.Write(_buffer, 0, numBytes);
-                    _dataStream.Flush();
-                    _dataStream.Seek(-numBytes, SeekOrigin.Current);
-                }
-                while (_dataStream.Length >= 4 + _dataStream.Position)
-                {
-                    var subaddress = (byte)_dataStream.ReadByte();
-                    var data = (byte)_dataStream.ReadByte();
-                    var checksum = (byte)_dataStream.ReadByte();
-                    var delimeter = (byte)_dataStream.ReadByte();
+                    var subaddress = buffer[0];
+                    var data = buffer[1];
+                    var checksum = buffer[2];
+                    var delimeter = buffer[3];
                     HandleCommandOrQuery((CommandSubaddress)subaddress, data);
-                }
-                if (_dataStream.Position == _dataStream.Length)
-                {
-                    _dataStream.SetLength(0);
-                    _dataStream.Position = 0;
                 }
             }
         }
+
 
         private void HandleCommandOrQuery(CommandSubaddress subaddress, byte data)
         {
@@ -167,12 +152,13 @@ namespace Henkie.HSI.Board2
         }
         private void SendCourseAndHeadingUpdatePacket()
         {
+            var packet = new byte[10];
             var headerBytes = BitConverter.GetBytes((ushort)0x7777);
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(headerBytes);
             }
-            _serialPortConnection.Write(headerBytes, 0, headerBytes.Length);
+            Array.Copy(headerBytes, 0, packet, 0, headerBytes.Length);
 
             var headingDatumAsInt16 = Convert.ToInt16((_headingDatumDegrees / 90.0000d) * 1023);
             if (headingDatumAsInt16 < -1023) headingDatumAsInt16 = -1023;
@@ -183,7 +169,7 @@ namespace Henkie.HSI.Board2
             {
                 Array.Reverse(headingDatumBytes);
             }
-            _serialPortConnection.Write(headingDatumBytes, 0, headingDatumBytes.Length);
+            Array.Copy(headingDatumBytes, 0, packet, 2, headingDatumBytes.Length);
 
             var desiredCourseAsInt16 = Convert.ToInt16(_desiredCourseDegrees / 360.0000d * 4096.0000d);
             var desiredCourseBytes = BitConverter.GetBytes(desiredCourseAsInt16);
@@ -191,7 +177,7 @@ namespace Henkie.HSI.Board2
             {
                 Array.Reverse(desiredCourseBytes);
             }
-            _serialPortConnection.Write(desiredCourseBytes, 0, desiredCourseBytes.Length);
+            Array.Copy(desiredCourseBytes, 0, packet, 4, desiredCourseBytes.Length);
 
             var checksumAsInt16 = Convert.ToInt16(headingDatumAsInt16 + desiredCourseAsInt16);
             var checkSumBytes = BitConverter.GetBytes(checksumAsInt16);
@@ -199,15 +185,16 @@ namespace Henkie.HSI.Board2
             {
                 Array.Reverse(checkSumBytes);
             }
-            _serialPortConnection.Write(checkSumBytes, 0, checkSumBytes.Length);
+            Array.Copy(checkSumBytes, 0, packet, 6, checkSumBytes.Length);
 
             var footerBytes = BitConverter.GetBytes((ushort)0xFFFF);
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(footerBytes);
             }
-            _serialPortConnection.Write(footerBytes, 0, footerBytes.Length);
+            Array.Copy(footerBytes, 0, packet, 8, footerBytes.Length);
 
+            _serialPortConnection.Write(packet, 0, packet.Length);
         }
         public short CourseDeviationIndicatorPosition { get; private set; } = 0;
         public byte NavigationWarningFlag { get; private set; } = 0x00;

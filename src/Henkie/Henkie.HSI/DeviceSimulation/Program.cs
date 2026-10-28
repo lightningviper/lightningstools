@@ -19,10 +19,12 @@ namespace Henkie.HSI.DeviceSimulation
             var headingDatumDegrees = -90.000d;
             while (true)
             {
+                _simulatedHsiBoard1Device.ProcessIncomingData();
+                _simulatedHsiBoard2Device.ProcessIncomingData();
                 var hsiBoard1Props = SerializePublicPropertiesToString(_simulatedHsiBoard1Device);
                 var hsiBoard2Props = SerializePublicPropertiesToString(_simulatedHsiBoard2Device);
                 _simulatedHsiBoard2Device.SetHeadingDatum(headingDatumDegrees:headingDatumDegrees);
-                headingDatumDegrees += 0.02;
+                headingDatumDegrees += 0.1;
                 if (headingDatumDegrees > 90.000d) headingDatumDegrees = -90.000d;
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine(hsiBoard1Props);

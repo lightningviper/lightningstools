@@ -53,20 +53,20 @@ namespace Henkie.Common
                     _serialPort?.DiscardInBuffer();
                     return true;
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Serial port " + _serialPort.PortName + " timed out, disconnecting and reconnecting");
+                    _log.Error("Serial port " + _serialPort?.PortName + " exception in DiscardInputBuffer(), disconnecting.", ex);
                     ClosePort();
                 }
                 return false;
             }
         }
-        public bool WriteThenRead(byte[] writeBuffer, int writeBufferIndex, int bytesToWrite, byte[] readBuffer, int readBufferIndex, int bytesToRead)
+        public int WriteThenRead(byte[] writeBuffer, int writeBufferIndex, int bytesToWrite, byte[] readBuffer, int readBufferIndex, int bytesToRead)
         {
             lock (_serialPortLock)
             {
                 var success = Write(writeBuffer, writeBufferIndex, bytesToWrite);
-                if (!success) return false; 
+                if (!success) return -1;
                 return Read(readBuffer, readBufferIndex, bytesToRead);
             }
         }
@@ -77,13 +77,13 @@ namespace Henkie.Common
                 try
                 {
                     EnsurePortIsReady();
-                    _serialPort.Write(buffer, index, count);
+                    _serialPort.BaseStream.Write(buffer, index, count);
                     _serialPort.BaseStream.Flush();
                     return true;
                 }
-                catch
+                catch (Exception ex) 
                 {
-                    Console.WriteLine("Serial port " + _serialPort.PortName + " timed out, disconnecting and reconnecting");
+                    _log.Error("Serial port " + _serialPort?.PortName + " exception in Write(), disconnecting.", ex);
                     ClosePort();
                 }
             }
@@ -95,42 +95,56 @@ namespace Henkie.Common
             {
                 lock (_serialPortLock)
                 {
-                    return (_serialPort != null && _serialPort.IsOpen) ? _serialPort.BytesToRead : 0;
+                    EnsurePortIsReady();
+                    if (_serialPort == null) return 0;
+                    try
+                    {
+                        return _serialPort.BytesToRead;
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.Error("Serial port " + _serialPort?.PortName + " exception in BytesAvailable(), disconnecting.", ex);
+                        ClosePort();
+                    }
+                    return 0;
                 }
             }
         }
 
-        public bool Read(byte[] buffer, int index, int count)
+        public int Read(byte[] buffer, int index, int count)
         {
-            lock (_serialPortLock)
+            lock (_serialPortLock) 
             {
-                try
-                {
-                    EnsurePortIsReady();
-                    var timeout = _serialPort.ReadTimeout;
-                    var startTime = DateTime.UtcNow;
-                    var bytesAvailable = 0;
+                EnsurePortIsReady();
 
-                    while (bytesAvailable < count)
+                var timeout = _serialPort.ReadTimeout;
+                var startTime = DateTime.UtcNow;
+                var bytesAvailable = 0;
+
+                while (bytesAvailable < count)
+                {
+                    bytesAvailable = BytesAvailable;
+                    if (DateTime.UtcNow > startTime.AddMilliseconds(timeout) && timeout != Timeout.Infinite)
                     {
-                        bytesAvailable = BytesAvailable;
-                        if (DateTime.UtcNow > startTime.AddMilliseconds(timeout) && timeout != Timeout.Infinite)
-                        {
-                            throw new TimeoutException();
-                        }
-                        Thread.Sleep(0);
+                        return -1;
                     }
+                    Thread.Sleep(0);
+                }
 
-                    _serialPort.Read(buffer, index, count);
-                    return true;
-                }
-                catch
+                if (BytesAvailable >= count)
                 {
-                    Console.WriteLine("Serial port " + _serialPort.PortName + " timed out, disconnecting and reconnecting");
-                    ClosePort();
+                    try
+                    {
+                        return _serialPort.BaseStream.Read(buffer, index, count);
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.Error("Serial port " + _serialPort?.PortName + " exception in Read(), disconnecting.", ex);
+                        ClosePort();
+                    }
                 }
+                return -1;
             }
-            return false;
         }
 
         public void Dispose()
@@ -184,7 +198,6 @@ namespace Henkie.Common
             catch (Exception ex)
             {
                 _log.Error(ex.Message, ex);
-                throw;
             }
         }
         private void OnSerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -196,14 +209,14 @@ namespace Henkie.Common
             lock (_serialPortLock)
             {
                 if (_serialPort == null) return;
-                try {
+                try
+                {
                     _serialPort.DataReceived -= SerialPort_DataReceived;
                     _serialPort.ErrorReceived -= SerialPort_ErrorReceived;
                 }
                 catch (Exception ex)
                 {
-                    _log.Error(ex.Message, ex);
-                    throw;
+                    _log.Error("Serial port " + _serialPort.PortName + " exception in ClosePort().", ex);
                 }
                 try
                 {
@@ -215,43 +228,69 @@ namespace Henkie.Common
                         }
                         catch (Exception ex)
                         {
-                            _log.Error(ex.Message, ex);
-                            throw;
+                            _log.Error("Serial port " + _serialPort.PortName + " exception in ClosePort().", ex);
                         }
                         finally
                         {
-                            _serialPort.Close();
+                            try
+                            {
+                                _serialPort.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                _log.Error("Serial port " + _serialPort.PortName + " exception in ClosePort().", ex);
+                            }
+
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    _log.Error(ex.Message, ex);
-                    throw;
+                    _log.Error("Serial port " + _serialPort.PortName + " exception in ClosePort().", ex);
                 }
                 finally
                 {
-                    _serialPort.Dispose();
+                    try
+                    {
+                        _serialPort.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.Error("Serial port " + _serialPort.PortName + " exception in ClosePort().", ex);
+                    }
                 }
                 _serialPort = null;
                 Thread.Sleep(500);
             }
         }
-       private static void SerialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e) { }
+        private static void SerialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e) { }
 
         ~SerialPortConnection()
         {
-            Dispose();
+            try
+            {
+                Dispose();
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Serial port " + _serialPort?.PortName + " exception in SerialPortConnection finalizer.", ex);
+            }
         }
 
         private void Dispose(bool disposing)
         {
             if (disposing && !_isDisposed)
             {
-                ClosePort();
+                try
+                {
+                    ClosePort();
+                }
+                catch (Exception ex)
+                {
+                    _log.Error("Serial port " + _serialPort?.PortName + " exception in Dispose().", ex);
+                }
             }
             _isDisposed = true;
         }
-
     }
 }
