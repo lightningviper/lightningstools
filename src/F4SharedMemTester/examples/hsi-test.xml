@@ -19,7 +19,7 @@
 	     <IntellivibeData In3D="true" />
 	</Moment>
 
-	<Moment t="00:02:00:000">
+	<Moment t="00:01:00:000">
         <FlightData yaw="3.14159265" 
                 courseDeviation = "5.00"
                 desiredCourse = "180.00"
@@ -32,7 +32,7 @@
         />
 	</Moment>
 
-	<Moment t="00:04:00:000">
+	<Moment t="00:02:00:000">
 	    <FlightData yaw = "6.28318531"
 	             courseDeviation = "0.00"
                 desiredCourse = "359.99"
@@ -46,7 +46,7 @@
 					/>
     </Moment>
 
-	<Moment t="00:06:00:000">
+	<Moment t="00:03:00:000">
 		<FlightData yaw="3.14159265"
                 courseDeviation = "-5.00"
                 desiredCourse = "180.00"
@@ -59,7 +59,7 @@
         />
 	</Moment>
 
-	<Moment t="00:08:00:000">
+	<Moment t="00:04:00:000">
 		<FlightData yaw = "0.0000000"
 	             courseDeviation = "0.00"
                 desiredCourse = "0.00"
