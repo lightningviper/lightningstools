@@ -226,7 +226,9 @@ namespace Henkie.HSI.Board2
         }
         public void SetHeadingDatum(double headingDatumDegrees)
         {
-            _headingDatumDegrees = headingDatumDegrees % 360.0000d;
+            if (headingDatumDegrees < -90) headingDatumDegrees = -90;
+            if (headingDatumDegrees > 90) headingDatumDegrees = 90;
+            _headingDatumDegrees = headingDatumDegrees;
         }
     }
 }

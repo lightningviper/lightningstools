@@ -5,7 +5,7 @@ using System.Runtime.Remoting;
 using Common.HardwareSupport;
 using Common.HardwareSupport.Calibration;
 using Common.MacroProgramming;
-using LightningGauges.Renderers.F16.HSI;
+using Henkie.Common;
 using Henkie.HSI.Board2;
 using System.IO;
 using System.Linq;

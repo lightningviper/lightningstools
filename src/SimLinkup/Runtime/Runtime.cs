@@ -172,7 +172,7 @@ namespace SimLinkup.Runtime
                         if (mapping.Source == null || mapping.Destination == null)
                         {
                             _log.Warn(
-                                $"A mapping defined in file {profileToLoad} had an unresolvable source or destination signal.");
+                                $"A mapping defined in file {profileToLoad} had an unresolvable source or destination signal. Source: {origSource?.Id}, Destination: {origDestination?.Id}");
                             continue;
                         }
                         _mappings.Add(mapping);
