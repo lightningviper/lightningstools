@@ -9,13 +9,13 @@ using Henkie.Common;
 using Henkie.HSI.Board2;
 using System.IO;
 using System.Linq;
-using Henkie.Common;
 using System.Globalization;
 using log4net;
 using p = Phcc;
 using SimLinkup.HardwareSupport.Henk.HSI.HeadingBug;
 using Common.Collections;
 using System.Threading.Tasks;
+using LightningGauges.Renderers.F16.HSI;
 
 namespace SimLinkup.HardwareSupport.Henk.HSI.Board2
 {
