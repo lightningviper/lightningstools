@@ -384,10 +384,10 @@ namespace MFDExtractor
         private static void UpdateHSI(IHorizontalSituationIndicator hsi, IEHSI ehsi, HsiBits hsibits, FlightData fromFalcon)
         {
             hsi.InstrumentState.OffFlag = ((hsibits & HsiBits.HSI_OFF) == HsiBits.HSI_OFF) && !Extractor.State.OptionsFormIsShowing;
-            hsi.InstrumentState.MagneticHeadingDegrees = (360 + (fromFalcon.yaw / Common.Math.Constants.RADIANS_PER_DEGREE)) % 360;
+            hsi.InstrumentState.MagneticHeadingDegrees = fromFalcon.currentHeading;
             ehsi.InstrumentState.NoDataFlag = ((hsibits & HsiBits.HSI_OFF) == HsiBits.HSI_OFF) && !Extractor.State.OptionsFormIsShowing; ;
-            ehsi.InstrumentState.NoPowerFlag = ((fromFalcon.powerBits & (int)PowerBits.BusPowerBattery) != (int)PowerBits.BusPowerBattery) && !Extractor.State.OptionsFormIsShowing; 
-            ehsi.InstrumentState.MagneticHeadingDegrees = (360 + (fromFalcon.yaw / Common.Math.Constants.RADIANS_PER_DEGREE)) % 360;
+            ehsi.InstrumentState.NoPowerFlag = ((fromFalcon.powerBits & (int)PowerBits.BusPowerBattery) != (int)PowerBits.BusPowerBattery) && !Extractor.State.OptionsFormIsShowing;
+            ehsi.InstrumentState.MagneticHeadingDegrees = fromFalcon.currentHeading;
         }
 
         private static void UpdateADI(IADI adi, HsiBits hsibits)
